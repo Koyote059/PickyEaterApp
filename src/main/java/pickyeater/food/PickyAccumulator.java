@@ -4,7 +4,7 @@ package pickyeater.food;
  * @author Claudio Di Maio
  */
 
-public class PickyNutrientsAccumulator implements NutrientsAccumulator {
+public class PickyAccumulator implements Accumulator {
     private double proteins = 0;
     private double complexCarbs = 0;
     private double simpleCarbs = 0;

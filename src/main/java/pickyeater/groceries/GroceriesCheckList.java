@@ -16,6 +16,6 @@ public interface GroceriesCheckList {
 
     void checkIngredient(Ingredient ingredient);
     void unCheckIngredient(Ingredient ingredient);
-    void setIngredientMissing(Ingredient ingredient);
-    void unSetIngredientMissing(Ingredient ingredient);
+    void setMissingIngredient(Ingredient ingredient);
+    void unSetMissingIngredient(Ingredient ingredient);
 }

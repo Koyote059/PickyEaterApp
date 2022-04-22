@@ -1,6 +1,7 @@
 package pickyeater.food;
 
 import java.util.List;
+import java.util.Objects;
 
 /**
  * @author Claudio Di Maio
@@ -54,6 +55,24 @@ public class PickyIngredient implements Ingredient {
                 ", price=" + price +
                 ", quantity=" + quantity +
                 ", tags=" + tags +
-                '}';
+                '}' + '\n';
+    }
+
+    /**
+     * Ingredients are equals ONLY if they have the SAME NAME
+     */
+    @Override
+    public boolean equals(Object o) {
+        if (this == o)
+            return true;
+        if (o == null || getClass() != o.getClass())
+            return false;
+        PickyIngredient that = (PickyIngredient) o;
+        return Objects.equals(name, that.name);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name);
     }
 }

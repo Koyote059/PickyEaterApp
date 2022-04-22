@@ -10,7 +10,6 @@ public class PickyUserStatus implements UserStatus {
     private final Date dateOfBirth;
     private final Sex sex;
 
-
     public PickyUserStatus(double weight, double height,double bodyFat, Date dateOfBirth, Sex sex) {
         this.weight = weight;
         this.bodyFat = bodyFat;

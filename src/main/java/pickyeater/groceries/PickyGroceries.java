@@ -19,10 +19,6 @@ public class PickyGroceries implements Groceries{
         return ingredients;
     }
 
-    public void setIngredients(Set<Ingredient> ingredients) {
-        this.ingredients = ingredients;
-    }
-
     @Override
     public double getPrice() {
         double price = 0;
@@ -35,5 +31,13 @@ public class PickyGroceries implements Groceries{
     @Override
     public GroceriesCheckList generateCheckList() {
         return new PickyGroceriesChecklist(ingredients);
+    }
+
+    /**
+     * toString
+     */
+    @Override
+    public String toString() {
+        return "PickyGroceries{" + "ingredients=" + ingredients + '}' + '\n';
     }
 }

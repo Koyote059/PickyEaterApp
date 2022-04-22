@@ -1,16 +1,23 @@
 package pickyeater.food;
 
-import java.util.*;
+import java.util.List;
+import java.util.Set;
+
+/**
+ * @author Claudio Di Maio
+ */
 
 public class PickyMeal implements Meal{
     private Set<Ingredient> ingredients;
     private String name;
     private Quantity quantity;
+    private List<String> tags;
 
-    public PickyMeal(Set<Ingredient> ingredients, String name, Quantity quantity) {
+    public PickyMeal(Set<Ingredient> ingredients, String name, Quantity quantity, List<String> tags) {
         this.ingredients = ingredients;
         this.name = name;
         this.quantity = quantity;
+        this.tags = tags;
     }
 
     @Override
@@ -30,27 +37,7 @@ public class PickyMeal implements Meal{
 
     @Override
     public List<String> getTags() {
-        Iterator<Ingredient> ingredientIterator = this.ingredients.iterator();
-        if (!ingredientIterator.hasNext()) {
-            return new ArrayList<>();
-        } else {
-            List<String> tags = new LinkedList<>(ingredientIterator.next().getTags());
-
-            while (ingredientIterator.hasNext()) {
-                Ingredient ingredient = ingredientIterator.next();
-                List<String> ingredientTags = ingredient.getTags();
-                Iterator<String> tagsIterator = tags.iterator();
-
-                while (tagsIterator.hasNext()) {
-                    String tag = tagsIterator.next();
-                    if (!ingredientTags.contains(tag)) {
-                        tagsIterator.remove();
-                    }
-                }
-            }
-
-            return tags;
-        }
+        return tags;
     }
 
     /**
@@ -59,7 +46,7 @@ public class PickyMeal implements Meal{
     @Override
     public Nutrients getNutrients() {
         Set<Ingredient> ingredientSet = getIngredients();
-        NutrientsAccumulator accumulator = new PickyNutrientsAccumulator();
+        Accumulator accumulator = new PickyAccumulator();
         for (Ingredient i : ingredientSet) {
             accumulator.sumNutrients(i.getNutrients());
         }
@@ -72,6 +59,7 @@ public class PickyMeal implements Meal{
                 "ingredients=" + ingredients +
                 ", name='" + name + '\'' +
                 ", quantity=" + quantity +
+                ", tags=" + tags +
                 '}';
     }
 }
