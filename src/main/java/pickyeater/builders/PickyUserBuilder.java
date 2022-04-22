@@ -5,9 +5,9 @@
 
 package pickyeater.builders;
 
-import pickyeater.food.Meal;
-import pickyeater.mealplan.MealPlan;
-import pickyeater.user.*;
+import pickyeater.basics.food.Meal;
+import pickyeater.basics.mealplan.MealPlan;
+import pickyeater.basics.user.*;
 
 import java.util.Collection;
 import java.util.Date;

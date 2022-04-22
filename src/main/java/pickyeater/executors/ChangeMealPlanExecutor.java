@@ -8,8 +8,8 @@ package pickyeater.executors;
 import pickyeater.builders.MealPlanBuilder;
 import pickyeater.builders.PickyMealPlanBuilder;
 import pickyeater.managers.EaterManager;
-import pickyeater.mealplan.MealPlan;
-import pickyeater.user.User;
+import pickyeater.basics.mealplan.MealPlan;
+import pickyeater.basics.user.User;
 
 import java.util.Optional;
 

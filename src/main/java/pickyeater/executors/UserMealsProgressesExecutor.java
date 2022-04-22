@@ -6,8 +6,8 @@
 package pickyeater.executors;
 
 import pickyeater.managers.EaterManager;
-import pickyeater.user.DailyProgresses;
-import pickyeater.user.User;
+import pickyeater.basics.user.DailyProgresses;
+import pickyeater.basics.user.User;
 
 import java.util.Optional;
 

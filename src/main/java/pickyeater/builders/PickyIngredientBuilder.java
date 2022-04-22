@@ -5,7 +5,7 @@
 
 package pickyeater.builders;
 
-import pickyeater.food.*;
+import pickyeater.basics.food.*;
 
 import java.util.ArrayList;
 import java.util.List;

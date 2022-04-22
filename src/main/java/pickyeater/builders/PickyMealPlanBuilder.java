@@ -5,9 +5,9 @@
 
 package pickyeater.builders;
 
-import pickyeater.mealplan.DailyMealPlan;
-import pickyeater.mealplan.MealPlan;
-import pickyeater.mealplan.PickyMealPlan;
+import pickyeater.basics.mealplan.DailyMealPlan;
+import pickyeater.basics.mealplan.MealPlan;
+import pickyeater.basics.mealplan.PickyMealPlan;
 
 import java.util.ArrayList;
 import java.util.List;

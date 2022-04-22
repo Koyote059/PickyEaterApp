@@ -1,11 +1,11 @@
 package pickyeater.database;
 
+import pickyeater.database.jsonutils.FoodCreator;
+import pickyeater.database.jsonutils.JSONCreator;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import pickyeater.database.jsonutils.FoodCreator;
-import pickyeater.database.jsonutils.JSONCreator;
-import pickyeater.food.Meal;
+import pickyeater.basics.food.Meal;
 
 import java.io.File;
 import java.io.IOException;

@@ -12,12 +12,12 @@ import pickyeater.builders.IngredientBuilder;
 import pickyeater.builders.MealBuilder;
 import pickyeater.builders.PickyIngredientBuilder;
 import pickyeater.builders.PickyMealBuilder;
-import pickyeater.food.*;
-import pickyeater.mealplan.DailyMealPlan;
-import pickyeater.mealplan.MealPlan;
-import pickyeater.mealplan.PickyDailyMealPlan;
-import pickyeater.mealplan.PickyMealPlan;
-import pickyeater.user.*;
+import pickyeater.basics.food.*;
+import pickyeater.basics.user.*;
+import pickyeater.basics.mealplan.DailyMealPlan;
+import pickyeater.basics.mealplan.MealPlan;
+import pickyeater.basics.mealplan.PickyDailyMealPlan;
+import pickyeater.basics.mealplan.PickyMealPlan;
 
 import java.util.Date;
 import java.util.List;

@@ -5,11 +5,11 @@
 
 package pickyeater.builders;
 
-import pickyeater.food.Meal;
-import pickyeater.mealplan.MealPlan;
-import pickyeater.user.LifeStyle;
-import pickyeater.user.Sex;
-import pickyeater.user.User;
+import pickyeater.basics.food.Meal;
+import pickyeater.basics.mealplan.MealPlan;
+import pickyeater.basics.user.LifeStyle;
+import pickyeater.basics.user.Sex;
+import pickyeater.basics.user.User;
 
 import java.util.Collection;
 import java.util.Date;

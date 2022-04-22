@@ -5,7 +5,7 @@
 
 package pickyeater.builders;
 
-import pickyeater.food.Nutrients;
+import pickyeater.basics.food.Nutrients;
 
 public interface NutrientsBuilder {
 

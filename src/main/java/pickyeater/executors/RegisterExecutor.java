@@ -8,7 +8,7 @@ package pickyeater.executors;
 import pickyeater.builders.PickyUserBuilder;
 import pickyeater.builders.UserBuilder;
 import pickyeater.managers.EaterManager;
-import pickyeater.user.User;
+import pickyeater.basics.user.User;
 
 public class RegisterExecutor {
     private final EaterManager eaterManager;

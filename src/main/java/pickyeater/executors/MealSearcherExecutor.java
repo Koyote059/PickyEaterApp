@@ -5,7 +5,7 @@
 
 package pickyeater.executors;
 
-import pickyeater.food.Meal;
+import pickyeater.basics.food.Meal;
 import pickyeater.managers.EaterManager;
 import pickyeater.managers.FoodManager;
 

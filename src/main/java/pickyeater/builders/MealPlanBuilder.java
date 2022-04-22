@@ -5,7 +5,7 @@
 
 package pickyeater.builders;
 
-import pickyeater.mealplan.MealPlan;
+import pickyeater.basics.mealplan.MealPlan;
 
 import java.util.Optional;
 

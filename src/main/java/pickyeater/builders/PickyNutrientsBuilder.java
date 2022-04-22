@@ -5,8 +5,8 @@
 
 package pickyeater.builders;
 
-import pickyeater.food.Nutrients;
-import pickyeater.food.PickyNutrients;
+import pickyeater.basics.food.Nutrients;
+import pickyeater.basics.food.PickyNutrients;
 
 public class PickyNutrientsBuilder implements NutrientsBuilder {
     private double proteins;

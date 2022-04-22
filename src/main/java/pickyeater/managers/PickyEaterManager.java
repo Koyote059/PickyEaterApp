@@ -8,7 +8,7 @@ package pickyeater.managers;
 import pickyeater.database.IngredientsDatabase;
 import pickyeater.database.MealsDatabase;
 import pickyeater.database.UserDatabase;
-import pickyeater.user.User;
+import pickyeater.basics.user.User;
 
 import java.util.Optional;
 

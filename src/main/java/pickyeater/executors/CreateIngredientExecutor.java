@@ -9,7 +9,7 @@ import pickyeater.builders.IngredientBuilder;
 import pickyeater.builders.NutrientsBuilder;
 import pickyeater.builders.PickyIngredientBuilder;
 import pickyeater.builders.PickyNutrientsBuilder;
-import pickyeater.food.Ingredient;
+import pickyeater.basics.food.Ingredient;
 import pickyeater.managers.EaterManager;
 import pickyeater.managers.FoodManager;
 

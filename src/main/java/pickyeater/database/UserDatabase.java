@@ -1,6 +1,6 @@
 package pickyeater.database;
 
-import pickyeater.user.User;
+import pickyeater.basics.user.User;
 
 import java.util.Optional;
 

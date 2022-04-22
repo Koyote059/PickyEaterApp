@@ -5,9 +5,9 @@
 
 package pickyeater.builders;
 
-import pickyeater.food.Ingredient;
-import pickyeater.food.Meal;
-import pickyeater.food.Quantity;
+import pickyeater.basics.food.Ingredient;
+import pickyeater.basics.food.Meal;
+import pickyeater.basics.food.Quantity;
 
 public interface MealBuilder {
     void setName(String name);

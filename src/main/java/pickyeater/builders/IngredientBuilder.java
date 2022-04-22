@@ -5,9 +5,9 @@
 
 package pickyeater.builders;
 
-import pickyeater.food.Ingredient;
-import pickyeater.food.Nutrients;
-import pickyeater.food.Quantity;
+import pickyeater.basics.food.Ingredient;
+import pickyeater.basics.food.Nutrients;
+import pickyeater.basics.food.Quantity;
 
 public interface IngredientBuilder {
     void setPrice(double price);

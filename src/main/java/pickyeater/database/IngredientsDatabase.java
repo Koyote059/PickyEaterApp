@@ -1,6 +1,6 @@
 package pickyeater.database;
 
-import pickyeater.food.Ingredient;
+import pickyeater.basics.food.Ingredient;
 
 import java.util.Optional;
 import java.util.Set;
