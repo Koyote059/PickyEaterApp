@@ -5,11 +5,10 @@ import pickyeater.mealplan.MealPlan;
 import java.util.Optional;
 
 public class PickyUser implements User {
-
     private final String name;
     private final UserStatus userStatus;
     private final UserGoal userGoal;
-    private final DailyProgresses dailyProgresses;
+    private DailyProgresses dailyProgresses;
     private MealPlan mealPlan;
 
     public PickyUser(String name, UserStatus userStatus, UserGoal userGoal, DailyProgresses dailyProgresses, MealPlan mealPlan) {
@@ -48,6 +47,11 @@ public class PickyUser implements User {
     @Override
     public DailyProgresses getDailyProgresses() {
         return dailyProgresses;
+    }
+
+    @Override
+    public void resetDailyProgresses() {
+        dailyProgresses = new PickyDailyProgresses();
     }
 
     @Override

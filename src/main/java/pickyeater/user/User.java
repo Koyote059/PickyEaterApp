@@ -11,5 +11,6 @@ public interface User {
     Optional<MealPlan> getMealPlan();
     void setMealPlan(MealPlan mealPlan);
     DailyProgresses getDailyProgresses();
+    void resetDailyProgresses();
 
 }

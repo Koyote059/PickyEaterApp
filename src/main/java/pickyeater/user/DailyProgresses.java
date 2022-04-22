@@ -3,6 +3,7 @@ package pickyeater.user;
 import pickyeater.food.Meal;
 import pickyeater.food.Nutrients;
 
+import java.time.LocalDate;
 import java.util.List;
 
 public interface DailyProgresses {
@@ -13,6 +14,7 @@ public interface DailyProgresses {
     List<Meal> getEatenMeals();
     void addBurnedCalories(int calories);
     int getBurnedCalories();
+    LocalDate getDate();
 
 
 }

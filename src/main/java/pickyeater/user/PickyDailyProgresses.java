@@ -1,10 +1,11 @@
 package pickyeater.user;
 
-import pickyeater.food.Accumulator;
 import pickyeater.food.Meal;
 import pickyeater.food.Nutrients;
-import pickyeater.food.PickyAccumulator;
+import pickyeater.food.NutrientsAccumulator;
+import pickyeater.food.PickyNutrientsAccumulator;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -14,6 +15,7 @@ public class PickyDailyProgresses implements DailyProgresses {
 
     private int burnedCalories = 0;
     private final List<Meal> eatenMeals = new ArrayList<>();
+    private final LocalDate date = LocalDate.now(); // Todo constructor with localdate
 
     public  PickyDailyProgresses(){}
     public PickyDailyProgresses(int burnedCalories, Collection<Meal> eatenMeals) {
@@ -46,11 +48,24 @@ public class PickyDailyProgresses implements DailyProgresses {
         return burnedCalories;
     }
 
+    @Override
+    public LocalDate getDate() {
+        return date;
+    }
+
     public Nutrients getEatenNutrients(){
-        Accumulator nutrientsAccumulator = new PickyAccumulator();
+        NutrientsAccumulator nutrientsAccumulator = new PickyNutrientsAccumulator();
         for (Meal eatenMeal : eatenMeals) {
             nutrientsAccumulator.sumNutrients(eatenMeal.getNutrients());
         }
         return nutrientsAccumulator.generateNutrients();
+    }
+
+    @Override
+    public String toString() {
+        return "PickyDailyProgresses{" +
+                "burnedCalories=" + burnedCalories +
+                ", eatenMeals=" + eatenMeals +
+                '}';
     }
 }

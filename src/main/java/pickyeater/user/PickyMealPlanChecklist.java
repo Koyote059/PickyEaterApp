@@ -12,7 +12,6 @@ public class PickyMealPlanChecklist implements MealPlanChecklist {
     private final List<Meal> mealsToEat;
     private final List<Meal> eatenMeals = new ArrayList<>();
 
-
     public PickyMealPlanChecklist(DailyMealPlan dailyMealPlan){
         mealsToEat = dailyMealPlan.getMeals();
     }
@@ -45,5 +44,13 @@ public class PickyMealPlanChecklist implements MealPlanChecklist {
     @Override
     public List<Meal> getMealsToEat(){
         return Collections.unmodifiableList(mealsToEat);
+    }
+
+    @Override
+    public String toString() {
+        return "PickyMealPlanChecklist{" +
+                "mealsToEat=" + mealsToEat +
+                ", eatenMeals=" + eatenMeals +
+                '}';
     }
 }
