@@ -11,6 +11,7 @@ import java.util.List;
 public class PickyDailyMealPlan implements DailyMealPlan {
 
     private final List<Meal> meals;
+
     public PickyDailyMealPlan(List<Meal> meals) {
         this.meals = meals;
     }
@@ -19,7 +20,6 @@ public class PickyDailyMealPlan implements DailyMealPlan {
     public List<Meal> getMeals() {
         return Collections.unmodifiableList(meals);
     }
-
 
     @Override
     public Nutrients getNutrients() {

@@ -16,5 +16,4 @@ public class PickyMealPlan implements MealPlan {
     public List<DailyMealPlan> getDailyMealPlans() {
         return Collections.unmodifiableList(dailyMealPlans);
     }
-
 }
