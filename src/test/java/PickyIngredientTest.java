@@ -1,5 +1,5 @@
 import org.junit.jupiter.api.Test;
-import pickyeater.food.*;
+import pickyeater.basics.food.*;
 
 import java.util.ArrayList;
 import java.util.List;

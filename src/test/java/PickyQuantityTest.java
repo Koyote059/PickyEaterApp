@@ -1,7 +1,7 @@
 import org.junit.jupiter.api.Test;
-import pickyeater.food.PickyQuantity;
-import pickyeater.food.Quantity;
-import pickyeater.food.QuantityType;
+import pickyeater.basics.food.PickyQuantity;
+import pickyeater.basics.food.Quantity;
+import pickyeater.basics.food.QuantityType;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 

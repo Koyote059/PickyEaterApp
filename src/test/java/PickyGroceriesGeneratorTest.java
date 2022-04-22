@@ -1,11 +1,11 @@
 import org.junit.jupiter.api.Test;
-import pickyeater.food.*;
-import pickyeater.groceries.GroceriesGenerator;
-import pickyeater.groceries.PickyGroceriesGenerator;
-import pickyeater.mealplan.DailyMealPlan;
-import pickyeater.mealplan.MealPlan;
-import pickyeater.mealplan.PickyDailyMealPlan;
-import pickyeater.mealplan.PickyMealPlan;
+import pickyeater.basics.food.*;
+import pickyeater.basics.groceries.GroceriesGenerator;
+import pickyeater.basics.groceries.PickyGroceriesGenerator;
+import pickyeater.basics.mealplan.DailyMealPlan;
+import pickyeater.basics.mealplan.MealPlan;
+import pickyeater.basics.mealplan.PickyDailyMealPlan;
+import pickyeater.basics.mealplan.PickyMealPlan;
 
 import java.util.ArrayList;
 import java.util.HashSet;

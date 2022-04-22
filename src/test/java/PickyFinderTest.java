@@ -1,6 +1,6 @@
 import org.junit.jupiter.api.Test;
-import pickyeater.food.*;
-import pickyeater.groceries.PickyFinder;
+import pickyeater.basics.food.*;
+import pickyeater.basics.groceries.PickyFinder;
 
 import java.util.ArrayList;
 import java.util.HashSet;

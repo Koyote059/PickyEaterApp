@@ -1,7 +1,7 @@
 import org.junit.jupiter.api.Test;
-import pickyeater.food.*;
-import pickyeater.mealplan.DailyMealPlan;
-import pickyeater.mealplan.PickyDailyMealPlan;
+import pickyeater.basics.food.*;
+import pickyeater.basics.mealplan.DailyMealPlan;
+import pickyeater.basics.mealplan.PickyDailyMealPlan;
 
 import java.util.ArrayList;
 import java.util.HashSet;

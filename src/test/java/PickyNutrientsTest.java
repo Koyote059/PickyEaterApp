@@ -1,6 +1,6 @@
 import org.junit.jupiter.api.Test;
-import pickyeater.food.Nutrients;
-import pickyeater.food.PickyNutrients;
+import pickyeater.basics.food.Nutrients;
+import pickyeater.basics.food.PickyNutrients;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 

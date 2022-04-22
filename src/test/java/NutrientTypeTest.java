@@ -1,5 +1,5 @@
 import org.junit.jupiter.api.Test;
-import pickyeater.food.NutrientType;
+import pickyeater.basics.food.NutrientType;
 
 public class NutrientTypeTest {
 
