@@ -54,7 +54,7 @@ public class PickyUser implements User {
     public void setMealPlan(MealPlan mealPlan) {
         this.mealPlan = mealPlan;
     }
-
+  
     @Override
     public String toString() {
         return "PickyUser{" +
@@ -65,4 +65,5 @@ public class PickyUser implements User {
                 ", mealPlan=" + mealPlan +
                 '}';
     }
+
 }
