@@ -107,6 +107,4 @@ public class PickyNutrients implements Nutrients{
     public int hashCode() {
         return Objects.hash(proteins, complexCarbs, simpleCarbs, fibers, saturatedFats, unSaturatedFats, transFats, alcohol);
     }
-
-
 }

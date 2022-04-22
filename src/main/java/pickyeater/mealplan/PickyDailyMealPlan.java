@@ -1,9 +1,9 @@
 package pickyeater.mealplan;
 
+import pickyeater.food.Accumulator;
 import pickyeater.food.Meal;
 import pickyeater.food.Nutrients;
-import pickyeater.food.NutrientsAccumulator;
-import pickyeater.food.PickyNutrientsAccumulator;
+import pickyeater.food.PickyAccumulator;
 
 import java.util.Collections;
 import java.util.List;
@@ -11,7 +11,6 @@ import java.util.List;
 public class PickyDailyMealPlan implements DailyMealPlan {
 
     private final List<Meal> meals;
-
     public PickyDailyMealPlan(List<Meal> meals) {
         this.meals = meals;
     }
@@ -21,9 +20,10 @@ public class PickyDailyMealPlan implements DailyMealPlan {
         return Collections.unmodifiableList(meals);
     }
 
+
     @Override
     public Nutrients getNutrients() {
-        NutrientsAccumulator accumulator = new PickyNutrientsAccumulator();
+        Accumulator accumulator = new PickyAccumulator();
         for(Meal meal: meals) accumulator.sumNutrients(meal.getNutrients());
         return accumulator.generateNutrients();
     }

@@ -61,7 +61,7 @@ public class PickyGroceriesChecklist implements GroceriesCheckList {
     }
 
     @Override
-    public void setIngredientMissing(Ingredient ingredient) {
+    public void setMissingIngredient(Ingredient ingredient) {
         if (neededIngredients.contains(ingredient)){
             neededIngredients.remove(ingredient);
             missingIngredients.add(ingredient);
@@ -69,7 +69,7 @@ public class PickyGroceriesChecklist implements GroceriesCheckList {
     }
 
     @Override
-    public void unSetIngredientMissing(Ingredient ingredient) {
+    public void unSetMissingIngredient(Ingredient ingredient) {
         if (missingIngredients.contains(ingredient)){
             missingIngredients.remove(ingredient);
             neededIngredients.add(ingredient);

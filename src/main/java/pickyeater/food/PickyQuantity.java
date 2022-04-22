@@ -38,10 +38,6 @@ public class PickyQuantity implements Quantity {
 
     @Override
     public String toString() {
-        return "PickyQuantity{" +
-                "quantity=" + quantity +
-                ", quantityType=" + quantityType +
-                ", quantityGrams=" + quantityGrams +
-                '}';
+        return "PickyQuantity{" + "quantity=" + quantity + ", quantityType=" + quantityType + ", quantityGrams=" + quantityGrams + '}';
     }
 }
