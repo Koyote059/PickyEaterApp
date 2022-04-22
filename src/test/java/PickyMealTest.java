@@ -19,35 +19,35 @@ public class PickyMealTest {
 
     @Test
     void getIngredients() {
-        Meal m = new PickyMeal(setIngredient, "Cibo preferito di Fede", q,listString);
+        Meal m = new PickyMeal(setIngredient, "Cibo preferito di Fede", q);
 
         assertEquals(setIngredient, m.getIngredients());
     }
 
     @Test
     void getQuantity() {
-        Meal m = new PickyMeal(setIngredient, "Cibo preferito di Fede", q,listString);
+        Meal m = new PickyMeal(setIngredient, "Cibo preferito di Fede", q);
 
         assertEquals(q, m.getQuantity());
     }
 
     @Test
     void getName() {
-        Meal m = new PickyMeal(setIngredient, "Cibo preferito di Fede", q,listString);
+        Meal m = new PickyMeal(setIngredient, "Cibo preferito di Fede", q);
 
         assertEquals("Cibo preferito di Fede", m.getName());
     }
 
     @Test
     void getTags() {
-        Meal m = new PickyMeal(setIngredient, "Cibo preferito di Fede", q,listString);
+        Meal m = new PickyMeal(setIngredient, "Cibo preferito di Fede", q);
 
         assertEquals(listString, m.getTags());
     }
 
     @Test
     void getNutrients() {
-        Meal m = new PickyMeal(setIngredient, "Cibo preferito di Fede", q, listString);
+        Meal m = new PickyMeal(setIngredient, "Cibo preferito di Fede", q);
 
         assertEquals(new PickyNutrients(3, 5, 7, 9, 11, 13, 15, 17), m.getNutrients());
     }

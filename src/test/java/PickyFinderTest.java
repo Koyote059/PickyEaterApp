@@ -16,7 +16,7 @@ public class PickyFinderTest {
     Ingredient i2 = new PickyIngredient(n2, "Cipolla piu' grande", 3.00, q, listString);
     Set<Ingredient> setIngredient = new HashSet<>(Set.of(i, i2));
 
-    Meal m = new PickyMeal(setIngredient, "Cibo preferito di Fede", q, listString);
+    Meal m = new PickyMeal(setIngredient, "Cibo preferito di Fede", q);
 
     PickyFinder pickyFinder = new PickyFinder();
 

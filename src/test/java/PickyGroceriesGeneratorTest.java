@@ -37,11 +37,10 @@ public class PickyGroceriesGeneratorTest {
      * DailyMealPlan
      */
     Set<Ingredient> ingredients = new HashSet<>(Set.of(egg,pecorino,pasta,guanciale));
-    Meal carbonara = new PickyMeal(ingredients, "Carbonara", new PickyQuantity(1, QuantityType.PIECE, 100), new ArrayList<>());
+    Meal carbonara = new PickyMeal(ingredients, "Carbonara", new PickyQuantity(1, QuantityType.PIECE, 100));
 
     Set<Ingredient> ingredients2 = new HashSet<>(Set.of(egg,pecorino,pasta,guanciale));
-    Meal cacioEPepe = new PickyMeal(ingredients2, "Cacio e Pepe", new PickyQuantity(1, QuantityType.PIECE, 100),
-            new ArrayList<>());
+    Meal cacioEPepe = new PickyMeal(ingredients2, "Cacio e Pepe", new PickyQuantity(1, QuantityType.PIECE, 100));
 
     DailyMealPlan dailyMealPlan = new PickyDailyMealPlan(List.of(cacioEPepe,carbonara,cacioEPepe));
     DailyMealPlan dailyMealPlan2 = new PickyDailyMealPlan(List.of(carbonara,carbonara));
