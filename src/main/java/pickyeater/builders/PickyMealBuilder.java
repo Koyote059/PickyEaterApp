@@ -10,16 +10,11 @@ import pickyeater.basics.food.*;
 import java.util.*;
 
 public class PickyMealBuilder implements MealBuilder {
-    private List<String> tags = new ArrayList<>();
     private Set<Ingredient> ingredients = new HashSet<>();
     private String name = null;
     private Quantity quantity = new PickyQuantity(100.0);
 
     public PickyMealBuilder() {
-    }
-
-    public PickyMealBuilder(Meal meal) {
-        this.tags = new ArrayList<>(meal.getTags());
     }
 
     public void setName(String name) {
