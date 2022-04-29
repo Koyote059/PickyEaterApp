@@ -1,8 +1,11 @@
 package pickyeater.basics.user;
 
+import pickyeater.basics.food.Nutrients;
+
 public interface UserGoal {
 
     LifeStyle getLifeStyle();
-    double getWeightVariationGoal();
+    WeightGoal getWeightVariationGoal();
+    Nutrients getRequiredNutrients();
 
 }

@@ -6,10 +6,12 @@
 package pickyeater.builders;
 
 import pickyeater.basics.food.Meal;
+import pickyeater.basics.food.Nutrients;
 import pickyeater.basics.mealplan.MealPlan;
 import pickyeater.basics.user.LifeStyle;
 import pickyeater.basics.user.Sex;
 import pickyeater.basics.user.User;
+import pickyeater.basics.user.WeightGoal;
 
 import java.util.Collection;
 import java.util.Date;
@@ -29,7 +31,9 @@ public interface UserBuilder {
 
     void setLifeStyle(LifeStyle lifeStyle);
 
-    void setWeightVariationGoal(double weightVariationGoal);
+    void setWeightVariationGoal(WeightGoal weightVariationGoal);
+
+    void setRequiredNutrients(Nutrients nutrients);
 
     void setDailyProgresses(Collection<Meal> eatenMeals, int burnedCalories);
 

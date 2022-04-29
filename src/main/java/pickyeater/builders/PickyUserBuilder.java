@@ -6,6 +6,7 @@
 package pickyeater.builders;
 
 import pickyeater.basics.food.Meal;
+import pickyeater.basics.food.Nutrients;
 import pickyeater.basics.mealplan.MealPlan;
 import pickyeater.basics.user.*;
 
@@ -19,9 +20,11 @@ public class PickyUserBuilder implements UserBuilder {
     private int height = 0;
     private double bodyFat = 0.0;
     private Date dateOfBirth = null;
+
+    private Nutrients requiredNutrients = null;
     private Sex sex = null;
     private LifeStyle lifeStyle = null;
-    private double weightVariationGoal = 0.0;
+    private WeightGoal weightVariationGoal = WeightGoal.MANTAIN_WEIGHT;
     private DailyProgresses dailyProgresses = new PickyDailyProgresses();
     private MealPlan mealPlan = null;
 
@@ -53,8 +56,12 @@ public class PickyUserBuilder implements UserBuilder {
         this.lifeStyle = lifeStyle;
     }
 
-    public void setWeightVariationGoal(double weightVariationGoal) {
+    public void setWeightVariationGoal(WeightGoal weightVariationGoal) {
         this.weightVariationGoal = weightVariationGoal;
+    }
+
+    public void setRequiredNutrients(Nutrients nutrients){
+        this.requiredNutrients = nutrients;
     }
 
     public void setMealPlan(MealPlan mealPlan) {
@@ -66,10 +73,15 @@ public class PickyUserBuilder implements UserBuilder {
     }
 
     public User build() {
-        if (this.name == null | this.weight == 0 | this.height == 0 | this.bodyFat == 0.0 | this.dateOfBirth == null | this.sex == null | this.lifeStyle == null) {
+        if (this.name == null | this.weight == 0 | this.height == 0 | this.bodyFat == 0.0 | this.dateOfBirth == null |
+                this.sex == null | this.lifeStyle == null | this.requiredNutrients == null) {
             throw new MissingFormatArgumentException("Missing arguments for UserBuilder!");
         } else {
-            return new PickyUser(this.name, new PickyUserStatus((double)this.weight, (double)this.height, this.bodyFat, this.dateOfBirth, this.sex), new PickyUserGoal(this.lifeStyle, this.weightVariationGoal), this.dailyProgresses, this.mealPlan);
+            return new PickyUser(this.name,
+                    new PickyUserStatus(this.weight, this.height, this.bodyFat, this.dateOfBirth, this.sex),
+                    new PickyUserGoal(this.lifeStyle, this.weightVariationGoal, this.requiredNutrients),
+                    this.dailyProgresses,
+                    this.mealPlan);
         }
     }
 }
