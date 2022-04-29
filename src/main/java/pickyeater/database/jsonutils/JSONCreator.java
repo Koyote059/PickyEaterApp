@@ -114,6 +114,7 @@ public class JSONCreator {
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("LifeStyle", userGoal.getLifeStyle().name());
         jsonObject.put("WeightVariationGoal", userGoal.getWeightVariationGoal());
+        jsonObject.put("RequiredNutrients",getNutrientsJsonObject(userGoal.getRequiredNutrients()));
         return jsonObject;
     }
 

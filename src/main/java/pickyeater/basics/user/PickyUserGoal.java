@@ -1,13 +1,18 @@
 package pickyeater.basics.user;
 
+import pickyeater.basics.food.Nutrients;
+
 public class PickyUserGoal implements UserGoal {
 
     private final LifeStyle lifeStyle;
-    private final double weightVariationGoal;
+    private final WeightGoal weightVariationGoal;
 
-    public PickyUserGoal(LifeStyle lifeStyle, double weightVariationGoal) {
+    private final Nutrients requiredNutrients;
+
+    public PickyUserGoal(LifeStyle lifeStyle, WeightGoal weightVariationGoal, Nutrients requiredNutrients) {
         this.lifeStyle = lifeStyle;
         this.weightVariationGoal = weightVariationGoal;
+        this.requiredNutrients = requiredNutrients;
     }
 
     @Override
@@ -16,7 +21,12 @@ public class PickyUserGoal implements UserGoal {
     }
 
     @Override
-    public double getWeightVariationGoal() {
+    public WeightGoal getWeightVariationGoal() {
         return weightVariationGoal;
+    }
+
+    @Override
+    public Nutrients getRequiredNutrients() {
+        return requiredNutrients;
     }
 }

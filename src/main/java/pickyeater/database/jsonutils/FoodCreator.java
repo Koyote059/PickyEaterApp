@@ -125,8 +125,9 @@ public class FoodCreator {
 
     private static UserGoal getUserGoalFromJSON(JSONObject userGoalJSON) throws JSONException {
         LifeStyle lifeStyle = LifeStyle.valueOf(userGoalJSON.getString("LifeStyle"));
-        double weightVariationGoal = userGoalJSON.getDouble("WeightVariationGoal");
-        return new PickyUserGoal(lifeStyle, weightVariationGoal);
+        WeightGoal weightVariationGoal = WeightGoal.valueOf(userGoalJSON.getString("WeightVariationGoal"));
+        Nutrients requiredNutrients = getNutrientsFromJSON(userGoalJSON.getJSONObject("RequiredNutrients"));
+        return new PickyUserGoal(lifeStyle, weightVariationGoal,requiredNutrients);
     }
 
     private static MealPlan getMealPlanFromJSON(JSONObject mealPlan) throws JSONException {
