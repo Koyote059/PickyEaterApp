@@ -12,7 +12,7 @@ public class UserMealsProgressesExecutor {
 
     public UserMealsProgressesExecutor(EaterManager eaterManager) {
         this.eaterManager = eaterManager;
-        Optional<User> userOptional = eaterManager.getUser(); //eaterManager.getUserManager().getUser();
+        Optional<User> userOptional = eaterManager.getUserManager().getUser();
         if (userOptional.isEmpty()) {
             throw new RuntimeException();
         } else {
@@ -29,6 +29,6 @@ public class UserMealsProgressesExecutor {
     }
 
     public void save() {
-        this.eaterManager.saveUser(this.user);
+        this.eaterManager.getUserManager().saveUser(this.user);
     }
 }
