@@ -28,11 +28,13 @@ public class MealPlanViewerExecutor {
     /**
      * to see
      */
+    /*
     public Optional<DailyMealPlan> getMealPlan(LocalDate date){
         if(mealPlanOptional.isEmpty()) return Optional.empty();
         MealPlan mealPlan = mealPlanOptional.get();
         //TODO: FINISH
     }
+     */
 
     public void next(){
 
