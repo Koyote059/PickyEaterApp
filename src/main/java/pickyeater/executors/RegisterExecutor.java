@@ -9,6 +9,7 @@ import pickyeater.builders.PickyUserBuilder;
 import pickyeater.builders.UserBuilder;
 import pickyeater.managers.EaterManager;
 import pickyeater.basics.user.User;
+import pickyeater.managers.UserManager;
 
 public class RegisterExecutor {
     private final EaterManager eaterManager;
@@ -22,6 +23,7 @@ public class RegisterExecutor {
     }
 
     public void saveUser(User user) {
-        this.eaterManager.saveUser(user);
+        UserManager userManager = eaterManager.getUserManager();
+        userManager.saveUser(user);
     }
 }
