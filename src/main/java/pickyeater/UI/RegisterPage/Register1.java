@@ -1,11 +1,10 @@
 package pickyeater.UI.RegisterPage;
 
-import com.toedter.calendar.JCalendar;
+import com.toedter.calendar.JDateChooser;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.event.*;
 import java.time.LocalDate;
 
 public class Register1 extends JFrame{
@@ -18,14 +17,10 @@ public class Register1 extends JFrame{
     private JTextField tfWeight;
     private JTextField tfHeight;
     private JTextField tfBodyfat;
-    private JCalendar jCalendar;
+    private JPanel birthdayPanel;
+    private JDateChooser jBirthdayChooser;
 
-    String name;
-    String sex;
-    double weight;
-    double height;
-    LocalDate brithDay;
-    double bodyFat;
+    String sexTmp = null;
 
     public Register1() {
         setContentPane(mainPanel);
@@ -33,50 +28,71 @@ public class Register1 extends JFrame{
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setVisible(true);
 
-        tfName.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent actionEvent) {
-                name = actionEvent.getActionCommand();
-            }
-        });
-        tfWeight.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent actionEvent) {
-                weight = Double.parseDouble(actionEvent.getActionCommand());
-            }
-        });
-        tfHeight.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent actionEvent) {
-                height = Double.parseDouble(actionEvent.getActionCommand());
-            }
-        });
-
-        tfBodyfat.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent actionEvent) {
-                bodyFat = Double.parseDouble(actionEvent.getActionCommand());
-            }
-        });
         btMale.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-                sex = actionEvent.getActionCommand();
+                sexTmp = actionEvent.getActionCommand();
             }
         });
         btFemale.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-                sex = actionEvent.getActionCommand();
+                sexTmp = actionEvent.getActionCommand();
             }
         });
         btContinue.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-                if (name != null && sex != null && weight != 0 && height != 0 && brithDay != null){
+                // Name
+                String nameTmp = null;
+                if (!tfName.getText().isEmpty()) {
+                    nameTmp = tfName.getText();
+                } else {
+                    JOptionPane.showMessageDialog(panelZeroOne, "Missing name");
+                }
+
+                // Weight
+                double weightTmp = 0;
+                if (!tfWeight.getText().isEmpty()) {
+                    weightTmp = Double.parseDouble(tfWeight.getText());
+                } else {
+                    JOptionPane.showMessageDialog(panelZeroOne, "Missing weight");
+                }
+
+                // Height
+                double heightTmp = 0;
+                if (!tfHeight.getText().isEmpty()) {
+                    heightTmp = Double.parseDouble(tfHeight.getText());
+                } else {
+                    JOptionPane.showMessageDialog(panelZeroOne, "Missing height");
+                }
+
+                // Birthday
+                LocalDate birthDayTmp = null;   // TODO
+                /**
+                if (!tfHeight.getText().isEmpty()) {
+                    heightTmp = Double.parseDouble(tfHeight.getText());
+                } else {
+                    JOptionPane.showMessageDialog(panelZeroOne, "Missing height");
+                }
+                 */
+
+                // Sex
+                if (sexTmp == null){
+                    JOptionPane.showMessageDialog(panelZeroOne, "Missing sex");
+                }
+
+                // BodyFat
+                double bodyFatTmp;
+                if (!tfBodyfat.getText().isEmpty()) {
+                    bodyFatTmp = Double.parseDouble(tfBodyfat.getText());
+                }
+
+                // All
+                if (nameTmp != null && sexTmp != null && weightTmp != 0 && heightTmp != 0 && birthDayTmp != null){
                     System.out.println("OK!");
                 } else {
-                    JOptionPane.showMessageDialog(panelZeroOne, "Missing stuff");
+                    JOptionPane.showMessageDialog(panelZeroOne, "Add missing stuff.");
                 }
             }
         });
@@ -85,5 +101,4 @@ public class Register1 extends JFrame{
     public static void main(String[] args) {
         EventQueue.invokeLater(Register1::new);
     }
-
 }

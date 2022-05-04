@@ -15,7 +15,7 @@ repositories {
 dependencies {
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.1'
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.1'
-    implementation group: 'com.toedter', name: 'jcalendar', version: '1.1.4'
+    implementation group: 'com.toedter', name: 'jcalendar', version: '1.4'
     implementation group: 'org.json', name: 'json', version: '20090211' // TODO -> TMP DB
 }
 
