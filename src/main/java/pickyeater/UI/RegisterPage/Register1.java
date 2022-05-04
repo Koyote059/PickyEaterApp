@@ -5,6 +5,8 @@ import com.toedter.calendar.JDateChooser;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 import java.time.LocalDate;
 
 public class Register1 extends JFrame{
@@ -21,6 +23,7 @@ public class Register1 extends JFrame{
     private JDateChooser jBirthdayChooser;
 
     String sexTmp = null;
+    LocalDate birthDayTmp = null;
 
     public Register1() {
         setContentPane(mainPanel);
@@ -38,6 +41,16 @@ public class Register1 extends JFrame{
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
                 sexTmp = actionEvent.getActionCommand();
+            }
+        });
+
+        jBirthdayChooser.addPropertyChangeListener(new PropertyChangeListener() {
+            @Override
+            public void propertyChange(PropertyChangeEvent propertyChangeEvent) {
+                StringBuilder dateTmp = new StringBuilder();
+                dateTmp.append(propertyChangeEvent.getNewValue());
+                System.out.println(dateTmp);    //TODO: FINISH THIS
+//                birthDayTmp = LocalDate.of(propertyChangeEvent.getNewValue());
             }
         });
         btContinue.addActionListener(new ActionListener() {
@@ -68,14 +81,9 @@ public class Register1 extends JFrame{
                 }
 
                 // Birthday
-                LocalDate birthDayTmp = null;   // TODO
-                /**
-                if (!tfHeight.getText().isEmpty()) {
-                    heightTmp = Double.parseDouble(tfHeight.getText());
-                } else {
-                    JOptionPane.showMessageDialog(panelZeroOne, "Missing height");
+                if (birthDayTmp == null){
+                    JOptionPane.showMessageDialog(panelZeroOne, "Missing birthday");
                 }
-                 */
 
                 // Sex
                 if (sexTmp == null){
@@ -100,5 +108,10 @@ public class Register1 extends JFrame{
 
     public static void main(String[] args) {
         EventQueue.invokeLater(Register1::new);
+    }
+
+    private void createUIComponents() {
+        jBirthdayChooser = new JDateChooser();
+        // TODO: place custom component creation code here
     }
 }
