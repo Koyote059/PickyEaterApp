@@ -10,16 +10,17 @@ import pickyeater.basics.food.Nutrients;
 import pickyeater.basics.mealplan.MealPlan;
 import pickyeater.basics.user.*;
 
+import java.time.LocalDate;
 import java.util.Collection;
 import java.util.Date;
 import java.util.MissingFormatArgumentException;
 
 public class PickyUserBuilder implements UserBuilder {
     private String name = null;
-    private int weight = 0;
+    private float weight = 0;
     private int height = 0;
-    private double bodyFat = 0.0;
-    private Date dateOfBirth = null;
+    private float bodyFat = 0.0f;
+    private LocalDate dateOfBirth = null;
 
     private Nutrients requiredNutrients = null;
     private Sex sex = null;
@@ -32,7 +33,7 @@ public class PickyUserBuilder implements UserBuilder {
         this.name = name;
     }
 
-    public void setWeight(int weight) {
+    public void setWeight(float weight) {
         this.weight = weight;
     }
 
@@ -40,11 +41,11 @@ public class PickyUserBuilder implements UserBuilder {
         this.height = height;
     }
 
-    public void setBodyFat(double bodyFat) {
+    public void setBodyFat(float bodyFat) {
         this.bodyFat = bodyFat;
     }
 
-    public void setDateOfBirth(Date dateOfBirth) {
+    public void setDateOfBirth(LocalDate dateOfBirth) {
         this.dateOfBirth = dateOfBirth;
     }
 
@@ -70,6 +71,61 @@ public class PickyUserBuilder implements UserBuilder {
 
     public void setDailyProgresses(Collection<Meal> meals, int burnedCalories) {
         this.dailyProgresses = new PickyDailyProgresses(burnedCalories, meals);
+    }
+
+    @Override
+    public String getName() {
+        return name;
+    }
+
+    @Override
+    public float getWeight() {
+        return weight;
+    }
+
+    @Override
+    public int getHeight() {
+        return height;
+    }
+
+    @Override
+    public float getBodyFat() {
+        return bodyFat;
+    }
+
+    @Override
+    public LocalDate getDateOfBirth() {
+        return dateOfBirth;
+    }
+
+    @Override
+    public Nutrients getRequiredNutrients() {
+        return requiredNutrients;
+    }
+
+    @Override
+    public Sex getSex() {
+        return sex;
+    }
+
+    @Override
+    public LifeStyle getLifeStyle() {
+        return lifeStyle;
+    }
+
+    @Override
+    public WeightGoal getWeightVariationGoal() {
+        return weightVariationGoal;
+    }
+
+    @Override
+    public DailyProgresses getDailyProgresses() {
+        return dailyProgresses;
+    }
+
+    @Override
+    public MealPlan getMealPlan() {
+        return mealPlan;
     }
 
     public User build() {

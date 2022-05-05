@@ -1,6 +1,7 @@
 package pickyeater.UI.RegisterPage;
 
 import pickyeater.basics.user.LifeStyle;
+import pickyeater.executors.RegisterExecutor;
 
 import javax.swing.*;
 import java.awt.*;
@@ -19,7 +20,7 @@ public class Register2 extends JFrame {
 
     LifeStyle lifeStyle;
 
-    public Register2() {
+    public Register2(RegisterExecutor registerExecutor) {
         setContentPane(mainPanel);
         pack();
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
@@ -33,7 +34,7 @@ public class Register2 extends JFrame {
                 btVeryActive.setBackground(Color.white);
                 lifeStyle = LifeStyle.SEDENTARY;
 
-                Continue();
+                Continue(registerExecutor);
             }
         });
         btSlightlyActive.addActionListener(new ActionListener() {
@@ -45,7 +46,7 @@ public class Register2 extends JFrame {
                 btVeryActive.setBackground(Color.white);
                 lifeStyle = LifeStyle.LIGHTLY_ACTIVE;
 
-                Continue();
+                Continue(registerExecutor);
             }
         });
         btActive.addActionListener(new ActionListener() {
@@ -57,7 +58,7 @@ public class Register2 extends JFrame {
                 btVeryActive.setBackground(Color.white);
                 lifeStyle = LifeStyle.ACTIVE;
 
-                Continue();
+                Continue(registerExecutor);
             }
         });
         btVeryActive.addActionListener(new ActionListener() {
@@ -69,7 +70,7 @@ public class Register2 extends JFrame {
                 btVeryActive.setBackground(Color.green);
                 lifeStyle = LifeStyle.VERY_ACTIVE;
 
-                Continue();
+                Continue(registerExecutor);
             }
         });
     btBack.addComponentListener(new ComponentAdapter() { } );
@@ -77,17 +78,17 @@ public class Register2 extends JFrame {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
                 setVisible(false);
-                EventQueue.invokeLater(Register1::new);
+                new Register1(registerExecutor);
             }
         });
     }
-    private void Continue(){
+    private void Continue(RegisterExecutor registerExecutor){
         if (lifeStyle != null){
             JOptionPane.showMessageDialog(buttonPanel, "Lifestyle: " + lifeStyle);
 
             setVisible(false);
 //            EventQueue.invokeLater(Register3::new);
-            EventQueue.invokeLater(Register1::new);     // todo: remove
+            new Register1(registerExecutor);     // todo: remove
         }
     }
 }

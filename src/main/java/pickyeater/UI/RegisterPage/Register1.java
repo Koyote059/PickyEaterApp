@@ -1,6 +1,9 @@
 package pickyeater.UI.RegisterPage;
 
 import com.toedter.calendar.JDateChooser;
+import pickyeater.basics.user.Sex;
+import pickyeater.builders.UserBuilder;
+import pickyeater.executors.RegisterExecutor;
 
 import javax.swing.*;
 import java.awt.*;
@@ -28,10 +31,13 @@ public class Register1 extends JFrame{
     private JPanel birthdayPanel;
     private JDateChooser jBirthdayChooser;
 
-    String sexTmp = null;
     LocalDate birthDayTmp = null;
 
-    public Register1() {
+    RegisterExecutor registerExecutor;
+    UserBuilder userBuilder;
+    public Register1(RegisterExecutor registerExecutor) {
+        this.registerExecutor = registerExecutor;
+        this.userBuilder = registerExecutor.getUserBuilder();
         setContentPane(mainPanel);
         pack();
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
@@ -41,17 +47,17 @@ public class Register1 extends JFrame{
         btMale.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-                sexTmp = actionEvent.getActionCommand();
                 btMale.setBackground(Color.green);
                 btFemale.setBackground(Color.white);
+                userBuilder.setSex(Sex.MALE);
             }
         });
         btFemale.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-                sexTmp = actionEvent.getActionCommand();
                 btMale.setBackground(Color.white);
                 btFemale.setBackground(Color.green);
+                userBuilder.setSex(Sex.FEMALE);
             }
         });
 
@@ -120,7 +126,7 @@ public class Register1 extends JFrame{
                 }
 
                 // Sex
-                if (sexTmp == null){
+                if (userBuilder.getSex() == null){
                     JOptionPane.showMessageDialog(panelZeroOne, "Missing sex", "Warning", JOptionPane.WARNING_MESSAGE);
                 }
 
@@ -131,12 +137,12 @@ public class Register1 extends JFrame{
                 }
 
                 // Continue
-                if (nameTmp != null && sexTmp != null && weightTmp != 0 && heightTmp != 0 && birthDayTmp != null){
-                    JOptionPane.showMessageDialog(panelZeroOne, "Selected:"  + "\n" +  "Name: " + nameTmp + "\n" + "Weight: " + weightTmp + "Kg\n" + "Height: " + heightTmp + "cm\n" + "Birthday: " + birthDayTmp + "\n" + "Sex: " + sexTmp + "\n" + "Body fat: " + bodyFatTmp + "%");
+                if (nameTmp != null && userBuilder.getSex() != null && weightTmp != 0 && heightTmp != 0 && birthDayTmp != null){
+                    JOptionPane.showMessageDialog(panelZeroOne, "Selected:"  + "\n" +  "Name: " + nameTmp + "\n" + "Weight: " + weightTmp + "Kg\n" + "Height: " + heightTmp + "cm\n" + "Birthday: " + birthDayTmp + "\n" + "Sex: " + userBuilder.getSex() + "\n" + "Body fat: " + bodyFatTmp + "%");
                     //System.out.println("OK!");
 
                     setVisible(false);
-                    EventQueue.invokeLater(Register2::new);
+                    new Register2(registerExecutor);
                 }
             }
         });

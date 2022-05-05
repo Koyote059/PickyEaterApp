@@ -19,6 +19,7 @@ import pickyeater.basics.mealplan.MealPlan;
 import pickyeater.basics.mealplan.PickyDailyMealPlan;
 import pickyeater.basics.mealplan.PickyMealPlan;
 
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 
@@ -109,10 +110,10 @@ public class FoodCreator {
     }
 
     private static UserStatus getUserStatusFromJSON(JSONObject userStatusJSON) throws JSONException {
-        double weight = userStatusJSON.getDouble("Weight");
-        double bodyFat = userStatusJSON.getDouble("Bodyfat");
-        double height = userStatusJSON.getDouble("Height");
-        Date dateOfBirth = new Date(userStatusJSON.getLong("Birth"));
+        float weight = (float) userStatusJSON.getDouble("Weight");
+        float bodyFat = (float) userStatusJSON.getDouble("Bodyfat");
+        int height = userStatusJSON.getInt("Height");
+        LocalDate dateOfBirth = null;// new LocalDate(userStatusJSON.getLong("Birth"));
         Sex sex = Sex.valueOf(userStatusJSON.getString("Sex"));
         return new PickyUserStatus(weight, height, bodyFat, dateOfBirth, sex);
     }

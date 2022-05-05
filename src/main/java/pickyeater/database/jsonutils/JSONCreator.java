@@ -106,7 +106,7 @@ public class JSONCreator {
         jsonObject.put("Sex", userStatus.getSex().name());
         jsonObject.put("Weight", userStatus.getWeight());
         jsonObject.put("Height", userStatus.getHeight());
-        jsonObject.put("Birth", userStatus.getDateOfBirth().getTime());
+        jsonObject.put("Birth", userStatus.getDateOfBirth());
         return jsonObject;
     }
 
