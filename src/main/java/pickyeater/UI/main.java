@@ -1,5 +1,7 @@
 package pickyeater.UI;
 
+import pickyeater.UI.RegisterPage.Register1;
+
 import pickyeater.UI.RegisterPage.Register2;
 
 import java.awt.*;
