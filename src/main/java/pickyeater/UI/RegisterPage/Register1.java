@@ -37,19 +37,25 @@ public class Register1 extends JFrame{
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setVisible(true);
 
+        // Sex
         btMale.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
                 sexTmp = actionEvent.getActionCommand();
+                btMale.setBackground(Color.green);
+                btFemale.setBackground(Color.white);
             }
         });
         btFemale.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
                 sexTmp = actionEvent.getActionCommand();
+                btMale.setBackground(Color.white);
+                btFemale.setBackground(Color.green);
             }
         });
 
+        // Birthday
         jBirthdayChooser.addPropertyChangeListener(new PropertyChangeListener() {
             @Override
             public void propertyChange(PropertyChangeEvent propertyChangeEvent) {
@@ -67,6 +73,10 @@ public class Register1 extends JFrame{
                 int monthInt = accessor.get(ChronoField.MONTH_OF_YEAR);
 
                 birthDayTmp = LocalDate.of(parseInt(year), monthInt, parseInt(day));
+
+                if (LocalDate.now().compareTo(birthDayTmp) <= 0){   //TODO: If a person is older than 150 years old -> null
+                    birthDayTmp = null;
+                }
             }
         });
         btContinue.addActionListener(new ActionListener() {
@@ -84,6 +94,10 @@ public class Register1 extends JFrame{
                 double weightTmp = 0;
                 if (!tfWeight.getText().isEmpty()) {
                     weightTmp = Double.parseDouble(tfWeight.getText());
+                    if (weightTmp > 800 || weightTmp < 10){
+                        JOptionPane.showMessageDialog(panelZeroOne, "Insert valid weight");
+                        weightTmp = 0;
+                    }
                 } else {
                     JOptionPane.showMessageDialog(panelZeroOne, "Missing weight");
                 }
@@ -92,13 +106,17 @@ public class Register1 extends JFrame{
                 double heightTmp = 0;
                 if (!tfHeight.getText().isEmpty()) {
                     heightTmp = Double.parseDouble(tfHeight.getText());
+                    if (heightTmp > 300 || heightTmp < 10){
+                        JOptionPane.showMessageDialog(panelZeroOne, "Insert valid height");
+                        heightTmp = 0;
+                    }
                 } else {
                     JOptionPane.showMessageDialog(panelZeroOne, "Missing height");
                 }
 
                 // Birthday
                 if (birthDayTmp == null){
-                    JOptionPane.showMessageDialog(panelZeroOne, "Missing birthday");
+                    JOptionPane.showMessageDialog(panelZeroOne, "Insert valid birthday");
                 }
 
                 // Sex
@@ -112,9 +130,10 @@ public class Register1 extends JFrame{
                     bodyFatTmp = Double.parseDouble(tfBodyfat.getText());
                 }
 
-                // All
+                // Continue
                 if (nameTmp != null && sexTmp != null && weightTmp != 0 && heightTmp != 0 && birthDayTmp != null){
                     System.out.println("OK!");
+                    JOptionPane.showConfirmDialog(panelZeroOne, "Selected:"  + "\n" +  "Name: " + nameTmp + "\n" + "Weight" + weightTmp + "");
                 } else {
                     JOptionPane.showMessageDialog(panelZeroOne, "Add missing stuff.");
                 }
