@@ -133,7 +133,7 @@ public class Register1 extends JFrame{
                 // Continue
                 if (nameTmp != null && sexTmp != null && weightTmp != 0 && heightTmp != 0 && birthDayTmp != null){
                     JOptionPane.showMessageDialog(panelZeroOne, "Selected:"  + "\n" +  "Name: " + nameTmp + "\n" + "Weight: " + weightTmp + "Kg\n" + "Height: " + heightTmp + "cm\n" + "Birthday: " + birthDayTmp + "\n" + "Sex: " + sexTmp + "\n" + "Body fat: " + bodyFatTmp + "%");
-                    System.out.println("OK!");
+                    //System.out.println("OK!");
 
                     setVisible(false);
                     EventQueue.invokeLater(Register2::new);
