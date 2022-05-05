@@ -142,10 +142,6 @@ public class Register1 extends JFrame{
         });
     }
 
-    public static void main(String[] args) {
-        EventQueue.invokeLater(Register1::new);
-    }
-
     private void createUIComponents() {
         jBirthdayChooser = new JDateChooser();
     }
