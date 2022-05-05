@@ -62,9 +62,9 @@ public class Register1 extends JFrame{
                 StringBuilder dateTmp = new StringBuilder();
                 dateTmp.append(propertyChangeEvent.getNewValue());
                 // System.out.println(dateTmp);
-                String month = new String(dateTmp.substring(4, 7));
-                String day = new String(dateTmp.substring(8, 10));
-                String year = new String(dateTmp.substring(dateTmp.length() - 4, dateTmp.length()));
+                String month = dateTmp.substring(4, 7);
+                String day = dateTmp.substring(8, 10);
+                String year = dateTmp.substring(dateTmp.length() - 4, dateTmp.length());
                 // System.out.println("month: " + month + ", day: " + day + ", year: " + year);
 
                 DateTimeFormatter parser = DateTimeFormatter.ofPattern("MMM")
@@ -87,7 +87,7 @@ public class Register1 extends JFrame{
                 if (!tfName.getText().isEmpty()) {
                     nameTmp = tfName.getText();
                 } else {
-                    JOptionPane.showMessageDialog(panelZeroOne, "Missing name");
+                    JOptionPane.showMessageDialog(panelZeroOne, "Missing name", "Warning", JOptionPane.WARNING_MESSAGE);
                 }
 
                 // Weight
@@ -95,11 +95,11 @@ public class Register1 extends JFrame{
                 if (!tfWeight.getText().isEmpty()) {
                     weightTmp = Double.parseDouble(tfWeight.getText());
                     if (weightTmp > 800 || weightTmp < 10){
-                        JOptionPane.showMessageDialog(panelZeroOne, "Insert valid weight");
+                        JOptionPane.showMessageDialog(panelZeroOne, "Insert valid weight", "Error", JOptionPane.ERROR_MESSAGE);
                         weightTmp = 0;
                     }
                 } else {
-                    JOptionPane.showMessageDialog(panelZeroOne, "Missing weight");
+                    JOptionPane.showMessageDialog(panelZeroOne, "Missing weight", "Warning", JOptionPane.WARNING_MESSAGE);
                 }
 
                 // Height
@@ -107,35 +107,33 @@ public class Register1 extends JFrame{
                 if (!tfHeight.getText().isEmpty()) {
                     heightTmp = Double.parseDouble(tfHeight.getText());
                     if (heightTmp > 300 || heightTmp < 10){
-                        JOptionPane.showMessageDialog(panelZeroOne, "Insert valid height");
+                        JOptionPane.showMessageDialog(panelZeroOne, "Insert valid height", "Error", JOptionPane.ERROR_MESSAGE);
                         heightTmp = 0;
                     }
                 } else {
-                    JOptionPane.showMessageDialog(panelZeroOne, "Missing height");
+                    JOptionPane.showMessageDialog(panelZeroOne, "Missing height", "Warning", JOptionPane.WARNING_MESSAGE);
                 }
 
                 // Birthday
                 if (birthDayTmp == null){
-                    JOptionPane.showMessageDialog(panelZeroOne, "Insert valid birthday");
+                    JOptionPane.showMessageDialog(panelZeroOne, "Insert valid birthday", "Error", JOptionPane.ERROR_MESSAGE);
                 }
 
                 // Sex
                 if (sexTmp == null){
-                    JOptionPane.showMessageDialog(panelZeroOne, "Missing sex");
+                    JOptionPane.showMessageDialog(panelZeroOne, "Missing sex", "Warning", JOptionPane.WARNING_MESSAGE);
                 }
 
                 // BodyFat
-                double bodyFatTmp;
+                double bodyFatTmp = 0;
                 if (!tfBodyfat.getText().isEmpty()) {
                     bodyFatTmp = Double.parseDouble(tfBodyfat.getText());
                 }
 
                 // Continue
                 if (nameTmp != null && sexTmp != null && weightTmp != 0 && heightTmp != 0 && birthDayTmp != null){
+                    JOptionPane.showMessageDialog(panelZeroOne, "Selected:"  + "\n" +  "Name: " + nameTmp + "\n" + "Weight: " + weightTmp + "Kg\n" + "Height: " + heightTmp + "cm\n" + "Birthday: " + birthDayTmp + "\n" + "Sex: " + sexTmp + "\n" + "Body fat: " + bodyFatTmp + "%");
                     System.out.println("OK!");
-                    JOptionPane.showConfirmDialog(panelZeroOne, "Selected:"  + "\n" +  "Name: " + nameTmp + "\n" + "Weight" + weightTmp + "");
-                } else {
-                    JOptionPane.showMessageDialog(panelZeroOne, "Add missing stuff.");
                 }
             }
         });
