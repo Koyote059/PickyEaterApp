@@ -8,6 +8,12 @@ import java.awt.event.*;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoField;
+import java.time.temporal.TemporalAccessor;
+import java.util.Locale;
+
+import static java.lang.Integer.parseInt;
 
 public class Register1 extends JFrame{
     private JPanel mainPanel;
@@ -49,8 +55,18 @@ public class Register1 extends JFrame{
             public void propertyChange(PropertyChangeEvent propertyChangeEvent) {
                 StringBuilder dateTmp = new StringBuilder();
                 dateTmp.append(propertyChangeEvent.getNewValue());
-                System.out.println(dateTmp);    //TODO: FINISH THIS
-//                birthDayTmp = LocalDate.of(propertyChangeEvent.getNewValue());
+                // System.out.println(dateTmp);
+                String month = new String(dateTmp.substring(4, 7));
+                String day = new String(dateTmp.substring(8, 10));
+                String year = new String(dateTmp.substring(dateTmp.length() - 4, dateTmp.length()));
+                // System.out.println("month: " + month + ", day: " + day + ", year: " + year);
+
+                DateTimeFormatter parser = DateTimeFormatter.ofPattern("MMM")
+                        .withLocale(Locale.ENGLISH);
+                TemporalAccessor accessor = parser.parse(month);
+                int monthInt = accessor.get(ChronoField.MONTH_OF_YEAR);
+
+                birthDayTmp = LocalDate.of(parseInt(year), monthInt, parseInt(day));
             }
         });
         btContinue.addActionListener(new ActionListener() {
@@ -112,6 +128,5 @@ public class Register1 extends JFrame{
 
     private void createUIComponents() {
         jBirthdayChooser = new JDateChooser();
-        // TODO: place custom component creation code here
     }
 }
