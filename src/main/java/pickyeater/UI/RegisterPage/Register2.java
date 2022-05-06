@@ -84,7 +84,7 @@ public class Register2 extends JFrame {
     }
     private void Continue(RegisterExecutor registerExecutor){
         if (lifeStyle != null){
-            JOptionPane.showMessageDialog(buttonPanel, "Lifestyle: " + lifeStyle);
+            //JOptionPane.showMessageDialog(buttonPanel, "Lifestyle: " + lifeStyle);
 
             setVisible(false);
 //            EventQueue.invokeLater(Register3::new);

@@ -17,7 +17,6 @@ public class Register3 extends JFrame {
     private JPanel mainPanel;
     private JButton btBack;
     private JPanel buttonPanel;
-
     WeightGoal weightGoal;
 
     public Register3(RegisterExecutor registerExecutor) {
@@ -70,7 +69,7 @@ public class Register3 extends JFrame {
     }
     private void Continue(RegisterExecutor registerExecutor){
         if (weightGoal != null){
-            JOptionPane.showMessageDialog(buttonPanel, "Goal: " + weightGoal);
+            //JOptionPane.showMessageDialog(buttonPanel, "Goal: " + weightGoal);
 
             setVisible(false);
 
