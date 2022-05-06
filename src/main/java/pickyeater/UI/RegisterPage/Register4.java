@@ -42,10 +42,9 @@ public class Register4 extends JFrame {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
 
-                JOptionPane.showMessageDialog(mainPanel, "Selected:"  + "\n" );
-                // TODO: FINISH THIS
+                JOptionPane.showMessageDialog(mainPanel, "Selected:"  + "\n" + "Calories: " + newNutrientsTmp.getCalories() + "\n" + "Proteins: " + newNutrientsTmp.getProteins() + "\n" + "Carbs: " + newNutrientsTmp.getCarbs() + "\n" + "Fats: " + newNutrientsTmp.getFats());
 
-                // TODO: SAVE TO DATABASE newNutrients
+                // TODO: SAVE TO DATABASE newNutrientsTmp
 
                 setVisible(false);
                 // TODO: GO TO THE APP WITH new AppPanel(registerExecutor);
@@ -66,24 +65,20 @@ public class Register4 extends JFrame {
                     JOptionPane.showMessageDialog(mainPanel, "Insert valid number in Proteins", "Error", JOptionPane.ERROR_MESSAGE);
                 } else {
                     newNutrientsTmp.setProteins(Double.parseDouble(tfProteins.getText()));
-                    // TODO: Save in database
                 }
 
                 if (Double.parseDouble(tfFats.getText()) > 5000 | Double.parseDouble(tfFats.getText()) < 0){
                     JOptionPane.showMessageDialog(mainPanel, "Insert valid number in Fats", "Error", JOptionPane.ERROR_MESSAGE);
                 } else {
                     newNutrientsTmp.setUnSaturatedFats(Double.parseDouble(tfFats.getText()));
-                    // TODO: Save in database
                 }
 
                 if (Double.parseDouble(tfCarbs.getText()) > 5000 | Double.parseDouble(tfCarbs.getText()) < 0){
                     JOptionPane.showMessageDialog(mainPanel, "Insert valid number in Carbs", "Error", JOptionPane.ERROR_MESSAGE);
                 } else {
                     newNutrientsTmp.setComplexCarbs(Double.parseDouble(tfCarbs.getText()));
-                    // TODO: Save in database
                 }
 
-                // TODO: Get from database
                 tfCalories.setText(Double.toString(newNutrientsTmp.getCalories()));
             }
         };
@@ -105,6 +100,11 @@ public class Register4 extends JFrame {
 
         // Refresh monitor
         setVisible(true);
+
+        // save also to newNutrientsTmp
+        newNutrientsTmp.setComplexCarbs(Double.parseDouble(tfCarbs.getText()));
+        newNutrientsTmp.setUnSaturatedFats(Double.parseDouble(tfFats.getText()));
+        newNutrientsTmp.setProteins(Double.parseDouble(tfProteins.getText()));
     }
 
 }
