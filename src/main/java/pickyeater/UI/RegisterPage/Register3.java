@@ -33,7 +33,7 @@ public class Register3 extends JFrame {
                 btMaintainWeight.setBackground(Color.white);
                 weightGoal = WeightGoal.LOSE_WEIGHT;
 
-                Continue();
+                Continue(registerExecutor);
             }
         });
         btGainWeight.addActionListener(new ActionListener() {
@@ -44,7 +44,7 @@ public class Register3 extends JFrame {
                 btMaintainWeight.setBackground(Color.white);
                 weightGoal = WeightGoal.INCREASE_WEIGHT;
 
-                Continue();
+                Continue(registerExecutor);
             }
         });
         btMaintainWeight.addActionListener(new ActionListener() {
@@ -55,7 +55,7 @@ public class Register3 extends JFrame {
                 btMaintainWeight.setBackground(Color.green);
                 weightGoal = WeightGoal.MANTAIN_WEIGHT;
 
-                Continue();
+                Continue(registerExecutor);
             }
         });
 
@@ -68,13 +68,13 @@ public class Register3 extends JFrame {
             }
         });
     }
-    private void Continue(){
+    private void Continue(RegisterExecutor registerExecutor){
         if (weightGoal != null){
             JOptionPane.showMessageDialog(buttonPanel, "Goal: " + weightGoal);
 
             setVisible(false);
 
-            //TODO: go to Nutrients calculated page
+            new Register4(registerExecutor);
         }
     }
 }
