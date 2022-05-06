@@ -89,32 +89,29 @@ public class Register1 extends JFrame{
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
                 // Name
-                String nameTmp = null;
                 if (!tfName.getText().isEmpty()) {
-                    nameTmp = tfName.getText();
+                    userBuilder.setName(tfName.getText());
                 } else {
                     JOptionPane.showMessageDialog(panelZeroOne, "Missing name", "Warning", JOptionPane.WARNING_MESSAGE);
                 }
 
                 // Weight
-                double weightTmp = 0;
                 if (!tfWeight.getText().isEmpty()) {
-                    weightTmp = Double.parseDouble(tfWeight.getText());
-                    if (weightTmp > 800 || weightTmp < 10){
+                    userBuilder.setWeight(Float.parseFloat(tfWeight.getText()));
+                    if (userBuilder.getWeight() > 800 || userBuilder.getWeight() < 10){
                         JOptionPane.showMessageDialog(panelZeroOne, "Insert valid weight", "Error", JOptionPane.ERROR_MESSAGE);
-                        weightTmp = 0;
+                        userBuilder.setWeight(0);
                     }
                 } else {
                     JOptionPane.showMessageDialog(panelZeroOne, "Missing weight", "Warning", JOptionPane.WARNING_MESSAGE);
                 }
 
                 // Height
-                double heightTmp = 0;
                 if (!tfHeight.getText().isEmpty()) {
-                    heightTmp = Double.parseDouble(tfHeight.getText());
-                    if (heightTmp > 300 || heightTmp < 10){
+                    userBuilder.setHeight(Integer.parseInt(tfHeight.getText()));
+                    if (userBuilder.getHeight() > 300 || userBuilder.getHeight() < 10){
                         JOptionPane.showMessageDialog(panelZeroOne, "Insert valid height", "Error", JOptionPane.ERROR_MESSAGE);
-                        heightTmp = 0;
+                        userBuilder.setHeight(0);
                     }
                 } else {
                     JOptionPane.showMessageDialog(panelZeroOne, "Missing height", "Warning", JOptionPane.WARNING_MESSAGE);
@@ -131,15 +128,19 @@ public class Register1 extends JFrame{
                 }
 
                 // BodyFat
-                double bodyFatTmp = 0;
                 if (!tfBodyfat.getText().isEmpty()) {
-                    bodyFatTmp = Double.parseDouble(tfBodyfat.getText());
+                    userBuilder.setBodyFat(Float.parseFloat(tfBodyfat.getText()));
+                    if (userBuilder.getBodyFat() < 0 | userBuilder.getBodyFat() > 100){
+                        JOptionPane.showMessageDialog(panelZeroOne, "Insert valid body-fat percentage", "Error", JOptionPane.ERROR_MESSAGE);
+                    userBuilder.setBodyFat(0);
+                    }
                 }
 
                 // Continue
-                if (nameTmp != null && userBuilder.getSex() != null && weightTmp != 0 && heightTmp != 0 && birthDayTmp != null){
-                    JOptionPane.showMessageDialog(panelZeroOne, "Selected:"  + "\n" +  "Name: " + nameTmp + "\n" + "Weight: " + weightTmp + "Kg\n" + "Height: " + heightTmp + "cm\n" + "Birthday: " + birthDayTmp + "\n" + "Sex: " + userBuilder.getSex() + "\n" + "Body fat: " + bodyFatTmp + "%");
-                    //System.out.println("OK!");
+                if (userBuilder.getName() != null && userBuilder.getSex() != null && userBuilder.getWeight() != 0 && userBuilder.getHeight() != 0 && birthDayTmp != null){
+                    JOptionPane.showMessageDialog(panelZeroOne, "Selected:"  + "\n" +  "Name: " + userBuilder.getName() + "\n" + "Weight: " + userBuilder.getWeight() + "Kg\n" + "Height: " + userBuilder.getHeight() + "cm\n" + "Birthday: " + birthDayTmp + "\n" + "Sex: " + userBuilder.getSex() + "\n" + "Body fat: " + userBuilder.getBodyFat() + "%");
+
+                    // TODO: User Save
 
                     setVisible(false);
                     new Register2(registerExecutor);
