@@ -31,8 +31,6 @@ public class Register1 extends JFrame{
     private JPanel birthdayPanel;
     private JDateChooser jBirthdayChooser;
 
-    LocalDate birthDayTmp = null;
-
     RegisterExecutor registerExecutor;
     UserBuilder userBuilder;
     public Register1(RegisterExecutor registerExecutor) {
@@ -78,10 +76,10 @@ public class Register1 extends JFrame{
                 TemporalAccessor accessor = parser.parse(month);
                 int monthInt = accessor.get(ChronoField.MONTH_OF_YEAR);
 
-                birthDayTmp = LocalDate.of(parseInt(year), monthInt, parseInt(day));
+                userBuilder.setDateOfBirth(LocalDate.of(parseInt(year), monthInt, parseInt(day)));
 
-                if (LocalDate.now().compareTo(birthDayTmp) <= 0){   //TODO: If a person is older than 150 years old -> null
-                    birthDayTmp = null;
+                if (LocalDate.now().compareTo(userBuilder.getDateOfBirth()) <= 0){   //TODO: If a person is older than 150 years old -> null
+                    userBuilder.setDateOfBirth(null);
                 }
             }
         });
@@ -118,7 +116,7 @@ public class Register1 extends JFrame{
                 }
 
                 // Birthday
-                if (birthDayTmp == null){
+                if (userBuilder.getDateOfBirth() == null){
                     JOptionPane.showMessageDialog(panelZeroOne, "Insert valid birthday", "Error", JOptionPane.ERROR_MESSAGE);
                 }
 
@@ -137,8 +135,8 @@ public class Register1 extends JFrame{
                 }
 
                 // Continue
-                if (userBuilder.getName() != null && userBuilder.getSex() != null && userBuilder.getWeight() != 0 && userBuilder.getHeight() != 0 && birthDayTmp != null){
-                    JOptionPane.showMessageDialog(panelZeroOne, "Selected:"  + "\n" +  "Name: " + userBuilder.getName() + "\n" + "Weight: " + userBuilder.getWeight() + "Kg\n" + "Height: " + userBuilder.getHeight() + "cm\n" + "Birthday: " + birthDayTmp + "\n" + "Sex: " + userBuilder.getSex() + "\n" + "Body fat: " + userBuilder.getBodyFat() + "%");
+                if (userBuilder.getName() != null && userBuilder.getSex() != null && userBuilder.getWeight() != 0 && userBuilder.getHeight() != 0 && userBuilder.getDateOfBirth() != null){
+                    JOptionPane.showMessageDialog(panelZeroOne, "Selected:"  + "\n" +  "Name: " + userBuilder.getName() + "\n" + "Weight: " + userBuilder.getWeight() + "Kg\n" + "Height: " + userBuilder.getHeight() + "cm\n" + "Birthday: " + userBuilder.getDateOfBirth() + "\n" + "Sex: " + userBuilder.getSex() + "\n" + "Body fat: " + userBuilder.getBodyFat() + "%");
 
                     // TODO: User Save
 
