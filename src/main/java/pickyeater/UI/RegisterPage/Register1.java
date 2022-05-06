@@ -1,6 +1,8 @@
 package pickyeater.UI.RegisterPage;
 
 import com.toedter.calendar.JDateChooser;
+import pickyeater.algorithms.BodyFatCalculator;
+import pickyeater.algorithms.BodyFatCaluclatorWrong;
 import pickyeater.basics.user.Sex;
 import pickyeater.builders.UserBuilder;
 import pickyeater.executors.RegisterExecutor;
@@ -89,6 +91,10 @@ public class Register1 extends JFrame{
                 // Name
                 if (!tfName.getText().isEmpty()) {
                     userBuilder.setName(tfName.getText());
+                    if (userBuilder.getName().length() > 20){
+                        JOptionPane.showMessageDialog(panelZeroOne, "Insert valid name", "Error", JOptionPane.ERROR_MESSAGE);
+                        userBuilder.setName(null);
+                    }
                 } else {
                     JOptionPane.showMessageDialog(panelZeroOne, "Missing name", "Warning", JOptionPane.WARNING_MESSAGE);
                 }
@@ -136,7 +142,11 @@ public class Register1 extends JFrame{
 
                 // Continue
                 if (userBuilder.getName() != null && userBuilder.getSex() != null && userBuilder.getWeight() != 0 && userBuilder.getHeight() != 0 && userBuilder.getDateOfBirth() != null){
-                    JOptionPane.showMessageDialog(panelZeroOne, "Selected:"  + "\n" +  "Name: " + userBuilder.getName() + "\n" + "Weight: " + userBuilder.getWeight() + "Kg\n" + "Height: " + userBuilder.getHeight() + "cm\n" + "Birthday: " + userBuilder.getDateOfBirth() + "\n" + "Sex: " + userBuilder.getSex() + "\n" + "Body fat: " + userBuilder.getBodyFat() + "%");
+                    if (userBuilder.getBodyFat() == 0){
+                        BodyFatCalculator bodyFatCalculator = new BodyFatCaluclatorWrong();
+                        userBuilder.setBodyFat(bodyFatCalculator.calculate(userBuilder.getHeight(), userBuilder.getWeight(), userBuilder.getSex()));
+                    }
+                    JOptionPane.showMessageDialog(panelZeroOne, "Selected:"  + "\n" +  "Name: " + userBuilder.getName() + "\n" + "Height: " + userBuilder.getHeight() + "cm\n" + "Weight: " + userBuilder.getWeight() + "Kg\n" + "Birthday: " + userBuilder.getDateOfBirth() + "\n" + "Sex: " + userBuilder.getSex() + "\n" + "Body fat: " + userBuilder.getBodyFat() + "%");
 
                     // TODO: User Save
 
