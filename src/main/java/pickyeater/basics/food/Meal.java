@@ -11,6 +11,6 @@ public interface Meal {
     String getName();
     Set<Ingredient> getIngredients();
     List<String> getTags();
-    Quantity getQuantity();
+    float getWeight();
     Nutrients getNutrients();
 }

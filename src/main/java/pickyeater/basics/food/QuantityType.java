@@ -5,5 +5,5 @@ package pickyeater.basics.food;
  */
 
 public enum QuantityType {
-    GRAMS, LITERS, PIECE
+    GRAMS, MILLILITERS, PIECES
 }

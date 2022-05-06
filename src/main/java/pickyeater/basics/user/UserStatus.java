@@ -1,12 +1,12 @@
 package pickyeater.basics.user;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 public interface UserStatus {
 
-    double getWeight();
-    double getBodyFat();
-    double getHeight();
-    Date getDateOfBirth();
+    float getWeight();
+    float getBodyFat();
+    int getHeight();
+    LocalDate getDateOfBirth();
     Sex getSex();
 }

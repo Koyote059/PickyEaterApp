@@ -70,7 +70,7 @@ public class PickyFinder implements Finder {
 
         Quantity newQuantity = new PickyQuantity(dst.getQuantity().getQuantity() + src.getQuantity().getQuantity(),
                 src.getQuantity().getQuantityType(),
-                dst.getQuantity().getQuantityGrams() + src.getQuantity().getQuantityGrams());
+                dst.getQuantity().getGramsPerQuantity() + src.getQuantity().getGramsPerQuantity());
 
         double newPrice = dst.getPrice() + src.getPrice();
 

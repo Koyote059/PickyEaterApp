@@ -6,9 +6,9 @@ import pickyeater.basics.food.QuantityType;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class PickyQuantityTest {
-    Quantity q1 = new PickyQuantity(1, QuantityType.PIECE, 30);
+    Quantity q1 = new PickyQuantity(1, QuantityType.PIECES, 30);
     Quantity q2 = new PickyQuantity(2, QuantityType.GRAMS, 20);
-    Quantity q3 = new PickyQuantity(3, QuantityType.LITERS, 10);
+    Quantity q3 = new PickyQuantity(3, QuantityType.MILLILITERS, 10);
 
     @Test
     void getQuantity() {
@@ -19,15 +19,15 @@ public class PickyQuantityTest {
 
     @Test
     void getQuantityType() {
-        assertEquals(QuantityType.PIECE, q1.getQuantityType());
+        assertEquals(QuantityType.PIECES, q1.getQuantityType());
         assertEquals(QuantityType.GRAMS, q2.getQuantityType());
-        assertEquals(QuantityType.LITERS, q3.getQuantityType());
+        assertEquals(QuantityType.MILLILITERS, q3.getQuantityType());
     }
 
     @Test
     void getQuantityGrams() {
-        assertEquals(30, q1.getQuantityGrams());
-        assertEquals(20, q2.getQuantityGrams());
-        assertEquals(10, q3.getQuantityGrams());
+        assertEquals(30, q1.getGramsPerQuantity());
+        assertEquals(20, q2.getGramsPerQuantity());
+        assertEquals(10, q3.getGramsPerQuantity());
     }
 }

@@ -51,7 +51,7 @@ public class JSONCreator {
         JSONObject quantityJSON = new JSONObject();
         quantityJSON.put("Quantity", quantity.getQuantity());
         quantityJSON.put("QuantityType", quantity.getQuantityType().name());
-        quantityJSON.put("QuantityGrams", quantity.getQuantityGrams());
+        quantityJSON.put("QuantityGrams", quantity.getGramsPerQuantity());
         return quantityJSON;
     }
 

@@ -12,7 +12,7 @@ import pickyeater.basics.food.Quantity;
 public interface MealBuilder {
     void setName(String name);
 
-    void setQuantity(Quantity quantity);
+    void setWeight(float weight);
 
     void addIngredients(Ingredient... ingredients);
 

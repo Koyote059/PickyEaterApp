@@ -19,7 +19,7 @@ public class PickyGroceriesGeneratorTest {
      */
     List<String> eggList = new ArrayList<>(List.of("Vegetariano","Proteico","Celiaci"));
     Ingredient egg = new PickyIngredient(new PickyNutrients(12.4, 0.1, 0.1, 0.0, 3.17, 3.84, 0, 0),
-            "Uovo", 0.2, new PickyQuantity(1.0, QuantityType.PIECE,58), eggList);
+            "Uovo", 0.2, new PickyQuantity(1.0, QuantityType.PIECES,58), eggList);
 
     List<String> pastaList = new ArrayList<>(List.of("Vegetariano","Proteico","Italian"));
     Ingredient pasta = new PickyIngredient(new PickyNutrients(13.04,68.8,2.67,3.2,0.277,0.7,0,0),
@@ -27,20 +27,20 @@ public class PickyGroceriesGeneratorTest {
 
     List<String> pecorinoList = new ArrayList<>(List.of("Vegetariano","Latticino"));
     Ingredient pecorino = new PickyIngredient(new PickyNutrients(31.8, 3, 0.7, 0, 17.115, 8, 0, 0),
-            "Pecorino Romano", 0.2, new PickyQuantity(1.0, QuantityType.PIECE,58), pecorinoList);
+            "Pecorino Romano", 0.2, new PickyQuantity(1.0, QuantityType.PIECES,58), pecorinoList);
 
     List<String> guancialeList = new ArrayList<>();
     Ingredient guanciale = new PickyIngredient(new PickyNutrients(17.0,3,0.7,0,26.0,8,0,0),
-            "Guanciale", 0, new PickyQuantity(1.0, QuantityType.PIECE,58), guancialeList);
+            "Guanciale", 0, new PickyQuantity(1.0, QuantityType.PIECES,58), guancialeList);
 
     /**
      * DailyMealPlan
      */
     Set<Ingredient> ingredients = new HashSet<>(Set.of(egg,pecorino,pasta,guanciale));
-    Meal carbonara = new PickyMeal(ingredients, "Carbonara", new PickyQuantity(1, QuantityType.PIECE, 100));
+    Meal carbonara = new PickyMeal(ingredients, "Carbonara", new PickyQuantity(1, QuantityType.PIECES, 100));
 
     Set<Ingredient> ingredients2 = new HashSet<>(Set.of(egg,pecorino,pasta,guanciale));
-    Meal cacioEPepe = new PickyMeal(ingredients2, "Cacio e Pepe", new PickyQuantity(1, QuantityType.PIECE, 100));
+    Meal cacioEPepe = new PickyMeal(ingredients2, "Cacio e Pepe", new PickyQuantity(1, QuantityType.PIECES, 100));
 
     DailyMealPlan dailyMealPlan = new PickyDailyMealPlan(List.of(cacioEPepe,carbonara,cacioEPepe));
     DailyMealPlan dailyMealPlan2 = new PickyDailyMealPlan(List.of(carbonara,carbonara));

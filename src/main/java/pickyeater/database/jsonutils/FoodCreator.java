@@ -19,6 +19,7 @@ import pickyeater.basics.mealplan.MealPlan;
 import pickyeater.basics.mealplan.PickyDailyMealPlan;
 import pickyeater.basics.mealplan.PickyMealPlan;
 
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 
@@ -66,19 +67,19 @@ public class FoodCreator {
     public static Quantity getQuantityFromJSON(JSONObject quantityJSON) throws JSONException {
         double quantity = quantityJSON.getDouble("Quantity");
         QuantityType quantityType = QuantityType.valueOf(quantityJSON.getString("QuantityType"));
-        double quantityGrams = quantityJSON.getDouble("QuantityGrams");
+        float quantityGrams = (float) quantityJSON.getDouble("QuantityGrams");
         return new PickyQuantity(quantity, quantityType, quantityGrams);
     }
 
     public static Nutrients getNutrientsFromJSON(JSONObject nutrientsJSON) throws JSONException {
-        double proteins = nutrientsJSON.getDouble("Proteins");
-        double complexCarbs = nutrientsJSON.getDouble("ComplexCarbs");
-        double simpleCarbs = nutrientsJSON.getDouble("SimpleCarbs");
-        double fibers = nutrientsJSON.getDouble("Fibers");
-        double saturatedFats = nutrientsJSON.getDouble("SaturatedFats");
-        double unSaturatedFats = nutrientsJSON.getDouble("UnSaturatedFats");
-        double transFats = nutrientsJSON.getDouble("TransFats");
-        double alcohol = nutrientsJSON.getDouble("Alcohol");
+        float proteins = (float) nutrientsJSON.getDouble("Proteins");
+        float complexCarbs = (float) nutrientsJSON.getDouble("ComplexCarbs");
+        float simpleCarbs = (float) nutrientsJSON.getDouble("SimpleCarbs");
+        float fibers = (float) nutrientsJSON.getDouble("Fibers");
+        float saturatedFats = (float) nutrientsJSON.getDouble("SaturatedFats");
+        float unSaturatedFats = (float) nutrientsJSON.getDouble("UnSaturatedFats");
+        float transFats = (float) nutrientsJSON.getDouble("TransFats");
+        float alcohol = (float) nutrientsJSON.getDouble("Alcohol");
         return new PickyNutrients(proteins, complexCarbs, simpleCarbs, fibers, saturatedFats, unSaturatedFats, transFats, alcohol);
     }
 
@@ -109,10 +110,10 @@ public class FoodCreator {
     }
 
     private static UserStatus getUserStatusFromJSON(JSONObject userStatusJSON) throws JSONException {
-        double weight = userStatusJSON.getDouble("Weight");
-        double bodyFat = userStatusJSON.getDouble("Bodyfat");
-        double height = userStatusJSON.getDouble("Height");
-        Date dateOfBirth = new Date(userStatusJSON.getLong("Birth"));
+        float weight = (float) userStatusJSON.getDouble("Weight");
+        float bodyFat = (float) userStatusJSON.getDouble("Bodyfat");
+        int height = userStatusJSON.getInt("Height");
+        LocalDate dateOfBirth = LocalDate.ofEpochDay(userStatusJSON.getLong("Birth"));
         Sex sex = Sex.valueOf(userStatusJSON.getString("Sex"));
         return new PickyUserStatus(weight, height, bodyFat, dateOfBirth, sex);
     }

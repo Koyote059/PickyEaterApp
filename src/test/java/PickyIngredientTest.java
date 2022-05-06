@@ -9,7 +9,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class PickyIngredientTest {
     Nutrients n = new PickyNutrients(1, 2, 3, 4, 5, 6, 7, 8);
     List<String> listString = new ArrayList<>(List.of("Vegan"));
-    Quantity q = new PickyQuantity(1, QuantityType.PIECE, 30);
+    Quantity q = new PickyQuantity(1, QuantityType.PIECES, 30);
     Ingredient i = new PickyIngredient(n, "Cipolla", 2.00, q, listString);
 
     @Test

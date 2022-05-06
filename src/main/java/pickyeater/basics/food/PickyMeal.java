@@ -5,12 +5,12 @@ import java.util.*;
 public class PickyMeal implements Meal{
     private Set<Ingredient> ingredients;
     private String name;
-    private Quantity quantity;
+    private float weight;
 
-    public PickyMeal(Set<Ingredient> ingredients, String name, Quantity quantity) {
+    public PickyMeal(Set<Ingredient> ingredients, String name, float weight) {
         this.ingredients = ingredients;
         this.name = name;
-        this.quantity = quantity;
+        this.weight = weight;
     }
 
     @Override
@@ -19,8 +19,8 @@ public class PickyMeal implements Meal{
     }
 
     @Override
-    public Quantity getQuantity() {
-        return quantity;
+    public float getWeight() {
+        return weight;
     }
 
     @Override
@@ -71,7 +71,7 @@ public class PickyMeal implements Meal{
         return "PickyMeal{" +
                 "ingredients=" + ingredients +
                 ", name='" + name + '\'' +
-                ", quantity=" + quantity +
+                ", quantity=" + weight +
                 '}';
     }
 }
