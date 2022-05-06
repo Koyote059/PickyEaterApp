@@ -1,6 +1,6 @@
 package pickyeater.UI.RegisterPage;
 
-import pickyeater.basics.user.LifeStyle;
+import pickyeater.basics.user.WeightGoal;
 import pickyeater.executors.RegisterExecutor;
 
 import javax.swing.*;
@@ -18,7 +18,7 @@ public class Register3 extends JFrame {
     private JButton btBack;
     private JPanel buttonPanel;
 
-    LifeStyle lifeStyle;
+    WeightGoal weightGoal;
 
     public Register3(RegisterExecutor registerExecutor) {
         setContentPane(mainPanel);
@@ -31,7 +31,7 @@ public class Register3 extends JFrame {
                 btLoseWeight.setBackground(Color.green);
                 btGainWeight.setBackground(Color.white);
                 btMaintainWeight.setBackground(Color.white);
-                lifeStyle = LifeStyle.SEDENTARY;
+                weightGoal = WeightGoal.LOSE_WEIGHT;
 
                 Continue();
             }
@@ -42,7 +42,7 @@ public class Register3 extends JFrame {
                 btLoseWeight.setBackground(Color.white);
                 btGainWeight.setBackground(Color.green);
                 btMaintainWeight.setBackground(Color.white);
-                lifeStyle = LifeStyle.LIGHTLY_ACTIVE;
+                weightGoal = WeightGoal.INCREASE_WEIGHT;
 
                 Continue();
             }
@@ -53,7 +53,7 @@ public class Register3 extends JFrame {
                 btLoseWeight.setBackground(Color.white);
                 btGainWeight.setBackground(Color.white);
                 btMaintainWeight.setBackground(Color.green);
-                lifeStyle = LifeStyle.ACTIVE;
+                weightGoal = WeightGoal.MANTAIN_WEIGHT;
 
                 Continue();
             }
@@ -69,8 +69,8 @@ public class Register3 extends JFrame {
         });
     }
     private void Continue(){
-        if (lifeStyle != null){
-            JOptionPane.showMessageDialog(buttonPanel, "Lifestyle: " + lifeStyle);
+        if (weightGoal != null){
+            JOptionPane.showMessageDialog(buttonPanel, "Goal: " + weightGoal);
 
             setVisible(false);
 
