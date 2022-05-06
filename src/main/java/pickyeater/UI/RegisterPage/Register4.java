@@ -13,7 +13,7 @@ public class Register4 extends JFrame {
     private JPanel mainPanel;
     private JButton btBack;
     private JButton btDone;
-    private JTextField tfCalories;
+    private JLabel tfCalories;
     private JTextField tfProteins;
     private JTextField tfCarbs;
     private JTextField tfFats;

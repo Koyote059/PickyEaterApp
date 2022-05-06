@@ -29,17 +29,8 @@
               <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
             </constraints>
             <properties>
-              <labelFor value="2c47f"/>
               <text value="Calories:"/>
             </properties>
-          </component>
-          <component id="2c47f" class="javax.swing.JTextField" binding="tfCalories">
-            <constraints>
-              <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
-                <preferred-size width="150" height="-1"/>
-              </grid>
-            </constraints>
-            <properties/>
           </component>
           <component id="f79df" class="javax.swing.JLabel">
             <constraints>
@@ -91,6 +82,14 @@
               </grid>
             </constraints>
             <properties/>
+          </component>
+          <component id="e80a0" class="javax.swing.JLabel" binding="tfCalories">
+            <constraints>
+              <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <text value=""/>
+            </properties>
           </component>
         </children>
       </grid>
