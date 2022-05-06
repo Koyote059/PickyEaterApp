@@ -16,8 +16,8 @@ public class main {
     public static void main(String[] args) {
         RegisterExecutor registerExecutor = new RegisterExecutor(new PickyEaterManager(new JSONUserDatabase("User_Database"), new JSONIngredientsDatabase("Ingredient_Database"), new JSONMealsDatabase("Meals_Database")));
 
-        //new Register1(registerExecutor);
+        new Register1(registerExecutor);
         //new Register2(registerExecutor);
-        new Register3(registerExecutor);
+        //new Register3(registerExecutor);
     }
 }
