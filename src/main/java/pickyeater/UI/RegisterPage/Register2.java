@@ -88,7 +88,7 @@ public class Register2 extends JFrame {
 
             setVisible(false);
 //            EventQueue.invokeLater(Register3::new);
-            new Register1(registerExecutor);     // todo: remove
+            new Register3(registerExecutor);     // todo: remove
         }
     }
 }
