@@ -1,10 +1,12 @@
 package pickyeater.UI.RegisterPage;
 
+import pickyeater.UI.App.UserPage;
 import pickyeater.algorithms.NutrientsRequiremenetCalculatorWrong;
 import pickyeater.algorithms.NutrientsRequirementCalculator;
 import pickyeater.basics.food.Nutrients;
 import pickyeater.builders.NutrientsBuilder;
 import pickyeater.builders.PickyNutrientsBuilder;
+import pickyeater.builders.UserBuilder;
 import pickyeater.executors.RegisterExecutor;
 
 import javax.swing.*;
@@ -20,7 +22,7 @@ public class Register4 extends JFrame {
     private JTextField tfCarbs;
     private JTextField tfFats;
     private JButton btReset;
-    NutrientsBuilder newNutrientsTmp = new PickyNutrientsBuilder();
+    NutrientsBuilder nutrientsBuilder = new PickyNutrientsBuilder();
 
     public Register4(RegisterExecutor registerExecutor) {
         setContentPane(mainPanel);
@@ -28,7 +30,7 @@ public class Register4 extends JFrame {
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setVisible(true);
 
-        ResetNutirents(registerExecutor);
+        ResetNutrients(registerExecutor);
 
         btBack.addActionListener(new ActionListener() {
             @Override
@@ -42,19 +44,22 @@ public class Register4 extends JFrame {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
 
-                JOptionPane.showMessageDialog(mainPanel, "Selected:"  + "\n" + "Calories: " + newNutrientsTmp.getCalories() + "\n" + "Proteins: " + newNutrientsTmp.getProteins() + "\n" + "Carbs: " + newNutrientsTmp.getCarbs() + "\n" + "Fats: " + newNutrientsTmp.getFats());
+                JOptionPane.showMessageDialog(mainPanel, "Selected:"  + "\n" + "Calories: " + nutrientsBuilder.getCalories() + "\n" + "Proteins: " + nutrientsBuilder.getProteins() + "\n" + "Carbs: " + nutrientsBuilder.getCarbs() + "\n" + "Fats: " + nutrientsBuilder.getFats());
 
-                // TODO: SAVE TO DATABASE newNutrientsTmp
+                UserBuilder userBuilder = registerExecutor.getUserBuilder();
+                userBuilder.setRequiredNutrients(nutrientsBuilder.build());
+                registerExecutor.saveUser(userBuilder.build());
 
                 setVisible(false);
                 // TODO: GO TO THE APP WITH new AppPanel(registerExecutor);
+                new UserPage(registerExecutor);
             }
         });
 
         btReset.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-                ResetNutirents(registerExecutor);
+                ResetNutrients(registerExecutor);
             }
         });
 
@@ -64,22 +69,22 @@ public class Register4 extends JFrame {
                 if (Double.parseDouble(tfProteins.getText()) > 5000 | Double.parseDouble(tfProteins.getText()) < 0){
                     JOptionPane.showMessageDialog(mainPanel, "Insert valid number in Proteins", "Error", JOptionPane.ERROR_MESSAGE);
                 } else {
-                    newNutrientsTmp.setProteins(Double.parseDouble(tfProteins.getText()));
+                    nutrientsBuilder.setProteins(Double.parseDouble(tfProteins.getText()));
                 }
 
                 if (Double.parseDouble(tfFats.getText()) > 5000 | Double.parseDouble(tfFats.getText()) < 0){
                     JOptionPane.showMessageDialog(mainPanel, "Insert valid number in Fats", "Error", JOptionPane.ERROR_MESSAGE);
                 } else {
-                    newNutrientsTmp.setUnSaturatedFats(Double.parseDouble(tfFats.getText()));
+                    nutrientsBuilder.setUnSaturatedFats(Double.parseDouble(tfFats.getText()));
                 }
 
                 if (Double.parseDouble(tfCarbs.getText()) > 5000 | Double.parseDouble(tfCarbs.getText()) < 0){
                     JOptionPane.showMessageDialog(mainPanel, "Insert valid number in Carbs", "Error", JOptionPane.ERROR_MESSAGE);
                 } else {
-                    newNutrientsTmp.setComplexCarbs(Double.parseDouble(tfCarbs.getText()));
+                    nutrientsBuilder.setComplexCarbs(Double.parseDouble(tfCarbs.getText()));
                 }
 
-                tfCalories.setText(Double.toString(newNutrientsTmp.getCalories()));
+                tfCalories.setText(Double.toString(nutrientsBuilder.getCalories()));
             }
         };
         tfFats.addActionListener(listener);
@@ -87,8 +92,8 @@ public class Register4 extends JFrame {
         tfProteins.addActionListener(listener);
     }
 
-    private void ResetNutirents(RegisterExecutor registerExecutor){
-        // Get nutrients from NitrientsRequirementCalculator
+    private void ResetNutrients(RegisterExecutor registerExecutor){
+        // Get nutrients from NutrientsRequirementCalculator
         NutrientsRequirementCalculator nutrientsCalculated = new NutrientsRequiremenetCalculatorWrong();
         Nutrients nutrients = nutrientsCalculated.calculate(registerExecutor.getUserBuilder().getHeight(), registerExecutor.getUserBuilder().getWeight(), registerExecutor.getUserBuilder().getSex(), registerExecutor.getUserBuilder().getLifeStyle());
 
@@ -102,9 +107,9 @@ public class Register4 extends JFrame {
         setVisible(true);
 
         // save also to newNutrientsTmp
-        newNutrientsTmp.setComplexCarbs(Double.parseDouble(tfCarbs.getText()));
-        newNutrientsTmp.setUnSaturatedFats(Double.parseDouble(tfFats.getText()));
-        newNutrientsTmp.setProteins(Double.parseDouble(tfProteins.getText()));
+        nutrientsBuilder.setComplexCarbs(Double.parseDouble(tfCarbs.getText()));
+        nutrientsBuilder.setUnSaturatedFats(Double.parseDouble(tfFats.getText()));
+        nutrientsBuilder.setProteins(Double.parseDouble(tfProteins.getText()));
     }
 
 }

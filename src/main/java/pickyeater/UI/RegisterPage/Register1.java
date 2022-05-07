@@ -137,26 +137,32 @@ public class Register1 extends JFrame{
                     if (userBuilder.getBodyFat() < 0 | userBuilder.getBodyFat() > 100){
                         JOptionPane.showMessageDialog(panelZeroOne, "Insert valid body-fat percentage", "Error", JOptionPane.ERROR_MESSAGE);
                     userBuilder.setBodyFat(0);
+                    } else {
+                        // Continue
+                        Continue(registerExecutor);
                     }
-                }
-
-                // Continue
-                if (userBuilder.getName() != null && userBuilder.getSex() != null && userBuilder.getWeight() != 0 && userBuilder.getHeight() != 0 && userBuilder.getDateOfBirth() != null){
-                    if (userBuilder.getBodyFat() == 0){
-                        BodyFatCalculator bodyFatCalculator = new BodyFatCaluclatorWrong();
-                        userBuilder.setBodyFat(bodyFatCalculator.calculate(userBuilder.getHeight(), userBuilder.getWeight(), userBuilder.getSex()));
-                    }
-                    JOptionPane.showMessageDialog(panelZeroOne, "Selected:"  + "\n" +  "Name: " + userBuilder.getName() + "\n" + "Height: " + userBuilder.getHeight() + "cm\n" + "Weight: " + userBuilder.getWeight() + "Kg\n" + "Birthday: " + userBuilder.getDateOfBirth() + "\n" + "Sex: " + userBuilder.getSex() + "\n" + "Body fat: " + userBuilder.getBodyFat() + "%");
-
-                    // TODO: User Save
-
-                    setVisible(false);
-                    new Register2(registerExecutor);
+                } else {
+                    // Continue
+                    Continue(registerExecutor);
                 }
             }
         });
     }
 
+    private void Continue(RegisterExecutor registerExecutor){
+        if (userBuilder.getName() != null && userBuilder.getSex() != null && userBuilder.getWeight() != 0 && userBuilder.getHeight() != 0 && userBuilder.getDateOfBirth() != null) {
+            if (userBuilder.getBodyFat() == 0) {
+                BodyFatCalculator bodyFatCalculator = new BodyFatCaluclatorWrong();
+                userBuilder.setBodyFat(bodyFatCalculator.calculate(userBuilder.getHeight(), userBuilder.getWeight(), userBuilder.getSex()));
+            }
+            JOptionPane.showMessageDialog(panelZeroOne, "Selected:" + "\n" + "Name: " + userBuilder.getName() + "\n" + "Height: " + userBuilder.getHeight() + "cm\n" + "Weight: " + userBuilder.getWeight() + "Kg\n" + "Birthday: " + userBuilder.getDateOfBirth() + "\n" + "Sex: " + userBuilder.getSex() + "\n" + "Body fat: " + userBuilder.getBodyFat() + "%");
+
+            // TODO: User Save - technically it's already done
+
+            setVisible(false);
+            new Register2(registerExecutor);
+        }
+    }
     private void createUIComponents() {
         jBirthdayChooser = new JDateChooser();
     }
