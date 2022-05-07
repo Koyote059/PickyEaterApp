@@ -9,13 +9,16 @@ import pickyeater.basics.mealplan.DailyMealPlan;
 import pickyeater.basics.mealplan.MealPlan;
 import pickyeater.basics.mealplan.PickyMealPlan;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.MissingFormatArgumentException;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
 public class PickyMealPlanBuilder implements MealPlanBuilder {
     public List<DailyMealPlanBuilder> dailyMealPlanBuilders = new ArrayList<>();
+    private LocalDate localDate = null;
 
     public PickyMealPlanBuilder() {
     }
@@ -48,8 +51,17 @@ public class PickyMealPlanBuilder implements MealPlanBuilder {
 
     }
 
+    public void setBeginningDay(LocalDate localDate){
+        this.localDate = localDate;
+    }
+
+    public LocalDate getBeginningDay(){
+        return localDate;
+    }
+
     public MealPlan build() {
+        if(localDate == null) throw new MissingFormatArgumentException("Missing argument: localdate");
         List<DailyMealPlan> dailyMealPlans = this.dailyMealPlanBuilders.stream().map(DailyMealPlanBuilder::build).collect(Collectors.toList());
-        return new PickyMealPlan(dailyMealPlans);
+        return new PickyMealPlan(dailyMealPlans,localDate);
     }
 }

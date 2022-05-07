@@ -14,13 +14,16 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.time.LocalDate;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
 public class SQLQueryExecutor {
 
-    public SQLQueryExecutor(){
-        DBManager.setConnection(DBManager.JDBC_Driver_SQLite,DBManager.JDBC_URL_SQLite);
+    public SQLQueryExecutor(String dbPath){
+        DBManager.setConnection(
+                DBManager.JDBC_Driver_SQLite,
+                String.format("jdbc:sqlite:%s",dbPath));
     }
 
     public void createTables() throws SQLException {
@@ -191,12 +194,19 @@ public class SQLQueryExecutor {
         Connection connection = DBManager.getConnection();
         connection.setAutoCommit(false);
 
+        if(meal.getIngredients().isEmpty()) return;
+
         // Deletes every ingredient that is not actual in the meal
-        StringBuilder queryBuilder = new StringBuilder("" +
+        StringBuilder queryBuilder = new StringBuilder(String.format(
                 "DELETE FROM MealCompositions WHERE " +
-                "mealName = %s AND ingredientName NOT IN (");
-        for (Ingredient ingredient : meal.getIngredients()) {
-            queryBuilder.append(ingredient.getName()).append(", ");
+                "mealName = %s AND ingredientName NOT IN (",meal.getName()));
+
+        Set<Ingredient> ingredients = meal.getIngredients();
+        int i = 0;
+        for (Ingredient ingredient : ingredients) {
+            queryBuilder.append(ingredient.getName());
+            i++;
+            if(i<ingredients.size())  queryBuilder.append(", ");
         }
         queryBuilder.append(" )");
         connection.createStatement().execute(queryBuilder.toString());
@@ -225,7 +235,7 @@ public class SQLQueryExecutor {
         String query = "INSERT INTO User " +
                 "(username, sex, bodyFat, height, weight, dateOfBirth, " +
                 "weightGoal, lifeStyle, neededCarbs, neededFats, neededProteins) " +
-                "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) ";
+                "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
         PreparedStatement statement = connection.prepareStatement(query);
         statement.setString(1,user.getName());
         UserStatus userStatus = user.getUserStatus();
@@ -265,18 +275,23 @@ public class SQLQueryExecutor {
         Connection connection = DBManager.getConnection();
         connection.setAutoCommit(false);
 
-        for (int i = 0; i < dailyMealPlans.size(); i++) {
-            DailyMealPlan dailyMealPlan = dailyMealPlans.get(i);
+        if(dailyMealPlans.isEmpty()) return;
+
+        connection.createStatement().execute(String.format(
+                "DELETE FROM DailyMeals WHERE " +
+                "username = %s",userName));
+        for (int dayNumber = 0; dayNumber < dailyMealPlans.size(); dayNumber++) {
+            DailyMealPlan dailyMealPlan = dailyMealPlans.get(dayNumber);
             List<Meal> meals = dailyMealPlan.getMeals();
-            for (int j = 0; j < meals.size(); j++) {
-                Meal meal = meals.get(j);
+            for (int mealNumber = 0; mealNumber < meals.size(); mealNumber++) {
+                Meal meal = meals.get(mealNumber);
                 connection.createStatement().execute(
                         String.format("INSERT INTO DailyMeals (mealName, username, dayNumber, mealNumber, weight)" +
                                         " VALUES ('%s','%s',%d,%d, %f)",
                                 meal.getName(),
                                 userName,
-                                i,
-                                j,
+                                dayNumber,
+                                mealNumber,
                                 meal.getWeight()));
             }
         }
@@ -287,20 +302,34 @@ public class SQLQueryExecutor {
         Connection connection = DBManager.getConnection();
         connection.setAutoCommit(false);
         connection.createStatement().execute(String.format(
-                "INSERT INTO MealPlan (username, beginningDay) VALUES ('%s', %d)",username,burnedCalories));
+                "INSERT INTO DailyProgresses (username, burnedCalories) VALUES ('%s', %d) " +
+                        "ON CONFLICT DO UPDATE SET burnedCalories = %d",username,burnedCalories));
         connection.commit();
     }
 
-    public void insertIntoEatenMeals(String userName, String mealName, List<Meal> eatenMeals) throws SQLException {
+    public void insertIntoEatenMeals(String userName, List<Meal> eatenMeals) throws SQLException {
         Connection connection = DBManager.getConnection();
         connection.setAutoCommit(false);
+
+        if(!eatenMeals.isEmpty()){
+            StringBuilder queryBuilder = new StringBuilder(String.format(
+                    "DELETE FROM EatenMeals WHERE " +
+                            "username = %s AND mealName NOT IN (",userName));
+            for (Meal meal : eatenMeals) {
+                queryBuilder.append(meal.getName()).append(", ");
+            }
+            queryBuilder.append(" )");
+            connection.createStatement().execute(queryBuilder.toString());
+        }
+
+
         for (int i = 0; i < eatenMeals.size(); i++) {
             Meal eatenMeal = eatenMeals.get(i);
             connection.createStatement().execute(
                     String.format("INSERT INTO EatenMeals (username, mealName, mealNumber, weight)" +
                                     " VALUES ('%s','%s',%d,%f)",
                             userName,
-                            mealName,
+                            eatenMeal.getName(),
                             i,
                             eatenMeal.getWeight()));
         }
@@ -315,6 +344,18 @@ public class SQLQueryExecutor {
         insertIngredientIntoTable(checkList.getTakenIngredients(), connection, userName, "TAKEN");
     }
     private void insertIngredientIntoTable(Set<Ingredient> checkList, Connection connection, String userName, String status) throws SQLException {
+        if(checkList.isEmpty()) return;
+        StringBuilder queryBuilder = new StringBuilder(String.format("DELETE FROM GroceriesItems WHERE " +
+                        "username=%s AND status = %s AND ingredientName NOT IN (",userName,status));
+        int i = 0;
+        for (Ingredient ingredient : checkList) {
+            queryBuilder.append(ingredient.getName());
+            i++;
+            if(i<checkList.size()) queryBuilder.append(", ");
+        }
+
+        queryBuilder.append(" )");
+
         for (Ingredient neededIngredient : checkList) {
             connection.createStatement().execute(String.format("INSERT INTO GroceriesItems " +
                             "(username, ingredientName, quantity, status) VALUES ('%s','%s',%f,'%s')",
