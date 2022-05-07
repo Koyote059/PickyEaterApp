@@ -12,6 +12,11 @@ public class UserPage extends JFrame{
     private JButton btGroceries;
     private JButton btFood;
     private JButton btDiet;
+    private JProgressBar progressBar1;
+    private JComboBox comboBox1;
+    private JButton btAddEatenMeals;
+    private JButton btAddBurntCalories;
+    private JList list1;
 
     public UserPage(RegisterExecutor registerExecutor) {
         setContentPane(mainPanel);
