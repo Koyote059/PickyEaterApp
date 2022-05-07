@@ -16,7 +16,7 @@ public class main {
         ExecutorProvider executorProvider = new ExecutorProvider(pickyEaterManager);
 
         // if User_Database is empty:
-        if (executorProvider.getRegisterExecutor().getUserBuilder().getName() == null) {
+        if (executorProvider.getRegisterExecutor().getUserBuilder().getName() == null) {    // ToDo: FIX THIS (it doesn't work)
             new Register1(executorProvider.getRegisterExecutor());
             //new Register2(executorProvider.getRegisterExecutor());
         } else  // go to the app
