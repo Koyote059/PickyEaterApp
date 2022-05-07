@@ -117,7 +117,7 @@ public class SQLQueryExecutor {
                 "    status VARCHAR(16),\n" +
                 "    CONSTRAINT PK_DAILYPROGRESSES PRIMARY KEY (username,ingredientName),\n" +
                 "    CONSTRAINT FK_DAILYPROGRESSES_USERNAME FOREIGN KEY (username) REFERENCES User,\n" +
-                "    CONSTRAINT FK_DAILYPROGRESSES_INGREDIENTNAME FOREIGN KEY (ingredientName) REFERENCES Ingredients\n" +
+                "    CONSTRAINT FK_DAILYPROGRESSES_INGREDIENTNAME FOREIGN KEY (ingredientName) REFERENCES Ingredients,\n" +
                 "    CONSTRAINT ILLEGAL_ARGUMENT_STATUS CHECK (status = 'MISSING' OR status = 'NEEDED' OR status = 'TAKEN')" +
                 ")");
 
@@ -339,6 +339,7 @@ public class SQLQueryExecutor {
         insertGroceriesIngredient(checkList.getMissingIngredients(), connection, userName, "MISSING");
         insertGroceriesIngredient(checkList.getTakenIngredients(), connection, userName, "TAKEN");
     }
+
     private void insertGroceriesIngredient(Set<Ingredient> checkList, Connection connection, String userName, String status) throws SQLException {
         if(checkList.isEmpty()) return;
         StringBuilder queryBuilder = new StringBuilder(String.format("DELETE FROM GroceriesItems WHERE " +
@@ -434,5 +435,84 @@ public class SQLQueryExecutor {
         }
     }
 
+    public ResultSet selectFromIngredientTable(String ingredientName) throws SQLException {
+        Connection connection = DBManager.getConnection();
+        ResultSet resultSet;
+        try(Statement statement = connection.createStatement()){
+            resultSet = statement.executeQuery(
+                    String.format("SELECT * FROM Ingredients WHERE ingredientName = '%s'",ingredientName));
+        }
+        return resultSet;
+    }
 
+    public ResultSet selectFromUserTable() throws SQLException {
+        Connection connection = DBManager.getConnection();
+        ResultSet resultSet;
+        try(Statement statement = connection.createStatement()){
+            resultSet = statement.executeQuery("SELECT * FROM User");
+        }
+        return resultSet;
+    }
+
+    public ResultSet selectFromMealsJoinedMealCompositionsTable(String mealName) throws SQLException {
+        Connection connection = DBManager.getConnection();
+        ResultSet resultSet;
+        try(Statement statement = connection.createStatement()){
+            resultSet = statement.executeQuery(
+                    String.format("SELECT MealCompositions.* FROM " +
+                            "Meals JOIN MealCompositions ON Meals.mealName = MealCompositions.mealName WHERE" +
+                            "mealName = '%s'",mealName));
+        }
+        return resultSet;
+    }
+
+    public ResultSet selectFromDailyProgressesTable(String username) throws SQLException {
+        Connection connection = DBManager.getConnection();
+        ResultSet resultSet;
+        try(Statement statement = connection.createStatement()){
+            resultSet = statement.executeQuery(
+                    String.format("SELECT * FROM DailyProgresses WHERE username = '%s'",username));
+        }
+        return resultSet;
+    }
+
+    public ResultSet selectFromEatenMealsTable(String username) throws SQLException {
+        Connection connection = DBManager.getConnection();
+        ResultSet resultSet;
+        try(Statement statement = connection.createStatement()){
+            resultSet = statement.executeQuery(
+                    String.format("SELECT * FROM EatenMeals WHERE username = '%s'",username));
+        }
+        return resultSet;
+    }
+
+    public ResultSet selectFromMealPlanTable(String username) throws SQLException {
+        Connection connection = DBManager.getConnection();
+        ResultSet resultSet;
+        try(Statement statement = connection.createStatement()){
+            resultSet = statement.executeQuery(
+                    String.format("SELECT * FROM MealPlan WHERE username = '%s'",username));
+        }
+        return resultSet;
+    }
+
+    public ResultSet selectFromDailyMealsTable(String username) throws SQLException {
+        Connection connection = DBManager.getConnection();
+        ResultSet resultSet;
+        try(Statement statement = connection.createStatement()){
+            resultSet = statement.executeQuery(
+                    String.format("SELECT * FROM DailyMeals WHERE username = '%s'",username));
+        }
+        return resultSet;
+    }
+
+    public ResultSet selectFromGroceriesItemTable(String username) throws SQLException {
+        Connection connection = DBManager.getConnection();
+        ResultSet resultSet;
+        try(Statement statement = connection.createStatement()){
+            resultSet = statement.executeQuery(
+                    String.format("SELECT * FROM GroceriesItem WHERE username = '%s'",username));
+        }
+        return resultSet;
+    }
 }
