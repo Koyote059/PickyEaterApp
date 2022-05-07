@@ -26,14 +26,15 @@ public class SQLUserDB implements UserDatabase {
             Optional<MealPlan> mealPlanOptional = user.getMealPlan();
             if(mealPlanOptional.isPresent()) {
                 MealPlan mealPlan = mealPlanOptional.get();
-                queryExecutor.insertIntoMealPlan(user.getName(),mealPlan.getBeginningDay());
-                queryExecutor.insertIntoDailyMeals(user.getName(),mealPlan.getDailyMealPlans());
+                queryExecutor.insertIntoMealPlanTable(user.getName(),mealPlan.getBeginningDay());
+                queryExecutor.insertIntoDailyMealsTable(user.getName(),mealPlan.getDailyMealPlans());
             } else {
-                // Todo -> Delete it
+                queryExecutor.deleteFromMealPlanTable(user.getName());
+                queryExecutor.deleteFromDailyMealsTable(user.getName());
             }
             DailyProgresses dailyProgresses = user.getDailyProgresses();
-            queryExecutor.insertIntoDailyProgresses(user.getName(),dailyProgresses.getBurnedCalories());
-            queryExecutor.insertIntoEatenMeals(user.getName(),dailyProgresses.getEatenMeals());
+            queryExecutor.insertIntoDailyProgressesTable(user.getName(),dailyProgresses.getBurnedCalories());
+            queryExecutor.insertIntoEatenMealsTable(user.getName(),dailyProgresses.getEatenMeals());
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }

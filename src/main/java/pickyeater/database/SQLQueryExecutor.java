@@ -9,12 +9,8 @@ import pickyeater.basics.user.User;
 import pickyeater.basics.user.UserGoal;
 import pickyeater.basics.user.UserStatus;
 
-import java.sql.Connection;
-import java.sql.Date;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
+import java.sql.*;
 import java.time.LocalDate;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
@@ -256,7 +252,7 @@ public class SQLQueryExecutor {
         connection.commit();
     }
 
-    public void insertIntoMealPlan(String userName, LocalDate beginningDay) throws SQLException {
+    public void insertIntoMealPlanTable(String userName, LocalDate beginningDay) throws SQLException {
         Connection connection = DBManager.getConnection();
         connection.setAutoCommit(false);
         String query = "INSERT INTO MealPlan (username, beginningDay) " +
@@ -271,7 +267,7 @@ public class SQLQueryExecutor {
         connection.commit();
     }
 
-    public void insertIntoDailyMeals(String userName, List<DailyMealPlan> dailyMealPlans) throws SQLException {
+    public void insertIntoDailyMealsTable(String userName, List<DailyMealPlan> dailyMealPlans) throws SQLException {
         Connection connection = DBManager.getConnection();
         connection.setAutoCommit(false);
 
@@ -298,7 +294,7 @@ public class SQLQueryExecutor {
         connection.commit();
     }
 
-    public void insertIntoDailyProgresses(String username, int burnedCalories) throws SQLException {
+    public void insertIntoDailyProgressesTable(String username, int burnedCalories) throws SQLException {
         Connection connection = DBManager.getConnection();
         connection.setAutoCommit(false);
         connection.createStatement().execute(String.format(
@@ -307,7 +303,7 @@ public class SQLQueryExecutor {
         connection.commit();
     }
 
-    public void insertIntoEatenMeals(String userName, List<Meal> eatenMeals) throws SQLException {
+    public void insertIntoEatenMealsTable(String userName, List<Meal> eatenMeals) throws SQLException {
         Connection connection = DBManager.getConnection();
         connection.setAutoCommit(false);
 
@@ -336,14 +332,14 @@ public class SQLQueryExecutor {
         connection.commit();
     }
 
-    public void insertIntoGroceriesItem(String userName, GroceriesCheckList checkList) throws SQLException {
+    public void insertIntoGroceriesItemTable(String userName, GroceriesCheckList checkList) throws SQLException {
         Connection connection = DBManager.getConnection();
         connection.setAutoCommit(false);
-        insertIngredientIntoTable(checkList.getNeededIngredients(), connection, userName, "NEEDED");
-        insertIngredientIntoTable(checkList.getMissingIngredients(), connection, userName, "MISSING");
-        insertIngredientIntoTable(checkList.getTakenIngredients(), connection, userName, "TAKEN");
+        insertGroceriesIngredient(checkList.getNeededIngredients(), connection, userName, "NEEDED");
+        insertGroceriesIngredient(checkList.getMissingIngredients(), connection, userName, "MISSING");
+        insertGroceriesIngredient(checkList.getTakenIngredients(), connection, userName, "TAKEN");
     }
-    private void insertIngredientIntoTable(Set<Ingredient> checkList, Connection connection, String userName, String status) throws SQLException {
+    private void insertGroceriesIngredient(Set<Ingredient> checkList, Connection connection, String userName, String status) throws SQLException {
         if(checkList.isEmpty()) return;
         StringBuilder queryBuilder = new StringBuilder(String.format("DELETE FROM GroceriesItems WHERE " +
                         "username=%s AND status = %s AND ingredientName NOT IN (",userName,status));
@@ -366,6 +362,77 @@ public class SQLQueryExecutor {
         }
     }
 
+    public void deleteFromIngredientsTable(String ingredientName) throws SQLException {
+        Connection connection = DBManager.getConnection();
+        try(Statement statement = connection.createStatement()){
+            statement.execute(String.format(
+                    "DELETE FROM Ingredients WHERE ingredientName = '%s'",ingredientName));
+        }
+    }
+
+    public void deleteFromMealsTable(String mealName) throws SQLException {
+        Connection connection = DBManager.getConnection();
+        try(Statement statement = connection.createStatement()){
+            statement.execute(String.format(
+                    "DELETE FROM Meals WHERE mealName = '%s'",mealName));
+        }
+    }
+
+    public void deleteFromMealCompositionsTable(String mealName) throws SQLException {
+        Connection connection = DBManager.getConnection();
+        try(Statement statement = connection.createStatement()){
+            statement.execute(String.format(
+                    "DELETE FROM MealCompositions WHERE mealName = '%s'",mealName));
+        }
+    }
+
+    public void deleteFromUserTable(String username) throws SQLException {
+        Connection connection = DBManager.getConnection();
+        try(Statement statement = connection.createStatement()){
+            statement.execute(String.format(
+                    "DELETE FROM User WHERE username = '%s",username));
+        }
+    }
+
+    public void deleteFromMealPlanTable(String username) throws SQLException {
+        Connection connection = DBManager.getConnection();
+        try(Statement statement = connection.createStatement()){
+            statement.execute(String.format(
+                    "DELETE FROM MealPlan WHERE username = '%s",username));
+        }
+    }
+
+    public void deleteFromDailyMealsTable(String username) throws SQLException {
+        Connection connection = DBManager.getConnection();
+        try(Statement statement = connection.createStatement()){
+            statement.execute(String.format(
+                    "DELETE FROM DailyMeals WHERE username = '%s",username));
+        }
+    }
+
+    public void deleteFromDailyProgressesTable(String username) throws SQLException {
+        Connection connection = DBManager.getConnection();
+        try(Statement statement = connection.createStatement()){
+            statement.execute(String.format(
+                    "DELETE FROM DailyProgresses WHERE username = '%s",username));
+        }
+    }
+
+    public void deleteFromEatenMealsTable(String username) throws SQLException {
+        Connection connection = DBManager.getConnection();
+        try(Statement statement = connection.createStatement()){
+            statement.execute(String.format(
+                    "DELETE FROM EatenMeals WHERE username = '%s",username));
+        }
+    }
+
+    public void insertIntoGroceriesItemTable(String username) throws SQLException {
+        Connection connection = DBManager.getConnection();
+        try(Statement statement = connection.createStatement()){
+            statement.execute(String.format(
+                    "DELETE FROM GroceriesItems WHERE username = '%s",username));
+        }
+    }
 
 
 }
