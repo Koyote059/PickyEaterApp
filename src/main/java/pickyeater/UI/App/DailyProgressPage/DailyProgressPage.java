@@ -1,6 +1,6 @@
 package pickyeater.UI.App.DailyProgressPage;
 
-import pickyeater.executors.RegisterExecutor;
+import pickyeater.executors.UserMealsProgressesExecutor;
 
 import javax.swing.*;
 
@@ -13,7 +13,7 @@ public class DailyProgressPage extends JFrame{
     private JButton btFood;
     private JButton btDiet;
 
-    public DailyProgressPage(RegisterExecutor registerExecutor) {
+    public DailyProgressPage(UserMealsProgressesExecutor userMealsProgressesExecutor) {
         setContentPane(mainPanel);
         pack();
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
