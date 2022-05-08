@@ -6,6 +6,7 @@ package pickyeater.UI.RegisterPage;
 
 import pickyeater.basics.user.LifeStyle;
 import pickyeater.builders.UserBuilder;
+import pickyeater.executors.ExecutorProvider;
 import pickyeater.executors.RegisterExecutor;
 
 import javax.swing.*;
@@ -23,13 +24,17 @@ public class Register2 extends JFrame {
     private JButton btBack;
     private JPanel buttonPanel;
 
+    private RegisterExecutor registerExecutor;
+    private UserBuilder userBuilder;
 
-    public Register2(RegisterExecutor registerExecutor) {
+    public Register2(ExecutorProvider executorProvider) {
         setContentPane(mainPanel);
         pack();
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setVisible(true);
-        UserBuilder userBuilder = registerExecutor.getUserBuilder();
+
+        this.registerExecutor = executorProvider.getRegisterExecutor();;
+        this.userBuilder = registerExecutor.getUserBuilder();
 
         btSedentary.addActionListener(new ActionListener() {
             @Override
@@ -38,9 +43,10 @@ public class Register2 extends JFrame {
                 btSlightlyActive.setBackground(Color.white);
                 btActive.setBackground(Color.white);
                 btVeryActive.setBackground(Color.white);
+
                 userBuilder.setLifeStyle(LifeStyle.SEDENTARY);
 
-                Continue(registerExecutor);
+                Continue(executorProvider);
             }
         });
         btSlightlyActive.addActionListener(new ActionListener() {
@@ -50,9 +56,10 @@ public class Register2 extends JFrame {
                 btSlightlyActive.setBackground(Color.green);
                 btActive.setBackground(Color.white);
                 btVeryActive.setBackground(Color.white);
+
                 userBuilder.setLifeStyle(LifeStyle.LIGHTLY_ACTIVE);
 
-                Continue(registerExecutor);
+                Continue(executorProvider);
             }
         });
         btActive.addActionListener(new ActionListener() {
@@ -62,9 +69,10 @@ public class Register2 extends JFrame {
                 btSlightlyActive.setBackground(Color.white);
                 btActive.setBackground(Color.green);
                 btVeryActive.setBackground(Color.white);
+
                 userBuilder.setLifeStyle(LifeStyle.ACTIVE);
 
-                Continue(registerExecutor);
+                Continue(executorProvider);
             }
         });
         btVeryActive.addActionListener(new ActionListener() {
@@ -74,9 +82,10 @@ public class Register2 extends JFrame {
                 btSlightlyActive.setBackground(Color.white);
                 btActive.setBackground(Color.white);
                 btVeryActive.setBackground(Color.green);
+
                 userBuilder.setLifeStyle(LifeStyle.VERY_ACTIVE);
 
-                Continue(registerExecutor);
+                Continue(executorProvider);
             }
         });
     btBack.addComponentListener(new ComponentAdapter() { } );
@@ -84,15 +93,15 @@ public class Register2 extends JFrame {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
                 setVisible(false);
-                new Register1(registerExecutor);
+                new Register1(executorProvider);
             }
         });
     }
-    private void Continue(RegisterExecutor registerExecutor){
-        if ( registerExecutor.getUserBuilder().getLifeStyle() != null){
+    private void Continue(ExecutorProvider executorProvider){
+        if (userBuilder.getLifeStyle() != null){
             //JOptionPane.showMessageDialog(buttonPanel, "Lifestyle: " + lifeStyle);
             setVisible(false);
-            new Register3(registerExecutor);
+            new Register3(executorProvider);
         }
     }
 }

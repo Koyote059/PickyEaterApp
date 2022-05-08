@@ -4,6 +4,7 @@ package pickyeater.UI.RegisterPage;
  * @author Claudio Di Maio
  */
 
+import pickyeater.UI.App.DailyProgressPage.DailyProgressPage;
 import pickyeater.UI.App.UserPage;
 import pickyeater.algorithms.NutrientsRequiremenetCalculatorWrong;
 import pickyeater.algorithms.NutrientsRequirementCalculator;
@@ -11,6 +12,7 @@ import pickyeater.basics.food.Nutrients;
 import pickyeater.builders.NutrientsBuilder;
 import pickyeater.builders.PickyNutrientsBuilder;
 import pickyeater.builders.UserBuilder;
+import pickyeater.executors.ExecutorProvider;
 import pickyeater.executors.RegisterExecutor;
 
 import javax.swing.*;
@@ -28,7 +30,8 @@ public class Register4 extends JFrame {
     private JButton btReset;
     NutrientsBuilder nutrientsBuilder = new PickyNutrientsBuilder();
 
-    public Register4(RegisterExecutor registerExecutor) {
+    public Register4(ExecutorProvider executorProvider) {
+        RegisterExecutor registerExecutor = executorProvider.getRegisterExecutor();
         setContentPane(mainPanel);
         pack();
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
@@ -40,7 +43,7 @@ public class Register4 extends JFrame {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
                 setVisible(false);
-                new Register3(registerExecutor);
+                new Register3(executorProvider);
             }
         });
 
@@ -56,7 +59,7 @@ public class Register4 extends JFrame {
 
                 setVisible(false);
                 // TODO: GO TO THE APP WITH new AppPanel(registerExecutor);
-                new UserPage(registerExecutor);
+                new DailyProgressPage(executorProvider);
             }
         });
 

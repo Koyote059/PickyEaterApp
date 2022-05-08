@@ -1,4 +1,4 @@
-package pickyeater.UI.App.DailyProgressPage;
+package pickyeater.UI.App.DailyProgressPageWithColours;
 
 /**
  * @author Claudio Di Maio
@@ -9,7 +9,7 @@ import pickyeater.executors.UserMealsProgressesExecutor;
 
 import javax.swing.*;
 
-public class DailyProgressPage extends JFrame{
+public class DailyProgressPageWithColours extends JFrame{
     private JPanel mainPanel;
     private JButton btSettings;
     private JButton btDailyProgress;
@@ -26,7 +26,7 @@ public class DailyProgressPage extends JFrame{
 
     UserMealsProgressesExecutor userMealsProgressesExecutor;
 
-    public DailyProgressPage(ExecutorProvider executorProvider) {
+    public DailyProgressPageWithColours(ExecutorProvider executorProvider) {
         setContentPane(mainPanel);
         pack();
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);

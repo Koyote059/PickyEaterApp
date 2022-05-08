@@ -9,6 +9,7 @@ import pickyeater.algorithms.BodyFatCalculator;
 import pickyeater.algorithms.BodyFatCaluclatorWrong;
 import pickyeater.basics.user.Sex;
 import pickyeater.builders.UserBuilder;
+import pickyeater.executors.ExecutorProvider;
 import pickyeater.executors.RegisterExecutor;
 
 import javax.swing.*;
@@ -39,8 +40,8 @@ public class Register1 extends JFrame{
 
     RegisterExecutor registerExecutor;
     UserBuilder userBuilder;
-    public Register1(RegisterExecutor registerExecutor) {
-        this.registerExecutor = registerExecutor;
+    public Register1(ExecutorProvider executorProvider) {
+        this.registerExecutor = executorProvider.getRegisterExecutor();;
         this.userBuilder = registerExecutor.getUserBuilder();
         setContentPane(mainPanel);
         pack();
@@ -143,17 +144,17 @@ public class Register1 extends JFrame{
                     userBuilder.setBodyFat(0);
                     } else {
                         // Continue
-                        Continue(registerExecutor);
+                        Continue(executorProvider);
                     }
                 } else {
                     // Continue
-                    Continue(registerExecutor);
+                    Continue(executorProvider);
                 }
             }
         });
     }
 
-    private void Continue(RegisterExecutor registerExecutor){
+    private void Continue(ExecutorProvider executorProvider){
         if (userBuilder.getName() != null && userBuilder.getSex() != null && userBuilder.getWeight() != 0 && userBuilder.getHeight() != 0 && userBuilder.getDateOfBirth() != null) {
             if (userBuilder.getBodyFat() == 0) {
                 BodyFatCalculator bodyFatCalculator = new BodyFatCaluclatorWrong();
@@ -164,7 +165,7 @@ public class Register1 extends JFrame{
             // TODO: User Save - technically it's already done
 
             setVisible(false);
-            new Register2(registerExecutor);
+            new Register2(executorProvider);
         }
     }
     private void createUIComponents() {

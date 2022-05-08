@@ -6,6 +6,7 @@ package pickyeater.UI.RegisterPage;
 
 import pickyeater.basics.user.WeightGoal;
 import pickyeater.builders.UserBuilder;
+import pickyeater.executors.ExecutorProvider;
 import pickyeater.executors.RegisterExecutor;
 
 import javax.swing.*;
@@ -23,12 +24,17 @@ public class Register3 extends JFrame {
     private JButton btBack;
     private JPanel buttonPanel;
 
-    public Register3(RegisterExecutor registerExecutor) {
+    private RegisterExecutor registerExecutor;
+    private UserBuilder userBuilder;
+
+    public Register3(ExecutorProvider executorProvider) {
         setContentPane(mainPanel);
         pack();
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setVisible(true);
-        UserBuilder userBuilder = registerExecutor.getUserBuilder();
+
+        this.registerExecutor = executorProvider.getRegisterExecutor();
+        this.userBuilder = registerExecutor.getUserBuilder();
         btLoseWeight.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
@@ -37,7 +43,7 @@ public class Register3 extends JFrame {
                 btMaintainWeight.setBackground(Color.white);
                 userBuilder.setWeightVariationGoal(WeightGoal.LOSE_WEIGHT);
 
-                Continue(registerExecutor);
+                Continue(executorProvider);
             }
         });
         btGainWeight.addActionListener(new ActionListener() {
@@ -48,7 +54,7 @@ public class Register3 extends JFrame {
                 btMaintainWeight.setBackground(Color.white);
                 userBuilder.setWeightVariationGoal(WeightGoal.INCREASE_WEIGHT);
 
-                Continue(registerExecutor);
+                Continue(executorProvider);
             }
         });
         btMaintainWeight.addActionListener(new ActionListener() {
@@ -59,7 +65,7 @@ public class Register3 extends JFrame {
                 btMaintainWeight.setBackground(Color.green);
                 userBuilder.setWeightVariationGoal(WeightGoal.MANTAIN_WEIGHT);
 
-                Continue(registerExecutor);
+                Continue(executorProvider);
             }
         });
 
@@ -68,16 +74,16 @@ public class Register3 extends JFrame {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
                 setVisible(false);
-                new Register2(registerExecutor);
+                new Register2(executorProvider);
             }
         });
     }
-    private void Continue(RegisterExecutor registerExecutor){
-        if (registerExecutor.getUserBuilder().getWeightVariationGoal() != null){
+    private void Continue(ExecutorProvider executorProvider){
+        if (executorProvider.getRegisterExecutor().getUserBuilder().getWeightVariationGoal() != null){
             //JOptionPane.showMessageDialog(buttonPanel, "Goal: " + weightGoal);
             setVisible(false);
 
-            new Register4(registerExecutor);
+            new Register4(executorProvider);
         }
     }
 }
