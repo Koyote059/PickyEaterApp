@@ -1,5 +1,9 @@
 package pickyeater.UI.App;
 
+/**
+ * @author Claudio Di Maio
+ */
+
 import pickyeater.executors.RegisterExecutor;
 
 import javax.swing.*;

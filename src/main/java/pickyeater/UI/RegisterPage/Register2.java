@@ -1,5 +1,9 @@
 package pickyeater.UI.RegisterPage;
 
+/**
+ * @author Claudio Di Maio
+ */
+
 import pickyeater.basics.user.LifeStyle;
 import pickyeater.builders.UserBuilder;
 import pickyeater.executors.RegisterExecutor;

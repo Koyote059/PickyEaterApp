@@ -1,5 +1,9 @@
 package pickyeater.UI.RegisterPage;
 
+/**
+ * @author Claudio Di Maio
+ */
+
 import com.toedter.calendar.JDateChooser;
 import pickyeater.algorithms.BodyFatCalculator;
 import pickyeater.algorithms.BodyFatCaluclatorWrong;

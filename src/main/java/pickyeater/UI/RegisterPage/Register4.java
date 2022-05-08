@@ -1,5 +1,9 @@
 package pickyeater.UI.RegisterPage;
 
+/**
+ * @author Claudio Di Maio
+ */
+
 import pickyeater.UI.App.UserPage;
 import pickyeater.algorithms.NutrientsRequiremenetCalculatorWrong;
 import pickyeater.algorithms.NutrientsRequirementCalculator;

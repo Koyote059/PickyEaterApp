@@ -1,5 +1,9 @@
 package pickyeater.UI;
 
+/**
+ * @author Claudio Di Maio
+ */
+
 import pickyeater.UI.App.DailyProgressPage.DailyProgressPage;
 import pickyeater.UI.RegisterPage.Register1;
 import pickyeater.database.JSONIngredientsDatabase;

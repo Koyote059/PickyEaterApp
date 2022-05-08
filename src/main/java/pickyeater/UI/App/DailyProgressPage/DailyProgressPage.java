@@ -1,5 +1,9 @@
 package pickyeater.UI.App.DailyProgressPage;
 
+/**
+ * @author Claudio Di Maio
+ */
+
 import pickyeater.executors.UserMealsProgressesExecutor;
 
 import javax.swing.*;
