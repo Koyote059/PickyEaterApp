@@ -23,7 +23,8 @@ public class main {
         if (executorProvider.getRegisterExecutor().getUserBuilder().getName() == null) {    // ToDo: FIX THIS (it doesn't work)
             new Register1(executorProvider.getRegisterExecutor());
             //new Register2(executorProvider.getRegisterExecutor());
-        } else  // go to the app
-        new DailyProgressPage(executorProvider.getUserMealsProgressesExecutor());
+        } else {  // go to the app
+            new DailyProgressPage(executorProvider.getUserMealsProgressesExecutor());
+        }
     }
 }

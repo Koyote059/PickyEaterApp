@@ -7,6 +7,7 @@ package pickyeater.UI.App.DailyProgressPage;
 import pickyeater.executors.UserMealsProgressesExecutor;
 
 import javax.swing.*;
+import java.awt.event.ComponentAdapter;
 
 public class DailyProgressPage extends JFrame{
     private JPanel mainPanel;
@@ -16,12 +17,19 @@ public class DailyProgressPage extends JFrame{
     private JButton btGroceries;
     private JButton btFood;
     private JButton btDiet;
+    private JButton btAddEatenMeals;
+    private JButton btAddBurntCalories;
+    private JList listEatenMeals;
+    private JProgressBar progressBar;
+    private JComboBox comboBox1;
+    private JLabel txtBurntCalories;
 
     public DailyProgressPage(UserMealsProgressesExecutor userMealsProgressesExecutor) {
         setContentPane(mainPanel);
         pack();
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setVisible(true);
+
 
     }
 }
