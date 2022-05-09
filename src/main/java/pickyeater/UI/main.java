@@ -6,26 +6,29 @@ package pickyeater.UI;
 
 import pickyeater.UI.App.DailyProgressPage.DailyProgressPage;
 import pickyeater.UI.RegisterPage.Register1;
-import pickyeater.database.JSONIngredientsDatabase;
-import pickyeater.database.JSONMealsDatabase;
-import pickyeater.database.JSONUserDatabase;
+import pickyeater.database.*;
 import pickyeater.executors.ExecutorProvider;
 import pickyeater.managers.PickyEaterManager;
+import pickyeater.managers.PickyUserManager;
+import pickyeater.managers.UserManager;
 
 public class main {
     public static void main(String[] args) {
-        PickyEaterManager pickyEaterManager = new PickyEaterManager(new JSONUserDatabase("User_Database"), new JSONIngredientsDatabase("Ingredient_Database"), new JSONMealsDatabase("Meals_Database"));
+        UserDatabase userDatabase = new JSONUserDatabase("User_Database");
+        IngredientsDatabase ingredientsDatabase = new JSONIngredientsDatabase("Ingredient_Database");
+        MealsDatabase mealsDatabase = new JSONMealsDatabase("Meals_Database");
+
+        PickyEaterManager pickyEaterManager = new PickyEaterManager(userDatabase, ingredientsDatabase, mealsDatabase);
         ExecutorProvider executorProvider = new ExecutorProvider(pickyEaterManager);
 
-        new DailyProgressPage(executorProvider);
-        /*
-        // if User_Database is empty: (there is no name)
-        if (executorProvider.getRegisterExecutor().getUserBuilder().getName() == null) {    //TODO: FIX THIS
+        UserManager userManager = new PickyUserManager(userDatabase);
+
+        // if userDatabase is empty
+        if (userManager.getUser().isEmpty()) {
             new Register1(executorProvider);
             //new Register2(executorProvider);
         } else {  // go to the app
             new DailyProgressPage(executorProvider);
         }
-         */
     }
 }
