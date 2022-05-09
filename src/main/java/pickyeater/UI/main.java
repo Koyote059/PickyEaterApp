@@ -11,8 +11,6 @@ import pickyeater.database.*;
 import pickyeater.executors.ExecutorProvider;
 import pickyeater.managers.EaterManager;
 import pickyeater.managers.PickyEaterManager;
-import pickyeater.managers.PickyUserManager;
-import pickyeater.managers.UserManager;
 
 public class main {
     public static void main(String[] args) {

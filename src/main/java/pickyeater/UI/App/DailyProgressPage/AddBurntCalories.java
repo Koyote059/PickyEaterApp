@@ -1,45 +1,32 @@
 package pickyeater.UI.App.DailyProgressPage;
 
-/**
- * @author Claudio Di Maio
- */
-
 import pickyeater.UI.App.MainPages;
 import pickyeater.UI.App.MealPlanPage.MealPlanPage;
 import pickyeater.UI.App.UserPage.UserPage;
 import pickyeater.executors.ExecutorProvider;
-import pickyeater.executors.UserMealsProgressesExecutor;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class DailyProgressPage extends JFrame{
-    private JPanel mainPanel;
+public class AddBurntCalories extends JFrame {
     private JButton btSettings;
     private JButton btDailyProgress;
     private JButton btUser;
     private JButton btGroceries;
     private JButton btFood;
     private JButton btDiet;
-    private JButton btAddEatenMeals;
-    private JButton btAddBurntCalories;
-    private JList listEatenMeals;
-    private JProgressBar progressBar;
-    private JComboBox cbConsumed;
-    private JLabel txtBurntCalories;
+    private JButton btCancel;
+    private JTextField textField1;
+    private JPanel mainPanel;
+    private JButton btSave;
 
-    UserMealsProgressesExecutor userMealsProgressesExecutor;
-
-    public DailyProgressPage(ExecutorProvider executorProvider) {
+    public AddBurntCalories(ExecutorProvider executorProvider) {
         setContentPane(mainPanel);
         pack();
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setVisible(true);
-
-        this.userMealsProgressesExecutor = executorProvider.getUserMealsProgressesExecutor();
-
         btDailyProgress.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -120,18 +107,18 @@ public class DailyProgressPage extends JFrame{
                 new MainPages(executorProvider);
             }
         });
-        btAddEatenMeals.addActionListener(new ActionListener() {
+        btCancel.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 setVisible(false);
-                new AddEatenMealPage(executorProvider);
+                new DailyProgressPage(executorProvider);
             }
         });
-        btAddBurntCalories.addActionListener(new ActionListener() {
+        btSave.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 setVisible(false);
-                new AddBurntCalories(executorProvider);
+                new DailyProgressPage(executorProvider);
             }
         });
     }
