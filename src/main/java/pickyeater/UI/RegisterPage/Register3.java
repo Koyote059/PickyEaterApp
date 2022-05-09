@@ -24,17 +24,11 @@ public class Register3 extends JFrame {
     private JButton btBack;
     private JPanel buttonPanel;
 
-    private RegisterExecutor registerExecutor;
-    private UserBuilder userBuilder;
-
-    public Register3(ExecutorProvider executorProvider) {
+    public Register3(ExecutorProvider executorProvider, UserBuilder userBuilder) {
         setContentPane(mainPanel);
         pack();
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setVisible(true);
-
-        this.registerExecutor = executorProvider.getRegisterExecutor();
-        this.userBuilder = registerExecutor.getUserBuilder();
         btLoseWeight.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
@@ -43,7 +37,7 @@ public class Register3 extends JFrame {
                 btMaintainWeight.setBackground(Color.white);
                 userBuilder.setWeightVariationGoal(WeightGoal.LOSE_WEIGHT);
 
-                Continue(executorProvider);
+                Continue(executorProvider, userBuilder);
             }
         });
         btGainWeight.addActionListener(new ActionListener() {
@@ -54,7 +48,7 @@ public class Register3 extends JFrame {
                 btMaintainWeight.setBackground(Color.white);
                 userBuilder.setWeightVariationGoal(WeightGoal.INCREASE_WEIGHT);
 
-                Continue(executorProvider);
+                Continue(executorProvider, userBuilder);
             }
         });
         btMaintainWeight.addActionListener(new ActionListener() {
@@ -65,7 +59,7 @@ public class Register3 extends JFrame {
                 btMaintainWeight.setBackground(Color.green);
                 userBuilder.setWeightVariationGoal(WeightGoal.MANTAIN_WEIGHT);
 
-                Continue(executorProvider);
+                Continue(executorProvider, userBuilder);
             }
         });
 
@@ -74,16 +68,16 @@ public class Register3 extends JFrame {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
                 setVisible(false);
-                new Register2(executorProvider);
+                new Register2(executorProvider, userBuilder);
             }
         });
     }
-    private void Continue(ExecutorProvider executorProvider){
+    private void Continue(ExecutorProvider executorProvider, UserBuilder userBuilder){
         if (executorProvider.getRegisterExecutor().getUserBuilder().getWeightVariationGoal() != null){
             //JOptionPane.showMessageDialog(buttonPanel, "Goal: " + weightGoal);
             setVisible(false);
 
-            new Register4(executorProvider);
+            new Register4(executorProvider, userBuilder);
         }
     }
 }

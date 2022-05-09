@@ -140,4 +140,12 @@ public class PickyUserBuilder implements UserBuilder {
                     this.mealPlan);
         }
     }
+
+    @Override
+    public String toString() {
+        return "PickyUserBuilder{" + "name='" + name + '\'' + ", weight=" + weight + ", height=" + height + ", " +
+                "bodyFat=" + bodyFat + ", dateOfBirth=" + dateOfBirth + ", requiredNutrients=" + requiredNutrients +
+                ", sex=" + sex + ", lifeStyle=" + lifeStyle + ", weightVariationGoal=" + weightVariationGoal + ", " +
+                "dailyProgresses=" + dailyProgresses + ", mealPlan=" + mealPlan + '}' + "\n";
+    }
 }

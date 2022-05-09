@@ -165,7 +165,7 @@ public class Register1 extends JFrame{
             // TODO: User Save - technically it's already done
 
             setVisible(false);
-            new Register2(executorProvider);
+            new Register2(executorProvider, userBuilder);
         }
     }
     private void createUIComponents() {

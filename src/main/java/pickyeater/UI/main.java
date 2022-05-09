@@ -19,17 +19,12 @@ public class main {
         PickyEaterManager pickyEaterManager = new PickyEaterManager(new JSONUserDatabase("User_Database"), new JSONIngredientsDatabase("Ingredient_Database"), new JSONMealsDatabase("Meals_Database"));
         ExecutorProvider executorProvider = new ExecutorProvider(pickyEaterManager);
 
-       // new DailyProgressPage(executorProvider);
-        new Register1(executorProvider);
-/*
         // if User_Database is empty:
         if (executorProvider.getRegisterExecutor().getUserBuilder().getName() == null) {
-            // ToDo: FIX THIS (it doesn't work)
             new Register1(executorProvider);
-            new Register2(executorProvider);
+            //new Register2(executorProvider);
         } else {  // go to the app
             new DailyProgressPage(executorProvider);
         }
-         */
     }
 }

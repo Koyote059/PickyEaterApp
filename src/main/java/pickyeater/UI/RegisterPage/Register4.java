@@ -30,20 +30,19 @@ public class Register4 extends JFrame {
     private JButton btReset;
     NutrientsBuilder nutrientsBuilder = new PickyNutrientsBuilder();
 
-    public Register4(ExecutorProvider executorProvider) {
-        RegisterExecutor registerExecutor = executorProvider.getRegisterExecutor();
+    public Register4(ExecutorProvider executorProvider, UserBuilder userBuilder) {
         setContentPane(mainPanel);
         pack();
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setVisible(true);
 
-        ResetNutrients(registerExecutor);
+        ResetNutrients(executorProvider.getRegisterExecutor());
 
         btBack.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
                 setVisible(false);
-                new Register3(executorProvider);
+                new Register3(executorProvider, userBuilder);
             }
         });
 
@@ -53,9 +52,8 @@ public class Register4 extends JFrame {
 
                 JOptionPane.showMessageDialog(mainPanel, "Selected:"  + "\n" + "Calories: " + nutrientsBuilder.getCalories() + "\n" + "Proteins: " + nutrientsBuilder.getProteins() + "\n" + "Carbs: " + nutrientsBuilder.getCarbs() + "\n" + "Fats: " + nutrientsBuilder.getFats());
 
-                UserBuilder userBuilder = registerExecutor.getUserBuilder();
                 userBuilder.setRequiredNutrients(nutrientsBuilder.build());
-                registerExecutor.saveUser(userBuilder.build());
+                executorProvider.getRegisterExecutor().saveUser(userBuilder.build());
 
                 setVisible(false);
                 // TODO: GO TO THE APP WITH new AppPanel(registerExecutor);
@@ -66,7 +64,7 @@ public class Register4 extends JFrame {
         btReset.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-                ResetNutrients(registerExecutor);
+                ResetNutrients(executorProvider.getRegisterExecutor());
             }
         });
 
