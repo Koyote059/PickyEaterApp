@@ -13,6 +13,7 @@ import pickyeater.builders.PickyNutrientsBuilder;
 import pickyeater.builders.UserBuilder;
 import pickyeater.executors.ExecutorProvider;
 import pickyeater.executors.RegisterExecutor;
+import pickyeater.managers.EaterManager;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -29,7 +30,7 @@ public class Register4 extends JFrame {
     private JButton btReset;
     NutrientsBuilder nutrientsBuilder = new PickyNutrientsBuilder();
 
-    public Register4(ExecutorProvider executorProvider, UserBuilder userBuilder) {
+    public Register4(EaterManager eaterManager, ExecutorProvider executorProvider, UserBuilder userBuilder) {
         setContentPane(mainPanel);
         pack();
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
@@ -41,7 +42,7 @@ public class Register4 extends JFrame {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
                 setVisible(false);
-                new Register3(executorProvider, userBuilder);
+                new Register3(eaterManager, executorProvider, userBuilder);
             }
         });
 

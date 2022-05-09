@@ -11,6 +11,7 @@ import pickyeater.basics.user.Sex;
 import pickyeater.builders.UserBuilder;
 import pickyeater.executors.ExecutorProvider;
 import pickyeater.executors.RegisterExecutor;
+import pickyeater.managers.EaterManager;
 
 import javax.swing.*;
 import java.awt.*;
@@ -38,11 +39,10 @@ public class Register1 extends JFrame{
     private JPanel birthdayPanel;
     private JDateChooser jBirthdayChooser;
 
-    RegisterExecutor registerExecutor;
-    UserBuilder userBuilder;
-    public Register1(ExecutorProvider executorProvider) {
-        this.registerExecutor = executorProvider.getRegisterExecutor();;
-        this.userBuilder = registerExecutor.getUserBuilder();
+    private UserBuilder userBuilder;
+
+    public Register1(EaterManager eaterManager, ExecutorProvider executorProvider) {
+        this.userBuilder = executorProvider.getRegisterExecutor().getUserBuilder();
         setContentPane(mainPanel);
         pack();
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
@@ -144,17 +144,17 @@ public class Register1 extends JFrame{
                     userBuilder.setBodyFat(0);
                     } else {
                         // Continue
-                        Continue(executorProvider);
+                        Continue(eaterManager, executorProvider);
                     }
                 } else {
                     // Continue
-                    Continue(executorProvider);
+                    Continue(eaterManager, executorProvider);
                 }
             }
         });
     }
 
-    private void Continue(ExecutorProvider executorProvider){
+    private void Continue(EaterManager eaterManager, ExecutorProvider executorProvider){
         if (userBuilder.getName() != null && userBuilder.getSex() != null && userBuilder.getWeight() != 0 && userBuilder.getHeight() != 0 && userBuilder.getDateOfBirth() != null) {
             if (userBuilder.getBodyFat() == 0) {
                 BodyFatCalculator bodyFatCalculator = new BodyFatCaluclatorWrong();
@@ -165,7 +165,7 @@ public class Register1 extends JFrame{
             // TODO: User Save - technically it's already done
 
             setVisible(false);
-            new Register2(executorProvider, userBuilder);
+            new Register2(eaterManager, executorProvider, userBuilder);
         }
     }
     private void createUIComponents() {

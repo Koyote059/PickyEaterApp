@@ -9,6 +9,7 @@ import pickyeater.builders.UserBuilder;
 import pickyeater.database.UserDatabase;
 import pickyeater.executors.ExecutorProvider;
 import pickyeater.executors.RegisterExecutor;
+import pickyeater.managers.EaterManager;
 
 import javax.swing.*;
 import java.awt.*;
@@ -25,7 +26,7 @@ public class Register2 extends JFrame {
     private JButton btBack;
     private JPanel buttonPanel;
 
-    public Register2(ExecutorProvider executorProvider, UserBuilder userBuilder) {
+    public Register2(EaterManager eaterManager, ExecutorProvider executorProvider, UserBuilder userBuilder) {
         setContentPane(mainPanel);
         pack();
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
@@ -42,7 +43,7 @@ public class Register2 extends JFrame {
                 userBuilder.setLifeStyle(LifeStyle.SEDENTARY);
                 System.out.println("LS " + LifeStyle.SEDENTARY);
                 System.out.println("UB " + userBuilder.getLifeStyle());
-                Continue(executorProvider, userBuilder);
+                Continue(eaterManager, executorProvider, userBuilder);
             }
         });
         btSlightlyActive.addActionListener(new ActionListener() {
@@ -55,7 +56,7 @@ public class Register2 extends JFrame {
 
                 userBuilder.setLifeStyle(LifeStyle.LIGHTLY_ACTIVE);
 
-                Continue(executorProvider, userBuilder);
+                Continue(eaterManager, executorProvider, userBuilder);
             }
         });
         btActive.addActionListener(new ActionListener() {
@@ -68,7 +69,7 @@ public class Register2 extends JFrame {
 
                 userBuilder.setLifeStyle(LifeStyle.ACTIVE);
 
-                Continue(executorProvider, userBuilder);
+                Continue(eaterManager, executorProvider, userBuilder);
             }
         });
         btVeryActive.addActionListener(new ActionListener() {
@@ -81,7 +82,7 @@ public class Register2 extends JFrame {
 
                 userBuilder.setLifeStyle(LifeStyle.VERY_ACTIVE);
 
-                Continue(executorProvider, userBuilder);
+                Continue(eaterManager, executorProvider, userBuilder);
             }
         });
     btBack.addComponentListener(new ComponentAdapter() { } );
@@ -89,15 +90,15 @@ public class Register2 extends JFrame {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
                 setVisible(false);
-                new Register1(executorProvider);
+                new Register1(eaterManager, executorProvider);
             }
         });
     }
-    private void Continue(ExecutorProvider executorProvider, UserBuilder userBuilder){
+    private void Continue(EaterManager eaterManager, ExecutorProvider executorProvider, UserBuilder userBuilder){
         if (userBuilder.getLifeStyle() != null){
             //JOptionPane.showMessageDialog(buttonPanel, "Lifestyle: " + lifeStyle);
             setVisible(false);
-            new Register3(executorProvider, userBuilder);
+            new Register3(eaterManager, executorProvider, userBuilder);
         }
     }
 }

@@ -5,9 +5,11 @@ package pickyeater.UI;
  */
 
 import pickyeater.UI.App.DailyProgressPage.DailyProgressPage;
+import pickyeater.UI.App.MainPages;
 import pickyeater.UI.RegisterPage.Register1;
 import pickyeater.database.*;
 import pickyeater.executors.ExecutorProvider;
+import pickyeater.managers.EaterManager;
 import pickyeater.managers.PickyEaterManager;
 import pickyeater.managers.PickyUserManager;
 import pickyeater.managers.UserManager;
@@ -21,12 +23,13 @@ public class main {
         PickyEaterManager pickyEaterManager = new PickyEaterManager(userDatabase, ingredientsDatabase, mealsDatabase);
         ExecutorProvider executorProvider = new ExecutorProvider(pickyEaterManager);
 
-        UserManager userManager = new PickyUserManager(userDatabase);
+        EaterManager eaterManager = new PickyEaterManager(userDatabase, ingredientsDatabase, mealsDatabase);
 
-        if (userManager.getUser().isEmpty()) {  // userDatabase is empty
-            new Register1(executorProvider);
+        if (eaterManager.getUserManager().getUser().isEmpty()) {  // User Database is empty
+            new Register1(eaterManager, executorProvider);
         } else {  // go to the app
             new DailyProgressPage(executorProvider);
+            // new MainPages(executorProvider);
         }
     }
 }
