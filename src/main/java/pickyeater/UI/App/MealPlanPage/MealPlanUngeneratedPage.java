@@ -1,4 +1,4 @@
-package pickyeater.UI.App.MealPlan;
+package pickyeater.UI.App.MealPlanPage;
 
 /**
  * @author Claudio Di Maio
@@ -9,7 +9,7 @@ import pickyeater.executors.UserMealsProgressesExecutor;
 
 import javax.swing.*;
 
-public class MealPlanPage extends JFrame{
+public class MealPlanUngeneratedPage extends JFrame{
     private JPanel mainPanel;
     private JButton btSettings;
     private JButton btDailyProgress;
@@ -17,11 +17,10 @@ public class MealPlanPage extends JFrame{
     private JButton btGroceries;
     private JButton btFood;
     private JButton btDiet;
-    private JButton DELETEButton;
-    private JList list1;
+    private JButton clickHereToGoButton;
     UserMealsProgressesExecutor userMealsProgressesExecutor;
 
-    public MealPlanPage(ExecutorProvider executorProvider) {
+    public MealPlanUngeneratedPage(ExecutorProvider executorProvider) {
         setContentPane(mainPanel);
         pack();
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);

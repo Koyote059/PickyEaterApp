@@ -4,11 +4,12 @@ package pickyeater.UI.App;
  * @author Claudio Di Maio
  */
 
-import pickyeater.executors.RegisterExecutor;
+import pickyeater.executors.ExecutorProvider;
+import pickyeater.executors.UserMealsProgressesExecutor;
 
 import javax.swing.*;
 
-public class UserPage extends JFrame{
+public class MainPages extends JFrame{
     private JPanel mainPanel;
     private JButton btSettings;
     private JButton btDailyProgress;
@@ -16,17 +17,16 @@ public class UserPage extends JFrame{
     private JButton btGroceries;
     private JButton btFood;
     private JButton btDiet;
-    private JProgressBar progressBar1;
-    private JComboBox comboBox1;
-    private JButton btAddEatenMeals;
-    private JButton btAddBurntCalories;
-    private JList listEatenMeals;
+    UserMealsProgressesExecutor userMealsProgressesExecutor;
 
-    public UserPage(RegisterExecutor registerExecutor) {
+    public MainPages(ExecutorProvider executorProvider) {
         setContentPane(mainPanel);
         pack();
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setVisible(true);
+
+        this.userMealsProgressesExecutor = executorProvider.getUserMealsProgressesExecutor();
+
 
     }
 }

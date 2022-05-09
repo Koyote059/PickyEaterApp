@@ -5,7 +5,6 @@ package pickyeater.UI.RegisterPage;
  */
 
 import pickyeater.UI.App.DailyProgressPage.DailyProgressPage;
-import pickyeater.UI.App.UserPage;
 import pickyeater.algorithms.NutrientsRequiremenetCalculatorWrong;
 import pickyeater.algorithms.NutrientsRequirementCalculator;
 import pickyeater.basics.food.Nutrients;

@@ -1,4 +1,4 @@
-package pickyeater.UI.App.MealPlan;
+package pickyeater.UI.App.UserPage;
 
 /**
  * @author Claudio Di Maio
@@ -9,7 +9,7 @@ import pickyeater.executors.UserMealsProgressesExecutor;
 
 import javax.swing.*;
 
-public class MealPlanUnavailablePage extends JFrame{
+public class UserEditModePage extends JFrame{
     private JPanel mainPanel;
     private JButton btSettings;
     private JButton btDailyProgress;
@@ -17,10 +17,13 @@ public class MealPlanUnavailablePage extends JFrame{
     private JButton btGroceries;
     private JButton btFood;
     private JButton btDiet;
-    private JButton clickHereToGoButton;
+    private JTextField NAMETextField;
+    private JComboBox comboBox1;
+    private JButton btSave;
+    private JButton btUndo;
     UserMealsProgressesExecutor userMealsProgressesExecutor;
 
-    public MealPlanUnavailablePage(ExecutorProvider executorProvider) {
+    public UserEditModePage(ExecutorProvider executorProvider) {
         setContentPane(mainPanel);
         pack();
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);

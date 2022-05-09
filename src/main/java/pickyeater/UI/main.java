@@ -23,10 +23,8 @@ public class main {
 
         UserManager userManager = new PickyUserManager(userDatabase);
 
-        // if userDatabase is empty
-        if (userManager.getUser().isEmpty()) {
+        if (userManager.getUser().isEmpty()) {  // userDatabase is empty
             new Register1(executorProvider);
-            //new Register2(executorProvider);
         } else {  // go to the app
             new DailyProgressPage(executorProvider);
         }
