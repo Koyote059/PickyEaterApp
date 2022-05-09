@@ -19,7 +19,7 @@ public class main {
         PickyEaterManager pickyEaterManager = new PickyEaterManager(new JSONUserDatabase("User_Database"), new JSONIngredientsDatabase("Ingredient_Database"), new JSONMealsDatabase("Meals_Database"));
         ExecutorProvider executorProvider = new ExecutorProvider(pickyEaterManager);
 
-        // if User_Database is empty:
+        // if User_Database is empty: (there is no name) //TODO: FIX THIS
         if (executorProvider.getRegisterExecutor().getUserBuilder().getName() == null) {
             new Register1(executorProvider);
             //new Register2(executorProvider);
