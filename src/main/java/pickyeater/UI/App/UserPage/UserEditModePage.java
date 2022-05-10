@@ -4,15 +4,20 @@ package pickyeater.UI.App.UserPage;
  * @author Claudio Di Maio
  */
 
+import com.toedter.calendar.JDateChooser;
 import pickyeater.UI.LeftButtons.MainButton;
 import pickyeater.UI.LeftButtons.PanelButtons;
 import pickyeater.UI.LeftButtons.PanelButtonsConverter;
+import pickyeater.basics.user.User;
 import pickyeater.database.Databases;
+import pickyeater.managers.EaterManager;
+import pickyeater.managers.PickyEaterManager;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Optional;
 
 public class UserEditModePage extends JFrame{
     private JPanel mainPanel;
@@ -27,7 +32,6 @@ public class UserEditModePage extends JFrame{
     private JButton btSave;
     private JButton btUndo;
     private JTextField tfSex;
-    private JTextField tfDoB;
     private JTextField tfHeight;
     private JTextField tfWeight;
     private JTextField tfBodyfat;
@@ -35,9 +39,36 @@ public class UserEditModePage extends JFrame{
     private JTextField tfProteins;
     private JTextField tfCarbs;
     private JTextField tfFats;
-    private JLabel lbCalories;
+    private JLabel txtCalories;
+    private JPanel birthdayPanel;
+    private JDateChooser jBirthdayChooser;
 
     public UserEditModePage(Databases databases) {
+        EaterManager eaterManager = new PickyEaterManager(databases.getUserDatabase(),
+                databases.getIngredientsDatabase(), databases.getMealsDatabase());
+
+
+        Optional<User> userOptional = eaterManager.getUserManager().getUser();
+
+        User user = userOptional.get();
+
+        // User:
+        tfName.setText(user.getName());
+        tfSex.setText(user.getUserStatus().getSex().toString());
+        // txtDateOfBirth.setText(user.getUserStatus().getDateOfBirth().toString());
+        // TODO: Fix DoB
+        tfHeight.setText(Double.toString(user.getUserStatus().getHeight()));
+        tfWeight.setText(Double.toString(user.getUserStatus().getWeight()));
+        tfBodyfat.setText(Double.toString(user.getUserStatus().getBodyFat()));
+        //cbLifestyle
+        //tfLifestyle.setText(user.getUserGoal().getLifeStyle().toString());
+        //tfWeightGoal.setText(user.getUserGoal().getWeightVariationGoal().toString());
+
+        // Nutrients:
+        tfProteins.setText(Double.toString(user.getUserGoal().getRequiredNutrients().getProteins()));
+        tfCarbs.setText(Double.toString(user.getUserGoal().getRequiredNutrients().getCarbs()));
+        tfFats.setText(Double.toString(user.getUserGoal().getRequiredNutrients().getFats()));
+        txtCalories.setText(Double.toString(user.getUserGoal().getRequiredNutrients().getCalories()));
 
         btDailyProgress.setBackground(Color.white);
         btDiet.setBackground(Color.white);
@@ -79,5 +110,9 @@ public class UserEditModePage extends JFrame{
                 new MainButton(databases, PanelButtons.USER);
             }
         });
+    }
+
+    private void createUIComponents() {
+        jBirthdayChooser = new JDateChooser();
     }
 }

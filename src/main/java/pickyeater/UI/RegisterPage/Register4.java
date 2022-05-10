@@ -12,6 +12,7 @@ import pickyeater.basics.food.Nutrients;
 import pickyeater.builders.NutrientsBuilder;
 import pickyeater.builders.PickyNutrientsBuilder;
 import pickyeater.builders.UserBuilder;
+import pickyeater.database.*;
 import pickyeater.executors.ExecutorProvider;
 import pickyeater.executors.RegisterExecutor;
 import pickyeater.managers.EaterManager;
@@ -57,8 +58,13 @@ public class Register4 extends JFrame {
                 executorProvider.getRegisterExecutor().saveUser(userBuilder.build());
 
                 setVisible(false);
-                // TODO: GO TO THE APP WITH new AppPanel(registerExecutor);
-                new main();
+                // TODO: IMPORTANT: FIX THIS WHEN WE STOP USING JSONDatabases
+                UserDatabase userDatabase = new JSONUserDatabase("User_Database");
+                IngredientsDatabase ingredientsDatabase = new JSONIngredientsDatabase("Ingredient_Database");
+                MealsDatabase mealsDatabase = new JSONMealsDatabase("Meals_Database");
+
+                Databases databases = new Databases(userDatabase, ingredientsDatabase, mealsDatabase);
+                new DailyProgressPage(databases);
             }
         });
 

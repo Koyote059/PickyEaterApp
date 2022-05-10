@@ -10,7 +10,6 @@ import pickyeater.algorithms.BodyFatCaluclatorWrong;
 import pickyeater.basics.user.Sex;
 import pickyeater.builders.UserBuilder;
 import pickyeater.executors.ExecutorProvider;
-import pickyeater.executors.RegisterExecutor;
 import pickyeater.managers.EaterManager;
 
 import javax.swing.*;
@@ -143,11 +142,9 @@ public class Register1 extends JFrame{
                         JOptionPane.showMessageDialog(panelZeroOne, "Insert valid body-fat percentage", "Error", JOptionPane.ERROR_MESSAGE);
                     userBuilder.setBodyFat(0);
                     } else {
-                        // Continue
                         Continue(eaterManager, executorProvider);
                     }
                 } else {
-                    // Continue
                     Continue(eaterManager, executorProvider);
                 }
             }

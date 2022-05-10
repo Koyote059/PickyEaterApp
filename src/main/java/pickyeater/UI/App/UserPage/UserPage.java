@@ -44,11 +44,13 @@ public class UserPage extends JFrame{
     private JLabel txtDateOfBirth;
     private JLabel txtLifestyle;
     private JLabel txtWeightGoal;
+    private JLabel txtProteins;
+    private JLabel txtCarbs;
+    private JLabel txtFats;
+    private JLabel txtCalories;
     UserMealsProgressesExecutor userMealsProgressesExecutor;
 
-    public UserPage(Databases databases) {    //TODO: EaterManager eaterManager,
-        // TODO: txtName = ;
-        //EaterManager eaterManager = new PickyEaterManager(PickyEaterManager)
+    public UserPage(Databases databases) {
         EaterManager eaterManager = new PickyEaterManager(databases.getUserDatabase(),
                 databases.getIngredientsDatabase(), databases.getMealsDatabase());
 
@@ -60,7 +62,8 @@ public class UserPage extends JFrame{
         // User:
         txtName.setText(user.getName());
         txtSex.setText(user.getUserStatus().getSex().toString());
-        txtDateOfBirth.setText(user.getUserStatus().getDateOfBirth().toString());   // TODO: CHECK
+        // txtDateOfBirth.setText(user.getUserStatus().getDateOfBirth().toString());
+        // TODO: Fix DoB
         txtHeight.setText(Double.toString(user.getUserStatus().getHeight()));
         txtWeight.setText(Double.toString(user.getUserStatus().getWeight()));
         txtBodyFat.setText(Double.toString(user.getUserStatus().getBodyFat()));
@@ -68,7 +71,10 @@ public class UserPage extends JFrame{
         txtWeightGoal.setText(user.getUserGoal().getWeightVariationGoal().toString());
 
         // Nutrients:
-        // TODO: NUTRIENTS
+        txtProteins.setText(Double.toString(user.getUserGoal().getRequiredNutrients().getProteins()));
+        txtCarbs.setText(Double.toString(user.getUserGoal().getRequiredNutrients().getCarbs()));
+        txtFats.setText(Double.toString(user.getUserGoal().getRequiredNutrients().getFats()));
+        txtCalories.setText(Double.toString(user.getUserGoal().getRequiredNutrients().getCalories()));
 
         btDailyProgress.setBackground(Color.white);
         btDiet.setBackground(Color.white);

@@ -263,7 +263,7 @@
                       <text value="Calories:"/>
                     </properties>
                   </component>
-                  <component id="17356" class="javax.swing.JLabel">
+                  <component id="17356" class="javax.swing.JLabel" binding="txtCalories">
                     <constraints>
                       <grid row="4" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
                     </constraints>
@@ -271,7 +271,7 @@
                       <text value="CALORIES"/>
                     </properties>
                   </component>
-                  <component id="eb740" class="javax.swing.JLabel">
+                  <component id="eb740" class="javax.swing.JLabel" binding="txtProteins">
                     <constraints>
                       <grid row="1" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
                     </constraints>
@@ -279,7 +279,7 @@
                       <text value="PROTEINS"/>
                     </properties>
                   </component>
-                  <component id="129b" class="javax.swing.JLabel">
+                  <component id="129b" class="javax.swing.JLabel" binding="txtCarbs">
                     <constraints>
                       <grid row="2" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
                     </constraints>
@@ -287,7 +287,7 @@
                       <text value="CARBS"/>
                     </properties>
                   </component>
-                  <component id="d6d4a" class="javax.swing.JLabel">
+                  <component id="d6d4a" class="javax.swing.JLabel" binding="txtFats">
                     <constraints>
                       <grid row="3" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
                     </constraints>
