@@ -4,18 +4,10 @@ package pickyeater.UI.App.UserPage;
  * @author Claudio Di Maio
  */
 
-import pickyeater.UI.App.DailyProgressPage.DailyProgressPage;
-import pickyeater.UI.App.FoodPage.FoodPage;
-import pickyeater.UI.App.GroceriesPage.GroceriesPage;
-import pickyeater.UI.App.MainPages;
-import pickyeater.UI.App.MealPlanPage.MealPlanPage;
-import pickyeater.UI.App.SettingsPage.SettingsPage;
 import pickyeater.UI.LeftButtons.MainButton;
 import pickyeater.UI.LeftButtons.PanelButtons;
 import pickyeater.UI.LeftButtons.PanelButtonsConverter;
-import pickyeater.executors.ExecutorProvider;
-import pickyeater.executors.UserMealsProgressesExecutor;
-import pickyeater.managers.PickyEaterManager;
+import pickyeater.database.Databases;
 
 import javax.swing.*;
 import java.awt.*;
@@ -30,12 +22,22 @@ public class UserEditModePage extends JFrame{
     private JButton btGroceries;
     private JButton btFood;
     private JButton btDiet;
-    private JTextField NAMETextField;
-    private JComboBox comboBox1;
+    private JTextField tfName;
+    private JComboBox cbLifestyle;
     private JButton btSave;
     private JButton btUndo;
+    private JTextField tfSex;
+    private JTextField tfDoB;
+    private JTextField tfHeight;
+    private JTextField tfWeight;
+    private JTextField tfBodyfat;
+    private JComboBox cbWeightGoal;
+    private JTextField tfProteins;
+    private JTextField tfCarbs;
+    private JTextField tfFats;
+    private JLabel lbCalories;
 
-    public UserEditModePage(PickyEaterManager pickyEaterManager) {
+    public UserEditModePage(Databases databases) {
 
         btDailyProgress.setBackground(Color.white);
         btDiet.setBackground(Color.white);
@@ -54,7 +56,7 @@ public class UserEditModePage extends JFrame{
             public void actionPerformed(ActionEvent e) {
                 String cmd = e.getActionCommand();
                 setVisible(false);
-                new MainButton(pickyEaterManager, new PanelButtonsConverter(cmd).Convert());
+                new MainButton(databases, new PanelButtonsConverter(cmd).Convert());
             }
         };
         btSettings.addActionListener(listener);
@@ -67,14 +69,14 @@ public class UserEditModePage extends JFrame{
             @Override
             public void actionPerformed(ActionEvent e) {
                 setVisible(false);
-                new MainButton(pickyEaterManager, PanelButtons.USER);
+                new MainButton(databases, PanelButtons.USER);
             }
         });
         btSave.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 setVisible(false);
-                new MainButton(pickyEaterManager, PanelButtons.USER);
+                new MainButton(databases, PanelButtons.USER);
             }
         });
     }

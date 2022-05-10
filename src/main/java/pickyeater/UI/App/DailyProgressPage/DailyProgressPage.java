@@ -12,6 +12,7 @@ import pickyeater.UI.App.SettingsPage.SettingsPage;
 import pickyeater.UI.App.UserPage.UserPage;
 import pickyeater.UI.LeftButtons.MainButton;
 import pickyeater.UI.LeftButtons.PanelButtonsConverter;
+import pickyeater.database.Databases;
 import pickyeater.executors.ExecutorProvider;
 import pickyeater.executors.UserMealsProgressesExecutor;
 import pickyeater.managers.PickyEaterManager;
@@ -38,7 +39,7 @@ public class DailyProgressPage extends JFrame{
 
     UserMealsProgressesExecutor userMealsProgressesExecutor;
 
-    public DailyProgressPage(PickyEaterManager pickyEaterManager) {
+    public DailyProgressPage(Databases databases) {
         btDailyProgress.setBackground(Color.green);
         btDiet.setBackground(Color.white);
         btFood.setBackground(Color.white);
@@ -56,7 +57,7 @@ public class DailyProgressPage extends JFrame{
             public void actionPerformed(ActionEvent e) {
                 String cmd = e.getActionCommand();
                 setVisible(false);
-                new MainButton(pickyEaterManager, new PanelButtonsConverter(cmd).Convert());
+                new MainButton(databases, new PanelButtonsConverter(cmd).Convert());
             }
         };
         btSettings.addActionListener(listener);
@@ -70,14 +71,14 @@ public class DailyProgressPage extends JFrame{
             @Override
             public void actionPerformed(ActionEvent e) {
                 setVisible(false);
-                new AddEatenMealPage(pickyEaterManager);
+                new AddEatenMealPage(databases);
             }
         });
         btAddBurntCalories.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 setVisible(false);
-                new AddBurntCalories(pickyEaterManager);
+                new AddBurntCalories(databases);
             }
         });
     }

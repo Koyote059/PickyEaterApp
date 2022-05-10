@@ -146,7 +146,7 @@
                   <text value="Weight Goal:"/>
                 </properties>
               </component>
-              <component id="689ce" class="javax.swing.JTextField" binding="NAMETextField" default-binding="true">
+              <component id="689ce" class="javax.swing.JTextField" binding="tfName">
                 <constraints>
                   <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
                     <preferred-size width="150" height="-1"/>
@@ -156,7 +156,7 @@
                   <text value="NAME"/>
                 </properties>
               </component>
-              <component id="80925" class="javax.swing.JTextField" default-binding="true">
+              <component id="80925" class="javax.swing.JTextField" binding="tfDoB">
                 <constraints>
                   <grid row="2" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
                     <preferred-size width="150" height="-1"/>
@@ -166,7 +166,7 @@
                   <text value="DATE OF BIRTH"/>
                 </properties>
               </component>
-              <component id="38e31" class="javax.swing.JTextField" default-binding="true">
+              <component id="38e31" class="javax.swing.JTextField" binding="tfSex">
                 <constraints>
                   <grid row="1" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
                     <preferred-size width="150" height="-1"/>
@@ -176,7 +176,7 @@
                   <text value="SEX"/>
                 </properties>
               </component>
-              <component id="d0221" class="javax.swing.JTextField" default-binding="true">
+              <component id="d0221" class="javax.swing.JTextField" binding="tfHeight">
                 <constraints>
                   <grid row="3" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
                     <preferred-size width="150" height="-1"/>
@@ -186,7 +186,7 @@
                   <text value="HEIGHT"/>
                 </properties>
               </component>
-              <component id="b170f" class="javax.swing.JTextField" default-binding="true">
+              <component id="b170f" class="javax.swing.JTextField" binding="tfWeight">
                 <constraints>
                   <grid row="4" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
                     <preferred-size width="150" height="-1"/>
@@ -196,7 +196,7 @@
                   <text value="WEIGHT"/>
                 </properties>
               </component>
-              <component id="92b60" class="javax.swing.JTextField" default-binding="true">
+              <component id="92b60" class="javax.swing.JTextField" binding="tfBodyfat">
                 <constraints>
                   <grid row="5" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
                     <preferred-size width="150" height="-1"/>
@@ -259,7 +259,7 @@
                       <text value="Calories:"/>
                     </properties>
                   </component>
-                  <component id="17494" class="javax.swing.JTextField" default-binding="true">
+                  <component id="17494" class="javax.swing.JTextField" binding="tfProteins">
                     <constraints>
                       <grid row="1" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
                         <preferred-size width="150" height="-1"/>
@@ -269,7 +269,7 @@
                       <text value="PROTEINS"/>
                     </properties>
                   </component>
-                  <component id="cec3a" class="javax.swing.JTextField" default-binding="true">
+                  <component id="cec3a" class="javax.swing.JTextField" binding="tfCarbs">
                     <constraints>
                       <grid row="2" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
                         <preferred-size width="150" height="-1"/>
@@ -279,7 +279,7 @@
                       <text value="CARBS"/>
                     </properties>
                   </component>
-                  <component id="9b802" class="javax.swing.JTextField" default-binding="true">
+                  <component id="9b802" class="javax.swing.JTextField" binding="tfFats">
                     <constraints>
                       <grid row="3" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
                         <preferred-size width="150" height="-1"/>
@@ -289,11 +289,9 @@
                       <text value="FATS"/>
                     </properties>
                   </component>
-                  <component id="d4229" class="javax.swing.JTextField" default-binding="true">
+                  <component id="27327" class="javax.swing.JLabel" binding="lbCalories">
                     <constraints>
-                      <grid row="4" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
-                        <preferred-size width="150" height="-1"/>
-                      </grid>
+                      <grid row="4" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
                     </constraints>
                     <properties>
                       <text value="CALORIES"/>
@@ -301,7 +299,7 @@
                   </component>
                 </children>
               </grid>
-              <component id="fcf80" class="javax.swing.JComboBox" binding="comboBox1" default-binding="true">
+              <component id="fcf80" class="javax.swing.JComboBox" binding="cbLifestyle">
                 <constraints>
                   <grid row="6" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="2" anchor="8" fill="1" indent="0" use-parent-layout="false"/>
                 </constraints>
@@ -314,7 +312,7 @@
                   </model>
                 </properties>
               </component>
-              <component id="ec4b7" class="javax.swing.JComboBox" default-binding="true">
+              <component id="ec4b7" class="javax.swing.JComboBox" binding="cbWeightGoal">
                 <constraints>
                   <grid row="7" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="2" anchor="8" fill="1" indent="0" use-parent-layout="false"/>
                 </constraints>

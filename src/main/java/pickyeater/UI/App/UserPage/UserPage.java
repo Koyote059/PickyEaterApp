@@ -13,6 +13,7 @@ import pickyeater.UI.App.SettingsPage.SettingsPage;
 import pickyeater.UI.LeftButtons.MainButton;
 import pickyeater.UI.LeftButtons.PanelButtons;
 import pickyeater.UI.LeftButtons.PanelButtonsConverter;
+import pickyeater.database.Databases;
 import pickyeater.executors.ExecutorProvider;
 import pickyeater.executors.UserMealsProgressesExecutor;
 import pickyeater.managers.EaterManager;
@@ -42,8 +43,10 @@ public class UserPage extends JFrame{
     private JLabel txtWeightGoal;
     UserMealsProgressesExecutor userMealsProgressesExecutor;
 
-    public UserPage(PickyEaterManager pickyEaterManager) {    //TODO: EaterManager eaterManager,
+    public UserPage(Databases databases) {    //TODO: EaterManager eaterManager,
         // TODO: txtName = ;
+        //EaterManager eaterManager = new PickyEaterManager(PickyEaterManager)
+
         btDailyProgress.setBackground(Color.white);
         btDiet.setBackground(Color.white);
         btFood.setBackground(Color.white);
@@ -61,7 +64,7 @@ public class UserPage extends JFrame{
             public void actionPerformed(ActionEvent e) {
                 String cmd = e.getActionCommand();
                 setVisible(false);
-                new MainButton(pickyEaterManager, new PanelButtonsConverter(cmd).Convert());
+                new MainButton(databases, new PanelButtonsConverter(cmd).Convert());
             }
         };
         btSettings.addActionListener(listener);
@@ -74,7 +77,7 @@ public class UserPage extends JFrame{
             @Override
             public void actionPerformed(ActionEvent e) {
                 setVisible(false);
-                new UserEditModePage(pickyEaterManager);
+                new UserEditModePage(databases);
             }
         });
     }

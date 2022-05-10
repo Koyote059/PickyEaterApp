@@ -1,9 +1,10 @@
-package pickyeater.UI.App.DailyProgressPageWithColours;
+package Garbage.DailyProgressPageWithColours;
 
 /**
  * @author Claudio Di Maio
  */
 
+import pickyeater.database.Databases;
 import pickyeater.executors.ExecutorProvider;
 import pickyeater.executors.UserMealsProgressesExecutor;
 
@@ -26,13 +27,13 @@ public class DailyProgressPageWithColours extends JFrame{
 
     UserMealsProgressesExecutor userMealsProgressesExecutor;
 
-    public DailyProgressPageWithColours(ExecutorProvider executorProvider) {
+    public DailyProgressPageWithColours(Databases databases) {
         setContentPane(mainPanel);
         pack();
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setVisible(true);
 
-        this.userMealsProgressesExecutor = executorProvider.getUserMealsProgressesExecutor();
+        //this.userMealsProgressesExecutor = executorProvider.getUserMealsProgressesExecutor();
 
 
     }

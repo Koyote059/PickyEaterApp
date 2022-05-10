@@ -12,6 +12,7 @@ import pickyeater.UI.App.SettingsPage.SettingsPage;
 import pickyeater.UI.App.UserPage.UserPage;
 import pickyeater.UI.LeftButtons.MainButton;
 import pickyeater.UI.LeftButtons.PanelButtonsConverter;
+import pickyeater.database.Databases;
 import pickyeater.executors.ExecutorProvider;
 import pickyeater.executors.UserMealsProgressesExecutor;
 import pickyeater.managers.PickyEaterManager;
@@ -33,7 +34,7 @@ public class MealPlanPage extends JFrame{
     private JList list1;
     private JButton previousButton;
 
-    public MealPlanPage(PickyEaterManager pickyEaterManager) {
+    public MealPlanPage(Databases databases) {
 
         btDailyProgress.setBackground(Color.white);
         btDiet.setBackground(Color.green);
@@ -52,7 +53,7 @@ public class MealPlanPage extends JFrame{
             public void actionPerformed(ActionEvent e) {
                 String cmd = e.getActionCommand();
                 setVisible(false);
-                new MainButton(pickyEaterManager, new PanelButtonsConverter(cmd).Convert());
+                new MainButton(databases, new PanelButtonsConverter(cmd).Convert());
             }
         };
         btSettings.addActionListener(listener);

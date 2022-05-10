@@ -8,6 +8,7 @@ import pickyeater.UI.App.SettingsPage.SettingsPage;
 import pickyeater.UI.App.UserPage.UserPage;
 import pickyeater.UI.LeftButtons.MainButton;
 import pickyeater.UI.LeftButtons.PanelButtonsConverter;
+import pickyeater.database.Databases;
 import pickyeater.executors.ExecutorProvider;
 import pickyeater.managers.PickyEaterManager;
 
@@ -26,11 +27,11 @@ public class AddEatenMealPage extends JFrame {
     private JButton btCancel;
     private JPanel pieChartPanel;
     private JList list1;
-    private JTextField a100TextField;
     private JPanel mainPanel;
     private JButton btSave;
+    private JTextField tfQuantity;
 
-    public AddEatenMealPage(PickyEaterManager pickyEaterManager) {
+    public AddEatenMealPage(Databases databases) {
 
         btDailyProgress.setBackground(Color.green);
         btDiet.setBackground(Color.white);
@@ -48,7 +49,7 @@ public class AddEatenMealPage extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 String cmd = e.getActionCommand();
                 setVisible(false);
-                new MainButton(pickyEaterManager, new PanelButtonsConverter(cmd).Convert());
+                new MainButton(databases, new PanelButtonsConverter(cmd).Convert());
             }
         };
         btSettings.addActionListener(listener);
@@ -61,14 +62,14 @@ public class AddEatenMealPage extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 setVisible(false);
-                new DailyProgressPage(pickyEaterManager);
+                new DailyProgressPage(databases);
             }
         });
         btSave.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 setVisible(false);
-                new DailyProgressPage(pickyEaterManager);
+                new DailyProgressPage(databases);
             }
         });
     }

@@ -20,15 +20,18 @@ public class main {
         IngredientsDatabase ingredientsDatabase = new JSONIngredientsDatabase("Ingredient_Database");
         MealsDatabase mealsDatabase = new JSONMealsDatabase("Meals_Database");
 
-        PickyEaterManager pickyEaterManager = new PickyEaterManager(userDatabase, ingredientsDatabase, mealsDatabase);
-        ExecutorProvider executorProvider = new ExecutorProvider(pickyEaterManager);
+        Databases databases = new Databases(userDatabase, ingredientsDatabase, mealsDatabase);
 
-        EaterManager eaterManager = new PickyEaterManager(userDatabase, ingredientsDatabase, mealsDatabase);
+        EaterManager eaterManager = new PickyEaterManager(databases.getUserDatabase(),
+                databases.getIngredientsDatabase(), databases.getMealsDatabase());
+
+        ExecutorProvider executorProvider = new ExecutorProvider(eaterManager);
+
 
         if (eaterManager.getUserManager().getUser().isEmpty()) {  // User Database is empty
             new Register1(eaterManager, executorProvider);
         } else {  // go to the app
-            new MainButton(pickyEaterManager, PanelButtons.PROGRESS);
+            new MainButton(databases, PanelButtons.PROGRESS);
             //new DailyProgressPage(pickyEaterManager);
             // new MainPages(executorProvider);
         }

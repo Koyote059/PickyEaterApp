@@ -8,6 +8,7 @@ import pickyeater.UI.App.SettingsPage.SettingsPage;
 import pickyeater.UI.App.UserPage.UserPage;
 import pickyeater.UI.LeftButtons.MainButton;
 import pickyeater.UI.LeftButtons.PanelButtonsConverter;
+import pickyeater.database.Databases;
 import pickyeater.executors.ExecutorProvider;
 import pickyeater.managers.PickyEaterManager;
 
@@ -28,7 +29,7 @@ public class AddBurntCalories extends JFrame {
     private JPanel mainPanel;
     private JButton btSave;
 
-    public AddBurntCalories(PickyEaterManager pickyEaterManager) {
+    public AddBurntCalories(Databases databases) {
 
         btDailyProgress.setBackground(Color.green);
         btDiet.setBackground(Color.white);
@@ -41,13 +42,12 @@ public class AddBurntCalories extends JFrame {
         pack();
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setVisible(true);
-        ExecutorProvider executorProvider = new ExecutorProvider(pickyEaterManager);
         ActionListener listener = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 String cmd = e.getActionCommand();
                 setVisible(false);
-                new MainButton(pickyEaterManager, new PanelButtonsConverter(cmd).Convert());
+                new MainButton(databases, new PanelButtonsConverter(cmd).Convert());
             }
         };
         btSettings.addActionListener(listener);
@@ -61,14 +61,14 @@ public class AddBurntCalories extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 setVisible(false);
-                new DailyProgressPage(pickyEaterManager);
+                new DailyProgressPage(databases);
             }
         });
         btSave.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 setVisible(false);
-                new DailyProgressPage(pickyEaterManager);
+                new DailyProgressPage(databases);
             }
         });
     }
