@@ -6,6 +6,8 @@ package pickyeater.UI;
 
 import pickyeater.UI.App.DailyProgressPage.DailyProgressPage;
 import pickyeater.UI.App.MainPages;
+import pickyeater.UI.LeftButtons.MainButton;
+import pickyeater.UI.LeftButtons.PanelButtons;
 import pickyeater.UI.RegisterPage.Register1;
 import pickyeater.database.*;
 import pickyeater.executors.ExecutorProvider;
@@ -26,7 +28,8 @@ public class main {
         if (eaterManager.getUserManager().getUser().isEmpty()) {  // User Database is empty
             new Register1(eaterManager, executorProvider);
         } else {  // go to the app
-            new DailyProgressPage(executorProvider);
+            new MainButton(pickyEaterManager, PanelButtons.PROGRESS);
+            //new DailyProgressPage(pickyEaterManager);
             // new MainPages(executorProvider);
         }
     }

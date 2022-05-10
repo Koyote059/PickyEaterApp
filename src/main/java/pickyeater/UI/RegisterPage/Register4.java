@@ -5,6 +5,7 @@ package pickyeater.UI.RegisterPage;
  */
 
 import pickyeater.UI.App.DailyProgressPage.DailyProgressPage;
+import pickyeater.UI.main;
 import pickyeater.algorithms.NutrientsRequiremenetCalculatorWrong;
 import pickyeater.algorithms.NutrientsRequirementCalculator;
 import pickyeater.basics.food.Nutrients;
@@ -57,7 +58,7 @@ public class Register4 extends JFrame {
 
                 setVisible(false);
                 // TODO: GO TO THE APP WITH new AppPanel(registerExecutor);
-                new DailyProgressPage(executorProvider);
+                new main();
             }
         });
 

@@ -5,10 +5,16 @@ package pickyeater.UI.App.MealPlanPage;
  */
 
 import pickyeater.UI.App.DailyProgressPage.DailyProgressPage;
+import pickyeater.UI.App.FoodPage.FoodPage;
+import pickyeater.UI.App.GroceriesPage.GroceriesPage;
 import pickyeater.UI.App.MainPages;
+import pickyeater.UI.App.SettingsPage.SettingsPage;
 import pickyeater.UI.App.UserPage.UserPage;
+import pickyeater.UI.LeftButtons.MainButton;
+import pickyeater.UI.LeftButtons.PanelButtonsConverter;
 import pickyeater.executors.ExecutorProvider;
 import pickyeater.executors.UserMealsProgressesExecutor;
+import pickyeater.managers.PickyEaterManager;
 
 import javax.swing.*;
 import java.awt.*;
@@ -24,95 +30,33 @@ public class MealPlanUnavailablePage extends JFrame{
     private JButton btFood;
     private JButton btDiet;
     private JButton clickHereToGoButton;
-    UserMealsProgressesExecutor userMealsProgressesExecutor;
 
-    public MealPlanUnavailablePage(ExecutorProvider executorProvider) {
+    public MealPlanUnavailablePage(PickyEaterManager pickyEaterManager) {
+        btDailyProgress.setBackground(Color.white);
+        btDiet.setBackground(Color.green);
+        btFood.setBackground(Color.white);
+        btGroceries.setBackground(Color.white);
+        btUser.setBackground(Color.white);
+        btSettings.setBackground(Color.white);
+
         setContentPane(mainPanel);
         pack();
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setVisible(true);
 
-        this.userMealsProgressesExecutor = executorProvider.getUserMealsProgressesExecutor();
-
-        btDailyProgress.addActionListener(new ActionListener() {
+        ActionListener listener = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                btDailyProgress.setBackground(Color.green);
-                btDiet.setBackground(Color.white);
-                btFood.setBackground(Color.white);
-                btGroceries.setBackground(Color.white);
-                btUser.setBackground(Color.white);
-                btSettings.setBackground(Color.white);
+                String cmd = e.getActionCommand();
                 setVisible(false);
-                new DailyProgressPage(executorProvider);
+                new MainButton(pickyEaterManager, new PanelButtonsConverter(cmd).Convert());
             }
-        });
-        btDiet.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                btDailyProgress.setBackground(Color.white);
-                btDiet.setBackground(Color.green);
-                btFood.setBackground(Color.white);
-                btGroceries.setBackground(Color.white);
-                btUser.setBackground(Color.white);
-                btSettings.setBackground(Color.white);
-                setVisible(false);
-                new MealPlanPage(executorProvider);
-                //new MealPlanUnavailablePage(executorProvider);
-                //new MealPlanUngeneratedPage(executorProvider);
-            }
-        });
-        btFood.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                btDailyProgress.setBackground(Color.white);
-                btDiet.setBackground(Color.white);
-                btFood.setBackground(Color.green);
-                btGroceries.setBackground(Color.white);
-                btUser.setBackground(Color.white);
-                btSettings.setBackground(Color.white);
-                setVisible(false);
-                new MainPages(executorProvider);
-            }
-        });
-        btGroceries.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                btDailyProgress.setBackground(Color.white);
-                btDiet.setBackground(Color.white);
-                btFood.setBackground(Color.white);
-                btGroceries.setBackground(Color.green);
-                btUser.setBackground(Color.white);
-                btSettings.setBackground(Color.white);
-                setVisible(false);
-                new MainPages(executorProvider);
-            }
-        });
-        btUser.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                btDailyProgress.setBackground(Color.white);
-                btDiet.setBackground(Color.white);
-                btFood.setBackground(Color.white);
-                btGroceries.setBackground(Color.white);
-                btUser.setBackground(Color.green);
-                btSettings.setBackground(Color.white);
-                setVisible(false);
-                new UserPage(executorProvider);
-            }
-        });
-        btSettings.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                btDailyProgress.setBackground(Color.white);
-                btDiet.setBackground(Color.white);
-                btFood.setBackground(Color.white);
-                btGroceries.setBackground(Color.white);
-                btUser.setBackground(Color.white);
-                btSettings.setBackground(Color.green);
-                setVisible(false);
-                new MainPages(executorProvider);
-            }
-        });
+        };
+        btSettings.addActionListener(listener);
+        btDailyProgress.addActionListener(listener);
+        btUser.addActionListener(listener);
+        btGroceries.addActionListener(listener);
+        btFood.addActionListener(listener);
+        btDiet.addActionListener(listener);
     }
 }

@@ -1,21 +1,8 @@
-package pickyeater.UI.App.UserPage;
+package pickyeater.UI.App.SettingsPage;
 
-/**
- * @author Claudio Di Maio
- */
-
-import pickyeater.UI.App.DailyProgressPage.DailyProgressPage;
-import pickyeater.UI.App.FoodPage.FoodPage;
-import pickyeater.UI.App.GroceriesPage.GroceriesPage;
-import pickyeater.UI.App.MainPages;
-import pickyeater.UI.App.MealPlanPage.MealPlanPage;
-import pickyeater.UI.App.SettingsPage.SettingsPage;
 import pickyeater.UI.LeftButtons.MainButton;
 import pickyeater.UI.LeftButtons.PanelButtons;
 import pickyeater.UI.LeftButtons.PanelButtonsConverter;
-import pickyeater.executors.ExecutorProvider;
-import pickyeater.executors.UserMealsProgressesExecutor;
-import pickyeater.managers.EaterManager;
 import pickyeater.managers.PickyEaterManager;
 
 import javax.swing.*;
@@ -23,7 +10,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class UserPage extends JFrame{
+public class SettingsPage extends JFrame {
     private JPanel mainPanel;
     private JButton btSettings;
     private JButton btDailyProgress;
@@ -31,25 +18,14 @@ public class UserPage extends JFrame{
     private JButton btGroceries;
     private JButton btFood;
     private JButton btDiet;
-    private JButton editModeButton;
-    private JLabel txtName;
-    private JLabel txtHeight;
-    private JLabel txtWeight;
-    private JLabel txtBodyFat;
-    private JLabel txtSex;
-    private JLabel txtDateOfBirth;
-    private JLabel txtLifestyle;
-    private JLabel txtWeightGoal;
-    UserMealsProgressesExecutor userMealsProgressesExecutor;
 
-    public UserPage(PickyEaterManager pickyEaterManager) {    //TODO: EaterManager eaterManager,
-        // TODO: txtName = ;
+    public SettingsPage(PickyEaterManager pickyEaterManager) {
         btDailyProgress.setBackground(Color.white);
         btDiet.setBackground(Color.white);
         btFood.setBackground(Color.white);
         btGroceries.setBackground(Color.white);
-        btUser.setBackground(Color.green);
-        btSettings.setBackground(Color.white);
+        btUser.setBackground(Color.white);
+        btSettings.setBackground(Color.green);
 
         setContentPane(mainPanel);
         pack();
@@ -70,12 +46,5 @@ public class UserPage extends JFrame{
         btGroceries.addActionListener(listener);
         btFood.addActionListener(listener);
         btDiet.addActionListener(listener);
-        editModeButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                setVisible(false);
-                new UserEditModePage(pickyEaterManager);
-            }
-        });
     }
 }
