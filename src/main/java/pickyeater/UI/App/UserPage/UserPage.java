@@ -13,6 +13,8 @@ import pickyeater.UI.App.SettingsPage.SettingsPage;
 import pickyeater.UI.LeftButtons.MainButton;
 import pickyeater.UI.LeftButtons.PanelButtons;
 import pickyeater.UI.LeftButtons.PanelButtonsConverter;
+import pickyeater.basics.user.PickyUser;
+import pickyeater.basics.user.User;
 import pickyeater.database.Databases;
 import pickyeater.executors.ExecutorProvider;
 import pickyeater.executors.UserMealsProgressesExecutor;
@@ -23,6 +25,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Optional;
 
 public class UserPage extends JFrame{
     private JPanel mainPanel;
@@ -46,6 +49,26 @@ public class UserPage extends JFrame{
     public UserPage(Databases databases) {    //TODO: EaterManager eaterManager,
         // TODO: txtName = ;
         //EaterManager eaterManager = new PickyEaterManager(PickyEaterManager)
+        EaterManager eaterManager = new PickyEaterManager(databases.getUserDatabase(),
+                databases.getIngredientsDatabase(), databases.getMealsDatabase());
+
+
+        Optional<User> userOptional = eaterManager.getUserManager().getUser();
+
+        User user = userOptional.get();
+
+        // User:
+        txtName.setText(user.getName());
+        txtSex.setText(user.getUserStatus().getSex().toString());
+        txtDateOfBirth.setText(user.getUserStatus().getDateOfBirth().toString());   // TODO: CHECK
+        txtHeight.setText(Double.toString(user.getUserStatus().getHeight()));
+        txtWeight.setText(Double.toString(user.getUserStatus().getWeight()));
+        txtBodyFat.setText(Double.toString(user.getUserStatus().getBodyFat()));
+        txtLifestyle.setText(user.getUserGoal().getLifeStyle().toString());
+        txtWeightGoal.setText(user.getUserGoal().getWeightVariationGoal().toString());
+
+        // Nutrients:
+        // TODO: NUTRIENTS
 
         btDailyProgress.setBackground(Color.white);
         btDiet.setBackground(Color.white);
