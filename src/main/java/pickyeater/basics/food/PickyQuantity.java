@@ -22,7 +22,7 @@ public class PickyQuantity implements Quantity {
     }
 
     @Override
-    public float getQuantity() {
+    public float getWeight() {
         return quantity;
     }
 
