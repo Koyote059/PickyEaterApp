@@ -1,4 +1,4 @@
-package pickyeater.database;
+package pickyeater.database.SQLutils;
 
 import java.sql.*;
 import java.util.TimeZone;
@@ -37,7 +37,6 @@ public class DBManager {
                 e.printStackTrace();
             }
             connection = DriverManager.getConnection(JDBC_URL);
-            showMetadata();
         }
         return connection;
     }
