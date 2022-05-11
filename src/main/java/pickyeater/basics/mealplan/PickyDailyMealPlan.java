@@ -27,4 +27,11 @@ public class PickyDailyMealPlan implements DailyMealPlan {
         for(Meal meal: meals) accumulator.sumNutrients(meal.getNutrients());
         return accumulator.generateNutrients();
     }
+
+    @Override
+    public String toString() {
+        return "PickyDailyMealPlan{" +
+                "meals=" + meals +
+                '}';
+    }
 }

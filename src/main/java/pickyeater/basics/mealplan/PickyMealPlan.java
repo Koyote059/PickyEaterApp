@@ -24,4 +24,12 @@ public class PickyMealPlan implements MealPlan {
     public LocalDate getBeginningDay() {
         return beginningDay;
     }
+
+    @Override
+    public String toString() {
+        return "PickyMealPlan{" +
+                "dailyMealPlans=" + dailyMealPlans +
+                ", beginningDay=" + beginningDay +
+                '}';
+    }
 }

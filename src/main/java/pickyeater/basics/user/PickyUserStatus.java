@@ -43,4 +43,15 @@ public class PickyUserStatus implements UserStatus {
     public Sex getSex() {
         return sex;
     }
+
+    @Override
+    public String toString() {
+        return "PickyUserStatus{" +
+                "weight=" + weight +
+                ", bodyFat=" + bodyFat +
+                ", height=" + height +
+                ", dateOfBirth=" + dateOfBirth +
+                ", sex=" + sex +
+                '}';
+    }
 }
