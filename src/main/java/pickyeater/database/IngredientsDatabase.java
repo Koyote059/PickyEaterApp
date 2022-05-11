@@ -12,4 +12,6 @@ public interface IngredientsDatabase {
     Set<Ingredient> loadEveryIngredient();
     Set<Ingredient> getIngredientsThatStartWith(String string);
 
+    void deleteIngredient(Ingredient ingredient);
+
 }

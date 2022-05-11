@@ -5,15 +5,15 @@ package pickyeater.basics.food;
  */
 
 public interface Nutrients {
-    double getProteins();
-    double getSimpleCarbs();
-    double getComplexCarbs();
-    double getFibers();
-    double getSaturatedFats();
-    double getUnSaturatedFats();
-    double getTransFats();
-    double getAlcohol();
-    double getCarbs();
-    double getFats();
-    double getCalories();
+    float getProteins();
+    float getSimpleCarbs();
+    float getComplexCarbs();
+    float getFibers();
+    float getSaturatedFats();
+    float getUnSaturatedFats();
+    float getTransFats();
+    float getAlcohol();
+    float getCarbs();
+    float getFats();
+    float getCalories();
 }

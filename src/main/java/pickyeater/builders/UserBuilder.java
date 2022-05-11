@@ -13,19 +13,20 @@ import pickyeater.basics.user.Sex;
 import pickyeater.basics.user.User;
 import pickyeater.basics.user.WeightGoal;
 
+import java.time.LocalDate;
 import java.util.Collection;
 import java.util.Date;
 
 public interface UserBuilder {
     void setName(String name);
 
-    void setWeight(int weight);
+    void setWeight(float weight);
 
     void setHeight(int height);
 
-    void setBodyFat(double bodyFat);
+    void setBodyFat(float bodyFat);
 
-    void setDateOfBirth(Date dateOfBirth);
+    void setDateOfBirth(LocalDate dateOfBirth);
 
     void setSex(Sex sex);
 

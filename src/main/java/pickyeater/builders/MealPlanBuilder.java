@@ -5,16 +5,25 @@
 
 package pickyeater.builders;
 
+import pickyeater.basics.mealplan.DailyMealPlan;
 import pickyeater.basics.mealplan.MealPlan;
 
-import java.util.Optional;
+import java.time.LocalDate;
 
 public interface MealPlanBuilder {
-    Optional<DailyMealPlanBuilder> getDailyMealPlan(int day);
+    DailyMealPlan getDailyMealPlan(int day);
 
     int getDays();
 
+    void setDailyMealPlan(int day, DailyMealPlan dailyMealPlan);
+
     void setDays(int days);
+
+    LocalDate getBeginningDay();
+
+    void setBeginningDay(LocalDate toLocalDate);
+
+    void addDailyMealPlan(DailyMealPlan build);
 
     MealPlan build();
 }

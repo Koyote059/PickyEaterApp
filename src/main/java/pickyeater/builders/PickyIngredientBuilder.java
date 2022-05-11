@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.MissingFormatArgumentException;
 
 public class PickyIngredientBuilder implements IngredientBuilder {
-    private double price = 0.0;
+    private float price = 0;
     private String name = null;
     private List<String> tags = new ArrayList<>();
     private Quantity quantity = null;
@@ -26,11 +26,11 @@ public class PickyIngredientBuilder implements IngredientBuilder {
         this.name = ingredient.getName();
         this.tags = new ArrayList<>(ingredient.getTags());
         Quantity ingredientQuantity = ingredient.getQuantity();
-        this.quantity = new PickyQuantity(ingredientQuantity.getQuantity(), ingredientQuantity.getQuantityType(), ingredientQuantity.getQuantityGrams());
+        this.quantity = new PickyQuantity(ingredientQuantity.getWeight(), ingredientQuantity.getQuantityType(), ingredientQuantity.getGramsPerQuantity());
         this.nutrients = ingredient.getNutrients();
     }
 
-    public void setPrice(double price) {
+    public void setPrice(float price) {
         this.price = price;
     }
 

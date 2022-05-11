@@ -10,6 +10,6 @@ public interface Ingredient {
     Quantity getQuantity();
     String getName();
     Nutrients getNutrients();
-    double getPrice();
+    float getPrice();
     List<String> getTags();
 }

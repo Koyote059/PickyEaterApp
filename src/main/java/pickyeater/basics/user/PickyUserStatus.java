@@ -1,17 +1,17 @@
 package pickyeater.basics.user;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 public class PickyUserStatus implements UserStatus {
 
-    private final double weight;
-    private final double bodyFat;
-    private final double height;
-    private final Date dateOfBirth;
+    private final float weight;
+    private final float bodyFat;
+    private final int height;
+    private final LocalDate dateOfBirth;
     private final Sex sex;
 
 
-    public PickyUserStatus(double weight, double height,double bodyFat, Date dateOfBirth, Sex sex) {
+    public PickyUserStatus(float weight, int height,float bodyFat, LocalDate dateOfBirth, Sex sex) {
         this.weight = weight;
         this.bodyFat = bodyFat;
         this.height = height;
@@ -20,27 +20,38 @@ public class PickyUserStatus implements UserStatus {
     }
 
     @Override
-    public double getWeight() {
+    public float getWeight() {
         return weight;
     }
 
     @Override
-    public double getBodyFat() {
+    public float getBodyFat() {
         return bodyFat;
     }
 
     @Override
-    public double getHeight() {
+    public int getHeight() {
         return height;
     }
 
     @Override
-    public Date getDateOfBirth() {
+    public LocalDate getDateOfBirth() {
         return dateOfBirth;
     }
 
     @Override
     public Sex getSex() {
         return sex;
+    }
+
+    @Override
+    public String toString() {
+        return "PickyUserStatus{" +
+                "weight=" + weight +
+                ", bodyFat=" + bodyFat +
+                ", height=" + height +
+                ", dateOfBirth=" + dateOfBirth +
+                ", sex=" + sex +
+                '}';
     }
 }

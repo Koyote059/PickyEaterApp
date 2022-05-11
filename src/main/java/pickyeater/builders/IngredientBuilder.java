@@ -10,7 +10,7 @@ import pickyeater.basics.food.Nutrients;
 import pickyeater.basics.food.Quantity;
 
 public interface IngredientBuilder {
-    void setPrice(double price);
+    void setPrice(float price);
 
     void setName(String name);
 

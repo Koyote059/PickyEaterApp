@@ -2,6 +2,7 @@ package pickyeater.basics.groceries;
 
 import pickyeater.basics.food.Ingredient;
 
+import java.util.HashSet;
 import java.util.Set;
 
 /**
@@ -9,10 +10,19 @@ import java.util.Set;
  */
 
 public class PickyGroceries implements Groceries{
-    private Set<Ingredient> ingredients;
+    private  Set<Ingredient> ingredients;
+    private GroceriesCheckList checkList;
 
     public PickyGroceries(Set<Ingredient> ingredients) {
         this.ingredients = ingredients;
+        this.checkList = new PickyGroceriesChecklist(ingredients);
+    }
+
+    public PickyGroceries(Set<Ingredient> neededIngredients, Set<Ingredient> missingIngredients, Set<Ingredient> takenIngredients) {
+        this.checkList = new PickyGroceriesChecklist(neededIngredients,missingIngredients,takenIngredients);
+        this.ingredients = new HashSet<>(neededIngredients);
+        this.ingredients.addAll(missingIngredients);
+        this.ingredients.addAll(takenIngredients);
     }
 
     public Set<Ingredient> getIngredients() {
@@ -30,7 +40,7 @@ public class PickyGroceries implements Groceries{
 
     @Override
     public GroceriesCheckList generateCheckList() {
-        return new PickyGroceriesChecklist(ingredients);
+        return checkList;
     }
 
     /**
