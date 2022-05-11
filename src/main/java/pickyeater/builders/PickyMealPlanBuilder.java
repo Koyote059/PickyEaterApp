@@ -17,7 +17,7 @@ import java.util.stream.Collectors;
 
 public class PickyMealPlanBuilder implements MealPlanBuilder {
     public List<DailyMealPlan> dailyMealPlans;
-    private LocalDate beginningDay = null;
+    private LocalDate beginningDay = LocalDate.now();
 
     public PickyMealPlanBuilder(){
         this.dailyMealPlans = new ArrayList<>();
@@ -66,7 +66,6 @@ public class PickyMealPlanBuilder implements MealPlanBuilder {
 
     @Override
     public MealPlan build() {
-        if(beginningDay == null) throw new MissingFormatArgumentException("Missing argument: beginningDay");
         return new PickyMealPlan(dailyMealPlans, beginningDay);
     }
 }

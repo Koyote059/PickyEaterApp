@@ -30,7 +30,7 @@ public class PickyMealBuilder implements MealBuilder {
     }
 
     public Meal build() {
-        if (this.name == null | this.name == null) {
+        if (this.name == null) {
             throw new MissingFormatArgumentException("Missing arguments for IngredientBuilder!");
         } else {
             return new PickyMeal(this.ingredients, this.name);

@@ -9,44 +9,44 @@ import pickyeater.basics.food.Nutrients;
 import pickyeater.basics.food.PickyNutrients;
 
 public class PickyNutrientsBuilder implements NutrientsBuilder {
-    private double proteins;
-    private double complexCarbs;
-    private double simpleCarbs;
-    private double fibers;
-    private double saturatedFats;
-    private double unSaturatedFats;
-    private double transFats;
-    private double alcohol;
+    private float proteins;
+    private float complexCarbs;
+    private float simpleCarbs;
+    private float fibers;
+    private float saturatedFats;
+    private float unSaturatedFats;
+    private float transFats;
+    private float alcohol;
 
-    public void setProteins(double proteins) {
+    public void setProteins(float proteins) {
         this.proteins = proteins;
     }
 
-    public void setComplexCarbs(double complexCarbs) {
+    public void setComplexCarbs(float complexCarbs) {
         this.complexCarbs = complexCarbs;
     }
 
-    public void setSimpleCarbs(double simpleCarbs) {
+    public void setSimpleCarbs(float simpleCarbs) {
         this.simpleCarbs = simpleCarbs;
     }
 
-    public void setFibers(double fibers) {
+    public void setFibers(float fibers) {
         this.fibers = fibers;
     }
 
-    public void setSaturatedFats(double saturatedFats) {
+    public void setSaturatedFats(float saturatedFats) {
         this.saturatedFats = saturatedFats;
     }
 
-    public void setUnSaturatedFats(double unSaturatedFats) {
+    public void setUnSaturatedFats(float unSaturatedFats) {
         this.unSaturatedFats = unSaturatedFats;
     }
 
-    public void setTransFats(double transFats) {
+    public void setTransFats(float transFats) {
         this.transFats = transFats;
     }
 
-    public void setAlcohol(double alcohol) {
+    public void setAlcohol(float alcohol) {
         this.alcohol = alcohol;
     }
 
