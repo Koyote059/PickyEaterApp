@@ -7,13 +7,16 @@ version '1.0-SNAPSHOT'
 
 repositories {
     mavenCentral()
+    maven {
+        url "https://mvnrepository.com/artifact/com.toedter/jcalendar"
+    }
 }
 
 dependencies {
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.1'
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.1'
     implementation 'org.xerial:sqlite-jdbc:3.36.0.3'
-    implementation group: 'org.json', name: 'json', version: '20090211' // TODO -> TMP DB
+    implementation group: 'com.toedter', name: 'jcalendar', version: '1.4'
 }
 
 test {

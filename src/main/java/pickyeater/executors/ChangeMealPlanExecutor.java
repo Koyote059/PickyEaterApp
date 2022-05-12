@@ -10,6 +10,7 @@ import pickyeater.builders.PickyMealPlanBuilder;
 import pickyeater.managers.EaterManager;
 import pickyeater.basics.mealplan.MealPlan;
 import pickyeater.basics.user.User;
+import pickyeater.managers.UserManager;
 
 import java.util.Optional;
 
@@ -30,13 +31,14 @@ public class ChangeMealPlanExecutor {
     }
 
     public void saveMealPlan(MealPlan mealPlan) {
-        Optional<User> userOptional = this.eaterManager.getUser();
+        UserManager userManager = eaterManager.getUserManager();
+        Optional<User> userOptional = userManager.getUser();
         if (userOptional.isEmpty()) {
             throw new RuntimeException();
         } else {
-            User user = (User)userOptional.get();
+            User user = userOptional.get();
             user.setMealPlan(mealPlan);
-            this.eaterManager.saveUser(user);
+            userManager.saveUser(user);
         }
     }
 }

@@ -17,10 +17,11 @@ import java.util.MissingFormatArgumentException;
 
 public class PickyUserBuilder implements UserBuilder {
     private String name = null;
-    private float weight = 0.0f;
+    private float weight = 0;
     private int height = 0;
     private float bodyFat = 0.0f;
     private LocalDate dateOfBirth = null;
+
     private Nutrients requiredNutrients = null;
     private Sex sex = null;
     private LifeStyle lifeStyle = null;
@@ -72,6 +73,61 @@ public class PickyUserBuilder implements UserBuilder {
         this.dailyProgresses = new PickyDailyProgresses(burnedCalories, meals);
     }
 
+    @Override
+    public String getName() {
+        return name;
+    }
+
+    @Override
+    public float getWeight() {
+        return weight;
+    }
+
+    @Override
+    public int getHeight() {
+        return height;
+    }
+
+    @Override
+    public float getBodyFat() {
+        return bodyFat;
+    }
+
+    @Override
+    public LocalDate getDateOfBirth() {
+        return dateOfBirth;
+    }
+
+    @Override
+    public Nutrients getRequiredNutrients() {
+        return requiredNutrients;
+    }
+
+    @Override
+    public Sex getSex() {
+        return sex;
+    }
+
+    @Override
+    public LifeStyle getLifeStyle() {
+        return lifeStyle;
+    }
+
+    @Override
+    public WeightGoal getWeightVariationGoal() {
+        return weightVariationGoal;
+    }
+
+    @Override
+    public DailyProgresses getDailyProgresses() {
+        return dailyProgresses;
+    }
+
+    @Override
+    public MealPlan getMealPlan() {
+        return mealPlan;
+    }
+
     public User build() {
         if (this.name == null | this.weight == 0 | this.height == 0 | this.bodyFat == 0.0 | this.dateOfBirth == null |
                 this.sex == null | this.lifeStyle == null | this.requiredNutrients == null) {
@@ -83,5 +139,13 @@ public class PickyUserBuilder implements UserBuilder {
                     this.dailyProgresses,
                     this.mealPlan);
         }
+    }
+
+    @Override
+    public String toString() {
+        return "PickyUserBuilder{" + "name='" + name + '\'' + ", weight=" + weight + ", height=" + height + ", " +
+                "bodyFat=" + bodyFat + ", dateOfBirth=" + dateOfBirth + ", requiredNutrients=" + requiredNutrients +
+                ", sex=" + sex + ", lifeStyle=" + lifeStyle + ", weightVariationGoal=" + weightVariationGoal + ", " +
+                "dailyProgresses=" + dailyProgresses + ", mealPlan=" + mealPlan + '}' + "\n";
     }
 }

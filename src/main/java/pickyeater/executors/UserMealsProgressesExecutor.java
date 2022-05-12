@@ -1,8 +1,3 @@
-//
-// Source code recreated from a .class file by IntelliJ IDEA
-// (powered by FernFlower decompiler)
-//
-
 package pickyeater.executors;
 
 import pickyeater.managers.EaterManager;
@@ -17,7 +12,7 @@ public class UserMealsProgressesExecutor {
 
     public UserMealsProgressesExecutor(EaterManager eaterManager) {
         this.eaterManager = eaterManager;
-        Optional<User> userOptional = eaterManager.getUser();
+        Optional<User> userOptional = eaterManager.getUserManager().getUser();
         if (userOptional.isEmpty()) {
             throw new RuntimeException();
         } else {
@@ -34,6 +29,6 @@ public class UserMealsProgressesExecutor {
     }
 
     public void save() {
-        this.eaterManager.saveUser(this.user);
+        this.eaterManager.getUserManager().saveUser(this.user);
     }
 }

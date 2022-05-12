@@ -5,6 +5,7 @@
 
 package pickyeater.builders;
 
+import pickyeater.basics.food.NutrientType;
 import pickyeater.basics.food.Nutrients;
 import pickyeater.basics.food.PickyNutrients;
 
@@ -49,6 +50,67 @@ public class PickyNutrientsBuilder implements NutrientsBuilder {
     public void setAlcohol(float alcohol) {
         this.alcohol = alcohol;
     }
+
+    @Override
+    public float getProteins() {
+        return proteins;
+    }
+
+    @Override
+    public float getComplexCarbs() {
+        return complexCarbs;
+    }
+
+    @Override
+    public float getSimpleCarbs() {
+        return simpleCarbs;
+    }
+
+    @Override
+    public float getFibers() {
+        return fibers;
+    }
+
+    @Override
+    public float getSaturatedFats() {
+        return saturatedFats;
+    }
+
+    @Override
+    public float getUnSaturatedFats() {
+        return unSaturatedFats;
+    }
+
+    @Override
+    public float getTransFats() {
+        return transFats;
+    }
+
+    @Override
+    public float getCarbs() {
+        return complexCarbs + simpleCarbs + fibers;
+    }
+
+    @Override
+    public float getFats() {
+        return saturatedFats + unSaturatedFats + transFats;
+    }
+
+    @Override
+    public float getAlcohol() {
+        return alcohol;
+    }
+
+    @Override
+    public float getCalories() {
+        NutrientType p = NutrientType.PROTEIN;
+        NutrientType c = NutrientType.CARBOHYDRATE;
+        NutrientType f = NutrientType.FAT;
+        NutrientType a = NutrientType.ALCOHOL;
+
+        return (float) (getProteins() * p.getCaloriesPerGram() + getCarbs() * c.getCaloriesPerGram() + getFats() * f.getCaloriesPerGram() + getAlcohol() * a.getCaloriesPerGram());
+    }
+
 
     public Nutrients build() {
         return new PickyNutrients(this.proteins, this.complexCarbs, this.simpleCarbs, this.fibers, this.saturatedFats, this.unSaturatedFats, this.transFats, this.alcohol);
