@@ -29,4 +29,13 @@ public class PickyUserGoal implements UserGoal {
     public Nutrients getRequiredNutrients() {
         return requiredNutrients;
     }
+
+    @Override
+    public String toString() {
+        return "PickyUserGoal{" +
+                "lifeStyle=" + lifeStyle +
+                ", weightVariationGoal=" + weightVariationGoal +
+                ", requiredNutrients=" + requiredNutrients +
+                '}';
+    }
 }

@@ -7,13 +7,13 @@ package pickyeater.basics.food;
 public enum NutrientType {  // TO FIX
     PROTEIN(4), CARBOHYDRATE(4), FAT(9), ALCOHOL(7);
 
-    double caloriesPerGram;
+    float caloriesPerGram;
 
-    NutrientType(double caloriesPerGram) {
+    NutrientType(float caloriesPerGram) {
         this.caloriesPerGram = caloriesPerGram;
     }
 
-    public double getCaloriesPerGram() {
+    public float getCaloriesPerGram() {
         return caloriesPerGram;
     }
 }

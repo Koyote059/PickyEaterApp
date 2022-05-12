@@ -62,11 +62,11 @@ public class PickyUser implements User {
     @Override
     public String toString() {
         return "PickyUser{" +
-                "name='" + name + '\'' +
-                ", userStatus=" + userStatus +
-                ", userGoal=" + userGoal +
-                ", dailyProgresses=" + dailyProgresses +
-                ", mealPlan=" + mealPlan +
+                "name='" + name + '\n' +
+                ", userStatus=" + userStatus + '\n' +
+                ", userGoal=" + userGoal + '\n' +
+                ", dailyProgresses=" + dailyProgresses + '\n' +
+                ", mealPlan=" + mealPlan + '\n' +
                 '}';
     }
 

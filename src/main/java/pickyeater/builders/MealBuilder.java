@@ -12,8 +12,6 @@ import pickyeater.basics.food.Quantity;
 public interface MealBuilder {
     void setName(String name);
 
-    void setQuantity(Quantity quantity);
-
     void addIngredients(Ingredient... ingredients);
 
     Meal build();

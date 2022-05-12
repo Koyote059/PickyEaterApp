@@ -9,4 +9,5 @@ public interface UserDatabase {
     Optional<User> loadUser();
     void saveUser(User user);
 
+    void deleteUser(User user);
 }

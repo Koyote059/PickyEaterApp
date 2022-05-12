@@ -13,7 +13,6 @@ public class PickyMealBuilder implements MealBuilder {
     private List<String> tags = new ArrayList<>();
     private Set<Ingredient> ingredients = new HashSet<>();
     private String name = null;
-    private Quantity quantity = new PickyQuantity(100.0);
 
     public PickyMealBuilder() {
     }
@@ -26,19 +25,15 @@ public class PickyMealBuilder implements MealBuilder {
         this.name = name;
     }
 
-    public void setQuantity(Quantity quantity) {
-        this.quantity = quantity;
-    }
-
     public void addIngredients(Ingredient... ingredients) {
         this.ingredients.addAll(List.of(ingredients));
     }
 
     public Meal build() {
-        if (this.name == null | this.name == null | this.quantity == null) {
+        if (this.name == null) {
             throw new MissingFormatArgumentException("Missing arguments for IngredientBuilder!");
         } else {
-            return new PickyMeal(this.ingredients, this.name, this.quantity);
+            return new PickyMeal(this.ingredients, this.name);
         }
     }
 }

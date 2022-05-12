@@ -25,6 +25,12 @@ public class PickyGroceriesChecklist implements GroceriesCheckList {
         this.takenIngredients = new HashSet<>();
     }
 
+    public PickyGroceriesChecklist(Set<Ingredient> neededIngredients, Set<Ingredient> missingIngredients, Set<Ingredient> takenIngredients) {
+        this.neededIngredients = neededIngredients;
+        this.missingIngredients = missingIngredients;
+        this.takenIngredients = takenIngredients;
+    }
+
     /**
      * Getters (Unmodifiable):
      */

@@ -5,16 +5,16 @@ package pickyeater.basics.food;
  */
 
 public class PickyNutrientsAccumulator implements NutrientsAccumulator {
-    private double proteins = 0;
-    private double complexCarbs = 0;
-    private double simpleCarbs = 0;
-    private double fibers = 0;
-    private double saturatedFats = 0;
-    private double unSaturatedFats = 0;
-    private double transFats = 0;
-    private double alcohol = 0;
+    private float proteins = 0;
+    private float complexCarbs = 0;
+    private float simpleCarbs = 0;
+    private float fibers = 0;
+    private float saturatedFats = 0;
+    private float unSaturatedFats = 0;
+    private float transFats = 0;
+    private float alcohol = 0;
 
-    private double calories = 0;
+    private float calories = 0;
 
     @Override
     public Nutrients generateNutrients() {

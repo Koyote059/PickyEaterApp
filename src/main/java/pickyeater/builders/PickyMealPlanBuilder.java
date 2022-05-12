@@ -9,47 +9,63 @@ import pickyeater.basics.mealplan.DailyMealPlan;
 import pickyeater.basics.mealplan.MealPlan;
 import pickyeater.basics.mealplan.PickyMealPlan;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
+import java.util.MissingFormatArgumentException;
 import java.util.stream.Collectors;
 
 public class PickyMealPlanBuilder implements MealPlanBuilder {
-    public List<DailyMealPlanBuilder> dailyMealPlanBuilders = new ArrayList<>();
+    public List<DailyMealPlan> dailyMealPlans;
+    private LocalDate beginningDay = LocalDate.now();
 
-    public PickyMealPlanBuilder() {
+    public PickyMealPlanBuilder(){
+        this.dailyMealPlans = new ArrayList<>();
     }
 
-    public Optional<DailyMealPlanBuilder> getDailyMealPlan(int day) {
-        if(this.dailyMealPlanBuilders.size() <= day) {
-            return Optional.empty();
-        } else {
-            return Optional.of(this.dailyMealPlanBuilders.get(day));
-        }
+    public PickyMealPlanBuilder(int days){
+        this.dailyMealPlans = new ArrayList<>(days);
     }
 
+    @Override
+    public void setBeginningDay(LocalDate beginningDay){
+        this.beginningDay = beginningDay;
+    }
+
+    @Override
+    public void addDailyMealPlan(DailyMealPlan dailyMealPlan) {
+        dailyMealPlans.add(dailyMealPlan);
+    }
+
+    @Override
+    public DailyMealPlan getDailyMealPlan(int day){
+        return dailyMealPlans.get(day);
+    }
+
+    @Override
     public int getDays() {
-        return this.dailyMealPlanBuilders.size();
+        return dailyMealPlans.size();
     }
 
-    public void setDays(int days) {
-        if (this.dailyMealPlanBuilders.size() > days) {
-            this.dailyMealPlanBuilders = this.dailyMealPlanBuilders.subList(0, days);
-        } else {
-            List<DailyMealPlanBuilder> newList = new ArrayList<>(days);
-            newList.addAll(this.dailyMealPlanBuilders);
-
-            for(int i = this.dailyMealPlanBuilders.size(); i < days; ++i) {
-                newList.set(i, new PickyDailyMealPlanBuilder());
-            }
-
-            this.dailyMealPlanBuilders = newList;
-        }
-
+    @Override
+    public void setDailyMealPlan(int day, DailyMealPlan dailyMealPlan){
+        this.dailyMealPlans.add(day,dailyMealPlan);
     }
 
+    @Override
+    public void setDays(int days){
+        List<DailyMealPlan> tmpDailyMealPlans = dailyMealPlans;
+        dailyMealPlans = new ArrayList<>(days);
+        dailyMealPlans.addAll(tmpDailyMealPlans.subList(0,days));
+    }
+
+    @Override
+    public LocalDate getBeginningDay(){
+        return beginningDay;
+    }
+
+    @Override
     public MealPlan build() {
-        List<DailyMealPlan> dailyMealPlans = this.dailyMealPlanBuilders.stream().map(DailyMealPlanBuilder::build).collect(Collectors.toList());
-        return new PickyMealPlan(dailyMealPlans);
+        return new PickyMealPlan(dailyMealPlans, beginningDay);
     }
 }

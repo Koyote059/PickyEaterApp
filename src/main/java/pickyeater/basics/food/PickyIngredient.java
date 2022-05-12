@@ -10,11 +10,11 @@ import java.util.Objects;
 public class PickyIngredient implements Ingredient {
     private Nutrients nutrients;
     private String name;
-    private double price;
+    private float price;
     private Quantity quantity;
     private List<String> tags;
 
-    public PickyIngredient(Nutrients nutrients, String name, double price, Quantity quantity, List<String> tags) {
+    public PickyIngredient(Nutrients nutrients, String name, float price, Quantity quantity, List<String> tags) {
         this.nutrients = nutrients;
         this.name = name;
         this.price = price;
@@ -33,7 +33,7 @@ public class PickyIngredient implements Ingredient {
     }
 
     @Override
-    public double getPrice() {
+    public float getPrice() {
         return price;
     }
 

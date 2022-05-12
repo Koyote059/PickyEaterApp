@@ -5,25 +5,25 @@ package pickyeater.basics.food;
  */
 
 public class PickyQuantity implements Quantity {
-    private double quantity;
+    private float weight;
     private QuantityType quantityType;
-    private double quantityGrams;
+    private float gramsPerQuantity;
 
-    public PickyQuantity(double quantity, QuantityType quantityType, double quantityGrams) {
-        this.quantity = quantity;
+    public PickyQuantity(float weight, QuantityType quantityType, float gramsPerQuantity) {
+        this.weight = weight;
         this.quantityType = quantityType;
-        this.quantityGrams = quantityGrams;
+        this.gramsPerQuantity = gramsPerQuantity;
     }
 
-    public PickyQuantity(double quantity){
-        this.quantity = quantity;
+    public PickyQuantity(float weight){
+        this.weight = weight;
         this.quantityType = QuantityType.GRAMS;
-        this.quantityGrams = 1;
+        this.gramsPerQuantity = 1;
     }
 
     @Override
-    public double getQuantity() {
-        return quantity;
+    public float getWeight() {
+        return weight;
     }
 
     @Override
@@ -32,12 +32,12 @@ public class PickyQuantity implements Quantity {
     }
 
     @Override
-    public double getQuantityGrams() {
-        return quantityGrams;
+    public float getGramsPerQuantity() {
+        return gramsPerQuantity;
     }
 
     @Override
     public String toString() {
-        return "PickyQuantity{" + "quantity=" + quantity + ", quantityType=" + quantityType + ", quantityGrams=" + quantityGrams + '}';
+        return "PickyQuantity{" + "quantity=" + weight + ", quantityType=" + quantityType + ", quantityGrams=" + gramsPerQuantity + '}';
     }
 }

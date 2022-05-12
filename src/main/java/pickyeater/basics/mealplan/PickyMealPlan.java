@@ -8,9 +8,11 @@ public class PickyMealPlan implements MealPlan {
 
 
     private final List<DailyMealPlan> dailyMealPlans;
+    private final LocalDate beginningDay;
 
-    public PickyMealPlan(List<DailyMealPlan> dailyMealPlans) {
+    public PickyMealPlan(List<DailyMealPlan> dailyMealPlans, LocalDate beginningDay) {
         this.dailyMealPlans = dailyMealPlans;
+        this.beginningDay = beginningDay;
     }
 
     @Override
@@ -18,9 +20,16 @@ public class PickyMealPlan implements MealPlan {
         return Collections.unmodifiableList(dailyMealPlans);
     }
 
-    //TODO: SOMETHING WITH THIS
     @Override
-    public LocalDate getBeginningOfMealPlan() {
-        return null;
+    public LocalDate getBeginningDay() {
+        return beginningDay;
+    }
+
+    @Override
+    public String toString() {
+        return "PickyMealPlan{" +
+                "dailyMealPlans=" + dailyMealPlans +
+                ", beginningDay=" + beginningDay +
+                '}';
     }
 }
