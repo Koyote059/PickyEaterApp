@@ -9,8 +9,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class FoodPage extends JFrame {
-    private JPanel mainPanel;
+public class SearchMeal extends JFrame {
     private JButton btSettings;
     private JButton btDailyProgress;
     private JButton btUser;
@@ -18,13 +17,10 @@ public class FoodPage extends JFrame {
     private JButton btFood;
     private JButton btDiet;
     private JList listMeals;
-    private JList listIngredients;
-    private JButton btSearchMeal;
-    private JButton btSearchIngredient;
-    private JButton btAddMeal;
-    private JButton btAddIngredient;
+    private JButton btDone;
+    private JPanel mainPanel;
 
-    public FoodPage(Databases databases) {
+    public SearchMeal(Databases databases) {
         btDailyProgress.setBackground(Color.white);
         btDiet.setBackground(Color.white);
         btFood.setBackground(Color.green);

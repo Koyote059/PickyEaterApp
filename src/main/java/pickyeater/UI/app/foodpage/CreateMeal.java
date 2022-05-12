@@ -9,7 +9,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class FoodPage extends JFrame {
+public class CreateMeal extends JFrame {
     private JPanel mainPanel;
     private JButton btSettings;
     private JButton btDailyProgress;
@@ -18,13 +18,11 @@ public class FoodPage extends JFrame {
     private JButton btFood;
     private JButton btDiet;
     private JList listMeals;
-    private JList listIngredients;
     private JButton btSearchMeal;
     private JButton btSearchIngredient;
-    private JButton btAddMeal;
     private JButton btAddIngredient;
 
-    public FoodPage(Databases databases) {
+    public CreateMeal(Databases databases) {
         btDailyProgress.setBackground(Color.white);
         btDiet.setBackground(Color.white);
         btFood.setBackground(Color.green);

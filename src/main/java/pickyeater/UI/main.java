@@ -30,8 +30,6 @@ public class main {
             new Register1(eaterManager, executorProvider);
         } else {  // go to the app
             new MainButton(databases, PanelButtons.PROGRESS);
-            // new DailyProgressPage(pickyEaterManager);
-            // new MainPages(executorProvider);
         }
     }
 }
