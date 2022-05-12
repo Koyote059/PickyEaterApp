@@ -2,7 +2,7 @@ package pickyeater.UI.app.dailyprogresspage;
 
 import pickyeater.UI.leftbuttons.MainButton;
 import pickyeater.UI.leftbuttons.PanelButtonsConverter;
-import pickyeater.database.Databases;
+import pickyeater.database.PickyEatersDatabase;
 
 import javax.swing.*;
 import java.awt.*;
@@ -21,7 +21,7 @@ public class AddBurntCalories extends JFrame {
     private JPanel mainPanel;
     private JButton btSave;
 
-    public AddBurntCalories(Databases databases) {
+    public AddBurntCalories(PickyEatersDatabase databases) {
 
         btDailyProgress.setBackground(Color.green);
         btDiet.setBackground(Color.white);

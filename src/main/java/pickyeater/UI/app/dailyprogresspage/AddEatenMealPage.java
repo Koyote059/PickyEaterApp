@@ -2,7 +2,7 @@ package pickyeater.UI.app.dailyprogresspage;
 
 import pickyeater.UI.leftbuttons.MainButton;
 import pickyeater.UI.leftbuttons.PanelButtonsConverter;
-import pickyeater.database.Databases;
+import pickyeater.database.PickyEatersDatabase;
 
 import javax.swing.*;
 import java.awt.*;
@@ -23,7 +23,7 @@ public class AddEatenMealPage extends JFrame {
     private JButton btSave;
     private JTextField tfQuantity;
 
-    public AddEatenMealPage(Databases databases) {
+    public AddEatenMealPage(PickyEatersDatabase databases) {
 
         btDailyProgress.setBackground(Color.green);
         btDiet.setBackground(Color.white);

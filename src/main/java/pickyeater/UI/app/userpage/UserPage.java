@@ -7,7 +7,7 @@ package pickyeater.UI.app.userpage;
 import pickyeater.UI.leftbuttons.MainButton;
 import pickyeater.UI.leftbuttons.PanelButtonsConverter;
 import pickyeater.basics.user.User;
-import pickyeater.database.Databases;
+import pickyeater.database.PickyEatersDatabase;
 import pickyeater.executors.UserMealsProgressesExecutor;
 import pickyeater.managers.EaterManager;
 import pickyeater.managers.PickyEaterManager;
@@ -41,7 +41,7 @@ public class UserPage extends JFrame{
     private JLabel txtCalories;
     UserMealsProgressesExecutor userMealsProgressesExecutor;
 
-    public UserPage(Databases databases) {
+    public UserPage(PickyEatersDatabase databases) {
         EaterManager eaterManager = new PickyEaterManager(databases.getUserDatabase(),
                 databases.getIngredientsDatabase(), databases.getMealsDatabase());
 

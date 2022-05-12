@@ -52,52 +52,52 @@ public class PickyNutrientsBuilder implements NutrientsBuilder {
     }
 
     @Override
-    public double getProteins() {
+    public float getProteins() {
         return proteins;
     }
 
     @Override
-    public double getComplexCarbs() {
+    public float getComplexCarbs() {
         return complexCarbs;
     }
 
     @Override
-    public double getSimpleCarbs() {
+    public float getSimpleCarbs() {
         return simpleCarbs;
     }
 
     @Override
-    public double getFibers() {
+    public float getFibers() {
         return fibers;
     }
 
     @Override
-    public double getSaturatedFats() {
+    public float getSaturatedFats() {
         return saturatedFats;
     }
 
     @Override
-    public double getUnSaturatedFats() {
+    public float getUnSaturatedFats() {
         return unSaturatedFats;
     }
 
     @Override
-    public double getTransFats() {
+    public float getTransFats() {
         return transFats;
     }
 
     @Override
-    public double getCarbs() {
+    public float getCarbs() {
         return complexCarbs + simpleCarbs + fibers;
     }
 
     @Override
-    public double getFats() {
+    public float getFats() {
         return saturatedFats + unSaturatedFats + transFats;
     }
 
     @Override
-    public double getAlcohol() {
+    public float getAlcohol() {
         return alcohol;
     }
 

@@ -6,7 +6,7 @@ package pickyeater.UI.app.dailyprogresspage;
 
 import pickyeater.UI.leftbuttons.MainButton;
 import pickyeater.UI.leftbuttons.PanelButtonsConverter;
-import pickyeater.database.Databases;
+import pickyeater.database.PickyEatersDatabase;
 import pickyeater.executors.UserMealsProgressesExecutor;
 
 import javax.swing.*;
@@ -31,7 +31,7 @@ public class DailyProgressPage extends JFrame{
 
     UserMealsProgressesExecutor userMealsProgressesExecutor;
 
-    public DailyProgressPage(Databases databases) {
+    public DailyProgressPage(PickyEatersDatabase databases) {
         btDailyProgress.setBackground(Color.green);
         btDiet.setBackground(Color.white);
         btFood.setBackground(Color.white);

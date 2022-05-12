@@ -6,7 +6,7 @@ package pickyeater.UI.app.mealplanpage;
 
 import pickyeater.UI.leftbuttons.MainButton;
 import pickyeater.UI.leftbuttons.PanelButtonsConverter;
-import pickyeater.database.Databases;
+import pickyeater.database.PickyEatersDatabase;
 
 import javax.swing.*;
 import java.awt.*;
@@ -25,7 +25,7 @@ public class MealPlanPage extends JFrame{
     private JList list1;
     private JButton previousButton;
 
-    public MealPlanPage(Databases databases) {
+    public MealPlanPage(PickyEatersDatabase databases) {
 
         btDailyProgress.setBackground(Color.white);
         btDiet.setBackground(Color.green);

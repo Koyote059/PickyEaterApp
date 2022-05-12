@@ -8,6 +8,7 @@ import pickyeater.basics.mealplan.DailyMealPlan;
 import pickyeater.basics.user.User;
 import pickyeater.basics.user.UserGoal;
 import pickyeater.basics.user.UserStatus;
+import pickyeater.database.SQLutils.DBManager;
 
 import java.sql.*;
 import java.time.LocalDate;
@@ -358,7 +359,7 @@ public class SQLQueryExecutor {
                             "(username, ingredientName, quantity, status) VALUES ('%s','%s',%f,'%s')",
                     userName,
                     neededIngredient.getName(),
-                    neededIngredient.getQuantity().getQuantity(),
+                    neededIngredient.getQuantity().getWeight(),
                     status));
         }
     }

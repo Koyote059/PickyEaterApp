@@ -12,7 +12,7 @@ import pickyeater.basics.user.LifeStyle;
 import pickyeater.basics.user.Sex;
 import pickyeater.basics.user.User;
 import pickyeater.basics.user.WeightGoal;
-import pickyeater.database.Databases;
+import pickyeater.database.PickyEatersDatabase;
 import pickyeater.managers.EaterManager;
 import pickyeater.managers.PickyEaterManager;
 
@@ -46,7 +46,7 @@ public class UserEditModePage extends JFrame{
     private JDateChooser jBirthdayChooser;
     private JComboBox cbSex;
 
-    public UserEditModePage(Databases databases) {
+    public UserEditModePage(PickyEatersDatabase databases) {
         EaterManager eaterManager = new PickyEaterManager(databases.getUserDatabase(),
                 databases.getIngredientsDatabase(), databases.getMealsDatabase());
 

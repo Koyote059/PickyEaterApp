@@ -2,7 +2,7 @@ package pickyeater.UI.app.foodpage;
 
 import pickyeater.UI.leftbuttons.MainButton;
 import pickyeater.UI.leftbuttons.PanelButtonsConverter;
-import pickyeater.database.Databases;
+import pickyeater.database.PickyEatersDatabase;
 
 import javax.swing.*;
 import java.awt.*;
@@ -24,7 +24,7 @@ public class CreateIngredient extends JFrame {
     private JButton btAddMeal;
     private JButton btAddIngredient;
 
-    public CreateIngredient(Databases databases) {
+    public CreateIngredient(PickyEatersDatabase databases) {
         btDailyProgress.setBackground(Color.white);
         btDiet.setBackground(Color.white);
         btFood.setBackground(Color.green);

@@ -6,10 +6,10 @@ import pickyeater.UI.app.groceriespage.GroceriesPage;
 import pickyeater.UI.app.mealplanpage.MealPlanPage;
 import pickyeater.UI.app.settingspage.SettingsPage;
 import pickyeater.UI.app.userpage.UserPage;
-import pickyeater.database.Databases;
+import pickyeater.database.PickyEatersDatabase;
 
 public class MainButton {
-        public MainButton(Databases databases, PanelButtons panelButton) {
+        public MainButton(PickyEatersDatabase databases, PanelButtons panelButton) {
                 switch (panelButton) {
                         case PROGRESS -> new DailyProgressPage(databases);
                         case DIET -> new MealPlanPage(databases);

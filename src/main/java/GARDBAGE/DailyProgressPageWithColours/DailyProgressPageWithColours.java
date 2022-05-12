@@ -4,8 +4,7 @@ package GARDBAGE.DailyProgressPageWithColours;
  * @author Claudio Di Maio
  */
 
-import pickyeater.database.Databases;
-import pickyeater.executors.ExecutorProvider;
+import pickyeater.database.PickyEatersDatabase;
 import pickyeater.executors.UserMealsProgressesExecutor;
 
 import javax.swing.*;
@@ -27,7 +26,7 @@ public class DailyProgressPageWithColours extends JFrame{
 
     UserMealsProgressesExecutor userMealsProgressesExecutor;
 
-    public DailyProgressPageWithColours(Databases databases) {
+    public DailyProgressPageWithColours(PickyEatersDatabase databases) {
         setContentPane(mainPanel);
         pack();
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);

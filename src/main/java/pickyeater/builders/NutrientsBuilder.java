@@ -9,25 +9,25 @@ import pickyeater.basics.food.Nutrients;
 
 public interface NutrientsBuilder {
 
-    void setSimpleCarbs(double simpleCarbs);
-    double getSimpleCarbs();
-    void setComplexCarbs(double complexCarbs);
-    double getComplexCarbs();
-    void setFibers(double fibers);
-    double getFibers();
-    void setProteins(double proteins);
-    double getProteins();
-    void setAlcohol(double alcohol);
-    double getAlcohol();
-    void setSaturatedFats(double saturatedFats);
-    double getSaturatedFats();
-    void setUnSaturatedFats(double unSaturatedFats);
-    double getUnSaturatedFats();
-    void setTransFats(double transFats);
-    double getTransFats();
+    void setSimpleCarbs(float simpleCarbs);
+    float getSimpleCarbs();
+    void setComplexCarbs(float complexCarbs);
+    float getComplexCarbs();
+    void setFibers(float fibers);
+    float getFibers();
+    void setProteins(float proteins);
+    float getProteins();
+    void setAlcohol(float alcohol);
+    float getAlcohol();
+    void setSaturatedFats(float saturatedFats);
+    float getSaturatedFats();
+    void setUnSaturatedFats(float unSaturatedFats);
+    float getUnSaturatedFats();
+    void setTransFats(float transFats);
+    float getTransFats();
 
-    double getCarbs();
-    double getFats();
+    float getCarbs();
+    float getFats();
 
 
     float getCalories();

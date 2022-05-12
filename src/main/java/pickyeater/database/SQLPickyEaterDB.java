@@ -4,7 +4,7 @@ import pickyeater.database.SQLutils.SQLExecutorManager;
 
 import java.sql.SQLException;
 
-public class SQLPickyEaterDB {
+public class SQLPickyEaterDB implements PickyEatersDatabase {
 
     private final IngredientsDatabase ingredientsDatabase;
     private final MealsDatabase mealsDatabase;
