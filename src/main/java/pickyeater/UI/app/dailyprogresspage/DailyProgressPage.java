@@ -31,7 +31,7 @@ public class DailyProgressPage extends JFrame{
 
     UserMealsProgressesExecutor userMealsProgressesExecutor;
 
-    public DailyProgressPage(PickyEatersDatabase databases) {
+    public DailyProgressPage() {
         btDailyProgress.setBackground(Color.green);
         btDiet.setBackground(Color.white);
         btFood.setBackground(Color.white);
@@ -49,7 +49,7 @@ public class DailyProgressPage extends JFrame{
             public void actionPerformed(ActionEvent e) {
                 String cmd = e.getActionCommand();
                 setVisible(false);
-                new MainButton(databases, new PanelButtonsConverter(cmd).Convert());
+                new MainButton(new PanelButtonsConverter(cmd).Convert());
             }
         };
         btSettings.addActionListener(listener);
@@ -63,14 +63,14 @@ public class DailyProgressPage extends JFrame{
             @Override
             public void actionPerformed(ActionEvent e) {
                 setVisible(false);
-                new AddEatenMealPage(databases);
+                new AddEatenMealPage();
             }
         });
         btAddBurntCalories.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 setVisible(false);
-                new AddBurntCalories(databases);
+                new AddBurntCalories();
             }
         });
     }

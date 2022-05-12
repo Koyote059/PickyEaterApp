@@ -10,41 +10,41 @@ import pickyeater.managers.EaterManager;
  * Contains all executors
  */
 public class ExecutorProvider {
-    private EaterManager manager;
+    static EaterManager eaterManager;
 
-    public ExecutorProvider(EaterManager manager) {
-        this.manager = manager;
+    public static void setEaterManager(EaterManager eaterManager) {
+        ExecutorProvider.eaterManager = eaterManager;
     }
 
-    public ChangeMealPlanExecutor getChangeMealPlanExecutor(){
-        return new ChangeMealPlanExecutor(manager);
+    public static ChangeMealPlanExecutor getChangeMealPlanExecutor(){
+        return new ChangeMealPlanExecutor(eaterManager);
     }
 
-    public CreateIngredientExecutor getCreateIngredientExecutor(){
-        return new CreateIngredientExecutor(manager);
+    public static CreateIngredientExecutor getCreateIngredientExecutor(){
+        return new CreateIngredientExecutor(eaterManager);
     }
 
-    public CreateMealExecutor getCreateMealExecutor(){
-        return new CreateMealExecutor(manager);
+    public static CreateMealExecutor getCreateMealExecutor(){
+        return new CreateMealExecutor(eaterManager);
     }
 
-    public IngredientSearcherExecutor getIngredientSearcherExecutor(){
-        return new IngredientSearcherExecutor(manager);
+    public static IngredientSearcherExecutor getIngredientSearcherExecutor(){
+        return new IngredientSearcherExecutor(eaterManager);
     }
 
-    public MealPlanViewerExecutor getMealPlanViewerExecutor(){
-        return new MealPlanViewerExecutor(manager);
+    public static MealPlanViewerExecutor getMealPlanViewerExecutor(){
+        return new MealPlanViewerExecutor(eaterManager);
     }
 
-    public MealSearcherExecutor getMealSearcherExecutor(){
-        return new MealSearcherExecutor(manager);
+    public static MealSearcherExecutor getMealSearcherExecutor(){
+        return new MealSearcherExecutor(eaterManager);
     }
 
-    public RegisterExecutor getRegisterExecutor(){
-        return new RegisterExecutor(manager);
+    public static RegisterExecutor getRegisterExecutor(){
+        return new RegisterExecutor(eaterManager);
     }
 
-    public UserMealsProgressesExecutor getUserMealsProgressesExecutor(){
-        return new UserMealsProgressesExecutor(manager);
+    public static UserMealsProgressesExecutor getUserMealsProgressesExecutor(){
+        return new UserMealsProgressesExecutor(eaterManager);
     }
 }

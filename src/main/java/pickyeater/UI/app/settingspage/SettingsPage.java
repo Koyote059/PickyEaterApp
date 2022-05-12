@@ -18,7 +18,7 @@ public class SettingsPage extends JFrame {
     private JButton btFood;
     private JButton btDiet;
 
-    public SettingsPage(PickyEatersDatabase databases) {
+    public SettingsPage() {
         btDailyProgress.setBackground(Color.white);
         btDiet.setBackground(Color.white);
         btFood.setBackground(Color.white);
@@ -36,7 +36,7 @@ public class SettingsPage extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 String cmd = e.getActionCommand();
                 setVisible(false);
-                new MainButton(databases, new PanelButtonsConverter(cmd).Convert());
+                new MainButton(new PanelButtonsConverter(cmd).Convert());
             }
         };
         btSettings.addActionListener(listener);

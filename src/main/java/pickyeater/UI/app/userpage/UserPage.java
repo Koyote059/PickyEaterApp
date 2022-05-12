@@ -85,7 +85,7 @@ public class UserPage extends JFrame{
             public void actionPerformed(ActionEvent e) {
                 String cmd = e.getActionCommand();
                 setVisible(false);
-                new MainButton(databases, new PanelButtonsConverter(cmd).Convert());
+                new MainButton(new PanelButtonsConverter(cmd).Convert());
             }
         };
         btSettings.addActionListener(listener);

@@ -4,6 +4,8 @@ package pickyeater.UI.registerpage;
  * @author Claudio Di Maio
  */
 import pickyeater.UI.app.dailyprogresspage.DailyProgressPage;
+import pickyeater.UI.leftbuttons.MainButton;
+import pickyeater.UI.leftbuttons.PanelButtons;
 import pickyeater.algorithms.NutrientsRequiremenetCalculatorWrong;
 import pickyeater.algorithms.NutrientsRequirementCalculator;
 import pickyeater.basics.food.Nutrients;
@@ -56,9 +58,7 @@ public class Register4 extends JFrame {
                 executorProvider.getRegisterExecutor().saveUser(userBuilder.build());
 
                 setVisible(false);
-                // Todo -> Togli sto coso, devi portarti gli executors, non i database
-                PickyEatersDatabase databases = new SQLPickyEaterDB("PickyEatersDB.sqlite");
-                new DailyProgressPage(databases);
+                new MainButton(PanelButtons.PROGRESS);
             }
         });
 
