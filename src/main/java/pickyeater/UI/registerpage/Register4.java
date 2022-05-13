@@ -7,6 +7,7 @@ import pickyeater.UI.app.dailyprogresspage.DailyProgressPage;
 import pickyeater.UI.leftbuttons.MainButton;
 import pickyeater.UI.leftbuttons.PanelButtons;
 import pickyeater.algorithms.NutrientsRequiremenetCalculatorWrong;
+
 import pickyeater.algorithms.NutrientsRequirementCalculator;
 import pickyeater.basics.food.Nutrients;
 import pickyeater.builders.NutrientsBuilder;

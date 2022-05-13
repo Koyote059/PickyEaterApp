@@ -68,7 +68,7 @@ public class PickyFinder implements Finder {
                 dst.getNutrients().getTransFats() + src.getNutrients().getTransFats(),
                 dst.getNutrients().getAlcohol() + src.getNutrients().getAlcohol());
 
-        Quantity newQuantity = new PickyQuantity(dst.getQuantity().getWeight() + src.getQuantity().getWeight(),
+        Quantity newQuantity = new PickyQuantity(dst.getQuantity().getAmount() + src.getQuantity().getAmount(),
                 src.getQuantity().getQuantityType(),
                 dst.getQuantity().getGramsPerQuantity() + src.getQuantity().getGramsPerQuantity());
 
