@@ -2,6 +2,7 @@ package pickyeater.UI.app.foodpage;
 
 import pickyeater.UI.leftbuttons.MainButton;
 import pickyeater.UI.leftbuttons.PanelButtonsConverter;
+import pickyeater.basics.food.Ingredient;
 import pickyeater.database.PickyEatersDatabase;
 import pickyeater.executors.ExecutorProvider;
 
@@ -9,6 +10,9 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.Set;
 
 public class FoodPage extends JFrame {
     private JPanel mainPanel;
@@ -38,10 +42,24 @@ public class FoodPage extends JFrame {
 
         // TODO: PUT IN AN EXECUTOR
         ExecutorProvider executorProvider = new ExecutorProvider();
-        System.out.println(executorProvider.getEaterManager().getFoodManager().getIngredients());
+        //System.out.println(executorProvider.getEaterManager().getFoodManager().getIngredientsThatStartWith("p"));
         //for (int i < executorProvider.)
 
        // listMeals.setListData();
+
+        Set<Ingredient> ingredientSet = executorProvider.getEaterManager().getFoodManager().getIngredients();
+
+        int tmpSize = ingredientSet.size();
+
+        Object o[] = new Object[tmpSize];
+
+        for (Iterator<Ingredient> it = ingredientSet.iterator(); it.hasNext(); tmpSize--) {
+            Ingredient ingredient = it.next();
+            //System.out.println(ingredient.getName());
+            o[tmpSize - 1] = ingredient.getName();
+        }
+
+        listIngredients.setListData(o);
 
         setContentPane(mainPanel);
         pack();
