@@ -20,6 +20,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.time.format.DateTimeFormatterBuilder;
+import java.util.Date;
 import java.util.Optional;
 
 public class UserEditModePage extends JFrame{
@@ -59,8 +61,9 @@ public class UserEditModePage extends JFrame{
 
         // User:
         tfName.setText(user.getName());
-        // txtDateOfBirth.setText(user.getUserStatus().getDateOfBirth().toString());
-        // TODO: Fix DoB
+        jBirthdayChooser.setDateFormatString(user.getUserStatus().getDateOfBirth().toString());
+        //txtDateOfBirth.setText(user.getUserStatus().getDateOfBirth().toString());
+        //TODO: FIX
         tfHeight.setText(Double.toString(user.getUserStatus().getHeight()));
         tfWeight.setText(Double.toString(user.getUserStatus().getWeight()));
         tfBodyfat.setText(Double.toString(user.getUserStatus().getBodyFat()));

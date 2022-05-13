@@ -16,14 +16,12 @@ public class main {
 
         PickyEatersDatabase pickyEatersDB = new SQLPickyEaterDB("PickyEatersDB.sqlite");
 
-        ExecutorProvider executorProvider = new ExecutorProvider();
-
-        //TODO: USE SET METHOD OF EXECUTOR-PROVIDER
-
         EaterManager eaterManager = new PickyEaterManager(
                 pickyEatersDB.getUserDatabase(),
                 pickyEatersDB.getIngredientsDatabase(),
                 pickyEatersDB.getMealsDatabase());
+
+        ExecutorProvider executorProvider = new ExecutorProvider(eaterManager);
 
         if (eaterManager.getUserManager().getUser().isEmpty()) {  // User Database is empty
             new Register1(eaterManager, executorProvider);

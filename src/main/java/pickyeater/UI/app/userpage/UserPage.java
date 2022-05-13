@@ -53,9 +53,7 @@ public class UserPage extends JFrame{
         // User:
         txtName.setText(user.getName());
         txtSex.setText(user.getUserStatus().getSex().toString());
-        System.out.println(user.getUserStatus());
-        // txtDateOfBirth.setText(user.getUserStatus().getDateOfBirth().toString());
-        // TODO: Fix DoB
+        txtDateOfBirth.setText(user.getUserStatus().getDateOfBirth().toString());
         txtHeight.setText(Double.toString(user.getUserStatus().getHeight()));
         txtWeight.setText(Double.toString(user.getUserStatus().getWeight()));
         txtBodyFat.setText(Double.toString(user.getUserStatus().getBodyFat()));

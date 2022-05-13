@@ -6,7 +6,6 @@ package pickyeater.UI.app.dailyprogresspage;
 
 import pickyeater.UI.leftbuttons.MainButton;
 import pickyeater.UI.leftbuttons.PanelButtonsConverter;
-import pickyeater.database.PickyEatersDatabase;
 import pickyeater.executors.UserMealsProgressesExecutor;
 
 import javax.swing.*;
@@ -25,7 +24,7 @@ public class DailyProgressPage extends JFrame{
     private JButton btAddEatenMeals;
     private JButton btAddBurntCalories;
     private JList listEatenMeals;
-    private JProgressBar progressBar;
+    private JProgressBar bar;
     private JComboBox cbConsumed;
     private JLabel txtBurntCalories;
 
@@ -38,6 +37,10 @@ public class DailyProgressPage extends JFrame{
         btGroceries.setBackground(Color.white);
         btUser.setBackground(Color.white);
         btSettings.setBackground(Color.white);
+
+        //bar.setStringPainted(true);
+        //bar.setValue(0-100);
+        //bar.setString("Done");
 
         setContentPane(mainPanel);
         pack();
