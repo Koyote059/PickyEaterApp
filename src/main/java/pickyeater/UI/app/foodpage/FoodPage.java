@@ -3,6 +3,7 @@ package pickyeater.UI.app.foodpage;
 import pickyeater.UI.leftbuttons.MainButton;
 import pickyeater.UI.leftbuttons.PanelButtonsConverter;
 import pickyeater.basics.food.Ingredient;
+import pickyeater.basics.food.Meal;
 import pickyeater.database.PickyEatersDatabase;
 import pickyeater.executors.ExecutorProvider;
 
@@ -42,24 +43,26 @@ public class FoodPage extends JFrame {
 
         // TODO: PUT IN AN EXECUTOR
         ExecutorProvider executorProvider = new ExecutorProvider();
-        //System.out.println(executorProvider.getEaterManager().getFoodManager().getIngredientsThatStartWith("p"));
-        //for (int i < executorProvider.)
 
        // listMeals.setListData();
 
         Set<Ingredient> ingredientSet = executorProvider.getEaterManager().getFoodManager().getIngredients();
-
         int tmpSize = ingredientSet.size();
-
-        Object o[] = new Object[tmpSize];
-
+        Object o1[] = new Object[tmpSize];
         for (Iterator<Ingredient> it = ingredientSet.iterator(); it.hasNext(); tmpSize--) {
             Ingredient ingredient = it.next();
-            //System.out.println(ingredient.getName());
-            o[tmpSize - 1] = ingredient.getName();
+            o1[tmpSize - 1] = ingredient.getName();
         }
+        listIngredients.setListData(o1);
 
-        listIngredients.setListData(o);
+        Set<Meal> mealSet = executorProvider.getEaterManager().getFoodManager().getMeals();
+        tmpSize = mealSet.size();
+        Object o2[] = new Object[tmpSize];
+        for (Iterator<Meal> it = mealSet.iterator(); it.hasNext(); tmpSize--) {
+            Meal meal = it.next();
+            o2[tmpSize - 1] = meal.getName();
+        }
+        listMeals.setListData(o2);
 
         setContentPane(mainPanel);
         pack();
