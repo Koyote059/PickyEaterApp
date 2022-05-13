@@ -82,5 +82,13 @@ public class FoodPage extends JFrame {
         btGroceries.addActionListener(listener);
         btFood.addActionListener(listener);
         btDiet.addActionListener(listener);
+
+        btSearchMeal.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                setVisible(false);
+                new SearchMeal();
+            }
+        });
     }
 }
