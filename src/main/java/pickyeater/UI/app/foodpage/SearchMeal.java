@@ -20,7 +20,7 @@ public class SearchMeal extends JFrame {
     private JButton btDone;
     private JPanel mainPanel;
 
-    public SearchMeal(PickyEatersDatabase databases) {
+    public SearchMeal() {
         btDailyProgress.setBackground(Color.white);
         btDiet.setBackground(Color.white);
         btFood.setBackground(Color.green);
@@ -37,7 +37,7 @@ public class SearchMeal extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 String cmd = e.getActionCommand();
                 setVisible(false);
-                new MainButton(databases, new PanelButtonsConverter(cmd).Convert());
+                new MainButton(new PanelButtonsConverter(cmd).Convert());
             }
         };
         btSettings.addActionListener(listener);

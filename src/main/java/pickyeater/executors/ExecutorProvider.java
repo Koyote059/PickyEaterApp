@@ -10,41 +10,53 @@ import pickyeater.managers.EaterManager;
  * Contains all executors
  */
 public class ExecutorProvider {
-    private EaterManager manager;
+    private static EaterManager eaterManager;
 
-    public ExecutorProvider(EaterManager manager) {
-        this.manager = manager;
+    public ExecutorProvider(){
+
+    }
+
+    public ExecutorProvider(EaterManager eaterManager) {
+        ExecutorProvider.eaterManager = eaterManager;
+    }
+
+    public EaterManager getEaterManager() {
+        return eaterManager;
+    }
+
+    public void setEaterManager(EaterManager eaterManager) {
+        ExecutorProvider.eaterManager = eaterManager;
     }
 
     public ChangeMealPlanExecutor getChangeMealPlanExecutor(){
-        return new ChangeMealPlanExecutor(manager);
+        return new ChangeMealPlanExecutor(eaterManager);
     }
 
     public CreateIngredientExecutor getCreateIngredientExecutor(){
-        return new CreateIngredientExecutor(manager);
+        return new CreateIngredientExecutor(eaterManager);
     }
 
     public CreateMealExecutor getCreateMealExecutor(){
-        return new CreateMealExecutor(manager);
+        return new CreateMealExecutor(eaterManager);
     }
 
     public IngredientSearcherExecutor getIngredientSearcherExecutor(){
-        return new IngredientSearcherExecutor(manager);
+        return new IngredientSearcherExecutor(eaterManager);
     }
 
     public MealPlanViewerExecutor getMealPlanViewerExecutor(){
-        return new MealPlanViewerExecutor(manager);
+        return new MealPlanViewerExecutor(eaterManager);
     }
 
     public MealSearcherExecutor getMealSearcherExecutor(){
-        return new MealSearcherExecutor(manager);
+        return new MealSearcherExecutor(eaterManager);
     }
 
     public RegisterExecutor getRegisterExecutor(){
-        return new RegisterExecutor(manager);
+        return new RegisterExecutor(eaterManager);
     }
 
     public UserMealsProgressesExecutor getUserMealsProgressesExecutor(){
-        return new UserMealsProgressesExecutor(manager);
+        return new UserMealsProgressesExecutor(eaterManager);
     }
 }

@@ -11,9 +11,7 @@ import pickyeater.managers.EaterManager;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.ComponentAdapter;
+import java.awt.event.*;
 
 public class Register3 extends JFrame {
     private JPanel panel1;
@@ -32,9 +30,6 @@ public class Register3 extends JFrame {
         btLoseWeight.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-                btLoseWeight.setBackground(Color.green);
-                btGainWeight.setBackground(Color.white);
-                btMaintainWeight.setBackground(Color.white);
                 userBuilder.setWeightVariationGoal(WeightGoal.LOSE_WEIGHT);
 
                 Continue(eaterManager, executorProvider, userBuilder);
@@ -43,9 +38,6 @@ public class Register3 extends JFrame {
         btGainWeight.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-                btLoseWeight.setBackground(Color.white);
-                btGainWeight.setBackground(Color.green);
-                btMaintainWeight.setBackground(Color.white);
                 userBuilder.setWeightVariationGoal(WeightGoal.INCREASE_WEIGHT);
 
                 Continue(eaterManager, executorProvider, userBuilder);
@@ -54,9 +46,6 @@ public class Register3 extends JFrame {
         btMaintainWeight.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-                btLoseWeight.setBackground(Color.white);
-                btGainWeight.setBackground(Color.white);
-                btMaintainWeight.setBackground(Color.green);
                 userBuilder.setWeightVariationGoal(WeightGoal.MANTAIN_WEIGHT);
 
                 Continue(eaterManager, executorProvider, userBuilder);
@@ -71,6 +60,45 @@ public class Register3 extends JFrame {
                 new Register2(eaterManager, executorProvider, userBuilder);
             }
         });
+        btLoseWeight.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                super.mouseEntered(e);
+                btLoseWeight.setBackground(Color.green);
+                btGainWeight.setBackground(Color.white);
+                btMaintainWeight.setBackground(Color.white);
+            }
+        });
+        btGainWeight.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                super.mouseEntered(e);
+                btLoseWeight.setBackground(Color.white);
+                btGainWeight.setBackground(Color.green);
+                btMaintainWeight.setBackground(Color.white);
+            }
+        });
+        btMaintainWeight.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                super.mouseEntered(e);
+                btLoseWeight.setBackground(Color.white);
+                btGainWeight.setBackground(Color.white);
+                btMaintainWeight.setBackground(Color.green);
+            }
+        });
+        MouseAdapter listener = new MouseAdapter() {
+            @Override
+            public void mouseExited(MouseEvent e) {
+                super.mouseExited(e);
+                btLoseWeight.setBackground(Color.white);
+                btGainWeight.setBackground(Color.white);
+                btMaintainWeight.setBackground(Color.white);
+            }
+        };
+        btGainWeight.addMouseListener(listener);
+        btMaintainWeight.addMouseListener(listener);
+        btLoseWeight.addMouseListener(listener);
     }
     private void Continue(EaterManager eaterManager,ExecutorProvider executorProvider, UserBuilder userBuilder){
         if (executorProvider.getRegisterExecutor().getUserBuilder().getWeightVariationGoal() != null){

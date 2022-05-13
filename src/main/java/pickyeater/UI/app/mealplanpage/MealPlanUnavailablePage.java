@@ -23,7 +23,7 @@ public class MealPlanUnavailablePage extends JFrame{
     private JButton btDiet;
     private JButton clickHereToGoButton;
 
-    public MealPlanUnavailablePage(PickyEatersDatabase databases) {
+    public MealPlanUnavailablePage() {
         btDailyProgress.setBackground(Color.white);
         btDiet.setBackground(Color.green);
         btFood.setBackground(Color.white);
@@ -41,7 +41,7 @@ public class MealPlanUnavailablePage extends JFrame{
             public void actionPerformed(ActionEvent e) {
                 String cmd = e.getActionCommand();
                 setVisible(false);
-                new MainButton(databases, new PanelButtonsConverter(cmd).Convert());
+                new MainButton(new PanelButtonsConverter(cmd).Convert());
             }
         };
         btSettings.addActionListener(listener);

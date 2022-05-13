@@ -10,9 +10,7 @@ import pickyeater.managers.EaterManager;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.ComponentAdapter;
+import java.awt.event.*;
 
 public class Register2 extends JFrame {
     private JPanel panel1;
@@ -33,25 +31,13 @@ public class Register2 extends JFrame {
         btSedentary.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-                btSedentary.setBackground(Color.green);
-                btSlightlyActive.setBackground(Color.white);
-                btActive.setBackground(Color.white);
-                btVeryActive.setBackground(Color.white);
-
                 userBuilder.setLifeStyle(LifeStyle.SEDENTARY);
-                System.out.println("LS " + LifeStyle.SEDENTARY);
-                System.out.println("UB " + userBuilder.getLifeStyle());
                 Continue(eaterManager, executorProvider, userBuilder);
             }
         });
         btSlightlyActive.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-                btSedentary.setBackground(Color.white);
-                btSlightlyActive.setBackground(Color.green);
-                btActive.setBackground(Color.white);
-                btVeryActive.setBackground(Color.white);
-
                 userBuilder.setLifeStyle(LifeStyle.LIGHTLY_ACTIVE);
 
                 Continue(eaterManager, executorProvider, userBuilder);
@@ -60,11 +46,6 @@ public class Register2 extends JFrame {
         btActive.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-                btSedentary.setBackground(Color.white);
-                btSlightlyActive.setBackground(Color.white);
-                btActive.setBackground(Color.green);
-                btVeryActive.setBackground(Color.white);
-
                 userBuilder.setLifeStyle(LifeStyle.ACTIVE);
 
                 Continue(eaterManager, executorProvider, userBuilder);
@@ -73,11 +54,6 @@ public class Register2 extends JFrame {
         btVeryActive.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-                btSedentary.setBackground(Color.white);
-                btSlightlyActive.setBackground(Color.white);
-                btActive.setBackground(Color.white);
-                btVeryActive.setBackground(Color.green);
-
                 userBuilder.setLifeStyle(LifeStyle.VERY_ACTIVE);
 
                 Continue(eaterManager, executorProvider, userBuilder);
@@ -91,6 +67,60 @@ public class Register2 extends JFrame {
                 new Register1(eaterManager, executorProvider);
             }
         });
+        btSedentary.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                super.mouseEntered(e);
+                btSedentary.setBackground(Color.green);
+                btSlightlyActive.setBackground(Color.white);
+                btActive.setBackground(Color.white);
+                btVeryActive.setBackground(Color.white);
+            }
+        });
+        btSlightlyActive.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                super.mouseEntered(e);
+                btSedentary.setBackground(Color.white);
+                btSlightlyActive.setBackground(Color.green);
+                btActive.setBackground(Color.white);
+                btVeryActive.setBackground(Color.white);
+            }
+        });
+        btActive.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                super.mouseEntered(e);
+                btSedentary.setBackground(Color.white);
+                btSlightlyActive.setBackground(Color.white);
+                btActive.setBackground(Color.green);
+                btVeryActive.setBackground(Color.white);
+            }
+        });
+        btVeryActive.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                super.mouseEntered(e);
+                btSedentary.setBackground(Color.white);
+                btSlightlyActive.setBackground(Color.white);
+                btActive.setBackground(Color.white);
+                btVeryActive.setBackground(Color.green);
+            }
+        });
+        MouseAdapter listener = new MouseAdapter() {
+            @Override
+            public void mouseExited(MouseEvent e) {
+                super.mouseExited(e);
+                btSedentary.setBackground(Color.white);
+                btSlightlyActive.setBackground(Color.white);
+                btActive.setBackground(Color.white);
+                btVeryActive.setBackground(Color.white);
+            }
+        };
+        btActive.addMouseListener(listener);
+        btSlightlyActive.addMouseListener(listener);
+        btSedentary.addMouseListener(listener);
+        btVeryActive.addMouseListener(listener);
     }
     private void Continue(EaterManager eaterManager, ExecutorProvider executorProvider, UserBuilder userBuilder){
         if (userBuilder.getLifeStyle() != null){

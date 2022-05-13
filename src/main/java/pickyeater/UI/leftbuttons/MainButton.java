@@ -7,16 +7,20 @@ import pickyeater.UI.app.mealplanpage.MealPlanPage;
 import pickyeater.UI.app.settingspage.SettingsPage;
 import pickyeater.UI.app.userpage.UserPage;
 import pickyeater.database.PickyEatersDatabase;
+import pickyeater.database.SQLPickyEaterDB;
 
 public class MainButton {
-        public MainButton(PickyEatersDatabase databases, PanelButtons panelButton) {
+
+        // TODO: REMOVE
+        PickyEatersDatabase pickyEatersDB = new SQLPickyEaterDB("PickyEatersDB.sqlite");
+        public MainButton(PanelButtons panelButton) {
                 switch (panelButton) {
-                        case PROGRESS -> new DailyProgressPage(databases);
-                        case DIET -> new MealPlanPage(databases);
-                        case FOOD -> new FoodPage(databases);
-                        case GROCERIES -> new GroceriesPage(databases);
-                        case USER -> new UserPage(databases);
-                        case SETTINGS -> new SettingsPage(databases);
+                        case PROGRESS -> new DailyProgressPage();
+                        case DIET -> new MealPlanPage();
+                        case FOOD -> new FoodPage();
+                        case GROCERIES -> new GroceriesPage();
+                        case USER -> new UserPage(pickyEatersDB);
+                        case SETTINGS -> new SettingsPage();
                 }
         }
 
