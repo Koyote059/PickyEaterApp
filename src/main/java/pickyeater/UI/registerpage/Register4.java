@@ -4,7 +4,6 @@ package pickyeater.UI.registerpage;
  * @author Claudio Di Maio
  */
 import pickyeater.UI.app.dailyprogresspage.DailyProgressPage;
-import pickyeater.algorithms.NutrientsRequiremenetCalculatorWrong;
 import pickyeater.algorithms.NutrientsRequirementCalculator;
 import pickyeater.basics.food.Nutrients;
 import pickyeater.builders.NutrientsBuilder;

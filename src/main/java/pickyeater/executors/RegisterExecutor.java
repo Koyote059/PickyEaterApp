@@ -6,8 +6,8 @@
 package pickyeater.executors;
 
 import pickyeater.algorithms.BodyFatCalculator;
-import pickyeater.algorithms.BodyFatCaluclatorWrong;
-import pickyeater.algorithms.NutrientsRequiremenetCalculatorWrong;
+import pickyeater.algorithms.DeurenbergCalculator;
+import pickyeater.algorithms.HarrisBenedictCalculator;
 import pickyeater.algorithms.NutrientsRequirementCalculator;
 import pickyeater.builders.PickyUserBuilder;
 import pickyeater.builders.UserBuilder;
@@ -35,10 +35,10 @@ public class RegisterExecutor {
     }
 
     public BodyFatCalculator getBFCalculator(){
-        return new BodyFatCaluclatorWrong();
+        return new DeurenbergCalculator();
     }
 
     public NutrientsRequirementCalculator getNutrientsCalculator(){
-        return new NutrientsRequiremenetCalculatorWrong();
+        return new HarrisBenedictCalculator();
     }
 }

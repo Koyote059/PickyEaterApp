@@ -5,7 +5,7 @@ package pickyeater.basics.food;
  */
 
 public interface Quantity {
-    float getWeight();
+    float getAmount();
     QuantityType getQuantityType();
     float getGramsPerQuantity();
 }

@@ -26,7 +26,7 @@ public class PickyIngredientBuilder implements IngredientBuilder {
         this.name = ingredient.getName();
         this.tags = new ArrayList<>(ingredient.getTags());
         Quantity ingredientQuantity = ingredient.getQuantity();
-        this.quantity = new PickyQuantity(ingredientQuantity.getWeight(), ingredientQuantity.getQuantityType(), ingredientQuantity.getGramsPerQuantity());
+        this.quantity = new PickyQuantity(ingredientQuantity.getAmount(), ingredientQuantity.getQuantityType(), ingredientQuantity.getGramsPerQuantity());
         this.nutrients = ingredient.getNutrients();
     }
 
