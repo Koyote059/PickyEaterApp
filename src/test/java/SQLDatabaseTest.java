@@ -30,8 +30,10 @@ public class SQLDatabaseTest {
 
         ingredients.forEach(ingredientsDatabase::saveIngredient);
         meals.forEach(mealsDatabase::saveMeal);
-        Groceries groceries = groceriesDatabase.getGroceries().get();
-        groceriesDatabase.deleteGroceries(groceries);
+        if(groceriesDatabase.getGroceries().isPresent()) {
+            Groceries groceries = groceriesDatabase.getGroceries().get();
+            groceriesDatabase.deleteGroceries(groceries);
+        }
         System.out.println(groceriesDatabase.getGroceries().isPresent());
     }
 

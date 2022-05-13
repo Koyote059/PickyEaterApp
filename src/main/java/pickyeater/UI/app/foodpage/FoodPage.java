@@ -3,6 +3,7 @@ package pickyeater.UI.app.foodpage;
 import pickyeater.UI.leftbuttons.MainButton;
 import pickyeater.UI.leftbuttons.PanelButtonsConverter;
 import pickyeater.database.PickyEatersDatabase;
+import pickyeater.executors.ExecutorProvider;
 
 import javax.swing.*;
 import java.awt.*;
@@ -31,6 +32,16 @@ public class FoodPage extends JFrame {
         btGroceries.setBackground(Color.white);
         btUser.setBackground(Color.white);
         btSettings.setBackground(Color.white);
+
+        listMeals.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        listIngredients.setSelectionMode((ListSelectionModel.SINGLE_SELECTION));
+
+        // TODO: PUT IN AN EXECUTOR
+        ExecutorProvider executorProvider = new ExecutorProvider();
+        System.out.println(executorProvider.getEaterManager().getFoodManager().getIngredientsThatStartWith("p"));
+        //for (int i < executorProvider.)
+
+       // listMeals.setListData();
 
         setContentPane(mainPanel);
         pack();

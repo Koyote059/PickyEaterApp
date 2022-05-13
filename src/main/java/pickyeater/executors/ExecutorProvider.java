@@ -12,6 +12,10 @@ import pickyeater.managers.EaterManager;
 public class ExecutorProvider {
     private static EaterManager eaterManager;
 
+    public ExecutorProvider(){
+
+    }
+
     public ExecutorProvider(EaterManager eaterManager) {
         ExecutorProvider.eaterManager = eaterManager;
     }
