@@ -5,7 +5,6 @@ package pickyeater.UI.registerpage;
  */
 import com.toedter.calendar.JDateChooser;
 import pickyeater.algorithms.BodyFatCalculator;
-import pickyeater.algorithms.BodyFatCaluclatorWrong;
 import pickyeater.basics.user.Sex;
 import pickyeater.builders.UserBuilder;
 import pickyeater.executors.ExecutorProvider;

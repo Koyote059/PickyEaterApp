@@ -359,7 +359,7 @@ public class SQLQueryExecutor {
                             "(username, ingredientName, quantity, status) VALUES ('%s','%s',%f,'%s')",
                     userName,
                     neededIngredient.getName(),
-                    neededIngredient.getQuantity().getWeight(),
+                    neededIngredient.getQuantity().getAmount(),
                     status));
         }
     }
