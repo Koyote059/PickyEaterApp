@@ -36,4 +36,9 @@ public class PickyMealBuilder implements MealBuilder {
             return new PickyMeal(this.ingredients, this.name);
         }
     }
+
+    @Override
+    public String getName() {
+        return name;
+    }
 }
