@@ -64,12 +64,12 @@ public class SQLCreator {
         MealBuilder mealBuilder = new PickyMealBuilder();
         int prevDayNumber = dailyMealsRS.getInt("dayNumber");
         String prevMealName = dailyMealsRS.getString("mealName");
-        mealBuilder.addIngredients(getIngredient(dailyMealsRS));
+        String ingredientName = dailyMealsRS.getString("ingredientName");
+        if(ingredientName!=null) mealBuilder.addIngredients(getIngredient(dailyMealsRS));
 
         while(dailyMealsRS.next()){
             int dayNumber = dailyMealsRS.getInt("dayNumber");
             String mealName = dailyMealsRS.getString("mealName");
-            Ingredient ingredient = getIngredient(dailyMealsRS);
             if(dayNumber>prevDayNumber || ! mealName.equals(prevMealName)){
                 mealBuilder.setName(prevMealName);
                 prevMealName = mealName;
@@ -80,7 +80,11 @@ public class SQLCreator {
                     dailyMealPlanBuilder = new PickyDailyMealPlanBuilder();
                     prevDayNumber = dayNumber;
                 }
-                mealBuilder.addIngredients(ingredient);
+                String tmpIngredientName = dailyMealsRS.getString("ingredientName");
+                if(tmpIngredientName!=null){
+                    Ingredient ingredient = getIngredient(dailyMealsRS);
+                    mealBuilder.addIngredients(ingredient);
+                }
             }
         }
         return Optional.of(mealPlanBuilder.build());
@@ -97,20 +101,25 @@ public class SQLCreator {
     public List<Meal> getMeals(ResultSet resultSet) throws SQLException {
         List<Meal> meals = new ArrayList<>();
         String previousName = null;
+        MealBuilder mealBuilder = new PickyMealBuilder();
         while(resultSet.next()){
-            MealBuilder mealBuilder = new PickyMealBuilder();
             String mealName = resultSet.getString("mealName");
+            if(previousName==null) previousName = mealName;
             if(!mealName.equals(previousName)) {
-                if(previousName!=null){
-                    mealBuilder.setName(previousName);
-                    meals.add(mealBuilder.build());
-                    mealBuilder = new PickyMealBuilder();
-                }
+                mealBuilder.setName(previousName);
+                meals.add(mealBuilder.build());
+                mealBuilder = new PickyMealBuilder();
                 previousName = mealName;
-
             }
-            mealBuilder.addIngredients(getIngredient(resultSet));
+            String ingredientName = resultSet.getString("ingredientName");
+            if(ingredientName != null) mealBuilder.addIngredients(getIngredient(resultSet));
         }
+
+        if(previousName!=null){
+            mealBuilder.setName(previousName);
+            meals.add(mealBuilder.build());
+        }
+
         return meals;
     }
 

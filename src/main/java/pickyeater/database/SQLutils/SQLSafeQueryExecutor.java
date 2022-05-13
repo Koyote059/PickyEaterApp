@@ -39,22 +39,25 @@ public class SQLSafeQueryExecutor {
         ResultSet resultSet;
         CachedRowSet cachedRowSet;
         try(Statement statement = connection.createStatement()){
-            resultSet = statement.executeQuery(
-                    String.format("SELECT mealName,\n" +
-                            "       Ingredients.ingredientName AS ingredientName,\n" +
-                            "       quantityType,\n" +
-                            "       quantity,\n" +
-                            "       price * ( gramsPerQuantity * MealCompositions.quantity / 100) AS price,\n" +
-                            "       complexCarbs * ( gramsPerQuantity * MealCompositions.quantity / 100) AS complexCarbs,\n" +
-                            "       simpleCarbs * ( gramsPerQuantity * MealCompositions.quantity / 100) AS simpleCarbs,\n" +
-                            "       fibers * ( gramsPerQuantity * MealCompositions.quantity / 100) AS fibers,\n" +
-                            "       saturatedFats * ( gramsPerQuantity * MealCompositions.quantity / 100) AS saturatedFats,\n" +
-                            "       unSaturatedFats * ( gramsPerQuantity * MealCompositions.quantity / 100) AS unSaturatedFats,\n" +
-                            "       transFats * ( gramsPerQuantity * MealCompositions.quantity / 100) AS transFats,\n" +
-                            "       proteins * ( gramsPerQuantity * MealCompositions.quantity / 100) AS proteins,\n" +
-                            "       alcohol * ( gramsPerQuantity * MealCompositions.quantity / 100) AS alcohol\n" +
-                            "FROM MealCompositions JOIN Ingredients ON MealCompositions.ingredientName = Ingredients.ingredientName\n" +
-                            "WHERE mealName = '%s'",mealName));
+            String query =  String.format("\n" +
+                    "SELECT Meals.mealName AS mealName,\n" +
+                    "       Ingredients.ingredientName AS ingredientName,\n" +
+                    "       quantityType,\n" +
+                    "       gramsPerQuantity,\n" +
+                    "       MealCompositions.quantity AS quantity,\n" +
+                    "       price * ( gramsPerQuantity * MealCompositions.quantity / 100) AS price,\n" +
+                    "       complexCarbs * ( gramsPerQuantity * MealCompositions.quantity / 100) AS complexCarbs,\n" +
+                    "       simpleCarbs * ( gramsPerQuantity * MealCompositions.quantity / 100) AS simpleCarbs,\n" +
+                    "       fibers * ( gramsPerQuantity * MealCompositions.quantity / 100) AS fibers,\n" +
+                    "       saturatedFats * ( gramsPerQuantity * MealCompositions.quantity / 100) AS saturatedFats,\n" +
+                    "       unSaturatedFats * ( gramsPerQuantity * MealCompositions.quantity / 100) AS unSaturatedFats,\n" +
+                    "       transFats * ( gramsPerQuantity * MealCompositions.quantity / 100) AS transFats,\n" +
+                    "       proteins * ( gramsPerQuantity * MealCompositions.quantity / 100) AS proteins,\n" +
+                    "       alcohol * ( gramsPerQuantity * MealCompositions.quantity / 100) AS alcohol\n" +
+                    "    FROM Meals LEFT JOIN MealCompositions ON Meals.mealName = MealCompositions.mealName\n" +
+                    "    LEFT JOIN Ingredients ON MealCompositions.ingredientName = Ingredients.ingredientName\n" +
+                    "WHERE Meals.mealName = '%s'",mealName);
+            resultSet = statement.executeQuery(query);
             cachedRowSet = cache(resultSet);
         }
         return cachedRowSet;
@@ -68,8 +71,7 @@ public class SQLSafeQueryExecutor {
             resultSet = statement.executeQuery(
                     String.format("SELECT MealCompositions.mealName AS mealName,\n" +
                             "       Ingredients.ingredientName AS ingredientName,\n" +
-                            "       quantity,\n" +
-                            "       quantityType,\n" +
+                            "       MealCompositions.quantity AS quantity,\n" +
                             "       quantityType,\n" +
                             "       ingredientsRatio,\n" +
                             "       gramsPerQuantity,\n" +
@@ -82,8 +84,9 @@ public class SQLSafeQueryExecutor {
                             "       transFats * ( ingredientsRatio * gramsPerQuantity * MealCompositions.quantity / 100) AS transFats,\n" +
                             "       proteins * ( ingredientsRatio * gramsPerQuantity * MealCompositions.quantity / 100) AS proteins,\n" +
                             "       alcohol * ( ingredientsRatio * gramsPerQuantity * MealCompositions.quantity / 100) AS alcohol\n" +
-                            "FROM MealCompositions JOIN Ingredients ON MealCompositions.ingredientName = Ingredients.ingredientName\n" +
-                            "JOIN EatenMeals ON MealCompositions.mealName = EatenMeals.mealName\n" +
+                            "FROM Meals LEFT JOIN MealCompositions ON Meals.mealName = MealCompositions.mealName\n" +
+                            "LEFT JOIN Ingredients ON MealCompositions.ingredientName = Ingredients.ingredientName\n" +
+                            "LEFT JOIN EatenMeals ON MealCompositions.mealName = EatenMeals.mealName\n" +
                             "WHERE username = '%s'\n" +
                             "ORDER BY mealNumber;",username));
             cachedRowSet = cache(resultSet);
@@ -123,28 +126,29 @@ public class SQLSafeQueryExecutor {
         Connection connection = DBManager.getConnection();
         CachedRowSet cachedRowSet;
         try(Statement statement = connection.createStatement()){
-            ResultSet resultSet = statement.executeQuery(
-                    String.format("SELECT dayNumber,\n" +
-                            "       DailyMeals.mealName AS mealName,\n" +
-                            "       Ingredients.ingredientName AS ingredientName,\n" +
-                            "       quantity,\n" +
-                            "       quantityType,\n" +
-                            "       ingredientsRatio, \n" +
-                            "       gramsPerQuantity,\n" +
-                            "       price * ( ingredientsRatio * quantity * gramsPerQuantity / 100) AS price,\n" +
-                            "       complexcarbs * ( ingredientsRatio * quantity * gramsPerQuantity / 100 ) AS complexCarbs,\n" +
-                            "       simplecarbs * ( ingredientsRatio * quantity * gramsPerQuantity / 100) AS simpleCarbs,\n" +
-                            "       fibers * ( ingredientsRatio * quantity * gramsPerQuantity / 100) AS fibers,\n" +
-                            "       saturatedfats * ( ingredientsRatio * quantity * gramsPerQuantity / 100 ) AS saturatedFats,\n" +
-                            "       unsaturatedfats * ( ingredientsRatio * quantity * gramsPerQuantity / 100 ) AS unSaturatedFats,\n" +
-                            "       transfats * ( ingredientsRatio * quantity * gramsPerQuantity / 100) AS transFats,\n" +
-                            "       proteins * ( ingredientsRatio * quantity * gramsPerQuantity / 100) as proteins,\n" +
-                            "       alcohol * ( ingredientsRatio * quantity * gramsPerQuantity / 100) AS alcohol\n" +
-                            "FROM\n" +
-                            "    DailyMeals JOIN MealCompositions ON DailyMeals.mealName = MealCompositions.mealName\n" +
-                            "    JOIN Ingredients on MealCompositions.ingredientName = Ingredients.ingredientName\n" +
-                            "    WHERE username = '%s'\n" +
-                            "    ORDER BY DailyMeals.dayNumber, DailyMeals.mealNumber",username));
+            String query = String.format("SELECT dayNumber,\n" +
+                    "       DailyMeals.mealName AS mealName,\n" +
+                    "       Ingredients.ingredientName AS ingredientName,\n" +
+                    "       MealCompositions.quantity AS quantity,\n" +
+                    "       quantityType,\n" +
+                    "       ingredientsRatio,\n" +
+                    "       gramsPerQuantity,\n" +
+                    "       price * ( ingredientsRatio * MealCompositions.quantity * gramsPerQuantity / 100) AS price,\n" +
+                    "       complexcarbs * ( ingredientsRatio * MealCompositions.quantity * gramsPerQuantity / 100 ) AS complexCarbs,\n" +
+                    "       simplecarbs * ( ingredientsRatio * MealCompositions.quantity * gramsPerQuantity / 100) AS simpleCarbs,\n" +
+                    "       fibers * ( ingredientsRatio * MealCompositions.quantity * gramsPerQuantity / 100) AS fibers,\n" +
+                    "       saturatedfats * ( ingredientsRatio * MealCompositions.quantity * gramsPerQuantity / 100 ) AS saturatedFats,\n" +
+                    "       unsaturatedfats * ( ingredientsRatio * MealCompositions.quantity * gramsPerQuantity / 100 ) AS unSaturatedFats,\n" +
+                    "       transfats * ( ingredientsRatio * MealCompositions.quantity * gramsPerQuantity / 100) AS transFats,\n" +
+                    "       proteins * ( ingredientsRatio * MealCompositions.quantity * gramsPerQuantity / 100) as proteins,\n" +
+                    "       alcohol * ( ingredientsRatio * MealCompositions.quantity * gramsPerQuantity / 100) AS alcohol\n" +
+                    "FROM\n" +
+                    "    DailyMeals JOIN Meals ON DailyMeals.mealName = Meals.mealName     " +
+                    "    LEFT JOIN MealCompositions ON DailyMeals.mealName = MealCompositions.mealName\n" +
+                    "    LEFT JOIN Ingredients on MealCompositions.ingredientName = Ingredients.ingredientName\n" +
+                    "WHERE username = '%s'\n" +
+                    "ORDER BY DailyMeals.dayNumber, DailyMeals.mealNumber",username);
+            ResultSet resultSet = statement.executeQuery(query);
             cachedRowSet = cache(resultSet);
         }
         return cachedRowSet;
@@ -193,10 +197,11 @@ public class SQLSafeQueryExecutor {
         ResultSet resultSet;
         CachedRowSet cachedRowSet;
         try(Statement statement = connection.createStatement()){
-            resultSet = statement.executeQuery("SELECT mealName,\n" +
+            resultSet = statement.executeQuery("SELECT Meals.mealName AS mealName,\n" +
                             "       Ingredients.ingredientName AS ingredientName,\n" +
                             "       quantityType,\n" +
-                            "       quantity,\n" +
+                            "       MealCompositions.quantity AS quantity,\n" +
+                            "       gramsPerQuantity,\n" +
                             "       price * ( gramsPerQuantity * MealCompositions.quantity / 100) AS price,\n" +
                             "       complexCarbs * ( gramsPerQuantity * MealCompositions.quantity / 100) AS complexCarbs,\n" +
                             "       simpleCarbs * ( gramsPerQuantity * MealCompositions.quantity / 100) AS simpleCarbs,\n" +
@@ -206,7 +211,8 @@ public class SQLSafeQueryExecutor {
                             "       transFats * ( gramsPerQuantity * MealCompositions.quantity / 100) AS transFats,\n" +
                             "       proteins * ( gramsPerQuantity * MealCompositions.quantity / 100) AS proteins,\n" +
                             "       alcohol * ( gramsPerQuantity * MealCompositions.quantity / 100) AS alcohol\n" +
-                            "FROM MealCompositions JOIN Ingredients ON MealCompositions.ingredientName = Ingredients.ingredientName\n");
+                            "       FROM Meals LEFT JOIN MealCompositions ON Meals.mealName = MealCompositions.mealName" +
+                            "       LEFT JOIN Ingredients ON MealCompositions.ingredientName = Ingredients.ingredientName\n");
             cachedRowSet = cache(resultSet);
         }
         return cachedRowSet;
@@ -216,8 +222,8 @@ public class SQLSafeQueryExecutor {
         Connection connection = DBManager.getConnection();
         CachedRowSet cachedRowSet;
         try(Statement statement = connection.createStatement()){
-            ResultSet resultSet = statement.executeQuery(
-                    String.format("SELECT * FROM Ingredients WHERE ingredientName LIKE '%s'",ingredientName));
+            String query = String.format("SELECT * FROM Ingredients WHERE ingredientName LIKE '%s%c'",ingredientName,'%');
+            ResultSet resultSet = statement.executeQuery(query);
             cachedRowSet = cache(resultSet);
         }
         return cachedRowSet;
@@ -227,22 +233,25 @@ public class SQLSafeQueryExecutor {
         Connection connection = DBManager.getConnection();
         CachedRowSet cachedRowSet;
         try(Statement statement = connection.createStatement()){
-            ResultSet resultSet = statement.executeQuery(
-                    String.format("SELECT mealName,\n" +
-                            "       Ingredients.ingredientName AS ingredientName,\n" +
-                            "       quantityType,\n" +
-                            "       quantity,\n" +
-                            "       price * ( gramsPerQuantity * MealCompositions.quantity / 100) AS price,\n" +
-                            "       complexCarbs * ( gramsPerQuantity * MealCompositions.quantity / 100) AS complexCarbs,\n" +
-                            "       simpleCarbs * ( gramsPerQuantity * MealCompositions.quantity / 100) AS simpleCarbs,\n" +
-                            "       fibers * ( gramsPerQuantity * MealCompositions.quantity / 100) AS fibers,\n" +
-                            "       saturatedFats * ( gramsPerQuantity * MealCompositions.quantity / 100) AS saturatedFats,\n" +
-                            "       unSaturatedFats * ( gramsPerQuantity * MealCompositions.quantity / 100) AS unSaturatedFats,\n" +
-                            "       transFats * ( gramsPerQuantity * MealCompositions.quantity / 100) AS transFats,\n" +
-                            "       proteins * ( gramsPerQuantity * MealCompositions.quantity / 100) AS proteins,\n" +
-                            "       alcohol * ( gramsPerQuantity * MealCompositions.quantity / 100) AS alcohol\n" +
-                            "FROM MealCompositions JOIN Ingredients ON MealCompositions.ingredientName = Ingredients.ingredientName\n" +
-                            "WHERE mealName LIKE '%s'",mealName));
+            String query =  String.format("\n" +
+                    "SELECT Meals.mealName AS mealName,\n" +
+                    "       Ingredients.ingredientName AS ingredientName,\n" +
+                    "       quantityType,\n" +
+                    "       gramsPerQuantity,\n" +
+                    "       MealCompositions.quantity AS quantity,\n" +
+                    "       price * ( gramsPerQuantity * MealCompositions.quantity / 100) AS price,\n" +
+                    "       complexCarbs * ( gramsPerQuantity * MealCompositions.quantity / 100) AS complexCarbs,\n" +
+                    "       simpleCarbs * ( gramsPerQuantity * MealCompositions.quantity / 100) AS simpleCarbs,\n" +
+                    "       fibers * ( gramsPerQuantity * MealCompositions.quantity / 100) AS fibers,\n" +
+                    "       saturatedFats * ( gramsPerQuantity * MealCompositions.quantity / 100) AS saturatedFats,\n" +
+                    "       unSaturatedFats * ( gramsPerQuantity * MealCompositions.quantity / 100) AS unSaturatedFats,\n" +
+                    "       transFats * ( gramsPerQuantity * MealCompositions.quantity / 100) AS transFats,\n" +
+                    "       proteins * ( gramsPerQuantity * MealCompositions.quantity / 100) AS proteins,\n" +
+                    "       alcohol * ( gramsPerQuantity * MealCompositions.quantity / 100) AS alcohol\n" +
+                    "    FROM Meals LEFT JOIN MealCompositions ON Meals.mealName = MealCompositions.mealName\n" +
+                    "    LEFT JOIN Ingredients ON MealCompositions.ingredientName = Ingredients.ingredientName\n" +
+                    "    WHERE Meals.mealName LIKE '%s%c'",mealName,'%','%');
+            ResultSet resultSet = statement.executeQuery(query);
             cachedRowSet = cache(resultSet);
         }
         return cachedRowSet;

@@ -17,6 +17,7 @@ public class SQLExecutorManager {
             statement.execute("CREATE TABLE IF NOT EXISTS Ingredients (\n" +
                     "ingredientName VARCHAR(32),\n" +
                     "price SMALLMONEY,\n" +
+                    "quantity FLOAT,\n" +
                     "quantityType VARCHAR(16),\n" +
                     "gramsPerQuantity REAL," +
                     "complexCarbs REAL,\n" +

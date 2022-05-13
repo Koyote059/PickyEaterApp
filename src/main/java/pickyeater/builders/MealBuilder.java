@@ -15,4 +15,5 @@ public interface MealBuilder {
     void addIngredients(Ingredient... ingredients);
 
     Meal build();
+    String getName();
 }
