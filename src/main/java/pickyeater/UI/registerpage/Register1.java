@@ -4,7 +4,9 @@ package pickyeater.UI.registerpage;
  * @author Claudio Di Maio
  */
 import com.toedter.calendar.JDateChooser;
+import pickyeater.UI.AgeCalculator;
 import pickyeater.algorithms.BodyFatCalculator;
+import pickyeater.algorithms.DeurenbergCalculator;
 import pickyeater.basics.user.Sex;
 import pickyeater.builders.UserBuilder;
 import pickyeater.executors.ExecutorProvider;
@@ -152,8 +154,9 @@ public class Register1 extends JFrame{
     private void Continue(EaterManager eaterManager, ExecutorProvider executorProvider){
         if (userBuilder.getName() != null && userBuilder.getSex() != null && userBuilder.getWeight() != 0 && userBuilder.getHeight() != 0 && userBuilder.getDateOfBirth() != null) {
             if (userBuilder.getBodyFat() == 0) {
-                BodyFatCalculator bodyFatCalculator = new BodyFatCaluclatorWrong();
-                userBuilder.setBodyFat(bodyFatCalculator.calculate(userBuilder.getHeight(), userBuilder.getWeight(), userBuilder.getSex()));
+                BodyFatCalculator bodyFatCalculator = new DeurenbergCalculator();
+                userBuilder.setBodyFat(bodyFatCalculator.calculate(userBuilder.getHeight(), userBuilder.getWeight(),
+                 new AgeCalculator().Age(userBuilder.getDateOfBirth()), userBuilder.getSex()));
             }
             JOptionPane.showMessageDialog(panelZeroOne, "Selected:" + "\n" + "Name: " + userBuilder.getName() + "\n" + "Height: " + userBuilder.getHeight() + "cm\n" + "Weight: " + userBuilder.getWeight() + "Kg\n" + "Birthday: " + userBuilder.getDateOfBirth() + "\n" + "Sex: " + userBuilder.getSex() + "\n" + "Body fat: " + userBuilder.getBodyFat() + "%");
 

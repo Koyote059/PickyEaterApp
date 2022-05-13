@@ -3,17 +3,15 @@ package pickyeater.UI.registerpage;
 /**
  * @author Claudio Di Maio
  */
-import pickyeater.UI.app.dailyprogresspage.DailyProgressPage;
+import pickyeater.UI.AgeCalculator;
 import pickyeater.UI.leftbuttons.MainButton;
 import pickyeater.UI.leftbuttons.PanelButtons;
-import pickyeater.algorithms.NutrientsRequiremenetCalculatorWrong;
-
+import pickyeater.algorithms.HarrisBenedictCalculator;
 import pickyeater.algorithms.NutrientsRequirementCalculator;
 import pickyeater.basics.food.Nutrients;
 import pickyeater.builders.NutrientsBuilder;
 import pickyeater.builders.PickyNutrientsBuilder;
 import pickyeater.builders.UserBuilder;
-import pickyeater.database.*;
 import pickyeater.executors.ExecutorProvider;
 import pickyeater.executors.RegisterExecutor;
 import pickyeater.managers.EaterManager;
@@ -101,8 +99,11 @@ public class Register4 extends JFrame {
 
     private void ResetNutrients(RegisterExecutor registerExecutor){
         // Get nutrients from NutrientsRequirementCalculator
-        NutrientsRequirementCalculator nutrientsCalculated = new NutrientsRequiremenetCalculatorWrong();
-        Nutrients nutrients = nutrientsCalculated.calculate(registerExecutor.getUserBuilder().getHeight(), registerExecutor.getUserBuilder().getWeight(), registerExecutor.getUserBuilder().getSex(), registerExecutor.getUserBuilder().getLifeStyle());
+        NutrientsRequirementCalculator nutrientsCalculated = new HarrisBenedictCalculator();
+        Nutrients nutrients = nutrientsCalculated.calculate(registerExecutor.getUserBuilder().getHeight(),
+                registerExecutor.getUserBuilder().getWeight(), new AgeCalculator().Age(registerExecutor.getUserBuilder().getDateOfBirth()),
+                registerExecutor.getUserBuilder().getSex(),
+                registerExecutor.getUserBuilder().getLifeStyle());
 
         // Do stuff to text fields (tf)
         tfCalories.setText(Double.toString(nutrients.getCalories()));
