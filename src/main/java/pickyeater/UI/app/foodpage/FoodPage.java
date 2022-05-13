@@ -38,7 +38,7 @@ public class FoodPage extends JFrame {
 
         // TODO: PUT IN AN EXECUTOR
         ExecutorProvider executorProvider = new ExecutorProvider();
-        System.out.println(executorProvider.getEaterManager().getFoodManager().getIngredientsThatStartWith("p"));
+        System.out.println(executorProvider.getEaterManager().getFoodManager().getIngredients());
         //for (int i < executorProvider.)
 
        // listMeals.setListData();
