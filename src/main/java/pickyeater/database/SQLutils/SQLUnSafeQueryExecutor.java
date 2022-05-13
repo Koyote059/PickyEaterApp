@@ -265,7 +265,7 @@ public class SQLUnSafeQueryExecutor {
                 statement.execute(String.format("INSERT INTO GroceriesItems " +
                                 "(ingredientName, quantity, status) VALUES ('%s',%s,'%s')",
                         neededIngredient.getName(),
-                        String.format("%f",neededIngredient.getQuantity().getWeight()).replaceAll(",","."),
+                        String.format("%f",neededIngredient.getQuantity().getAmount()).replaceAll(",","."),
                         status));
             }
         }
