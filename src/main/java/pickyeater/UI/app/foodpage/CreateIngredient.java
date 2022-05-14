@@ -24,6 +24,8 @@ public class CreateIngredient extends JFrame {
     private JTextField textField1;
     private JLabel txtQuantityType;
     private JComboBox cbQuantityType;
+    private JTextField tfQuantity;
+    private JLabel txtQuantity;
 
     public CreateIngredient() {
         btDailyProgress.setBackground(Color.white);
@@ -38,7 +40,10 @@ public class CreateIngredient extends JFrame {
                 new IngredientSearcherExecutor(executorProvider.getEaterManager());
 
         listIngredients.setListData(ingredientSearcherExecutor.getAllIngredientsObj());
-        txtQuantityType.setText("g");
+
+        txtQuantity.setVisible(false);
+        tfQuantity.setVisible(false);
+        txtQuantityType.setVisible(false);
 
         setContentPane(mainPanel);
         pack();
@@ -78,13 +83,19 @@ public class CreateIngredient extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 if (cbQuantityType.getSelectedIndex() == 0){
                     // todo: do stuff
-                    txtQuantityType.setText("g");
+                    txtQuantity.setVisible(false);
+                    tfQuantity.setVisible(false);
+                    txtQuantityType.setVisible(false);
                 } else if (cbQuantityType.getSelectedIndex() == 1) {
                     // todo: do stuff
-                    txtQuantityType.setText("ml");
+                    txtQuantity.setVisible(true);
+                    tfQuantity.setVisible(true);
+                    txtQuantityType.setVisible(true);
                 } else if (cbQuantityType.getSelectedIndex() == 2) {
                     // todo: do stuff
-                    txtQuantityType.setText("pz");
+                    txtQuantity.setVisible(true);
+                    tfQuantity.setVisible(true);
+                    txtQuantityType.setVisible(true);
                 }
             }
         });
