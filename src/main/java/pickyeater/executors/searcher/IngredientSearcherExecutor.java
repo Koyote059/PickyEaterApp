@@ -1,7 +1,6 @@
 package pickyeater.executors.searcher;
 
 import pickyeater.basics.food.Ingredient;
-import pickyeater.basics.food.Meal;
 import pickyeater.executors.ExecutorProvider;
 import pickyeater.managers.EaterManager;
 import pickyeater.managers.FoodManager;
@@ -20,12 +19,6 @@ public class IngredientSearcherExecutor {
     public Set<Ingredient> getIngredientsThatStartWith(String name) {
         FoodManager foodManager = this.eaterManager.getFoodManager();
         return foodManager.getIngredientsThatStartWith(name);
-    }
-
-    public Ingredient getIngredientWithName(String name) {
-        FoodManager foodManager = this.eaterManager.getFoodManager();
-        Set<Ingredient> ingredientSet = foodManager.getIngredientsThatStartWith(name);
-        return ingredientSet.iterator().next();
     }
 
     public Set<Ingredient> getAllIngredients() {

@@ -11,6 +11,7 @@ import java.text.DecimalFormat;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.util.Optional;
 
 public class SearchIngredient extends JFrame {
     private JButton btSettings;
@@ -38,10 +39,10 @@ public class SearchIngredient extends JFrame {
         btSettings.setBackground(Color.white);
 
         ExecutorProvider executorProvider = new ExecutorProvider();
-        listIngredients.setListData(new IngredientSearcherExecutor(executorProvider.getEaterManager()).getAllIngredientsObj());
-
         IngredientSearcherExecutor ingredientSearcherExecutor =
                 new IngredientSearcherExecutor(executorProvider.getEaterManager());
+
+        listIngredients.setListData(ingredientSearcherExecutor.getAllIngredientsObj());
 
         /*
         // TODO: ingredient = first ingredient in index
@@ -84,16 +85,19 @@ public class SearchIngredient extends JFrame {
             public void mouseReleased(MouseEvent e) {
                 super.mouseReleased(e);
 
-                Ingredient ingredient = ingredientSearcherExecutor.getIngredientWithName((String) listIngredients.getSelectedValue());
-
-                DecimalFormat df = new DecimalFormat("0.000");
-
-                txtIngredientStats.setText(ingredient.getName() + " stats");
-                txtCalories.setText(df.format(ingredient.getNutrients().getCalories()));
-                txtCarbs.setText(df.format(ingredient.getNutrients().getCarbs()));
-                txtProteins.setText(df.format(ingredient.getNutrients().getProteins()));
-                txtFats.setText(df.format(ingredient.getNutrients().getFats()));
-
+                Optional<Ingredient> ingredientOptional =
+                        ingredientSearcherExecutor.getIngredientByName((String) listIngredients.getSelectedValue());
+                if(ingredientOptional.isEmpty()){
+                    throw new RuntimeException("Missing ingredient from database : " + listIngredients.getSelectedValue());
+                } else {
+                    Ingredient ingredient = ingredientOptional.get();
+                    DecimalFormat df = new DecimalFormat("0.000");
+                    txtIngredientStats.setText(ingredient.getName());
+                    txtCalories.setText(df.format(ingredient.getNutrients().getCalories()));
+                    txtCarbs.setText(df.format(ingredient.getNutrients().getCarbs()));
+                    txtProteins.setText(df.format(ingredient.getNutrients().getProteins()));
+                    txtFats.setText(df.format(ingredient.getNutrients().getFats()));
+                }
                 //panelPieChart
             }
         });

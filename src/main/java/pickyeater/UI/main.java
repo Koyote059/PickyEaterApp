@@ -22,10 +22,10 @@ public class main {
                 pickyEatersDB.getIngredientsDatabase(),
                 pickyEatersDB.getMealsDatabase());
 
-        ExecutorProvider executorProvider = new ExecutorProvider(eaterManager);
+        ExecutorProvider.setEaterManager(eaterManager);
 
         if (eaterManager.getUserManager().getUser().isEmpty()) {  // User Database is empty
-            new Register1(eaterManager, executorProvider);
+            new Register1();
         } else {  // go to the app
             new MainButton(PanelButtons.PROGRESS);
         }

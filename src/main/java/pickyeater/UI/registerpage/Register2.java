@@ -4,9 +4,7 @@ package pickyeater.UI.registerpage;
  * @author Claudio Di Maio
  */
 import pickyeater.basics.user.LifeStyle;
-import pickyeater.builders.UserBuilder;
-import pickyeater.executors.ExecutorProvider;
-import pickyeater.managers.EaterManager;
+import pickyeater.executors.RegisterExecutor;
 
 import javax.swing.*;
 import java.awt.*;
@@ -22,7 +20,7 @@ public class Register2 extends JFrame {
     private JButton btBack;
     private JPanel buttonPanel;
 
-    public Register2(EaterManager eaterManager, ExecutorProvider executorProvider, UserBuilder userBuilder) {
+    public Register2(RegisterExecutor registerExecutor) {
         setContentPane(mainPanel);
         pack();
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
@@ -31,32 +29,32 @@ public class Register2 extends JFrame {
         btSedentary.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-                userBuilder.setLifeStyle(LifeStyle.SEDENTARY);
-                Continue(eaterManager, executorProvider, userBuilder);
+                registerExecutor.getUserBuilder().setLifeStyle(LifeStyle.SEDENTARY);
+                next(registerExecutor);
             }
         });
         btSlightlyActive.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-                userBuilder.setLifeStyle(LifeStyle.LIGHTLY_ACTIVE);
+                registerExecutor.getUserBuilder().setLifeStyle(LifeStyle.LIGHTLY_ACTIVE);
 
-                Continue(eaterManager, executorProvider, userBuilder);
+                next(registerExecutor);
             }
         });
         btActive.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-                userBuilder.setLifeStyle(LifeStyle.ACTIVE);
+                registerExecutor.getUserBuilder().setLifeStyle(LifeStyle.ACTIVE);
 
-                Continue(eaterManager, executorProvider, userBuilder);
+                next(registerExecutor);
             }
         });
         btVeryActive.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-                userBuilder.setLifeStyle(LifeStyle.VERY_ACTIVE);
+                registerExecutor.getUserBuilder().setLifeStyle(LifeStyle.VERY_ACTIVE);
 
-                Continue(eaterManager, executorProvider, userBuilder);
+                next(registerExecutor);
             }
         });
     btBack.addComponentListener(new ComponentAdapter() { } );
@@ -64,7 +62,7 @@ public class Register2 extends JFrame {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
                 setVisible(false);
-                new Register1(eaterManager, executorProvider);
+                new Register1();
             }
         });
         btSedentary.addMouseListener(new MouseAdapter() {
@@ -122,11 +120,11 @@ public class Register2 extends JFrame {
         btSedentary.addMouseListener(listener);
         btVeryActive.addMouseListener(listener);
     }
-    private void Continue(EaterManager eaterManager, ExecutorProvider executorProvider, UserBuilder userBuilder){
-        if (userBuilder.getLifeStyle() != null){
+    private void next(RegisterExecutor registerExecutor){
+        if (registerExecutor.getUserBuilder().getLifeStyle() != null){
             //JOptionPane.showMessageDialog(buttonPanel, "Lifestyle: " + lifeStyle);
             setVisible(false);
-            new Register3(eaterManager, executorProvider, userBuilder);
+            new Register3(registerExecutor);
         }
     }
 }

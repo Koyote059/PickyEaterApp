@@ -83,5 +83,12 @@ public class FoodPage extends JFrame {
                 new SearchIngredient();
             }
         });
+        btAddIngredient.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                setVisible(false);
+                new CreateIngredient();
+            }
+        });
     }
 }

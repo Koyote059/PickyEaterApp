@@ -12,9 +12,7 @@ import pickyeater.basics.food.Nutrients;
 import pickyeater.builders.NutrientsBuilder;
 import pickyeater.builders.PickyNutrientsBuilder;
 import pickyeater.builders.UserBuilder;
-import pickyeater.executors.ExecutorProvider;
 import pickyeater.executors.RegisterExecutor;
-import pickyeater.managers.EaterManager;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -31,25 +29,21 @@ public class Register4 extends JFrame {
     private JButton btReset;
     NutrientsBuilder nutrientsBuilder = new PickyNutrientsBuilder();
 
-    public Register4(EaterManager eaterManager, ExecutorProvider executorProvider, UserBuilder userBuilder) {
+    public Register4(RegisterExecutor registerExecutor) {
         setContentPane(mainPanel);
         pack();
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setVisible(true);
 
-        /*
-        System.out.println("" + executorProvider.getRegisterExecutor().getUserBuilder().getHeight() +
-                executorProvider.getRegisterExecutor().getUserBuilder().getWeight() + new AgeCalculator().Age(executorProvider.getRegisterExecutor().getUserBuilder().getDateOfBirth()) +
-                executorProvider.getRegisterExecutor().getUserBuilder().getSex() +
-                executorProvider.getRegisterExecutor().getUserBuilder().getLifeStyle());
-         */
-        ResetNutrients(executorProvider.getRegisterExecutor());
+        UserBuilder userBuilder = registerExecutor.getUserBuilder();
+
+        resetNutrients(userBuilder);
 
         btBack.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
                 setVisible(false);
-                new Register3(eaterManager, executorProvider, userBuilder);
+                new Register3(registerExecutor);
             }
         });
 
@@ -60,7 +54,7 @@ public class Register4 extends JFrame {
                 JOptionPane.showMessageDialog(mainPanel, "Selected:"  + "\n" + "Calories: " + nutrientsBuilder.getCalories() + "\n" + "Proteins: " + nutrientsBuilder.getProteins() + "\n" + "Carbs: " + nutrientsBuilder.getCarbs() + "\n" + "Fats: " + nutrientsBuilder.getFats());
 
                 userBuilder.setRequiredNutrients(nutrientsBuilder.build());
-                executorProvider.getRegisterExecutor().saveUser(userBuilder.build());
+                registerExecutor.saveUser(userBuilder.build());
 
                 setVisible(false);
                 new MainButton(PanelButtons.PROGRESS);
@@ -70,7 +64,7 @@ public class Register4 extends JFrame {
         btReset.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-                ResetNutrients(executorProvider.getRegisterExecutor());
+                resetNutrients(userBuilder);
             }
         });
 
@@ -103,21 +97,12 @@ public class Register4 extends JFrame {
         tfProteins.addActionListener(listener);
     }
 
-    private void ResetNutrients(RegisterExecutor registerExecutor){
-        /*
-        System.out.println("" + registerExecutor.getUserBuilder().getHeight() +
-                registerExecutor.getUserBuilder().getWeight() + new AgeCalculator().Age(registerExecutor.getUserBuilder().getDateOfBirth()) +
-                registerExecutor.getUserBuilder().getSex() +
-                registerExecutor.getUserBuilder().getLifeStyle());
-         */
-        // Get nutrients from NutrientsRequirementCalculator
+    private void resetNutrients(UserBuilder userBuilder){
         NutrientsRequirementCalculator nutrientsCalculated = new HarrisBenedictCalculator();
-        Nutrients nutrients = nutrientsCalculated.calculate(registerExecutor.getUserBuilder().getHeight(),
-                registerExecutor.getUserBuilder().getWeight(), new AgeCalculator().Age(registerExecutor.getUserBuilder().getDateOfBirth()),
-                registerExecutor.getUserBuilder().getSex(),
-                registerExecutor.getUserBuilder().getLifeStyle());
+        Nutrients nutrients = nutrientsCalculated.calculate(userBuilder.getHeight(),
+                userBuilder.getWeight(), new AgeCalculator().age(userBuilder.getDateOfBirth()),
+                userBuilder.getSex(), userBuilder.getLifeStyle());
 
-        // Do stuff to text fields (tf)
         tfCalories.setText(Double.toString(nutrients.getCalories()));
         tfProteins.setText(Double.toString(nutrients.getProteins()));
         tfCarbs.setText(Double.toString(nutrients.getCarbs()));

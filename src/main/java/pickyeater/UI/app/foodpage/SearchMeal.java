@@ -2,6 +2,7 @@ package pickyeater.UI.app.foodpage;
 
 import pickyeater.UI.leftbuttons.MainButton;
 import pickyeater.UI.leftbuttons.PanelButtonsConverter;
+import pickyeater.basics.food.Ingredient;
 import pickyeater.basics.food.Meal;
 import pickyeater.executors.ExecutorProvider;
 import pickyeater.executors.searcher.MealSearcherExecutor;
@@ -10,6 +11,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.text.DecimalFormat;
+import java.util.Optional;
 
 public class SearchMeal extends JFrame {
     private JButton btSettings;
@@ -82,16 +84,19 @@ public class SearchMeal extends JFrame {
             @Override
             public void mouseReleased(MouseEvent e) {
                 super.mouseReleased(e);
-
-                Meal meal = mealSearcherExecutor.getMealWithName((String)listMeals.getSelectedValue());
-
+                Optional<Meal> mealOptional =
+                        mealSearcherExecutor.getMealByName((String) listMeals.getSelectedValue());
+                if(mealOptional.isEmpty()){
+                    throw new RuntimeException("Missing ingredient from database : " + listMeals.getSelectedValue());
+                } else {
+                Meal meal = mealOptional.get();
                 DecimalFormat df = new DecimalFormat("0.000");
-
-                txtMealStats.setText(meal.getName() + " stats");
+                txtMealStats.setText(meal.getName());
                 txtCalories.setText(df.format(meal.getNutrients().getCalories()));
                 txtCarbs.setText(df.format(meal.getNutrients().getCarbs()));
                 txtProteins.setText(df.format(meal.getNutrients().getProteins()));
                 txtFats.setText(df.format(meal.getNutrients().getFats()));
+            }
             }
         });
     }

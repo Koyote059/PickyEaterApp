@@ -21,12 +21,6 @@ public class MealSearcherExecutor {
         return foodManager.getMealsThatStartsWith(name);
     }
 
-    public Meal getMealWithName(String name) {
-        FoodManager foodManager = this.eaterManager.getFoodManager();
-        Set<Meal> mealSet = foodManager.getMealsThatStartsWith(name);
-        return mealSet.iterator().next();
-    }
-
     public Set<Meal> getAllMeals() {
         FoodManager foodManager = this.eaterManager.getFoodManager();
         return foodManager.getMeals();

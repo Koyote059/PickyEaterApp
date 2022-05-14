@@ -5,9 +5,7 @@ package pickyeater.UI.registerpage;
  */
 
 import pickyeater.basics.user.WeightGoal;
-import pickyeater.builders.UserBuilder;
-import pickyeater.executors.ExecutorProvider;
-import pickyeater.managers.EaterManager;
+import pickyeater.executors.RegisterExecutor;
 
 import javax.swing.*;
 import java.awt.*;
@@ -22,7 +20,7 @@ public class Register3 extends JFrame {
     private JButton btBack;
     private JPanel buttonPanel;
 
-    public Register3(EaterManager eaterManager, ExecutorProvider executorProvider, UserBuilder userBuilder) {
+    public Register3(RegisterExecutor registerExecutor) {
         setContentPane(mainPanel);
         pack();
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
@@ -30,25 +28,25 @@ public class Register3 extends JFrame {
         btLoseWeight.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-                userBuilder.setWeightVariationGoal(WeightGoal.LOSE_WEIGHT);
+                registerExecutor.getUserBuilder().setWeightVariationGoal(WeightGoal.LOSE_WEIGHT);
 
-                Continue(eaterManager, executorProvider, userBuilder);
+                next(registerExecutor);
             }
         });
         btGainWeight.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-                userBuilder.setWeightVariationGoal(WeightGoal.INCREASE_WEIGHT);
+                registerExecutor.getUserBuilder().setWeightVariationGoal(WeightGoal.INCREASE_WEIGHT);
 
-                Continue(eaterManager, executorProvider, userBuilder);
+                next(registerExecutor);
             }
         });
         btMaintainWeight.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-                userBuilder.setWeightVariationGoal(WeightGoal.MANTAIN_WEIGHT);
+                registerExecutor.getUserBuilder().setWeightVariationGoal(WeightGoal.MANTAIN_WEIGHT);
 
-                Continue(eaterManager, executorProvider, userBuilder);
+                next(registerExecutor);
             }
         });
 
@@ -57,7 +55,7 @@ public class Register3 extends JFrame {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
                 setVisible(false);
-                new Register2(eaterManager, executorProvider, userBuilder);
+                new Register2(registerExecutor);
             }
         });
         btLoseWeight.addMouseListener(new MouseAdapter() {
@@ -100,12 +98,11 @@ public class Register3 extends JFrame {
         btMaintainWeight.addMouseListener(listener);
         btLoseWeight.addMouseListener(listener);
     }
-    private void Continue(EaterManager eaterManager,ExecutorProvider executorProvider, UserBuilder userBuilder){
-        if (executorProvider.getRegisterExecutor().getUserBuilder().getWeightVariationGoal() != null){
-            //JOptionPane.showMessageDialog(buttonPanel, "Goal: " + weightGoal);
+    private void next(RegisterExecutor registerExecutor){
+        if (registerExecutor.getUserBuilder().getWeightVariationGoal() != null){
             setVisible(false);
 
-            new Register4(eaterManager, executorProvider, userBuilder);
+            new Register4(registerExecutor);
         }
     }
 }

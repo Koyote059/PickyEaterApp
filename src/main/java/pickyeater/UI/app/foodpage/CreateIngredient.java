@@ -2,7 +2,8 @@ package pickyeater.UI.app.foodpage;
 
 import pickyeater.UI.leftbuttons.MainButton;
 import pickyeater.UI.leftbuttons.PanelButtonsConverter;
-import pickyeater.database.PickyEatersDatabase;
+import pickyeater.executors.ExecutorProvider;
+import pickyeater.executors.searcher.IngredientSearcherExecutor;
 
 import javax.swing.*;
 import java.awt.*;
@@ -17,12 +18,12 @@ public class CreateIngredient extends JFrame {
     private JButton btGroceries;
     private JButton btFood;
     private JButton btDiet;
-    private JList listMeals;
     private JList listIngredients;
-    private JButton btSearchMeal;
     private JButton btSearchIngredient;
-    private JButton btAddMeal;
     private JButton btAddIngredient;
+    private JTextField textField1;
+    private JLabel txtQuantityType;
+    private JComboBox cbQuantityType;
 
     public CreateIngredient() {
         btDailyProgress.setBackground(Color.white);
@@ -31,6 +32,13 @@ public class CreateIngredient extends JFrame {
         btGroceries.setBackground(Color.white);
         btUser.setBackground(Color.white);
         btSettings.setBackground(Color.white);
+
+        ExecutorProvider executorProvider = new ExecutorProvider();
+        IngredientSearcherExecutor ingredientSearcherExecutor =
+                new IngredientSearcherExecutor(executorProvider.getEaterManager());
+
+        listIngredients.setListData(ingredientSearcherExecutor.getAllIngredientsObj());
+        txtQuantityType.setText("g");
 
         setContentPane(mainPanel);
         pack();
@@ -50,5 +58,36 @@ public class CreateIngredient extends JFrame {
         btGroceries.addActionListener(listener);
         btFood.addActionListener(listener);
         btDiet.addActionListener(listener);
+        btSearchIngredient.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                setVisible(false);
+                new FoodPage();
+            }
+        });
+        btAddIngredient.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // TODO: Save ingredient to database
+                setVisible(false);
+                new CreateIngredient();
+            }
+        });
+        cbQuantityType.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (cbQuantityType.getSelectedIndex() == 0){
+                    // todo: do stuff
+                    txtQuantityType.setText("g");
+                } else if (cbQuantityType.getSelectedIndex() == 1) {
+                    // todo: do stuff
+                    txtQuantityType.setText("ml");
+                } else if (cbQuantityType.getSelectedIndex() == 2) {
+                    // todo: do stuff
+                    txtQuantityType.setText("pz");
+                }
+            }
+        });
     }
+
 }
