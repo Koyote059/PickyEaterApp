@@ -25,7 +25,7 @@ public class SearchIngredient extends JFrame {
     private JLabel txtFats;
     private JLabel txtCarbs;
     private JLabel txtProteins;
-    private JLabel txtMealStats;
+    private JLabel txtIngredientStats;
 
     public SearchIngredient() {
         btDailyProgress.setBackground(Color.white);
@@ -42,8 +42,8 @@ public class SearchIngredient extends JFrame {
                 new IngredientSearcherExecutor(executorProvider.getEaterManager());
 
         /*
-        // TODO: meal = first meal in index
-        txtMealStats.setText(meal.getName() + " stats");
+        // TODO: ingredient = first ingredient in index
+        txtIngredientStats.setText(meal.getName() + " stats");
         txtCalories.setText(Double.toString(meal.getNutrients().getCalories()));
         txtCarbs.setText(Double.toString(meal.getNutrients().getCarbs()));
         txtProteins.setText(Double.toString(meal.getNutrients().getProteins()));
@@ -84,7 +84,7 @@ public class SearchIngredient extends JFrame {
 
                 Ingredient ingredient = ingredientSearcherExecutor.getIngredientWithName((String) listIngredients.getSelectedValue());
 
-                txtMealStats.setText(ingredient.getName() + " stats");
+                txtIngredientStats.setText(ingredient.getName() + " stats");
                 txtCalories.setText(new ResizeString().ReduceStringLenght(Double.toString(ingredient.getNutrients().getCalories()), 6));
                 txtCarbs.setText(Double.toString(ingredient.getNutrients().getCarbs()));
                 txtProteins.setText(Double.toString(ingredient.getNutrients().getProteins()));
