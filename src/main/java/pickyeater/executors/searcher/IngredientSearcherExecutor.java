@@ -1,14 +1,11 @@
-//
-// Source code recreated from a .class file by IntelliJ IDEA
-// (powered by FernFlower decompiler)
-//
-
-package pickyeater.executors;
+package pickyeater.executors.searcher;
 
 import pickyeater.basics.food.Ingredient;
+import pickyeater.executors.ExecutorProvider;
 import pickyeater.managers.EaterManager;
 import pickyeater.managers.FoodManager;
 
+import java.util.Iterator;
 import java.util.Optional;
 import java.util.Set;
 
@@ -27,6 +24,18 @@ public class IngredientSearcherExecutor {
     public Set<Ingredient> getAllIngredients() {
         FoodManager foodManager = this.eaterManager.getFoodManager();
         return foodManager.getIngredients();
+    }
+
+    public Object[] getAllIngredientsObj() {
+        ExecutorProvider executorProvider = new ExecutorProvider();
+        Set<Ingredient> ingredientSet = executorProvider.getEaterManager().getFoodManager().getIngredients();
+        int tmpSize = ingredientSet.size();
+        Object objects[] = new Object[tmpSize];
+        for (Iterator<Ingredient> it = ingredientSet.iterator(); it.hasNext(); tmpSize--) {
+            Ingredient ingredient = it.next();
+            objects[tmpSize - 1] = ingredient.getName();
+        }
+        return objects;
     }
 
     public Optional<Ingredient> getIngredientByName(String ingredientName) {

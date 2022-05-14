@@ -3,16 +3,16 @@ package pickyeater.UI.registerpage;
 /**
  * @author Claudio Di Maio
  */
-import pickyeater.UI.app.dailyprogresspage.DailyProgressPage;
+import pickyeater.utils.AgeCalculator;
+import pickyeater.UI.leftbuttons.MainButton;
+import pickyeater.UI.leftbuttons.PanelButtons;
+import pickyeater.algorithms.HarrisBenedictCalculator;
 import pickyeater.algorithms.NutrientsRequirementCalculator;
 import pickyeater.basics.food.Nutrients;
 import pickyeater.builders.NutrientsBuilder;
 import pickyeater.builders.PickyNutrientsBuilder;
 import pickyeater.builders.UserBuilder;
-import pickyeater.database.*;
-import pickyeater.executors.ExecutorProvider;
 import pickyeater.executors.RegisterExecutor;
-import pickyeater.managers.EaterManager;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -29,19 +29,21 @@ public class Register4 extends JFrame {
     private JButton btReset;
     NutrientsBuilder nutrientsBuilder = new PickyNutrientsBuilder();
 
-    public Register4(EaterManager eaterManager, ExecutorProvider executorProvider, UserBuilder userBuilder) {
+    public Register4(RegisterExecutor registerExecutor) {
         setContentPane(mainPanel);
         pack();
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setVisible(true);
 
-        ResetNutrients(executorProvider.getRegisterExecutor());
+        UserBuilder userBuilder = registerExecutor.getUserBuilder();
+
+        resetNutrients(userBuilder);
 
         btBack.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
                 setVisible(false);
-                new Register3(eaterManager, executorProvider, userBuilder);
+                new Register3(registerExecutor);
             }
         });
 
@@ -52,19 +54,17 @@ public class Register4 extends JFrame {
                 JOptionPane.showMessageDialog(mainPanel, "Selected:"  + "\n" + "Calories: " + nutrientsBuilder.getCalories() + "\n" + "Proteins: " + nutrientsBuilder.getProteins() + "\n" + "Carbs: " + nutrientsBuilder.getCarbs() + "\n" + "Fats: " + nutrientsBuilder.getFats());
 
                 userBuilder.setRequiredNutrients(nutrientsBuilder.build());
-                executorProvider.getRegisterExecutor().saveUser(userBuilder.build());
+                registerExecutor.saveUser(userBuilder.build());
 
                 setVisible(false);
-                // Todo -> Togli sto coso, devi portarti gli executors, non i database
-                PickyEatersDatabase databases = new SQLPickyEaterDB("PickyEatersDB.sqlite");
-                new DailyProgressPage(databases);
+                new MainButton(PanelButtons.PROGRESS);
             }
         });
 
         btReset.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-                ResetNutrients(executorProvider.getRegisterExecutor());
+                resetNutrients(userBuilder);
             }
         });
 
@@ -97,12 +97,12 @@ public class Register4 extends JFrame {
         tfProteins.addActionListener(listener);
     }
 
-    private void ResetNutrients(RegisterExecutor registerExecutor){
-        // Get nutrients from NutrientsRequirementCalculator
-        NutrientsRequirementCalculator nutrientsCalculated = new NutrientsRequiremenetCalculatorWrong();
-        Nutrients nutrients = nutrientsCalculated.calculate(registerExecutor.getUserBuilder().getHeight(), registerExecutor.getUserBuilder().getWeight(), registerExecutor.getUserBuilder().getSex(), registerExecutor.getUserBuilder().getLifeStyle());
+    private void resetNutrients(UserBuilder userBuilder){
+        NutrientsRequirementCalculator nutrientsCalculated = new HarrisBenedictCalculator();
+        Nutrients nutrients = nutrientsCalculated.calculate(userBuilder.getHeight(),
+                userBuilder.getWeight(), new AgeCalculator().age(userBuilder.getDateOfBirth()),
+                userBuilder.getSex(), userBuilder.getLifeStyle());
 
-        // Do stuff to text fields (tf)
         tfCalories.setText(Double.toString(nutrients.getCalories()));
         tfProteins.setText(Double.toString(nutrients.getProteins()));
         tfCarbs.setText(Double.toString(nutrients.getCarbs()));

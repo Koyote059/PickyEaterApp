@@ -4,15 +4,11 @@ package pickyeater.UI.registerpage;
  * @author Claudio Di Maio
  */
 import pickyeater.basics.user.LifeStyle;
-import pickyeater.builders.UserBuilder;
-import pickyeater.executors.ExecutorProvider;
-import pickyeater.managers.EaterManager;
+import pickyeater.executors.RegisterExecutor;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.ComponentAdapter;
+import java.awt.event.*;
 
 public class Register2 extends JFrame {
     private JPanel panel1;
@@ -24,7 +20,7 @@ public class Register2 extends JFrame {
     private JButton btBack;
     private JPanel buttonPanel;
 
-    public Register2(EaterManager eaterManager, ExecutorProvider executorProvider, UserBuilder userBuilder) {
+    public Register2(RegisterExecutor registerExecutor) {
         setContentPane(mainPanel);
         pack();
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
@@ -33,54 +29,32 @@ public class Register2 extends JFrame {
         btSedentary.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-                btSedentary.setBackground(Color.green);
-                btSlightlyActive.setBackground(Color.white);
-                btActive.setBackground(Color.white);
-                btVeryActive.setBackground(Color.white);
-
-                userBuilder.setLifeStyle(LifeStyle.SEDENTARY);
-                System.out.println("LS " + LifeStyle.SEDENTARY);
-                System.out.println("UB " + userBuilder.getLifeStyle());
-                Continue(eaterManager, executorProvider, userBuilder);
+                registerExecutor.getUserBuilder().setLifeStyle(LifeStyle.SEDENTARY);
+                next(registerExecutor);
             }
         });
         btSlightlyActive.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-                btSedentary.setBackground(Color.white);
-                btSlightlyActive.setBackground(Color.green);
-                btActive.setBackground(Color.white);
-                btVeryActive.setBackground(Color.white);
+                registerExecutor.getUserBuilder().setLifeStyle(LifeStyle.LIGHTLY_ACTIVE);
 
-                userBuilder.setLifeStyle(LifeStyle.LIGHTLY_ACTIVE);
-
-                Continue(eaterManager, executorProvider, userBuilder);
+                next(registerExecutor);
             }
         });
         btActive.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-                btSedentary.setBackground(Color.white);
-                btSlightlyActive.setBackground(Color.white);
-                btActive.setBackground(Color.green);
-                btVeryActive.setBackground(Color.white);
+                registerExecutor.getUserBuilder().setLifeStyle(LifeStyle.ACTIVE);
 
-                userBuilder.setLifeStyle(LifeStyle.ACTIVE);
-
-                Continue(eaterManager, executorProvider, userBuilder);
+                next(registerExecutor);
             }
         });
         btVeryActive.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-                btSedentary.setBackground(Color.white);
-                btSlightlyActive.setBackground(Color.white);
-                btActive.setBackground(Color.white);
-                btVeryActive.setBackground(Color.green);
+                registerExecutor.getUserBuilder().setLifeStyle(LifeStyle.VERY_ACTIVE);
 
-                userBuilder.setLifeStyle(LifeStyle.VERY_ACTIVE);
-
-                Continue(eaterManager, executorProvider, userBuilder);
+                next(registerExecutor);
             }
         });
     btBack.addComponentListener(new ComponentAdapter() { } );
@@ -88,15 +62,69 @@ public class Register2 extends JFrame {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
                 setVisible(false);
-                new Register1(eaterManager, executorProvider);
+                new Register1();
             }
         });
+        btSedentary.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                super.mouseEntered(e);
+                btSedentary.setBackground(Color.green);
+                btSlightlyActive.setBackground(Color.white);
+                btActive.setBackground(Color.white);
+                btVeryActive.setBackground(Color.white);
+            }
+        });
+        btSlightlyActive.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                super.mouseEntered(e);
+                btSedentary.setBackground(Color.white);
+                btSlightlyActive.setBackground(Color.green);
+                btActive.setBackground(Color.white);
+                btVeryActive.setBackground(Color.white);
+            }
+        });
+        btActive.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                super.mouseEntered(e);
+                btSedentary.setBackground(Color.white);
+                btSlightlyActive.setBackground(Color.white);
+                btActive.setBackground(Color.green);
+                btVeryActive.setBackground(Color.white);
+            }
+        });
+        btVeryActive.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                super.mouseEntered(e);
+                btSedentary.setBackground(Color.white);
+                btSlightlyActive.setBackground(Color.white);
+                btActive.setBackground(Color.white);
+                btVeryActive.setBackground(Color.green);
+            }
+        });
+        MouseAdapter listener = new MouseAdapter() {
+            @Override
+            public void mouseExited(MouseEvent e) {
+                super.mouseExited(e);
+                btSedentary.setBackground(Color.white);
+                btSlightlyActive.setBackground(Color.white);
+                btActive.setBackground(Color.white);
+                btVeryActive.setBackground(Color.white);
+            }
+        };
+        btActive.addMouseListener(listener);
+        btSlightlyActive.addMouseListener(listener);
+        btSedentary.addMouseListener(listener);
+        btVeryActive.addMouseListener(listener);
     }
-    private void Continue(EaterManager eaterManager, ExecutorProvider executorProvider, UserBuilder userBuilder){
-        if (userBuilder.getLifeStyle() != null){
+    private void next(RegisterExecutor registerExecutor){
+        if (registerExecutor.getUserBuilder().getLifeStyle() != null){
             //JOptionPane.showMessageDialog(buttonPanel, "Lifestyle: " + lifeStyle);
             setVisible(false);
-            new Register3(eaterManager, executorProvider, userBuilder);
+            new Register3(registerExecutor);
         }
     }
 }

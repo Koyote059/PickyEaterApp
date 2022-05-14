@@ -6,7 +6,6 @@ package pickyeater.UI.app.dailyprogresspage;
 
 import pickyeater.UI.leftbuttons.MainButton;
 import pickyeater.UI.leftbuttons.PanelButtonsConverter;
-import pickyeater.database.PickyEatersDatabase;
 import pickyeater.executors.UserMealsProgressesExecutor;
 
 import javax.swing.*;
@@ -25,19 +24,23 @@ public class DailyProgressPage extends JFrame{
     private JButton btAddEatenMeals;
     private JButton btAddBurntCalories;
     private JList listEatenMeals;
-    private JProgressBar progressBar;
+    private JProgressBar bar;
     private JComboBox cbConsumed;
     private JLabel txtBurntCalories;
 
     UserMealsProgressesExecutor userMealsProgressesExecutor;
 
-    public DailyProgressPage(PickyEatersDatabase databases) {
+    public DailyProgressPage() {
         btDailyProgress.setBackground(Color.green);
         btDiet.setBackground(Color.white);
         btFood.setBackground(Color.white);
         btGroceries.setBackground(Color.white);
         btUser.setBackground(Color.white);
         btSettings.setBackground(Color.white);
+
+        //bar.setStringPainted(true);
+        //bar.setValue(0-100);
+        //bar.setString("Done");
 
         setContentPane(mainPanel);
         pack();
@@ -49,7 +52,7 @@ public class DailyProgressPage extends JFrame{
             public void actionPerformed(ActionEvent e) {
                 String cmd = e.getActionCommand();
                 setVisible(false);
-                new MainButton(databases, new PanelButtonsConverter(cmd).Convert());
+                new MainButton(new PanelButtonsConverter(cmd).Convert());
             }
         };
         btSettings.addActionListener(listener);
@@ -63,14 +66,14 @@ public class DailyProgressPage extends JFrame{
             @Override
             public void actionPerformed(ActionEvent e) {
                 setVisible(false);
-                new AddEatenMealPage(databases);
+                new AddEatenMealPage();
             }
         });
         btAddBurntCalories.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 setVisible(false);
-                new AddBurntCalories(databases);
+                new AddBurntCalories();
             }
         });
     }

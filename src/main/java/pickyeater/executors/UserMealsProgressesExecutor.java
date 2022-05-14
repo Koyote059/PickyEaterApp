@@ -1,5 +1,6 @@
 package pickyeater.executors;
 
+import pickyeater.executors.searcher.MealSearcherExecutor;
 import pickyeater.managers.EaterManager;
 import pickyeater.basics.user.DailyProgresses;
 import pickyeater.basics.user.User;

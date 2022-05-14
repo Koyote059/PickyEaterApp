@@ -23,7 +23,7 @@ public class AddEatenMealPage extends JFrame {
     private JButton btSave;
     private JTextField tfQuantity;
 
-    public AddEatenMealPage(PickyEatersDatabase databases) {
+    public AddEatenMealPage() {
 
         btDailyProgress.setBackground(Color.green);
         btDiet.setBackground(Color.white);
@@ -41,7 +41,7 @@ public class AddEatenMealPage extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 String cmd = e.getActionCommand();
                 setVisible(false);
-                new MainButton(databases, new PanelButtonsConverter(cmd).Convert());
+                new MainButton(new PanelButtonsConverter(cmd).Convert());
             }
         };
         btSettings.addActionListener(listener);
@@ -54,14 +54,14 @@ public class AddEatenMealPage extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 setVisible(false);
-                new DailyProgressPage(databases);
+                new DailyProgressPage();
             }
         });
         btSave.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 setVisible(false);
-                new DailyProgressPage(databases);
+                new DailyProgressPage();
             }
         });
     }

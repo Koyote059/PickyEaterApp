@@ -3,34 +3,34 @@ package pickyeater.UI.app.foodpage;
 import pickyeater.UI.leftbuttons.MainButton;
 import pickyeater.UI.leftbuttons.PanelButtonsConverter;
 import pickyeater.basics.food.Ingredient;
-import pickyeater.basics.food.Meal;
 import pickyeater.executors.ExecutorProvider;
-import pickyeater.executors.searcher.MealSearcherExecutor;
+import pickyeater.executors.searcher.IngredientSearcherExecutor;
+
+import java.text.DecimalFormat;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
-import java.text.DecimalFormat;
 import java.util.Optional;
 
-public class SearchMeal extends JFrame {
+public class SearchIngredient extends JFrame {
     private JButton btSettings;
     private JButton btDailyProgress;
     private JButton btUser;
     private JButton btGroceries;
     private JButton btFood;
     private JButton btDiet;
-    private JList listMeals;
+    private JList listIngredients;
     private JButton btDone;
     private JPanel mainPanel;
     private JLabel txtCalories;
     private JLabel txtFats;
     private JLabel txtCarbs;
     private JLabel txtProteins;
-    private JLabel txtMealStats;
+    private JLabel txtIngredientStats;
     private JPanel panelPieChart;
 
-    public SearchMeal() {
+    public SearchIngredient() {
         btDailyProgress.setBackground(Color.white);
         btDiet.setBackground(Color.white);
         btFood.setBackground(Color.green);
@@ -39,14 +39,14 @@ public class SearchMeal extends JFrame {
         btSettings.setBackground(Color.white);
 
         ExecutorProvider executorProvider = new ExecutorProvider();
-        listMeals.setListData(new MealSearcherExecutor(executorProvider.getEaterManager()).getAllMealsObj());
+        IngredientSearcherExecutor ingredientSearcherExecutor =
+                new IngredientSearcherExecutor(executorProvider.getEaterManager());
 
-        MealSearcherExecutor mealSearcherExecutor =
-                new MealSearcherExecutor(executorProvider.getEaterManager());
+        listIngredients.setListData(ingredientSearcherExecutor.getAllIngredientsObj());
 
         /*
-        // TODO: meal = first meal in index
-        txtMealStats.setText(meal.getName() + " stats");
+        // TODO: ingredient = first ingredient in index
+        txtIngredientStats.setText(meal.getName() + " stats");
         txtCalories.setText(Double.toString(meal.getNutrients().getCalories()));
         txtCarbs.setText(Double.toString(meal.getNutrients().getCarbs()));
         txtProteins.setText(Double.toString(meal.getNutrients().getProteins()));
@@ -78,25 +78,27 @@ public class SearchMeal extends JFrame {
                 new FoodPage();
             }
         });
-        listMeals.addComponentListener(new ComponentAdapter() {
+        listIngredients.addComponentListener(new ComponentAdapter() {
         });
-        listMeals.addMouseListener(new MouseAdapter() {
+        listIngredients.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseReleased(MouseEvent e) {
                 super.mouseReleased(e);
-                Optional<Meal> mealOptional =
-                        mealSearcherExecutor.getMealByName((String) listMeals.getSelectedValue());
-                if(mealOptional.isEmpty()){
-                    throw new RuntimeException("Missing ingredient from database : " + listMeals.getSelectedValue());
+
+                Optional<Ingredient> ingredientOptional =
+                        ingredientSearcherExecutor.getIngredientByName((String) listIngredients.getSelectedValue());
+                if(ingredientOptional.isEmpty()){
+                    throw new RuntimeException("Missing ingredient from database : " + listIngredients.getSelectedValue());
                 } else {
-                Meal meal = mealOptional.get();
-                DecimalFormat df = new DecimalFormat("0.000");
-                txtMealStats.setText(meal.getName());
-                txtCalories.setText(df.format(meal.getNutrients().getCalories()));
-                txtCarbs.setText(df.format(meal.getNutrients().getCarbs()));
-                txtProteins.setText(df.format(meal.getNutrients().getProteins()));
-                txtFats.setText(df.format(meal.getNutrients().getFats()));
-            }
+                    Ingredient ingredient = ingredientOptional.get();
+                    DecimalFormat df = new DecimalFormat("0.000");
+                    txtIngredientStats.setText(ingredient.getName());
+                    txtCalories.setText(df.format(ingredient.getNutrients().getCalories()));
+                    txtCarbs.setText(df.format(ingredient.getNutrients().getCarbs()));
+                    txtProteins.setText(df.format(ingredient.getNutrients().getProteins()));
+                    txtFats.setText(df.format(ingredient.getNutrients().getFats()));
+                }
+                //panelPieChart
             }
         });
     }

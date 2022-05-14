@@ -25,7 +25,7 @@ public class MealPlanUngeneratedPage extends JFrame{
     private JButton clickHereToGoButton;
     UserMealsProgressesExecutor userMealsProgressesExecutor;
 
-    public MealPlanUngeneratedPage(PickyEatersDatabase databases) {
+    public MealPlanUngeneratedPage() {
 
         btDailyProgress.setBackground(Color.white);
         btDiet.setBackground(Color.green);
@@ -44,7 +44,7 @@ public class MealPlanUngeneratedPage extends JFrame{
             public void actionPerformed(ActionEvent e) {
                 String cmd = e.getActionCommand();
                 setVisible(false);
-                new MainButton(databases, new PanelButtonsConverter(cmd).Convert());
+                new MainButton(new PanelButtonsConverter(cmd).Convert());
             }
         };
         btSettings.addActionListener(listener);

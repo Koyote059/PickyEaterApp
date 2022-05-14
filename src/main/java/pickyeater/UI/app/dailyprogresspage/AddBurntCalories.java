@@ -21,7 +21,7 @@ public class AddBurntCalories extends JFrame {
     private JPanel mainPanel;
     private JButton btSave;
 
-    public AddBurntCalories(PickyEatersDatabase databases) {
+    public AddBurntCalories() {
 
         btDailyProgress.setBackground(Color.green);
         btDiet.setBackground(Color.white);
@@ -39,7 +39,7 @@ public class AddBurntCalories extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 String cmd = e.getActionCommand();
                 setVisible(false);
-                new MainButton(databases, new PanelButtonsConverter(cmd).Convert());
+                new MainButton(new PanelButtonsConverter(cmd).Convert());
             }
         };
         btSettings.addActionListener(listener);
@@ -53,14 +53,14 @@ public class AddBurntCalories extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 setVisible(false);
-                new DailyProgressPage(databases);
+                new DailyProgressPage();
             }
         });
         btSave.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 setVisible(false);
-                new DailyProgressPage(databases);
+                new DailyProgressPage();
             }
         });
     }

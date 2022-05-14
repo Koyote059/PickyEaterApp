@@ -4,11 +4,13 @@ package pickyeater.UI.registerpage;
  * @author Claudio Di Maio
  */
 import com.toedter.calendar.JDateChooser;
+import pickyeater.executors.RegisterExecutor;
+import pickyeater.utils.AgeCalculator;
 import pickyeater.algorithms.BodyFatCalculator;
+import pickyeater.algorithms.DeurenbergCalculator;
 import pickyeater.basics.user.Sex;
 import pickyeater.builders.UserBuilder;
 import pickyeater.executors.ExecutorProvider;
-import pickyeater.managers.EaterManager;
 
 import javax.swing.*;
 import java.awt.*;
@@ -36,11 +38,11 @@ public class Register1 extends JFrame{
     private JTextField tfBodyfat;
     private JPanel birthdayPanel;
     private JDateChooser jBirthdayChooser;
-
     private UserBuilder userBuilder;
 
-    public Register1(EaterManager eaterManager, ExecutorProvider executorProvider) {
-        this.userBuilder = executorProvider.getRegisterExecutor().getUserBuilder();
+    public Register1() {
+        RegisterExecutor registerExecutor = ExecutorProvider.getRegisterExecutor();
+        this.userBuilder = registerExecutor.getUserBuilder();
         setContentPane(mainPanel);
         pack();
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
@@ -141,27 +143,26 @@ public class Register1 extends JFrame{
                         JOptionPane.showMessageDialog(panelZeroOne, "Insert valid body-fat percentage", "Error", JOptionPane.ERROR_MESSAGE);
                     userBuilder.setBodyFat(0);
                     } else {
-                        Continue(eaterManager, executorProvider);
+                        next(registerExecutor);
                     }
                 } else {
-                    Continue(eaterManager, executorProvider);
+                    next(registerExecutor);
                 }
             }
         });
     }
 
-    private void Continue(EaterManager eaterManager, ExecutorProvider executorProvider){
+    private void next(RegisterExecutor registerExecutor){
         if (userBuilder.getName() != null && userBuilder.getSex() != null && userBuilder.getWeight() != 0 && userBuilder.getHeight() != 0 && userBuilder.getDateOfBirth() != null) {
             if (userBuilder.getBodyFat() == 0) {
-                BodyFatCalculator bodyFatCalculator = new BodyFatCaluclatorWrong();
-                userBuilder.setBodyFat(bodyFatCalculator.calculate(userBuilder.getHeight(), userBuilder.getWeight(), userBuilder.getSex()));
+                BodyFatCalculator bodyFatCalculator = new DeurenbergCalculator();
+                userBuilder.setBodyFat(bodyFatCalculator.calculate(userBuilder.getHeight(), userBuilder.getWeight(),
+                 new AgeCalculator().age(userBuilder.getDateOfBirth()), userBuilder.getSex()));
             }
             JOptionPane.showMessageDialog(panelZeroOne, "Selected:" + "\n" + "Name: " + userBuilder.getName() + "\n" + "Height: " + userBuilder.getHeight() + "cm\n" + "Weight: " + userBuilder.getWeight() + "Kg\n" + "Birthday: " + userBuilder.getDateOfBirth() + "\n" + "Sex: " + userBuilder.getSex() + "\n" + "Body fat: " + userBuilder.getBodyFat() + "%");
 
-            // TODO: User Save - technically it's already done
-
             setVisible(false);
-            new Register2(eaterManager, executorProvider, userBuilder);
+            new Register2(registerExecutor);
         }
     }
     private void createUIComponents() {

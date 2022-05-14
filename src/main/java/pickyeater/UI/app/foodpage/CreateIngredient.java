@@ -2,7 +2,8 @@ package pickyeater.UI.app.foodpage;
 
 import pickyeater.UI.leftbuttons.MainButton;
 import pickyeater.UI.leftbuttons.PanelButtonsConverter;
-import pickyeater.database.PickyEatersDatabase;
+import pickyeater.executors.ExecutorProvider;
+import pickyeater.executors.searcher.IngredientSearcherExecutor;
 
 import javax.swing.*;
 import java.awt.*;
@@ -17,20 +18,32 @@ public class CreateIngredient extends JFrame {
     private JButton btGroceries;
     private JButton btFood;
     private JButton btDiet;
-    private JList listMeals;
     private JList listIngredients;
-    private JButton btSearchMeal;
     private JButton btSearchIngredient;
-    private JButton btAddMeal;
     private JButton btAddIngredient;
+    private JTextField textField1;
+    private JLabel txtQuantityType;
+    private JComboBox cbQuantityType;
+    private JTextField tfQuantity;
+    private JLabel txtQuantity;
 
-    public CreateIngredient(PickyEatersDatabase databases) {
+    public CreateIngredient() {
         btDailyProgress.setBackground(Color.white);
         btDiet.setBackground(Color.white);
         btFood.setBackground(Color.green);
         btGroceries.setBackground(Color.white);
         btUser.setBackground(Color.white);
         btSettings.setBackground(Color.white);
+
+        ExecutorProvider executorProvider = new ExecutorProvider();
+        IngredientSearcherExecutor ingredientSearcherExecutor =
+                new IngredientSearcherExecutor(executorProvider.getEaterManager());
+
+        listIngredients.setListData(ingredientSearcherExecutor.getAllIngredientsObj());
+
+        txtQuantity.setVisible(false);
+        tfQuantity.setVisible(false);
+        txtQuantityType.setVisible(false);
 
         setContentPane(mainPanel);
         pack();
@@ -41,7 +54,7 @@ public class CreateIngredient extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 String cmd = e.getActionCommand();
                 setVisible(false);
-                new MainButton(databases, new PanelButtonsConverter(cmd).Convert());
+                new MainButton(new PanelButtonsConverter(cmd).Convert());
             }
         };
         btSettings.addActionListener(listener);
@@ -50,5 +63,42 @@ public class CreateIngredient extends JFrame {
         btGroceries.addActionListener(listener);
         btFood.addActionListener(listener);
         btDiet.addActionListener(listener);
+        btSearchIngredient.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                setVisible(false);
+                new FoodPage();
+            }
+        });
+        btAddIngredient.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // TODO: Save ingredient to database
+                setVisible(false);
+                new CreateIngredient();
+            }
+        });
+        cbQuantityType.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (cbQuantityType.getSelectedIndex() == 0){
+                    // todo: do stuff
+                    txtQuantity.setVisible(false);
+                    tfQuantity.setVisible(false);
+                    txtQuantityType.setVisible(false);
+                } else if (cbQuantityType.getSelectedIndex() == 1) {
+                    // todo: do stuff
+                    txtQuantity.setVisible(true);
+                    tfQuantity.setVisible(true);
+                    txtQuantityType.setVisible(true);
+                } else if (cbQuantityType.getSelectedIndex() == 2) {
+                    // todo: do stuff
+                    txtQuantity.setVisible(true);
+                    tfQuantity.setVisible(true);
+                    txtQuantityType.setVisible(true);
+                }
+            }
+        });
     }
+
 }

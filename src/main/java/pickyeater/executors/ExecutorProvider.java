@@ -4,47 +4,57 @@ package pickyeater.executors;
  * Author: Claudio Di Maio
  */
 
+import pickyeater.executors.searcher.IngredientSearcherExecutor;
+import pickyeater.executors.searcher.MealSearcherExecutor;
 import pickyeater.managers.EaterManager;
 
 /**
  * Contains all executors
  */
 public class ExecutorProvider {
-    private EaterManager manager;
+    private static EaterManager eaterManager;
 
-    public ExecutorProvider(EaterManager manager) {
-        this.manager = manager;
+    public static EaterManager getEaterManager() {
+        return eaterManager;
     }
 
-    public ChangeMealPlanExecutor getChangeMealPlanExecutor(){
-        return new ChangeMealPlanExecutor(manager);
+    public static void setEaterManager(EaterManager eaterManager) {
+        ExecutorProvider.eaterManager = eaterManager;
     }
 
-    public CreateIngredientExecutor getCreateIngredientExecutor(){
-        return new CreateIngredientExecutor(manager);
+    public static ChangeMealPlanExecutor getChangeMealPlanExecutor(){
+        return new ChangeMealPlanExecutor(eaterManager);
     }
 
-    public CreateMealExecutor getCreateMealExecutor(){
-        return new CreateMealExecutor(manager);
+    public static CreateIngredientExecutor getCreateIngredientExecutor(){
+        return new CreateIngredientExecutor(eaterManager);
     }
 
-    public IngredientSearcherExecutor getIngredientSearcherExecutor(){
-        return new IngredientSearcherExecutor(manager);
+    public static CreateMealExecutor getCreateMealExecutor(){
+        return new CreateMealExecutor(eaterManager);
     }
 
-    public MealPlanViewerExecutor getMealPlanViewerExecutor(){
-        return new MealPlanViewerExecutor(manager);
+    public static IngredientSearcherExecutor getIngredientSearcherExecutor(){
+        return new IngredientSearcherExecutor(eaterManager);
     }
 
-    public MealSearcherExecutor getMealSearcherExecutor(){
-        return new MealSearcherExecutor(manager);
+    public static MealPlanViewerExecutor getMealPlanViewerExecutor(){
+        return new MealPlanViewerExecutor(eaterManager);
     }
 
-    public RegisterExecutor getRegisterExecutor(){
-        return new RegisterExecutor(manager);
+    public static MealSearcherExecutor getMealSearcherExecutor(){
+        return new MealSearcherExecutor(eaterManager);
     }
 
-    public UserMealsProgressesExecutor getUserMealsProgressesExecutor(){
-        return new UserMealsProgressesExecutor(manager);
+    public static RegisterExecutor getRegisterExecutor(){
+        return new RegisterExecutor(eaterManager);
+    }
+
+    public static UserMealsProgressesExecutor getUserMealsProgressesExecutor(){
+        return new UserMealsProgressesExecutor(eaterManager);
+    }
+
+    public static SearchMealExecutor getSearchMealExecutor(){
+        return new SearchMealExecutor(eaterManager);
     }
 }

@@ -20,6 +20,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.time.format.DateTimeFormatterBuilder;
+import java.util.Date;
 import java.util.Optional;
 
 public class UserEditModePage extends JFrame{
@@ -47,6 +49,8 @@ public class UserEditModePage extends JFrame{
     private JComboBox cbSex;
 
     public UserEditModePage(PickyEatersDatabase databases) {
+
+        //TODO: FIX
         EaterManager eaterManager = new PickyEaterManager(databases.getUserDatabase(),
                 databases.getIngredientsDatabase(), databases.getMealsDatabase());
 
@@ -57,8 +61,9 @@ public class UserEditModePage extends JFrame{
 
         // User:
         tfName.setText(user.getName());
-        // txtDateOfBirth.setText(user.getUserStatus().getDateOfBirth().toString());
-        // TODO: Fix DoB
+        jBirthdayChooser.setDateFormatString(user.getUserStatus().getDateOfBirth().toString());
+        //txtDateOfBirth.setText(user.getUserStatus().getDateOfBirth().toString());
+        //TODO: FIX
         tfHeight.setText(Double.toString(user.getUserStatus().getHeight()));
         tfWeight.setText(Double.toString(user.getUserStatus().getWeight()));
         tfBodyfat.setText(Double.toString(user.getUserStatus().getBodyFat()));
@@ -111,7 +116,7 @@ public class UserEditModePage extends JFrame{
             public void actionPerformed(ActionEvent e) {
                 String cmd = e.getActionCommand();
                 setVisible(false);
-                new MainButton(databases, new PanelButtonsConverter(cmd).Convert());
+                new MainButton(new PanelButtonsConverter(cmd).Convert());
             }
         };
         btSettings.addActionListener(listener);
@@ -124,14 +129,14 @@ public class UserEditModePage extends JFrame{
             @Override
             public void actionPerformed(ActionEvent e) {
                 setVisible(false);
-                new MainButton(databases, PanelButtons.USER);
+                new MainButton(PanelButtons.USER);
             }
         });
         btSave.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 setVisible(false);
-                new MainButton(databases, PanelButtons.USER);
+                new MainButton(PanelButtons.USER);
             }
         });
         cbLifestyle.addActionListener(new ActionListener() {
