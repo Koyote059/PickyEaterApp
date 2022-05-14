@@ -9,6 +9,7 @@ import pickyeater.executors.searcher.MealSearcherExecutor;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.text.DecimalFormat;
 
 public class SearchMeal extends JFrame {
     private JButton btSettings;
@@ -83,11 +84,13 @@ public class SearchMeal extends JFrame {
 
                 Meal meal = mealSearcherExecutor.getMealWithName((String)listMeals.getSelectedValue());
 
+                DecimalFormat df = new DecimalFormat("0.000");
+
                 txtMealStats.setText(meal.getName() + " stats");
-                txtCalories.setText(Double.toString(meal.getNutrients().getCalories()));
-                txtCarbs.setText(Double.toString(meal.getNutrients().getCarbs()));
-                txtProteins.setText(Double.toString(meal.getNutrients().getProteins()));
-                txtFats.setText(Double.toString(meal.getNutrients().getFats()));
+                txtCalories.setText(df.format(meal.getNutrients().getCalories()));
+                txtCarbs.setText(df.format(meal.getNutrients().getCarbs()));
+                txtProteins.setText(df.format(meal.getNutrients().getProteins()));
+                txtFats.setText(df.format(meal.getNutrients().getFats()));
             }
         });
     }

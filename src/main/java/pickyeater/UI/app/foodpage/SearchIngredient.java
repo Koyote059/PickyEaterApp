@@ -5,7 +5,8 @@ import pickyeater.UI.leftbuttons.PanelButtonsConverter;
 import pickyeater.basics.food.Ingredient;
 import pickyeater.executors.ExecutorProvider;
 import pickyeater.executors.searcher.IngredientSearcherExecutor;
-import pickyeater.utils.ResizeString;
+
+import java.text.DecimalFormat;
 
 import javax.swing.*;
 import java.awt.*;
@@ -84,11 +85,13 @@ public class SearchIngredient extends JFrame {
 
                 Ingredient ingredient = ingredientSearcherExecutor.getIngredientWithName((String) listIngredients.getSelectedValue());
 
+                DecimalFormat df = new DecimalFormat("0.000");
+
                 txtIngredientStats.setText(ingredient.getName() + " stats");
-                txtCalories.setText(new ResizeString().ReduceStringLenght(Double.toString(ingredient.getNutrients().getCalories()), 6));
-                txtCarbs.setText(Double.toString(ingredient.getNutrients().getCarbs()));
-                txtProteins.setText(Double.toString(ingredient.getNutrients().getProteins()));
-                txtFats.setText(Double.toString(ingredient.getNutrients().getFats()));
+                txtCalories.setText(df.format(ingredient.getNutrients().getCalories()));
+                txtCarbs.setText(df.format(ingredient.getNutrients().getCarbs()));
+                txtProteins.setText(df.format(ingredient.getNutrients().getProteins()));
+                txtFats.setText(df.format(ingredient.getNutrients().getFats()));
             }
         });
     }
