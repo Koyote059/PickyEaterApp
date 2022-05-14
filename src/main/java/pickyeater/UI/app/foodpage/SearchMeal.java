@@ -3,15 +3,12 @@ package pickyeater.UI.app.foodpage;
 import pickyeater.UI.leftbuttons.MainButton;
 import pickyeater.UI.leftbuttons.PanelButtonsConverter;
 import pickyeater.basics.food.Meal;
-import pickyeater.database.PickyEatersDatabase;
 import pickyeater.executors.ExecutorProvider;
-import pickyeater.executors.MealSearcherExecutor;
+import pickyeater.executors.searcher.MealSearcherExecutor;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
-import java.util.Iterator;
-import java.util.Set;
 
 public class SearchMeal extends JFrame {
     private JButton btSettings;

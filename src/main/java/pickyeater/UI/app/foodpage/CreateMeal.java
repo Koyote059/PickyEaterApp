@@ -1,6 +1,7 @@
 package pickyeater.UI.app.foodpage;
 
 import pickyeater.UI.leftbuttons.MainButton;
+import pickyeater.UI.leftbuttons.PanelButtons;
 import pickyeater.UI.leftbuttons.PanelButtonsConverter;
 import pickyeater.database.PickyEatersDatabase;
 
@@ -48,5 +49,26 @@ public class CreateMeal extends JFrame {
         btGroceries.addActionListener(listener);
         btFood.addActionListener(listener);
         btDiet.addActionListener(listener);
+        btSearchMeal.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                setVisible(false);
+                new MainButton(PanelButtons.FOOD);
+            }
+        });
+        btSearchIngredient.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                setVisible(false);
+                new MainButton(PanelButtons.FOOD);
+            }
+        });
+        btAddIngredient.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                setVisible(false);
+                new CreateIngredient();
+            }
+        });
     }
 }

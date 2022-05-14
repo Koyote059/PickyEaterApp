@@ -4,6 +4,8 @@ package pickyeater.executors;
  * Author: Claudio Di Maio
  */
 
+import pickyeater.executors.searcher.IngredientSearcherExecutor;
+import pickyeater.executors.searcher.MealSearcherExecutor;
 import pickyeater.managers.EaterManager;
 
 /**

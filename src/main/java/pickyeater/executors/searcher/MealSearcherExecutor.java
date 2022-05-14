@@ -1,6 +1,7 @@
-package pickyeater.executors;
+package pickyeater.executors.searcher;
 
 import pickyeater.basics.food.Meal;
+import pickyeater.executors.ExecutorProvider;
 import pickyeater.managers.EaterManager;
 import pickyeater.managers.FoodManager;
 

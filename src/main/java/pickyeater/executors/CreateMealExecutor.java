@@ -3,6 +3,7 @@ package pickyeater.executors;
 import pickyeater.builders.MealBuilder;
 import pickyeater.builders.PickyMealBuilder;
 import pickyeater.basics.food.Meal;
+import pickyeater.executors.searcher.IngredientSearcherExecutor;
 import pickyeater.managers.EaterManager;
 import pickyeater.managers.FoodManager;
 

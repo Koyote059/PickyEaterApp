@@ -2,6 +2,7 @@ package pickyeater.executors;
 
 import pickyeater.builders.MealPlanBuilder;
 import pickyeater.builders.PickyMealPlanBuilder;
+import pickyeater.executors.searcher.MealSearcherExecutor;
 import pickyeater.managers.EaterManager;
 import pickyeater.basics.mealplan.MealPlan;
 import pickyeater.basics.user.User;

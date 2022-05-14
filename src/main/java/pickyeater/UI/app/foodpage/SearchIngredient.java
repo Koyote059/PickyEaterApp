@@ -2,32 +2,32 @@ package pickyeater.UI.app.foodpage;
 
 import pickyeater.UI.leftbuttons.MainButton;
 import pickyeater.UI.leftbuttons.PanelButtonsConverter;
+import pickyeater.basics.food.Ingredient;
 import pickyeater.executors.ExecutorProvider;
 import pickyeater.executors.searcher.IngredientSearcherExecutor;
-import pickyeater.executors.searcher.MealSearcherExecutor;
+import pickyeater.utils.ResizeString;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.ContainerAdapter;
+import java.awt.event.*;
 
-public class FoodPage extends JFrame {
-    private JPanel mainPanel;
+public class SearchIngredient extends JFrame {
     private JButton btSettings;
     private JButton btDailyProgress;
     private JButton btUser;
     private JButton btGroceries;
     private JButton btFood;
     private JButton btDiet;
-    private JList listMeals;
     private JList listIngredients;
-    private JButton btSearchMeal;
-    private JButton btSearchIngredient;
-    private JButton btAddMeal;
-    private JButton btAddIngredient;
+    private JButton btDone;
+    private JPanel mainPanel;
+    private JLabel txtCalories;
+    private JLabel txtFats;
+    private JLabel txtCarbs;
+    private JLabel txtProteins;
+    private JLabel txtMealStats;
 
-    public FoodPage() {
+    public SearchIngredient() {
         btDailyProgress.setBackground(Color.white);
         btDiet.setBackground(Color.white);
         btFood.setBackground(Color.green);
@@ -35,13 +35,20 @@ public class FoodPage extends JFrame {
         btUser.setBackground(Color.white);
         btSettings.setBackground(Color.white);
 
-        listMeals.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-        listIngredients.setSelectionMode((ListSelectionModel.SINGLE_SELECTION));
-
         ExecutorProvider executorProvider = new ExecutorProvider();
-
         listIngredients.setListData(new IngredientSearcherExecutor(executorProvider.getEaterManager()).getAllIngredientsObj());
-        listMeals.setListData(new MealSearcherExecutor(executorProvider.getEaterManager()).getAllMealsObj());
+
+        IngredientSearcherExecutor ingredientSearcherExecutor =
+                new IngredientSearcherExecutor(executorProvider.getEaterManager());
+
+        /*
+        // TODO: meal = first meal in index
+        txtMealStats.setText(meal.getName() + " stats");
+        txtCalories.setText(Double.toString(meal.getNutrients().getCalories()));
+        txtCarbs.setText(Double.toString(meal.getNutrients().getCarbs()));
+        txtProteins.setText(Double.toString(meal.getNutrients().getProteins()));
+        txtFats.setText(Double.toString(meal.getNutrients().getFats()));
+         */
 
         setContentPane(mainPanel);
         pack();
@@ -61,26 +68,27 @@ public class FoodPage extends JFrame {
         btGroceries.addActionListener(listener);
         btFood.addActionListener(listener);
         btDiet.addActionListener(listener);
+        btDone.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                setVisible(false);
+                new FoodPage();
+            }
+        });
+        listIngredients.addComponentListener(new ComponentAdapter() {
+        });
+        listIngredients.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseReleased(MouseEvent e) {
+                super.mouseReleased(e);
 
-        btSearchMeal.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                setVisible(false);
-                new SearchMeal();
-            }
-        });
-        btAddMeal.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                setVisible(false);
-                new CreateMeal();
-            }
-        });
-        btSearchIngredient.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                setVisible(false);
-                new SearchIngredient();
+                Ingredient ingredient = ingredientSearcherExecutor.getIngredientWithName((String) listIngredients.getSelectedValue());
+
+                txtMealStats.setText(ingredient.getName() + " stats");
+                txtCalories.setText(new ResizeString().ReduceStringLenght(Double.toString(ingredient.getNutrients().getCalories()), 6));
+                txtCarbs.setText(Double.toString(ingredient.getNutrients().getCarbs()));
+                txtProteins.setText(Double.toString(ingredient.getNutrients().getProteins()));
+                txtFats.setText(Double.toString(ingredient.getNutrients().getFats()));
             }
         });
     }
