@@ -59,4 +59,8 @@ public class ExecutorProvider {
     public UserMealsProgressesExecutor getUserMealsProgressesExecutor(){
         return new UserMealsProgressesExecutor(eaterManager);
     }
+
+    public SearchMealExecutor getSearchMealExecutor(){
+        return new SearchMealExecutor(eaterManager);
+    }
 }

@@ -17,7 +17,7 @@ public class main {
     public static void main(String[] args) {
 
         //PickyEatersDatabase pickyEatersDB = new SQLPickyEaterDB("PickyEatersDB.sqlite");
-        PickyEatersDatabase pickyEatersDB = new SQLPickyEaterDB("dbDiProva2.sqlite");
+        PickyEatersDatabase pickyEatersDB = new SQLPickyEaterDB("dbDiProva.sqlite");
 
         EaterManager eaterManager = new PickyEaterManager(
                 pickyEatersDB.getUserDatabase(),
@@ -25,8 +25,6 @@ public class main {
                 pickyEatersDB.getMealsDatabase());
 
         ExecutorProvider executorProvider = new ExecutorProvider(eaterManager);
-
-        //eaterManager.getFoodManager().saveIngredient(new PickyIngredient());
 
         if (eaterManager.getUserManager().getUser().isEmpty()) {  // User Database is empty
             new Register1(eaterManager, executorProvider);

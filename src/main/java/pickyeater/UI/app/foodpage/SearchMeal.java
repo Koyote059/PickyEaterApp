@@ -2,12 +2,17 @@ package pickyeater.UI.app.foodpage;
 
 import pickyeater.UI.leftbuttons.MainButton;
 import pickyeater.UI.leftbuttons.PanelButtonsConverter;
+import pickyeater.basics.food.Meal;
 import pickyeater.database.PickyEatersDatabase;
+import pickyeater.executors.ExecutorProvider;
+import pickyeater.executors.MealSearcherExecutor;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Iterator;
+import java.util.Set;
 
 public class SearchMeal extends JFrame {
     private JButton btSettings;
@@ -19,6 +24,11 @@ public class SearchMeal extends JFrame {
     private JList listMeals;
     private JButton btDone;
     private JPanel mainPanel;
+    private JLabel txtCalories;
+    private JLabel txtFats;
+    private JLabel txtCarbs;
+    private JLabel txtProteins;
+    private JLabel txtMealStats;
 
     public SearchMeal() {
         btDailyProgress.setBackground(Color.white);
@@ -27,6 +37,9 @@ public class SearchMeal extends JFrame {
         btGroceries.setBackground(Color.white);
         btUser.setBackground(Color.white);
         btSettings.setBackground(Color.white);
+
+        ExecutorProvider executorProvider = new ExecutorProvider();
+        listMeals.setListData(new MealSearcherExecutor(executorProvider.getEaterManager()).getAllMealsObj());
 
         setContentPane(mainPanel);
         pack();
@@ -46,5 +59,12 @@ public class SearchMeal extends JFrame {
         btGroceries.addActionListener(listener);
         btFood.addActionListener(listener);
         btDiet.addActionListener(listener);
+        btDone.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                setVisible(false);
+                new FoodPage();
+            }
+        });
     }
 }

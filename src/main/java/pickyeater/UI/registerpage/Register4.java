@@ -3,7 +3,7 @@ package pickyeater.UI.registerpage;
 /**
  * @author Claudio Di Maio
  */
-import pickyeater.UI.AgeCalculator;
+import pickyeater.utils.AgeCalculator;
 import pickyeater.UI.leftbuttons.MainButton;
 import pickyeater.UI.leftbuttons.PanelButtons;
 import pickyeater.algorithms.HarrisBenedictCalculator;
@@ -37,6 +37,12 @@ public class Register4 extends JFrame {
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setVisible(true);
 
+        /*
+        System.out.println("" + executorProvider.getRegisterExecutor().getUserBuilder().getHeight() +
+                executorProvider.getRegisterExecutor().getUserBuilder().getWeight() + new AgeCalculator().Age(executorProvider.getRegisterExecutor().getUserBuilder().getDateOfBirth()) +
+                executorProvider.getRegisterExecutor().getUserBuilder().getSex() +
+                executorProvider.getRegisterExecutor().getUserBuilder().getLifeStyle());
+         */
         ResetNutrients(executorProvider.getRegisterExecutor());
 
         btBack.addActionListener(new ActionListener() {
@@ -98,6 +104,12 @@ public class Register4 extends JFrame {
     }
 
     private void ResetNutrients(RegisterExecutor registerExecutor){
+        /*
+        System.out.println("" + registerExecutor.getUserBuilder().getHeight() +
+                registerExecutor.getUserBuilder().getWeight() + new AgeCalculator().Age(registerExecutor.getUserBuilder().getDateOfBirth()) +
+                registerExecutor.getUserBuilder().getSex() +
+                registerExecutor.getUserBuilder().getLifeStyle());
+         */
         // Get nutrients from NutrientsRequirementCalculator
         NutrientsRequirementCalculator nutrientsCalculated = new HarrisBenedictCalculator();
         Nutrients nutrients = nutrientsCalculated.calculate(registerExecutor.getUserBuilder().getHeight(),

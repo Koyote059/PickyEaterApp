@@ -6,6 +6,8 @@ import pickyeater.basics.food.Ingredient;
 import pickyeater.basics.food.Meal;
 import pickyeater.database.PickyEatersDatabase;
 import pickyeater.executors.ExecutorProvider;
+import pickyeater.executors.IngredientSearcherExecutor;
+import pickyeater.executors.MealSearcherExecutor;
 
 import javax.swing.*;
 import java.awt.*;
@@ -41,28 +43,10 @@ public class FoodPage extends JFrame {
         listMeals.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         listIngredients.setSelectionMode((ListSelectionModel.SINGLE_SELECTION));
 
-        // TODO: PUT IN AN EXECUTOR
         ExecutorProvider executorProvider = new ExecutorProvider();
 
-       // listMeals.setListData();
-
-        Set<Ingredient> ingredientSet = executorProvider.getEaterManager().getFoodManager().getIngredients();
-        int tmpSize = ingredientSet.size();
-        Object o1[] = new Object[tmpSize];
-        for (Iterator<Ingredient> it = ingredientSet.iterator(); it.hasNext(); tmpSize--) {
-            Ingredient ingredient = it.next();
-            o1[tmpSize - 1] = ingredient.getName();
-        }
-        listIngredients.setListData(o1);
-
-        Set<Meal> mealSet = executorProvider.getEaterManager().getFoodManager().getMeals();
-        tmpSize = mealSet.size();
-        Object o2[] = new Object[tmpSize];
-        for (Iterator<Meal> it = mealSet.iterator(); it.hasNext(); tmpSize--) {
-            Meal meal = it.next();
-            o2[tmpSize - 1] = meal.getName();
-        }
-        listMeals.setListData(o2);
+        listIngredients.setListData(new IngredientSearcherExecutor(executorProvider.getEaterManager()).getAllIngredientsObj());
+        listMeals.setListData(new MealSearcherExecutor(executorProvider.getEaterManager()).getAllMealsObj());
 
         setContentPane(mainPanel);
         pack();

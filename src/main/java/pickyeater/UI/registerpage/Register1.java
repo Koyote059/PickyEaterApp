@@ -4,7 +4,7 @@ package pickyeater.UI.registerpage;
  * @author Claudio Di Maio
  */
 import com.toedter.calendar.JDateChooser;
-import pickyeater.UI.AgeCalculator;
+import pickyeater.utils.AgeCalculator;
 import pickyeater.algorithms.BodyFatCalculator;
 import pickyeater.algorithms.DeurenbergCalculator;
 import pickyeater.basics.user.Sex;
@@ -159,8 +159,6 @@ public class Register1 extends JFrame{
                  new AgeCalculator().Age(userBuilder.getDateOfBirth()), userBuilder.getSex()));
             }
             JOptionPane.showMessageDialog(panelZeroOne, "Selected:" + "\n" + "Name: " + userBuilder.getName() + "\n" + "Height: " + userBuilder.getHeight() + "cm\n" + "Weight: " + userBuilder.getWeight() + "Kg\n" + "Birthday: " + userBuilder.getDateOfBirth() + "\n" + "Sex: " + userBuilder.getSex() + "\n" + "Body fat: " + userBuilder.getBodyFat() + "%");
-
-            // TODO: User Save - technically it's already done
 
             setVisible(false);
             new Register2(eaterManager, executorProvider, userBuilder);
