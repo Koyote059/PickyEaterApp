@@ -9,8 +9,7 @@ import pickyeater.executors.MealSearcherExecutor;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.event.*;
 import java.util.Iterator;
 import java.util.Set;
 
@@ -41,6 +40,18 @@ public class SearchMeal extends JFrame {
         ExecutorProvider executorProvider = new ExecutorProvider();
         listMeals.setListData(new MealSearcherExecutor(executorProvider.getEaterManager()).getAllMealsObj());
 
+        MealSearcherExecutor mealSearcherExecutor =
+                new MealSearcherExecutor(executorProvider.getEaterManager());
+
+        /*
+        // TODO: meal = first meal in index
+        txtMealStats.setText(meal.getName() + " stats");
+        txtCalories.setText(Double.toString(meal.getNutrients().getCalories()));
+        txtCarbs.setText(Double.toString(meal.getNutrients().getCarbs()));
+        txtProteins.setText(Double.toString(meal.getNutrients().getProteins()));
+        txtFats.setText(Double.toString(meal.getNutrients().getFats()));
+         */
+
         setContentPane(mainPanel);
         pack();
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
@@ -64,6 +75,22 @@ public class SearchMeal extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 setVisible(false);
                 new FoodPage();
+            }
+        });
+        listMeals.addComponentListener(new ComponentAdapter() {
+        });
+        listMeals.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseReleased(MouseEvent e) {
+                super.mouseReleased(e);
+
+                Meal meal = mealSearcherExecutor.getMealWithName((String)listMeals.getSelectedValue());
+
+                txtMealStats.setText(meal.getName() + " stats");
+                txtCalories.setText(Double.toString(meal.getNutrients().getCalories()));
+                txtCarbs.setText(Double.toString(meal.getNutrients().getCarbs()));
+                txtProteins.setText(Double.toString(meal.getNutrients().getProteins()));
+                txtFats.setText(Double.toString(meal.getNutrients().getFats()));
             }
         });
     }
