@@ -26,6 +26,7 @@ public class SearchMeal extends JFrame {
     private JLabel txtCarbs;
     private JLabel txtProteins;
     private JLabel txtMealStats;
+    private JPanel panelPieChart;
 
     public SearchMeal() {
         btDailyProgress.setBackground(Color.white);

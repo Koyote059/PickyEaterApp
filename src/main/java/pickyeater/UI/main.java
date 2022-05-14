@@ -6,8 +6,6 @@ package pickyeater.UI;
 import pickyeater.UI.leftbuttons.MainButton;
 import pickyeater.UI.leftbuttons.PanelButtons;
 import pickyeater.UI.registerpage.Register1;
-import pickyeater.basics.food.PickyIngredient;
-import pickyeater.builders.PickyIngredientBuilder;
 import pickyeater.database.*;
 import pickyeater.executors.ExecutorProvider;
 import pickyeater.managers.EaterManager;

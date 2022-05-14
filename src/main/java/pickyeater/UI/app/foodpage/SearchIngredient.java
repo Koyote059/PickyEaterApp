@@ -27,6 +27,7 @@ public class SearchIngredient extends JFrame {
     private JLabel txtCarbs;
     private JLabel txtProteins;
     private JLabel txtIngredientStats;
+    private JPanel panelPieChart;
 
     public SearchIngredient() {
         btDailyProgress.setBackground(Color.white);
@@ -92,6 +93,8 @@ public class SearchIngredient extends JFrame {
                 txtCarbs.setText(df.format(ingredient.getNutrients().getCarbs()));
                 txtProteins.setText(df.format(ingredient.getNutrients().getProteins()));
                 txtFats.setText(df.format(ingredient.getNutrients().getFats()));
+
+                //panelPieChart
             }
         });
     }
