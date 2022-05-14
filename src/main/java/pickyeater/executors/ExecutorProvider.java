@@ -57,4 +57,12 @@ public class ExecutorProvider {
     public static SearchMealExecutor getSearchMealExecutor(){
         return new SearchMealExecutor(eaterManager);
     }
+
+    public static UserExecutor getUserExecutor(){
+        return new UserExecutor(eaterManager);
+    }
+
+    public static UserEditModeExecutor getUserEditModeExecutor(){
+        return new UserEditModeExecutor(eaterManager);
+    }
 }

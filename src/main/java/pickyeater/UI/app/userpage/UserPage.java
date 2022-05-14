@@ -8,6 +8,9 @@ import pickyeater.UI.leftbuttons.MainButton;
 import pickyeater.UI.leftbuttons.PanelButtonsConverter;
 import pickyeater.basics.user.User;
 import pickyeater.database.PickyEatersDatabase;
+import pickyeater.executors.ExecutorProvider;
+import pickyeater.executors.RegisterExecutor;
+import pickyeater.executors.UserExecutor;
 import pickyeater.executors.UserMealsProgressesExecutor;
 import pickyeater.managers.EaterManager;
 import pickyeater.managers.PickyEaterManager;
@@ -39,16 +42,12 @@ public class UserPage extends JFrame{
     private JLabel txtCarbs;
     private JLabel txtFats;
     private JLabel txtCalories;
-    UserMealsProgressesExecutor userMealsProgressesExecutor;
 
-    public UserPage(PickyEatersDatabase databases) {
-        EaterManager eaterManager = new PickyEaterManager(databases.getUserDatabase(),
-                databases.getIngredientsDatabase(), databases.getMealsDatabase());
+    public UserPage() {
 
+        UserExecutor userExecutor = ExecutorProvider.getUserExecutor();
 
-        Optional<User> userOptional = eaterManager.getUserManager().getUser();
-
-        User user = userOptional.get();
+        User user = userExecutor.getUser();
 
         // User:
         txtName.setText(user.getName());
@@ -96,7 +95,7 @@ public class UserPage extends JFrame{
             @Override
             public void actionPerformed(ActionEvent e) {
                 setVisible(false);
-                new UserEditModePage(databases);
+                new UserEditModePage();
             }
         });
     }

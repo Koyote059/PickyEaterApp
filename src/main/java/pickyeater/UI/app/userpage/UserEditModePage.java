@@ -12,17 +12,13 @@ import pickyeater.basics.user.LifeStyle;
 import pickyeater.basics.user.Sex;
 import pickyeater.basics.user.User;
 import pickyeater.basics.user.WeightGoal;
-import pickyeater.database.PickyEatersDatabase;
-import pickyeater.managers.EaterManager;
-import pickyeater.managers.PickyEaterManager;
+import pickyeater.executors.ExecutorProvider;
+import pickyeater.executors.UserEditModeExecutor;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.time.format.DateTimeFormatterBuilder;
-import java.util.Date;
-import java.util.Optional;
 
 public class UserEditModePage extends JFrame{
     private JPanel mainPanel;
@@ -48,16 +44,10 @@ public class UserEditModePage extends JFrame{
     private JDateChooser jBirthdayChooser;
     private JComboBox cbSex;
 
-    public UserEditModePage(PickyEatersDatabase databases) {
+    public UserEditModePage() {
+        UserEditModeExecutor userEditModeExecutor = ExecutorProvider.getUserEditModeExecutor();
 
-        //TODO: FIX
-        EaterManager eaterManager = new PickyEaterManager(databases.getUserDatabase(),
-                databases.getIngredientsDatabase(), databases.getMealsDatabase());
-
-
-        Optional<User> userOptional = eaterManager.getUserManager().getUser();
-
-        User user = userOptional.get();
+        User user = userEditModeExecutor.getUser();
 
         // User:
         tfName.setText(user.getName());
