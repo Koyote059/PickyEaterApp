@@ -2,6 +2,7 @@ package pickyeater.UI.app.dailyprogresspage;
 
 import pickyeater.UI.leftbuttons.MainButton;
 import pickyeater.UI.leftbuttons.PanelButtonsConverter;
+import pickyeater.executors.ExecutorProvider;
 
 import javax.swing.*;
 import java.awt.*;
@@ -60,9 +61,8 @@ public class AddBurntCalories extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
 
-                //TODO if in Calories there isn't a valid number, show error
-
-
+                //TODO if in Calories there isn't a valid number (negative or not a number), show error
+                ExecutorProvider.getAddBurntCalories().setBurntCalories(Float.parseFloat(tfBurntCalories.getText()));
 
                 JOptionPane.showMessageDialog(mainPanel, "Activity name: " + tfActivityName.getText() + "\nBurnt " +
                         "Calories: " + tfBurntCalories.getText());

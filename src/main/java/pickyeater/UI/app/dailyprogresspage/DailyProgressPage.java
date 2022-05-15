@@ -8,7 +8,7 @@ import pickyeater.UI.leftbuttons.MainButton;
 import pickyeater.UI.leftbuttons.PanelButtonsConverter;
 import pickyeater.executors.DailyProgressExecutor;
 import pickyeater.executors.ExecutorProvider;
-import pickyeater.executors.user.UserMealsProgressesExecutor;
+import GARBAGE.UserMealsProgressesExecutor;
 
 import javax.swing.*;
 import java.awt.*;

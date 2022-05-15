@@ -11,7 +11,7 @@ import pickyeater.executors.searcher.MealSearcherExecutor;
 import pickyeater.executors.user.RegisterExecutor;
 import pickyeater.executors.user.UserEditModeExecutor;
 import pickyeater.executors.user.UserExecutor;
-import pickyeater.executors.user.UserMealsProgressesExecutor;
+import GARBAGE.UserMealsProgressesExecutor;
 import pickyeater.managers.EaterManager;
 
 /**
@@ -69,4 +69,6 @@ public class ExecutorProvider {
     }
 
     public static DailyProgressExecutor getDailyProgressExecutor() { return new DailyProgressExecutor(eaterManager);}
+
+    public static AddBurntCaloriesExecutor getAddBurntCalories() {return new AddBurntCaloriesExecutor(eaterManager);}
 }
