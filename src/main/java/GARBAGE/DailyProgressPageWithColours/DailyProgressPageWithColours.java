@@ -1,4 +1,4 @@
-package GARDBAGE.DailyProgressPageWithColours;
+package GARBAGE.DailyProgressPageWithColours;
 
 /**
  * @author Claudio Di Maio

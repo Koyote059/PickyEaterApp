@@ -4,6 +4,8 @@ package pickyeater.executors;
  * Author: Claudio Di Maio
  */
 
+import pickyeater.executors.creators.CreateIngredientExecutor;
+import pickyeater.executors.creators.CreateMealExecutor;
 import pickyeater.executors.searcher.IngredientSearcherExecutor;
 import pickyeater.executors.searcher.MealSearcherExecutor;
 import pickyeater.executors.user.RegisterExecutor;
@@ -65,4 +67,6 @@ public class ExecutorProvider {
     public static UserEditModeExecutor getUserEditModeExecutor(){
         return new UserEditModeExecutor(eaterManager);
     }
+
+    public static DailyProgressExecutor getDailyProgressExecutor() { return new DailyProgressExecutor(eaterManager);}
 }
