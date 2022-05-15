@@ -320,12 +320,12 @@
                   <text value="SAVE"/>
                 </properties>
               </component>
-              <component id="65c96" class="javax.swing.JButton" binding="btUndo">
+              <component id="65c96" class="javax.swing.JButton" binding="btCancel">
                 <constraints>
                   <grid row="9" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
                 </constraints>
                 <properties>
-                  <text value="UNDO"/>
+                  <text value="CANCEL"/>
                 </properties>
               </component>
               <grid id="9d955" binding="birthdayPanel" layout-manager="BorderLayout" hgap="0" vgap="0">

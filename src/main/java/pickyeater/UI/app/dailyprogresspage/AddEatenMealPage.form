@@ -122,7 +122,7 @@
         <properties/>
         <border type="none"/>
         <children>
-          <component id="6dd64" class="javax.swing.JList" binding="list1" default-binding="true">
+          <component id="6dd64" class="javax.swing.JList" binding="listMeals">
             <constraints/>
             <properties>
               <model>

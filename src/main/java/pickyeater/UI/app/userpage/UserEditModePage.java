@@ -45,7 +45,7 @@ public class UserEditModePage extends JFrame {
     private JTextField tfName;
     private JComboBox cbLifestyle;
     private JButton btSave;
-    private JButton btUndo;
+    private JButton btCancel;
     private JTextField tfHeight;
     private JTextField tfWeight;
     private JTextField tfBodyfat;
@@ -146,7 +146,7 @@ public class UserEditModePage extends JFrame {
                 }
             }
         });
-        btUndo.addActionListener(new ActionListener() {
+        btCancel.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 setVisible(false);
@@ -262,7 +262,7 @@ public class UserEditModePage extends JFrame {
         // BodyFat
         if (!tfBodyfat.getText().isEmpty()) {
             userBuilder.setBodyFat(Float.parseFloat(tfBodyfat.getText()));
-            if (userBuilder.getBodyFat() < 0 | userBuilder.getBodyFat() > 100) {
+            if (userBuilder.getBodyFat() <= 0 | userBuilder.getBodyFat() > 100) {
                 JOptionPane.showMessageDialog(panelOne, "Insert valid body-fat percentage", "Error", JOptionPane.ERROR_MESSAGE);
                 userBuilder.setBodyFat(0);
             } else {
@@ -278,6 +278,9 @@ public class UserEditModePage extends JFrame {
     }
 
     private void next(UserBuilder userBuilder){
+
+        System.out.println(userBuilder.getBodyFat());
+
         NutrientsBuilder newNutrientsBuilder = new PickyNutrientsBuilder();
         newNutrientsBuilder.setComplexCarbs(Float.parseFloat(tfCarbs.getText()));
         newNutrientsBuilder.setUnSaturatedFats(Float.parseFloat(tfFats.getText()));

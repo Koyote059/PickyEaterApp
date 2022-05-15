@@ -38,10 +38,8 @@ public class FoodPage extends JFrame {
         listMeals.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         listIngredients.setSelectionMode((ListSelectionModel.SINGLE_SELECTION));
 
-        ExecutorProvider executorProvider = new ExecutorProvider();
-
-        listIngredients.setListData(new IngredientSearcherExecutor(executorProvider.getEaterManager()).getAllIngredientsObj());
-        listMeals.setListData(new MealSearcherExecutor(executorProvider.getEaterManager()).getAllMealsObj());
+        listIngredients.setListData(new IngredientSearcherExecutor(ExecutorProvider.getEaterManager()).getAllIngredientsObj());
+        listMeals.setListData(new MealSearcherExecutor(ExecutorProvider.getEaterManager()).getAllMealsObj());
 
         setContentPane(mainPanel);
         pack();

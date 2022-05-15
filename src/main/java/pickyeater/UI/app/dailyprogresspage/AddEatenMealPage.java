@@ -2,7 +2,9 @@ package pickyeater.UI.app.dailyprogresspage;
 
 import pickyeater.UI.leftbuttons.MainButton;
 import pickyeater.UI.leftbuttons.PanelButtonsConverter;
-import pickyeater.database.PickyEatersDatabase;
+import pickyeater.executors.ExecutorProvider;
+import pickyeater.executors.searcher.MealSearcherExecutor;
+import pickyeater.managers.EaterManager;
 
 import javax.swing.*;
 import java.awt.*;
@@ -18,7 +20,7 @@ public class AddEatenMealPage extends JFrame {
     private JButton btDiet;
     private JButton btCancel;
     private JPanel pieChartPanel;
-    private JList list1;
+    private JList listMeals;
     private JPanel mainPanel;
     private JButton btSave;
     private JTextField tfQuantity;
@@ -31,6 +33,9 @@ public class AddEatenMealPage extends JFrame {
         btGroceries.setBackground(Color.white);
         btUser.setBackground(Color.white);
         btSettings.setBackground(Color.white);
+
+        listMeals.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);    //TODO. For now
+        listMeals.setListData(new MealSearcherExecutor(ExecutorProvider.getEaterManager()).getAllMealsObj());
 
         setContentPane(mainPanel);
         pack();
@@ -60,8 +65,7 @@ public class AddEatenMealPage extends JFrame {
         btSave.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                setVisible(false);
-                new DailyProgressPage();
+               // TODO: Do stuff but stay in the same page
             }
         });
     }
