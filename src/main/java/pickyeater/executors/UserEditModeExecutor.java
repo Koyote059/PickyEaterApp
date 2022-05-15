@@ -24,6 +24,9 @@ public class UserEditModeExecutor {
 
     public void saveUser(User user) {
         UserManager userManager = eaterManager.getUserManager();
+        if (!userManager.getUser().isEmpty()) {
+            userManager.deleteUser(userManager.getUser().get());
+        }
         userManager.saveUser(user);
     }
 

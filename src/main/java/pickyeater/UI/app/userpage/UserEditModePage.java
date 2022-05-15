@@ -278,9 +278,6 @@ public class UserEditModePage extends JFrame {
     }
 
     private void next(UserBuilder userBuilder){
-
-        // TODO: take stuff from Float.parseFloat(tfCarbs.getText()) etc
-
         NutrientsBuilder newNutrientsBuilder = new PickyNutrientsBuilder();
         newNutrientsBuilder.setComplexCarbs(Float.parseFloat(tfCarbs.getText()));
         newNutrientsBuilder.setUnSaturatedFats(Float.parseFloat(tfFats.getText()));
@@ -296,7 +293,6 @@ public class UserEditModePage extends JFrame {
 
 
         // Save user // TODO -> CHECK IF IT WORKS
-        userBuilder.setRequiredNutrients(newNutrientsBuilder.build());
         ExecutorProvider.getUserEditModeExecutor().saveUser(userBuilder.build());
 
             setVisible(false);
