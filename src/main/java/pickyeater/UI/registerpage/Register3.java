@@ -44,7 +44,7 @@ public class Register3 extends JFrame {
         btMaintainWeight.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-                registerExecutor.getUserBuilder().setWeightVariationGoal(WeightGoal.MANTAIN_WEIGHT);
+                registerExecutor.getUserBuilder().setWeightVariationGoal(WeightGoal.MAINTAIN_WEIGHT);
 
                 next(registerExecutor);
             }

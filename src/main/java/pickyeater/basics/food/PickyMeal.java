@@ -3,8 +3,8 @@ package pickyeater.basics.food;
 import java.util.*;
 
 public class PickyMeal implements Meal{
-    private Set<Ingredient> ingredients;
-    private String name;
+    private final Set<Ingredient> ingredients;
+    private final String name;
 
     public PickyMeal(Set<Ingredient> ingredients, String name) {
         this.ingredients = ingredients;
@@ -41,14 +41,7 @@ public class PickyMeal implements Meal{
             while (ingredientIterator.hasNext()) {
                 Ingredient ingredient = ingredientIterator.next();
                 List<String> ingredientTags = ingredient.getTags();
-                Iterator<String> tagsIterator = tags.iterator();
-
-                while (tagsIterator.hasNext()) {
-                    String tag = tagsIterator.next();
-                    if (!ingredientTags.contains(tag)) {
-                        tagsIterator.remove();
-                    }
-                }
+                tags.removeIf(tag -> !ingredientTags.contains(tag));
             }
 
             return tags;

@@ -100,9 +100,9 @@ public class UserEditModePage extends JFrame {
         if (user.getUserGoal().getWeightVariationGoal() == WeightGoal.LOSE_WEIGHT) {
             cbWeightGoal.setSelectedIndex(0);
             newUserBuilder.setWeightVariationGoal(WeightGoal.LOSE_WEIGHT);
-        } else if (user.getUserGoal().getWeightVariationGoal() == WeightGoal.MANTAIN_WEIGHT) {
+        } else if (user.getUserGoal().getWeightVariationGoal() == WeightGoal.MAINTAIN_WEIGHT) {
             cbWeightGoal.setSelectedIndex(1);
-            newUserBuilder.setWeightVariationGoal(WeightGoal.MANTAIN_WEIGHT);
+            newUserBuilder.setWeightVariationGoal(WeightGoal.MAINTAIN_WEIGHT);
         } else if (user.getUserGoal().getWeightVariationGoal() == WeightGoal.INCREASE_WEIGHT) {
             cbWeightGoal.setSelectedIndex(2);
             newUserBuilder.setWeightVariationGoal(WeightGoal.INCREASE_WEIGHT);
@@ -190,7 +190,7 @@ public class UserEditModePage extends JFrame {
                 if (item.equals("Decrease Weight")){
                     newUserBuilder.setWeightVariationGoal(WeightGoal.LOSE_WEIGHT);
                 } else if (item.equals("Maintain Weight")){
-                    newUserBuilder.setWeightVariationGoal(WeightGoal.MANTAIN_WEIGHT);
+                    newUserBuilder.setWeightVariationGoal(WeightGoal.MAINTAIN_WEIGHT);
                 } else if (item.equals("Increase Weight")) {
                     newUserBuilder.setWeightVariationGoal(WeightGoal.INCREASE_WEIGHT);
                 } else {

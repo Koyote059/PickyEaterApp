@@ -7,14 +7,14 @@ import java.util.Objects;
  */
 
 public class PickyNutrients implements Nutrients{
-    private float proteins;
-    private float complexCarbs;
-    private float simpleCarbs;
-    private float fibers;
-    private float saturatedFats;
-    private float unSaturatedFats;
-    private float transFats;
-    private float alcohol;
+    private final float proteins;
+    private final float complexCarbs;
+    private final float simpleCarbs;
+    private final float fibers;
+    private final float saturatedFats;
+    private final float unSaturatedFats;
+    private final float transFats;
+    private final float alcohol;
 
     public PickyNutrients(float proteins, float complexCarbs, float simpleCarbs, float fibers,
                           float saturatedFats, float unSaturatedFats, float transFats, float alcohol) {

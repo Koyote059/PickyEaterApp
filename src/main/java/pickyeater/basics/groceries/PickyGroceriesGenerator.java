@@ -8,7 +8,7 @@ import pickyeater.basics.mealplan.MealPlan;
 
 public class PickyGroceriesGenerator implements GroceriesGenerator{
 
-    private MealPlan mealPlans;
+    private final MealPlan mealPlans;
 
     /**
      * Constructor
@@ -25,7 +25,7 @@ public class PickyGroceriesGenerator implements GroceriesGenerator{
     }
 
     /**
-     * generate(MealPlan mealPlan): Generates the list of ingredients needed, and returns them in Groceries format
+     * generate(MealPlan): Generates the list of ingredients needed, and returns them in Groceries format
      */
     @Override
     public Groceries generate(MealPlan mealPlan) {

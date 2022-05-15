@@ -5,9 +5,9 @@ package pickyeater.basics.food;
  */
 
 public class PickyQuantity implements Quantity {
-    private float amount;
-    private QuantityType quantityType;
-    private float gramsPerQuantity;
+    private final float amount;
+    private final QuantityType quantityType;
+    private final float gramsPerQuantity;
 
     public PickyQuantity(float amount, QuantityType quantityType, float gramsPerQuantity) {
         this.amount = amount;
