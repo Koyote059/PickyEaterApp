@@ -19,6 +19,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.DecimalFormat;
 import java.util.Optional;
 
 public class UserPage extends JFrame{
@@ -49,21 +50,23 @@ public class UserPage extends JFrame{
 
         User user = userExecutor.getUser();
 
+        DecimalFormat df = new DecimalFormat("0.00");
+
         // User:
         txtName.setText(user.getName());
         txtSex.setText(user.getUserStatus().getSex().toString());
         txtDateOfBirth.setText(user.getUserStatus().getDateOfBirth().toString());
-        txtHeight.setText(Double.toString(user.getUserStatus().getHeight()));
-        txtWeight.setText(Double.toString(user.getUserStatus().getWeight()));
-        txtBodyFat.setText(Double.toString(user.getUserStatus().getBodyFat()));
+        txtHeight.setText(df.format(user.getUserStatus().getHeight()));
+        txtWeight.setText(df.format(user.getUserStatus().getWeight()));
+        txtBodyFat.setText(df.format(user.getUserStatus().getBodyFat()));
         txtLifestyle.setText(user.getUserGoal().getLifeStyle().toString());
         txtWeightGoal.setText(user.getUserGoal().getWeightVariationGoal().toString());
 
         // Nutrients:
-        txtProteins.setText(Double.toString(user.getUserGoal().getRequiredNutrients().getProteins()));
-        txtCarbs.setText(Double.toString(user.getUserGoal().getRequiredNutrients().getCarbs()));
-        txtFats.setText(Double.toString(user.getUserGoal().getRequiredNutrients().getFats()));
-        txtCalories.setText(Double.toString(user.getUserGoal().getRequiredNutrients().getCalories()));
+        txtProteins.setText(df.format(user.getUserGoal().getRequiredNutrients().getProteins()));
+        txtCarbs.setText(df.format(user.getUserGoal().getRequiredNutrients().getCarbs()));
+        txtFats.setText(df.format(user.getUserGoal().getRequiredNutrients().getFats()));
+        txtCalories.setText(df.format(user.getUserGoal().getRequiredNutrients().getCalories()));
 
         btDailyProgress.setBackground(Color.white);
         btDiet.setBackground(Color.white);

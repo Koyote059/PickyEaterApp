@@ -68,12 +68,15 @@ public class UserEditModePage extends JFrame {
         // FROM LOCALDATE TO DATE
         ZoneId defaultZoneId = ZoneId.systemDefault();
 
+        //TODO: Fix DecimalFormat (from 0,00 to 0.00)
+        DecimalFormat df = new DecimalFormat("0.000");
+
         // User:
         tfName.setText(user.getName());
         jBirthdayChooser.setDate(Date.from(user.getUserStatus().getDateOfBirth().atStartOfDay(defaultZoneId).toInstant()));
         tfHeight.setText(Integer.toString(user.getUserStatus().getHeight()));
-        tfWeight.setText(Double.toString(user.getUserStatus().getWeight()));
-        tfBodyfat.setText(Double.toString(user.getUserStatus().getBodyFat()));
+        tfWeight.setText(df.format(user.getUserStatus().getWeight()));
+        tfBodyfat.setText(df.format(user.getUserStatus().getBodyFat()));
         if (user.getUserStatus().getSex() == Sex.MALE) {
             cbSex.setSelectedIndex(0);
             newUserBuilder.setSex(Sex.MALE);
@@ -105,10 +108,10 @@ public class UserEditModePage extends JFrame {
             newUserBuilder.setWeightVariationGoal(WeightGoal.INCREASE_WEIGHT);
         }
         // Nutrients:
-        tfProteins.setText(Double.toString(user.getUserGoal().getRequiredNutrients().getProteins()));
-        tfCarbs.setText(Double.toString(user.getUserGoal().getRequiredNutrients().getCarbs()));
-        tfFats.setText(Double.toString(user.getUserGoal().getRequiredNutrients().getFats()));
-        txtCalories.setText(Double.toString(user.getUserGoal().getRequiredNutrients().getCalories()));
+        tfProteins.setText(df.format(user.getUserGoal().getRequiredNutrients().getProteins()));
+        tfCarbs.setText(df.format(user.getUserGoal().getRequiredNutrients().getCarbs()));
+        tfFats.setText(df.format(user.getUserGoal().getRequiredNutrients().getFats()));
+        txtCalories.setText(df.format(user.getUserGoal().getRequiredNutrients().getCalories()));
         btDailyProgress.setBackground(Color.white);
         btDiet.setBackground(Color.white);
         btFood.setBackground(Color.white);
