@@ -58,10 +58,6 @@ public class ExecutorProvider {
         return new UserMealsProgressesExecutor(eaterManager);
     }
 
-    public static SearchMealExecutor getSearchMealExecutor(){
-        return new SearchMealExecutor(eaterManager);
-    }
-
     public static UserExecutor getUserExecutor(){
         return new UserExecutor(eaterManager);
     }
