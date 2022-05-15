@@ -6,6 +6,10 @@ package pickyeater.executors;
 
 import pickyeater.executors.searcher.IngredientSearcherExecutor;
 import pickyeater.executors.searcher.MealSearcherExecutor;
+import pickyeater.executors.user.RegisterExecutor;
+import pickyeater.executors.user.UserEditModeExecutor;
+import pickyeater.executors.user.UserExecutor;
+import pickyeater.executors.user.UserMealsProgressesExecutor;
 import pickyeater.managers.EaterManager;
 
 /**

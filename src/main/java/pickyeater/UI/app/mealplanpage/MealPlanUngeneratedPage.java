@@ -6,8 +6,7 @@ package pickyeater.UI.app.mealplanpage;
 
 import pickyeater.UI.leftbuttons.MainButton;
 import pickyeater.UI.leftbuttons.PanelButtonsConverter;
-import pickyeater.database.PickyEatersDatabase;
-import pickyeater.executors.UserMealsProgressesExecutor;
+import pickyeater.executors.user.UserMealsProgressesExecutor;
 
 import javax.swing.*;
 import java.awt.*;

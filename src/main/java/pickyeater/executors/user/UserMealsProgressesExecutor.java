@@ -1,4 +1,4 @@
-package pickyeater.executors;
+package pickyeater.executors.user;
 
 import pickyeater.executors.searcher.MealSearcherExecutor;
 import pickyeater.managers.EaterManager;

@@ -4,7 +4,7 @@ package pickyeater.UI.registerpage;
  * @author Claudio Di Maio
  */
 import com.toedter.calendar.JDateChooser;
-import pickyeater.executors.RegisterExecutor;
+import pickyeater.executors.user.RegisterExecutor;
 import pickyeater.utils.AgeCalculator;
 import pickyeater.algorithms.BodyFatCalculator;
 import pickyeater.algorithms.DeurenbergCalculator;
@@ -20,10 +20,6 @@ import java.awt.event.ActionListener;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.time.temporal.ChronoField;
-import java.time.temporal.TemporalAccessor;
-import java.util.Locale;
 
 import static java.lang.Integer.parseInt;
 

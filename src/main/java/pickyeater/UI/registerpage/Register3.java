@@ -5,7 +5,7 @@ package pickyeater.UI.registerpage;
  */
 
 import pickyeater.basics.user.WeightGoal;
-import pickyeater.executors.RegisterExecutor;
+import pickyeater.executors.user.RegisterExecutor;
 
 import javax.swing.*;
 import java.awt.*;

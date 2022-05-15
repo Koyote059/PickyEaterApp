@@ -19,7 +19,7 @@ import pickyeater.builders.PickyNutrientsBuilder;
 import pickyeater.builders.PickyUserBuilder;
 import pickyeater.builders.UserBuilder;
 import pickyeater.executors.ExecutorProvider;
-import pickyeater.executors.UserEditModeExecutor;
+import pickyeater.executors.user.UserEditModeExecutor;
 import pickyeater.utils.AgeCalculator;
 import pickyeater.utils.JCalendarToLocalDate;
 

@@ -12,7 +12,7 @@ import pickyeater.basics.food.Nutrients;
 import pickyeater.builders.NutrientsBuilder;
 import pickyeater.builders.PickyNutrientsBuilder;
 import pickyeater.builders.UserBuilder;
-import pickyeater.executors.RegisterExecutor;
+import pickyeater.executors.user.RegisterExecutor;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;

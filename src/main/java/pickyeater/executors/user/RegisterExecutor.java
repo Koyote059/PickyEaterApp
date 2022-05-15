@@ -1,26 +1,32 @@
-package pickyeater.executors;
+package pickyeater.executors.user;
 
 import pickyeater.algorithms.BodyFatCalculator;
 import pickyeater.algorithms.DeurenbergCalculator;
 import pickyeater.algorithms.HarrisBenedictCalculator;
 import pickyeater.algorithms.NutrientsRequirementCalculator;
-import pickyeater.basics.user.User;
+import pickyeater.builders.PickyUserBuilder;
 import pickyeater.builders.UserBuilder;
 import pickyeater.managers.EaterManager;
+import pickyeater.basics.user.User;
 import pickyeater.managers.UserManager;
 
-public class UserExecutor {
+public class RegisterExecutor {
     private final EaterManager eaterManager;
-    User user = null;
-    public UserExecutor(EaterManager eaterManager) {
+    UserBuilder userBuilder = null;
+    public RegisterExecutor(EaterManager eaterManager) {
         this.eaterManager = eaterManager;
     }
 
-    public User getUser() {
-        if(user==null){
-            user = eaterManager.getUserManager().getUser().get();
+    public UserBuilder getUserBuilder() {
+        if(userBuilder==null){
+            userBuilder = new PickyUserBuilder();
         }
-        return user;
+        return userBuilder;
+    }
+
+    public void saveUser(User user) {
+        UserManager userManager = eaterManager.getUserManager();
+        userManager.saveUser(user);
     }
 
     public BodyFatCalculator getBFCalculator(){

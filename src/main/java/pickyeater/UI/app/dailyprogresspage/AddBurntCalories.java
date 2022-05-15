@@ -2,7 +2,6 @@ package pickyeater.UI.app.dailyprogresspage;
 
 import pickyeater.UI.leftbuttons.MainButton;
 import pickyeater.UI.leftbuttons.PanelButtonsConverter;
-import pickyeater.database.PickyEatersDatabase;
 
 import javax.swing.*;
 import java.awt.*;
@@ -17,9 +16,10 @@ public class AddBurntCalories extends JFrame {
     private JButton btFood;
     private JButton btDiet;
     private JButton btCancel;
-    private JTextField textField1;
+    private JTextField tfActivityName;
     private JPanel mainPanel;
     private JButton btSave;
+    private JTextField tfBurntCalories;
 
     public AddBurntCalories() {
 
@@ -59,8 +59,13 @@ public class AddBurntCalories extends JFrame {
         btSave.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                setVisible(false);
-                new DailyProgressPage();
+
+                //TODO if in Calories there isn't a valid number, show error
+
+
+
+                JOptionPane.showMessageDialog(mainPanel, "Activity name: " + tfActivityName.getText() + "\nBurnt " +
+                        "Calories: " + tfBurntCalories.getText());
             }
         });
     }

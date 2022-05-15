@@ -5,7 +5,7 @@ package GARDBAGE.DailyProgressPageWithColours;
  */
 
 import pickyeater.database.PickyEatersDatabase;
-import pickyeater.executors.UserMealsProgressesExecutor;
+import pickyeater.executors.user.UserMealsProgressesExecutor;
 
 import javax.swing.*;
 

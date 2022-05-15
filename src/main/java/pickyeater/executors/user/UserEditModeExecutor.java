@@ -1,4 +1,4 @@
-package pickyeater.executors;
+package pickyeater.executors.user;
 
 import pickyeater.algorithms.BodyFatCalculator;
 import pickyeater.algorithms.DeurenbergCalculator;

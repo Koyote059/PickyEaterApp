@@ -6,7 +6,7 @@ package pickyeater.UI.app.dailyprogresspage;
 
 import pickyeater.UI.leftbuttons.MainButton;
 import pickyeater.UI.leftbuttons.PanelButtonsConverter;
-import pickyeater.executors.UserMealsProgressesExecutor;
+import pickyeater.executors.user.UserMealsProgressesExecutor;
 
 import javax.swing.*;
 import java.awt.*;

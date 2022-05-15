@@ -7,20 +7,14 @@ package pickyeater.UI.app.userpage;
 import pickyeater.UI.leftbuttons.MainButton;
 import pickyeater.UI.leftbuttons.PanelButtonsConverter;
 import pickyeater.basics.user.User;
-import pickyeater.database.PickyEatersDatabase;
 import pickyeater.executors.ExecutorProvider;
-import pickyeater.executors.RegisterExecutor;
-import pickyeater.executors.UserExecutor;
-import pickyeater.executors.UserMealsProgressesExecutor;
-import pickyeater.managers.EaterManager;
-import pickyeater.managers.PickyEaterManager;
+import pickyeater.executors.user.UserExecutor;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.DecimalFormat;
-import java.util.Optional;
 
 public class UserPage extends JFrame{
     private JPanel mainPanel;
