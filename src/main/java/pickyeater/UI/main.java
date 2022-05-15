@@ -15,7 +15,7 @@ public class main {
     public static void main(String[] args) {
 
         //PickyEatersDatabase pickyEatersDB = new SQLPickyEaterDB("PickyEatersDB.sqlite");
-        PickyEatersDatabase pickyEatersDB = new SQLPickyEaterDB("dbDiProva.sqlite");
+        PickyEatersDatabase pickyEatersDB = new SQLPickyEaterDB("dbDiProva2.sqlite");
 
         EaterManager eaterManager = new PickyEaterManager(
                 pickyEatersDB.getUserDatabase(),

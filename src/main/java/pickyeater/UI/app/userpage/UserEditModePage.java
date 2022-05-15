@@ -29,7 +29,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
+import java.text.DecimalFormat;
 import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.Date;
 
 public class UserEditModePage extends JFrame {
@@ -62,14 +64,16 @@ public class UserEditModePage extends JFrame {
         UserEditModeExecutor userEditModeExecutor = ExecutorProvider.getUserEditModeExecutor();
         User user = userEditModeExecutor.getUser();
         UserBuilder newUserBuilder = new PickyUserBuilder();
-        NutrientsBuilder newNutrientsBuilder = new PickyNutrientsBuilder();
+
+        // FROM LOCALDATE TO DATE
+        ZoneId defaultZoneId = ZoneId.systemDefault();
+
         // User:
         tfName.setText(user.getName());
-        jBirthdayChooser.setDate(new Date(user.getUserStatus().getDateOfBirth().getYear(), user.getUserStatus().getDateOfBirth().getMonthValue(), user.getUserStatus().getDateOfBirth().getDayOfMonth()));
+        jBirthdayChooser.setDate(Date.from(user.getUserStatus().getDateOfBirth().atStartOfDay(defaultZoneId).toInstant()));
         tfHeight.setText(Integer.toString(user.getUserStatus().getHeight()));
         tfWeight.setText(Double.toString(user.getUserStatus().getWeight()));
         tfBodyfat.setText(Double.toString(user.getUserStatus().getBodyFat()));
-        // tfSex.setText(user.getUserStatus().getSex().toString());
         if (user.getUserStatus().getSex() == Sex.MALE) {
             cbSex.setSelectedIndex(0);
             newUserBuilder.setSex(Sex.MALE);
@@ -111,10 +115,13 @@ public class UserEditModePage extends JFrame {
         btGroceries.setBackground(Color.white);
         btUser.setBackground(Color.green);
         btSettings.setBackground(Color.white);
+
         setContentPane(mainPanel);
         pack();
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setVisible(true);
+
+        newUserBuilder.setDateOfBirth(new JCalendarToLocalDate().jCalendarToLocalDate(jBirthdayChooser.getDate()));
         ActionListener listener = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -247,6 +254,11 @@ public class UserEditModePage extends JFrame {
         if (userBuilder.getSex() == null) {
             JOptionPane.showMessageDialog(panelOne, "Missing sex", "Warning", JOptionPane.WARNING_MESSAGE);
         }
+
+        if (userBuilder.getName() == null | userBuilder.getSex() == null | userBuilder.getWeight() == 0 | userBuilder.getHeight() == 0 | userBuilder.getDateOfBirth() == null) {
+            return false;
+        }
+
         // BodyFat
         if (!tfBodyfat.getText().isEmpty()) {
             userBuilder.setBodyFat(Float.parseFloat(tfBodyfat.getText()));
@@ -257,28 +269,38 @@ public class UserEditModePage extends JFrame {
                 return true;
             }
         } else {
+            BodyFatCalculator bodyFatCalculator = new DeurenbergCalculator();
+            userBuilder.setBodyFat(bodyFatCalculator.calculate(userBuilder.getHeight(), userBuilder.getWeight(),
+                        new AgeCalculator().age(userBuilder.getDateOfBirth()), userBuilder.getSex()));
             return true;
         }
         return false;
     }
 
     private void next(UserBuilder userBuilder){
-        if (userBuilder.getName() != null && userBuilder.getSex() != null && userBuilder.getWeight() != 0 && userBuilder.getHeight() != 0 && userBuilder.getDateOfBirth() != null) {
-            if (userBuilder.getBodyFat() == 0) {
-                BodyFatCalculator bodyFatCalculator = new DeurenbergCalculator();
-                userBuilder.setBodyFat(bodyFatCalculator.calculate(userBuilder.getHeight(), userBuilder.getWeight(),
-                        new AgeCalculator().age(userBuilder.getDateOfBirth()), userBuilder.getSex()));
-            }
-            JOptionPane.showMessageDialog(panelOne, "Selected:" + "\n" + "Name: " + userBuilder.getName() + "\n" + "Sex: " + userBuilder.getSex() + "\n" +
+
+        // TODO: take stuff from Float.parseFloat(tfCarbs.getText()) etc
+
+        NutrientsBuilder newNutrientsBuilder = new PickyNutrientsBuilder();
+        newNutrientsBuilder.setComplexCarbs(Float.parseFloat(tfCarbs.getText()));
+        newNutrientsBuilder.setUnSaturatedFats(Float.parseFloat(tfFats.getText()));
+        newNutrientsBuilder.setProteins(Float.parseFloat(tfProteins.getText()));
+
+        userBuilder.setRequiredNutrients(newNutrientsBuilder.build());
+
+        JOptionPane.showMessageDialog(panelOne, "Selected:" + "\n" + "Name: " + userBuilder.getName() + "\n" + "Sex: " + userBuilder.getSex() + "\n" +
                     "Height: " + userBuilder.getHeight() + "cm\n" + "Weight: " + userBuilder.getWeight() + "Kg\n" + "Birthday: " + userBuilder.getDateOfBirth() + "\n" + "Body fat: " + userBuilder.getBodyFat() + "%");
 
-            // TODO: take stuff from Float.parseFloat(tfCarbs.getText()) etc
+        JOptionPane.showMessageDialog(panelOne,
+                "Nutrients:\n" + "Proteins: " + userBuilder.getRequiredNutrients().getProteins() + "\nCarbs: " + userBuilder.getRequiredNutrients().getCarbs() + "\nFats: " + userBuilder.getRequiredNutrients().getFats() + "\nCalories: " + userBuilder.getRequiredNutrients().getCalories());
 
-            // TODO: SAVE USER
+
+        // Save user // TODO -> CHECK IF IT WORKS
+        userBuilder.setRequiredNutrients(newNutrientsBuilder.build());
+        ExecutorProvider.getUserEditModeExecutor().saveUser(userBuilder.build());
 
             setVisible(false);
             new MainButton(PanelButtons.USER);
-        }
     }
     private void resetNutrients(UserBuilder userBuilder){
         NutrientsRequirementCalculator nutrientsCalculated = new HarrisBenedictCalculator();
@@ -286,10 +308,14 @@ public class UserEditModePage extends JFrame {
                 userBuilder.getWeight(), new AgeCalculator().age(userBuilder.getDateOfBirth()),
                 userBuilder.getSex(), userBuilder.getLifeStyle());
 
-        txtCalories.setText(Double.toString(nutrients.getCalories()));
-        tfProteins.setText(Double.toString(nutrients.getProteins()));
-        tfCarbs.setText(Double.toString(nutrients.getCarbs()));
-        tfFats.setText(Double.toString(nutrients.getFats()));
+        DecimalFormat df = new DecimalFormat("0.000");
+
+        // TODO: FIX THAT DecimalFormat df RETURNS 0,00 INSTEAD OF 0.00
+
+        txtCalories.setText(df.format(nutrients.getCalories()));
+        tfProteins.setText(df.format(nutrients.getProteins()));
+        tfCarbs.setText(df.format(nutrients.getCarbs()));
+        tfFats.setText(df.format(nutrients.getFats()));
     }
 
     private void createUIComponents() {
