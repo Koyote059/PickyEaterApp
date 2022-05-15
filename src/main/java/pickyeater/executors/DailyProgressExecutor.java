@@ -2,8 +2,10 @@ package pickyeater.executors;
 
 import pickyeater.basics.food.Ingredient;
 import pickyeater.basics.food.Meal;
+import pickyeater.basics.food.Nutrients;
 import pickyeater.basics.mealplan.DailyMealPlan;
 import pickyeater.basics.user.DailyProgresses;
+import pickyeater.basics.user.UserGoal;
 import pickyeater.managers.EaterManager;
 
 import java.util.Iterator;
@@ -13,18 +15,13 @@ import java.util.Set;
 public class DailyProgressExecutor {
 
     private final DailyProgresses dailyProgresses;
-
-    // private final DailyMealPlan dailyMealPlan;
+    private final Nutrients requiredNutrients;
     private final EaterManager eaterManager;
 
     public DailyProgressExecutor(EaterManager eaterManager) {
         this.eaterManager = eaterManager;
         this.dailyProgresses = eaterManager.getUserManager().getUser().get().getDailyProgresses();
-        //TODO Fix
-        /*
-        this.dailyMealPlan = eaterManager.getUserManager().getUser().get().getMealPlan().get().getDailyMealPlans()
-        .get();
-         */
+        this.requiredNutrients = eaterManager.getUserManager().getUser().get().getUserGoal().getRequiredNutrients();
     }
 
     public List<Meal> getEatenMeals(){
@@ -52,23 +49,19 @@ public class DailyProgressExecutor {
     }
 
     public float getCaloriesToEat(){
-        // TODO
-        return 0;
+        return requiredNutrients.getCalories();
     }
 
     public float getProteinsToEat(){
-        // TODO
-        return 0;
+        return requiredNutrients.getProteins();
     }
 
     public float getCarbsToEat(){
-        // TODO
-        return 0;
+        return requiredNutrients.getCarbs();
     }
 
     public float getFatsToEat(){
-        // TODO
-        return 0;
+        return requiredNutrients.getFats();
     }
 
     public Object[] getAllMealsObj() {

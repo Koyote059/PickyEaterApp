@@ -48,6 +48,13 @@ public class DailyProgressPage extends JFrame{
 
         DailyProgressExecutor dailyProgressExecutor = ExecutorProvider.getDailyProgressExecutor();
 
+        cbConsumed.insertItemAt("Calories: " + dailyProgressExecutor.getEatenCalories() + "/" + dailyProgressExecutor.getCaloriesToEat(), 0);
+        cbConsumed.insertItemAt("Proteins: " + dailyProgressExecutor.getEatenProteins() + "/" + dailyProgressExecutor.getProteinsToEat(), 1);
+        cbConsumed.insertItemAt("Carbs: " + dailyProgressExecutor.getEatenCarbs() + "/" + dailyProgressExecutor.getCarbsToEat(), 2);
+        cbConsumed.insertItemAt("Fats: " + dailyProgressExecutor.getEatenFats() + "/" + dailyProgressExecutor.getFatsToEat(), 3);
+
+        cbConsumed.setSelectedIndex(0);
+
         txtBurntCalories.setText(Integer.toString(dailyProgressExecutor.getBurntCalories()));
 
         listEatenMeals.setListData(dailyProgressExecutor.getAllMealsObj());
@@ -99,7 +106,6 @@ public class DailyProgressPage extends JFrame{
         });
     }
     private void progressBar(float eaten, float toEat){
-
         float percentage = (eaten / toEat) * 100;
 
         bar.setStringPainted(true);
