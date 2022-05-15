@@ -6,12 +6,15 @@ package pickyeater.UI.app.dailyprogresspage;
 
 import pickyeater.UI.leftbuttons.MainButton;
 import pickyeater.UI.leftbuttons.PanelButtonsConverter;
+import pickyeater.executors.DailyProgressExecutor;
+import pickyeater.executors.ExecutorProvider;
 import pickyeater.executors.user.UserMealsProgressesExecutor;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.DecimalFormat;
 
 public class DailyProgressPage extends JFrame{
     private JPanel mainPanel;
@@ -38,14 +41,18 @@ public class DailyProgressPage extends JFrame{
         btUser.setBackground(Color.white);
         btSettings.setBackground(Color.white);
 
-        //bar.setStringPainted(true);
-        //bar.setValue(0-100);
-        //bar.setString("Done");
-
         setContentPane(mainPanel);
         pack();
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setVisible(true);
+
+        DailyProgressExecutor dailyProgressExecutor = ExecutorProvider.getDailyProgressExecutor();
+
+        txtBurntCalories.setText(Integer.toString(dailyProgressExecutor.getBurntCalories()));
+
+        listEatenMeals.setListData(dailyProgressExecutor.getAllMealsObj());
+
+        progressBar(dailyProgressExecutor.getEatenCalories(), dailyProgressExecutor.getCaloriesToEat());
 
         ActionListener listener = new ActionListener() {
             @Override
@@ -76,5 +83,29 @@ public class DailyProgressPage extends JFrame{
                 new AddBurntCalories();
             }
         });
+        cbConsumed.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (cbConsumed.getSelectedIndex() == 0){
+                    progressBar(dailyProgressExecutor.getEatenCalories(), dailyProgressExecutor.getCaloriesToEat());
+                } else if (cbConsumed.getSelectedIndex() == 1){
+                    progressBar(dailyProgressExecutor.getEatenProteins(), dailyProgressExecutor.getProteinsToEat());
+                } else if (cbConsumed.getSelectedIndex() == 2){
+                    progressBar(dailyProgressExecutor.getEatenCarbs(), dailyProgressExecutor.getCarbsToEat());
+                } else if (cbConsumed.getSelectedIndex() == 3){
+                    progressBar(dailyProgressExecutor.getEatenFats(), dailyProgressExecutor.getFatsToEat());
+                }
+            }
+        });
+    }
+    private void progressBar(float eaten, float toEat){
+
+        float percentage = (eaten / toEat) * 100;
+
+        bar.setStringPainted(true);
+        bar.setValue((int)percentage);
+        DecimalFormat df = new DecimalFormat("0.00");
+        bar.setString(df.format(percentage) + "%");
+        setVisible(true);
     }
 }
