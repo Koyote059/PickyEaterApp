@@ -219,6 +219,7 @@ public class UserEditModePage extends JFrame {
     }
 
     private boolean update(UserBuilder userBuilder) {
+        // TODO -> Put update in the executor (it will return 1, 2, 3, 4 ... if it's an error, 0 otherwise
         // Name
         if (!tfName.getText().isEmpty()) {
             userBuilder.setName(tfName.getText());
@@ -298,7 +299,7 @@ public class UserEditModePage extends JFrame {
                 "Nutrients:\n" + "Proteins: " + userBuilder.getRequiredNutrients().getProteins() + "\nCarbs: " + userBuilder.getRequiredNutrients().getCarbs() + "\nFats: " + userBuilder.getRequiredNutrients().getFats() + "\nCalories: " + userBuilder.getRequiredNutrients().getCalories());
 
 
-        // Save user // TODO -> CHECK IF IT WORKS
+        // Save user
         ExecutorProvider.getUserEditModeExecutor().saveUser(userBuilder.build());
 
             setVisible(false);

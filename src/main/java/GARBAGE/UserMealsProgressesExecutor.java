@@ -7,7 +7,7 @@ import pickyeater.basics.user.User;
 
 import java.util.Optional;
 
-public class UserMealsProgressesExecutor {  // TODO: REMOVE (?) - use DailyProgressPage instead
+public class UserMealsProgressesExecutor {  // REMOVED - used DailyProgressPage instead
     private final EaterManager eaterManager;
     private final User user;
 

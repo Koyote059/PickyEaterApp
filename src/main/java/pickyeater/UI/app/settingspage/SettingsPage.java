@@ -2,7 +2,8 @@ package pickyeater.UI.app.settingspage;
 
 import pickyeater.UI.leftbuttons.MainButton;
 import pickyeater.UI.leftbuttons.PanelButtonsConverter;
-import pickyeater.database.PickyEatersDatabase;
+import pickyeater.UI.registerpage.Register1;
+import pickyeater.executors.ExecutorProvider;
 
 import javax.swing.*;
 import java.awt.*;
@@ -17,6 +18,10 @@ public class SettingsPage extends JFrame {
     private JButton btGroceries;
     private JButton btFood;
     private JButton btDiet;
+    private JLabel txtDeletingZone;
+    private JButton btDeleteUser;
+    private JButton btResetMeals;
+    private JButton btResetIngredients;
 
     public SettingsPage() {
         btDailyProgress.setBackground(Color.white);
@@ -30,6 +35,14 @@ public class SettingsPage extends JFrame {
         pack();
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setVisible(true);
+
+        txtDeletingZone.setForeground(Color.red);
+        btDeleteUser.setForeground(Color.red);
+        btDeleteUser.setBackground(Color.white);
+        btResetMeals.setForeground(Color.red);
+        btResetMeals.setBackground(Color.white);
+        btResetIngredients.setForeground(Color.red);
+        btResetIngredients.setBackground(Color.white);
 
         ActionListener listener = new ActionListener() {
             @Override
@@ -45,5 +58,37 @@ public class SettingsPage extends JFrame {
         btGroceries.addActionListener(listener);
         btFood.addActionListener(listener);
         btDiet.addActionListener(listener);
+        btDeleteUser.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                int x = JOptionPane.showConfirmDialog(mainPanel, "Are you sure? All your info will be lost forever",
+                        "Delete user", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+                if (x == 0){
+                    ExecutorProvider.getUserEditModeExecutor().saveUser(null);  // TODO: CHECK IF IT WORKS
+                    setVisible(false);
+                    new Register1();
+                }
+            }
+        });
+        btResetMeals.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                int x = JOptionPane.showConfirmDialog(mainPanel, "Are you sure? All your added meals will be lost " +
+                                "forever", "Reset Meals", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+                if (x == 0){
+                    //TODO: RESET MEALS
+                }
+            }
+        });
+        btResetIngredients.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                int x = JOptionPane.showConfirmDialog(mainPanel, "Are you sure? All your added ingredients will be " +
+                        "lost forever", "Reset Ingredients", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+                if (x == 0){
+                    //TODO: RESET INGREDIENTS
+                }
+            }
+        });
     }
 }
