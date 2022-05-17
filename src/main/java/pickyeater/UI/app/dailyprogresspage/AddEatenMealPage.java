@@ -2,6 +2,9 @@ package pickyeater.UI.app.dailyprogresspage;
 
 import pickyeater.UI.leftbuttons.MainButton;
 import pickyeater.UI.leftbuttons.PanelButtonsConverter;
+import pickyeater.basics.food.Meal;
+import pickyeater.basics.food.PickyMeal;
+import pickyeater.executors.AddEatenMealExecutor;
 import pickyeater.executors.ExecutorProvider;
 import pickyeater.executors.searcher.MealSearcherExecutor;
 import pickyeater.managers.EaterManager;
@@ -10,6 +13,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Iterator;
+import java.util.Set;
 
 public class AddEatenMealPage extends JFrame {
     private JButton btSettings;
@@ -34,8 +39,10 @@ public class AddEatenMealPage extends JFrame {
         btUser.setBackground(Color.white);
         btSettings.setBackground(Color.white);
 
-        listMeals.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);    //TODO. For now
-        listMeals.setListData(new MealSearcherExecutor(ExecutorProvider.getEaterManager()).getAllMealsObj());
+        MealSearcherExecutor mealSearcherExecutor = new MealSearcherExecutor(ExecutorProvider.getEaterManager());
+
+        listMeals.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        listMeals.setListData(mealSearcherExecutor.getAllMealsObj());
 
         setContentPane(mainPanel);
         pack();
@@ -66,6 +73,30 @@ public class AddEatenMealPage extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                // TODO: Do stuff but stay in the same page
+                String selectedMeal = listMeals.getSelectedValue().toString();
+                Set<Meal> mealSet = mealSearcherExecutor.getAllMeals();
+
+                System.out.println(selectedMeal);
+                Meal currentMeal = mealSet.iterator().next();
+                Iterator<Meal> mealIterator = mealSet.iterator();
+
+                while (mealIterator.hasNext()){
+                    currentMeal = mealIterator.next();
+                    if (currentMeal.getName().equals(selectedMeal)){
+                        break;
+                    }
+                    mealIterator.remove();
+                }
+                AddEatenMealExecutor addEatenMealExecutor =
+                        new AddEatenMealExecutor(ExecutorProvider.getEaterManager());
+
+                addEatenMealExecutor.addEatenMeal(currentMeal);
+
+                System.out.println(currentMeal);
+
+                JOptionPane.showMessageDialog(mainPanel, "Eaten meal:\n" + currentMeal);
+                // TODO: FIX MASSIVE ERROR
+
             }
         });
     }

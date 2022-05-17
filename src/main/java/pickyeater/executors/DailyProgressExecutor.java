@@ -68,7 +68,7 @@ public class DailyProgressExecutor {
         // TODO: Check / Delete comment
         List<Meal> mealList = getEatenMeals(); //ExecutorProvider.getDailyProgressExecutor().getEatenMeals();
         int tmpSize = mealList.size();
-        Object objects[] = new Object[tmpSize];
+        Object[] objects = new Object[tmpSize];
         for (Iterator<Meal> it = mealList.iterator(); it.hasNext(); tmpSize--) {
             Meal meal = it.next();
             objects[tmpSize - 1] = meal.getName();

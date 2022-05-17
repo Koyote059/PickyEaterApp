@@ -1,12 +1,10 @@
 package pickyeater.executors;
 
-import pickyeater.basics.mealplan.DailyMealPlan;
 import pickyeater.basics.mealplan.MealPlan;
 import pickyeater.basics.user.User;
 import pickyeater.managers.EaterManager;
 import pickyeater.managers.UserManager;
 
-import java.time.LocalDate;
 import java.util.Optional;
 
 public class MealPlanViewerExecutor {

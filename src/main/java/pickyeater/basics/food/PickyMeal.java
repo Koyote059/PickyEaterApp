@@ -63,9 +63,6 @@ public class PickyMeal implements Meal{
 
     @Override
     public String toString() {
-        return "PickyMeal{" +
-                "ingredients=" + ingredients +
-                ", name='" + name + '\'' +
-                '}';
+        return name + ":\n" + ingredients;
     }
 }

@@ -71,4 +71,6 @@ public class ExecutorProvider {
     public static DailyProgressExecutor getDailyProgressExecutor() { return new DailyProgressExecutor(eaterManager);}
 
     public static AddBurntCaloriesExecutor getAddBurntCalories() {return new AddBurntCaloriesExecutor(eaterManager);}
+
+    public static AddEatenMealExecutor getEatenMealExecutor() {return new AddEatenMealExecutor(eaterManager);}
 }
