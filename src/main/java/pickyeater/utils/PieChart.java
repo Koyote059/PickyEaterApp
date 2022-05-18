@@ -41,7 +41,7 @@ class MyComponent extends JComponent {
     }
 }
 
-public class PieChart2 {
+public class PieChart {
     public static void main(String[] argv) {
         JFrame frame = new JFrame();
         frame.getContentPane().add(new MyComponent());

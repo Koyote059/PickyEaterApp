@@ -4,8 +4,14 @@ package pickyeater.executors;
  * Author: Claudio Di Maio
  */
 
+import pickyeater.executors.creators.CreateIngredientExecutor;
+import pickyeater.executors.creators.CreateMealExecutor;
 import pickyeater.executors.searcher.IngredientSearcherExecutor;
 import pickyeater.executors.searcher.MealSearcherExecutor;
+import pickyeater.executors.user.RegisterExecutor;
+import pickyeater.executors.user.UserEditModeExecutor;
+import pickyeater.executors.user.UserExecutor;
+import GARBAGE.UserMealsProgressesExecutor;
 import pickyeater.managers.EaterManager;
 
 /**
@@ -54,7 +60,17 @@ public class ExecutorProvider {
         return new UserMealsProgressesExecutor(eaterManager);
     }
 
-    public static SearchMealExecutor getSearchMealExecutor(){
-        return new SearchMealExecutor(eaterManager);
+    public static UserExecutor getUserExecutor(){
+        return new UserExecutor(eaterManager);
     }
+
+    public static UserEditModeExecutor getUserEditModeExecutor(){
+        return new UserEditModeExecutor(eaterManager);
+    }
+
+    public static DailyProgressExecutor getDailyProgressExecutor() { return new DailyProgressExecutor(eaterManager);}
+
+    public static AddBurntCaloriesExecutor getAddBurntCalories() {return new AddBurntCaloriesExecutor(eaterManager);}
+
+    public static AddEatenMealExecutor getEatenMealExecutor() {return new AddEatenMealExecutor(eaterManager);}
 }

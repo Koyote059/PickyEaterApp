@@ -12,7 +12,6 @@ import pickyeater.basics.user.*;
 
 import java.time.LocalDate;
 import java.util.Collection;
-import java.util.Date;
 import java.util.MissingFormatArgumentException;
 
 public class PickyUserBuilder implements UserBuilder {
@@ -25,7 +24,7 @@ public class PickyUserBuilder implements UserBuilder {
     private Nutrients requiredNutrients = null;
     private Sex sex = null;
     private LifeStyle lifeStyle = null;
-    private WeightGoal weightVariationGoal = WeightGoal.MANTAIN_WEIGHT;
+    private WeightGoal weightVariationGoal = WeightGoal.MAINTAIN_WEIGHT;
     private DailyProgresses dailyProgresses = new PickyDailyProgresses();
     private MealPlan mealPlan = null;
 

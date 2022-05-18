@@ -4,7 +4,7 @@ package pickyeater.UI.registerpage;
  * @author Claudio Di Maio
  */
 import pickyeater.basics.user.LifeStyle;
-import pickyeater.executors.RegisterExecutor;
+import pickyeater.executors.user.RegisterExecutor;
 
 import javax.swing.*;
 import java.awt.*;

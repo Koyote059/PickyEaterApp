@@ -10,8 +10,8 @@ import java.util.Set;
  */
 
 public class PickyGroceries implements Groceries{
-    private  Set<Ingredient> ingredients;
-    private GroceriesCheckList checkList;
+    private final Set<Ingredient> ingredients;
+    private final GroceriesCheckList checkList;
 
     public PickyGroceries(Set<Ingredient> ingredients) {
         this.ingredients = ingredients;

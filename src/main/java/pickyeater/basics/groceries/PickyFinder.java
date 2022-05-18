@@ -39,8 +39,7 @@ public class PickyFinder implements Finder {
         Set<Ingredient> ris = new HashSet<>(dst);
         for (Ingredient ingredient : src) {
             if (dst.contains(ingredient)) {
-                for (Iterator<Ingredient> dstIterator = dst.iterator(); dstIterator.hasNext(); ) {
-                    Ingredient dstNext = dstIterator.next();
+                for (Ingredient dstNext : dst) {
                     if (dstNext.equals(ingredient)) {
                         Ingredient newIngredient = sumIngredient(ingredient, dstNext);
                         ris.remove(ingredient);

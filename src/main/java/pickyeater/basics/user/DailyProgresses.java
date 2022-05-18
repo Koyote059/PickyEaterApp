@@ -12,7 +12,7 @@ public interface DailyProgresses {
     void removeEatenMeal(Meal meal);
     Nutrients getEatenNutrients();
     List<Meal> getEatenMeals();
-    void addBurnedCalories(int calories);
+    void addBurnedCalories(float calories);
     int getBurnedCalories();
     LocalDate getDate();
 

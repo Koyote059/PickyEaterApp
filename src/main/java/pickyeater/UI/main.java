@@ -26,7 +26,7 @@ public class main {
 
         if (eaterManager.getUserManager().getUser().isEmpty()) {  // User Database is empty
             new Register1();
-        } else {  // go to the app
+        } else {  // Go to the app
             new MainButton(PanelButtons.PROGRESS);
         }
     }

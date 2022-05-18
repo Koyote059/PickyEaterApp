@@ -2,12 +2,19 @@ package pickyeater.UI.app.dailyprogresspage;
 
 import pickyeater.UI.leftbuttons.MainButton;
 import pickyeater.UI.leftbuttons.PanelButtonsConverter;
-import pickyeater.database.PickyEatersDatabase;
+import pickyeater.basics.food.Meal;
+import pickyeater.basics.food.PickyMeal;
+import pickyeater.executors.AddEatenMealExecutor;
+import pickyeater.executors.ExecutorProvider;
+import pickyeater.executors.searcher.MealSearcherExecutor;
+import pickyeater.managers.EaterManager;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Iterator;
+import java.util.Set;
 
 public class AddEatenMealPage extends JFrame {
     private JButton btSettings;
@@ -18,7 +25,7 @@ public class AddEatenMealPage extends JFrame {
     private JButton btDiet;
     private JButton btCancel;
     private JPanel pieChartPanel;
-    private JList list1;
+    private JList listMeals;
     private JPanel mainPanel;
     private JButton btSave;
     private JTextField tfQuantity;
@@ -31,6 +38,11 @@ public class AddEatenMealPage extends JFrame {
         btGroceries.setBackground(Color.white);
         btUser.setBackground(Color.white);
         btSettings.setBackground(Color.white);
+
+        MealSearcherExecutor mealSearcherExecutor = new MealSearcherExecutor(ExecutorProvider.getEaterManager());
+
+        listMeals.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        listMeals.setListData(mealSearcherExecutor.getAllMealsObj());
 
         setContentPane(mainPanel);
         pack();
@@ -60,8 +72,31 @@ public class AddEatenMealPage extends JFrame {
         btSave.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                setVisible(false);
-                new DailyProgressPage();
+               // TODO: Do stuff but stay in the same page
+                String selectedMeal = listMeals.getSelectedValue().toString();
+                Set<Meal> mealSet = mealSearcherExecutor.getAllMeals();
+
+                System.out.println(selectedMeal);
+                Meal currentMeal = mealSet.iterator().next();
+                Iterator<Meal> mealIterator = mealSet.iterator();
+
+                while (mealIterator.hasNext()){
+                    currentMeal = mealIterator.next();
+                    if (currentMeal.getName().equals(selectedMeal)){
+                        break;
+                    }
+                    mealIterator.remove();
+                }
+                AddEatenMealExecutor addEatenMealExecutor =
+                        new AddEatenMealExecutor(ExecutorProvider.getEaterManager());
+
+                addEatenMealExecutor.addEatenMeal(currentMeal);
+
+                System.out.println(currentMeal);
+
+                JOptionPane.showMessageDialog(mainPanel, "Eaten meal:\n" + currentMeal);
+                // TODO: FIX MASSIVE ERROR
+
             }
         });
     }

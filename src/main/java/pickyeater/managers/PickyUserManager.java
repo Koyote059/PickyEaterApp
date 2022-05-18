@@ -18,6 +18,11 @@ public class PickyUserManager implements UserManager {
         this.user = user;
     }
 
+    public void deleteUser(User user) {
+        this.userDatabase.deleteUser(user);
+        this.user = user;
+    }
+
     public Optional<User> getUser() {
         if(user != null){
             return Optional.of(this.user);

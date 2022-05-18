@@ -8,11 +8,11 @@ import java.util.Objects;
  */
 
 public class PickyIngredient implements Ingredient {
-    private Nutrients nutrients;
-    private String name;
-    private float price;
-    private Quantity quantity;
-    private List<String> tags;
+    private final Nutrients nutrients;
+    private final String name;
+    private final float price;
+    private final Quantity quantity;
+    private final List<String> tags;
 
     public PickyIngredient(Nutrients nutrients, String name, float price, Quantity quantity, List<String> tags) {
         this.nutrients = nutrients;
@@ -49,13 +49,7 @@ public class PickyIngredient implements Ingredient {
 
     @Override
     public String toString() {
-        return "PickyIngredient{" +
-                "nutrients=" + nutrients +
-                ", name='" + name + '\'' +
-                ", price=" + price +
-                ", quantity=" + quantity +
-                ", tags=" + tags +
-                '}' + '\n';
+        return  "\nname=" + name;
     }
 
     /**
