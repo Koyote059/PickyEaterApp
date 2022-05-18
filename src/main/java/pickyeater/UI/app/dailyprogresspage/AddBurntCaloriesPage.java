@@ -3,13 +3,14 @@ package pickyeater.UI.app.dailyprogresspage;
 import pickyeater.UI.leftbuttons.MainButton;
 import pickyeater.UI.leftbuttons.PanelButtonsConverter;
 import pickyeater.executors.ExecutorProvider;
+import pickyeater.utils.StringToNumber;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class AddBurntCalories extends JFrame {
+public class AddBurntCaloriesPage extends JFrame {
     private JButton btSettings;
     private JButton btDailyProgress;
     private JButton btUser;
@@ -22,7 +23,7 @@ public class AddBurntCalories extends JFrame {
     private JButton btSave;
     private JTextField tfBurntCalories;
 
-    public AddBurntCalories() {
+    public AddBurntCaloriesPage() {
 
         btDailyProgress.setBackground(Color.green);
         btDiet.setBackground(Color.white);
@@ -60,12 +61,14 @@ public class AddBurntCalories extends JFrame {
         btSave.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                float burntCal = new StringToNumber().convertPositiveFloat(tfBurntCalories.getText());
 
-                //TODO if in Calories there isn't a valid number (negative or not a number), show error
-                ExecutorProvider.getAddBurntCaloriesExecutor().setBurntCalories(Float.parseFloat(tfBurntCalories.getText()));
-
-                JOptionPane.showMessageDialog(mainPanel, "Activity name: " + tfActivityName.getText() + "\nBurnt " +
-                        "Calories: " + tfBurntCalories.getText());
+                if (burntCal != 0) {
+                    JOptionPane.showMessageDialog(mainPanel, "Activity name: " + tfActivityName.getText() + "\n" + "Burnt Calories: " + tfBurntCalories.getText());
+                    ExecutorProvider.getAddBurntCaloriesExecutor().setBurntCalories(burntCal);
+                } else {
+                    JOptionPane.showMessageDialog(mainPanel, "Insert valid number", "", JOptionPane.ERROR_MESSAGE);
+                }
             }
         });
     }

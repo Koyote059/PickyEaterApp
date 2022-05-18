@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="pickyeater.UI.app.dailyprogresspage.AddBurntCalories">
+<form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="pickyeater.UI.app.dailyprogresspage.AddBurntCaloriesPage">
   <grid id="27dc6" binding="mainPanel" layout-manager="GridLayoutManager" row-count="4" column-count="3" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
     <margin top="0" left="0" bottom="0" right="0"/>
     <constraints>
@@ -76,18 +76,10 @@
       </component>
       <component id="b8399" class="javax.swing.JLabel">
         <constraints>
-          <grid row="1" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
-        </constraints>
-        <properties>
-          <text value="Insert burnt calories:"/>
-        </properties>
-      </component>
-      <component id="c9d4a" class="javax.swing.JLabel">
-        <constraints>
           <grid row="2" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
-          <text value="Insert activity name:"/>
+          <text value="Insert burnt calories:"/>
         </properties>
       </component>
       <component id="78c46" class="javax.swing.JButton" binding="btCancel">
@@ -106,9 +98,17 @@
           <text value="Save"/>
         </properties>
       </component>
+      <component id="c9d4a" class="javax.swing.JLabel">
+        <constraints>
+          <grid row="1" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <text value="Insert activity name:"/>
+        </properties>
+      </component>
       <component id="aa047" class="javax.swing.JTextField" binding="tfActivityName">
         <constraints>
-          <grid row="2" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
+          <grid row="1" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
             <preferred-size width="150" height="-1"/>
           </grid>
         </constraints>
@@ -116,7 +116,7 @@
       </component>
       <component id="907c8" class="javax.swing.JTextField" binding="tfBurntCalories">
         <constraints>
-          <grid row="1" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
+          <grid row="2" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
             <preferred-size width="150" height="-1"/>
           </grid>
         </constraints>
