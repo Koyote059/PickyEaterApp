@@ -76,7 +76,7 @@ public class SettingsPage extends JFrame {
                 int x = JOptionPane.showConfirmDialog(mainPanel, "Are you sure? All your added meals will be lost " +
                                 "forever", "Reset Meals", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
                 if (x == 0){
-                    //TODO: RESET MEALS
+                    ExecutorProvider.getSettingsExecutor().resetMeals();
                 }
             }
         });
@@ -86,7 +86,7 @@ public class SettingsPage extends JFrame {
                 int x = JOptionPane.showConfirmDialog(mainPanel, "Are you sure? All your added ingredients will be " +
                         "lost forever", "Reset Ingredients", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
                 if (x == 0){
-                    //TODO: RESET INGREDIENTS
+                    ExecutorProvider.getSettingsExecutor().resetIngredients();
                 }
             }
         });
