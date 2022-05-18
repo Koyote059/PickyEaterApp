@@ -8,6 +8,8 @@ import pickyeater.executors.AddEatenMealExecutor;
 import pickyeater.executors.ExecutorProvider;
 import pickyeater.executors.searcher.MealSearcherExecutor;
 import pickyeater.managers.EaterManager;
+import pickyeater.utils.MealQuantityConverter;
+import pickyeater.utils.StringToNumber;
 
 import javax.swing.*;
 import java.awt.*;
@@ -72,7 +74,6 @@ public class AddEatenMealPage extends JFrame {
         btSave.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-               // TODO: Do stuff but stay in the same page
                 String selectedMeal = listMeals.getSelectedValue().toString();
                 Set<Meal> mealSet = mealSearcherExecutor.getAllMeals();
 
@@ -87,15 +88,17 @@ public class AddEatenMealPage extends JFrame {
                     }
                     mealIterator.remove();
                 }
-                AddEatenMealExecutor addEatenMealExecutor =
-                        new AddEatenMealExecutor(ExecutorProvider.getEaterManager());
 
-                addEatenMealExecutor.addEatenMeal(currentMeal);
-
-                System.out.println(currentMeal);
-
-                JOptionPane.showMessageDialog(mainPanel, "Eaten meal:\n" + currentMeal);
-                // TODO: FIX MASSIVE ERROR
+                if (new StringToNumber().convertInteger(tfQuantity.getText()) == 0){
+                    JOptionPane.showMessageDialog(mainPanel, "Error, insert valid number", "",
+                            JOptionPane.ERROR_MESSAGE);
+                } else {
+                    currentMeal = new MealQuantityConverter().convert(currentMeal, new StringToNumber().convertInteger(tfQuantity.getText()));
+                    AddEatenMealExecutor addEatenMealExecutor = new AddEatenMealExecutor(ExecutorProvider.getEaterManager());
+                    addEatenMealExecutor.addEatenMeal(currentMeal);
+                    System.out.println(currentMeal);    // TODO -> ??
+                    JOptionPane.showMessageDialog(mainPanel, "Eaten meal:\n" + currentMeal);
+                }
 
             }
         });

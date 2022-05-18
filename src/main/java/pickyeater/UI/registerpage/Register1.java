@@ -12,6 +12,7 @@ import pickyeater.basics.user.Sex;
 import pickyeater.builders.UserBuilder;
 import pickyeater.executors.ExecutorProvider;
 import pickyeater.utils.JCalendarToLocalDate;
+import pickyeater.utils.StringToNumber;
 
 import javax.swing.*;
 import java.awt.*;
@@ -91,7 +92,7 @@ public class Register1 extends JFrame{
 
                 // Weight
                 if (!tfWeight.getText().isEmpty()) {
-                    userBuilder.setWeight(Float.parseFloat(tfWeight.getText()));
+                    userBuilder.setWeight(new StringToNumber().convertPositiveFloat(tfWeight.getText()));
                     if (userBuilder.getWeight() > 800 || userBuilder.getWeight() < 10){
                         JOptionPane.showMessageDialog(panelZeroOne, "Insert valid weight", "Error", JOptionPane.ERROR_MESSAGE);
                         userBuilder.setWeight(0);
@@ -102,7 +103,7 @@ public class Register1 extends JFrame{
 
                 // Height
                 if (!tfHeight.getText().isEmpty()) {
-                    userBuilder.setHeight(Integer.parseInt(tfHeight.getText()));
+                    userBuilder.setHeight(new StringToNumber().convertPositiveInteger(tfHeight.getText()));
                     if (userBuilder.getHeight() > 300 || userBuilder.getHeight() < 10){
                         JOptionPane.showMessageDialog(panelZeroOne, "Insert valid height", "Error", JOptionPane.ERROR_MESSAGE);
                         userBuilder.setHeight(0);
@@ -123,7 +124,7 @@ public class Register1 extends JFrame{
 
                 // BodyFat
                 if (!tfBodyfat.getText().isEmpty()) {
-                    userBuilder.setBodyFat(Float.parseFloat(tfBodyfat.getText()));
+                    userBuilder.setBodyFat(new StringToNumber().convertPositiveFloat(tfBodyfat.getText()));
                     if (userBuilder.getBodyFat() < 0 | userBuilder.getBodyFat() > 100){
                         JOptionPane.showMessageDialog(panelZeroOne, "Insert valid body-fat percentage", "Error", JOptionPane.ERROR_MESSAGE);
                     userBuilder.setBodyFat(0);

@@ -22,6 +22,7 @@ import pickyeater.executors.ExecutorProvider;
 import pickyeater.executors.user.UserEditModeExecutor;
 import pickyeater.utils.AgeCalculator;
 import pickyeater.utils.JCalendarToLocalDate;
+import pickyeater.utils.StringToNumber;
 
 import javax.swing.*;
 import java.awt.*;
@@ -219,6 +220,7 @@ public class UserEditModePage extends JFrame {
     }
 
     private boolean update(UserBuilder userBuilder) {
+        StringToNumber stn = new StringToNumber();
         // TODO -> Put update in the executor (it will return 1, 2, 3, 4 ... if it's an error, 0 otherwise
         // Name
         if (!tfName.getText().isEmpty()) {
@@ -232,7 +234,7 @@ public class UserEditModePage extends JFrame {
         }
         // Weight
         if (!tfWeight.getText().isEmpty()) {
-            userBuilder.setWeight(Float.parseFloat(tfWeight.getText()));
+            userBuilder.setWeight(stn.convertPositiveFloat(tfWeight.getText()));
             if (userBuilder.getWeight() > 800 || userBuilder.getWeight() < 10) {
                 JOptionPane.showMessageDialog(panelOne, "Insert valid weight", "Error", JOptionPane.ERROR_MESSAGE);
                 userBuilder.setWeight(0);
@@ -242,7 +244,7 @@ public class UserEditModePage extends JFrame {
         }
         // Height
         if (!tfHeight.getText().isEmpty()) {
-            userBuilder.setHeight(Integer.parseInt(tfHeight.getText()));
+            userBuilder.setHeight(stn.convertPositiveInteger(tfHeight.getText()));
             if (userBuilder.getHeight() > 300 || userBuilder.getHeight() < 10) {
                 JOptionPane.showMessageDialog(panelOne, "Insert valid height", "Error", JOptionPane.ERROR_MESSAGE);
                 userBuilder.setHeight(0);
@@ -265,7 +267,7 @@ public class UserEditModePage extends JFrame {
 
         // BodyFat
         if (!tfBodyfat.getText().isEmpty()) {
-            userBuilder.setBodyFat(Float.parseFloat(tfBodyfat.getText()));
+            userBuilder.setBodyFat(stn.convertPositiveFloat(tfBodyfat.getText()));
             if (userBuilder.getBodyFat() <= 0 | userBuilder.getBodyFat() > 100) {
                 JOptionPane.showMessageDialog(panelOne, "Insert valid body-fat percentage", "Error", JOptionPane.ERROR_MESSAGE);
                 userBuilder.setBodyFat(0);
@@ -282,13 +284,13 @@ public class UserEditModePage extends JFrame {
     }
 
     private void next(UserBuilder userBuilder){
-
+        StringToNumber stn = new StringToNumber();
         System.out.println(userBuilder.getBodyFat());
 
         NutrientsBuilder newNutrientsBuilder = new PickyNutrientsBuilder();
-        newNutrientsBuilder.setComplexCarbs(Float.parseFloat(tfCarbs.getText()));
-        newNutrientsBuilder.setUnSaturatedFats(Float.parseFloat(tfFats.getText()));
-        newNutrientsBuilder.setProteins(Float.parseFloat(tfProteins.getText()));
+        newNutrientsBuilder.setComplexCarbs(stn.convertPositiveFloat(tfCarbs.getText()));
+        newNutrientsBuilder.setUnSaturatedFats(stn.convertPositiveFloat(tfFats.getText()));
+        newNutrientsBuilder.setProteins(stn.convertPositiveFloat(tfProteins.getText()));
 
         userBuilder.setRequiredNutrients(newNutrientsBuilder.build());
 

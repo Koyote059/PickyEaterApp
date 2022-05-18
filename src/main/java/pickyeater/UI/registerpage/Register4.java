@@ -13,6 +13,7 @@ import pickyeater.builders.NutrientsBuilder;
 import pickyeater.builders.PickyNutrientsBuilder;
 import pickyeater.builders.UserBuilder;
 import pickyeater.executors.user.RegisterExecutor;
+import pickyeater.utils.StringToNumber;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -38,6 +39,8 @@ public class Register4 extends JFrame {
         UserBuilder userBuilder = registerExecutor.getUserBuilder();
 
         resetNutrients(userBuilder);
+
+        StringToNumber stn = new StringToNumber();
 
         btBack.addActionListener(new ActionListener() {
             @Override
@@ -71,22 +74,22 @@ public class Register4 extends JFrame {
         ActionListener listener = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-                if (Double.parseDouble(tfProteins.getText()) > 5000 | Double.parseDouble(tfProteins.getText()) < 0){
+                if (stn.convertPositiveDouble(tfProteins.getText()) > 5000 | stn.convertPositiveDouble(tfProteins.getText()) < 0){
                     JOptionPane.showMessageDialog(mainPanel, "Insert valid number in Proteins", "Error", JOptionPane.ERROR_MESSAGE);
                 } else {
-                    nutrientsBuilder.setProteins(Float.parseFloat(tfProteins.getText()));
+                    nutrientsBuilder.setProteins(stn.convertPositiveFloat(tfProteins.getText()));
                 }
 
-                if (Double.parseDouble(tfFats.getText()) > 5000 | Double.parseDouble(tfFats.getText()) < 0){
+                if (stn.convertPositiveDouble(tfFats.getText()) > 5000 | stn.convertPositiveDouble(tfFats.getText()) < 0){
                     JOptionPane.showMessageDialog(mainPanel, "Insert valid number in Fats", "Error", JOptionPane.ERROR_MESSAGE);
                 } else {
-                    nutrientsBuilder.setUnSaturatedFats(Float.parseFloat(tfFats.getText()));
+                    nutrientsBuilder.setUnSaturatedFats(stn.convertPositiveFloat(tfFats.getText()));
                 }
 
-                if (Float.parseFloat(tfCarbs.getText()) > 5000 | Float.parseFloat(tfCarbs.getText()) < 0){
+                if (stn.convertPositiveFloat(tfCarbs.getText()) > 5000 | stn.convertPositiveFloat(tfCarbs.getText()) < 0){
                     JOptionPane.showMessageDialog(mainPanel, "Insert valid number in Carbs", "Error", JOptionPane.ERROR_MESSAGE);
                 } else {
-                    nutrientsBuilder.setComplexCarbs(Float.parseFloat(tfCarbs.getText()));
+                    nutrientsBuilder.setComplexCarbs(stn.convertPositiveFloat(tfCarbs.getText()));
                 }
 
                 txtCalories.setText(Double.toString(nutrientsBuilder.getCalories()));
@@ -109,9 +112,9 @@ public class Register4 extends JFrame {
         tfFats.setText(Double.toString(nutrients.getFats()));
 
         // save also to newNutrientsTmp
-        nutrientsBuilder.setComplexCarbs(Float.parseFloat(tfCarbs.getText()));
-        nutrientsBuilder.setUnSaturatedFats(Float.parseFloat(tfFats.getText()));
-        nutrientsBuilder.setProteins(Float.parseFloat(tfProteins.getText()));
+        nutrientsBuilder.setComplexCarbs(new StringToNumber().convertPositiveFloat(tfCarbs.getText()));
+        nutrientsBuilder.setUnSaturatedFats(new StringToNumber().convertPositiveFloat(tfFats.getText()));
+        nutrientsBuilder.setProteins(new StringToNumber().convertPositiveFloat(tfProteins.getText()));
     }
 
 }

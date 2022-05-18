@@ -1,4 +1,4 @@
-package pickyeater.UI.app;
+package GARBAGE;
 
 /**
  * @author Claudio Di Maio

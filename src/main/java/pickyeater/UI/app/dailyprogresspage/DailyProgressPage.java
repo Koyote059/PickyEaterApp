@@ -57,6 +57,7 @@ public class DailyProgressPage extends JFrame{
 
         txtBurntCalories.setText(Integer.toString(dailyProgressExecutor.getBurntCalories()));
 
+        // TODO: Show quantity next to name; if two (or more) have the same name it will sum the quantity
         listEatenMeals.setListData(dailyProgressExecutor.getAllMealsObj());
 
         progressBar(dailyProgressExecutor.getEatenCalories(), dailyProgressExecutor.getCaloriesToEat());
@@ -87,7 +88,7 @@ public class DailyProgressPage extends JFrame{
             @Override
             public void actionPerformed(ActionEvent e) {
                 setVisible(false);
-                new AddBurntCalories();
+                new AddBurntCaloriesPage();
             }
         });
         cbConsumed.addActionListener(new ActionListener() {
