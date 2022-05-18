@@ -1,5 +1,6 @@
 package pickyeater.managers;
 
+import pickyeater.database.GroceriesDatabase;
 import pickyeater.database.IngredientsDatabase;
 import pickyeater.database.MealsDatabase;
 import pickyeater.database.UserDatabase;
@@ -12,9 +13,9 @@ public class PickyEaterManager implements EaterManager {
     private FoodManager foodManager;
     private UserManager userManager;
 
-    public PickyEaterManager(UserDatabase userDatabase, IngredientsDatabase ingredientsDatabase, MealsDatabase mealsDatabase) {
+    public PickyEaterManager(UserDatabase userDatabase, IngredientsDatabase ingredientsDatabase, MealsDatabase mealsDatabase, GroceriesDatabase groceriesDatabase) {
         this.foodManager = new PickyFoodManager(mealsDatabase, ingredientsDatabase);
-        this.userManager = new PickyUserManager(userDatabase);
+        this.userManager = new PickyUserManager(userDatabase, groceriesDatabase);
     }
 
     public FoodManager getFoodManager() {

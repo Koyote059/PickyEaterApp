@@ -52,7 +52,7 @@ public class UserEditModePage extends JFrame{
 
         //TODO: FIX
         EaterManager eaterManager = new PickyEaterManager(databases.getUserDatabase(),
-                databases.getIngredientsDatabase(), databases.getMealsDatabase());
+                databases.getIngredientsDatabase(), databases.getMealsDatabase(),databases.getGroceriesDatabase());
 
 
         Optional<User> userOptional = eaterManager.getUserManager().getUser();

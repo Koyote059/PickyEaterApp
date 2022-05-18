@@ -87,6 +87,9 @@ public class SQLCreator {
                 }
             }
         }
+
+        mealPlanBuilder.addDailyMealPlan(dailyMealPlanBuilder.build());
+
         return Optional.of(mealPlanBuilder.build());
     }
 

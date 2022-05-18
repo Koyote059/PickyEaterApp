@@ -43,7 +43,7 @@ public class UserPage extends JFrame{
 
     public UserPage(PickyEatersDatabase databases) {
         EaterManager eaterManager = new PickyEaterManager(databases.getUserDatabase(),
-                databases.getIngredientsDatabase(), databases.getMealsDatabase());
+                databases.getIngredientsDatabase(), databases.getMealsDatabase(),databases.getGroceriesDatabase());
 
 
         Optional<User> userOptional = eaterManager.getUserManager().getUser();

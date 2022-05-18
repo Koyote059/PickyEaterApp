@@ -15,6 +15,8 @@ public interface DailyMealPlanBuilder {
 
     void addMeal(Meal meal);
 
+    void removeMeal(int index);
+
     List<Meal> getMeals();
 
     DailyMealPlan build();

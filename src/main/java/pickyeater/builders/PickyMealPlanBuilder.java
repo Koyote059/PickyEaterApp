@@ -11,6 +11,7 @@ import pickyeater.basics.mealplan.PickyMealPlan;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.MissingFormatArgumentException;
 import java.util.stream.Collectors;
@@ -56,7 +57,14 @@ public class PickyMealPlanBuilder implements MealPlanBuilder {
     public void setDays(int days){
         List<DailyMealPlan> tmpDailyMealPlans = dailyMealPlans;
         dailyMealPlans = new ArrayList<>(days);
-        dailyMealPlans.addAll(tmpDailyMealPlans.subList(0,days));
+
+        if(days>=tmpDailyMealPlans.size()){
+            dailyMealPlans.addAll(tmpDailyMealPlans);
+            return;
+        }
+        for (int i = 0; i < days; i++) {
+            dailyMealPlans.add(tmpDailyMealPlans.get(i));
+        }
     }
 
     @Override
@@ -67,5 +75,10 @@ public class PickyMealPlanBuilder implements MealPlanBuilder {
     @Override
     public MealPlan build() {
         return new PickyMealPlan(dailyMealPlans, beginningDay);
+    }
+
+    @Override
+    public List<DailyMealPlan> getDailyMealPlans() {
+        return Collections.unmodifiableList(dailyMealPlans);
     }
 }

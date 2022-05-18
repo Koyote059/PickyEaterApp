@@ -1,6 +1,7 @@
 package pickyeater.database;
 
 import pickyeater.basics.groceries.Groceries;
+import pickyeater.basics.groceries.GroceriesCheckList;
 import pickyeater.database.SQLutils.SQLExecutorManager;
 import pickyeater.database.SQLutils.SQLCreator;
 import pickyeater.database.SQLutils.SQLSafeQueryExecutor;
@@ -33,10 +34,10 @@ public class SQLGroceriesDatabase implements GroceriesDatabase {
     }
 
     @Override
-    public void saveGroceries(Groceries groceries) {
+    public void saveGroceries(GroceriesCheckList groceriesCheckList) {
         try {
             SQLUnSafeQueryExecutor executor = queryExecutor.getUnSafeQueryExecutor();
-            executor.insertIntoGroceriesTable(groceries.generateCheckList());
+            executor.insertIntoGroceriesTable(groceriesCheckList);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }

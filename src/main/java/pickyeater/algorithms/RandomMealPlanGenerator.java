@@ -6,20 +6,21 @@ import pickyeater.builders.*;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.Random;
 
 public class RandomMealPlanGenerator implements MealPlanGenerator {
     @Override
-    public MealPlan generate(List<Meal> availableMeals, Nutrients requiredNutrients, int days, int mealsInADay) {
+    public MealPlan generate(Collection<Meal> availableMeals, Nutrients requiredNutrients, int days, int mealsInADay) {
         MealPlanBuilder mealPlanBuilder = new PickyMealPlanBuilder();
         mealPlanBuilder.setBeginningDay(LocalDate.now());
-        mealPlanBuilder.setDays(days);
+
 
         for(int i=0; i<days; i++){
             List<Meal> meals = new ArrayList<>(mealsInADay);
             for(int j=0; j<mealsInADay; j++){
-                Meal meal = getRandomMeal(availableMeals);
+                Meal meal = getRandomMeal(new ArrayList<>(availableMeals));
                 if(meals.contains(meal)){
                     j--;
                     continue;
@@ -38,7 +39,7 @@ public class RandomMealPlanGenerator implements MealPlanGenerator {
 
     private Meal getRandomMeal(List<Meal> availableMeals){
         Random random = new Random();
-        return availableMeals.get(random.nextInt(availableMeals.size() + 1));
+        return availableMeals.get(random.nextInt(availableMeals.size()));
     }
 
     private List<Meal> normalizeMeals(Nutrients requiredNutrients, List<Meal> meals, int mealsInADay){

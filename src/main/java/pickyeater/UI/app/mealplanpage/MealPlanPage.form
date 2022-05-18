@@ -89,47 +89,21 @@
                 <properties/>
                 <border type="none"/>
                 <children>
-                  <component id="2ed6c" class="javax.swing.JList" binding="list1" default-binding="true">
+                  <component id="a372b" class="javax.swing.JTable" binding="dailyMealsTable">
                     <constraints/>
                     <properties>
-                      <model>
-                        <item value="CHECKLIST"/>
-                        <item value="CHECKLIST"/>
-                        <item value="CHECKLIST"/>
-                        <item value="CHECKLIST"/>
-                        <item value="CHECKLIST"/>
-                        <item value="CHECKLIST"/>
-                        <item value="CHECKLIST"/>
-                        <item value="CHECKLIST"/>
-                        <item value="CHECKLIST"/>
-                        <item value="CHECKLIST"/>
-                        <item value="CHECKLIST"/>
-                        <item value="CHECKLIST"/>
-                        <item value="CHECKLIST"/>
-                        <item value="CHECKLIST"/>
-                        <item value="CHECKLIST"/>
-                        <item value="CHECKLIST"/>
-                        <item value="CHECKLIST"/>
-                        <item value="CHECKLIST"/>
-                      </model>
+                      <preferredScrollableViewportSize width="250" height="200"/>
                     </properties>
                   </component>
                 </children>
               </scrollpane>
-              <component id="d1624" class="javax.swing.JLabel">
+              <component id="d1624" class="javax.swing.JLabel" binding="dayLabel">
                 <constraints>
                   <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
                 </constraints>
                 <properties>
-                  <text value="Groceries:"/>
-                </properties>
-              </component>
-              <component id="f9014" class="javax.swing.JButton" binding="DELETEButton" default-binding="true">
-                <constraints>
-                  <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
-                </constraints>
-                <properties>
-                  <text value="DELETE"/>
+                  <labelFor value="e4ac0"/>
+                  <text value=""/>
                 </properties>
               </component>
               <component id="5a0b1" class="javax.swing.JButton" binding="previousButton" default-binding="true">
@@ -140,7 +114,7 @@
                   <text value="Previous"/>
                 </properties>
               </component>
-              <component id="7d7bb" class="javax.swing.JButton" default-binding="true">
+              <component id="7d7bb" class="javax.swing.JButton" binding="nextButton">
                 <constraints>
                   <grid row="2" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
                 </constraints>
@@ -148,12 +122,20 @@
                   <text value="Next"/>
                 </properties>
               </component>
-              <component id="b1578" class="javax.swing.JButton" default-binding="true">
+              <component id="b1578" class="javax.swing.JButton" binding="todaysButton">
                 <constraints>
-                  <grid row="3" column="0" row-span="1" col-span="2" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                  <grid row="3" column="0" row-span="1" col-span="2" vsize-policy="0" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
                 </constraints>
                 <properties>
                   <text value="Today's"/>
+                </properties>
+              </component>
+              <component id="346be" class="javax.swing.JLabel" binding="binLabel">
+                <constraints>
+                  <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="4" fill="0" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <text value=""/>
                 </properties>
               </component>
             </children>

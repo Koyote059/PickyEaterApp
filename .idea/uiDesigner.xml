@@ -137,6 +137,15 @@
       <item class="com.toedter.calendar.JDateChooser" icon="/com/intellij/uiDesigner/icons/panel.png" removable="true" auto-create-binding="false" can-attach-label="false">
         <default-constraints vsize-policy="3" hsize-policy="3" anchor="0" fill="0" />
       </item>
+      <item class="org.jfree.chart.ChartPanel" icon="/com/intellij/uiDesigner/icons/panel.png" removable="true" auto-create-binding="false" can-attach-label="false">
+        <default-constraints vsize-policy="3" hsize-policy="3" anchor="0" fill="0" />
+      </item>
+      <item class="org.knowm.xchart.XChartPanel" icon="/com/intellij/uiDesigner/icons/panel.png" removable="true" auto-create-binding="false" can-attach-label="false">
+        <default-constraints vsize-policy="3" hsize-policy="3" anchor="0" fill="0" />
+      </item>
     </group>
+  </component>
+  <component name="uidesigner-configuration">
+    <option name="USE_DYNAMIC_BUNDLES" value="true" />
   </component>
 </project>

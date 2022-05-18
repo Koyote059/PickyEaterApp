@@ -23,6 +23,22 @@ public class SQLDatabaseTest {
     List<Meal> meals;
 
     @Test
+    public void Test0(){
+        User user = userDatabase.loadUser().get();
+        MealPlan mealPlan = user.getMealPlan().get();
+        List<DailyMealPlan> dailyMealPlans = mealPlan.getDailyMealPlans();
+        for (int i = 0; i < dailyMealPlans.size(); i++) {
+            DailyMealPlan dailyMealPlan = dailyMealPlans.get(i);
+            for (Meal meal : dailyMealPlan.getMeals()) {
+                System.out.println(i + ") " + meal.getName());
+                for (Ingredient ingredient : meal.getIngredients()) {
+                    System.out.println("    " + ingredient.getName() + " -> " + ingredient.getQuantity().getAmount() + " " + ingredient.getQuantity().getQuantityType());
+                }
+            }
+        }
+    }
+
+    @Test
     public void test(){
 
         this.ingredients = getIngredients();
@@ -30,11 +46,20 @@ public class SQLDatabaseTest {
 
         ingredients.forEach(ingredientsDatabase::saveIngredient);
         meals.forEach(mealsDatabase::saveMeal);
-        if(groceriesDatabase.getGroceries().isPresent()) {
-            Groceries groceries = groceriesDatabase.getGroceries().get();
-            groceriesDatabase.deleteGroceries(groceries);
+        User user = getUser();
+        MealPlan mealPlan = user.getMealPlan().get();
+        List<DailyMealPlan> dailyMealPlans = mealPlan.getDailyMealPlans();
+        for (int i = 0; i < dailyMealPlans.size(); i++) {
+            DailyMealPlan dailyMealPlan = dailyMealPlans.get(i);
+            for (Meal meal : dailyMealPlan.getMeals()) {
+                System.out.println(i + ") " + meal.getName());
+                for (Ingredient ingredient : meal.getIngredients()) {
+                    System.out.println("    " + ingredient.getName() + " -> " + ingredient.getQuantity().getAmount() + " " + ingredient.getQuantity().getQuantityType());
+                }
+            }
+
         }
-        System.out.println(groceriesDatabase.getGroceries().isPresent());
+        userDatabase.saveUser(user);
     }
 
     private User getUser(){
@@ -75,7 +100,7 @@ public class SQLDatabaseTest {
         for(int j=0;j<6;j++){
             DailyMealPlanBuilder dailyMealPlanBuilder = new PickyDailyMealPlanBuilder();
             Random random = new Random();
-            int bound = random.nextInt()%6;
+            int bound = random.nextInt()%6+3;
             for(int i = 0;i<bound;i++){
                 Meal meal = meals.get(Math.abs(random.nextInt()%meals.size()));;
                 dailyMealPlanBuilder.addMeal(meal);
@@ -173,7 +198,7 @@ public class SQLDatabaseTest {
         MealBuilder mealBuilder = new PickyMealBuilder();
         mealBuilder.setName(name);
         Random random = new Random();
-        int bound = random.nextInt()%(ingredients.size()/3);
+        int bound = random.nextInt()%(ingredients.size()/3)+4;
         for(int i = 0; i< bound; i++){
             Ingredient ingredient = ingredients.get(Math.abs(random.nextInt()%ingredients.size()));
             mealBuilder.addIngredients(ingredient);

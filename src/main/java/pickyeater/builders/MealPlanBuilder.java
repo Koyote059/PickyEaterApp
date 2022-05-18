@@ -9,6 +9,7 @@ import pickyeater.basics.mealplan.DailyMealPlan;
 import pickyeater.basics.mealplan.MealPlan;
 
 import java.time.LocalDate;
+import java.util.List;
 
 public interface MealPlanBuilder {
     DailyMealPlan getDailyMealPlan(int day);
@@ -26,4 +27,6 @@ public interface MealPlanBuilder {
     void addDailyMealPlan(DailyMealPlan build);
 
     MealPlan build();
+
+    List<DailyMealPlan> getDailyMealPlans();
 }

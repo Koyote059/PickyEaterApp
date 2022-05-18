@@ -10,4 +10,6 @@ public interface UserDatabase {
     void saveUser(User user);
 
     void deleteUser(User user);
+
+    void deleteMealPlan(User user);
 }

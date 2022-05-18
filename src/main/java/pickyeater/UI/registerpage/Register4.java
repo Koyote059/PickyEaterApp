@@ -101,7 +101,7 @@ public class Register4 extends JFrame {
         NutrientsRequirementCalculator nutrientsCalculated = new HarrisBenedictCalculator();
         Nutrients nutrients = nutrientsCalculated.calculate(userBuilder.getHeight(),
                 userBuilder.getWeight(), new AgeCalculator().age(userBuilder.getDateOfBirth()),
-                userBuilder.getSex(), userBuilder.getLifeStyle());
+                userBuilder.getSex(), userBuilder.getLifeStyle(),userBuilder.getWeightVariationGoal());
 
         tfCalories.setText(Double.toString(nutrients.getCalories()));
         tfProteins.setText(Double.toString(nutrients.getProteins()));

@@ -26,6 +26,11 @@ public class PickyDailyMealPlanBuilder implements DailyMealPlanBuilder {
         return Collections.unmodifiableList(this.meals);
     }
 
+    public void removeMeal(int index){
+        meals.remove(index);
+    }
+
+
     public void setMeals(int mealNumber) {
         if (this.meals.size() > mealNumber) {
             this.meals = this.meals.subList(0, mealNumber);

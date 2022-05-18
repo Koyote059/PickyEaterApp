@@ -49,6 +49,9 @@ public class SQLUserDB implements UserDatabase {
                 MealPlan mealPlan = mealPlanOptional.get();
                 executor.insertIntoMealPlanTable(user.getName(),mealPlan.getBeginningDay());
                 executor.insertIntoDailyMealsTable(user.getName(),mealPlan.getDailyMealPlans());
+            } else {
+                executor.deleteFromMealPlanTable(user.getName());
+                executor.deleteFromDailyMealsTable(user.getName());
             }
             DailyProgresses dailyProgresses = user.getDailyProgresses();
             executor.insertIntoDailyProgressesTable(user.getName(),dailyProgresses);
@@ -67,6 +70,17 @@ public class SQLUserDB implements UserDatabase {
             executor.deleteFromEatenMealsTable(user.getName());
             executor.deleteFromMealPlanTable(user.getName());
             executor.deleteFromDailyProgressesTable(user.getName());
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    @Override
+    public void deleteMealPlan(User user) {
+        try {
+            SQLUnSafeQueryExecutor executor = queryExecutor.getUnSafeQueryExecutor();
+            executor.deleteFromDailyMealsTable(user.getName());
+            executor.deleteFromMealPlanTable(user.getName());
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }

@@ -81,4 +81,13 @@ public class PickyGroceriesChecklist implements GroceriesCheckList {
             neededIngredients.add(ingredient);
         }
     }
+
+    @Override
+    public String toString() {
+        return "PickyGroceriesChecklist{" +
+                "neededIngredients=" + neededIngredients +
+                ", missingIngredients=" + missingIngredients +
+                ", takenIngredients=" + takenIngredients +
+                '}';
+    }
 }

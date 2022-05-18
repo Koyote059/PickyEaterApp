@@ -5,11 +5,12 @@ import pickyeater.executors.ExecutorProvider;
 import pickyeater.managers.EaterManager;
 import pickyeater.managers.FoodManager;
 
+import javax.swing.*;
 import java.util.Iterator;
 import java.util.Optional;
 import java.util.Set;
 
-public class MealSearcherExecutor {
+public class MealSearcherExecutor extends JFrame {
     private final EaterManager eaterManager;
 
     public MealSearcherExecutor(EaterManager eaterManager) {
@@ -42,4 +43,9 @@ public class MealSearcherExecutor {
         FoodManager foodManager = this.eaterManager.getFoodManager();
         return foodManager.getMeal(mealName);
     }
+
+    public void createUIComponents(){
+
+    }
+
 }

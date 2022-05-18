@@ -261,6 +261,7 @@ public class SQLUnSafeQueryExecutor {
     private void insertGroceriesIngredient(Set<Ingredient> checkList, Connection connection, String status) throws SQLException {
 
         for (Ingredient neededIngredient : checkList) {
+
             try(Statement statement = connection.createStatement()){
                 statement.execute(String.format("INSERT INTO GroceriesItems " +
                                 "(ingredientName, quantity, status) VALUES ('%s',%s,'%s')",

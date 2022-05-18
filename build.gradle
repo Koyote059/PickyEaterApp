@@ -9,7 +9,8 @@ repositories {
     mavenCentral()
     maven {
         url "https://mvnrepository.com/artifact/com.toedter/jcalendar"
-    }
+        }
+    maven { url "https://mvnrepository.com/artifact/org.knowm.xchart/xchart" }
 }
 
 dependencies {
@@ -17,6 +18,7 @@ dependencies {
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.1'
     implementation 'org.xerial:sqlite-jdbc:3.36.0.3'
     implementation group: 'com.toedter', name: 'jcalendar', version: '1.4'
+    implementation group: 'org.knowm.xchart', name: 'xchart', version: '3.8.1'
 }
 
 test {

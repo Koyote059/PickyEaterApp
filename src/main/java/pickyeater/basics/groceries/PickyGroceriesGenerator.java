@@ -8,21 +8,10 @@ import pickyeater.basics.mealplan.MealPlan;
 
 public class PickyGroceriesGenerator implements GroceriesGenerator{
 
-    private MealPlan mealPlans;
 
     /**
-     * Constructor
-     */
-    public PickyGroceriesGenerator(MealPlan mealPlans) {
-        this.mealPlans = mealPlans;
-    }
 
-    /**
-     * Getter
-     */
-    public MealPlan getMealPlans() {
-        return mealPlans;
-    }
+
 
     /**
      * generate(MealPlan mealPlan): Generates the list of ingredients needed, and returns them in Groceries format

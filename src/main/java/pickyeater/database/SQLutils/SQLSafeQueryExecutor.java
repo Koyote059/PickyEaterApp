@@ -162,18 +162,18 @@ public class SQLSafeQueryExecutor {
             resultSet = statement.executeQuery("SELECT " +
                             "   status," +
                             "   Ingredients.ingredientName AS ingredientName," +
-                            "   quantity," +
+                            "   GroceriesItems.quantity AS quantity," +
                             "   quantityType,"+
                             "   gramsPerQuantity,"+
-                            "   price * (quantity * gramsPerQuantity / 100) AS price,\n" +
-                            "   complexcarbs * ( quantity * gramsPerQuantity / 100 ) AS complexCarbs,\n" +
-                            "   simplecarbs * ( quantity * gramsPerQuantity / 100) AS simpleCarbs,\n" +
-                            "   fibers * ( quantity * gramsPerQuantity / 100) AS fibers,\n" +
-                            "   saturatedfats * ( quantity * gramsPerQuantity / 100 ) AS saturatedFats,\n" +
-                            "   unSaturatedfats * ( quantity * gramsPerQuantity / 100 ) AS unSaturatedFats,\n" +
-                            "   transfats * ( quantity * gramsPerQuantity / 100) AS transFats,\n" +
-                            "   proteins * ( quantity * gramsPerQuantity / 100) as proteins,\n" +
-                            "   alcohol * ( quantity * gramsPerQuantity / 100) AS alcohol\n" +
+                            "   price * (GroceriesItems.quantity * gramsPerQuantity / 100) AS price,\n" +
+                            "   complexcarbs * ( GroceriesItems.quantity * gramsPerQuantity / 100 ) AS complexCarbs,\n" +
+                            "   simplecarbs * ( GroceriesItems.quantity * gramsPerQuantity / 100) AS simpleCarbs,\n" +
+                            "   fibers * ( GroceriesItems.quantity * gramsPerQuantity / 100) AS fibers,\n" +
+                            "   saturatedfats * ( GroceriesItems.quantity * gramsPerQuantity / 100 ) AS saturatedFats,\n" +
+                            "   unSaturatedfats * ( GroceriesItems.quantity * gramsPerQuantity / 100 ) AS unSaturatedFats,\n" +
+                            "   transfats * ( GroceriesItems.quantity * gramsPerQuantity / 100) AS transFats,\n" +
+                            "   proteins * ( GroceriesItems.quantity * gramsPerQuantity / 100) as proteins,\n" +
+                            "   alcohol * ( GroceriesItems.quantity * gramsPerQuantity / 100) AS alcohol\n" +
                             "FROM \n" +
                             "GroceriesItems JOIN Ingredients ON GroceriesItems.ingredientName = Ingredients.ingredientName\n");
             cachedRowSet = cache(resultSet);
