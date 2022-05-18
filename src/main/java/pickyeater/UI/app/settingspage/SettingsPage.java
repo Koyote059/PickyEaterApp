@@ -64,7 +64,7 @@ public class SettingsPage extends JFrame {
                 int x = JOptionPane.showConfirmDialog(mainPanel, "Are you sure? All your info will be lost forever",
                         "Delete user", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
                 if (x == 0){
-                    ExecutorProvider.getUserEditModeExecutor().saveUser(null);  // TODO: CHECK IF IT WORKS
+                    ExecutorProvider.getSettingsExecutor().deleteUser();
                     setVisible(false);
                     new Register1();
                 }

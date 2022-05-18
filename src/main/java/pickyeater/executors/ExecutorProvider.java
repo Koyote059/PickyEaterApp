@@ -87,4 +87,8 @@ public class ExecutorProvider {
     public static MealChooserExecutor getMealChooserExecutor() {
         return new MealChooserExecutor(eaterManager);
     }
+
+    public static SettingsExecutor getSettingsExecutor() {
+        return new SettingsExecutor(eaterManager);
+    }
 }
