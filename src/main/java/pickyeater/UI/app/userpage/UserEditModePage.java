@@ -309,7 +309,7 @@ public class UserEditModePage extends JFrame {
         NutrientsRequirementCalculator nutrientsCalculated = new HarrisBenedictCalculator();
         Nutrients nutrients = nutrientsCalculated.calculate(userBuilder.getHeight(),
                 userBuilder.getWeight(), new AgeCalculator().age(userBuilder.getDateOfBirth()),
-                userBuilder.getSex(), userBuilder.getLifeStyle());
+                userBuilder.getSex(), userBuilder.getLifeStyle(),userBuilder.getWeightVariationGoal());
 
         DecimalFormat df = new DecimalFormat("0.000");
 

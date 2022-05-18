@@ -62,7 +62,7 @@ public class AddBurntCalories extends JFrame {
             public void actionPerformed(ActionEvent e) {
 
                 //TODO if in Calories there isn't a valid number (negative or not a number), show error
-                ExecutorProvider.getAddBurntCalories().setBurntCalories(Float.parseFloat(tfBurntCalories.getText()));
+                ExecutorProvider.getAddBurntCaloriesExecutor().setBurntCalories(Float.parseFloat(tfBurntCalories.getText()));
 
                 JOptionPane.showMessageDialog(mainPanel, "Activity name: " + tfActivityName.getText() + "\nBurnt " +
                         "Calories: " + tfBurntCalories.getText());

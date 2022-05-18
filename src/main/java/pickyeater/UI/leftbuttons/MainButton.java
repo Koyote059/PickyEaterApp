@@ -20,7 +20,7 @@ public class MainButton {
                         case DIET -> new MealPlanPage();
                         case FOOD -> new FoodPage();
                         case GROCERIES -> new UnavailableGroceriesPage();
-                        case USER -> new UserPage(pickyEatersDB);
+                        case USER -> new UserPage();
                         case SETTINGS -> new SettingsPage();
                 }
         }

@@ -30,7 +30,7 @@ public class HarrisBenedictCalculator implements NutrientsRequirementCalculator 
         int offset;
         switch (weightGoal){
             case LOSE_WEIGHT -> offset = -400;
-            case MANTAIN_WEIGHT -> offset = 0;
+            case MAINTAIN_WEIGHT -> offset = 0;
             case INCREASE_WEIGHT -> offset = 400;
             default -> throw new IllegalArgumentException("Illegal argument: weightGoal -> " + weightGoal);
         }
