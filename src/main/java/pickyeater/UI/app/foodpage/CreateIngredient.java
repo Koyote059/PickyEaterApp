@@ -2,7 +2,10 @@ package pickyeater.UI.app.foodpage;
 
 import pickyeater.UI.leftbuttons.MainButton;
 import pickyeater.UI.leftbuttons.PanelButtonsConverter;
+import pickyeater.basics.food.QuantityType;
+import pickyeater.builders.IngredientBuilder;
 import pickyeater.executors.ExecutorProvider;
+import pickyeater.executors.creators.CreateIngredientExecutor;
 import pickyeater.executors.searcher.IngredientSearcherExecutor;
 
 import javax.swing.*;
@@ -19,13 +22,18 @@ public class CreateIngredient extends JFrame {
     private JButton btFood;
     private JButton btDiet;
     private JList listIngredients;
-    private JButton btSearchIngredient;
-    private JButton btAddIngredient;
-    private JTextField textField1;
+    private JButton btCancel;
+    private JButton btSave;
+    private JTextField tfName;
     private JLabel txtQuantityType;
     private JComboBox cbQuantityType;
     private JTextField tfQuantity;
     private JLabel txtQuantity;
+    private JTextField tfPrice;
+    private JTextField tfProteins;
+    private JTextField tfCarbs;
+    private JTextField tfFats;
+    private QuantityType quantityType;
 
     public CreateIngredient() {
         btDailyProgress.setBackground(Color.white);
@@ -35,9 +43,10 @@ public class CreateIngredient extends JFrame {
         btUser.setBackground(Color.white);
         btSettings.setBackground(Color.white);
 
-        ExecutorProvider executorProvider = new ExecutorProvider();
-        IngredientSearcherExecutor ingredientSearcherExecutor =
-                new IngredientSearcherExecutor(executorProvider.getEaterManager());
+        quantityType = QuantityType.GRAMS;
+
+        CreateIngredientExecutor createIngredientExecutor = ExecutorProvider.getCreateIngredientExecutor();
+        IngredientSearcherExecutor ingredientSearcherExecutor = ExecutorProvider.getIngredientSearcherExecutor();
 
         listIngredients.setListData(ingredientSearcherExecutor.getAllIngredientsObj());
 
@@ -63,17 +72,22 @@ public class CreateIngredient extends JFrame {
         btGroceries.addActionListener(listener);
         btFood.addActionListener(listener);
         btDiet.addActionListener(listener);
-        btSearchIngredient.addActionListener(new ActionListener() {
+        btCancel.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 setVisible(false);
                 new FoodPage();
             }
         });
-        btAddIngredient.addActionListener(new ActionListener() {
+        btSave.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // TODO: Save ingredient to database
+                IngredientBuilder ingredientBuilder = createIngredientExecutor.createIngredient(tfName.getText(),
+                        quantityType, tfQuantity.getText(), tfPrice.getText(), tfProteins.getText(),
+                        tfCarbs.getText(), tfFats.getText());
+
+                createIngredientExecutor.saveIngredient(ingredientBuilder.build());
+
                 setVisible(false);
                 new CreateIngredient();
             }
@@ -82,20 +96,20 @@ public class CreateIngredient extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if (cbQuantityType.getSelectedIndex() == 0){
-                    // todo: do stuff
                     txtQuantity.setVisible(false);
                     tfQuantity.setVisible(false);
                     txtQuantityType.setVisible(false);
+                    quantityType = QuantityType.GRAMS;
                 } else if (cbQuantityType.getSelectedIndex() == 1) {
-                    // todo: do stuff
                     txtQuantity.setVisible(true);
                     tfQuantity.setVisible(true);
                     txtQuantityType.setVisible(true);
+                    quantityType = QuantityType.MILLILITERS;
                 } else if (cbQuantityType.getSelectedIndex() == 2) {
-                    // todo: do stuff
                     txtQuantity.setVisible(true);
                     tfQuantity.setVisible(true);
                     txtQuantityType.setVisible(true);
+                    quantityType = QuantityType.PIECES;
                 }
             }
         });

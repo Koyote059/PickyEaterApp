@@ -3,7 +3,9 @@ package pickyeater.UI.app.foodpage;
 import pickyeater.UI.leftbuttons.MainButton;
 import pickyeater.UI.leftbuttons.PanelButtons;
 import pickyeater.UI.leftbuttons.PanelButtonsConverter;
-import pickyeater.database.PickyEatersDatabase;
+import pickyeater.executors.ExecutorProvider;
+import pickyeater.executors.searcher.IngredientSearcherExecutor;
+import pickyeater.executors.searcher.MealSearcherExecutor;
 
 import javax.swing.*;
 import java.awt.*;
@@ -19,9 +21,11 @@ public class CreateMeal extends JFrame {
     private JButton btFood;
     private JButton btDiet;
     private JList listMeals;
-    private JButton btSearchMeal;
-    private JButton btSearchIngredient;
+    private JButton btCancel;
+    private JButton btSave;
     private JButton btAddIngredient;
+    private JTextField tfName;
+    private JList listIngredients;
 
     public CreateMeal() {
         btDailyProgress.setBackground(Color.white);
@@ -30,6 +34,17 @@ public class CreateMeal extends JFrame {
         btGroceries.setBackground(Color.white);
         btUser.setBackground(Color.white);
         btSettings.setBackground(Color.white);
+
+        ExecutorProvider executorProvider = new ExecutorProvider();
+
+        IngredientSearcherExecutor ingredientSearcherExecutor =
+                new IngredientSearcherExecutor(executorProvider.getEaterManager());
+        MealSearcherExecutor mealSearcherExecutor = new MealSearcherExecutor(executorProvider.getEaterManager());
+
+        listIngredients.setListData(ingredientSearcherExecutor.getAllIngredientsObj());
+        listMeals.setListData(mealSearcherExecutor.getAllMealsObj());
+
+
 
         setContentPane(mainPanel);
         pack();
@@ -49,14 +64,14 @@ public class CreateMeal extends JFrame {
         btGroceries.addActionListener(listener);
         btFood.addActionListener(listener);
         btDiet.addActionListener(listener);
-        btSearchMeal.addActionListener(new ActionListener() {
+        btCancel.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 setVisible(false);
                 new MainButton(PanelButtons.FOOD);
             }
         });
-        btSearchIngredient.addActionListener(new ActionListener() {
+        btSave.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 setVisible(false);

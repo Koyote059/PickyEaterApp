@@ -129,7 +129,7 @@
                       <text value="Ingredients:"/>
                     </properties>
                   </component>
-                  <component id="3054a" class="javax.swing.JButton" binding="btSearchIngredient">
+                  <component id="3054a" class="javax.swing.JButton" binding="btCancel">
                     <constraints>
                       <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
                     </constraints>
@@ -137,7 +137,7 @@
                       <text value="Cancel"/>
                     </properties>
                   </component>
-                  <component id="8366" class="javax.swing.JButton" binding="btAddIngredient">
+                  <component id="8366" class="javax.swing.JButton" binding="btSave">
                     <constraints>
                       <grid row="2" column="1" row-span="1" col-span="2" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
                     </constraints>
@@ -177,7 +177,7 @@
                           <text value="Price (optional):"/>
                         </properties>
                       </component>
-                      <component id="95781" class="javax.swing.JTextField" default-binding="true">
+                      <component id="95781" class="javax.swing.JTextField" binding="tfPrice">
                         <constraints>
                           <grid row="3" column="1" row-span="1" col-span="2" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
                             <preferred-size width="150" height="-1"/>
@@ -193,7 +193,7 @@
                         </constraints>
                         <properties/>
                       </component>
-                      <component id="e5e6e" class="javax.swing.JTextField" default-binding="true">
+                      <component id="e5e6e" class="javax.swing.JTextField" binding="tfProteins">
                         <constraints>
                           <grid row="5" column="1" row-span="1" col-span="2" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
                             <preferred-size width="150" height="-1"/>
@@ -225,7 +225,7 @@
                           <text value="Carbs:"/>
                         </properties>
                       </component>
-                      <component id="dc4f1" class="javax.swing.JTextField" default-binding="true">
+                      <component id="dc4f1" class="javax.swing.JTextField" binding="tfCarbs">
                         <constraints>
                           <grid row="6" column="1" row-span="1" col-span="2" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
                             <preferred-size width="150" height="-1"/>
@@ -233,7 +233,7 @@
                         </constraints>
                         <properties/>
                       </component>
-                      <component id="24375" class="javax.swing.JTextField" default-binding="true">
+                      <component id="24375" class="javax.swing.JTextField" binding="tfFats">
                         <constraints>
                           <grid row="7" column="1" row-span="1" col-span="2" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
                             <preferred-size width="150" height="-1"/>
@@ -277,7 +277,7 @@
                           </model>
                         </properties>
                       </component>
-                      <component id="16920" class="javax.swing.JTextField" binding="textField1" default-binding="true">
+                      <component id="16920" class="javax.swing.JTextField" binding="tfName">
                         <constraints>
                           <grid row="0" column="1" row-span="1" col-span="2" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
                             <preferred-size width="150" height="-1"/>
