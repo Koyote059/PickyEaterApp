@@ -1,4 +1,4 @@
-package pickyeater.executors;
+package pickyeater.executors.creators;
 
 import pickyeater.builders.IngredientBuilder;
 import pickyeater.builders.NutrientsBuilder;

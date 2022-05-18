@@ -7,16 +7,14 @@ package pickyeater.UI.app.userpage;
 import pickyeater.UI.leftbuttons.MainButton;
 import pickyeater.UI.leftbuttons.PanelButtonsConverter;
 import pickyeater.basics.user.User;
-import pickyeater.database.PickyEatersDatabase;
-import pickyeater.executors.UserMealsProgressesExecutor;
-import pickyeater.managers.EaterManager;
-import pickyeater.managers.PickyEaterManager;
+import pickyeater.executors.ExecutorProvider;
+import pickyeater.executors.user.UserExecutor;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.Optional;
+import java.text.DecimalFormat;
 
 public class UserPage extends JFrame{
     private JPanel mainPanel;
@@ -39,32 +37,30 @@ public class UserPage extends JFrame{
     private JLabel txtCarbs;
     private JLabel txtFats;
     private JLabel txtCalories;
-    UserMealsProgressesExecutor userMealsProgressesExecutor;
 
-    public UserPage(PickyEatersDatabase databases) {
-        EaterManager eaterManager = new PickyEaterManager(databases.getUserDatabase(),
-                databases.getIngredientsDatabase(), databases.getMealsDatabase(),databases.getGroceriesDatabase());
+    public UserPage() {
 
+        UserExecutor userExecutor = ExecutorProvider.getUserExecutor();
 
-        Optional<User> userOptional = eaterManager.getUserManager().getUser();
+        User user = userExecutor.getUser();
 
-        User user = userOptional.get();
+        DecimalFormat df = new DecimalFormat("0.00");
 
         // User:
         txtName.setText(user.getName());
         txtSex.setText(user.getUserStatus().getSex().toString());
         txtDateOfBirth.setText(user.getUserStatus().getDateOfBirth().toString());
-        txtHeight.setText(Double.toString(user.getUserStatus().getHeight()));
-        txtWeight.setText(Double.toString(user.getUserStatus().getWeight()));
-        txtBodyFat.setText(Double.toString(user.getUserStatus().getBodyFat()));
+        txtHeight.setText(df.format(user.getUserStatus().getHeight()));
+        txtWeight.setText(df.format(user.getUserStatus().getWeight()));
+        txtBodyFat.setText(df.format(user.getUserStatus().getBodyFat()));
         txtLifestyle.setText(user.getUserGoal().getLifeStyle().toString());
         txtWeightGoal.setText(user.getUserGoal().getWeightVariationGoal().toString());
 
         // Nutrients:
-        txtProteins.setText(Double.toString(user.getUserGoal().getRequiredNutrients().getProteins()));
-        txtCarbs.setText(Double.toString(user.getUserGoal().getRequiredNutrients().getCarbs()));
-        txtFats.setText(Double.toString(user.getUserGoal().getRequiredNutrients().getFats()));
-        txtCalories.setText(Double.toString(user.getUserGoal().getRequiredNutrients().getCalories()));
+        txtProteins.setText(df.format(user.getUserGoal().getRequiredNutrients().getProteins()));
+        txtCarbs.setText(df.format(user.getUserGoal().getRequiredNutrients().getCarbs()));
+        txtFats.setText(df.format(user.getUserGoal().getRequiredNutrients().getFats()));
+        txtCalories.setText(df.format(user.getUserGoal().getRequiredNutrients().getCalories()));
 
         btDailyProgress.setBackground(Color.white);
         btDiet.setBackground(Color.white);
@@ -96,7 +92,7 @@ public class UserPage extends JFrame{
             @Override
             public void actionPerformed(ActionEvent e) {
                 setVisible(false);
-                new UserEditModePage(databases);
+                new UserEditModePage();
             }
         });
     }

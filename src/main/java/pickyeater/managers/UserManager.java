@@ -14,6 +14,8 @@ import java.util.Optional;
 public interface UserManager {
     void saveUser(User user);
 
+    void deleteUser(User user);
+
     Optional<User> getUser();
 
     void saveGroceries(GroceriesCheckList groceriesCheckList);

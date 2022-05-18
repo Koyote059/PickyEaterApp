@@ -39,7 +39,7 @@ public class PickyDailyProgresses implements DailyProgresses {
     }
 
     @Override
-    public void addBurnedCalories(int calories) {
+    public void addBurnedCalories(float calories) {
         burnedCalories +=calories;
     }
 

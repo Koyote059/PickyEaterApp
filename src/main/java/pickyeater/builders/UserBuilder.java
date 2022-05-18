@@ -16,7 +16,6 @@ import java.util.Date;
 
 public interface UserBuilder {
     void setName(String name);
-
     String getName();
     void setWeight(float weight);
     float getWeight();

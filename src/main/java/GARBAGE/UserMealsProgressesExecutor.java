@@ -1,4 +1,4 @@
-package pickyeater.executors;
+package GARBAGE;
 
 import pickyeater.executors.searcher.MealSearcherExecutor;
 import pickyeater.managers.EaterManager;
@@ -7,7 +7,7 @@ import pickyeater.basics.user.User;
 
 import java.util.Optional;
 
-public class UserMealsProgressesExecutor {
+public class UserMealsProgressesExecutor {  // REMOVED - used DailyProgressPage instead
     private final EaterManager eaterManager;
     private final User user;
 

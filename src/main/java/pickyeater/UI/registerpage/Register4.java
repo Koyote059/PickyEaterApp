@@ -12,7 +12,7 @@ import pickyeater.basics.food.Nutrients;
 import pickyeater.builders.NutrientsBuilder;
 import pickyeater.builders.PickyNutrientsBuilder;
 import pickyeater.builders.UserBuilder;
-import pickyeater.executors.RegisterExecutor;
+import pickyeater.executors.user.RegisterExecutor;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -22,7 +22,7 @@ public class Register4 extends JFrame {
     private JPanel mainPanel;
     private JButton btBack;
     private JButton btDone;
-    private JLabel tfCalories;
+    private JLabel txtCalories;
     private JTextField tfProteins;
     private JTextField tfCarbs;
     private JTextField tfFats;
@@ -89,7 +89,7 @@ public class Register4 extends JFrame {
                     nutrientsBuilder.setComplexCarbs(Float.parseFloat(tfCarbs.getText()));
                 }
 
-                tfCalories.setText(Double.toString(nutrientsBuilder.getCalories()));
+                txtCalories.setText(Double.toString(nutrientsBuilder.getCalories()));
             }
         };
         tfFats.addActionListener(listener);
@@ -103,13 +103,10 @@ public class Register4 extends JFrame {
                 userBuilder.getWeight(), new AgeCalculator().age(userBuilder.getDateOfBirth()),
                 userBuilder.getSex(), userBuilder.getLifeStyle(),userBuilder.getWeightVariationGoal());
 
-        tfCalories.setText(Double.toString(nutrients.getCalories()));
+        txtCalories.setText(Double.toString(nutrients.getCalories()));
         tfProteins.setText(Double.toString(nutrients.getProteins()));
         tfCarbs.setText(Double.toString(nutrients.getCarbs()));
         tfFats.setText(Double.toString(nutrients.getFats()));
-
-        // Refresh monitor
-        setVisible(true);
 
         // save also to newNutrientsTmp
         nutrientsBuilder.setComplexCarbs(Float.parseFloat(tfCarbs.getText()));

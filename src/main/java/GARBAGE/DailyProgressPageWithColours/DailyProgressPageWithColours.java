@@ -1,11 +1,11 @@
-package GARDBAGE.DailyProgressPageWithColours;
+package GARBAGE.DailyProgressPageWithColours;
 
 /**
  * @author Claudio Di Maio
  */
 
 import pickyeater.database.PickyEatersDatabase;
-import pickyeater.executors.UserMealsProgressesExecutor;
+import GARBAGE.UserMealsProgressesExecutor;
 
 import javax.swing.*;
 

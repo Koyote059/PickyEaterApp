@@ -12,9 +12,9 @@ import java.util.Set;
 
 public class PickyGroceriesChecklist implements GroceriesCheckList {
 
-    private Set<Ingredient> neededIngredients;
-    private Set<Ingredient> missingIngredients;
-    private Set<Ingredient> takenIngredients;
+    private final Set<Ingredient> neededIngredients;
+    private final Set<Ingredient> missingIngredients;
+    private final Set<Ingredient> takenIngredients;
 
     /**
      * Constructor
