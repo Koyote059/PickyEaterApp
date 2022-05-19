@@ -24,13 +24,12 @@ public class AddBurntCaloriesPage extends JFrame {
     private JTextField tfBurntCalories;
 
     public AddBurntCaloriesPage() {
-
-        btDailyProgress.setBackground(Color.green);
-        btDiet.setBackground(Color.white);
-        btFood.setBackground(Color.white);
-        btGroceries.setBackground(Color.white);
-        btUser.setBackground(Color.white);
-        btSettings.setBackground(Color.white);
+        btDailyProgress.setBackground(Color.decode("#B1EA9D"));
+        btDiet.setBackground(Color.decode("#FFFFFF"));
+        btFood.setBackground(Color.decode("#FFFFFF"));
+        btGroceries.setBackground(Color.decode("#FFFFFF"));
+        btUser.setBackground(Color.decode("#FFFFFF"));
+        btSettings.setBackground(Color.decode("#FFFFFF"));
 
         setContentPane(mainPanel);
         pack();

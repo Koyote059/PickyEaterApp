@@ -113,12 +113,13 @@ public class UserEditModePage extends JFrame {
         tfCarbs.setText(df.format(user.getUserGoal().getRequiredNutrients().getCarbs()));
         tfFats.setText(df.format(user.getUserGoal().getRequiredNutrients().getFats()));
         txtCalories.setText(df.format(user.getUserGoal().getRequiredNutrients().getCalories()));
-        btDailyProgress.setBackground(Color.white);
-        btDiet.setBackground(Color.white);
-        btFood.setBackground(Color.white);
-        btGroceries.setBackground(Color.white);
-        btUser.setBackground(Color.green);
-        btSettings.setBackground(Color.white);
+
+        btDailyProgress.setBackground(Color.decode("#FFFFFF"));
+        btDiet.setBackground(Color.decode("#FFFFFF"));
+        btFood.setBackground(Color.decode("#FFFFFF"));
+        btGroceries.setBackground(Color.decode("#FFFFFF"));
+        btUser.setBackground(Color.decode("#B1EA9D"));
+        btSettings.setBackground(Color.decode("#FFFFFF"));
 
         setContentPane(mainPanel);
         pack();

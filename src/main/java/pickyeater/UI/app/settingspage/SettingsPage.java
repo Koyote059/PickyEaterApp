@@ -24,12 +24,12 @@ public class SettingsPage extends JFrame {
     private JButton btResetIngredients;
 
     public SettingsPage() {
-        btDailyProgress.setBackground(Color.white);
-        btDiet.setBackground(Color.white);
-        btFood.setBackground(Color.white);
-        btGroceries.setBackground(Color.white);
-        btUser.setBackground(Color.white);
-        btSettings.setBackground(Color.green);
+        btDailyProgress.setBackground(Color.decode("#FFFFFF"));
+        btDiet.setBackground(Color.decode("#FFFFFF"));
+        btFood.setBackground(Color.decode("#FFFFFF"));
+        btGroceries.setBackground(Color.decode("#FFFFFF"));
+        btUser.setBackground(Color.decode("#FFFFFF"));
+        btSettings.setBackground(Color.decode("#B1EA9D"));
 
         setContentPane(mainPanel);
         pack();
@@ -52,7 +52,6 @@ public class SettingsPage extends JFrame {
                 new MainButton(new PanelButtonsConverter(cmd).Convert());
             }
         };
-        btSettings.addActionListener(listener);
         btDailyProgress.addActionListener(listener);
         btUser.addActionListener(listener);
         btGroceries.addActionListener(listener);

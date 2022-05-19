@@ -26,6 +26,11 @@ public class Register2 extends JFrame {
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setVisible(true);
 
+        btSedentary.setBackground(Color.decode("#FFFFFF"));
+        btSlightlyActive.setBackground(Color.decode("#FFFFFF"));
+        btActive.setBackground(Color.decode("#FFFFFF"));
+        btVeryActive.setBackground(Color.decode("#FFFFFF"));
+
         btSedentary.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
@@ -69,50 +74,50 @@ public class Register2 extends JFrame {
             @Override
             public void mouseEntered(MouseEvent e) {
                 super.mouseEntered(e);
-                btSedentary.setBackground(Color.green);
-                btSlightlyActive.setBackground(Color.white);
-                btActive.setBackground(Color.white);
-                btVeryActive.setBackground(Color.white);
+                btSedentary.setBackground(Color.decode("#B1EA9D"));
+                btSlightlyActive.setBackground(Color.decode("#FFFFFF"));
+                btActive.setBackground(Color.decode("#FFFFFF"));
+                btVeryActive.setBackground(Color.decode("#FFFFFF"));
             }
         });
         btSlightlyActive.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseEntered(MouseEvent e) {
                 super.mouseEntered(e);
-                btSedentary.setBackground(Color.white);
-                btSlightlyActive.setBackground(Color.green);
-                btActive.setBackground(Color.white);
-                btVeryActive.setBackground(Color.white);
+                btSedentary.setBackground(Color.decode("#FFFFFF"));
+                btSlightlyActive.setBackground(Color.decode("#B1EA9D"));
+                btActive.setBackground(Color.decode("#FFFFFF"));
+                btVeryActive.setBackground(Color.decode("#FFFFFF"));
             }
         });
         btActive.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseEntered(MouseEvent e) {
                 super.mouseEntered(e);
-                btSedentary.setBackground(Color.white);
-                btSlightlyActive.setBackground(Color.white);
-                btActive.setBackground(Color.green);
-                btVeryActive.setBackground(Color.white);
+                btSedentary.setBackground(Color.decode("#FFFFFF"));
+                btSlightlyActive.setBackground(Color.decode("#FFFFFF"));
+                btActive.setBackground(Color.decode("#B1EA9D"));
+                btVeryActive.setBackground(Color.decode("#FFFFFF"));
             }
         });
         btVeryActive.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseEntered(MouseEvent e) {
                 super.mouseEntered(e);
-                btSedentary.setBackground(Color.white);
-                btSlightlyActive.setBackground(Color.white);
-                btActive.setBackground(Color.white);
-                btVeryActive.setBackground(Color.green);
+                btSedentary.setBackground(Color.decode("#FFFFFF"));
+                btSlightlyActive.setBackground(Color.decode("#FFFFFF"));
+                btActive.setBackground(Color.decode("#FFFFFF"));
+                btVeryActive.setBackground(Color.decode("#B1EA9D"));
             }
         });
         MouseAdapter listener = new MouseAdapter() {
             @Override
             public void mouseExited(MouseEvent e) {
                 super.mouseExited(e);
-                btSedentary.setBackground(Color.white);
-                btSlightlyActive.setBackground(Color.white);
-                btActive.setBackground(Color.white);
-                btVeryActive.setBackground(Color.white);
+                btSedentary.setBackground(Color.decode("#FFFFFF"));
+                btSlightlyActive.setBackground(Color.decode("#FFFFFF"));
+                btActive.setBackground(Color.decode("#FFFFFF"));
+                btVeryActive.setBackground(Color.decode("#FFFFFF"));
             }
         };
         btActive.addMouseListener(listener);

@@ -85,12 +85,12 @@ public class MealPlanPage extends JFrame{
         tableModel.addColumn("Meals");
         tableModel.addColumn("Quantity");
 
-        btDailyProgress.setBackground(Color.white);
-        btDiet.setBackground(Color.green);
-        btFood.setBackground(Color.white);
-        btGroceries.setBackground(Color.white);
-        btUser.setBackground(Color.white);
-        btSettings.setBackground(Color.white);
+        btDailyProgress.setBackground(Color.decode("#FFFFFF"));
+        btDiet.setBackground(Color.decode("#B1EA9D"));
+        btFood.setBackground(Color.decode("#FFFFFF"));
+        btGroceries.setBackground(Color.decode("#FFFFFF"));
+        btUser.setBackground(Color.decode("#FFFFFF"));
+        btSettings.setBackground(Color.decode("#FFFFFF"));
 
         setButtonsListeners();
         todaysButton.doClick();
