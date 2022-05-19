@@ -11,23 +11,15 @@ import pickyeater.database.*;
 import pickyeater.executors.ExecutorProvider;
 import pickyeater.managers.EaterManager;
 import pickyeater.managers.PickyEaterManager;
+import pickyeater.themes.SystemTheme;
 
 import javax.swing.*;
+import java.awt.*;
 
 public class main {
     public static void main(String[] args) {
 
-        try {
-            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-        } catch (ClassNotFoundException e) {
-            throw new RuntimeException(e);
-        } catch (InstantiationException e) {
-            throw new RuntimeException(e);
-        } catch (IllegalAccessException e) {
-            throw new RuntimeException(e);
-        } catch (UnsupportedLookAndFeelException e) {
-            throw new RuntimeException(e);
-        }
+        new SystemTheme().Theme1();
 
         //PickyEatersDatabase pickyEatersDB = new SQLPickyEaterDB("PickyEatersDB.sqlite");
         PickyEatersDatabase pickyEatersDB = new SQLPickyEaterDB("dbDiProva.sqlite");
