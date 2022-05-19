@@ -1,7 +1,5 @@
 package pickyeater.UI.app.groceriespage;
 
-import pickyeater.UI.app.groceriespage.utils.CheckBoxListRenderer;
-import pickyeater.UI.app.groceriespage.utils.TCheckBox;
 import pickyeater.UI.app.groceriespage.utils.WindowCloseListener;
 import pickyeater.UI.leftbuttons.MainButton;
 import pickyeater.UI.leftbuttons.PanelButtonsConverter;
@@ -15,7 +13,6 @@ import pickyeater.utils.MouseClickListener;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableCellRenderer;
 import java.awt.*;
 import java.awt.event.*;
 import java.awt.image.BufferedImage;
@@ -32,7 +29,7 @@ public class GroceriesPage extends JFrame{
     private JButton btFood;
     private JButton btDiet;
     private JLabel binLabel;
-    private JTable ingredientsTable;
+    private JTable tableIngredients;
 
     private GroceriesExecutor groceriesExecutor;
     private GroceriesCheckList groceriesCheckList;
@@ -81,7 +78,7 @@ public class GroceriesPage extends JFrame{
         Optional<Groceries> groceriesOptional = groceriesExecutor.getGroceries();
         if(groceriesOptional.isEmpty()) throw new RuntimeException("Error in Groceries Database!");
         groceriesCheckList = groceriesOptional.get().generateCheckList();
-        ingredientsTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        tableIngredients.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         draw();
     }
 
@@ -113,7 +110,7 @@ public class GroceriesPage extends JFrame{
             model.addRow(row);
         }
 
-        ingredientsTable.setModel(model);
+        tableIngredients.setModel(model);
     }
 
     private void setNavigationMenuListeners(){
