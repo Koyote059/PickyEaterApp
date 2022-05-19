@@ -69,7 +69,7 @@ public class Register1 extends JFrame{
             @Override
             public void propertyChange(PropertyChangeEvent propertyChangeEvent) {
 
-                userBuilder.setDateOfBirth(new JCalendarToLocalDate().jCalendarToLocalDate(propertyChangeEvent.getNewValue()));
+                userBuilder.setDateOfBirth(new JCalendarToLocalDate().jCalToLocDate(jBirthdayChooser.getDate()));
 
                 if (LocalDate.now().compareTo(userBuilder.getDateOfBirth()) <= 0){   //TODO: If a person is older than 150 years old -> null
                     userBuilder.setDateOfBirth(null);

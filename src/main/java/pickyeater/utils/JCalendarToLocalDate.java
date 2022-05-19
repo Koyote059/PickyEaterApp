@@ -1,15 +1,22 @@
 package pickyeater.utils;
 
 import java.time.LocalDate;
+import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoField;
 import java.time.temporal.TemporalAccessor;
+import java.util.Date;
 import java.util.Locale;
 
 import static java.lang.Integer.parseInt;
 
 public class JCalendarToLocalDate {
 
+    public LocalDate jCalToLocDate(Date date){
+        return date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+    }
+
+    /*
     public LocalDate jCalendarToLocalDate(Object object){
         StringBuilder dateTmp = new StringBuilder();
         dateTmp.append(object);
@@ -26,5 +33,5 @@ public class JCalendarToLocalDate {
 
         return LocalDate.of(parseInt(year), monthInt, parseInt(day));
     }
-
+    */
 }

@@ -125,7 +125,7 @@ public class UserEditModePage extends JFrame {
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setVisible(true);
 
-        newUserBuilder.setDateOfBirth(new JCalendarToLocalDate().jCalendarToLocalDate(jBirthdayChooser.getDate()));
+        newUserBuilder.setDateOfBirth(new JCalendarToLocalDate().jCalToLocDate(jBirthdayChooser.getDate()));
         ActionListener listener = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -144,7 +144,7 @@ public class UserEditModePage extends JFrame {
         jBirthdayChooser.addPropertyChangeListener(new PropertyChangeListener() {
             @Override
             public void propertyChange(PropertyChangeEvent propertyChangeEvent) {
-                newUserBuilder.setDateOfBirth(new JCalendarToLocalDate().jCalendarToLocalDate(propertyChangeEvent.getNewValue()));
+                newUserBuilder.setDateOfBirth(new JCalendarToLocalDate().jCalToLocDate(jBirthdayChooser.getDate()));
                 if (LocalDate.now().compareTo(newUserBuilder.getDateOfBirth()) <= 0) {   //TODO: If a person is older than 150 years old -> null
                     newUserBuilder.setDateOfBirth(null);
                 }
