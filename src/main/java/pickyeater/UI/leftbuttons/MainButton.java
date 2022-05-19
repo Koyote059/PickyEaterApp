@@ -11,9 +11,6 @@ import pickyeater.database.PickyEatersDatabase;
 import pickyeater.database.SQLPickyEaterDB;
 
 public class MainButton {
-
-        // TODO: REMOVE
-        PickyEatersDatabase pickyEatersDB = new SQLPickyEaterDB("PickyEatersDB.sqlite");
         public MainButton(PanelButtons panelButton) {
                 switch (panelButton) {
                         case PROGRESS -> new DailyProgressPage();
@@ -24,5 +21,4 @@ public class MainButton {
                         case SETTINGS -> new SettingsPage();
                 }
         }
-
 }
