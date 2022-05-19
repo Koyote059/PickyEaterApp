@@ -65,6 +65,8 @@ public class AddBurntCaloriesPage extends JFrame {
                 if (burntCal != 0) {
                     JOptionPane.showMessageDialog(mainPanel, "Activity name: " + tfActivityName.getText() + "\n" + "Burnt Calories: " + tfBurntCalories.getText());
                     ExecutorProvider.getAddBurntCaloriesExecutor().setBurntCalories(burntCal);
+                    setVisible(false);
+                    new DailyProgressPage();
                 } else {
                     JOptionPane.showMessageDialog(mainPanel, "Insert valid number", "", JOptionPane.ERROR_MESSAGE);
                 }

@@ -18,15 +18,6 @@ public class HarrisBenedictCalculator implements NutrientsRequirementCalculator 
             default -> throw new IllegalArgumentException("Illegal argument: sex -> " + sex);
         }
 
-        float cof;
-        switch (lifeStyle){
-            case SEDENTARY -> cof = 1.2f;
-            case LIGHTLY_ACTIVE -> cof = 1.35f;
-            case ACTIVE -> cof = 1.5f;
-            case VERY_ACTIVE -> cof = 1.7f;
-            default -> throw new IllegalArgumentException("Illegal argument: lifeStyle -> " + lifeStyle);
-        }
-
         int offset;
         switch (weightGoal){
             case LOSE_WEIGHT -> offset = -400;
@@ -35,16 +26,41 @@ public class HarrisBenedictCalculator implements NutrientsRequirementCalculator 
             default -> throw new IllegalArgumentException("Illegal argument: weightGoal -> " + weightGoal);
         }
 
+        float cof;
+        float proteinsPercentage;
+        switch (lifeStyle){
+            case SEDENTARY ->{
+                cof = 1.2f;
+                proteinsPercentage = 0.15f;
+            }
+            case LIGHTLY_ACTIVE -> {
+                cof = 1.35f;
+                proteinsPercentage = 0.18f;
+            }
+            case ACTIVE -> {
+                cof = 1.5f;
+                proteinsPercentage = 0.21f;
+            }
+            case VERY_ACTIVE -> {
+                cof = 1.7f;
+                proteinsPercentage = 0.23f;
+            }
+            default -> throw new IllegalArgumentException("Illegal argument: lifeStyle -> " + lifeStyle);
+        }
+
+
         int caloriesRequirement = (int) (basalMetabolicRate * cof) + offset;
 
         NutrientsBuilder nutrientsBuilder = new PickyNutrientsBuilder();
-        nutrientsBuilder.setFibers((caloriesRequirement*14.0f)/1000);
-        nutrientsBuilder.setProteins((0.2f*caloriesRequirement)/4);
-        nutrientsBuilder.setSaturatedFats((0.025f *caloriesRequirement)/9f);
-        nutrientsBuilder.setUnSaturatedFats((0.075f *caloriesRequirement)/9f);
+        nutrientsBuilder.setSimpleCarbs((0.10f * caloriesRequirement)/4);
+        nutrientsBuilder.setComplexCarbs(((0.31f * caloriesRequirement)/4) - nutrientsBuilder.getFibers());
+        nutrientsBuilder.setFibers((0.14f * caloriesRequirement)/4);
 
-        nutrientsBuilder.setSimpleCarbs((0.15f * caloriesRequirement)/4);
-        nutrientsBuilder.setComplexCarbs(((0.45f * caloriesRequirement)/4) - nutrientsBuilder.getFibers());
+        nutrientsBuilder.setProteins((proteinsPercentage*caloriesRequirement)/4);
+
+        nutrientsBuilder.setSaturatedFats(((0.45f - proteinsPercentage)*(2f/3f) *caloriesRequirement)/9f);
+        nutrientsBuilder.setUnSaturatedFats(((0.45f - proteinsPercentage)/3 *caloriesRequirement)/9f);
+
 
         return nutrientsBuilder.build();
     }

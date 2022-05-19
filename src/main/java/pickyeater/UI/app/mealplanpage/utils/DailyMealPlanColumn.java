@@ -1,6 +1,9 @@
 package pickyeater.UI.app.mealplanpage.utils;
 
+
+import pickyeater.UI.choosers.IngredientChooser;
 import pickyeater.UI.choosers.MealsChooser;
+import pickyeater.basics.food.Ingredient;
 import pickyeater.basics.food.Meal;
 import pickyeater.basics.mealplan.DailyMealPlan;
 import pickyeater.builders.DailyMealPlanBuilder;
@@ -8,11 +11,12 @@ import pickyeater.builders.PickyDailyMealPlanBuilder;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableCellRenderer;
 import java.awt.*;
-import java.awt.event.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.text.DecimalFormat;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
