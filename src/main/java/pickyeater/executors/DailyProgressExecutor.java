@@ -9,6 +9,7 @@ import pickyeater.basics.user.User;
 import pickyeater.basics.user.UserGoal;
 import pickyeater.executors.searcher.MealSearcherExecutor;
 import pickyeater.managers.EaterManager;
+import pickyeater.managers.UserManager;
 
 import java.util.Iterator;
 import java.util.List;
@@ -91,5 +92,12 @@ public class DailyProgressExecutor {
             objects[tmpSize - 1] = meal.getName();
         }
         return objects;
+    }
+
+    public void addEatenMeal(Meal meal) {
+        DailyProgresses progresses = user.getDailyProgresses();
+        progresses.addEatenMeal(meal);
+        UserManager manager = eaterManager.getUserManager();
+        manager.saveUser(user);
     }
 }

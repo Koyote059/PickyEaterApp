@@ -4,8 +4,10 @@ package pickyeater.UI.app.dailyprogresspage;
  * @author Claudio Di Maio
  */
 
+import pickyeater.UI.choosers.MealsChooser;
 import pickyeater.UI.leftbuttons.MainButton;
 import pickyeater.UI.leftbuttons.PanelButtonsConverter;
+import pickyeater.basics.food.Meal;
 import pickyeater.executors.DailyProgressExecutor;
 import pickyeater.executors.ExecutorProvider;
 import GARBAGE.UserMealsProgressesExecutor;
@@ -15,8 +17,9 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.DecimalFormat;
+import java.util.Optional;
 
-public class DailyProgressPage extends JFrame{
+public class DailyProgressPage extends JFrame {
     private JPanel mainPanel;
     private JButton btSettings;
     private JButton btDailyProgress;
@@ -62,13 +65,10 @@ public class DailyProgressPage extends JFrame{
 
         progressBar(dailyProgressExecutor.getEatenCalories(), dailyProgressExecutor.getCaloriesToEat());
 
-        ActionListener listener = new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                String cmd = e.getActionCommand();
-                setVisible(false);
-                new MainButton(new PanelButtonsConverter(cmd).Convert());
-            }
+        ActionListener listener = e -> {
+            String cmd = e.getActionCommand();
+            setVisible(false);
+            new MainButton(new PanelButtonsConverter(cmd).Convert());
         };
         btSettings.addActionListener(listener);
         btUser.addActionListener(listener);
@@ -76,12 +76,14 @@ public class DailyProgressPage extends JFrame{
         btFood.addActionListener(listener);
         btDiet.addActionListener(listener);
 
-        btAddEatenMeals.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                setVisible(false);
-                new AddEatenMealPage();
-            }
+
+        btAddEatenMeals.addActionListener(e -> {
+            MealsChooser chooser = new MealsChooser(this);
+            Optional<Meal> mealOptional = chooser.getMeal();
+            if(mealOptional.isEmpty()) return;
+            dailyProgressExecutor.addEatenMeal(mealOptional.get());
+            listEatenMeals.setListData(dailyProgressExecutor.getAllMealsObj());
+
         });
         btAddBurntCalories.addActionListener(new ActionListener() {
             @Override

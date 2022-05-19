@@ -146,6 +146,7 @@
     </group>
   </component>
   <component name="uidesigner-configuration">
+    <option name="DEFAULT_LAYOUT_MANAGER" value="BorderLayout" />
     <option name="USE_DYNAMIC_BUNDLES" value="true" />
   </component>
 </project>

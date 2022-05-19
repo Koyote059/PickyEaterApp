@@ -49,13 +49,11 @@ public class AddEatenMealPage extends JFrame {
         pack();
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setVisible(true);
-        ActionListener listener = new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                String cmd = e.getActionCommand();
-                setVisible(false);
-                new MainButton(new PanelButtonsConverter(cmd).Convert());
-            }
+        ActionListener listener = e -> {
+
+            String cmd = e.getActionCommand();
+            setVisible(false);
+            new MainButton(new PanelButtonsConverter(cmd).Convert());
         };
         btSettings.addActionListener(listener);
         btDailyProgress.addActionListener(listener);

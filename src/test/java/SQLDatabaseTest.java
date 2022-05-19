@@ -1,4 +1,6 @@
 import org.junit.jupiter.api.Test;
+import pickyeater.algorithms.HarrisBenedictCalculator;
+import pickyeater.algorithms.NutrientsRequirementCalculator;
 import pickyeater.basics.food.*;
 import pickyeater.basics.groceries.Groceries;
 import pickyeater.basics.groceries.GroceriesCheckList;
@@ -22,6 +24,13 @@ public class SQLDatabaseTest {
     List<Ingredient> ingredients;
     List<Meal> meals;
 
+    @Test
+    public void nutrientsTest(){
+        NutrientsRequirementCalculator calculator = new HarrisBenedictCalculator();
+        Nutrients nutrients = calculator.calculate(180,77,21,Sex.MALE,LifeStyle.VERY_ACTIVE,WeightGoal.MAINTAIN_WEIGHT);
+        System.out.println(nutrients);
+        System.out.println(nutrients.getCalories());
+    }
     @Test
     public void Test0(){
         User user = userDatabase.loadUser().get();

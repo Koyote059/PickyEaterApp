@@ -20,6 +20,8 @@ public class MealInfoJDialog extends JDialog  {
     private JTable ingredientsTable;
     public MealInfoJDialog(Frame parent, Meal meal) {
         super(parent,meal.getName(),true);
+        setName("Meal Info - " + meal.getName());
+
         PieChart pieChart = new PieChart(410,330);
         pieChart.addSeries("Proteins",120);
         pieChart.addSeries("Carbs",200);

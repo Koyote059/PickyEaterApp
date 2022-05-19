@@ -6,9 +6,11 @@ import org.knowm.xchart.style.PieStyler;
 import org.knowm.xchart.style.Styler;
 import pickyeater.basics.food.Meal;
 import pickyeater.basics.food.Nutrients;
+import pickyeater.basics.mealplan.DailyMealPlan;
 import pickyeater.executors.ExecutorProvider;
 import pickyeater.executors.MealChooserExecutor;
 import pickyeater.utils.MealQuantityConverter;
+import pickyeater.utils.MouseClickListener;
 
 import javax.swing.*;
 import java.awt.*;
@@ -38,12 +40,23 @@ public class MealsChooser extends JDialog {
         });
         searchedMeals = new ArrayList<>(mealSearcherExecutor.getEveryMeal());
         populateMealList();
+        mealsList.setMinimumSize(new Dimension(300,300));
         mealsList.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
         mealsList.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseReleased(MouseEvent e) {
                 super.mouseReleased(e);
                 showPieChart();
+            }
+        });
+        mealsList.addMouseListener(new MouseClickListener() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                if(e.getClickCount()<2) return;
+                int selectedIndex = mealsList.getSelectedIndex();
+                if(selectedIndex<0) return;
+                Meal meal = searchedMeals.get(selectedIndex);
+                new MealInfoJDialog(parent,meal).run();
             }
         });
         showPieChart();
@@ -56,7 +69,7 @@ public class MealsChooser extends JDialog {
             MealQuantityConverter mealQuantityConverter = new MealQuantityConverter();
             String quantity = mealQuantityTextField.getText();
             try {
-                int returningWeight = Integer.parseInt(quantity); // Todo :C
+                int returningWeight = Integer.parseInt(quantity);
                 returningMeal = mealQuantityConverter.convert(meal,returningWeight);
                 dispose();
             } catch (NumberFormatException exception){
@@ -68,7 +81,8 @@ public class MealsChooser extends JDialog {
         buttonsPanel.add(doneButton);
         add(BorderLayout.PAGE_END,buttonsPanel);
 
-        setSize(new Dimension(500,500));
+        setSize(new Dimension(455,500));
+        setResizable(false);
 
     }
 
