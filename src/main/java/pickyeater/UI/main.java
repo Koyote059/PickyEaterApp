@@ -19,7 +19,7 @@ import java.awt.*;
 public class main {
     public static void main(String[] args) {
 
-        new SystemTheme().Theme1();
+        new SystemTheme().theme2();
 
         //PickyEatersDatabase pickyEatersDB = new SQLPickyEaterDB("PickyEatersDB.sqlite");
         PickyEatersDatabase pickyEatersDB = new SQLPickyEaterDB("dbDiProva.sqlite");

@@ -1,11 +1,13 @@
 package pickyeater.themes;
 
+import com.formdev.flatlaf.FlatLightLaf;
+
 import javax.swing.*;
 import java.awt.*;
 
 public class SystemTheme {
 
-    public void Theme1(){
+    public void theme1(){
     try {
         UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
     } catch (ClassNotFoundException e) {
@@ -28,5 +30,14 @@ public class SystemTheme {
     UIManager.put("ProgressBar.selectionForeground", Color.GREEN);
     */
 
+    }
+
+    public void theme2(){
+        try {
+            UIManager.setLookAndFeel( new FlatLightLaf() );
+        } catch( Exception ex ) {
+            System.err.println( "Failed to initialize LaF" );
+        }
+        UIManager.put("ProgressBar.foreground", Color.GREEN);
     }
 }
