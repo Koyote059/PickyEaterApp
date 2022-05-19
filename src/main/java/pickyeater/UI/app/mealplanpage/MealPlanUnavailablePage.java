@@ -76,6 +76,5 @@ public class MealPlanUnavailablePage extends JFrame {
         btUser.addActionListener(listener);
         btGroceries.addActionListener(listener);
         btFood.addActionListener(listener);
-        btDiet.addActionListener(listener);
     }
 }
