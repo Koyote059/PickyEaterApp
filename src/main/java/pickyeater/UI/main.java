@@ -13,11 +13,13 @@ import pickyeater.managers.EaterManager;
 import pickyeater.managers.PickyEaterManager;
 import pickyeater.themes.SystemTheme;
 
-import javax.swing.*;
 import java.awt.*;
 
 public class main {
     public static void main(String[] args) {
+
+        Color defaultGreen = Color.decode("#B1EA9D");
+        Color defaultWhite = Color.decode("#FFFFFF");
 
         new SystemTheme().theme2();
 

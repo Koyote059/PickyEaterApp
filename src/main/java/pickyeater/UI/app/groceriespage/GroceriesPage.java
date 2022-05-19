@@ -66,12 +66,12 @@ public class GroceriesPage extends JFrame{
             }
         });
 
-        btDailyProgress.setBackground(Color.white);
-        btDiet.setBackground(Color.white);
-        btFood.setBackground(Color.white);
-        btGroceries.setBackground(Color.green);
-        btUser.setBackground(Color.white);
-        btSettings.setBackground(Color.white);
+        btDailyProgress.setBackground(Color.decode("#FFFFFF"));
+        btDiet.setBackground(Color.decode("#FFFFFF"));
+        btFood.setBackground(Color.decode("#FFFFFF"));
+        btGroceries.setBackground(Color.decode("#B1EA9D"));
+        btUser.setBackground(Color.decode("#FFFFFF"));
+        btSettings.setBackground(Color.decode("#FFFFFF"));
 
         setContentPane(mainPanel);
         pack();

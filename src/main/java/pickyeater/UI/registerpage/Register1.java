@@ -46,20 +46,23 @@ public class Register1 extends JFrame{
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setVisible(true);
 
+        btMale.setBackground(Color.decode("#FFFFFF"));
+        btFemale.setBackground(Color.decode("#FFFFFF"));
+
         // Sex
         btMale.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-                btMale.setBackground(Color.green);
-                btFemale.setBackground(Color.white);
+                btMale.setBackground(Color.decode("#B1EA9D"));
+                btFemale.setBackground(Color.decode("#FFFFFF"));
                 userBuilder.setSex(Sex.MALE);
             }
         });
         btFemale.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-                btMale.setBackground(Color.white);
-                btFemale.setBackground(Color.green);
+                btMale.setBackground(Color.decode("#FFFFFF"));
+                btFemale.setBackground(Color.decode("#B1EA9D"));
                 userBuilder.setSex(Sex.FEMALE);
             }
         });

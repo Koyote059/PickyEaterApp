@@ -22,14 +22,6 @@ public class SystemTheme {
 
     UIManager.put("ProgressBar.foreground", Color.GREEN);
     UIManager.put("Button.background", Color.GREEN);
-
-    /*
-    UIManager.put("ProgressBar.background", Color.ORANGE);
-    UIManager.put("ProgressBar.foreground", Color.BLUE);
-    UIManager.put("ProgressBar.selectionBackground", Color.RED);
-    UIManager.put("ProgressBar.selectionForeground", Color.GREEN);
-    */
-
     }
 
     public void theme2(){
@@ -38,6 +30,23 @@ public class SystemTheme {
         } catch( Exception ex ) {
             System.err.println( "Failed to initialize LaF" );
         }
-        UIManager.put("ProgressBar.foreground", Color.GREEN);
+
+        UIManager.put("Button.background", Color.decode("#FFFFFF"));
+        UIManager.put("ProgressBar.foreground", Color.decode("#B1EA9D"));
+
+        setUIFont(new javax.swing.plaf.FontUIResource("Helvetica",Font.BOLD,12));
+
+        Color defaultGreen = Color.decode("#B1EA9D");
+        Color defaultWhite = Color.decode("#FFFFFF");
+    }
+
+    public static void setUIFont (javax.swing.plaf.FontUIResource f){
+        java.util.Enumeration keys = UIManager.getDefaults().keys();
+        while (keys.hasMoreElements()) {
+            Object key = keys.nextElement();
+            Object value = UIManager.get (key);
+            if (value instanceof javax.swing.plaf.FontUIResource)
+                UIManager.put (key, f);
+        }
     }
 }

@@ -62,36 +62,36 @@ public class Register3 extends JFrame {
             @Override
             public void mouseEntered(MouseEvent e) {
                 super.mouseEntered(e);
-                btLoseWeight.setBackground(Color.green);
-                btGainWeight.setBackground(Color.white);
-                btMaintainWeight.setBackground(Color.white);
+                btLoseWeight.setBackground(Color.decode("#B1EA9D"));
+                btGainWeight.setBackground(Color.decode("#FFFFFF"));
+                btMaintainWeight.setBackground(Color.decode("#FFFFFF"));
             }
         });
         btGainWeight.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseEntered(MouseEvent e) {
                 super.mouseEntered(e);
-                btLoseWeight.setBackground(Color.white);
-                btGainWeight.setBackground(Color.green);
-                btMaintainWeight.setBackground(Color.white);
+                btLoseWeight.setBackground(Color.decode("#FFFFFF"));
+                btGainWeight.setBackground(Color.decode("#B1EA9D"));
+                btMaintainWeight.setBackground(Color.decode("#FFFFFF"));
             }
         });
         btMaintainWeight.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseEntered(MouseEvent e) {
                 super.mouseEntered(e);
-                btLoseWeight.setBackground(Color.white);
-                btGainWeight.setBackground(Color.white);
-                btMaintainWeight.setBackground(Color.green);
+                btLoseWeight.setBackground(Color.decode("#FFFFFF"));
+                btGainWeight.setBackground(Color.decode("#FFFFFF"));
+                btMaintainWeight.setBackground(Color.decode("#B1EA9D"));
             }
         });
         MouseAdapter listener = new MouseAdapter() {
             @Override
             public void mouseExited(MouseEvent e) {
                 super.mouseExited(e);
-                btLoseWeight.setBackground(Color.white);
-                btGainWeight.setBackground(Color.white);
-                btMaintainWeight.setBackground(Color.white);
+                btLoseWeight.setBackground(Color.decode("#FFFFFF"));
+                btGainWeight.setBackground(Color.decode("#FFFFFF"));
+                btMaintainWeight.setBackground(Color.decode("#FFFFFF"));
             }
         };
         btGainWeight.addMouseListener(listener);
