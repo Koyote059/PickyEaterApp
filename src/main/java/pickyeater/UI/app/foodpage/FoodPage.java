@@ -42,7 +42,7 @@ public class FoodPage extends JFrame {
         listMeals.setListData(new MealSearcherExecutor(ExecutorProvider.getEaterManager()).getAllMealsObj());
 
         setContentPane(mainPanel);
-        pack();
+        setSize(677, 507);    //pack();
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setVisible(true);
         ActionListener listener = new ActionListener() {

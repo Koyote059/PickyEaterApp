@@ -47,7 +47,7 @@ public class AddEatenMealPage extends JFrame {
         listMeals.setToolTipText("Click twice to check ingredients");
 
         setContentPane(mainPanel);
-        pack();
+        setSize(677, 507);    //pack();
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setVisible(true);
         ActionListener listener = e -> {

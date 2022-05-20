@@ -47,7 +47,7 @@ public class CreateMeal extends JFrame {
 
 
         setContentPane(mainPanel);
-        pack();
+        setSize(677, 507);    //pack();
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setVisible(true);
         ActionListener listener = new ActionListener() {

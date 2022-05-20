@@ -42,7 +42,7 @@ public class Register1 extends JFrame{
         RegisterExecutor registerExecutor = ExecutorProvider.getRegisterExecutor();
         this.userBuilder = registerExecutor.getUserBuilder();
         setContentPane(mainPanel);
-        pack();
+        setSize(677, 507);    //pack();
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setVisible(true);
 

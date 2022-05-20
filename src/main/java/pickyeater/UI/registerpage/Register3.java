@@ -22,7 +22,7 @@ public class Register3 extends JFrame {
 
     public Register3(RegisterExecutor registerExecutor) {
         setContentPane(mainPanel);
-        pack();
+        setSize(677, 507);    //pack();
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setVisible(true);
         btLoseWeight.addActionListener(new ActionListener() {

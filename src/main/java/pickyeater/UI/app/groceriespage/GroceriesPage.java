@@ -71,7 +71,7 @@ public class GroceriesPage extends JFrame{
         btSettings.setBackground(Color.decode("#FFFFFF"));
 
         setContentPane(mainPanel);
-        pack();
+        setSize(677, 507);    //pack();
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE); // Todo save before exiting
         setVisible(true);
         setNavigationMenuListeners();

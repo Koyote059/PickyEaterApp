@@ -46,7 +46,7 @@ public class MealPlanGeneratorPage extends JFrame {
     public MealPlanGeneratorPage(MealPlanCreatorExecutor mealPlanCreator) {
         this.mealPlanCreator = mealPlanCreator;
         setContentPane(mainPanel);
-        pack();
+        setSize(677, 507);    //pack();
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
         doneButton.addActionListener( e -> {
@@ -70,7 +70,7 @@ public class MealPlanGeneratorPage extends JFrame {
         setVisible(true);
         setResizable(false);
         draw();
-        pack();
+        setSize(677, 507);    //pack();
     }
 
     public void draw(){
