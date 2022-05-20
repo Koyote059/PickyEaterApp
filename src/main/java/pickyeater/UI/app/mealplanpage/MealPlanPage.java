@@ -4,7 +4,7 @@ package pickyeater.UI.app.mealplanpage;
  * @author Claudio Di Maio
  */
 
-import pickyeater.UI.app.groceriespage.UnavailableGroceriesPage;
+import pickyeater.UI.app.MainPanel;
 import pickyeater.UI.choosers.MealInfoJDialog;
 import pickyeater.UI.leftbuttons.MainButton;
 import pickyeater.UI.leftbuttons.PanelButtonsConverter;
@@ -29,7 +29,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Optional;
 
-public class MealPlanPage extends JFrame{
+public class MealPlanPage extends JPanel {
     private JPanel mainPanel;
     private JButton btSettings;
     private JButton btDailyProgress;
@@ -46,7 +46,13 @@ public class MealPlanPage extends JFrame{
     private final MealPlanViewerExecutor executor;
 
     private LocalDate actualDate = null;
-    public MealPlanPage() {
+    public MealPlanPage(JFrame parent) {
+
+        CardLayout layout = new CardLayout();
+        setLayout(layout);
+        add(mainPanel,"MainPanel");
+        add(new MealPlanUnavailablePage(parent, this),"MealPlanUnavailablePage");
+
         binLabel.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
         try {
             BufferedImage binImage = ImageIO.read(new File("res/images/binIcon.png"));
@@ -54,14 +60,16 @@ public class MealPlanPage extends JFrame{
         } catch (IOException | NullPointerException ignored) {
 
         }
+
+        MealPlanPage panel = this;
         binLabel.addMouseListener(new MouseClickListener() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 int result = JOptionPane.showConfirmDialog(binLabel,"Are you sure you want to delete it?","Deleting  groceries",JOptionPane.YES_NO_OPTION);
                 if(result == JOptionPane.YES_OPTION){
                     executor.deleteMealPlan();
-                    setVisible(false);
-                    new MealPlanUnavailablePage();
+
+                    layout.show(panel,"MealPlanUnavailablePage");
                 }
             }
         });
@@ -69,10 +77,6 @@ public class MealPlanPage extends JFrame{
         executor = ExecutorProvider.getMealPlanViewerExecutor();
 
         actualDate = LocalDate.now();
-        if(!executor.isMealPlanAvailable()){
-            new MealPlanUnavailablePage();
-            return;
-        }
 
         dailyMealsTable.setModel(new DefaultTableModel() {
             @Override
@@ -92,15 +96,16 @@ public class MealPlanPage extends JFrame{
         btUser.setBackground(Color.decode("#FFFFFF"));
         btSettings.setBackground(Color.decode("#FFFFFF"));
 
-        setButtonsListeners();
+        setButtonsListeners(parent);
         todaysButton.doClick();
-        setContentPane(mainPanel);
-        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         dailyMealsTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         dailyMealsTable.removeEditor();
-        setVisible(true);
         setNavigationMenuListeners();
-        pack();
+        if(!executor.isMealPlanAvailable()){
+            layout.show(this,"MealPlanUnavailablePage");
+        } else  {
+            layout.show(this,"MainPanel");
+        }
     }
 
     private void setUpContent(DailyMealPlan dailyMealPlan){
@@ -124,8 +129,9 @@ public class MealPlanPage extends JFrame{
         ActionListener listener = e -> {
             String cmd = e.getActionCommand();
             setVisible(false);
-            new MainButton(new PanelButtonsConverter(cmd).Convert());
+            MainPanel.changePage(new PanelButtonsConverter(cmd).Convert());
         };
+
         btSettings.addActionListener(listener);
         btDailyProgress.addActionListener(listener);
         btUser.addActionListener(listener);
@@ -133,7 +139,7 @@ public class MealPlanPage extends JFrame{
         btFood.addActionListener(listener);
     }
 
-    private void setButtonsListeners() {
+    private void setButtonsListeners(JFrame parent) {
         todaysButton.addActionListener( e -> {
             actualDate = LocalDate.now();
             Optional<DailyMealPlan> dailyMealPlanOptional = executor.getDailyMealPlan(actualDate);
@@ -161,7 +167,6 @@ public class MealPlanPage extends JFrame{
             setUpContent(dailyMealPlanOptional.get());
         });
 
-        JFrame frame = this;
         dailyMealsTable.addMouseListener(new MouseClickListener() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -172,7 +177,7 @@ public class MealPlanPage extends JFrame{
                 if(dailyMealPlanOptional.isEmpty()) throw new RuntimeException("Error i dailyMealPlan Database: missing value." );
                 DailyMealPlan dailyMealPlan = dailyMealPlanOptional.get();
                 Meal meal = dailyMealPlan.getMeals().get(selectedIndex);
-                new MealInfoJDialog(frame,meal).run();
+                new MealInfoJDialog(parent,meal).run();
             }
         });
     }

@@ -2,7 +2,6 @@ package pickyeater.UI.app.foodpage;
 
 import pickyeater.UI.leftbuttons.MainButton;
 import pickyeater.UI.leftbuttons.PanelButtonsConverter;
-import pickyeater.basics.food.Ingredient;
 import pickyeater.basics.food.Meal;
 import pickyeater.executors.ExecutorProvider;
 import pickyeater.executors.searcher.MealSearcherExecutor;
@@ -75,7 +74,7 @@ public class SearchMeal extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 setVisible(false);
-                new FoodPage();
+                //new FoodPage(this); // Todo change
             }
         });
         listMeals.addComponentListener(new ComponentAdapter() {

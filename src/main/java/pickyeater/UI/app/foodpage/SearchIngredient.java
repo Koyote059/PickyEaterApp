@@ -75,7 +75,7 @@ public class SearchIngredient extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 setVisible(false);
-                new FoodPage();
+                //new FoodPage(this); // Todo chagne
             }
         });
         listIngredients.addComponentListener(new ComponentAdapter() {

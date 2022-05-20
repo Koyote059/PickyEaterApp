@@ -4,6 +4,7 @@ package pickyeater.UI.app.userpage;
  * @author Claudio Di Maio
  */
 
+import pickyeater.UI.app.MainPanel;
 import pickyeater.UI.leftbuttons.MainButton;
 import pickyeater.UI.leftbuttons.PanelButtonsConverter;
 import pickyeater.basics.user.User;
@@ -16,7 +17,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.DecimalFormat;
 
-public class UserPage extends JFrame{
+public class UserPage extends JPanel{
     private JPanel mainPanel;
     private JButton btSettings;
     private JButton btDailyProgress;
@@ -38,14 +39,14 @@ public class UserPage extends JFrame{
     private JLabel txtFats;
     private JLabel txtCalories;
 
-    public UserPage() {
+    public UserPage(JFrame parent) {
 
         UserExecutor userExecutor = ExecutorProvider.getUserExecutor();
 
         User user = userExecutor.getUser();
 
         DecimalFormat df = new DecimalFormat("0.00");
-
+        add(mainPanel);
         // User:
         txtName.setText(user.getName());
         txtSex.setText(user.getUserStatus().getSex().toString());
@@ -69,24 +70,8 @@ public class UserPage extends JFrame{
         btUser.setBackground(Color.decode("#B1EA9D"));
         btSettings.setBackground(Color.decode("#FFFFFF"));
 
-        setContentPane(mainPanel);
-        pack();
-        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        setVisible(true);
 
-        ActionListener listener = new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                String cmd = e.getActionCommand();
-                setVisible(false);
-                new MainButton(new PanelButtonsConverter(cmd).Convert());
-            }
-        };
-        btSettings.addActionListener(listener);
-        btDailyProgress.addActionListener(listener);
-        btGroceries.addActionListener(listener);
-        btFood.addActionListener(listener);
-        btDiet.addActionListener(listener);
+
         editModeButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -94,5 +79,22 @@ public class UserPage extends JFrame{
                 new UserEditModePage();
             }
         });
+
+        setNavigationMenuListeners();
     }
+
+    public void setNavigationMenuListeners(){
+        ActionListener listener = e -> {
+            String cmd = e.getActionCommand();
+            setVisible(false);
+            MainPanel.changePage(new PanelButtonsConverter(cmd).Convert());
+        };
+
+        btSettings.addActionListener(listener);
+        btDailyProgress.addActionListener(listener);
+        btGroceries.addActionListener(listener);
+        btFood.addActionListener(listener);
+        btDiet.addActionListener(listener);
+    }
+
 }

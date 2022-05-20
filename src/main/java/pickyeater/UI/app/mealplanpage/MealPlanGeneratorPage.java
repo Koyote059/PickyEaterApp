@@ -5,20 +5,16 @@ package pickyeater.UI.app.mealplanpage;
  */
 
 import pickyeater.UI.app.mealplanpage.utils.DailyMealPlanColumn;
-import pickyeater.UI.choosers.MealsChooser;
 import pickyeater.basics.food.Meal;
 import pickyeater.basics.mealplan.DailyMealPlan;
 import pickyeater.basics.mealplan.MealPlan;
 import pickyeater.builders.MealPlanBuilder;
-import pickyeater.executors.ExecutorProvider;
 import pickyeater.executors.MealPlanCreatorExecutor;
 
 import javax.swing.*;
-import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 public class MealPlanGeneratorPage extends JFrame {
     private JPanel mainPanel;
@@ -30,8 +26,8 @@ public class MealPlanGeneratorPage extends JFrame {
 
     List<DailyMealPlanColumn> columns = new ArrayList<>();
 
-    public MealPlanGeneratorPage(MealPlanCreatorExecutor mealPlanCreator, MealPlan mealPlan) {
-        this(mealPlanCreator);
+    public MealPlanGeneratorPage(MealPlanCreatorExecutor mealPlanCreator, MealPlan mealPlan, JPanel parent) {
+        this(mealPlanCreator,parent);
         this.mealPlanBuilder = mealPlanCreator.getMealPlanBuilder();
         columns.remove(0);
         for (DailyMealPlan dailyMealPlan : mealPlan.getDailyMealPlans()) {
@@ -43,7 +39,7 @@ public class MealPlanGeneratorPage extends JFrame {
         draw();
     }
 
-    public MealPlanGeneratorPage(MealPlanCreatorExecutor mealPlanCreator) {
+    public MealPlanGeneratorPage(MealPlanCreatorExecutor mealPlanCreator,JPanel parent) {
         this.mealPlanCreator = mealPlanCreator;
         setContentPane(mainPanel);
         pack();
@@ -54,13 +50,14 @@ public class MealPlanGeneratorPage extends JFrame {
                 mealPlanBuilder.addDailyMealPlan(column.getDailyMealPlan());
             }
             mealPlanCreator.saveMealPlan(mealPlanBuilder.build());
-            setVisible(false);
-            new MealPlanPage();
+
+            CardLayout layout = (CardLayout) parent.getLayout();
+            layout.show(parent,"MealPlanPage");
         });
 
         cancelButton.addActionListener( e -> {
-            setVisible(false);
-            new MealPlanUnavailablePage();
+            CardLayout layout = (CardLayout) parent.getLayout();
+            layout.show(parent,"UnavailableMealPlanPage");
         });
         GridLayout gridLayout = new GridLayout();
         gridLayout.setRows(1);

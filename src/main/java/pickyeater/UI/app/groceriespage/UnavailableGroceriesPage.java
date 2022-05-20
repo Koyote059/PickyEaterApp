@@ -1,18 +1,16 @@
 package pickyeater.UI.app.groceriespage;
 
+import pickyeater.UI.app.MainPanel;
 import pickyeater.UI.leftbuttons.MainButton;
 import pickyeater.UI.leftbuttons.PanelButtonsConverter;
-import pickyeater.basics.mealplan.MealPlan;
 import pickyeater.executors.ExecutorProvider;
 import pickyeater.executors.GroceriesExecutor;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
-import java.util.Optional;
-import java.util.concurrent.Executor;
 
-public class UnavailableGroceriesPage extends JFrame {
+public class UnavailableGroceriesPage extends JPanel {
     private JButton btSettings;
     private JButton btDailyProgress;
     private JButton btUser;
@@ -25,9 +23,9 @@ public class UnavailableGroceriesPage extends JFrame {
     private GroceriesExecutor groceriesExecutor = ExecutorProvider.getGroceriesExecutor();
 
 
-    public UnavailableGroceriesPage() {
+    public UnavailableGroceriesPage(JFrame parent) {
         if(groceriesExecutor.isGroceriesGenerated()){
-            new GroceriesPage(groceriesExecutor);
+            new GroceriesPage(groceriesExecutor,parent);
             return;
         }
         btDailyProgress.setBackground(Color.decode("#FFFFFF"));
@@ -36,16 +34,12 @@ public class UnavailableGroceriesPage extends JFrame {
         btGroceries.setBackground(Color.decode("#B1EA9D"));
         btUser.setBackground(Color.decode("#FFFFFF"));
         btSettings.setBackground(Color.decode("#FFFFFF"));
-
-        setContentPane(mainPanel);
-        pack();
-        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        setVisible(true);
+        add(mainPanel);
         setNavigationMenuListeners();
         generateGroceriesButton.addActionListener( e -> {
             if(groceriesExecutor.isGroceriesAvailable()){
                 setVisible(false);
-                new GroceriesPage(groceriesExecutor);
+                new GroceriesPage(groceriesExecutor,parent);
             } else {
                 JOptionPane.showMessageDialog(this,"Unavailable Meal Plan!\n You need to create a Meal Plan in order to generate groceries...");
             }
@@ -58,7 +52,7 @@ public class UnavailableGroceriesPage extends JFrame {
         ActionListener listener = e -> {
             String cmd = e.getActionCommand();
             setVisible(false);
-            new MainButton(new PanelButtonsConverter(cmd).Convert());
+            MainPanel.changePage(new PanelButtonsConverter(cmd).Convert());
         };
         btSettings.addActionListener(listener);
         btDailyProgress.addActionListener(listener);

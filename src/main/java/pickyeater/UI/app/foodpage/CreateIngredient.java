@@ -76,7 +76,7 @@ public class CreateIngredient extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 setVisible(false);
-                new FoodPage();
+                //new FoodPage(this); // Todo Chagne
             }
         });
         btSave.addActionListener(new ActionListener() {

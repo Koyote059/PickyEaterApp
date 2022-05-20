@@ -54,7 +54,7 @@ public class AddBurntCaloriesPage extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 setVisible(false);
-                new DailyProgressPage();
+                //new DailyProgressPage();
             }
         });
         btSave.addActionListener(new ActionListener() {
@@ -66,7 +66,7 @@ public class AddBurntCaloriesPage extends JFrame {
                     JOptionPane.showMessageDialog(mainPanel, "Activity name: " + tfActivityName.getText() + "\n" + "Burnt Calories: " + tfBurntCalories.getText());
                     ExecutorProvider.getAddBurntCaloriesExecutor().setBurntCalories(burntCal);
                     setVisible(false);
-                    new DailyProgressPage();
+                    //new DailyProgressPage();
                 } else {
                     JOptionPane.showMessageDialog(mainPanel, "Insert valid number", "", JOptionPane.ERROR_MESSAGE);
                 }

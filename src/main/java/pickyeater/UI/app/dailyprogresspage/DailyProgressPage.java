@@ -4,6 +4,7 @@ package pickyeater.UI.app.dailyprogresspage;
  * @author Claudio Di Maio
  */
 
+import pickyeater.UI.app.MainPanel;
 import pickyeater.UI.choosers.MealsChooser;
 import pickyeater.UI.leftbuttons.MainButton;
 import pickyeater.UI.leftbuttons.PanelButtonsConverter;
@@ -19,7 +20,7 @@ import java.awt.event.ActionListener;
 import java.text.DecimalFormat;
 import java.util.Optional;
 
-public class DailyProgressPage extends JFrame {
+public class DailyProgressPage extends JPanel {
     private JPanel mainPanel;
     private JButton btSettings;
     private JButton btDailyProgress;
@@ -35,22 +36,71 @@ public class DailyProgressPage extends JFrame {
     private JLabel txtBurntCalories;
 
     UserMealsProgressesExecutor userMealsProgressesExecutor;
+    DailyProgressExecutor dailyProgressExecutor;
+    JFrame parent;
 
-    public DailyProgressPage() {
+    public DailyProgressPage(JFrame parent) {
+        this.parent = parent;
+        Container container = parent.getContentPane();
+        parent.add(container,"ProgressPage");
+        add(mainPanel);
         btDailyProgress.setBackground(Color.decode("#B1EA9D"));
         btDiet.setBackground(Color.decode("#FFFFFF"));
         btFood.setBackground(Color.decode("#FFFFFF"));
         btGroceries.setBackground(Color.decode("#FFFFFF"));
         btUser.setBackground(Color.decode("#FFFFFF"));
         btSettings.setBackground(Color.decode("#FFFFFF"));
+        dailyProgressExecutor = ExecutorProvider.getDailyProgressExecutor();
+        btAddEatenMeals.addActionListener(e -> {
+            MealsChooser chooser = new MealsChooser(parent);
+            Optional<Meal> mealOptional = chooser.getMeal();
+            if(mealOptional.isEmpty()) return;
+            dailyProgressExecutor.addEatenMeal(mealOptional.get());
+            listEatenMeals.setListData(dailyProgressExecutor.getAllMealsObj());
+        });
+        btAddBurntCalories.addActionListener(e -> {
+            setVisible(false);
+            new AddBurntCaloriesPage();
+        });
+        cbConsumed.addActionListener(e -> {
+            if (cbConsumed.getSelectedIndex() == 0){
+                progressBar(dailyProgressExecutor.getEatenCalories(), dailyProgressExecutor.getCaloriesToEat());
+            } else if (cbConsumed.getSelectedIndex() == 1){
+                progressBar(dailyProgressExecutor.getEatenProteins(), dailyProgressExecutor.getProteinsToEat());
+            } else if (cbConsumed.getSelectedIndex() == 2){
+                progressBar(dailyProgressExecutor.getEatenCarbs(), dailyProgressExecutor.getCarbsToEat());
+            } else if (cbConsumed.getSelectedIndex() == 3){
+                progressBar(dailyProgressExecutor.getEatenFats(), dailyProgressExecutor.getFatsToEat());
+            }
+        });
+        setNavigationMenuListeners();
+    }
+    private void progressBar(float eaten, float toEat){
+        float percentage = (eaten / toEat) * 100;
 
-        setContentPane(mainPanel);
-        pack();
-        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        setVisible(true);
+        bar.setStringPainted(true);
+        bar.setValue((int)percentage);
+        DecimalFormat df = new DecimalFormat("0.00");
+        bar.setString(df.format(percentage) + "%");
+    }
 
-        DailyProgressExecutor dailyProgressExecutor = ExecutorProvider.getDailyProgressExecutor();
+    private void setNavigationMenuListeners(){
+        ActionListener listener = e -> {
+            String cmd = e.getActionCommand();
+            setVisible(false);
+            MainPanel.changePage(new PanelButtonsConverter(cmd).Convert());
+        };
+        btSettings.addActionListener(listener);
+        btUser.addActionListener(listener);
+        btGroceries.addActionListener(listener);
+        btFood.addActionListener(listener);
+        btDiet.addActionListener(listener);
+    }
 
+    public void showPage(){
+        Container container = parent.getContentPane();
+        CardLayout layout = (CardLayout) container.getLayout();
+        layout.show(container,this.getClass().getName());
         cbConsumed.insertItemAt("Calories: " + dailyProgressExecutor.getEatenCalories() + "/" + dailyProgressExecutor.getCaloriesToEat(), 0);
         cbConsumed.insertItemAt("Proteins: " + dailyProgressExecutor.getEatenProteins() + "/" + dailyProgressExecutor.getProteinsToEat(), 1);
         cbConsumed.insertItemAt("Carbs: " + dailyProgressExecutor.getEatenCarbs() + "/" + dailyProgressExecutor.getCarbsToEat(), 2);
@@ -65,55 +115,6 @@ public class DailyProgressPage extends JFrame {
 
         progressBar(dailyProgressExecutor.getEatenCalories(), dailyProgressExecutor.getCaloriesToEat());
 
-        ActionListener listener = e -> {
-            String cmd = e.getActionCommand();
-            setVisible(false);
-            new MainButton(new PanelButtonsConverter(cmd).Convert());
-        };
-        btSettings.addActionListener(listener);
-        btUser.addActionListener(listener);
-        btGroceries.addActionListener(listener);
-        btFood.addActionListener(listener);
-        btDiet.addActionListener(listener);
 
-
-        btAddEatenMeals.addActionListener(e -> {
-            MealsChooser chooser = new MealsChooser(this);
-            Optional<Meal> mealOptional = chooser.getMeal();
-            if(mealOptional.isEmpty()) return;
-            dailyProgressExecutor.addEatenMeal(mealOptional.get());
-            listEatenMeals.setListData(dailyProgressExecutor.getAllMealsObj());
-
-        });
-        btAddBurntCalories.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                setVisible(false);
-                new AddBurntCaloriesPage();
-            }
-        });
-        cbConsumed.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                if (cbConsumed.getSelectedIndex() == 0){
-                    progressBar(dailyProgressExecutor.getEatenCalories(), dailyProgressExecutor.getCaloriesToEat());
-                } else if (cbConsumed.getSelectedIndex() == 1){
-                    progressBar(dailyProgressExecutor.getEatenProteins(), dailyProgressExecutor.getProteinsToEat());
-                } else if (cbConsumed.getSelectedIndex() == 2){
-                    progressBar(dailyProgressExecutor.getEatenCarbs(), dailyProgressExecutor.getCarbsToEat());
-                } else if (cbConsumed.getSelectedIndex() == 3){
-                    progressBar(dailyProgressExecutor.getEatenFats(), dailyProgressExecutor.getFatsToEat());
-                }
-            }
-        });
-    }
-    private void progressBar(float eaten, float toEat){
-        float percentage = (eaten / toEat) * 100;
-
-        bar.setStringPainted(true);
-        bar.setValue((int)percentage);
-        DecimalFormat df = new DecimalFormat("0.00");
-        bar.setString(df.format(percentage) + "%");
-        setVisible(true);
     }
 }

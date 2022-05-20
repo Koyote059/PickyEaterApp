@@ -1,7 +1,5 @@
 package pickyeater.UI.app.groceriespage;
 
-import pickyeater.UI.app.groceriespage.utils.CheckBoxListRenderer;
-import pickyeater.UI.app.groceriespage.utils.TCheckBox;
 import pickyeater.UI.app.groceriespage.utils.WindowCloseListener;
 import pickyeater.UI.leftbuttons.MainButton;
 import pickyeater.UI.leftbuttons.PanelButtonsConverter;
@@ -15,7 +13,6 @@ import pickyeater.utils.MouseClickListener;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableCellRenderer;
 import java.awt.*;
 import java.awt.event.*;
 import java.awt.image.BufferedImage;
@@ -38,7 +35,7 @@ public class GroceriesPage extends JFrame{
     private GroceriesCheckList groceriesCheckList;
 
 
-    public GroceriesPage(GroceriesExecutor groceriesExecutor) {
+    public GroceriesPage(GroceriesExecutor groceriesExecutor, JFrame panel) {
         this.groceriesExecutor = groceriesExecutor;
         binLabel.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
         try {
@@ -61,7 +58,7 @@ public class GroceriesPage extends JFrame{
                 if(result == JOptionPane.YES_OPTION){
                     groceriesExecutor.deleteGroceries();
                     setVisible(false);
-                    new UnavailableGroceriesPage();
+                    new UnavailableGroceriesPage(panel);
                 }
             }
         });

@@ -1,5 +1,6 @@
 package pickyeater.UI.app.foodpage;
 
+import pickyeater.UI.app.MainPanel;
 import pickyeater.UI.leftbuttons.MainButton;
 import pickyeater.UI.leftbuttons.PanelButtonsConverter;
 import pickyeater.executors.ExecutorProvider;
@@ -10,9 +11,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.ContainerAdapter;
 
-public class FoodPage extends JFrame {
+public class FoodPage extends JPanel {
     private JPanel mainPanel;
     private JButton btSettings;
     private JButton btDailyProgress;
@@ -27,7 +27,7 @@ public class FoodPage extends JFrame {
     private JButton btAddMeal;
     private JButton btAddIngredient;
 
-    public FoodPage() {
+    public FoodPage(MainPanel parent) {
         btDailyProgress.setBackground(Color.decode("#FFFFFF"));
         btDiet.setBackground(Color.decode("#FFFFFF"));
         btFood.setBackground(Color.decode("#B1EA9D"));
@@ -41,23 +41,6 @@ public class FoodPage extends JFrame {
         listIngredients.setListData(new IngredientSearcherExecutor(ExecutorProvider.getEaterManager()).getAllIngredientsObj());
         listMeals.setListData(new MealSearcherExecutor(ExecutorProvider.getEaterManager()).getAllMealsObj());
 
-        setContentPane(mainPanel);
-        pack();
-        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        setVisible(true);
-        ActionListener listener = new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                String cmd = e.getActionCommand();
-                setVisible(false);
-                new MainButton(new PanelButtonsConverter(cmd).Convert());
-            }
-        };
-        btSettings.addActionListener(listener);
-        btDailyProgress.addActionListener(listener);
-        btUser.addActionListener(listener);
-        btGroceries.addActionListener(listener);
-        btDiet.addActionListener(listener);
 
         btSearchMeal.addActionListener(new ActionListener() {
             @Override
@@ -87,5 +70,22 @@ public class FoodPage extends JFrame {
                 new CreateIngredient();
             }
         });
+        setNavigationMenuListeners();
+        add(mainPanel);
+        setVisible(true);
     }
+
+    private void setNavigationMenuListeners(){
+        ActionListener listener = e -> {
+            String cmd = e.getActionCommand();
+            setVisible(false);
+            MainPanel.changePage(new PanelButtonsConverter(cmd).Convert());
+        };
+        btSettings.addActionListener(listener);
+        btDailyProgress.addActionListener(listener);
+        btUser.addActionListener(listener);
+        btGroceries.addActionListener(listener);
+        btDiet.addActionListener(listener);
+    }
+
 }
