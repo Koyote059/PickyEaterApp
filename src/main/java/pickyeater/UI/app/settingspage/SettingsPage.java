@@ -1,7 +1,7 @@
 package pickyeater.UI.app.settingspage;
 
-import pickyeater.UI.app.MainPanel;
-import pickyeater.UI.leftbuttons.MainButton;
+import pickyeater.UI.app.MainFrame;
+import pickyeater.UI.app.PickyPage;
 import pickyeater.UI.leftbuttons.PanelButtonsConverter;
 import pickyeater.UI.registerpage.Register1;
 import pickyeater.executors.ExecutorProvider;
@@ -11,7 +11,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class SettingsPage extends JPanel {
+public class SettingsPage extends PickyPage {
     private JPanel mainPanel;
     private JButton btSettings;
     private JButton btDailyProgress;
@@ -24,7 +24,8 @@ public class SettingsPage extends JPanel {
     private JButton btResetMeals;
     private JButton btResetIngredients;
 
-    public SettingsPage(MainPanel parent) {
+    public SettingsPage(JFrame parent) {
+        super(parent);
         btDailyProgress.setBackground(Color.decode("#FFFFFF"));
         btDiet.setBackground(Color.decode("#FFFFFF"));
         btFood.setBackground(Color.decode("#FFFFFF"));
@@ -40,36 +41,27 @@ public class SettingsPage extends JPanel {
         btResetIngredients.setBackground(Color.white);
         add(mainPanel);
 
-        btDeleteUser.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                int x = JOptionPane.showConfirmDialog(SettingsPage.this.mainPanel, "Are you sure? All your info will be lost forever",
-                        "Delete user", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
-                if (x == 0){
-                    ExecutorProvider.getSettingsExecutor().deleteUser();
-                    setVisible(false);
-                    new Register1();
-                }
+        btDeleteUser.addActionListener(e -> {
+            int x = JOptionPane.showConfirmDialog(SettingsPage.this.mainPanel, "Are you sure? All your info will be lost forever",
+                    "Delete user", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+            if (x == 0){
+                ExecutorProvider.getSettingsExecutor().deleteUser();
+                setVisible(false);
+                new Register1();
             }
         });
-        btResetMeals.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                int x = JOptionPane.showConfirmDialog(SettingsPage.this.mainPanel, "Are you sure? All your added meals will be lost " +
-                                "forever", "Reset Meals", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
-                if (x == 0){
-                    ExecutorProvider.getSettingsExecutor().resetMeals();
-                }
+        btResetMeals.addActionListener(e -> {
+            int x = JOptionPane.showConfirmDialog(SettingsPage.this.mainPanel, "Are you sure? All your added meals will be lost " +
+                            "forever", "Reset Meals", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+            if (x == 0){
+                ExecutorProvider.getSettingsExecutor().resetMeals();
             }
         });
-        btResetIngredients.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                int x = JOptionPane.showConfirmDialog(SettingsPage.this.mainPanel, "Are you sure? All your added ingredients will be " +
-                        "lost forever", "Reset Ingredients", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
-                if (x == 0){
-                    ExecutorProvider.getSettingsExecutor().resetIngredients();
-                }
+        btResetIngredients.addActionListener(e -> {
+            int x = JOptionPane.showConfirmDialog(SettingsPage.this.mainPanel, "Are you sure? All your added ingredients will be " +
+                    "lost forever", "Reset Ingredients", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+            if (x == 0){
+                ExecutorProvider.getSettingsExecutor().resetIngredients();
             }
         });
         setNavigationMenuListeners();
@@ -79,7 +71,7 @@ public class SettingsPage extends JPanel {
         ActionListener listener = e -> {
             String cmd = e.getActionCommand();
             setVisible(false);
-            MainPanel.changePage(new PanelButtonsConverter(cmd).Convert());
+            MainFrame.changePage(new PanelButtonsConverter(cmd).Convert());
         };
         btDailyProgress.addActionListener(listener);
         btUser.addActionListener(listener);

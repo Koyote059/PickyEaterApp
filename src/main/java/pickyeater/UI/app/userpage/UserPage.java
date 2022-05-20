@@ -4,8 +4,8 @@ package pickyeater.UI.app.userpage;
  * @author Claudio Di Maio
  */
 
-import pickyeater.UI.app.MainPanel;
-import pickyeater.UI.leftbuttons.MainButton;
+import pickyeater.UI.app.MainFrame;
+import pickyeater.UI.app.PickyPage;
 import pickyeater.UI.leftbuttons.PanelButtonsConverter;
 import pickyeater.basics.user.User;
 import pickyeater.executors.ExecutorProvider;
@@ -17,7 +17,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.DecimalFormat;
 
-public class UserPage extends JPanel{
+public class UserPage extends PickyPage {
     private JPanel mainPanel;
     private JButton btSettings;
     private JButton btDailyProgress;
@@ -40,7 +40,7 @@ public class UserPage extends JPanel{
     private JLabel txtCalories;
 
     public UserPage(JFrame parent) {
-
+        super(parent);
         UserExecutor userExecutor = ExecutorProvider.getUserExecutor();
 
         User user = userExecutor.getUser();
@@ -72,12 +72,9 @@ public class UserPage extends JPanel{
 
 
 
-        editModeButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                setVisible(false);
-                new UserEditModePage();
-            }
+        editModeButton.addActionListener(e -> {
+            PickyPage userEditModePage = new UserEditModePage(parent);
+            userEditModePage.showPage();
         });
 
         setNavigationMenuListeners();
@@ -87,7 +84,7 @@ public class UserPage extends JPanel{
         ActionListener listener = e -> {
             String cmd = e.getActionCommand();
             setVisible(false);
-            MainPanel.changePage(new PanelButtonsConverter(cmd).Convert());
+            MainFrame.changePage(new PanelButtonsConverter(cmd).Convert());
         };
 
         btSettings.addActionListener(listener);

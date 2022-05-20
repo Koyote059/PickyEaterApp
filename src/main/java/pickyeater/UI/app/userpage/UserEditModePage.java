@@ -5,6 +5,7 @@ package pickyeater.UI.app.userpage;
  */
 
 import com.toedter.calendar.JDateChooser;
+import pickyeater.UI.app.PickyPage;
 import pickyeater.UI.leftbuttons.MainButton;
 import pickyeater.UI.leftbuttons.PanelButtons;
 import pickyeater.UI.leftbuttons.PanelButtonsConverter;
@@ -35,7 +36,7 @@ import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.Date;
 
-public class UserEditModePage extends JFrame {
+public class UserEditModePage extends PickyPage {
     private JPanel mainPanel;
     private JButton btSettings;
     private JButton btDailyProgress;
@@ -61,7 +62,8 @@ public class UserEditModePage extends JFrame {
     private JPanel panelOne;
     private JButton btUpdateNutrients;
 
-    public UserEditModePage() {
+    public UserEditModePage(JFrame parent) {
+        super(parent);
         UserEditModeExecutor userEditModeExecutor = ExecutorProvider.getUserEditModeExecutor();
         User user = userEditModeExecutor.getUser();
         UserBuilder newUserBuilder = new PickyUserBuilder();
@@ -121,19 +123,11 @@ public class UserEditModePage extends JFrame {
         btUser.setBackground(Color.decode("#B1EA9D"));
         btSettings.setBackground(Color.decode("#FFFFFF"));
 
-        setContentPane(mainPanel);
-        pack();
-        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        setVisible(true);
-
         newUserBuilder.setDateOfBirth(new JCalendarToLocalDate().jCalToLocDate(jBirthdayChooser.getDate()));
-        ActionListener listener = new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                String cmd = e.getActionCommand();
-                setVisible(false);
-                new MainButton(new PanelButtonsConverter(cmd).Convert());
-            }
+        ActionListener listener = e -> {
+            String cmd = e.getActionCommand();
+            setVisible(false);
+            new MainButton(new PanelButtonsConverter(cmd).Convert());
         };
         btSettings.addActionListener(listener);
         btDailyProgress.addActionListener(listener);

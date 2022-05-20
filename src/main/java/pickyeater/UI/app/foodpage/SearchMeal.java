@@ -1,6 +1,9 @@
 package pickyeater.UI.app.foodpage;
 
+import pickyeater.UI.app.MainFrame;
+import pickyeater.UI.app.PickyPage;
 import pickyeater.UI.leftbuttons.MainButton;
+import pickyeater.UI.leftbuttons.PanelButtons;
 import pickyeater.UI.leftbuttons.PanelButtonsConverter;
 import pickyeater.basics.food.Meal;
 import pickyeater.executors.ExecutorProvider;
@@ -12,7 +15,8 @@ import java.awt.event.*;
 import java.text.DecimalFormat;
 import java.util.Optional;
 
-public class SearchMeal extends JFrame {
+public class SearchMeal extends PickyPage {
+    private final MealSearcherExecutor mealSearcherExecutor;
     private JButton btSettings;
     private JButton btDailyProgress;
     private JButton btUser;
@@ -29,7 +33,8 @@ public class SearchMeal extends JFrame {
     private JLabel txtMealStats;
     private JPanel panelPieChart;
 
-    public SearchMeal() {
+    public SearchMeal(JFrame parent) {
+        super(parent);
         btDailyProgress.setBackground(Color.decode("#FFFFFF"));
         btDiet.setBackground(Color.decode("#FFFFFF"));
         btFood.setBackground(Color.decode("#B1EA9D"));
@@ -37,11 +42,9 @@ public class SearchMeal extends JFrame {
         btUser.setBackground(Color.decode("#FFFFFF"));
         btSettings.setBackground(Color.decode("#FFFFFF"));
 
-        ExecutorProvider executorProvider = new ExecutorProvider();
-        listMeals.setListData(new MealSearcherExecutor(executorProvider.getEaterManager()).getAllMealsObj());
+        add(mainPanel);
 
-        MealSearcherExecutor mealSearcherExecutor =
-                new MealSearcherExecutor(executorProvider.getEaterManager());
+        mealSearcherExecutor = ExecutorProvider.getMealSearcherExecutor();
 
         /*
         // TODO: meal = first meal in index
@@ -52,30 +55,9 @@ public class SearchMeal extends JFrame {
         txtFats.setText(Double.toString(meal.getNutrients().getFats()));
          */
 
-        setContentPane(mainPanel);
-        pack();
-        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        setVisible(true);
-        ActionListener listener = new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                String cmd = e.getActionCommand();
-                setVisible(false);
-                new MainButton(new PanelButtonsConverter(cmd).Convert());
-            }
-        };
-        btSettings.addActionListener(listener);
-        btDailyProgress.addActionListener(listener);
-        btUser.addActionListener(listener);
-        btGroceries.addActionListener(listener);
-        btFood.addActionListener(listener);
-        btDiet.addActionListener(listener);
-        btDone.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                setVisible(false);
-                //new FoodPage(this); // Todo change
-            }
+        setNavigationMenuListeners();
+        btDone.addActionListener(e -> {
+            MainFrame.changePage(PanelButtons.FOOD);
         });
         listMeals.addComponentListener(new ComponentAdapter() {
         });
@@ -98,5 +80,23 @@ public class SearchMeal extends JFrame {
             }
             }
         });
+    }
+
+    private void setNavigationMenuListeners(){
+        ActionListener listener = e -> {
+            String cmd = e.getActionCommand();
+            MainFrame.changePage(new PanelButtonsConverter(cmd).Convert());
+        };
+        btSettings.addActionListener(listener);
+        btDailyProgress.addActionListener(listener);
+        btUser.addActionListener(listener);
+        btGroceries.addActionListener(listener);
+        btDiet.addActionListener(listener);
+    }
+
+    @Override
+    public void showPage() {
+        listMeals.setListData(mealSearcherExecutor.getAllMealsObj());
+        super.showPage();
     }
 }

@@ -3,6 +3,7 @@ package pickyeater.UI.registerpage;
 /**
  * @author Claudio Di Maio
  */
+import pickyeater.UI.app.MainFrame;
 import pickyeater.utils.AgeCalculator;
 import pickyeater.UI.leftbuttons.MainButton;
 import pickyeater.UI.leftbuttons.PanelButtons;
@@ -60,7 +61,7 @@ public class Register4 extends JFrame {
                 registerExecutor.saveUser(userBuilder.build());
 
                 setVisible(false);
-                new MainButton(PanelButtons.PROGRESS);
+                MainFrame.changePage(PanelButtons.PROGRESS);
             }
         });
 

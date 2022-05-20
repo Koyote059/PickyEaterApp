@@ -4,7 +4,10 @@ package pickyeater.UI.app.mealplanpage;
  * @author Claudio Di Maio
  */
 
+import pickyeater.UI.app.MainFrame;
+import pickyeater.UI.app.PickyPage;
 import pickyeater.UI.app.mealplanpage.utils.DailyMealPlanColumn;
+import pickyeater.UI.leftbuttons.PanelButtons;
 import pickyeater.basics.food.Meal;
 import pickyeater.basics.mealplan.DailyMealPlan;
 import pickyeater.basics.mealplan.MealPlan;
@@ -16,63 +19,51 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MealPlanGeneratorPage extends JFrame {
+public class MealPlanGeneratorPage extends PickyPage {
     private JPanel mainPanel;
     private JButton doneButton;
     private JButton cancelButton;
+    private JScrollPane scrollPane;
     private JPanel topPanel;
-    private MealPlanCreatorExecutor mealPlanCreator;
     private MealPlanBuilder mealPlanBuilder;
 
     List<DailyMealPlanColumn> columns = new ArrayList<>();
 
-    public MealPlanGeneratorPage(MealPlanCreatorExecutor mealPlanCreator, MealPlan mealPlan, JPanel parent) {
+    public MealPlanGeneratorPage(MealPlanCreatorExecutor mealPlanCreator, MealPlan mealPlan, JFrame parent) {
         this(mealPlanCreator,parent);
-        this.mealPlanBuilder = mealPlanCreator.getMealPlanBuilder();
         columns.remove(0);
         for (DailyMealPlan dailyMealPlan : mealPlan.getDailyMealPlans()) {
-            DailyMealPlanColumn dailyMealPlanColumn = new DailyMealPlanColumn(this);
+            DailyMealPlanColumn dailyMealPlanColumn = new DailyMealPlanColumn(parent);
             List<Meal> meals = dailyMealPlan.getMeals();
             dailyMealPlanColumn.addMeals(meals);
             columns.add(dailyMealPlanColumn);
         }
-        draw();
+
     }
 
-    public MealPlanGeneratorPage(MealPlanCreatorExecutor mealPlanCreator,JPanel parent) {
-        this.mealPlanCreator = mealPlanCreator;
-        setContentPane(mainPanel);
-        pack();
-        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-
+    public MealPlanGeneratorPage(MealPlanCreatorExecutor mealPlanCreator,JFrame parent) {
+        super(parent);
+        add(mainPanel);
+        this.mealPlanBuilder = mealPlanCreator.getMealPlanBuilder();
         doneButton.addActionListener( e -> {
             for (DailyMealPlanColumn column : columns) {
                 mealPlanBuilder.addDailyMealPlan(column.getDailyMealPlan());
             }
             mealPlanCreator.saveMealPlan(mealPlanBuilder.build());
+            MainFrame.changePage(PanelButtons.DIET);
 
-            CardLayout layout = (CardLayout) parent.getLayout();
-            layout.show(parent,"MealPlanPage");
         });
 
-        cancelButton.addActionListener( e -> {
-            CardLayout layout = (CardLayout) parent.getLayout();
-            layout.show(parent,"UnavailableMealPlanPage");
-        });
+        cancelButton.addActionListener( e -> MainFrame.changePage(PanelButtons.DIET));
         GridLayout gridLayout = new GridLayout();
         gridLayout.setRows(1);
-        columns.add(new DailyMealPlanColumn(this));
-        topPanel.setLayout(gridLayout);
+        columns.add(new DailyMealPlanColumn(parent));
         setPreferredSize(new Dimension(800,370));
-        setVisible(true);
-        setResizable(false);
-        draw();
-        pack();
     }
 
     public void draw(){
         topPanel.removeAll();
-        GridLayout layout = (GridLayout) topPanel.getLayout();
+        GridLayout layout = new GridLayout();
         layout.setColumns(columns.size() + 1);
         topPanel.setLayout(layout);
         for (DailyMealPlanColumn column : columns) {
@@ -82,18 +73,20 @@ public class MealPlanGeneratorPage extends JFrame {
         }
         JButton addTableButton = new JButton("+");
         addTableButton.addActionListener( e ->{
-            columns.add(new DailyMealPlanColumn(this));
+            columns.add(new DailyMealPlanColumn(parent));
             draw();
             revalidate();
         });
-
         topPanel.add(addTableButton);
+        scrollPane.setViewportView(topPanel);
     }
 
 
-
-    public void updateTable(JTable table){
-
+    @Override
+    public void showPage(){
+        draw();
+        super.showPage();
     }
+
 
 }

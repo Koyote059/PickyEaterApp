@@ -4,9 +4,9 @@ package pickyeater.UI.app.mealplanpage;
  * @author Claudio Di Maio
  */
 
-import pickyeater.UI.app.MainPanel;
+import pickyeater.UI.app.MainFrame;
+import pickyeater.UI.app.PickyPage;
 import pickyeater.UI.choosers.MealInfoJDialog;
-import pickyeater.UI.leftbuttons.MainButton;
 import pickyeater.UI.leftbuttons.PanelButtonsConverter;
 import pickyeater.basics.food.Meal;
 import pickyeater.basics.mealplan.DailyMealPlan;
@@ -29,7 +29,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Optional;
 
-public class MealPlanPage extends JPanel {
+public class MealPlanPage extends PickyPage {
     private JPanel mainPanel;
     private JButton btSettings;
     private JButton btDailyProgress;
@@ -45,13 +45,10 @@ public class MealPlanPage extends JPanel {
     private JLabel binLabel;
     private final MealPlanViewerExecutor executor;
 
-    private LocalDate actualDate = null;
+    private LocalDate actualDate;
     public MealPlanPage(JFrame parent) {
-
-        CardLayout layout = new CardLayout();
-        setLayout(layout);
-        add(mainPanel,"MainPanel");
-        add(new MealPlanUnavailablePage(parent, this),"MealPlanUnavailablePage");
+        super(parent);
+        add(mainPanel);
 
         binLabel.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
         try {
@@ -61,15 +58,14 @@ public class MealPlanPage extends JPanel {
 
         }
 
-        MealPlanPage panel = this;
         binLabel.addMouseListener(new MouseClickListener() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 int result = JOptionPane.showConfirmDialog(binLabel,"Are you sure you want to delete it?","Deleting  groceries",JOptionPane.YES_NO_OPTION);
                 if(result == JOptionPane.YES_OPTION){
                     executor.deleteMealPlan();
-
-                    layout.show(panel,"MealPlanUnavailablePage");
+                    PickyPage mealPlanUnavailablePage = new MealPlanUnavailablePage(parent);
+                    mealPlanUnavailablePage.showPage();
                 }
             }
         });
@@ -97,15 +93,10 @@ public class MealPlanPage extends JPanel {
         btSettings.setBackground(Color.decode("#FFFFFF"));
 
         setButtonsListeners(parent);
-        todaysButton.doClick();
         dailyMealsTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         dailyMealsTable.removeEditor();
         setNavigationMenuListeners();
-        if(!executor.isMealPlanAvailable()){
-            layout.show(this,"MealPlanUnavailablePage");
-        } else  {
-            layout.show(this,"MainPanel");
-        }
+
     }
 
     private void setUpContent(DailyMealPlan dailyMealPlan){
@@ -129,7 +120,7 @@ public class MealPlanPage extends JPanel {
         ActionListener listener = e -> {
             String cmd = e.getActionCommand();
             setVisible(false);
-            MainPanel.changePage(new PanelButtonsConverter(cmd).Convert());
+            MainFrame.changePage(new PanelButtonsConverter(cmd).Convert());
         };
 
         btSettings.addActionListener(listener);
@@ -182,4 +173,14 @@ public class MealPlanPage extends JPanel {
         });
     }
 
+    @Override
+    public void showPage() {
+        if(!executor.isMealPlanAvailable()){
+            PickyPage mealPlanUnavailablePage = new MealPlanUnavailablePage(parent);
+            mealPlanUnavailablePage.showPage();
+            return;
+        }
+        todaysButton.doClick();
+        super.showPage();
+    }
 }

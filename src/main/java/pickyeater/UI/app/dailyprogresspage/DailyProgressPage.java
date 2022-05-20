@@ -4,9 +4,9 @@ package pickyeater.UI.app.dailyprogresspage;
  * @author Claudio Di Maio
  */
 
-import pickyeater.UI.app.MainPanel;
+import pickyeater.UI.app.MainFrame;
+import pickyeater.UI.app.PickyPage;
 import pickyeater.UI.choosers.MealsChooser;
-import pickyeater.UI.leftbuttons.MainButton;
 import pickyeater.UI.leftbuttons.PanelButtonsConverter;
 import pickyeater.basics.food.Meal;
 import pickyeater.executors.DailyProgressExecutor;
@@ -15,12 +15,11 @@ import GARBAGE.UserMealsProgressesExecutor;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.DecimalFormat;
 import java.util.Optional;
 
-public class DailyProgressPage extends JPanel {
+public class DailyProgressPage extends PickyPage {
     private JPanel mainPanel;
     private JButton btSettings;
     private JButton btDailyProgress;
@@ -40,10 +39,9 @@ public class DailyProgressPage extends JPanel {
     JFrame parent;
 
     public DailyProgressPage(JFrame parent) {
-        this.parent = parent;
-        Container container = parent.getContentPane();
-        parent.add(container,"ProgressPage");
+        super(parent);
         add(mainPanel);
+
         btDailyProgress.setBackground(Color.decode("#B1EA9D"));
         btDiet.setBackground(Color.decode("#FFFFFF"));
         btFood.setBackground(Color.decode("#FFFFFF"));
@@ -60,7 +58,8 @@ public class DailyProgressPage extends JPanel {
         });
         btAddBurntCalories.addActionListener(e -> {
             setVisible(false);
-            new AddBurntCaloriesPage();
+            PickyPage addBurntCaloriesPage = new AddBurntCaloriesPage(parent);
+            addBurntCaloriesPage.showPage();
         });
         cbConsumed.addActionListener(e -> {
             if (cbConsumed.getSelectedIndex() == 0){
@@ -88,7 +87,7 @@ public class DailyProgressPage extends JPanel {
         ActionListener listener = e -> {
             String cmd = e.getActionCommand();
             setVisible(false);
-            MainPanel.changePage(new PanelButtonsConverter(cmd).Convert());
+            MainFrame.changePage(new PanelButtonsConverter(cmd).Convert());
         };
         btSettings.addActionListener(listener);
         btUser.addActionListener(listener);
@@ -97,24 +96,17 @@ public class DailyProgressPage extends JPanel {
         btDiet.addActionListener(listener);
     }
 
+    @Override
     public void showPage(){
-        Container container = parent.getContentPane();
-        CardLayout layout = (CardLayout) container.getLayout();
-        layout.show(container,this.getClass().getName());
         cbConsumed.insertItemAt("Calories: " + dailyProgressExecutor.getEatenCalories() + "/" + dailyProgressExecutor.getCaloriesToEat(), 0);
         cbConsumed.insertItemAt("Proteins: " + dailyProgressExecutor.getEatenProteins() + "/" + dailyProgressExecutor.getProteinsToEat(), 1);
         cbConsumed.insertItemAt("Carbs: " + dailyProgressExecutor.getEatenCarbs() + "/" + dailyProgressExecutor.getCarbsToEat(), 2);
         cbConsumed.insertItemAt("Fats: " + dailyProgressExecutor.getEatenFats() + "/" + dailyProgressExecutor.getFatsToEat(), 3);
-
         cbConsumed.setSelectedIndex(0);
-
         txtBurntCalories.setText(Integer.toString(dailyProgressExecutor.getBurntCalories()));
-
         // TODO: Show quantity next to name; if two (or more) have the same name it will sum the quantity
         listEatenMeals.setListData(dailyProgressExecutor.getAllMealsObj());
-
         progressBar(dailyProgressExecutor.getEatenCalories(), dailyProgressExecutor.getCaloriesToEat());
-
-
+        super.showPage();
     }
 }

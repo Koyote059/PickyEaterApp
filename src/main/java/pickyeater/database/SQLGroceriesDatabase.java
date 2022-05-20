@@ -48,6 +48,7 @@ public class SQLGroceriesDatabase implements GroceriesDatabase {
         try {
             SQLUnSafeQueryExecutor executor = queryExecutor.getUnSafeQueryExecutor();
             executor.deleteFromGroceriesTable();
+
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }

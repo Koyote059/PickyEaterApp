@@ -4,10 +4,7 @@ package pickyeater.UI;
  * @author Claudio Di Maio
  */
 
-import GARBAGE.MainPages;
-import pickyeater.UI.app.MainPanel;
-import pickyeater.UI.leftbuttons.MainButton;
-import pickyeater.UI.leftbuttons.PanelButtons;
+import pickyeater.UI.app.MainFrame;
 import pickyeater.UI.registerpage.Register1;
 import pickyeater.database.*;
 import pickyeater.executors.ExecutorProvider;
@@ -38,7 +35,7 @@ public class main {
         if (eaterManager.getUserManager().getUser().isEmpty()) {  // User Database is empty
             new Register1();
         } else {  // Go to the app
-            new MainPanel();
+            new MainFrame();
         }
 
 

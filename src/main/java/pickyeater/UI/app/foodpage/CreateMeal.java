@@ -1,5 +1,7 @@
 package pickyeater.UI.app.foodpage;
 
+import pickyeater.UI.app.MainFrame;
+import pickyeater.UI.app.PickyPage;
 import pickyeater.UI.leftbuttons.MainButton;
 import pickyeater.UI.leftbuttons.PanelButtons;
 import pickyeater.UI.leftbuttons.PanelButtonsConverter;
@@ -12,7 +14,9 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class CreateMeal extends JFrame {
+public class CreateMeal extends PickyPage {
+    private final MealSearcherExecutor mealSearcherExecutor;
+    private final IngredientSearcherExecutor ingredientSearcherExecutor;
     private JPanel mainPanel;
     private JButton btSettings;
     private JButton btDailyProgress;
@@ -27,7 +31,9 @@ public class CreateMeal extends JFrame {
     private JTextField tfName;
     private JList listIngredients;
 
-    public CreateMeal() {
+    public CreateMeal(JFrame parent) {
+        super(parent);
+        add(mainPanel);
         btDailyProgress.setBackground(Color.decode("#FFFFFF"));
         btDiet.setBackground(Color.decode("#FFFFFF"));
         btFood.setBackground(Color.decode("#B1EA9D"));
@@ -35,55 +41,37 @@ public class CreateMeal extends JFrame {
         btUser.setBackground(Color.decode("#FFFFFF"));
         btSettings.setBackground(Color.decode("#FFFFFF"));
 
-        ExecutorProvider executorProvider = new ExecutorProvider();
 
-        IngredientSearcherExecutor ingredientSearcherExecutor =
-                new IngredientSearcherExecutor(executorProvider.getEaterManager());
-        MealSearcherExecutor mealSearcherExecutor = new MealSearcherExecutor(executorProvider.getEaterManager());
-
-        listIngredients.setListData(ingredientSearcherExecutor.getAllIngredientsObj());
-        listMeals.setListData(mealSearcherExecutor.getAllMealsObj());
+        ingredientSearcherExecutor = ExecutorProvider.getIngredientSearcherExecutor();
+        mealSearcherExecutor = ExecutorProvider.getMealSearcherExecutor();
 
 
+        setNavigationMenuListeners();
+        btCancel.addActionListener(e -> MainFrame.changePage(PanelButtons.FOOD));
+        btSave.addActionListener(e -> MainFrame.changePage(PanelButtons.FOOD));
+        btAddIngredient.addActionListener(e -> {
+            PickyPage createIngredientPage = new CreateIngredient(parent);
+            createIngredientPage.showPage();
+        });
+    }
 
-        setContentPane(mainPanel);
-        pack();
-        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        setVisible(true);
-        ActionListener listener = new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                String cmd = e.getActionCommand();
-                setVisible(false);
-                new MainButton(new PanelButtonsConverter(cmd).Convert());
-            }
+    private void setNavigationMenuListeners(){
+        ActionListener listener = e -> {
+            String cmd = e.getActionCommand();
+            setVisible(false);
+            MainFrame.changePage(new PanelButtonsConverter(cmd).Convert());
         };
         btSettings.addActionListener(listener);
         btDailyProgress.addActionListener(listener);
         btUser.addActionListener(listener);
         btGroceries.addActionListener(listener);
-        btFood.addActionListener(listener);
         btDiet.addActionListener(listener);
-        btCancel.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                setVisible(false);
-                new MainButton(PanelButtons.FOOD);
-            }
-        });
-        btSave.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                setVisible(false);
-                new MainButton(PanelButtons.FOOD);
-            }
-        });
-        btAddIngredient.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                setVisible(false);
-                new CreateIngredient();
-            }
-        });
+    }
+
+    @Override
+    public void showPage() {
+        listIngredients.setListData(ingredientSearcherExecutor.getAllIngredientsObj());
+        listMeals.setListData(mealSearcherExecutor.getAllMealsObj());
+        super.showPage();
     }
 }

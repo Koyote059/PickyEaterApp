@@ -1,7 +1,7 @@
 package pickyeater.UI.app.foodpage;
 
-import pickyeater.UI.app.MainPanel;
-import pickyeater.UI.leftbuttons.MainButton;
+import pickyeater.UI.app.MainFrame;
+import pickyeater.UI.app.PickyPage;
 import pickyeater.UI.leftbuttons.PanelButtonsConverter;
 import pickyeater.executors.ExecutorProvider;
 import pickyeater.executors.searcher.IngredientSearcherExecutor;
@@ -12,7 +12,8 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class FoodPage extends JPanel {
+public class FoodPage extends PickyPage {
+
     private JPanel mainPanel;
     private JButton btSettings;
     private JButton btDailyProgress;
@@ -27,7 +28,9 @@ public class FoodPage extends JPanel {
     private JButton btAddMeal;
     private JButton btAddIngredient;
 
-    public FoodPage(MainPanel parent) {
+    public FoodPage(JFrame parent) {
+        super(parent);
+
         btDailyProgress.setBackground(Color.decode("#FFFFFF"));
         btDiet.setBackground(Color.decode("#FFFFFF"));
         btFood.setBackground(Color.decode("#B1EA9D"));
@@ -38,48 +41,31 @@ public class FoodPage extends JPanel {
         listMeals.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         listIngredients.setSelectionMode((ListSelectionModel.SINGLE_SELECTION));
 
-        listIngredients.setListData(new IngredientSearcherExecutor(ExecutorProvider.getEaterManager()).getAllIngredientsObj());
-        listMeals.setListData(new MealSearcherExecutor(ExecutorProvider.getEaterManager()).getAllMealsObj());
 
-
-        btSearchMeal.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                setVisible(false);
-                new SearchMeal();
-            }
+        btSearchMeal.addActionListener(e -> {
+            PickyPage searchMealPage = new SearchMeal(parent);
+            searchMealPage.showPage();
         });
-        btAddMeal.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                setVisible(false);
-                new CreateMeal();
-            }
+        btAddMeal.addActionListener(e -> {
+            PickyPage createMealPage = new CreateMeal(parent);
+            createMealPage.showPage();
         });
-        btSearchIngredient.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                setVisible(false);
-                new SearchIngredient();
-            }
+        btSearchIngredient.addActionListener(e -> {
+            PickyPage searchIngredientPage = new SearchIngredient(parent);
+            searchIngredientPage.showPage();
         });
-        btAddIngredient.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                setVisible(false);
-                new CreateIngredient();
-            }
+        btAddIngredient.addActionListener(e -> {
+            PickyPage pickyPage = new CreateIngredient(parent);
+            pickyPage.showPage();
         });
         setNavigationMenuListeners();
         add(mainPanel);
-        setVisible(true);
     }
 
     private void setNavigationMenuListeners(){
         ActionListener listener = e -> {
             String cmd = e.getActionCommand();
-            setVisible(false);
-            MainPanel.changePage(new PanelButtonsConverter(cmd).Convert());
+            MainFrame.changePage(new PanelButtonsConverter(cmd).Convert());
         };
         btSettings.addActionListener(listener);
         btDailyProgress.addActionListener(listener);
@@ -88,4 +74,10 @@ public class FoodPage extends JPanel {
         btDiet.addActionListener(listener);
     }
 
+    @Override
+    public void showPage() {
+        listIngredients.setListData(new IngredientSearcherExecutor(ExecutorProvider.getEaterManager()).getAllIngredientsObj());
+        listMeals.setListData(new MealSearcherExecutor(ExecutorProvider.getEaterManager()).getAllMealsObj());
+        super.showPage();
+    }
 }

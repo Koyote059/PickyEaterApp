@@ -1,5 +1,8 @@
 package pickyeater.UI.app.groceriespage;
 
+import GARBAGE.MainPages;
+import pickyeater.UI.app.MainFrame;
+import pickyeater.UI.app.PickyPage;
 import pickyeater.UI.app.groceriespage.utils.WindowCloseListener;
 import pickyeater.UI.leftbuttons.MainButton;
 import pickyeater.UI.leftbuttons.PanelButtonsConverter;
@@ -20,7 +23,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Optional;
 
-public class GroceriesPage extends JFrame{
+public class GroceriesPage extends PickyPage  {
     private JPanel mainPanel;
     private JButton btSettings;
     private JButton btDailyProgress;
@@ -35,7 +38,8 @@ public class GroceriesPage extends JFrame{
     private GroceriesCheckList groceriesCheckList;
 
 
-    public GroceriesPage(GroceriesExecutor groceriesExecutor, JFrame panel) {
+    public GroceriesPage(GroceriesExecutor groceriesExecutor, JFrame parent) {
+        super(parent);
         this.groceriesExecutor = groceriesExecutor;
         binLabel.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
         try {
@@ -45,7 +49,7 @@ public class GroceriesPage extends JFrame{
 
         }
 
-        this.addWindowListener(new WindowCloseListener() {
+        parent.addWindowListener(new WindowCloseListener() {
             @Override
             public void windowClosing(WindowEvent e) {
                 groceriesExecutor.saveGroceries(groceriesCheckList);
@@ -57,11 +61,12 @@ public class GroceriesPage extends JFrame{
                 int result = JOptionPane.showConfirmDialog(binLabel,"Are you sure you want to delete it?","Deleting  groceries",JOptionPane.YES_NO_OPTION);
                 if(result == JOptionPane.YES_OPTION){
                     groceriesExecutor.deleteGroceries();
-                    setVisible(false);
-                    new UnavailableGroceriesPage(panel);
+                    PickyPage page = new UnavailableGroceriesPage(parent);
+                    page.showPage();
                 }
             }
         });
+
 
         btDailyProgress.setBackground(Color.decode("#FFFFFF"));
         btDiet.setBackground(Color.decode("#FFFFFF"));
@@ -70,16 +75,12 @@ public class GroceriesPage extends JFrame{
         btUser.setBackground(Color.decode("#FFFFFF"));
         btSettings.setBackground(Color.decode("#FFFFFF"));
 
-        setContentPane(mainPanel);
-        pack();
-        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE); // Todo save before exiting
-        setVisible(true);
         setNavigationMenuListeners();
         Optional<Groceries> groceriesOptional = groceriesExecutor.getGroceries();
         if(groceriesOptional.isEmpty()) throw new RuntimeException("Error in Groceries Database!");
         groceriesCheckList = groceriesOptional.get().generateCheckList();
         ingredientsTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-        draw();
+        add(mainPanel);
     }
 
     private void draw() {
@@ -118,7 +119,7 @@ public class GroceriesPage extends JFrame{
             groceriesExecutor.saveGroceries(groceriesCheckList);
             String cmd = e.getActionCommand();
             setVisible(false);
-            new MainButton(new PanelButtonsConverter(cmd).Convert());
+            MainFrame.changePage(new PanelButtonsConverter(cmd).Convert());
         };
         btSettings.addActionListener(listener);
         btDailyProgress.addActionListener(listener);
@@ -127,4 +128,10 @@ public class GroceriesPage extends JFrame{
         btFood.addActionListener(listener);
     }
 
+
+    @Override
+    public void showPage() {
+        draw();
+        super.showPage();
+    }
 }

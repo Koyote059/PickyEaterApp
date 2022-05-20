@@ -13,6 +13,9 @@ public class PickyUserManager implements UserManager {
     private final UserDatabase userDatabase;
     private final GroceriesDatabase groceriesDatabase;
     private User user = null;
+
+    private Groceries groceries = null;
+
     public PickyUserManager(UserDatabase userDatabase, GroceriesDatabase groceriesDatabase) {
         this.userDatabase = userDatabase;
         this.groceriesDatabase = groceriesDatabase;
@@ -29,11 +32,11 @@ public class PickyUserManager implements UserManager {
     }
 
     public Optional<User> getUser() {
-        if(user != null){
-            return Optional.of(this.user);
-        } else {
-            return userDatabase.loadUser();
+        if(user == null){
+            Optional<User> userOptional = userDatabase.loadUser();
+            userOptional.ifPresent(value -> user = value);
         }
+        return Optional.ofNullable(this.user);
     }
 
     @Override
@@ -43,16 +46,23 @@ public class PickyUserManager implements UserManager {
 
     @Override
     public Optional<Groceries> getGroceries() {
-        return groceriesDatabase.getGroceries();
+        if(groceries==null){
+            Optional<Groceries> groceriesOptional = groceriesDatabase.getGroceries();
+            groceriesOptional.ifPresent(value -> groceries = value);
+        }
+        return Optional.ofNullable(groceries);
     }
 
     @Override
     public void deleteGroceries(Groceries groceries) {
         groceriesDatabase.deleteGroceries(groceries);
+
+        this.groceries = null;
     }
 
     @Override
     public void deleteMealPlan(User user) {
         userDatabase.deleteMealPlan(user);
+        user.setMealPlan(null);
     }
 }
