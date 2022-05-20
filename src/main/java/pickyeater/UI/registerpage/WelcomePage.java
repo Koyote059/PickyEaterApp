@@ -25,7 +25,7 @@ public class WelcomePage extends JFrame implements ActionListener {
 
         setContentPane(mainPanel);
         setSize(677, 507);
-        setResizable(false);
+        setResizable(true);
         coloredPanel.setBackground(Color.decode("#B1EA9D"));
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setVisible(true);
@@ -54,10 +54,10 @@ public class WelcomePage extends JFrame implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (x >= 677-logo.getWidth(null) | x <= 0){
+        if (x >= getWidth()-logo.getWidth(null) | x <= 0){
             xVelocity = xVelocity * -1;
         }
-        if (y >= 507-logo.getWidth(null) | y <= 0){
+        if (y >=getHeight()-logo.getHeight(null) | y <= 0){
             yVelocity = yVelocity * -1;
         }
         x = x + xVelocity;
