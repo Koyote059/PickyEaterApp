@@ -71,6 +71,7 @@ public class MealPlanGeneratorPage extends JFrame {
         setResizable(false);
         draw();
         setSize(677, 507);    //pack();
+        setResizable(false);
     }
 
     public void draw(){

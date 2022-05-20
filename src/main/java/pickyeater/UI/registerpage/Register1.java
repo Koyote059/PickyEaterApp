@@ -43,6 +43,7 @@ public class Register1 extends JFrame{
         this.userBuilder = registerExecutor.getUserBuilder();
         setContentPane(mainPanel);
         setSize(677, 507);    //pack();
+        setResizable(false);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setVisible(true);
 

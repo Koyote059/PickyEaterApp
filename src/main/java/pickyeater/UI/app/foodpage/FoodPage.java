@@ -43,6 +43,7 @@ public class FoodPage extends JFrame {
 
         setContentPane(mainPanel);
         setSize(677, 507);    //pack();
+        setResizable(false);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setVisible(true);
         ActionListener listener = new ActionListener() {

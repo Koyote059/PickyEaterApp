@@ -34,6 +34,7 @@ public class Register4 extends JFrame {
     public Register4(RegisterExecutor registerExecutor) {
         setContentPane(mainPanel);
         setSize(677, 507);    //pack();
+        setResizable(false);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setVisible(true);
 
