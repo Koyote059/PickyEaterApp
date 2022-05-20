@@ -26,6 +26,11 @@ public class Register3 extends JFrame {
         setResizable(false);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setVisible(true);
+
+        btLoseWeight.setBackground(Color.decode("#FFFFFF"));
+        btGainWeight.setBackground(Color.decode("#FFFFFF"));
+        btMaintainWeight.setBackground(Color.decode("#FFFFFF"));
+
         btLoseWeight.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
