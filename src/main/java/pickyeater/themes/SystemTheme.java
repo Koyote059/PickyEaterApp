@@ -21,6 +21,8 @@ public class SystemTheme {
         throw new RuntimeException(e);
     }
 
+    setPEFont();
+
     UIManager.put("ProgressBar.foreground", Color.GREEN);
     UIManager.put("Button.background", Color.GREEN);
     }
@@ -38,7 +40,7 @@ public class SystemTheme {
 //        UIManager.put("List.background", Color.decode("#B1EA9D"));
 //        UIManager.put("Table.background", Color.decode("#B1EA9D"));
 
-        setUIFont(new javax.swing.plaf.FontUIResource("Helvetica",Font.BOLD,16));
+        setDefaultFont();
 
         Color defaultGreen = Color.decode("#B1EA9D");
         Color defaultWhite = Color.decode("#FFFFFF");
@@ -57,7 +59,7 @@ public class SystemTheme {
         //        UIManager.put("List.background", Color.decode("#B1EA9D"));
         //        UIManager.put("Table.background", Color.decode("#B1EA9D"));
 
-        setUIFont(new javax.swing.plaf.FontUIResource("Helvetica",Font.BOLD,12));
+        setDefaultFont();
 
         Color defaultGreen = Color.decode("#32AB5E");
         Color defaultWhite = Color.decode("#000000");
@@ -71,5 +73,13 @@ public class SystemTheme {
             if (value instanceof javax.swing.plaf.FontUIResource)
                 UIManager.put (key, f);
         }
+    }
+
+    public static void setDefaultFont(){
+        setUIFont(new javax.swing.plaf.FontUIResource("Helvetica",Font.BOLD,16));
+    }
+
+    public static void setPEFont(){
+        setUIFont(new javax.swing.plaf.FontUIResource("Bauhaus 93",Font.PLAIN,16));
     }
 }
