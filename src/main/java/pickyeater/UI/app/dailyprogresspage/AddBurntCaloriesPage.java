@@ -55,7 +55,7 @@ public class AddBurntCaloriesPage extends PickyPage {
                 JOptionPane.showMessageDialog(mainPanel, "Insert valid number", "", JOptionPane.ERROR_MESSAGE);
             }
         });
-
+        setNavigationMenuListeners();
     }
 
     private void setNavigationMenuListeners(){

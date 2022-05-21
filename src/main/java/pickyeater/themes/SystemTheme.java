@@ -38,7 +38,7 @@ public class SystemTheme {
 //        UIManager.put("List.background", Color.decode("#B1EA9D"));
 //        UIManager.put("Table.background", Color.decode("#B1EA9D"));
 
-        setUIFont(new javax.swing.plaf.FontUIResource("Helvetica",Font.BOLD,12));
+        setUIFont(new javax.swing.plaf.FontUIResource("Helvetica",Font.BOLD,16));
 
         Color defaultGreen = Color.decode("#B1EA9D");
         Color defaultWhite = Color.decode("#FFFFFF");

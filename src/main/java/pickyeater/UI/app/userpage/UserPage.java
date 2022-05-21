@@ -11,10 +11,13 @@ import pickyeater.basics.user.User;
 import pickyeater.executors.ExecutorProvider;
 import pickyeater.executors.user.UserExecutor;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.text.DecimalFormat;
 
 public class UserPage extends PickyPage {
@@ -25,7 +28,7 @@ public class UserPage extends PickyPage {
     private JButton btGroceries;
     private JButton btFood;
     private JButton btDiet;
-    private JButton editModeButton;
+    private JButton btEditMode;
     private JLabel txtName;
     private JLabel txtHeight;
     private JLabel txtWeight;
@@ -49,6 +52,15 @@ public class UserPage extends PickyPage {
 
         setLayout(new BorderLayout());
         add(mainPanel,BorderLayout.CENTER);
+
+        btEditMode.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+        try {
+            BufferedImage binImage = ImageIO.read(new File("res/images/accounteditB.png"));
+            btEditMode.setIcon(new ImageIcon(binImage.getScaledInstance(40,40,Image.SCALE_SMOOTH)));
+            btEditMode.setText("");
+        } catch (IOException | NullPointerException ignored) {
+        }
+
         // User:
         txtName.setText(user.getName());
         txtSex.setText(user.getUserStatus().getSex().toString());
@@ -74,7 +86,7 @@ public class UserPage extends PickyPage {
 
 
 
-        editModeButton.addActionListener(e -> {
+        btEditMode.addActionListener(e -> {
             PickyPage userEditModePage = new UserEditModePage(parent);
             userEditModePage.showPage();
         });

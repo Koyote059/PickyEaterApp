@@ -228,6 +228,7 @@ public class UserEditModePage extends PickyPage {
 
         btSettings.addActionListener(listener);
         btDailyProgress.addActionListener(listener);
+        btUser.addActionListener(listener);
         btGroceries.addActionListener(listener);
         btFood.addActionListener(listener);
         btDiet.addActionListener(listener);

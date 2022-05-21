@@ -54,9 +54,9 @@ public class MealPlanPage extends PickyPage {
         binLabel.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
         try {
             BufferedImage binImage = ImageIO.read(new File("res/images/binIcon.png"));
-            binLabel.setIcon(new ImageIcon(binImage.getScaledInstance(20,20,Image.SCALE_SMOOTH)));
+            binLabel.setIcon(new ImageIcon(binImage.getScaledInstance(40,40,Image.SCALE_SMOOTH)));
+            binLabel.setText("");
         } catch (IOException | NullPointerException ignored) {
-
         }
 
         binLabel.addMouseListener(new MouseClickListener() {
