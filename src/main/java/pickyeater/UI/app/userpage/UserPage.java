@@ -4,7 +4,8 @@ package pickyeater.UI.app.userpage;
  * @author Claudio Di Maio
  */
 
-import pickyeater.UI.leftbuttons.MainButton;
+import pickyeater.UI.app.MainFrame;
+import pickyeater.UI.app.PickyPage;
 import pickyeater.UI.leftbuttons.PanelButtonsConverter;
 import pickyeater.basics.user.User;
 import pickyeater.executors.ExecutorProvider;
@@ -16,7 +17,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.DecimalFormat;
 
-public class UserPage extends JFrame{
+public class UserPage extends PickyPage {
     private JPanel mainPanel;
     private JButton btSettings;
     private JButton btDailyProgress;
@@ -38,14 +39,16 @@ public class UserPage extends JFrame{
     private JLabel txtFats;
     private JLabel txtCalories;
 
-    public UserPage() {
-
+    public UserPage(JFrame parent) {
+        super(parent);
         UserExecutor userExecutor = ExecutorProvider.getUserExecutor();
 
         User user = userExecutor.getUser();
 
         DecimalFormat df = new DecimalFormat("0.00");
 
+        setLayout(new BorderLayout());
+        add(mainPanel,BorderLayout.CENTER);
         // User:
         txtName.setText(user.getName());
         txtSex.setText(user.getUserStatus().getSex().toString());
@@ -69,31 +72,28 @@ public class UserPage extends JFrame{
         btUser.setBackground(Color.decode("#B1EA9D"));
         btSettings.setBackground(Color.decode("#FFFFFF"));
 
-        setContentPane(mainPanel);
-        setSize(677, 507);    //pack();
-        setResizable(false);
-        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        setVisible(true);
 
-        ActionListener listener = new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                String cmd = e.getActionCommand();
-                setVisible(false);
-                new MainButton(new PanelButtonsConverter(cmd).Convert());
-            }
+
+        editModeButton.addActionListener(e -> {
+            PickyPage userEditModePage = new UserEditModePage(parent);
+            userEditModePage.showPage();
+        });
+
+        setNavigationMenuListeners();
+    }
+
+    public void setNavigationMenuListeners(){
+        ActionListener listener = e -> {
+            String cmd = e.getActionCommand();
+            setVisible(false);
+            MainFrame.changePage(new PanelButtonsConverter(cmd).Convert());
         };
+
         btSettings.addActionListener(listener);
         btDailyProgress.addActionListener(listener);
         btGroceries.addActionListener(listener);
         btFood.addActionListener(listener);
         btDiet.addActionListener(listener);
-        editModeButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                setVisible(false);
-                new UserEditModePage();
-            }
-        });
     }
+
 }

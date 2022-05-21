@@ -1,6 +1,9 @@
 package pickyeater.UI.app.foodpage;
 
+import pickyeater.UI.app.MainFrame;
+import pickyeater.UI.app.PickyPage;
 import pickyeater.UI.leftbuttons.MainButton;
+import pickyeater.UI.leftbuttons.PanelButtons;
 import pickyeater.UI.leftbuttons.PanelButtonsConverter;
 import pickyeater.basics.food.QuantityType;
 import pickyeater.builders.IngredientBuilder;
@@ -13,7 +16,8 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class CreateIngredient extends JFrame {
+public class CreateIngredient extends PickyPage {
+
     private JPanel mainPanel;
     private JButton btSettings;
     private JButton btDailyProgress;
@@ -34,8 +38,14 @@ public class CreateIngredient extends JFrame {
     private JTextField tfCarbs;
     private JTextField tfFats;
     private QuantityType quantityType;
+    private IngredientSearcherExecutor ingredientSearcherExecutor;
 
-    public CreateIngredient() {
+    public CreateIngredient(JFrame parent) {
+        super(parent);
+
+        setLayout(new BorderLayout());
+        add(mainPanel,BorderLayout.CENTER);
+
         btDailyProgress.setBackground(Color.decode("#FFFFFF"));
         btDiet.setBackground(Color.decode("#FFFFFF"));
         btFood.setBackground(Color.decode("#B1EA9D"));
@@ -46,74 +56,60 @@ public class CreateIngredient extends JFrame {
         quantityType = QuantityType.GRAMS;
 
         CreateIngredientExecutor createIngredientExecutor = ExecutorProvider.getCreateIngredientExecutor();
-        IngredientSearcherExecutor ingredientSearcherExecutor = ExecutorProvider.getIngredientSearcherExecutor();
-
-        listIngredients.setListData(ingredientSearcherExecutor.getAllIngredientsObj());
+        ingredientSearcherExecutor = ExecutorProvider.getIngredientSearcherExecutor();
 
         txtQuantity.setVisible(false);
         tfQuantity.setVisible(false);
         txtQuantityType.setVisible(false);
 
-        setContentPane(mainPanel);
-        setSize(677, 507);    //pack();
-        setResizable(false);
-        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        setVisible(true);
-        ActionListener listener = new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                String cmd = e.getActionCommand();
-                setVisible(false);
-                new MainButton(new PanelButtonsConverter(cmd).Convert());
+        setNavigationMenuListeners();
+        btCancel.addActionListener(e -> MainFrame.changePage(PanelButtons.FOOD));
+        btSave.addActionListener(e -> {
+            IngredientBuilder ingredientBuilder = createIngredientExecutor.createIngredient(tfName.getText(),
+                    quantityType, tfQuantity.getText(), tfPrice.getText(), tfProteins.getText(),
+                    tfCarbs.getText(), tfFats.getText());
+
+            createIngredientExecutor.saveIngredient(ingredientBuilder.build());
+
+            PickyPage createIngredientPage = new CreateIngredient(parent);
+            createIngredientPage.showPage();
+        });
+        cbQuantityType.addActionListener(e -> {
+            if (cbQuantityType.getSelectedIndex() == 0){
+                txtQuantity.setVisible(false);
+                tfQuantity.setVisible(false);
+                txtQuantityType.setVisible(false);
+                quantityType = QuantityType.GRAMS;
+            } else if (cbQuantityType.getSelectedIndex() == 1) {
+                txtQuantity.setVisible(true);
+                tfQuantity.setVisible(true);
+                txtQuantityType.setVisible(true);
+                quantityType = QuantityType.MILLILITERS;
+            } else if (cbQuantityType.getSelectedIndex() == 2) {
+                txtQuantity.setVisible(true);
+                tfQuantity.setVisible(true);
+                txtQuantityType.setVisible(true);
+                quantityType = QuantityType.PIECES;
             }
+        });
+    }
+
+    private void setNavigationMenuListeners(){
+        ActionListener listener = e -> {
+            String cmd = e.getActionCommand();
+            setVisible(false);
+            MainFrame.changePage(new PanelButtonsConverter(cmd).Convert());
         };
         btSettings.addActionListener(listener);
         btDailyProgress.addActionListener(listener);
         btUser.addActionListener(listener);
         btGroceries.addActionListener(listener);
-        btFood.addActionListener(listener);
         btDiet.addActionListener(listener);
-        btCancel.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                setVisible(false);
-                new FoodPage();
-            }
-        });
-        btSave.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                IngredientBuilder ingredientBuilder = createIngredientExecutor.createIngredient(tfName.getText(),
-                        quantityType, tfQuantity.getText(), tfPrice.getText(), tfProteins.getText(),
-                        tfCarbs.getText(), tfFats.getText());
-
-                createIngredientExecutor.saveIngredient(ingredientBuilder.build());
-
-                setVisible(false);
-                new CreateIngredient();
-            }
-        });
-        cbQuantityType.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                if (cbQuantityType.getSelectedIndex() == 0){
-                    txtQuantity.setVisible(false);
-                    tfQuantity.setVisible(false);
-                    txtQuantityType.setVisible(false);
-                    quantityType = QuantityType.GRAMS;
-                } else if (cbQuantityType.getSelectedIndex() == 1) {
-                    txtQuantity.setVisible(true);
-                    tfQuantity.setVisible(true);
-                    txtQuantityType.setVisible(true);
-                    quantityType = QuantityType.MILLILITERS;
-                } else if (cbQuantityType.getSelectedIndex() == 2) {
-                    txtQuantity.setVisible(true);
-                    tfQuantity.setVisible(true);
-                    txtQuantityType.setVisible(true);
-                    quantityType = QuantityType.PIECES;
-                }
-            }
-        });
     }
 
+    @Override
+    public void showPage() {
+        listIngredients.setListData(ingredientSearcherExecutor.getAllIngredientsObj());
+        super.showPage();
+    }
 }

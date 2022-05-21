@@ -67,7 +67,7 @@ public class AddEatenMealPage extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 setVisible(false);
-                new DailyProgressPage();
+                //new DailyProgressPage();
             }
         });
         btSave.addActionListener(new ActionListener() {

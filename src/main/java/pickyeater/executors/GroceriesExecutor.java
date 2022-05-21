@@ -1,5 +1,6 @@
 package pickyeater.executors;
 
+import pickyeater.UI.app.groceriespage.GroceriesPage;
 import pickyeater.basics.groceries.Groceries;
 import pickyeater.basics.groceries.GroceriesCheckList;
 import pickyeater.basics.groceries.GroceriesGenerator;
@@ -14,29 +15,19 @@ import java.util.Optional;
 public class GroceriesExecutor {
 
     private final EaterManager eaterManager;
-    private Groceries groceries = null;
     public GroceriesExecutor(EaterManager eaterManager) {
         this.eaterManager = eaterManager;
     }
 
     public boolean isGroceriesAvailable() {
-        if(isGroceriesGenerated()) return true;
         UserManager userManager = eaterManager.getUserManager();
-        Optional<User> userOptional = userManager.getUser();
-        if(userOptional.isEmpty()) throw new RuntimeException("Error in database: User");
-        User user = userOptional.get();
-        Optional<MealPlan> mealPlanOptional = user.getMealPlan();
-        if(mealPlanOptional.isEmpty()) return false;
-        MealPlan mealPlan = mealPlanOptional.get();
-        GroceriesGenerator groceriesGenerator = new PickyGroceriesGenerator();
-        groceries = groceriesGenerator.generate(mealPlan);
-        return true;
-
+        Optional<Groceries> optionalGroceries = userManager.getGroceries();
+        return optionalGroceries.isPresent();
     }
 
     public Optional<Groceries> getGroceries() {
-        if(groceries==null) return Optional.empty();
-        return Optional.of(groceries);
+        UserManager userManager = eaterManager.getUserManager();
+        return userManager.getGroceries();
     }
 
     public void saveGroceries(GroceriesCheckList groceriesCheckList) {
@@ -44,19 +35,11 @@ public class GroceriesExecutor {
         userManager.saveGroceries(groceriesCheckList);
     }
 
-    public boolean isGroceriesGenerated() {
-        UserManager userManager = eaterManager.getUserManager();
-        if(groceries!=null) return true;
-        Optional<Groceries> groceriesOptional = userManager.getGroceries();
-        if(groceriesOptional.isEmpty()){
-            return false;
-        }
-        groceries = groceriesOptional.get();
-        return true;
-    }
-
     public void deleteGroceries() {
         UserManager userManager = eaterManager.getUserManager();
+        Optional<Groceries> groceriesOptional = userManager.getGroceries();
+        if(groceriesOptional.isEmpty()) return;
+        Groceries groceries = groceriesOptional.get();
         userManager.deleteGroceries(groceries);
     }
 }

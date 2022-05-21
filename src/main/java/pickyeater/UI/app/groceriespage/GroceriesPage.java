@@ -1,5 +1,8 @@
 package pickyeater.UI.app.groceriespage;
 
+import GARBAGE.MainPages;
+import pickyeater.UI.app.MainFrame;
+import pickyeater.UI.app.PickyPage;
 import pickyeater.UI.app.groceriespage.utils.WindowCloseListener;
 import pickyeater.UI.leftbuttons.MainButton;
 import pickyeater.UI.leftbuttons.PanelButtonsConverter;
@@ -20,7 +23,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Optional;
 
-public class GroceriesPage extends JFrame{
+public class GroceriesPage extends PickyPage  {
     private JPanel mainPanel;
     private JButton btSettings;
     private JButton btDailyProgress;
@@ -29,13 +32,14 @@ public class GroceriesPage extends JFrame{
     private JButton btFood;
     private JButton btDiet;
     private JLabel binLabel;
-    private JTable tableIngredients;
+    private JTable ingredientsTable;
 
     private GroceriesExecutor groceriesExecutor;
     private GroceriesCheckList groceriesCheckList;
 
 
-    public GroceriesPage(GroceriesExecutor groceriesExecutor) {
+    public GroceriesPage(GroceriesExecutor groceriesExecutor, JFrame parent) {
+        super(parent);
         this.groceriesExecutor = groceriesExecutor;
         binLabel.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
         try {
@@ -45,7 +49,7 @@ public class GroceriesPage extends JFrame{
 
         }
 
-        this.addWindowListener(new WindowCloseListener() {
+        parent.addWindowListener(new WindowCloseListener() {
             @Override
             public void windowClosing(WindowEvent e) {
                 groceriesExecutor.saveGroceries(groceriesCheckList);
@@ -57,11 +61,12 @@ public class GroceriesPage extends JFrame{
                 int result = JOptionPane.showConfirmDialog(binLabel,"Are you sure you want to delete it?","Deleting  groceries",JOptionPane.YES_NO_OPTION);
                 if(result == JOptionPane.YES_OPTION){
                     groceriesExecutor.deleteGroceries();
-                    setVisible(false);
-                    new UnavailableGroceriesPage();
+                    PickyPage page = new UnavailableGroceriesPage(parent);
+                    page.showPage();
                 }
             }
         });
+
 
         btDailyProgress.setBackground(Color.decode("#FFFFFF"));
         btDiet.setBackground(Color.decode("#FFFFFF"));
@@ -70,17 +75,14 @@ public class GroceriesPage extends JFrame{
         btUser.setBackground(Color.decode("#FFFFFF"));
         btSettings.setBackground(Color.decode("#FFFFFF"));
 
-        setContentPane(mainPanel);
-        setSize(677, 507);    //pack();
-        setResizable(false);
-        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE); // Todo save before exiting
-        setVisible(true);
         setNavigationMenuListeners();
         Optional<Groceries> groceriesOptional = groceriesExecutor.getGroceries();
         if(groceriesOptional.isEmpty()) throw new RuntimeException("Error in Groceries Database!");
         groceriesCheckList = groceriesOptional.get().generateCheckList();
-        tableIngredients.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-        draw();
+        ingredientsTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+
+        setLayout(new BorderLayout());
+        add(mainPanel,BorderLayout.CENTER);
     }
 
     private void draw() {
@@ -111,15 +113,16 @@ public class GroceriesPage extends JFrame{
             model.addRow(row);
         }
 
-        tableIngredients.setModel(model);
+        ingredientsTable.setModel(model);
     }
 
     private void setNavigationMenuListeners(){
+
         ActionListener listener = e -> {
             groceriesExecutor.saveGroceries(groceriesCheckList);
             String cmd = e.getActionCommand();
             setVisible(false);
-            new MainButton(new PanelButtonsConverter(cmd).Convert());
+            MainFrame.changePage(new PanelButtonsConverter(cmd).Convert());
         };
         btSettings.addActionListener(listener);
         btDailyProgress.addActionListener(listener);
@@ -128,4 +131,11 @@ public class GroceriesPage extends JFrame{
         btFood.addActionListener(listener);
     }
 
+
+    @Override
+    public void showPage() {
+
+        draw();
+        super.showPage();
+    }
 }

@@ -23,6 +23,7 @@ public class Register2 extends JFrame {
     public Register2(RegisterExecutor registerExecutor) {
         setContentPane(mainPanel);
         setSize(677, 507);    //pack();
+        setLocation(350,150);
         setResizable(false);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setVisible(true);

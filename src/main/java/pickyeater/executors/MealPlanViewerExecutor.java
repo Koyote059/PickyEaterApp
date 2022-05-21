@@ -15,7 +15,6 @@ import java.util.Optional;
 public class MealPlanViewerExecutor {
 
     private final EaterManager eaterManager;
-    private final MealPlan mealPlan;
 
     /**
      * Prende dal database il MealPlan (Se sta) e lo mette in MealPlanViewerExecutor
@@ -23,26 +22,25 @@ public class MealPlanViewerExecutor {
      */
     public MealPlanViewerExecutor(EaterManager eaterManager) {
         this.eaterManager = eaterManager;
-        UserManager userManager = eaterManager.getUserManager();
-        User user = userManager.getUser().get();
-        if(user.getMealPlan().isPresent()){
-            mealPlan = user.getMealPlan().get();
-        } else {
-            mealPlan = null;
-        }
     }
 
 
     public boolean isMealPlanAvailable() {
-        return mealPlan!=null;
+        UserManager userManager = eaterManager.getUserManager();
+        User user = userManager.getUser().get();
+        return user.getMealPlan().isPresent();
     }
 
     public Optional<MealPlan> getMealPlan() {
-        return Optional.ofNullable(mealPlan);
+        UserManager userManager = eaterManager.getUserManager();
+        User user = userManager.getUser().get();
+        return user.getMealPlan();
     }
 
     public Optional<DailyMealPlan> getDailyMealPlan(LocalDate date) {
-        if(mealPlan==null) return Optional.empty();
+        UserManager userManager = eaterManager.getUserManager();
+        User user = userManager.getUser().get();
+        MealPlan mealPlan = user.getMealPlan().get();
         LocalDate beginningDay = mealPlan.getBeginningDay();
         long daysDifference = ChronoUnit.DAYS.between(beginningDay,date);
         if(daysDifference<0) return Optional.empty();

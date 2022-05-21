@@ -65,6 +65,10 @@ public class MealsChooser extends JDialog {
         JButton doneButton = new JButton("Done");
         doneButton.addActionListener( e ->{
             int selectedItem = mealsList.getSelectedIndex();
+            if(selectedItem==-1){
+                dispose();
+                return;
+            }
             Meal meal = searchedMeals.get(selectedItem);
             MealQuantityConverter mealQuantityConverter = new MealQuantityConverter();
             String quantity = mealQuantityTextField.getText();
@@ -107,6 +111,7 @@ public class MealsChooser extends JDialog {
 
     private void showPieChart(){
         int selectedItem = mealsList.getSelectedIndex();
+        if(selectedItem==-1) return;
         Meal selectedMeal = searchedMeals.get(selectedItem);
         Nutrients mealNutrients = selectedMeal.getNutrients();
         PieChart pieChart = new PieChart(300,300);

@@ -4,7 +4,7 @@ package pickyeater.UI;
  * @author Claudio Di Maio
  */
 
-import pickyeater.UI.leftbuttons.MainButton;
+import pickyeater.UI.app.MainFrame;
 import pickyeater.UI.leftbuttons.PanelButtons;
 import pickyeater.UI.registerpage.Register1;
 import pickyeater.UI.registerpage.WelcomePage;
@@ -30,10 +30,15 @@ public class main {
 
         ExecutorProvider.setEaterManager(eaterManager);
 
+
+
         if (eaterManager.getUserManager().getUser().isEmpty()) {  // User Database is empty
             new WelcomePage();
         } else {  // Go to the app
-            new MainButton(PanelButtons.PROGRESS);
+            new MainFrame();
+            MainFrame.changePage(PanelButtons.PROGRESS);
         }
+
+
     }
 }

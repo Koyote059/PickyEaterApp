@@ -1,6 +1,9 @@
 package pickyeater.UI.app.foodpage;
 
+import pickyeater.UI.app.MainFrame;
+import pickyeater.UI.app.PickyPage;
 import pickyeater.UI.leftbuttons.MainButton;
+import pickyeater.UI.leftbuttons.PanelButtons;
 import pickyeater.UI.leftbuttons.PanelButtonsConverter;
 import pickyeater.basics.food.Ingredient;
 import pickyeater.executors.ExecutorProvider;
@@ -13,7 +16,7 @@ import java.awt.*;
 import java.awt.event.*;
 import java.util.Optional;
 
-public class SearchIngredient extends JFrame {
+public class SearchIngredient extends PickyPage {
     private JButton btSettings;
     private JButton btDailyProgress;
     private JButton btUser;
@@ -29,8 +32,10 @@ public class SearchIngredient extends JFrame {
     private JLabel txtProteins;
     private JLabel txtIngredientStats;
     private JPanel panelPieChart;
+    private IngredientSearcherExecutor ingredientSearcherExecutor;
 
-    public SearchIngredient() {
+    public SearchIngredient(JFrame parent) {
+        super(parent);
         btDailyProgress.setBackground(Color.decode("#FFFFFF"));
         btDiet.setBackground(Color.decode("#FFFFFF"));
         btFood.setBackground(Color.decode("#B1EA9D"));
@@ -38,11 +43,10 @@ public class SearchIngredient extends JFrame {
         btUser.setBackground(Color.decode("#FFFFFF"));
         btSettings.setBackground(Color.decode("#FFFFFF"));
 
-        ExecutorProvider executorProvider = new ExecutorProvider();
-        IngredientSearcherExecutor ingredientSearcherExecutor =
-                new IngredientSearcherExecutor(executorProvider.getEaterManager());
+        ingredientSearcherExecutor = ExecutorProvider.getIngredientSearcherExecutor();
 
-        listIngredients.setListData(ingredientSearcherExecutor.getAllIngredientsObj());
+        setLayout(new BorderLayout());
+        add(mainPanel,BorderLayout.CENTER);
 
         /*
         // TODO: ingredient = first ingredient in index
@@ -53,32 +57,8 @@ public class SearchIngredient extends JFrame {
         txtFats.setText(Double.toString(meal.getNutrients().getFats()));
          */
 
-        setContentPane(mainPanel);
-        setSize(677, 507);    //pack();
-        setResizable(false);
-        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        setVisible(true);
-        ActionListener listener = new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                String cmd = e.getActionCommand();
-                setVisible(false);
-                new MainButton(new PanelButtonsConverter(cmd).Convert());
-            }
-        };
-        btSettings.addActionListener(listener);
-        btDailyProgress.addActionListener(listener);
-        btUser.addActionListener(listener);
-        btGroceries.addActionListener(listener);
-        btFood.addActionListener(listener);
-        btDiet.addActionListener(listener);
-        btDone.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                setVisible(false);
-                new FoodPage();
-            }
-        });
+        setNavigationMenuListeners();
+        btDone.addActionListener(e -> MainFrame.changePage(PanelButtons.FOOD));
         listIngredients.addComponentListener(new ComponentAdapter() {
         });
         listIngredients.addMouseListener(new MouseAdapter() {
@@ -102,5 +82,24 @@ public class SearchIngredient extends JFrame {
                 //panelPieChart
             }
         });
+    }
+
+    private void setNavigationMenuListeners(){
+        ActionListener listener = e -> {
+            String cmd = e.getActionCommand();
+            MainFrame.changePage(new PanelButtonsConverter(cmd).Convert());
+        };
+        btSettings.addActionListener(listener);
+        btDailyProgress.addActionListener(listener);
+        btUser.addActionListener(listener);
+        btGroceries.addActionListener(listener);
+        btDiet.addActionListener(listener);
+    }
+
+
+    @Override
+    public void showPage() {
+        listIngredients.setListData(ingredientSearcherExecutor.getAllIngredientsObj());
+        super.showPage();
     }
 }

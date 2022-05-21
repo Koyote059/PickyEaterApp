@@ -67,7 +67,7 @@ public class SQLExecutorManager {
                     "    CONSTRAINT PK_USER PRIMARY KEY (username),\n" +
                     "    CONSTRAINT ILLEGAL_ARGUMENT_SEX CHECK ( sex = 'MALE' OR sex = 'FEMALE'),\n" +
                     "    CONSTRAINT ILLEGAL_ARGUMENT_WEIGHTGOAL CHECK\n" +
-                    "        ( weightGoal = 'LOSE_WEIGHT' OR weightGoal = 'MANTAIN_WEIGHT' OR weightGoal = 'INCREASE_WEIGHT'  ),\n" +
+                    "        ( weightGoal = 'LOSE_WEIGHT' OR weightGoal = 'MAINTAIN_WEIGHT' OR weightGoal = 'INCREASE_WEIGHT'  ),\n" +
                     "    CONSTRAINT ILLEGAL_ARGUMENT_LIFESTYLE CHECK\n" +
                     "        ( lifeStyle = 'SEDENTARY' OR lifeStyle = 'LIGHTLY_ACTIVE' OR lifeStyle = 'ACTIVE' OR lifeStyle = 'VERY_ACTIVE')\n" +
                     ")");

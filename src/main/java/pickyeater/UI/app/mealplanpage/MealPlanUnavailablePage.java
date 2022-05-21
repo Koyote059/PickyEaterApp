@@ -4,22 +4,22 @@ package pickyeater.UI.app.mealplanpage;
  * @author Claudio Di Maio
  */
 
-import pickyeater.UI.leftbuttons.MainButton;
+import pickyeater.UI.app.MainFrame;
+import pickyeater.UI.app.PickyPage;
 import pickyeater.UI.leftbuttons.PanelButtonsConverter;
 import pickyeater.algorithms.MealPlanGenerator;
 import pickyeater.algorithms.RandomMealPlanGenerator;
 import pickyeater.basics.mealplan.MealPlan;
+import pickyeater.basics.mealplan.PickyMealPlan;
 import pickyeater.basics.user.User;
-import pickyeater.basics.user.UserStatus;
 import pickyeater.executors.ExecutorProvider;
 import pickyeater.executors.MealPlanCreatorExecutor;
-import pickyeater.executors.MealPlanViewerExecutor;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
 
-public class MealPlanUnavailablePage extends JFrame {
+public class MealPlanUnavailablePage extends PickyPage {
     private JPanel mainPanel;
     private JButton btSettings;
     private JButton btDailyProgress;
@@ -30,7 +30,8 @@ public class MealPlanUnavailablePage extends JFrame {
     private JButton generateMealPlanButton;
     private JButton automaticGenerateMealPlanButton;
     private MealPlanCreatorExecutor mealPlanCreator;
-    public MealPlanUnavailablePage() {
+    public MealPlanUnavailablePage(JFrame parent) {
+        super(parent);
         this.mealPlanCreator = ExecutorProvider.getMealPlanExecutor();
         btDailyProgress.setBackground(Color.decode("#FFFFFF"));
         btDiet.setBackground(Color.decode("#B1EA9D"));
@@ -39,30 +40,33 @@ public class MealPlanUnavailablePage extends JFrame {
         btUser.setBackground(Color.decode("#FFFFFF"));
         btSettings.setBackground(Color.decode("#FFFFFF"));
 
-        setContentPane(mainPanel);
-        setSize(677, 507);    //pack();
-        setResizable(false);
-        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        setVisible(true);
 
+        setLayout(new BorderLayout());
+        add(mainPanel,BorderLayout.CENTER);
         setNavigationMenuListeners();
 
         generateMealPlanButton.addActionListener(e -> {
-            setVisible(false);
-            new MealPlanGeneratorPage(mealPlanCreator);
+            if(mealPlanCreator.getMeals().size()<5){
+                JOptionPane.showMessageDialog(this,"Unable to create a meal plan.\n Insufficient meals!");
+                return;
+            }
+            PickyPage mealPlanGeneratorPage = new MealPlanGeneratorPage(mealPlanCreator,parent);
+            mealPlanGeneratorPage.showPage();
         });
 
         automaticGenerateMealPlanButton.addActionListener(e -> {
+            if(mealPlanCreator.getMeals().size()<5){
+                JOptionPane.showMessageDialog(this,"Unable to create a meal plan.\n Insufficient meals!");
+                return;
+            }
             MealPlanGenerator mealPlanGenerator = new RandomMealPlanGenerator();
             User user = mealPlanCreator.getUser();
 
             MealPlan mealPlan = mealPlanGenerator.generate(mealPlanCreator.getMeals(),
                                 user.getUserGoal().getRequiredNutrients(),
                     7,4);
-
-
-            setVisible(false);
-            new MealPlanGeneratorPage(mealPlanCreator,mealPlan);
+            PickyPage mealPlanGeneratorPage = new MealPlanGeneratorPage(mealPlanCreator,mealPlan,parent);
+            mealPlanGeneratorPage.showPage();
         });
     }
 
@@ -70,7 +74,7 @@ public class MealPlanUnavailablePage extends JFrame {
         ActionListener listener = e -> {
             String cmd = e.getActionCommand();
             setVisible(false);
-            new MainButton(new PanelButtonsConverter(cmd).Convert());
+            MainFrame.changePage(new PanelButtonsConverter(cmd).Convert());
         };
         btSettings.addActionListener(listener);
         btDailyProgress.addActionListener(listener);

@@ -44,6 +44,7 @@ public class Register1 extends JFrame{
         setContentPane(mainPanel);
         setSize(677, 507);    //pack();
         setResizable(false);
+        setLocation(350,150);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setVisible(true);
 

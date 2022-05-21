@@ -1,6 +1,7 @@
 package pickyeater.UI.app.foodpage;
 
-import pickyeater.UI.leftbuttons.MainButton;
+import pickyeater.UI.app.MainFrame;
+import pickyeater.UI.app.PickyPage;
 import pickyeater.UI.leftbuttons.PanelButtonsConverter;
 import pickyeater.executors.ExecutorProvider;
 import pickyeater.executors.searcher.IngredientSearcherExecutor;
@@ -10,9 +11,9 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.ContainerAdapter;
 
-public class FoodPage extends JFrame {
+public class FoodPage extends PickyPage {
+
     private JPanel mainPanel;
     private JButton btSettings;
     private JButton btDailyProgress;
@@ -27,7 +28,9 @@ public class FoodPage extends JFrame {
     private JButton btAddMeal;
     private JButton btAddIngredient;
 
-    public FoodPage() {
+    public FoodPage(JFrame parent) {
+        super(parent);
+
         btDailyProgress.setBackground(Color.decode("#FFFFFF"));
         btDiet.setBackground(Color.decode("#FFFFFF"));
         btFood.setBackground(Color.decode("#B1EA9D"));
@@ -38,55 +41,52 @@ public class FoodPage extends JFrame {
         listMeals.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         listIngredients.setSelectionMode((ListSelectionModel.SINGLE_SELECTION));
 
-        listIngredients.setListData(new IngredientSearcherExecutor(ExecutorProvider.getEaterManager()).getAllIngredientsObj());
-        listMeals.setListData(new MealSearcherExecutor(ExecutorProvider.getEaterManager()).getAllMealsObj());
 
-        setContentPane(mainPanel);
-        setSize(677, 507);    //pack();
-        setResizable(false);
-        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        setVisible(true);
-        ActionListener listener = new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                String cmd = e.getActionCommand();
-                setVisible(false);
-                new MainButton(new PanelButtonsConverter(cmd).Convert());
-            }
+        btSearchMeal.addActionListener(e -> {
+            PickyPage searchMealPage = new SearchMeal(parent);
+            searchMealPage.showPage();
+        });
+        btAddMeal.addActionListener(e -> {
+            PickyPage createMealPage = new CreateMeal(parent);
+            createMealPage.showPage();
+        });
+        btSearchIngredient.addActionListener(e -> {
+            PickyPage searchIngredientPage = new SearchIngredient(parent);
+            searchIngredientPage.showPage();
+        });
+        btAddIngredient.addActionListener(e -> {
+            PickyPage pickyPage = new CreateIngredient(parent);
+            pickyPage.showPage();
+        });
+        setNavigationMenuListeners();
+
+
+
+        setLayout(new BorderLayout());
+        add(mainPanel,BorderLayout.CENTER);
+    }
+
+    private void setNavigationMenuListeners(){
+        ActionListener listener = e -> {
+            String cmd = e.getActionCommand();
+            MainFrame.changePage(new PanelButtonsConverter(cmd).Convert());
         };
         btSettings.addActionListener(listener);
         btDailyProgress.addActionListener(listener);
         btUser.addActionListener(listener);
         btGroceries.addActionListener(listener);
         btDiet.addActionListener(listener);
+        btSettings.setSize(new Dimension(200,85));
+        btUser.setSize(new Dimension(200,85));
+        btGroceries.setSize(new Dimension(200,85));
+        btFood.setSize(new Dimension(200,85));
+        btDiet.setSize(new Dimension(200,85));
+    }
 
-        btSearchMeal.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                setVisible(false);
-                new SearchMeal();
-            }
-        });
-        btAddMeal.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                setVisible(false);
-                new CreateMeal();
-            }
-        });
-        btSearchIngredient.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                setVisible(false);
-                new SearchIngredient();
-            }
-        });
-        btAddIngredient.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                setVisible(false);
-                new CreateIngredient();
-            }
-        });
+    @Override
+    public void showPage() {
+        listIngredients.setListData(new IngredientSearcherExecutor(ExecutorProvider.getEaterManager()).getAllIngredientsObj());
+        listMeals.setListData(new MealSearcherExecutor(ExecutorProvider.getEaterManager()).getAllMealsObj());
+        super.showPage();
     }
 }
