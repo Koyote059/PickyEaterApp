@@ -5,6 +5,7 @@ package pickyeater.UI.app.userpage;
  */
 
 import com.toedter.calendar.JDateChooser;
+import pickyeater.UI.app.MainFrame;
 import pickyeater.UI.app.PickyPage;
 import pickyeater.UI.leftbuttons.MainButton;
 import pickyeater.UI.leftbuttons.PanelButtons;
@@ -126,6 +127,7 @@ public class UserEditModePage extends PickyPage {
         btSettings.setBackground(Color.decode("#FFFFFF"));
 
         newUserBuilder.setDateOfBirth(new JCalendarToLocalDate().jCalToLocDate(jBirthdayChooser.getDate()));
+
         ActionListener listener = e -> {
             String cmd = e.getActionCommand();
             setVisible(false);
@@ -214,6 +216,21 @@ public class UserEditModePage extends PickyPage {
                 }
             }
         });
+        setNavigationMenuListeners();
+    }
+
+    public void setNavigationMenuListeners(){
+        ActionListener listener = e -> {
+            String cmd = e.getActionCommand();
+            setVisible(false);
+            MainFrame.changePage(new PanelButtonsConverter(cmd).Convert());
+        };
+
+        btSettings.addActionListener(listener);
+        btDailyProgress.addActionListener(listener);
+        btGroceries.addActionListener(listener);
+        btFood.addActionListener(listener);
+        btDiet.addActionListener(listener);
     }
 
     private boolean update(UserBuilder userBuilder) {
