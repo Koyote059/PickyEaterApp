@@ -33,7 +33,9 @@ public class SystemTheme {
 
         UIManager.put("Button.background", Color.decode("#FFFFFF"));
         UIManager.put("ProgressBar.foreground", Color.decode("#B1EA9D"));
-        //UIManager.put("List.background", Color.decode("#B1EA9D"));
+//        UIManager.put("Panel.background", Color.decode("#B1EA9D"));
+//        UIManager.put("List.background", Color.decode("#B1EA9D"));
+//        UIManager.put("Table.background", Color.decode("#B1EA9D"));
 
         setUIFont(new javax.swing.plaf.FontUIResource("Helvetica",Font.BOLD,12));
 

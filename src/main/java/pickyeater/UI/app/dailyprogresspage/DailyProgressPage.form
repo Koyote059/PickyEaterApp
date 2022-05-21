@@ -121,27 +121,9 @@
                     <properties/>
                     <border type="none"/>
                     <children>
-                      <component id="54aba" class="javax.swing.JList" binding="listEatenMeals">
+                      <component id="4efb4" class="javax.swing.JTable" binding="tableEatenMeals">
                         <constraints/>
-                        <properties>
-                          <model>
-                            <item value="a"/>
-                            <item value="b"/>
-                            <item value="c"/>
-                            <item value="d"/>
-                            <item value="e"/>
-                            <item value="f"/>
-                            <item value="g"/>
-                            <item value="h"/>
-                            <item value="u"/>
-                            <item value="k"/>
-                            <item value="a"/>
-                            <item value="a"/>
-                            <item value="a"/>
-                            <item value="a"/>
-                            <item value="w"/>
-                          </model>
-                        </properties>
+                        <properties/>
                       </component>
                     </children>
                   </scrollpane>

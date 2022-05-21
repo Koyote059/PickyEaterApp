@@ -3,6 +3,9 @@ package pickyeater.utils;
 public class StringToNumber {
 
     public float convertFloat(String s){
+        if (s.contains(",")) {
+            s = convertCommaToDot(s);
+        }
         float ris = 0;
         try {
             ris = Float.parseFloat(s);
@@ -13,6 +16,9 @@ public class StringToNumber {
     }
 
     public float convertPositiveFloat(String s){
+        if (s.contains(",")) {
+            s = convertCommaToDot(s);
+        }
         float ris = 0;
         try {
             ris = Float.parseFloat(s);
@@ -26,6 +32,9 @@ public class StringToNumber {
     }
 
     public double convertDouble(String s){
+        if (s.contains(",")) {
+            s = convertCommaToDot(s);
+        }
         double ris = 0;
         try {
             ris = Double.parseDouble(s);
@@ -36,6 +45,9 @@ public class StringToNumber {
     }
 
     public double convertPositiveDouble(String s){
+        if (s.contains(",")) {
+            s = convertCommaToDot(s);
+        }
         double ris = 0;
         try {
             ris = Double.parseDouble(s);
@@ -58,7 +70,7 @@ public class StringToNumber {
         return ris;
     }
 
-    public int convertPositiveInteger(String s){
+    public int convertPositiveInteger(String s) {
         int ris = 0;
         try {
             ris = Integer.parseInt(s);
@@ -69,5 +81,11 @@ public class StringToNumber {
             ris = 0;
         }
         return ris;
+    }
+
+    public String convertCommaToDot(String s){
+        StringBuilder stringBuilder = new StringBuilder(s);
+        stringBuilder.setCharAt(stringBuilder.indexOf(","), '.');
+        return stringBuilder.toString();
     }
 }

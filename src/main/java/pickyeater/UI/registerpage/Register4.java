@@ -18,6 +18,7 @@ import pickyeater.utils.StringToNumber;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.DecimalFormat;
 
 public class Register4 extends JFrame {
     private JPanel mainPanel;
@@ -32,7 +33,8 @@ public class Register4 extends JFrame {
 
     public Register4(RegisterExecutor registerExecutor) {
         setContentPane(mainPanel);
-        pack();
+        setSize(677, 507);    //pack();
+        setResizable(false);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setVisible(true);
 
@@ -101,15 +103,16 @@ public class Register4 extends JFrame {
     }
 
     private void resetNutrients(UserBuilder userBuilder){
+        DecimalFormat df = new DecimalFormat("0.00");
         NutrientsRequirementCalculator nutrientsCalculated = new HarrisBenedictCalculator();
         Nutrients nutrients = nutrientsCalculated.calculate(userBuilder.getHeight(),
                 userBuilder.getWeight(), new AgeCalculator().age(userBuilder.getDateOfBirth()),
                 userBuilder.getSex(), userBuilder.getLifeStyle(),userBuilder.getWeightVariationGoal());
 
-        txtCalories.setText(Double.toString(nutrients.getCalories()));
-        tfProteins.setText(Double.toString(nutrients.getProteins()));
-        tfCarbs.setText(Double.toString(nutrients.getCarbs()));
-        tfFats.setText(Double.toString(nutrients.getFats()));
+        txtCalories.setText(df.format(nutrients.getCalories()));
+        tfProteins.setText(df.format(nutrients.getProteins()));
+        tfCarbs.setText(df.format(nutrients.getCarbs()));
+        tfFats.setText(df.format(nutrients.getFats()));
 
         // save also to newNutrientsTmp
         nutrientsBuilder.setComplexCarbs(new StringToNumber().convertPositiveFloat(tfCarbs.getText()));

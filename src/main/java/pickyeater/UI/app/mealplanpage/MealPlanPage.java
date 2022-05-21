@@ -100,7 +100,8 @@ public class MealPlanPage extends JFrame{
         dailyMealsTable.removeEditor();
         setVisible(true);
         setNavigationMenuListeners();
-        pack();
+        setSize(677, 507);    //pack();
+        setResizable(false);
     }
 
     private void setUpContent(DailyMealPlan dailyMealPlan){

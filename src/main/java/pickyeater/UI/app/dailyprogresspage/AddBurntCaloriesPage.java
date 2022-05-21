@@ -32,7 +32,8 @@ public class AddBurntCaloriesPage extends JFrame {
         btSettings.setBackground(Color.decode("#FFFFFF"));
 
         setContentPane(mainPanel);
-        pack();
+        setSize(677, 507);    //pack();
+        setResizable(false);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setVisible(true);
         ActionListener listener = new ActionListener() {
@@ -63,7 +64,11 @@ public class AddBurntCaloriesPage extends JFrame {
                 float burntCal = new StringToNumber().convertPositiveFloat(tfBurntCalories.getText());
 
                 if (burntCal != 0) {
-                    JOptionPane.showMessageDialog(mainPanel, "Activity name: " + tfActivityName.getText() + "\n" + "Burnt Calories: " + tfBurntCalories.getText());
+                    if (!tfActivityName.getText().isEmpty()) {
+                        JOptionPane.showMessageDialog(mainPanel, "Activity name: " + tfActivityName.getText() + "\n" + "Burnt Calories: " + tfBurntCalories.getText());
+                    } else {
+                        JOptionPane.showMessageDialog(mainPanel,  "Burnt Calories: " + tfBurntCalories.getText());
+                    }
                     ExecutorProvider.getAddBurntCaloriesExecutor().setBurntCalories(burntCal);
                     setVisible(false);
                     new DailyProgressPage();
