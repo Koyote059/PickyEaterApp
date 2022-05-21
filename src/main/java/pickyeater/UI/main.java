@@ -13,11 +13,9 @@ import pickyeater.managers.EaterManager;
 import pickyeater.managers.PickyEaterManager;
 import pickyeater.themes.SystemTheme;
 
-import java.awt.*;
-
 public class main {
     public static void main(String[] args) {
-        new SystemTheme().theme2();
+        new SystemTheme().theme1();
 
         //PickyEatersDatabase pickyEatersDB = new SQLPickyEaterDB("PickyEatersDB.sqlite");
         PickyEatersDatabase pickyEatersDB = new SQLPickyEaterDB("dbDiProva.sqlite");
