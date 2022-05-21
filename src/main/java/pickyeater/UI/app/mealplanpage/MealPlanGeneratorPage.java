@@ -23,8 +23,9 @@ public class MealPlanGeneratorPage extends PickyPage {
     private JPanel mainPanel;
     private JButton doneButton;
     private JButton cancelButton;
-    private JScrollPane scrollPane;
+
     private JPanel topPanel;
+    private JScrollPane scrollPane;
     private MealPlanBuilder mealPlanBuilder;
 
     List<DailyMealPlanColumn> columns = new ArrayList<>();
@@ -78,7 +79,7 @@ public class MealPlanGeneratorPage extends PickyPage {
             revalidate();
         });
         topPanel.add(addTableButton);
-        scrollPane.setViewportView(topPanel);
+        parent.pack();
     }
 
 
@@ -89,4 +90,7 @@ public class MealPlanGeneratorPage extends PickyPage {
     }
 
 
+    private void createUIComponents() {
+        scrollPane = new JScrollPane(topPanel);
+    }
 }

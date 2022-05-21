@@ -21,11 +21,8 @@ public class GroceriesExecutor {
 
     public boolean isGroceriesAvailable() {
         UserManager userManager = eaterManager.getUserManager();
-        Optional<User> userOptional = userManager.getUser();
-        if(userOptional.isEmpty()) throw new RuntimeException("Error in database: User");
-        User user = userOptional.get();
-        Optional<MealPlan> mealPlanOptional = user.getMealPlan();
-        return mealPlanOptional.isPresent();
+        Optional<Groceries> optionalGroceries = userManager.getGroceries();
+        return optionalGroceries.isPresent();
     }
 
     public Optional<Groceries> getGroceries() {

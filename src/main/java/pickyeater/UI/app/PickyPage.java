@@ -16,6 +16,7 @@ public abstract class PickyPage extends JPanel {
         Container container = parent.getContentPane();
         CardLayout layout = (CardLayout) container.getLayout();
         layout.show(container,this.getClass().getName());
+
     }
 
 }
