@@ -42,7 +42,9 @@ public class CreateIngredient extends PickyPage {
 
     public CreateIngredient(JFrame parent) {
         super(parent);
-        add(mainPanel);
+
+        setLayout(new BorderLayout());
+        add(mainPanel,BorderLayout.CENTER);
 
         btDailyProgress.setBackground(Color.decode("#FFFFFF"));
         btDiet.setBackground(Color.decode("#FFFFFF"));

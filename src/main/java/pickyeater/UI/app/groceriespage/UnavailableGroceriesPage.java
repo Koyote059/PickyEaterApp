@@ -25,7 +25,10 @@ public class UnavailableGroceriesPage extends PickyPage {
 
     public UnavailableGroceriesPage(JFrame parent) {
         super(parent);
-        add(mainPanel);
+
+        setLayout(new BorderLayout());
+        add(mainPanel,BorderLayout.CENTER);
+
         if(groceriesExecutor.isGroceriesAvailable()){
             PickyPage groceriesPage = new GroceriesPage(groceriesExecutor,parent);
             groceriesPage.showPage();

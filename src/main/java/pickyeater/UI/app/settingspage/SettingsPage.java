@@ -39,14 +39,16 @@ public class SettingsPage extends PickyPage {
         btResetMeals.setBackground(Color.white);
         btResetIngredients.setForeground(Color.red);
         btResetIngredients.setBackground(Color.white);
-        add(mainPanel);
+
+        setLayout(new BorderLayout());
+        add(mainPanel,BorderLayout.CENTER);
 
         btDeleteUser.addActionListener(e -> {
             int x = JOptionPane.showConfirmDialog(SettingsPage.this.mainPanel, "Are you sure? All your info will be lost forever",
                     "Delete user", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
             if (x == 0){
                 ExecutorProvider.getSettingsExecutor().deleteUser();
-                setVisible(false);
+                parent.dispose();
                 new Register1();
             }
         });

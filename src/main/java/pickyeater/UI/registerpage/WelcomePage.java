@@ -2,10 +2,7 @@ package pickyeater.UI.registerpage;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
+import java.awt.event.*;
 
 public class WelcomePage extends JFrame implements ActionListener {
     private JPanel mainPanel;
@@ -25,6 +22,7 @@ public class WelcomePage extends JFrame implements ActionListener {
 
         setContentPane(mainPanel);
         setSize(677, 507);
+        setLocation(350,150);
         setResizable(true);
         coloredPanel.setBackground(Color.decode("#B1EA9D"));
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
@@ -42,6 +40,7 @@ public class WelcomePage extends JFrame implements ActionListener {
                 new Register1();
             }
         });
+
     }
 
     public void paint(Graphics g){

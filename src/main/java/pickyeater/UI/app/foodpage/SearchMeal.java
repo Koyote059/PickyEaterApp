@@ -42,7 +42,9 @@ public class SearchMeal extends PickyPage {
         btUser.setBackground(Color.decode("#FFFFFF"));
         btSettings.setBackground(Color.decode("#FFFFFF"));
 
-        add(mainPanel);
+
+        setLayout(new BorderLayout());
+        add(mainPanel,BorderLayout.CENTER);
 
         mealSearcherExecutor = ExecutorProvider.getMealSearcherExecutor();
 

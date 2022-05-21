@@ -80,7 +80,9 @@ public class GroceriesPage extends PickyPage  {
         if(groceriesOptional.isEmpty()) throw new RuntimeException("Error in Groceries Database!");
         groceriesCheckList = groceriesOptional.get().generateCheckList();
         ingredientsTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-        add(mainPanel);
+
+        setLayout(new BorderLayout());
+        add(mainPanel,BorderLayout.CENTER);
     }
 
     private void draw() {
@@ -115,6 +117,7 @@ public class GroceriesPage extends PickyPage  {
     }
 
     private void setNavigationMenuListeners(){
+
         ActionListener listener = e -> {
             groceriesExecutor.saveGroceries(groceriesCheckList);
             String cmd = e.getActionCommand();
@@ -131,6 +134,7 @@ public class GroceriesPage extends PickyPage  {
 
     @Override
     public void showPage() {
+
         draw();
         super.showPage();
     }

@@ -40,7 +40,9 @@ public class MealPlanUnavailablePage extends PickyPage {
         btUser.setBackground(Color.decode("#FFFFFF"));
         btSettings.setBackground(Color.decode("#FFFFFF"));
 
-        add(mainPanel);
+
+        setLayout(new BorderLayout());
+        add(mainPanel,BorderLayout.CENTER);
         setNavigationMenuListeners();
 
         generateMealPlanButton.addActionListener(e -> {

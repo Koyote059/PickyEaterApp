@@ -48,8 +48,9 @@ public class MealPlanPage extends PickyPage {
     private LocalDate actualDate;
     public MealPlanPage(JFrame parent) {
         super(parent);
-        add(mainPanel);
 
+        setLayout(new BorderLayout());
+        add(mainPanel,BorderLayout.CENTER);
         binLabel.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
         try {
             BufferedImage binImage = ImageIO.read(new File("res/images/binIcon.png"));

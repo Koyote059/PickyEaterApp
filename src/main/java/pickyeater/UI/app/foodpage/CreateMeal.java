@@ -33,7 +33,9 @@ public class CreateMeal extends PickyPage {
 
     public CreateMeal(JFrame parent) {
         super(parent);
-        add(mainPanel);
+
+        setLayout(new BorderLayout());
+        add(mainPanel,BorderLayout.CENTER);
         btDailyProgress.setBackground(Color.decode("#FFFFFF"));
         btDiet.setBackground(Color.decode("#FFFFFF"));
         btFood.setBackground(Color.decode("#B1EA9D"));

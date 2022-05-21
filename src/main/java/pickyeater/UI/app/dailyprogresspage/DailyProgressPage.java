@@ -14,6 +14,7 @@ import pickyeater.executors.ExecutorProvider;
 import GARBAGE.UserMealsProgressesExecutor;
 
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.ActionListener;
 import java.text.DecimalFormat;
@@ -29,7 +30,7 @@ public class DailyProgressPage extends PickyPage {
     private JButton btDiet;
     private JButton btAddEatenMeals;
     private JButton btAddBurntCalories;
-    private JList listEatenMeals;
+    private JTable tableEatenMeals;
     private JProgressBar bar;
     private JComboBox cbConsumed;
     private JLabel txtBurntCalories;
@@ -40,8 +41,9 @@ public class DailyProgressPage extends PickyPage {
 
     public DailyProgressPage(JFrame parent) {
         super(parent);
-        add(mainPanel);
 
+        setLayout(new BorderLayout());
+        add(mainPanel,BorderLayout.CENTER);
         btDailyProgress.setBackground(Color.decode("#B1EA9D"));
         btDiet.setBackground(Color.decode("#FFFFFF"));
         btFood.setBackground(Color.decode("#FFFFFF"));
@@ -54,7 +56,7 @@ public class DailyProgressPage extends PickyPage {
             Optional<Meal> mealOptional = chooser.getMeal();
             if(mealOptional.isEmpty()) return;
             dailyProgressExecutor.addEatenMeal(mealOptional.get());
-            listEatenMeals.setListData(dailyProgressExecutor.getAllMealsObj());
+            draw();
         });
         btAddBurntCalories.addActionListener(e -> {
             setVisible(false);
@@ -72,6 +74,7 @@ public class DailyProgressPage extends PickyPage {
                 progressBar(dailyProgressExecutor.getEatenFats(), dailyProgressExecutor.getFatsToEat());
             }
         });
+        tableEatenMeals.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         setNavigationMenuListeners();
     }
     private void progressBar(float eaten, float toEat){
@@ -94,6 +97,29 @@ public class DailyProgressPage extends PickyPage {
         btGroceries.addActionListener(listener);
         btFood.addActionListener(listener);
         btDiet.addActionListener(listener);
+        btSettings.setSize(new Dimension(200,85));
+        btUser.setSize(new Dimension(200,85));
+        btGroceries.setSize(new Dimension(200,85));
+        btFood.setSize(new Dimension(200,85));
+        btDiet.setSize(new Dimension(200,85));
+
+    }
+
+    private void draw() {
+        DefaultTableModel model = new DefaultTableModel();
+        model.addColumn("Name");
+        model.addColumn("Quantity");
+
+        DailyProgressExecutor dailyProgressExecutor = ExecutorProvider.getDailyProgressExecutor();
+        for (Meal meal : dailyProgressExecutor.getEatenMeals()) {
+            float ingredientQuantity = meal.getWeight();
+            Object[]  row= new Object[]{
+                    meal.getName(), meal.getWeight()
+            };
+            model.addRow(row);
+        }
+
+        tableEatenMeals.setModel(model);
     }
 
     @Override
@@ -105,7 +131,7 @@ public class DailyProgressPage extends PickyPage {
         cbConsumed.setSelectedIndex(0);
         txtBurntCalories.setText(Integer.toString(dailyProgressExecutor.getBurntCalories()));
         // TODO: Show quantity next to name; if two (or more) have the same name it will sum the quantity
-        listEatenMeals.setListData(dailyProgressExecutor.getAllMealsObj());
+        draw();
         progressBar(dailyProgressExecutor.getEatenCalories(), dailyProgressExecutor.getCaloriesToEat());
         super.showPage();
     }

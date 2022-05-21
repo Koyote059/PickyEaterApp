@@ -97,7 +97,7 @@
                 <properties/>
                 <border type="none"/>
                 <children>
-                  <component id="6deff" class="javax.swing.JTable" binding="tableIngredients">
+                  <component id="6deff" class="javax.swing.JTable" binding="ingredientsTable">
                     <constraints/>
                     <properties/>
                   </component>

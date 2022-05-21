@@ -46,7 +46,9 @@ public class UserPage extends PickyPage {
         User user = userExecutor.getUser();
 
         DecimalFormat df = new DecimalFormat("0.00");
-        add(mainPanel);
+
+        setLayout(new BorderLayout());
+        add(mainPanel,BorderLayout.CENTER);
         // User:
         txtName.setText(user.getName());
         txtSex.setText(user.getUserStatus().getSex().toString());

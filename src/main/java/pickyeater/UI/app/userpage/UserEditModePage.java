@@ -68,6 +68,8 @@ public class UserEditModePage extends PickyPage {
         User user = userEditModeExecutor.getUser();
         UserBuilder newUserBuilder = new PickyUserBuilder();
 
+        setLayout(new BorderLayout());
+        add(mainPanel,BorderLayout.CENTER);
         // FROM LOCALDATE TO DATE
         ZoneId defaultZoneId = ZoneId.systemDefault();
 

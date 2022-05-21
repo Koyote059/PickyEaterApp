@@ -44,7 +44,9 @@ public class SearchIngredient extends PickyPage {
         btSettings.setBackground(Color.decode("#FFFFFF"));
 
         ingredientSearcherExecutor = ExecutorProvider.getIngredientSearcherExecutor();
-        add(mainPanel);
+
+        setLayout(new BorderLayout());
+        add(mainPanel,BorderLayout.CENTER);
 
         /*
         // TODO: ingredient = first ingredient in index

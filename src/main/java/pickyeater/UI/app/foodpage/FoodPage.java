@@ -59,7 +59,11 @@ public class FoodPage extends PickyPage {
             pickyPage.showPage();
         });
         setNavigationMenuListeners();
-        add(mainPanel);
+
+
+
+        setLayout(new BorderLayout());
+        add(mainPanel,BorderLayout.CENTER);
     }
 
     private void setNavigationMenuListeners(){
@@ -72,6 +76,11 @@ public class FoodPage extends PickyPage {
         btUser.addActionListener(listener);
         btGroceries.addActionListener(listener);
         btDiet.addActionListener(listener);
+        btSettings.setSize(new Dimension(200,85));
+        btUser.setSize(new Dimension(200,85));
+        btGroceries.setSize(new Dimension(200,85));
+        btFood.setSize(new Dimension(200,85));
+        btDiet.setSize(new Dimension(200,85));
     }
 
     @Override

@@ -44,7 +44,9 @@ public class MealPlanGeneratorPage extends PickyPage {
 
     public MealPlanGeneratorPage(MealPlanCreatorExecutor mealPlanCreator,JFrame parent) {
         super(parent);
-        add(mainPanel);
+
+        setLayout(new BorderLayout());
+        add(mainPanel,BorderLayout.CENTER);
         this.mealPlanBuilder = mealPlanCreator.getMealPlanBuilder();
         doneButton.addActionListener( e -> {
             for (DailyMealPlanColumn column : columns) {
