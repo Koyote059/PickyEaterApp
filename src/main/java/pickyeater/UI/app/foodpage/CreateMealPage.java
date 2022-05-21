@@ -2,21 +2,27 @@ package pickyeater.UI.app.foodpage;
 
 import pickyeater.UI.app.MainFrame;
 import pickyeater.UI.app.PickyPage;
-import pickyeater.UI.leftbuttons.MainButton;
 import pickyeater.UI.leftbuttons.PanelButtons;
 import pickyeater.UI.leftbuttons.PanelButtonsConverter;
+import pickyeater.basics.food.Ingredient;
+import pickyeater.builders.MealBuilder;
+import pickyeater.builders.PickyMealBuilder;
 import pickyeater.executors.ExecutorProvider;
+import pickyeater.executors.creators.CreateMealExecutor;
 import pickyeater.executors.searcher.IngredientSearcherExecutor;
 import pickyeater.executors.searcher.MealSearcherExecutor;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.event.*;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 
-public class CreateMeal extends PickyPage {
+public class CreateMealPage extends PickyPage {
     private final MealSearcherExecutor mealSearcherExecutor;
     private final IngredientSearcherExecutor ingredientSearcherExecutor;
+    private final CreateMealExecutor createMealExecutor;
     private JPanel mainPanel;
     private JButton btSettings;
     private JButton btDailyProgress;
@@ -30,8 +36,9 @@ public class CreateMeal extends PickyPage {
     private JButton btAddIngredient;
     private JTextField tfName;
     private JList listIngredients;
+    private JList listSelectedIngredients;
 
-    public CreateMeal(JFrame parent) {
+    public CreateMealPage(JFrame parent) {
         super(parent);
 
         setLayout(new BorderLayout());
@@ -43,17 +50,38 @@ public class CreateMeal extends PickyPage {
         btUser.setBackground(Color.decode("#FFFFFF"));
         btSettings.setBackground(Color.decode("#FFFFFF"));
 
-
         ingredientSearcherExecutor = ExecutorProvider.getIngredientSearcherExecutor();
         mealSearcherExecutor = ExecutorProvider.getMealSearcherExecutor();
+        createMealExecutor = ExecutorProvider.getCreateMealExecutor();
 
+        Set<Ingredient> ingredientSelectedSet = new HashSet<>();
 
         setNavigationMenuListeners();
+
+        btSave.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                MealBuilder meal = new PickyMealBuilder();
+
+                meal.setName(tfName.getText());
+                createMealExecutor.addIngredients(meal, ingredientSelectedSet);
+
+                createMealExecutor.saveMeal(meal.build());
+                MainFrame.changePage(PanelButtons.FOOD);
+            }
+        });
         btCancel.addActionListener(e -> MainFrame.changePage(PanelButtons.FOOD));
-        btSave.addActionListener(e -> MainFrame.changePage(PanelButtons.FOOD));
         btAddIngredient.addActionListener(e -> {
-            PickyPage createIngredientPage = new CreateIngredient(parent);
+            PickyPage createIngredientPage = new CreateIngredientPage(parent);
             createIngredientPage.showPage();
+        });
+        listIngredients.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                super.mouseClicked(e);
+                createMealExecutor.appendToSet(ingredientSelectedSet, listIngredients.getSelectedValue().toString());
+                listSelectedIngredients.setListData(createMealExecutor.getAllSelectedIngredientsObj(ingredientSelectedSet));
+            }
         });
     }
 

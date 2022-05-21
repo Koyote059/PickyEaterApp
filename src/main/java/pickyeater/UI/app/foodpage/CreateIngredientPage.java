@@ -2,7 +2,6 @@ package pickyeater.UI.app.foodpage;
 
 import pickyeater.UI.app.MainFrame;
 import pickyeater.UI.app.PickyPage;
-import pickyeater.UI.leftbuttons.MainButton;
 import pickyeater.UI.leftbuttons.PanelButtons;
 import pickyeater.UI.leftbuttons.PanelButtonsConverter;
 import pickyeater.basics.food.QuantityType;
@@ -13,10 +12,9 @@ import pickyeater.executors.searcher.IngredientSearcherExecutor;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class CreateIngredient extends PickyPage {
+public class CreateIngredientPage extends PickyPage {
 
     private JPanel mainPanel;
     private JButton btSettings;
@@ -40,7 +38,7 @@ public class CreateIngredient extends PickyPage {
     private QuantityType quantityType;
     private IngredientSearcherExecutor ingredientSearcherExecutor;
 
-    public CreateIngredient(JFrame parent) {
+    public CreateIngredientPage(JFrame parent) {
         super(parent);
 
         setLayout(new BorderLayout());
@@ -71,7 +69,7 @@ public class CreateIngredient extends PickyPage {
 
             createIngredientExecutor.saveIngredient(ingredientBuilder.build());
 
-            PickyPage createIngredientPage = new CreateIngredient(parent);
+            PickyPage createIngredientPage = new CreateIngredientPage(parent);
             createIngredientPage.showPage();
         });
         cbQuantityType.addActionListener(e -> {

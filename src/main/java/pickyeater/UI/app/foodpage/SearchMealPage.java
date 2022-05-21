@@ -2,7 +2,6 @@ package pickyeater.UI.app.foodpage;
 
 import pickyeater.UI.app.MainFrame;
 import pickyeater.UI.app.PickyPage;
-import pickyeater.UI.leftbuttons.MainButton;
 import pickyeater.UI.leftbuttons.PanelButtons;
 import pickyeater.UI.leftbuttons.PanelButtonsConverter;
 import pickyeater.basics.food.Meal;
@@ -15,7 +14,7 @@ import java.awt.event.*;
 import java.text.DecimalFormat;
 import java.util.Optional;
 
-public class SearchMeal extends PickyPage {
+public class SearchMealPage extends PickyPage {
     private final MealSearcherExecutor mealSearcherExecutor;
     private JButton btSettings;
     private JButton btDailyProgress;
@@ -33,7 +32,7 @@ public class SearchMeal extends PickyPage {
     private JLabel txtMealStats;
     private JPanel panelPieChart;
 
-    public SearchMeal(JFrame parent) {
+    public SearchMealPage(JFrame parent) {
         super(parent);
         btDailyProgress.setBackground(Color.decode("#FFFFFF"));
         btDiet.setBackground(Color.decode("#FFFFFF"));

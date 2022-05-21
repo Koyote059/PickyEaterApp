@@ -10,7 +10,6 @@ import pickyeater.executors.searcher.MealSearcherExecutor;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -65,19 +64,19 @@ public class FoodPage extends PickyPage {
 
 
         btSearchMeal.addActionListener(e -> {
-            PickyPage searchMealPage = new SearchMeal(parent);
+            PickyPage searchMealPage = new SearchMealPage(parent);
             searchMealPage.showPage();
         });
         btAddMeal.addActionListener(e -> {
-            PickyPage createMealPage = new CreateMeal(parent);
+            PickyPage createMealPage = new CreateMealPage(parent);
             createMealPage.showPage();
         });
         btSearchIngredient.addActionListener(e -> {
-            PickyPage searchIngredientPage = new SearchIngredient(parent);
+            PickyPage searchIngredientPage = new SearchIngredientPage(parent);
             searchIngredientPage.showPage();
         });
         btAddIngredient.addActionListener(e -> {
-            PickyPage pickyPage = new CreateIngredient(parent);
+            PickyPage pickyPage = new CreateIngredientPage(parent);
             pickyPage.showPage();
         });
         setNavigationMenuListeners();
