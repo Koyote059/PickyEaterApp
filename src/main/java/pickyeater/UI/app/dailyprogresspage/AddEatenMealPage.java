@@ -44,9 +44,11 @@ public class AddEatenMealPage extends JFrame {
 
         listMeals.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         listMeals.setListData(mealSearcherExecutor.getAllMealsObj());
+        listMeals.setToolTipText("Click twice to check ingredients");
 
         setContentPane(mainPanel);
-        pack();
+        setSize(677, 507);    //pack();
+        setResizable(false);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setVisible(true);
         ActionListener listener = e -> {
@@ -96,7 +98,6 @@ public class AddEatenMealPage extends JFrame {
                     System.out.println(currentMeal);    // TODO -> ??
                     JOptionPane.showMessageDialog(mainPanel, "Eaten meal:\n" + currentMeal);
                 }
-
             }
         });
     }
