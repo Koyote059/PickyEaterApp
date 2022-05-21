@@ -79,6 +79,5 @@ public class MealPlanUnavailablePage extends PickyPage {
         btUser.addActionListener(listener);
         btGroceries.addActionListener(listener);
         btFood.addActionListener(listener);
-        btDiet.addActionListener(listener);
     }
 }
