@@ -6,7 +6,6 @@ package pickyeater.UI;
 
 import pickyeater.UI.app.MainFrame;
 import pickyeater.UI.leftbuttons.PanelButtons;
-import pickyeater.UI.registerpage.Register1;
 import pickyeater.UI.registerpage.WelcomePage;
 import pickyeater.database.*;
 import pickyeater.executors.ExecutorProvider;
@@ -21,7 +20,7 @@ public class main {
         new SystemTheme().theme2();
 
         //PickyEatersDatabase pickyEatersDB = new SQLPickyEaterDB("PickyEatersDB.sqlite");
-        PickyEatersDatabase pickyEatersDB = new SQLPickyEaterDB("dbDiProva3.sqlite");
+        PickyEatersDatabase pickyEatersDB = new SQLPickyEaterDB("dbDiProva.sqlite");
 
         EaterManager eaterManager = new PickyEaterManager(
                 pickyEatersDB.getUserDatabase(),
