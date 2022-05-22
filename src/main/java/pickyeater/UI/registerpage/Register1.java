@@ -36,6 +36,12 @@ public class Register1 extends JFrame{
     private JTextField tfBodyfat;
     private JPanel birthdayPanel;
     private JDateChooser jBirthdayChooser;
+    private JLabel txtName;
+    private JLabel txtHeight;
+    private JLabel txtWeight;
+    private JLabel txtBirthday;
+    private JLabel txtSex;
+    private JLabel txtBodyfat;
     private UserBuilder userBuilder;
 
     public Register1() {
@@ -47,6 +53,16 @@ public class Register1 extends JFrame{
         setLocation(350,150);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setVisible(true);
+
+        /*
+        Font font = new Font("Helvetica", Font.PLAIN, 25);
+        txtName.setFont(font);
+        txtHeight.setFont(font);
+        txtWeight.setFont(font);
+        txtBirthday.setFont(font);
+        txtSex.setFont(font);
+        txtBodyfat.setFont(font);
+         */
 
         btMale.setBackground(Color.decode("#FFFFFF"));
         btFemale.setBackground(Color.decode("#FFFFFF"));

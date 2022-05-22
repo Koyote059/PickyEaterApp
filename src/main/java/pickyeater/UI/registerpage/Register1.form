@@ -16,7 +16,7 @@
         <properties/>
         <border type="none"/>
         <children>
-          <component id="793b9" class="javax.swing.JLabel">
+          <component id="793b9" class="javax.swing.JLabel" binding="txtName">
             <constraints>
               <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
             </constraints>
@@ -24,7 +24,7 @@
               <text value="Name:"/>
             </properties>
           </component>
-          <component id="d7b58" class="javax.swing.JLabel">
+          <component id="d7b58" class="javax.swing.JLabel" binding="txtHeight">
             <constraints>
               <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
             </constraints>
@@ -32,7 +32,7 @@
               <text value="Height"/>
             </properties>
           </component>
-          <component id="96ec9" class="javax.swing.JLabel">
+          <component id="96ec9" class="javax.swing.JLabel" binding="txtBirthday">
             <constraints>
               <grid row="3" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
             </constraints>
@@ -40,7 +40,7 @@
               <text value="Birthday"/>
             </properties>
           </component>
-          <component id="cc34f" class="javax.swing.JLabel">
+          <component id="cc34f" class="javax.swing.JLabel" binding="txtSex">
             <constraints>
               <grid row="4" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
             </constraints>
@@ -48,7 +48,7 @@
               <text value="Sex"/>
             </properties>
           </component>
-          <component id="f66bc" class="javax.swing.JLabel">
+          <component id="f66bc" class="javax.swing.JLabel" binding="txtBodyfat">
             <constraints>
               <grid row="5" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
             </constraints>
@@ -66,7 +66,7 @@
             <children>
               <component id="e0dd2" class="javax.swing.JButton" binding="btMale">
                 <constraints>
-                  <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                  <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
                 </constraints>
                 <properties>
                   <text value="Male"/>
@@ -74,7 +74,7 @@
               </component>
               <component id="53abe" class="javax.swing.JButton" binding="btFemale">
                 <constraints>
-                  <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                  <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
                 </constraints>
                 <properties>
                   <text value="Female"/>
@@ -110,7 +110,7 @@
               <text value="cm"/>
             </properties>
           </component>
-          <component id="29074" class="javax.swing.JLabel">
+          <component id="29074" class="javax.swing.JLabel" binding="txtWeight">
             <constraints>
               <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
             </constraints>
@@ -136,7 +136,7 @@
             <children>
               <component id="64523" class="javax.swing.JTextField" binding="tfWeight">
                 <constraints>
-                  <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
+                  <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="3" indent="0" use-parent-layout="false">
                     <preferred-size width="150" height="-1"/>
                   </grid>
                 </constraints>
@@ -156,7 +156,7 @@
             <children>
               <component id="745fd" class="javax.swing.JTextField" binding="tfHeight">
                 <constraints>
-                  <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
+                  <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="3" indent="0" use-parent-layout="false">
                     <preferred-size width="150" height="-1"/>
                   </grid>
                 </constraints>
@@ -176,7 +176,7 @@
             <children>
               <component id="ff227" class="javax.swing.JTextField" binding="tfName">
                 <constraints>
-                  <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
+                  <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="3" indent="0" use-parent-layout="false">
                     <preferred-size width="150" height="-1"/>
                   </grid>
                 </constraints>
@@ -194,7 +194,7 @@
             <children>
               <component id="d8f63" class="javax.swing.JTextField" binding="tfBodyfat">
                 <constraints>
-                  <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
+                  <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="3" indent="0" use-parent-layout="false">
                     <preferred-size width="150" height="-1"/>
                   </grid>
                 </constraints>
@@ -208,7 +208,7 @@
       </grid>
       <component id="dd43c" class="javax.swing.JButton" binding="btContinue">
         <constraints>
-          <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+          <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
           <text value="Continue"/>

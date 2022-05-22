@@ -31,7 +31,7 @@ public class MainFrame extends JFrame {
         pages.put(MealPlanPage.class.getName(),new MealPlanPage(this));
         pages.put(UserPage.class.getName(),new UserPage(this));
         pages.put(SettingsPage.class.getName(),new SettingsPage(this));
-        setLocation(350,150);
+        //setLocation(350,150);
         changePage(PanelButtons.PROGRESS);
         setVisible(true);
         instance = this;

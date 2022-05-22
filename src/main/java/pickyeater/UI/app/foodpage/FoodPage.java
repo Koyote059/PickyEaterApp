@@ -7,10 +7,13 @@ import pickyeater.executors.ExecutorProvider;
 import pickyeater.executors.searcher.IngredientSearcherExecutor;
 import pickyeater.executors.searcher.MealSearcherExecutor;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 
 public class FoodPage extends PickyPage {
 
@@ -38,24 +41,42 @@ public class FoodPage extends PickyPage {
         btUser.setBackground(Color.decode("#FFFFFF"));
         btSettings.setBackground(Color.decode("#FFFFFF"));
 
+//        btSearchMeal.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+//        btSearchIngredient.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+        try {
+            BufferedImage binImage = ImageIO.read(new File("res/images/search1B.png"));
+            btSearchMeal.setIcon(new ImageIcon(binImage.getScaledInstance(30,30,Image.SCALE_SMOOTH)));
+            btSearchIngredient.setIcon(new ImageIcon(binImage.getScaledInstance(30,30,Image.SCALE_SMOOTH)));
+        } catch (IOException | NullPointerException ignored) {
+        }
+
+        //        btAddMeal.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+        //        btAddIngredient.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+        try {
+            BufferedImage binImage = ImageIO.read(new File("res/images/addB.png"));
+            btAddMeal.setIcon(new ImageIcon(binImage.getScaledInstance(30,30,Image.SCALE_SMOOTH)));
+            btAddIngredient.setIcon(new ImageIcon(binImage.getScaledInstance(30,30,Image.SCALE_SMOOTH)));
+        } catch (IOException | NullPointerException ignored) {
+        }
+
         listMeals.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         listIngredients.setSelectionMode((ListSelectionModel.SINGLE_SELECTION));
 
 
         btSearchMeal.addActionListener(e -> {
-            PickyPage searchMealPage = new SearchMeal(parent);
+            PickyPage searchMealPage = new SearchMealPage(parent);
             searchMealPage.showPage();
         });
         btAddMeal.addActionListener(e -> {
-            PickyPage createMealPage = new CreateMeal(parent);
+            PickyPage createMealPage = new CreateMealPage(parent);
             createMealPage.showPage();
         });
         btSearchIngredient.addActionListener(e -> {
-            PickyPage searchIngredientPage = new SearchIngredient(parent);
+            PickyPage searchIngredientPage = new SearchIngredientPage(parent);
             searchIngredientPage.showPage();
         });
         btAddIngredient.addActionListener(e -> {
-            PickyPage pickyPage = new CreateIngredient(parent);
+            PickyPage pickyPage = new CreateIngredientPage(parent);
             pickyPage.showPage();
         });
         setNavigationMenuListeners();

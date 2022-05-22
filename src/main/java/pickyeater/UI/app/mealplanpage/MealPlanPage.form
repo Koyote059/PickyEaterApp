@@ -97,13 +97,13 @@
                   </component>
                 </children>
               </scrollpane>
-              <component id="d1624" class="javax.swing.JLabel" binding="dayLabel">
+              <component id="d1624" class="javax.swing.JLabel" binding="txtDay">
                 <constraints>
                   <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
                 </constraints>
                 <properties>
                   <labelFor value="e4ac0"/>
-                  <text value=""/>
+                  <text value="DAY"/>
                 </properties>
               </component>
               <component id="5a0b1" class="javax.swing.JButton" binding="previousButton" default-binding="true">
@@ -130,12 +130,12 @@
                   <text value="Today's"/>
                 </properties>
               </component>
-              <component id="346be" class="javax.swing.JLabel" binding="binLabel">
+              <component id="346be" class="javax.swing.JLabel" binding="txtBin">
                 <constraints>
                   <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="4" fill="0" indent="0" use-parent-layout="false"/>
                 </constraints>
                 <properties>
-                  <text value=""/>
+                  <text value="BIN"/>
                 </properties>
               </component>
             </children>

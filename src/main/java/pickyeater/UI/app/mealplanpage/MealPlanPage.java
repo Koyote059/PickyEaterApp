@@ -38,11 +38,11 @@ public class MealPlanPage extends PickyPage {
     private JButton btFood;
     private JButton btDiet;
     private JButton previousButton;
-    private JLabel dayLabel;
+    private JLabel txtDay;
     private JButton nextButton;
     private JButton todaysButton;
     private JTable dailyMealsTable;
-    private JLabel binLabel;
+    private JLabel txtBin;
     private final MealPlanViewerExecutor executor;
 
     private LocalDate actualDate;
@@ -51,18 +51,19 @@ public class MealPlanPage extends PickyPage {
 
         setLayout(new BorderLayout());
         add(mainPanel,BorderLayout.CENTER);
-        binLabel.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+        txtBin.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
         try {
             BufferedImage binImage = ImageIO.read(new File("res/images/binIcon.png"));
-            binLabel.setIcon(new ImageIcon(binImage.getScaledInstance(20,20,Image.SCALE_SMOOTH)));
+            txtBin.setIcon(new ImageIcon(binImage.getScaledInstance(40,40,Image.SCALE_SMOOTH)));
+            txtBin.setText("");
         } catch (IOException | NullPointerException ignored) {
-
         }
 
-        binLabel.addMouseListener(new MouseClickListener() {
+        txtBin.addMouseListener(new MouseClickListener() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                int result = JOptionPane.showConfirmDialog(binLabel,"Are you sure you want to delete it?","Deleting  groceries",JOptionPane.YES_NO_OPTION);
+                int result = JOptionPane.showConfirmDialog(mainPanel,"Are you sure you want to delete it?","Deleting  " +
+                        "groceries",JOptionPane.YES_NO_OPTION);
                 if(result == JOptionPane.YES_OPTION){
                     executor.deleteMealPlan();
                     PickyPage mealPlanUnavailablePage = new MealPlanUnavailablePage(parent);
@@ -101,7 +102,7 @@ public class MealPlanPage extends PickyPage {
     }
 
     private void setUpContent(DailyMealPlan dailyMealPlan){
-        dayLabel.setText(actualDate.format(DateTimeFormatter.ofPattern("dd-MMM-yyyy")));
+        txtDay.setText(actualDate.format(DateTimeFormatter.ofPattern("dd-MMM-yyyy")));
         List<Meal> meals = dailyMealPlan.getMeals();
         DefaultTableModel tableModel = (DefaultTableModel) dailyMealsTable.getModel();
         tableModel.setRowCount(0);

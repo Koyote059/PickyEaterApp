@@ -2,7 +2,6 @@ package pickyeater.UI.app.foodpage;
 
 import pickyeater.UI.app.MainFrame;
 import pickyeater.UI.app.PickyPage;
-import pickyeater.UI.leftbuttons.MainButton;
 import pickyeater.UI.leftbuttons.PanelButtons;
 import pickyeater.UI.leftbuttons.PanelButtonsConverter;
 import pickyeater.basics.food.Ingredient;
@@ -16,7 +15,7 @@ import java.awt.*;
 import java.awt.event.*;
 import java.util.Optional;
 
-public class SearchIngredient extends PickyPage {
+public class SearchIngredientPage extends PickyPage {
     private JButton btSettings;
     private JButton btDailyProgress;
     private JButton btUser;
@@ -34,7 +33,7 @@ public class SearchIngredient extends PickyPage {
     private JPanel panelPieChart;
     private IngredientSearcherExecutor ingredientSearcherExecutor;
 
-    public SearchIngredient(JFrame parent) {
+    public SearchIngredientPage(JFrame parent) {
         super(parent);
         btDailyProgress.setBackground(Color.decode("#FFFFFF"));
         btDiet.setBackground(Color.decode("#FFFFFF"));
