@@ -74,7 +74,6 @@ public class UserEditModePage extends PickyPage {
         // FROM LOCALDATE TO DATE
         ZoneId defaultZoneId = ZoneId.systemDefault();
 
-        //TODO: Fix DecimalFormat (from 0,00 to 0.00)
         DecimalFormat df = new DecimalFormat("0.000");
 
         // User:
@@ -329,8 +328,6 @@ public class UserEditModePage extends PickyPage {
                 userBuilder.getSex(), userBuilder.getLifeStyle(),userBuilder.getWeightVariationGoal());
 
         DecimalFormat df = new DecimalFormat("0.000");
-
-        // TODO: FIX THAT DecimalFormat df RETURNS 0,00 INSTEAD OF 0.00
 
         txtCalories.setText(df.format(nutrients.getCalories()));
         tfProteins.setText(df.format(nutrients.getProteins()));

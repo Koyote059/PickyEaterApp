@@ -130,7 +130,6 @@ public class DailyProgressPage extends PickyPage {
         cbConsumed.insertItemAt("Fats: " + dailyProgressExecutor.getEatenFats() + "/" + dailyProgressExecutor.getFatsToEat(), 3);
         cbConsumed.setSelectedIndex(0);
         txtBurntCalories.setText(Integer.toString(dailyProgressExecutor.getBurntCalories()));
-        // TODO: Show quantity next to name; if two (or more) have the same name it will sum the quantity
         draw();
         progressBar(dailyProgressExecutor.getEatenCalories(), dailyProgressExecutor.getCaloriesToEat());
         super.showPage();

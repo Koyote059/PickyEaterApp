@@ -20,7 +20,6 @@ public class AddEatenMealExecutor {
     public void addEatenMeal(Meal eatenMeal){
         UserManager userManager = eaterManager.getUserManager();
         dailyProgresses.addEatenMeal(eatenMeal);
-        // TODO: FIX MASSIVE ERROR
         userManager.saveUser(userManager.getUser().get());
     }
 
