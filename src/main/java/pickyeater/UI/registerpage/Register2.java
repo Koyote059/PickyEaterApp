@@ -11,14 +11,12 @@ import java.awt.*;
 import java.awt.event.*;
 
 public class Register2 extends JFrame {
-    private JPanel panel1;
     private JButton btSedentary;
     private JButton btVeryActive;
     private JButton btSlightlyActive;
     private JButton btActive;
     private JPanel mainPanel;
     private JButton btBack;
-    private JPanel buttonPanel;
 
     public Register2(RegisterExecutor registerExecutor) {
         setContentPane(mainPanel);
@@ -33,44 +31,29 @@ public class Register2 extends JFrame {
         btActive.setBackground(Color.decode("#FFFFFF"));
         btVeryActive.setBackground(Color.decode("#FFFFFF"));
 
-        btSedentary.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent actionEvent) {
-                registerExecutor.getUserBuilder().setLifeStyle(LifeStyle.SEDENTARY);
-                next(registerExecutor);
-            }
+        btSedentary.addActionListener(actionEvent -> {
+            registerExecutor.getUserBuilder().setLifeStyle(LifeStyle.SEDENTARY);
+            next(registerExecutor);
         });
-        btSlightlyActive.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent actionEvent) {
-                registerExecutor.getUserBuilder().setLifeStyle(LifeStyle.LIGHTLY_ACTIVE);
+        btSlightlyActive.addActionListener(actionEvent -> {
+            registerExecutor.getUserBuilder().setLifeStyle(LifeStyle.LIGHTLY_ACTIVE);
 
-                next(registerExecutor);
-            }
+            next(registerExecutor);
         });
-        btActive.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent actionEvent) {
-                registerExecutor.getUserBuilder().setLifeStyle(LifeStyle.ACTIVE);
+        btActive.addActionListener(actionEvent -> {
+            registerExecutor.getUserBuilder().setLifeStyle(LifeStyle.ACTIVE);
 
-                next(registerExecutor);
-            }
+            next(registerExecutor);
         });
-        btVeryActive.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent actionEvent) {
-                registerExecutor.getUserBuilder().setLifeStyle(LifeStyle.VERY_ACTIVE);
+        btVeryActive.addActionListener(actionEvent -> {
+            registerExecutor.getUserBuilder().setLifeStyle(LifeStyle.VERY_ACTIVE);
 
-                next(registerExecutor);
-            }
+            next(registerExecutor);
         });
     btBack.addComponentListener(new ComponentAdapter() { } );
-        btBack.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent actionEvent) {
-                setVisible(false);
-                new Register1();
-            }
+        btBack.addActionListener(actionEvent -> {
+            setVisible(false);
+            new Register1();
         });
         btSedentary.addMouseListener(new MouseAdapter() {
             @Override

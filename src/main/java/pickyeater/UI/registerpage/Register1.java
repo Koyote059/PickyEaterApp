@@ -16,13 +16,7 @@ import pickyeater.utils.StringToNumber;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.beans.PropertyChangeEvent;
-import java.beans.PropertyChangeListener;
 import java.time.LocalDate;
-
-import static java.lang.Integer.parseInt;
 
 public class Register1 extends JFrame{
     private JPanel mainPanel;
@@ -34,15 +28,8 @@ public class Register1 extends JFrame{
     private JTextField tfWeight;
     private JTextField tfHeight;
     private JTextField tfBodyfat;
-    private JPanel birthdayPanel;
     private JDateChooser jBirthdayChooser;
-    private JLabel txtName;
-    private JLabel txtHeight;
-    private JLabel txtWeight;
-    private JLabel txtBirthday;
-    private JLabel txtSex;
-    private JLabel txtBodyfat;
-    private UserBuilder userBuilder;
+    private final UserBuilder userBuilder;
 
     public Register1() {
         RegisterExecutor registerExecutor = ExecutorProvider.getRegisterExecutor();
@@ -54,107 +41,85 @@ public class Register1 extends JFrame{
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setVisible(true);
 
-        /*
-        Font font = new Font("Helvetica", Font.PLAIN, 25);
-        txtName.setFont(font);
-        txtHeight.setFont(font);
-        txtWeight.setFont(font);
-        txtBirthday.setFont(font);
-        txtSex.setFont(font);
-        txtBodyfat.setFont(font);
-         */
-
         btMale.setBackground(Color.decode("#FFFFFF"));
         btFemale.setBackground(Color.decode("#FFFFFF"));
 
         // Sex
-        btMale.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent actionEvent) {
-                btMale.setBackground(Color.decode("#B1EA9D"));
-                btFemale.setBackground(Color.decode("#FFFFFF"));
-                userBuilder.setSex(Sex.MALE);
-            }
+        btMale.addActionListener(actionEvent -> {
+            btMale.setBackground(Color.decode("#B1EA9D"));
+            btFemale.setBackground(Color.decode("#FFFFFF"));
+            userBuilder.setSex(Sex.MALE);
         });
-        btFemale.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent actionEvent) {
-                btMale.setBackground(Color.decode("#FFFFFF"));
-                btFemale.setBackground(Color.decode("#B1EA9D"));
-                userBuilder.setSex(Sex.FEMALE);
-            }
+        btFemale.addActionListener(actionEvent -> {
+            btMale.setBackground(Color.decode("#FFFFFF"));
+            btFemale.setBackground(Color.decode("#B1EA9D"));
+            userBuilder.setSex(Sex.FEMALE);
         });
 
         // Birthday
-        jBirthdayChooser.addPropertyChangeListener(new PropertyChangeListener() {
-            @Override
-            public void propertyChange(PropertyChangeEvent propertyChangeEvent) {
+        jBirthdayChooser.addPropertyChangeListener(propertyChangeEvent -> {
 
-                userBuilder.setDateOfBirth(new JCalendarToLocalDate().jCalToLocDate(jBirthdayChooser.getDate()));
+            userBuilder.setDateOfBirth(new JCalendarToLocalDate().jCalToLocDate(jBirthdayChooser.getDate()));
 
-                if (LocalDate.now().compareTo(userBuilder.getDateOfBirth()) <= 0){   //TODO: If a person is older than 150 years old -> null
-                    userBuilder.setDateOfBirth(null);
-                }
+            if (LocalDate.now().compareTo(userBuilder.getDateOfBirth()) <= 0){   //TODO: If a person is older than 150 years old -> null
+                userBuilder.setDateOfBirth(null);
             }
         });
-        btContinue.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent actionEvent) {
-                // Name
-                if (!tfName.getText().isEmpty()) {
-                    userBuilder.setName(tfName.getText());
-                    if (userBuilder.getName().length() > 20){
-                        JOptionPane.showMessageDialog(panelZeroOne, "Insert valid name", "Error", JOptionPane.ERROR_MESSAGE);
-                        userBuilder.setName(null);
-                    }
-                } else {
-                    JOptionPane.showMessageDialog(panelZeroOne, "Missing name", "Warning", JOptionPane.WARNING_MESSAGE);
+        btContinue.addActionListener(actionEvent -> {
+            // Name
+            if (!tfName.getText().isEmpty()) {
+                userBuilder.setName(tfName.getText());
+                if (userBuilder.getName().length() > 20){
+                    JOptionPane.showMessageDialog(panelZeroOne, "Insert valid name", "Error", JOptionPane.ERROR_MESSAGE);
+                    userBuilder.setName(null);
                 }
+            } else {
+                JOptionPane.showMessageDialog(panelZeroOne, "Missing name", "Warning", JOptionPane.WARNING_MESSAGE);
+            }
 
-                // Weight
-                if (!tfWeight.getText().isEmpty()) {
-                    userBuilder.setWeight(new StringToNumber().convertPositiveFloat(tfWeight.getText()));
-                    if (userBuilder.getWeight() > 800 || userBuilder.getWeight() < 10){
-                        JOptionPane.showMessageDialog(panelZeroOne, "Insert valid weight", "Error", JOptionPane.ERROR_MESSAGE);
-                        userBuilder.setWeight(0);
-                    }
-                } else {
-                    JOptionPane.showMessageDialog(panelZeroOne, "Missing weight", "Warning", JOptionPane.WARNING_MESSAGE);
+            // Weight
+            if (!tfWeight.getText().isEmpty()) {
+                userBuilder.setWeight(new StringToNumber().convertPositiveFloat(tfWeight.getText()));
+                if (userBuilder.getWeight() > 800 || userBuilder.getWeight() < 10){
+                    JOptionPane.showMessageDialog(panelZeroOne, "Insert valid weight", "Error", JOptionPane.ERROR_MESSAGE);
+                    userBuilder.setWeight(0);
                 }
+            } else {
+                JOptionPane.showMessageDialog(panelZeroOne, "Missing weight", "Warning", JOptionPane.WARNING_MESSAGE);
+            }
 
-                // Height
-                if (!tfHeight.getText().isEmpty()) {
-                    userBuilder.setHeight(new StringToNumber().convertPositiveInteger(tfHeight.getText()));
-                    if (userBuilder.getHeight() > 300 || userBuilder.getHeight() < 10){
-                        JOptionPane.showMessageDialog(panelZeroOne, "Insert valid height", "Error", JOptionPane.ERROR_MESSAGE);
-                        userBuilder.setHeight(0);
-                    }
-                } else {
-                    JOptionPane.showMessageDialog(panelZeroOne, "Missing height", "Warning", JOptionPane.WARNING_MESSAGE);
+            // Height
+            if (!tfHeight.getText().isEmpty()) {
+                userBuilder.setHeight(new StringToNumber().convertPositiveInteger(tfHeight.getText()));
+                if (userBuilder.getHeight() > 300 || userBuilder.getHeight() < 10){
+                    JOptionPane.showMessageDialog(panelZeroOne, "Insert valid height", "Error", JOptionPane.ERROR_MESSAGE);
+                    userBuilder.setHeight(0);
                 }
+            } else {
+                JOptionPane.showMessageDialog(panelZeroOne, "Missing height", "Warning", JOptionPane.WARNING_MESSAGE);
+            }
 
-                // Birthday
-                if (userBuilder.getDateOfBirth() == null){
-                    JOptionPane.showMessageDialog(panelZeroOne, "Insert valid birthday", "Error", JOptionPane.ERROR_MESSAGE);
-                }
+            // Birthday
+            if (userBuilder.getDateOfBirth() == null){
+                JOptionPane.showMessageDialog(panelZeroOne, "Insert valid birthday", "Error", JOptionPane.ERROR_MESSAGE);
+            }
 
-                // Sex
-                if (userBuilder.getSex() == null){
-                    JOptionPane.showMessageDialog(panelZeroOne, "Missing sex", "Warning", JOptionPane.WARNING_MESSAGE);
-                }
+            // Sex
+            if (userBuilder.getSex() == null){
+                JOptionPane.showMessageDialog(panelZeroOne, "Missing sex", "Warning", JOptionPane.WARNING_MESSAGE);
+            }
 
-                // BodyFat
-                if (!tfBodyfat.getText().isEmpty()) {
-                    userBuilder.setBodyFat(new StringToNumber().convertPositiveFloat(tfBodyfat.getText()));
-                    if (userBuilder.getBodyFat() < 0 | userBuilder.getBodyFat() > 100){
-                        JOptionPane.showMessageDialog(panelZeroOne, "Insert valid body-fat percentage", "Error", JOptionPane.ERROR_MESSAGE);
-                    userBuilder.setBodyFat(0);
-                    } else {
-                        next(registerExecutor);
-                    }
+            // BodyFat
+            if (!tfBodyfat.getText().isEmpty()) {
+                userBuilder.setBodyFat(new StringToNumber().convertPositiveFloat(tfBodyfat.getText()));
+                if (userBuilder.getBodyFat() < 0 | userBuilder.getBodyFat() > 100){
+                    JOptionPane.showMessageDialog(panelZeroOne, "Insert valid body-fat percentage", "Error", JOptionPane.ERROR_MESSAGE);
+                userBuilder.setBodyFat(0);
                 } else {
                     next(registerExecutor);
                 }
+            } else {
+                next(registerExecutor);
             }
         });
     }

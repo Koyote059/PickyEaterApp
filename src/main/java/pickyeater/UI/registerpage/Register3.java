@@ -12,13 +12,11 @@ import java.awt.*;
 import java.awt.event.*;
 
 public class Register3 extends JFrame {
-    private JPanel panel1;
     private JButton btLoseWeight;
     private JButton btGainWeight;
     private JButton btMaintainWeight;
     private JPanel mainPanel;
     private JButton btBack;
-    private JPanel buttonPanel;
 
     public Register3(RegisterExecutor registerExecutor) {
         setContentPane(mainPanel);
@@ -32,38 +30,26 @@ public class Register3 extends JFrame {
         btGainWeight.setBackground(Color.decode("#FFFFFF"));
         btMaintainWeight.setBackground(Color.decode("#FFFFFF"));
 
-        btLoseWeight.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent actionEvent) {
-                registerExecutor.getUserBuilder().setWeightVariationGoal(WeightGoal.LOSE_WEIGHT);
+        btLoseWeight.addActionListener(actionEvent -> {
+            registerExecutor.getUserBuilder().setWeightVariationGoal(WeightGoal.LOSE_WEIGHT);
 
-                next(registerExecutor);
-            }
+            next(registerExecutor);
         });
-        btGainWeight.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent actionEvent) {
-                registerExecutor.getUserBuilder().setWeightVariationGoal(WeightGoal.INCREASE_WEIGHT);
+        btGainWeight.addActionListener(actionEvent -> {
+            registerExecutor.getUserBuilder().setWeightVariationGoal(WeightGoal.INCREASE_WEIGHT);
 
-                next(registerExecutor);
-            }
+            next(registerExecutor);
         });
-        btMaintainWeight.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent actionEvent) {
-                registerExecutor.getUserBuilder().setWeightVariationGoal(WeightGoal.MAINTAIN_WEIGHT);
+        btMaintainWeight.addActionListener(actionEvent -> {
+            registerExecutor.getUserBuilder().setWeightVariationGoal(WeightGoal.MAINTAIN_WEIGHT);
 
-                next(registerExecutor);
-            }
+            next(registerExecutor);
         });
 
     btBack.addComponentListener(new ComponentAdapter() { } );
-        btBack.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent actionEvent) {
-                setVisible(false);
-                new Register2(registerExecutor);
-            }
+        btBack.addActionListener(actionEvent -> {
+            setVisible(false);
+            new Register2(registerExecutor);
         });
         btLoseWeight.addMouseListener(new MouseAdapter() {
             @Override

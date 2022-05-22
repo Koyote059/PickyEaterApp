@@ -5,7 +5,6 @@ package pickyeater.UI.registerpage;
  */
 import pickyeater.UI.app.MainFrame;
 import pickyeater.utils.AgeCalculator;
-import pickyeater.UI.leftbuttons.MainButton;
 import pickyeater.UI.leftbuttons.PanelButtons;
 import pickyeater.algorithms.HarrisBenedictCalculator;
 import pickyeater.algorithms.NutrientsRequirementCalculator;
@@ -17,7 +16,6 @@ import pickyeater.executors.user.RegisterExecutor;
 import pickyeater.utils.StringToNumber;
 
 import javax.swing.*;
-import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.DecimalFormat;
 
@@ -46,59 +44,45 @@ public class Register4 extends JFrame {
 
         StringToNumber stn = new StringToNumber();
 
-        btBack.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent actionEvent) {
-                setVisible(false);
-                new Register3(registerExecutor);
-            }
+        btBack.addActionListener(actionEvent -> {
+            setVisible(false);
+            new Register3(registerExecutor);
         });
 
-        btDone.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent actionEvent) {
+        btDone.addActionListener(actionEvent -> {
 
-                JOptionPane.showMessageDialog(mainPanel, "Selected:"  + "\n" + "Calories: " + nutrientsBuilder.getCalories() + "\n" + "Proteins: " + nutrientsBuilder.getProteins() + "\n" + "Carbs: " + nutrientsBuilder.getCarbs() + "\n" + "Fats: " + nutrientsBuilder.getFats());
+            JOptionPane.showMessageDialog(mainPanel, "Selected:"  + "\n" + "Calories: " + nutrientsBuilder.getCalories() + "\n" + "Proteins: " + nutrientsBuilder.getProteins() + "\n" + "Carbs: " + nutrientsBuilder.getCarbs() + "\n" + "Fats: " + nutrientsBuilder.getFats());
 
-                userBuilder.setRequiredNutrients(nutrientsBuilder.build());
-                registerExecutor.saveUser(userBuilder.build());
+            userBuilder.setRequiredNutrients(nutrientsBuilder.build());
+            registerExecutor.saveUser(userBuilder.build());
 
-                setVisible(false);
-                new MainFrame();
-                MainFrame.changePage(PanelButtons.PROGRESS);
-            }
+            setVisible(false);
+            new MainFrame();
+            MainFrame.changePage(PanelButtons.PROGRESS);
         });
 
-        btReset.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent actionEvent) {
-                resetNutrients(userBuilder);
+        btReset.addActionListener(actionEvent -> resetNutrients(userBuilder));
+
+        ActionListener listener = actionEvent -> {
+            if (stn.convertPositiveDouble(tfProteins.getText()) > 5000 | stn.convertPositiveDouble(tfProteins.getText()) < 0){
+                JOptionPane.showMessageDialog(mainPanel, "Insert valid number in Proteins", "Error", JOptionPane.ERROR_MESSAGE);
+            } else {
+                nutrientsBuilder.setProteins(stn.convertPositiveFloat(tfProteins.getText()));
             }
-        });
 
-        ActionListener listener = new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent actionEvent) {
-                if (stn.convertPositiveDouble(tfProteins.getText()) > 5000 | stn.convertPositiveDouble(tfProteins.getText()) < 0){
-                    JOptionPane.showMessageDialog(mainPanel, "Insert valid number in Proteins", "Error", JOptionPane.ERROR_MESSAGE);
-                } else {
-                    nutrientsBuilder.setProteins(stn.convertPositiveFloat(tfProteins.getText()));
-                }
-
-                if (stn.convertPositiveDouble(tfFats.getText()) > 5000 | stn.convertPositiveDouble(tfFats.getText()) < 0){
-                    JOptionPane.showMessageDialog(mainPanel, "Insert valid number in Fats", "Error", JOptionPane.ERROR_MESSAGE);
-                } else {
-                    nutrientsBuilder.setUnSaturatedFats(stn.convertPositiveFloat(tfFats.getText()));
-                }
-
-                if (stn.convertPositiveFloat(tfCarbs.getText()) > 5000 | stn.convertPositiveFloat(tfCarbs.getText()) < 0){
-                    JOptionPane.showMessageDialog(mainPanel, "Insert valid number in Carbs", "Error", JOptionPane.ERROR_MESSAGE);
-                } else {
-                    nutrientsBuilder.setComplexCarbs(stn.convertPositiveFloat(tfCarbs.getText()));
-                }
-
-                txtCalories.setText(Double.toString(nutrientsBuilder.getCalories()));
+            if (stn.convertPositiveDouble(tfFats.getText()) > 5000 | stn.convertPositiveDouble(tfFats.getText()) < 0){
+                JOptionPane.showMessageDialog(mainPanel, "Insert valid number in Fats", "Error", JOptionPane.ERROR_MESSAGE);
+            } else {
+                nutrientsBuilder.setUnSaturatedFats(stn.convertPositiveFloat(tfFats.getText()));
             }
+
+            if (stn.convertPositiveFloat(tfCarbs.getText()) > 5000 | stn.convertPositiveFloat(tfCarbs.getText()) < 0){
+                JOptionPane.showMessageDialog(mainPanel, "Insert valid number in Carbs", "Error", JOptionPane.ERROR_MESSAGE);
+            } else {
+                nutrientsBuilder.setComplexCarbs(stn.convertPositiveFloat(tfCarbs.getText()));
+            }
+
+            txtCalories.setText(Double.toString(nutrientsBuilder.getCalories()));
         };
         tfFats.addActionListener(listener);
         tfCarbs.addActionListener(listener);
