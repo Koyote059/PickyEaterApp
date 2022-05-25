@@ -50,5 +50,4 @@ public class MainFrame extends JFrame {
             default -> System.out.println("ERROR: " + panelButton);
         }
     }
-
 }

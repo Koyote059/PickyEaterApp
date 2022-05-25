@@ -11,13 +11,11 @@ import pickyeater.UI.leftbuttons.PanelButtonsConverter;
 import pickyeater.basics.food.Meal;
 import pickyeater.executors.DailyProgressExecutor;
 import pickyeater.executors.ExecutorProvider;
-import GARBAGE.UserMealsProgressesExecutor;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.ActionListener;
-import java.nio.file.AccessDeniedException;
 import java.text.DecimalFormat;
 import java.util.Optional;
 
@@ -34,8 +32,6 @@ public class DailyProgressPage extends PickyPage {
     private JProgressBar bar;
     private JComboBox cbConsumed;
     private JLabel txtBurntCalories;
-
-    UserMealsProgressesExecutor userMealsProgressesExecutor;
     DailyProgressExecutor dailyProgressExecutor;
     JFrame parent;
 

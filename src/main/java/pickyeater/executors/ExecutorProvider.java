@@ -4,7 +4,6 @@ package pickyeater.executors;
  * Author: Claudio Di Maio
  */
 
-import GARBAGE.UserMealsProgressesExecutor;
 import pickyeater.executors.creators.CreateIngredientExecutor;
 import pickyeater.executors.creators.CreateMealExecutor;
 import pickyeater.executors.searcher.IngredientSearcherExecutor;
@@ -54,10 +53,6 @@ public class ExecutorProvider {
 
     public static RegisterExecutor getRegisterExecutor(){
         return new RegisterExecutor(eaterManager);
-    }
-
-    public static UserMealsProgressesExecutor getUserMealsProgressesExecutor(){
-        return new UserMealsProgressesExecutor(eaterManager);
     }
 
     public static DailyProgressExecutor getDailyProgressExecutor() {
