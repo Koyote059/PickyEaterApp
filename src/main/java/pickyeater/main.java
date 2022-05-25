@@ -27,15 +27,12 @@ public class main {
 
         ExecutorProvider.setEaterManager(eaterManager);
 
-
-
         if (eaterManager.getUserManager().getUser().isEmpty()) {  // User Database is empty
             new WelcomePage();
         } else {  // Go to the app
             new MainFrame();
             MainFrame.changePage(PanelButtons.PROGRESS);
         }
-
 
     }
 }

@@ -37,7 +37,6 @@ public class DailyProgressPage extends PickyPage {
 
     public DailyProgressPage(JFrame parent) {
         super(parent);
-
         setLayout(new BorderLayout());
         add(mainPanel,BorderLayout.CENTER);
         btDailyProgress.setBackground(Color.decode("#B1EA9D"));
