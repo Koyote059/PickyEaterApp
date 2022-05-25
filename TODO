@@ -1,10 +1,13 @@
 
-Progetti a breve termine:
-- Sistemare gli algoritmi
-- Inserire un grafico in user della cronologia dei progressi giornalieri
+Progetti a breve termine - Essenziali:
 - Sistemare il fatto che le pagine si aprono ricorsivamente
-- Aggiustare "Register" in maniera tale che non si aprano e chiudano pagine per ogni click
 - Aggiustare la pagina "Groceries"
+- Sistemare gli algoritmi
+
+Progetti a breve termine:
+- Aggiustare "Register" in maniera tale che non si aprano e chiudano pagine per ogni click
+- Inserire un grafico in user della cronologia dei progressi giornalieri
+
 
 Progetti a medio termine:
 - Popolare il database
