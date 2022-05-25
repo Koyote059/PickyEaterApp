@@ -17,6 +17,7 @@ import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.ActionListener;
+import java.nio.file.AccessDeniedException;
 import java.text.DecimalFormat;
 import java.util.Optional;
 
@@ -26,7 +27,6 @@ public class DailyProgressPage extends PickyPage {
     private JButton btDailyProgress;
     private JButton btUser;
     private JButton btGroceries;
-    private JButton btFood;
     private JButton btDiet;
     private JButton btAddEatenMeals;
     private JButton btAddBurntCalories;
@@ -46,7 +46,6 @@ public class DailyProgressPage extends PickyPage {
         add(mainPanel,BorderLayout.CENTER);
         btDailyProgress.setBackground(Color.decode("#B1EA9D"));
         btDiet.setBackground(Color.decode("#FFFFFF"));
-        btFood.setBackground(Color.decode("#FFFFFF"));
         btGroceries.setBackground(Color.decode("#FFFFFF"));
         btUser.setBackground(Color.decode("#FFFFFF"));
         btSettings.setBackground(Color.decode("#FFFFFF"));
@@ -60,8 +59,9 @@ public class DailyProgressPage extends PickyPage {
         });
         btAddBurntCalories.addActionListener(e -> {
             setVisible(false);
-            PickyPage addBurntCaloriesPage = new AddBurntCaloriesPage(parent);
-            addBurntCaloriesPage.showPage();
+            AddBurntCaloriesPage addBurntCaloriesPage = new AddBurntCaloriesPage(parent);
+            addBurntCaloriesPage.run();
+            draw();
         });
         cbConsumed.addActionListener(e -> {
             if (cbConsumed.getSelectedIndex() == 0){
@@ -95,12 +95,10 @@ public class DailyProgressPage extends PickyPage {
         btSettings.addActionListener(listener);
         btUser.addActionListener(listener);
         btGroceries.addActionListener(listener);
-        btFood.addActionListener(listener);
         btDiet.addActionListener(listener);
         btSettings.setSize(new Dimension(200,85));
         btUser.setSize(new Dimension(200,85));
         btGroceries.setSize(new Dimension(200,85));
-        btFood.setSize(new Dimension(200,85));
         btDiet.setSize(new Dimension(200,85));
 
     }

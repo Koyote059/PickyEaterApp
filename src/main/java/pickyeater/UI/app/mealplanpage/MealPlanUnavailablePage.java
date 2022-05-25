@@ -25,7 +25,6 @@ public class MealPlanUnavailablePage extends PickyPage {
     private JButton btDailyProgress;
     private JButton btUser;
     private JButton btGroceries;
-    private JButton btFood;
     private JButton btDiet;
     private JButton generateMealPlanButton;
     private JButton automaticGenerateMealPlanButton;
@@ -35,7 +34,6 @@ public class MealPlanUnavailablePage extends PickyPage {
         this.mealPlanCreator = ExecutorProvider.getMealPlanExecutor();
         btDailyProgress.setBackground(Color.decode("#FFFFFF"));
         btDiet.setBackground(Color.decode("#B1EA9D"));
-        btFood.setBackground(Color.decode("#FFFFFF"));
         btGroceries.setBackground(Color.decode("#FFFFFF"));
         btUser.setBackground(Color.decode("#FFFFFF"));
         btSettings.setBackground(Color.decode("#FFFFFF"));
@@ -80,6 +78,5 @@ public class MealPlanUnavailablePage extends PickyPage {
         btDailyProgress.addActionListener(listener);
         btUser.addActionListener(listener);
         btGroceries.addActionListener(listener);
-        btFood.addActionListener(listener);
     }
 }

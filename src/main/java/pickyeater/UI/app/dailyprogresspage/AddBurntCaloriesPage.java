@@ -12,13 +12,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class AddBurntCaloriesPage extends PickyPage {
-    private JButton btSettings;
-    private JButton btDailyProgress;
-    private JButton btUser;
-    private JButton btGroceries;
-    private JButton btFood;
-    private JButton btDiet;
+public class AddBurntCaloriesPage extends JDialog {
     private JButton btCancel;
     private JTextField tfActivityName;
     private JPanel mainPanel;
@@ -26,20 +20,12 @@ public class AddBurntCaloriesPage extends PickyPage {
     private JTextField tfBurntCalories;
 
     public AddBurntCaloriesPage(JFrame parent) {
-
-        super(parent);
-        btDailyProgress.setBackground(Color.decode("#B1EA9D"));
-        btDiet.setBackground(Color.decode("#FFFFFF"));
-        btFood.setBackground(Color.decode("#FFFFFF"));
-        btGroceries.setBackground(Color.decode("#FFFFFF"));
-        btUser.setBackground(Color.decode("#FFFFFF"));
-        btSettings.setBackground(Color.decode("#FFFFFF"));
-
+        super(parent,"Add Burnt Calories");
 
         setLayout(new BorderLayout());
         add(mainPanel,BorderLayout.CENTER);
 
-        btCancel.addActionListener(e -> MainFrame.changePage(PanelButtons.PROGRESS));
+        btCancel.addActionListener(e -> dispose());
         btSave.addActionListener(e -> {
             float burntCal = new StringToNumber().convertPositiveFloat(tfBurntCalories.getText());
 
@@ -50,26 +36,18 @@ public class AddBurntCaloriesPage extends PickyPage {
                     JOptionPane.showMessageDialog(mainPanel,  "Burnt Calories: " + tfBurntCalories.getText());
                 }
                 ExecutorProvider.getAddBurntCaloriesExecutor().setBurntCalories(burntCal);
-                MainFrame.changePage(PanelButtons.PROGRESS);
+                dispose();
             } else {
                 JOptionPane.showMessageDialog(mainPanel, "Insert valid number", "", JOptionPane.ERROR_MESSAGE);
             }
         });
-        setNavigationMenuListeners();
+        pack();
+        setResizable(false);
+        setLocationRelativeTo(null);
     }
 
-    private void setNavigationMenuListeners(){
-        ActionListener listener = e -> {
-            String cmd = e.getActionCommand();
-            setVisible(false);
-            MainFrame.changePage(new PanelButtonsConverter(cmd).Convert());
-        };
-        btSettings.addActionListener(listener);
-        btDailyProgress.addActionListener(listener);
-        btUser.addActionListener(listener);
-        btGroceries.addActionListener(listener);
-        btFood.addActionListener(listener);
-        btDiet.addActionListener(listener);
-    }
 
+    public void run() {
+        setVisible(true);
+    }
 }

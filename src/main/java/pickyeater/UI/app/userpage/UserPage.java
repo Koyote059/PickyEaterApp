@@ -26,7 +26,6 @@ public class UserPage extends PickyPage {
     private JButton btDailyProgress;
     private JButton btUser;
     private JButton btGroceries;
-    private JButton btFood;
     private JButton btDiet;
     private JButton btEditMode;
     private JLabel txtName;
@@ -79,7 +78,6 @@ public class UserPage extends PickyPage {
 
         btDailyProgress.setBackground(Color.decode("#FFFFFF"));
         btDiet.setBackground(Color.decode("#FFFFFF"));
-        btFood.setBackground(Color.decode("#FFFFFF"));
         btGroceries.setBackground(Color.decode("#FFFFFF"));
         btUser.setBackground(Color.decode("#B1EA9D"));
         btSettings.setBackground(Color.decode("#FFFFFF"));
@@ -104,7 +102,6 @@ public class UserPage extends PickyPage {
         btSettings.addActionListener(listener);
         btDailyProgress.addActionListener(listener);
         btGroceries.addActionListener(listener);
-        btFood.addActionListener(listener);
         btDiet.addActionListener(listener);
     }
 

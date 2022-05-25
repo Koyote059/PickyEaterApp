@@ -42,4 +42,14 @@ public class IngredientSearcherExecutor {
         FoodManager foodManager = this.eaterManager.getFoodManager();
         return foodManager.getIngredient(ingredientName);
     }
+
+    public void deleteIngredient(Ingredient ingredient) {
+        FoodManager foodManager = this.eaterManager.getFoodManager();
+        foodManager.deleteIngredient(ingredient);
+    }
+
+    public void saveIngredient(Ingredient ingredient) {
+        FoodManager foodManager = this.eaterManager.getFoodManager();
+        foodManager.saveIngredient(ingredient);
+    }
 }

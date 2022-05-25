@@ -6,8 +6,7 @@ import pickyeater.builders.PickyNutrientsBuilder;
 
 public class NutrientsQuantityConverter {
 
-    public Nutrients convert(Nutrients nutrients, int newWeight){
-        float weightRatio = newWeight/100f;
+    public Nutrients convert(Nutrients nutrients, float weightRatio){
         NutrientsBuilder nutrientsBuilder = new PickyNutrientsBuilder();
         nutrientsBuilder.setAlcohol(nutrients.getAlcohol()*weightRatio);
         nutrientsBuilder.setTransFats(nutrients.getTransFats()*weightRatio);

@@ -21,9 +21,9 @@ public class SQLUnSafeQueryExecutor {
         Connection connection = DBManager.getConnection();
         connection.setAutoCommit(false);
         String query = "INSERT INTO Ingredients " +
-                "(ingredientName,price,quantityType,gramsPerQuantity,complexCarbs,simpleCarbs," +
+                "(ingredientName,price,quantity,quantityType,gramsPerQuantity,complexCarbs,simpleCarbs," +
                 "fibers,saturatedFats,unsaturatedFats,transFats,proteins,alcohol)\n" +
-                "VALUES (?,?,?,?,?,?,?,?,?,?,?,?) " +
+                "VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?) " +
                 "ON CONFLICT (ingredientName) DO UPDATE SET " +
                 "price = ?," +
                 "quantityType = ?," +
@@ -42,29 +42,31 @@ public class SQLUnSafeQueryExecutor {
             // Insert values
             statement.setString(1,ingredient.getName());
             statement.setFloat(2,ingredient.getPrice());
-            statement.setString(3,ingredient.getQuantity().getQuantityType().name());
-            statement.setFloat(4,nutrients.getComplexCarbs());
-            statement.setFloat(5,nutrients.getSimpleCarbs());
-            statement.setFloat(6,nutrients.getFibers());
-            statement.setFloat(7,nutrients.getSaturatedFats());
-            statement.setFloat(8,nutrients.getUnSaturatedFats());
-            statement.setFloat(9,nutrients.getTransFats());
-            statement.setFloat(10,nutrients.getProteins());
-            statement.setFloat(11,nutrients.getAlcohol());
+            statement.setFloat(3,ingredient.getQuantity().getAmount());
+            statement.setString(4,ingredient.getQuantity().getQuantityType().name());
+            statement.setFloat(5,ingredient.getQuantity().getGramsPerQuantity());
+            statement.setFloat(6,nutrients.getComplexCarbs());
+            statement.setFloat(7,nutrients.getSimpleCarbs());
+            statement.setFloat(8,nutrients.getFibers());
+            statement.setFloat(9,nutrients.getSaturatedFats());
+            statement.setFloat(10,nutrients.getUnSaturatedFats());
+            statement.setFloat(11,nutrients.getTransFats());
+            statement.setFloat(12,nutrients.getProteins());
+            statement.setFloat(13,nutrients.getAlcohol());
 
             // Update values
-            statement.setFloat(12,ingredient.getPrice());
-            statement.setString(13,ingredient.getQuantity().getQuantityType().name());
-            statement.setFloat(14,nutrients.getComplexCarbs());
-            statement.setFloat(15,nutrients.getSimpleCarbs());
-            statement.setFloat(16,nutrients.getFibers());
-            statement.setFloat(17,nutrients.getSaturatedFats());
-            statement.setFloat(18,nutrients.getUnSaturatedFats());
-            statement.setFloat(19,nutrients.getTransFats());
-            statement.setFloat(20,nutrients.getProteins());
-            statement.setFloat(21,nutrients.getAlcohol());
-            statement.setString(22,ingredient.getName());
-
+            statement.setFloat(14,ingredient.getPrice());
+            statement.setString(15,ingredient.getQuantity().getQuantityType().name());
+            statement.setFloat(16,ingredient.getQuantity().getGramsPerQuantity());
+            statement.setFloat(17,nutrients.getComplexCarbs());
+            statement.setFloat(18,nutrients.getSimpleCarbs());
+            statement.setFloat(19,nutrients.getFibers());
+            statement.setFloat(20,nutrients.getSaturatedFats());
+            statement.setFloat(21,nutrients.getUnSaturatedFats());
+            statement.setFloat(22,nutrients.getTransFats());
+            statement.setFloat(23,nutrients.getProteins());
+            statement.setFloat(24,nutrients.getAlcohol());
+            statement.setString(25,ingredient.getName());
             statement.execute();
         }
         connection.commit();

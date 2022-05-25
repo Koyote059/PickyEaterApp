@@ -15,7 +15,6 @@ public class UnavailableGroceriesPage extends PickyPage {
     private JButton btDailyProgress;
     private JButton btUser;
     private JButton btGroceries;
-    private JButton btFood;
     private JButton btDiet;
     private JButton generateGroceriesButton;
     private JPanel mainPanel;
@@ -35,7 +34,6 @@ public class UnavailableGroceriesPage extends PickyPage {
         }
         btDailyProgress.setBackground(Color.decode("#FFFFFF"));
         btDiet.setBackground(Color.decode("#FFFFFF"));
-        btFood.setBackground(Color.decode("#FFFFFF"));
         btGroceries.setBackground(Color.decode("#B1EA9D"));
         btUser.setBackground(Color.decode("#FFFFFF"));
         btSettings.setBackground(Color.decode("#FFFFFF"));
@@ -62,7 +60,6 @@ public class UnavailableGroceriesPage extends PickyPage {
         btDailyProgress.addActionListener(listener);
         btUser.addActionListener(listener);
         btDiet.addActionListener(listener);
-        btFood.addActionListener(listener);
     }
 
     @Override

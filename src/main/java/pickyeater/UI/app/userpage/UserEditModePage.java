@@ -7,7 +7,6 @@ package pickyeater.UI.app.userpage;
 import com.toedter.calendar.JDateChooser;
 import pickyeater.UI.app.MainFrame;
 import pickyeater.UI.app.PickyPage;
-import pickyeater.UI.leftbuttons.MainButton;
 import pickyeater.UI.leftbuttons.PanelButtons;
 import pickyeater.UI.leftbuttons.PanelButtonsConverter;
 import pickyeater.algorithms.BodyFatCalculator;
@@ -43,7 +42,6 @@ public class UserEditModePage extends PickyPage {
     private JButton btDailyProgress;
     private JButton btUser;
     private JButton btGroceries;
-    private JButton btFood;
     private JButton btDiet;
     private JTextField tfName;
     private JComboBox cbLifestyle;
@@ -120,7 +118,6 @@ public class UserEditModePage extends PickyPage {
 
         btDailyProgress.setBackground(Color.decode("#FFFFFF"));
         btDiet.setBackground(Color.decode("#FFFFFF"));
-        btFood.setBackground(Color.decode("#FFFFFF"));
         btGroceries.setBackground(Color.decode("#FFFFFF"));
         btUser.setBackground(Color.decode("#B1EA9D"));
         btSettings.setBackground(Color.decode("#FFFFFF"));
@@ -130,13 +127,12 @@ public class UserEditModePage extends PickyPage {
         ActionListener listener = e -> {
             String cmd = e.getActionCommand();
             setVisible(false);
-            new MainButton(new PanelButtonsConverter(cmd).Convert());
+            MainFrame.changePage(new PanelButtonsConverter(cmd).Convert());
         };
         btSettings.addActionListener(listener);
         btDailyProgress.addActionListener(listener);
         btUser.addActionListener(listener);
         btGroceries.addActionListener(listener);
-        btFood.addActionListener(listener);
         btDiet.addActionListener(listener);
         // Birthday
         jBirthdayChooser.addPropertyChangeListener(new PropertyChangeListener() {
@@ -148,19 +144,12 @@ public class UserEditModePage extends PickyPage {
                 }
             }
         });
-        btCancel.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                setVisible(false);
-                new MainButton(PanelButtons.USER);
-            }
+        btCancel.addActionListener(e -> {
+            MainFrame.changePage(PanelButtons.USER);
         });
-        btSave.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                if (update(newUserBuilder)){
-                    next(newUserBuilder);
-                }
+        btSave.addActionListener(e -> {
+            if (update(newUserBuilder)){
+                next(newUserBuilder);
             }
         });
         cbLifestyle.addActionListener(new ActionListener() {
@@ -229,7 +218,6 @@ public class UserEditModePage extends PickyPage {
         btDailyProgress.addActionListener(listener);
         btUser.addActionListener(listener);
         btGroceries.addActionListener(listener);
-        btFood.addActionListener(listener);
         btDiet.addActionListener(listener);
     }
 
@@ -317,9 +305,7 @@ public class UserEditModePage extends PickyPage {
 
         // Save user
         ExecutorProvider.getUserEditModeExecutor().saveUser(userBuilder.build());
-
-            setVisible(false);
-            new MainButton(PanelButtons.USER);
+        MainFrame.changePage(PanelButtons.USER);
     }
     private void resetNutrients(UserBuilder userBuilder){
         NutrientsRequirementCalculator nutrientsCalculated = new HarrisBenedictCalculator();

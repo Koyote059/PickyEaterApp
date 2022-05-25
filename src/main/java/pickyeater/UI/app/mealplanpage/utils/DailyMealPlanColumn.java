@@ -24,11 +24,11 @@ public class DailyMealPlanColumn implements ActionListener, MouseListener {
 
     private final JPanel pane;
     private final JTable table;
-    private final Frame frame;
+    private final JFrame frame;
 
     private final DailyMealPlanBuilder dailyMealPlanBuilder = new PickyDailyMealPlanBuilder();
 
-    public DailyMealPlanColumn(Frame frame){
+    public DailyMealPlanColumn(JFrame frame){
         this.frame = frame;
         table = new JTable();
         DefaultTableModel tableModel = new DefaultTableModel(){

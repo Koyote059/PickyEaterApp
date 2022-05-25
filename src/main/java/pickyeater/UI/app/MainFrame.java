@@ -1,7 +1,6 @@
 package pickyeater.UI.app;
 
 import pickyeater.UI.app.dailyprogresspage.DailyProgressPage;
-import pickyeater.UI.app.foodpage.FoodPage;
 import pickyeater.UI.app.groceriespage.UnavailableGroceriesPage;
 import pickyeater.UI.app.mealplanpage.MealPlanPage;
 import pickyeater.UI.app.settingspage.SettingsPage;
@@ -26,7 +25,6 @@ public class MainFrame extends JFrame {
         CardLayout layout = new CardLayout();
         container.setLayout(layout);
         pages.put(DailyProgressPage.class.getName(),new DailyProgressPage(this));
-        pages.put(FoodPage.class.getName(),new FoodPage(this));
         pages.put(UnavailableGroceriesPage.class.getName(),new UnavailableGroceriesPage(this));
         pages.put(MealPlanPage.class.getName(),new MealPlanPage(this));
         pages.put(UserPage.class.getName(),new UserPage(this));
@@ -39,13 +37,13 @@ public class MainFrame extends JFrame {
         setSize(new Dimension(677,507));
         setResizable(false);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setLocationRelativeTo(null);
     }
 
     public static void changePage(PanelButtons panelButton){
         switch (panelButton) {
             case PROGRESS -> pages.get(DailyProgressPage.class.getName()).showPage();
             case DIET -> pages.get(MealPlanPage.class.getName()).showPage();
-            case FOOD -> pages.get(FoodPage.class.getName()).showPage();
             case GROCERIES -> pages.get(UnavailableGroceriesPage.class.getName()).showPage();
             case USER -> pages.get(UserPage.class.getName()).showPage();
             case SETTINGS -> pages.get(SettingsPage.class.getName()).showPage();

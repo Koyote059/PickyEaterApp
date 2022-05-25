@@ -9,6 +9,7 @@ import pickyeater.executors.ExecutorProvider;
 import pickyeater.executors.searcher.IngredientSearcherExecutor;
 import pickyeater.managers.EaterManager;
 import pickyeater.managers.FoodManager;
+import pickyeater.utils.MealQuantityConverter;
 
 import java.util.Iterator;
 import java.util.Set;
@@ -52,5 +53,9 @@ public class CreateMealExecutor {
         for (Iterator<Ingredient> it = ingredients.iterator(); it.hasNext(); tmpSize--) {
             mealBuilder.addIngredients(it.next());
         }
+    }
+
+    public MealQuantityConverter getMealQuantityConverter() {
+        return new MealQuantityConverter();
     }
 }

@@ -2,6 +2,8 @@ package pickyeater.UI.app.settingspage;
 
 import pickyeater.UI.app.MainFrame;
 import pickyeater.UI.app.PickyPage;
+import pickyeater.UI.choosers.IngredientChooser;
+import pickyeater.UI.choosers.MealsChooser;
 import pickyeater.UI.leftbuttons.PanelButtonsConverter;
 import pickyeater.UI.registerpage.Register1;
 import pickyeater.executors.ExecutorProvider;
@@ -22,7 +24,6 @@ public class SettingsPage extends PickyPage {
     private JButton btDailyProgress;
     private JButton btUser;
     private JButton btGroceries;
-    private JButton btFood;
     private JButton btDiet;
     private JLabel txtDeletingZone;
     private JButton btDeleteUser;
@@ -30,12 +31,13 @@ public class SettingsPage extends PickyPage {
     private JButton btResetIngredients;
     private JComboBox cbTheme;
     private JLabel txtImage;
+    private JButton manageMealsButton;
+    private JButton manageIngredientsButton;
 
     public SettingsPage(JFrame parent) {
         super(parent);
         btDailyProgress.setBackground(Color.decode("#FFFFFF"));
         btDiet.setBackground(Color.decode("#FFFFFF"));
-        btFood.setBackground(Color.decode("#FFFFFF"));
         btGroceries.setBackground(Color.decode("#FFFFFF"));
         btUser.setBackground(Color.decode("#FFFFFF"));
         btSettings.setBackground(Color.decode("#B1EA9D"));
@@ -79,19 +81,28 @@ public class SettingsPage extends PickyPage {
                 ExecutorProvider.getSettingsExecutor().resetIngredients();
             }
         });
-        cbTheme.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                if (cbTheme.getSelectedIndex() == 0){
-                    new SystemTheme().theme1();
-                } else if (cbTheme.getSelectedIndex() == 1) {
-                    new SystemTheme().theme2();
-                } else if (cbTheme.getSelectedIndex() == 2) {
-                    new SystemTheme().theme0();
-                }
-                SwingUtilities.updateComponentTreeUI(MainFrame.getFrames()[0]);
+
+        cbTheme.addActionListener(e -> {
+            if (cbTheme.getSelectedIndex() == 0){
+                new SystemTheme().theme1();
+            } else if (cbTheme.getSelectedIndex() == 1) {
+                new SystemTheme().theme2();
+            } else if (cbTheme.getSelectedIndex() == 2) {
+                new SystemTheme().theme0();
             }
+            SwingUtilities.updateComponentTreeUI(MainFrame.getFrames()[0]);
         });
+
+        manageMealsButton.addActionListener( l -> {
+            MealsChooser chooser = new MealsChooser(parent);
+            chooser.manageMeals();
+        });
+
+        manageIngredientsButton.addActionListener( l -> {
+            IngredientChooser chooser = new IngredientChooser(parent);
+            chooser.manageIngredients();
+        });
+
         setNavigationMenuListeners();
     }
 
@@ -104,7 +115,6 @@ public class SettingsPage extends PickyPage {
         btDailyProgress.addActionListener(listener);
         btUser.addActionListener(listener);
         btGroceries.addActionListener(listener);
-        btFood.addActionListener(listener);
         btDiet.addActionListener(listener);
     }
 

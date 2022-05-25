@@ -1,10 +1,8 @@
 package pickyeater.UI.app.groceriespage;
 
-import GARBAGE.MainPages;
 import pickyeater.UI.app.MainFrame;
 import pickyeater.UI.app.PickyPage;
 import pickyeater.UI.app.groceriespage.utils.WindowCloseListener;
-import pickyeater.UI.leftbuttons.MainButton;
 import pickyeater.UI.leftbuttons.PanelButtonsConverter;
 import pickyeater.basics.food.Ingredient;
 import pickyeater.basics.food.Quantity;

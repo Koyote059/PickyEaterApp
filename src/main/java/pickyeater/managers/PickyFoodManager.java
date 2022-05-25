@@ -48,4 +48,15 @@ public class PickyFoodManager implements FoodManager {
     public Set<Meal> getMeals() {
         return this.mealsDatabase.loadEveryMeal();
     }
+
+    @Override
+    public void deleteMeal(Meal meal) {
+        this.mealsDatabase.deleteMeal(meal);
+    }
+
+    @Override
+    public void deleteIngredient(Ingredient ingredient) {
+        this.ingredientsDatabase.deleteIngredient(ingredient);
+
+    }
 }

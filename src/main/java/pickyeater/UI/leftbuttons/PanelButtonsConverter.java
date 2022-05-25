@@ -13,8 +13,6 @@ public class PanelButtonsConverter {
             return PanelButtons.PROGRESS;
         } else if (command.equals("Meal Plan (Diet)")){
             return PanelButtons.DIET;
-        } else if (command.equals("Food")){
-            return PanelButtons.FOOD;
         } else if (command.equals("Groceries")){
             return PanelButtons.GROCERIES;
         } else if (command.equals("User")){

@@ -1,4 +1,4 @@
-package pickyeater.UI;
+package pickyeater;
 
 /**
  * @author Claudio Di Maio

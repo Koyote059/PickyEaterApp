@@ -55,7 +55,7 @@ public class SQLDatabaseTest {
 
         ingredients.forEach(ingredientsDatabase::saveIngredient);
         meals.forEach(mealsDatabase::saveMeal);
-        User user = getUser();
+        User     user = getUser();
         MealPlan mealPlan = user.getMealPlan().get();
         List<DailyMealPlan> dailyMealPlans = mealPlan.getDailyMealPlans();
         for (int i = 0; i < dailyMealPlans.size(); i++) {

@@ -49,7 +49,13 @@ public class PickyIngredient implements Ingredient {
 
     @Override
     public String toString() {
-        return  "\nname=" + name;
+        return "PickyIngredient{" +
+                "nutrients=" + nutrients +
+                ", name='" + name + '\'' +
+                ", price=" + price +
+                ", quantity=" + quantity +
+                ", tags=" + tags +
+                '}';
     }
 
     /**

@@ -22,4 +22,8 @@ public interface FoodManager {
     Set<Meal> getMealsThatStartsWith(String name);
 
     Set<Meal> getMeals();
+
+    void deleteMeal(Meal meal);
+
+    void deleteIngredient(Ingredient ingredient);
 }
