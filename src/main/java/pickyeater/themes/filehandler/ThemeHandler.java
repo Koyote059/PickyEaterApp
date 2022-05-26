@@ -13,24 +13,29 @@ public class ThemeHandler {
         }
     }
 
-    public void ReadTheme(){
+    public ThemesEnum ReadTheme(){
         FileHandler fileHandler = new FileHandler();
         String t = fileHandler.readFile();
         if (t == ""){
             fileHandler.createFile();
             fileHandler.writeFile(ThemesEnum.LIGHT_THEME);
             new SystemTheme().theme1();
+            return ThemesEnum.LIGHT_THEME;
         } else {
             if (t.equals(ThemesEnum.LIGHT_THEME.toString())){
                 new SystemTheme().theme1();
+                return ThemesEnum.LIGHT_THEME;
             } else if (t.equals(ThemesEnum.DARK_THEME.toString())){
                 new SystemTheme().theme2();
+                return ThemesEnum.DARK_THEME;
             } else if (t.equals(ThemesEnum.GREEN_THEME.toString())){
                 new SystemTheme().theme0();
+                return ThemesEnum.GREEN_THEME;
             } else {
                 System.out.println("Error in ThemeHandler -> ThemesEnum not found");
                 fileHandler.deleteFile();
                 new SystemTheme().theme1();
+                return null;
             }
         }
     }
