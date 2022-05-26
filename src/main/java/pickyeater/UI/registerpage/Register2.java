@@ -106,7 +106,7 @@ public class Register2 extends JFrame {
                 cB.ColorButtonWhite(btSedentary);
                 cB.ColorButtonWhite(btSlightlyActive);
                 cB.ColorButtonWhite(btActive);
-                cB.ColorButtonGreen(btVeryActive);
+                cB.ColorButtonWhite(btVeryActive);
             }
         };
         btActive.addMouseListener(listener);
