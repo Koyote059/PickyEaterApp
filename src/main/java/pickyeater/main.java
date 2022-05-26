@@ -18,7 +18,7 @@ public class main {
 
         new ThemeHandler().ReadTheme();
 
-        //PickyEatersDatabase pickyEatersDB = new SQLPickyEaterDB("PickyEatersDB.sqlite");
+        //PickyEatersDatabase pickyEatersDB = new SQLPickyEaterDB("DatabasePickEater.sqlite");
         PickyEatersDatabase pickyEatersDB = new SQLPickyEaterDB("dbDiProva.sqlite");
 
         EaterManager eaterManager = new PickyEaterManager(
