@@ -5,6 +5,7 @@ package pickyeater.UI.registerpage;
  */
 import pickyeater.basics.user.LifeStyle;
 import pickyeater.executors.user.RegisterExecutor;
+import pickyeater.themes.ColorButtons;
 import pickyeater.themes.filehandler.ThemeHandler;
 import pickyeater.themes.filehandler.ThemesEnum;
 
@@ -27,17 +28,12 @@ public class Register2 extends JFrame {
         setResizable(false);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setVisible(true);
-        if (new ThemeHandler().ReadTheme() == ThemesEnum.LIGHT_THEME) {
-            btSedentary.setBackground(Color.decode("#FFFFFF"));
-            btSlightlyActive.setBackground(Color.decode("#FFFFFF"));
-            btActive.setBackground(Color.decode("#FFFFFF"));
-            btVeryActive.setBackground(Color.decode("#FFFFFF"));
-        } else if (new ThemeHandler().ReadTheme() == ThemesEnum.DARK_THEME) {
-            btSedentary.setBackground(Color.decode("#000000"));
-            btSlightlyActive.setBackground(Color.decode("#000000"));
-            btActive.setBackground(Color.decode("#000000"));
-            btVeryActive.setBackground(Color.decode("#000000"));
-        }
+        ColorButtons cB = new ColorButtons();
+
+        cB.ColorButtonWhite(btSedentary);
+        cB.ColorButtonWhite(btSlightlyActive);
+        cB.ColorButtonWhite(btActive);
+        cB.ColorButtonWhite(btVeryActive);
 
         btSedentary.addActionListener(actionEvent -> {
             registerExecutor.getUserBuilder().setLifeStyle(LifeStyle.SEDENTARY);
@@ -67,85 +63,50 @@ public class Register2 extends JFrame {
             @Override
             public void mouseEntered(MouseEvent e) {
                 super.mouseEntered(e);
-                if (new ThemeHandler().ReadTheme() == ThemesEnum.LIGHT_THEME) {
-                    btSedentary.setBackground(Color.decode("#B1EA9D"));
-                    btSlightlyActive.setBackground(Color.decode("#FFFFFF"));
-                    btActive.setBackground(Color.decode("#FFFFFF"));
-                    btVeryActive.setBackground(Color.decode("#FFFFFF"));
-                } else if (new ThemeHandler().ReadTheme() == ThemesEnum.DARK_THEME) {
-                    btSedentary.setBackground(Color.decode("#32AB5E"));
-                    btSlightlyActive.setBackground(Color.decode("#000000"));
-                    btActive.setBackground(Color.decode("#000000"));
-                    btVeryActive.setBackground(Color.decode("#000000"));
-                }
+                cB.ColorButtonGreen(btSedentary);
+                cB.ColorButtonWhite(btSlightlyActive);
+                cB.ColorButtonWhite(btActive);
+                cB.ColorButtonWhite(btVeryActive);
             }
         });
         btSlightlyActive.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseEntered(MouseEvent e) {
                 super.mouseEntered(e);
-                if (new ThemeHandler().ReadTheme() == ThemesEnum.LIGHT_THEME) {
-                    btSedentary.setBackground(Color.decode("#FFFFFF"));
-                    btSlightlyActive.setBackground(Color.decode("#B1EA9D"));
-                    btActive.setBackground(Color.decode("#FFFFFF"));
-                    btVeryActive.setBackground(Color.decode("#FFFFFF"));
-                } else if (new ThemeHandler().ReadTheme() == ThemesEnum.DARK_THEME) {
-                    btSedentary.setBackground(Color.decode("#000000"));
-                    btSlightlyActive.setBackground(Color.decode("#32AB5E"));
-                    btActive.setBackground(Color.decode("#000000"));
-                    btVeryActive.setBackground(Color.decode("#000000"));
-                }
+                cB.ColorButtonWhite(btSedentary);
+                cB.ColorButtonGreen(btSlightlyActive);
+                cB.ColorButtonWhite(btActive);
+                cB.ColorButtonWhite(btVeryActive);
             }
         });
         btActive.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseEntered(MouseEvent e) {
                 super.mouseEntered(e);
-                if (new ThemeHandler().ReadTheme() == ThemesEnum.LIGHT_THEME) {
-                    btSedentary.setBackground(Color.decode("#FFFFFF"));
-                    btSlightlyActive.setBackground(Color.decode("#FFFFFF"));
-                    btActive.setBackground(Color.decode("#B1EA9D"));
-                    btVeryActive.setBackground(Color.decode("#FFFFFF"));
-                } else if (new ThemeHandler().ReadTheme() == ThemesEnum.DARK_THEME) {
-                    btSedentary.setBackground(Color.decode("#000000"));
-                    btSlightlyActive.setBackground(Color.decode("#000000"));
-                    btActive.setBackground(Color.decode("#32AB5E"));
-                    btVeryActive.setBackground(Color.decode("#000000"));
-                }
+                cB.ColorButtonWhite(btSedentary);
+                cB.ColorButtonWhite(btSlightlyActive);
+                cB.ColorButtonGreen(btActive);
+                cB.ColorButtonWhite(btVeryActive);
             }
         });
         btVeryActive.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseEntered(MouseEvent e) {
                 super.mouseEntered(e);
-                if (new ThemeHandler().ReadTheme() == ThemesEnum.LIGHT_THEME) {
-                    btSedentary.setBackground(Color.decode("#FFFFFF"));
-                    btSlightlyActive.setBackground(Color.decode("#FFFFFF"));
-                    btActive.setBackground(Color.decode("#FFFFFF"));
-                    btVeryActive.setBackground(Color.decode("#B1EA9D"));
-                } else if (new ThemeHandler().ReadTheme() == ThemesEnum.DARK_THEME) {
-                    btSedentary.setBackground(Color.decode("#000000"));
-                    btSlightlyActive.setBackground(Color.decode("#000000"));
-                    btActive.setBackground(Color.decode("#000000"));
-                    btVeryActive.setBackground(Color.decode("#32AB5E"));
-                }
+                cB.ColorButtonWhite(btSedentary);
+                cB.ColorButtonWhite(btSlightlyActive);
+                cB.ColorButtonWhite(btActive);
+                cB.ColorButtonGreen(btVeryActive);
             }
         });
         MouseAdapter listener = new MouseAdapter() {
             @Override
             public void mouseExited(MouseEvent e) {
                 super.mouseExited(e);
-                if (new ThemeHandler().ReadTheme() == ThemesEnum.LIGHT_THEME) {
-                    btSedentary.setBackground(Color.decode("#FFFFFF"));
-                    btSlightlyActive.setBackground(Color.decode("#FFFFFF"));
-                    btActive.setBackground(Color.decode("#FFFFFF"));
-                    btVeryActive.setBackground(Color.decode("#FFFFFF"));
-                } else if (new ThemeHandler().ReadTheme() == ThemesEnum.DARK_THEME) {
-                    btSedentary.setBackground(Color.decode("#000000"));
-                    btSlightlyActive.setBackground(Color.decode("#000000"));
-                    btActive.setBackground(Color.decode("#000000"));
-                    btVeryActive.setBackground(Color.decode("#000000"));
-                }
+                cB.ColorButtonWhite(btSedentary);
+                cB.ColorButtonWhite(btSlightlyActive);
+                cB.ColorButtonWhite(btActive);
+                cB.ColorButtonGreen(btVeryActive);
             }
         };
         btActive.addMouseListener(listener);
@@ -155,7 +116,6 @@ public class Register2 extends JFrame {
     }
     private void next(RegisterExecutor registerExecutor){
         if (registerExecutor.getUserBuilder().getLifeStyle() != null){
-            //JOptionPane.showMessageDialog(buttonPanel, "Lifestyle: " + lifeStyle);
             setVisible(false);
             new Register3(registerExecutor);
         }

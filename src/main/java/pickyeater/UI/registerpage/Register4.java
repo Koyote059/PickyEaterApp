@@ -4,6 +4,7 @@ package pickyeater.UI.registerpage;
  * @author Claudio Di Maio
  */
 import pickyeater.UI.app.MainFrame;
+import pickyeater.themes.ColorButtons;
 import pickyeater.utils.AgeCalculator;
 import pickyeater.UI.leftbuttons.PanelButtons;
 import pickyeater.algorithms.HarrisBenedictCalculator;
@@ -32,16 +33,13 @@ public class Register4 extends JFrame {
 
     public Register4(RegisterExecutor registerExecutor) {
         setContentPane(mainPanel);
-        setSize(677, 507);    //pack();
-        //setLocation(350,150);
+        setSize(677, 507);
         setResizable(false);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setVisible(true);
 
         UserBuilder userBuilder = registerExecutor.getUserBuilder();
-
         resetNutrients(userBuilder);
-
         StringToNumber stn = new StringToNumber();
 
         btBack.addActionListener(actionEvent -> {

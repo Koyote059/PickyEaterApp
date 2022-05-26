@@ -5,6 +5,7 @@ package pickyeater.UI.registerpage;
  */
 import com.toedter.calendar.JDateChooser;
 import pickyeater.executors.user.RegisterExecutor;
+import pickyeater.themes.ColorButtons;
 import pickyeater.themes.filehandler.ThemeHandler;
 import pickyeater.themes.filehandler.ThemesEnum;
 import pickyeater.utils.AgeCalculator;
@@ -35,6 +36,7 @@ public class Register1 extends JFrame{
 
     public Register1() {
         RegisterExecutor registerExecutor = ExecutorProvider.getRegisterExecutor();
+        ColorButtons cB = new ColorButtons();
         this.userBuilder = registerExecutor.getUserBuilder();
         setContentPane(mainPanel);
         setSize(677, 507);    //pack();
@@ -43,33 +45,18 @@ public class Register1 extends JFrame{
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setVisible(true);
 
-        if (new ThemeHandler().ReadTheme() == ThemesEnum.LIGHT_THEME) {
-            btMale.setBackground(Color.decode("#FFFFFF"));
-            btFemale.setBackground(Color.decode("#FFFFFF"));
-        } else if (new ThemeHandler().ReadTheme() == ThemesEnum.DARK_THEME){
-            btMale.setBackground(Color.decode("#121212"));
-            btFemale.setBackground(Color.decode("#121212"));
-        }
+        cB.ColorButtonWhite(btMale);
+        cB.ColorButtonWhite(btFemale);
 
         // Sex
         btMale.addActionListener(actionEvent -> {
-            if (new ThemeHandler().ReadTheme() == ThemesEnum.LIGHT_THEME) {
-                btMale.setBackground(Color.decode("#B1EA9D"));
-                btFemale.setBackground(Color.decode("#FFFFFF"));
-            } else if (new ThemeHandler().ReadTheme() == ThemesEnum.DARK_THEME){
-                btMale.setBackground(Color.decode("#32AB5E"));
-                btFemale.setBackground(Color.decode("#121212"));
-            }
+            cB.ColorButtonGreen(btMale);
+            cB.ColorButtonWhite(btFemale);
             userBuilder.setSex(Sex.MALE);
         });
         btFemale.addActionListener(actionEvent -> {
-            if (new ThemeHandler().ReadTheme() == ThemesEnum.LIGHT_THEME) {
-                btMale.setBackground(Color.decode("#FFFFFF"));
-                btFemale.setBackground(Color.decode("#B1EA9D"));
-            } else if (new ThemeHandler().ReadTheme() == ThemesEnum.DARK_THEME){
-                btMale.setBackground(Color.decode("#121212"));
-                btFemale.setBackground(Color.decode("#32AB5E"));
-            }
+            cB.ColorButtonWhite(btMale);
+            cB.ColorButtonGreen(btFemale);
             userBuilder.setSex(Sex.FEMALE);
         });
 
