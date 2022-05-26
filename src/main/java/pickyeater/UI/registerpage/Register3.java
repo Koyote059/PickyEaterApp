@@ -30,7 +30,6 @@ public class Register3 extends JFrame {
         setVisible(true);
 
         ColorButtons cB = new ColorButtons();
-
         cB.ColorButtonWhite(btGainWeight);
         cB.ColorButtonWhite(btMaintainWeight);
         cB.ColorButtonWhite(btLoseWeight);
