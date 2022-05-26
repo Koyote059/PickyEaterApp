@@ -23,7 +23,6 @@ import java.awt.event.WindowEvent;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Optional;
 import java.util.List;
@@ -64,7 +63,8 @@ public class GroceriesPage extends PickyPage  {
         binLabel.addMouseListener(new MouseClickListener() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                int result = JOptionPane.showConfirmDialog(binLabel,"Are you sure you want to delete it?","Deleting  groceries",JOptionPane.YES_NO_OPTION);
+                int result = JOptionPane.showConfirmDialog(mainPanel,"Are you sure you want to delete it?","Deleting  " +
+                        "groceries",JOptionPane.YES_NO_OPTION);
                 if(result == JOptionPane.YES_OPTION){
                     groceriesExecutor.deleteGroceries();
                     PickyPage page = new UnavailableGroceriesPage(parent);
