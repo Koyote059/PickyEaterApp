@@ -11,11 +11,12 @@ import pickyeater.database.*;
 import pickyeater.executors.ExecutorProvider;
 import pickyeater.managers.EaterManager;
 import pickyeater.managers.PickyEaterManager;
-import pickyeater.themes.SystemTheme;
+import pickyeater.themes.filehandler.ThemeHandler;
 
 public class main {
     public static void main(String[] args) {
-        new SystemTheme().theme1();
+
+        new ThemeHandler().ReadTheme();
 
         //PickyEatersDatabase pickyEatersDB = new SQLPickyEaterDB("PickyEatersDB.sqlite");
         PickyEatersDatabase pickyEatersDB = new SQLPickyEaterDB("dbDiProva.sqlite");

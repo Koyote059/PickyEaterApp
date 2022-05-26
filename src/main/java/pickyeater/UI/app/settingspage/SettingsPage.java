@@ -7,7 +7,9 @@ import pickyeater.UI.choosers.MealsChooser;
 import pickyeater.UI.leftbuttons.PanelButtonsConverter;
 import pickyeater.UI.registerpage.Register1;
 import pickyeater.executors.ExecutorProvider;
+import pickyeater.executors.SettingsExecutor;
 import pickyeater.themes.SystemTheme;
+import pickyeater.themes.filehandler.ThemesEnum;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -84,11 +86,14 @@ public class SettingsPage extends PickyPage {
 
         cbTheme.addActionListener(e -> {
             if (cbTheme.getSelectedIndex() == 0){
-                new SystemTheme().theme1();
+                ExecutorProvider.getSettingsExecutor().changeTheme(ThemesEnum.LIGHT_THEME);
+//                new SystemTheme().theme1();
             } else if (cbTheme.getSelectedIndex() == 1) {
-                new SystemTheme().theme2();
+                ExecutorProvider.getSettingsExecutor().changeTheme(ThemesEnum.DARK_THEME);
+//                new SystemTheme().theme2();
             } else if (cbTheme.getSelectedIndex() == 2) {
-                new SystemTheme().theme0();
+                ExecutorProvider.getSettingsExecutor().changeTheme(ThemesEnum.GREEN_THEME);
+//                new SystemTheme().theme0();
             }
             SwingUtilities.updateComponentTreeUI(MainFrame.getFrames()[0]);
         });
