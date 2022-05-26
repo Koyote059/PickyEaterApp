@@ -21,8 +21,8 @@ public class GroceriesExecutor {
 
     public boolean isGroceriesAvailable() {
         UserManager userManager = eaterManager.getUserManager();
-        Optional<Groceries> optionalGroceries = userManager.getGroceries();
-        return optionalGroceries.isPresent();
+        Optional<MealPlan> optionalMealPlan = userManager.getUser().get().getMealPlan();
+        return optionalMealPlan.isPresent();
     }
 
     public Optional<Groceries> getGroceries() {
@@ -41,5 +41,21 @@ public class GroceriesExecutor {
         if(groceriesOptional.isEmpty()) return;
         Groceries groceries = groceriesOptional.get();
         userManager.deleteGroceries(groceries);
+    }
+
+    public boolean isGroceriesGenerated() {
+        UserManager userManager = eaterManager.getUserManager();
+        Optional<Groceries> groceriesOptional = userManager.getGroceries();
+        return groceriesOptional.isPresent();
+    }
+
+
+    public void generateGroceries() {
+        GroceriesGenerator generator = new PickyGroceriesGenerator();
+        UserManager userManager = eaterManager.getUserManager();
+        User user = userManager.getUser().get();
+        MealPlan mealPlan = user.getMealPlan().get();
+        Groceries groceries = generator.generate(mealPlan);
+        userManager.saveGroceries(groceries.generateCheckList());
     }
 }

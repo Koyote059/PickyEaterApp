@@ -3,6 +3,7 @@ package pickyeater.UI.app.groceriespage;
 import pickyeater.UI.app.MainFrame;
 import pickyeater.UI.app.PickyPage;
 import pickyeater.UI.leftbuttons.PanelButtonsConverter;
+import pickyeater.basics.groceries.GroceriesGenerator;
 import pickyeater.executors.ExecutorProvider;
 import pickyeater.executors.GroceriesExecutor;
 import pickyeater.themes.ColorButtons;
@@ -29,13 +30,10 @@ public class UnavailableGroceriesPage extends PickyPage {
         setLayout(new BorderLayout());
         add(mainPanel,BorderLayout.CENTER);
 
-        if(groceriesExecutor.isGroceriesAvailable()){
-            PickyPage groceriesPage = new GroceriesPage(groceriesExecutor,parent);
-            groceriesPage.showPage();
-        }
         setNavigationMenuListeners();
         generateGroceriesButton.addActionListener( e -> {
             if(groceriesExecutor.isGroceriesAvailable()){
+                groceriesExecutor.generateGroceries();
                 PickyPage groceriesPage = new GroceriesPage(groceriesExecutor,parent);
                 groceriesPage.showPage();
             } else {
@@ -60,7 +58,7 @@ public class UnavailableGroceriesPage extends PickyPage {
 
     @Override
     public void showPage() {
-        if(groceriesExecutor.isGroceriesAvailable()) {
+        if(groceriesExecutor.isGroceriesGenerated()) {
             PickyPage groceriesPage = new GroceriesPage(groceriesExecutor, parent);
             groceriesPage.showPage();
         } else super.showPage();

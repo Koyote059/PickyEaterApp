@@ -13,7 +13,6 @@ public class PickyUserManager implements UserManager {
     private final UserDatabase userDatabase;
     private final GroceriesDatabase groceriesDatabase;
     private User user = null;
-
     private Groceries groceries = null;
 
     public PickyUserManager(UserDatabase userDatabase, GroceriesDatabase groceriesDatabase) {

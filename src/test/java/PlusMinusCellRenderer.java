@@ -1,3 +1,8 @@
+import org.junit.jupiter.api.Test;
+import pickyeater.algorithms.BodyFatCalculator;
+import pickyeater.algorithms.DeurenbergCalculator;
+import pickyeater.basics.user.Sex;
+
 import java.awt.*;
 import javax.swing.*;
 import javax.swing.table.*;
@@ -18,5 +23,13 @@ class PlusMinusCellRenderer extends JPanel implements TableCellRenderer {
         jPanel.add(BorderLayout.LINE_END,new JTextField( value.toString()));
         this.add(jPanel);
         return this;
+    }
+
+
+    @Test
+    public void bodyFat(){
+
+        BodyFatCalculator c = new DeurenbergCalculator();
+        System.out.println(c.calculate(150,300,21, Sex.FEMALE));
     }
 }
