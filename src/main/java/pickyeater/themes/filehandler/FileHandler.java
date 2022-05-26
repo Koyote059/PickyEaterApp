@@ -43,8 +43,8 @@ public class FileHandler {
             myReader.close();
             return data;
         } catch (FileNotFoundException e) {
-            System.out.println("An error occurred.");
-            e.printStackTrace();
+            System.out.println("themes.txt didn't exist, created");
+            //e.printStackTrace();
         }
         return data;
     }
