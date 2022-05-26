@@ -5,6 +5,8 @@ package pickyeater.UI.registerpage;
  */
 import pickyeater.basics.user.LifeStyle;
 import pickyeater.executors.user.RegisterExecutor;
+import pickyeater.themes.filehandler.ThemeHandler;
+import pickyeater.themes.filehandler.ThemesEnum;
 
 import javax.swing.*;
 import java.awt.*;
@@ -25,11 +27,17 @@ public class Register2 extends JFrame {
         setResizable(false);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setVisible(true);
-
-        btSedentary.setBackground(Color.decode("#FFFFFF"));
-        btSlightlyActive.setBackground(Color.decode("#FFFFFF"));
-        btActive.setBackground(Color.decode("#FFFFFF"));
-        btVeryActive.setBackground(Color.decode("#FFFFFF"));
+        if (new ThemeHandler().ReadTheme() == ThemesEnum.LIGHT_THEME) {
+            btSedentary.setBackground(Color.decode("#FFFFFF"));
+            btSlightlyActive.setBackground(Color.decode("#FFFFFF"));
+            btActive.setBackground(Color.decode("#FFFFFF"));
+            btVeryActive.setBackground(Color.decode("#FFFFFF"));
+        } else if (new ThemeHandler().ReadTheme() == ThemesEnum.DARK_THEME) {
+            btSedentary.setBackground(Color.decode("#000000"));
+            btSlightlyActive.setBackground(Color.decode("#000000"));
+            btActive.setBackground(Color.decode("#000000"));
+            btVeryActive.setBackground(Color.decode("#000000"));
+        }
 
         btSedentary.addActionListener(actionEvent -> {
             registerExecutor.getUserBuilder().setLifeStyle(LifeStyle.SEDENTARY);
@@ -59,50 +67,85 @@ public class Register2 extends JFrame {
             @Override
             public void mouseEntered(MouseEvent e) {
                 super.mouseEntered(e);
-                btSedentary.setBackground(Color.decode("#B1EA9D"));
-                btSlightlyActive.setBackground(Color.decode("#FFFFFF"));
-                btActive.setBackground(Color.decode("#FFFFFF"));
-                btVeryActive.setBackground(Color.decode("#FFFFFF"));
+                if (new ThemeHandler().ReadTheme() == ThemesEnum.LIGHT_THEME) {
+                    btSedentary.setBackground(Color.decode("#B1EA9D"));
+                    btSlightlyActive.setBackground(Color.decode("#FFFFFF"));
+                    btActive.setBackground(Color.decode("#FFFFFF"));
+                    btVeryActive.setBackground(Color.decode("#FFFFFF"));
+                } else if (new ThemeHandler().ReadTheme() == ThemesEnum.DARK_THEME) {
+                    btSedentary.setBackground(Color.decode("#32AB5E"));
+                    btSlightlyActive.setBackground(Color.decode("#000000"));
+                    btActive.setBackground(Color.decode("#000000"));
+                    btVeryActive.setBackground(Color.decode("#000000"));
+                }
             }
         });
         btSlightlyActive.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseEntered(MouseEvent e) {
                 super.mouseEntered(e);
-                btSedentary.setBackground(Color.decode("#FFFFFF"));
-                btSlightlyActive.setBackground(Color.decode("#B1EA9D"));
-                btActive.setBackground(Color.decode("#FFFFFF"));
-                btVeryActive.setBackground(Color.decode("#FFFFFF"));
+                if (new ThemeHandler().ReadTheme() == ThemesEnum.LIGHT_THEME) {
+                    btSedentary.setBackground(Color.decode("#FFFFFF"));
+                    btSlightlyActive.setBackground(Color.decode("#B1EA9D"));
+                    btActive.setBackground(Color.decode("#FFFFFF"));
+                    btVeryActive.setBackground(Color.decode("#FFFFFF"));
+                } else if (new ThemeHandler().ReadTheme() == ThemesEnum.DARK_THEME) {
+                    btSedentary.setBackground(Color.decode("#000000"));
+                    btSlightlyActive.setBackground(Color.decode("#32AB5E"));
+                    btActive.setBackground(Color.decode("#000000"));
+                    btVeryActive.setBackground(Color.decode("#000000"));
+                }
             }
         });
         btActive.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseEntered(MouseEvent e) {
                 super.mouseEntered(e);
-                btSedentary.setBackground(Color.decode("#FFFFFF"));
-                btSlightlyActive.setBackground(Color.decode("#FFFFFF"));
-                btActive.setBackground(Color.decode("#B1EA9D"));
-                btVeryActive.setBackground(Color.decode("#FFFFFF"));
+                if (new ThemeHandler().ReadTheme() == ThemesEnum.LIGHT_THEME) {
+                    btSedentary.setBackground(Color.decode("#FFFFFF"));
+                    btSlightlyActive.setBackground(Color.decode("#FFFFFF"));
+                    btActive.setBackground(Color.decode("#B1EA9D"));
+                    btVeryActive.setBackground(Color.decode("#FFFFFF"));
+                } else if (new ThemeHandler().ReadTheme() == ThemesEnum.DARK_THEME) {
+                    btSedentary.setBackground(Color.decode("#000000"));
+                    btSlightlyActive.setBackground(Color.decode("#000000"));
+                    btActive.setBackground(Color.decode("#32AB5E"));
+                    btVeryActive.setBackground(Color.decode("#000000"));
+                }
             }
         });
         btVeryActive.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseEntered(MouseEvent e) {
                 super.mouseEntered(e);
-                btSedentary.setBackground(Color.decode("#FFFFFF"));
-                btSlightlyActive.setBackground(Color.decode("#FFFFFF"));
-                btActive.setBackground(Color.decode("#FFFFFF"));
-                btVeryActive.setBackground(Color.decode("#B1EA9D"));
+                if (new ThemeHandler().ReadTheme() == ThemesEnum.LIGHT_THEME) {
+                    btSedentary.setBackground(Color.decode("#FFFFFF"));
+                    btSlightlyActive.setBackground(Color.decode("#FFFFFF"));
+                    btActive.setBackground(Color.decode("#FFFFFF"));
+                    btVeryActive.setBackground(Color.decode("#B1EA9D"));
+                } else if (new ThemeHandler().ReadTheme() == ThemesEnum.DARK_THEME) {
+                    btSedentary.setBackground(Color.decode("#000000"));
+                    btSlightlyActive.setBackground(Color.decode("#000000"));
+                    btActive.setBackground(Color.decode("#000000"));
+                    btVeryActive.setBackground(Color.decode("#32AB5E"));
+                }
             }
         });
         MouseAdapter listener = new MouseAdapter() {
             @Override
             public void mouseExited(MouseEvent e) {
                 super.mouseExited(e);
-                btSedentary.setBackground(Color.decode("#FFFFFF"));
-                btSlightlyActive.setBackground(Color.decode("#FFFFFF"));
-                btActive.setBackground(Color.decode("#FFFFFF"));
-                btVeryActive.setBackground(Color.decode("#FFFFFF"));
+                if (new ThemeHandler().ReadTheme() == ThemesEnum.LIGHT_THEME) {
+                    btSedentary.setBackground(Color.decode("#FFFFFF"));
+                    btSlightlyActive.setBackground(Color.decode("#FFFFFF"));
+                    btActive.setBackground(Color.decode("#FFFFFF"));
+                    btVeryActive.setBackground(Color.decode("#FFFFFF"));
+                } else if (new ThemeHandler().ReadTheme() == ThemesEnum.DARK_THEME) {
+                    btSedentary.setBackground(Color.decode("#000000"));
+                    btSlightlyActive.setBackground(Color.decode("#000000"));
+                    btActive.setBackground(Color.decode("#000000"));
+                    btVeryActive.setBackground(Color.decode("#000000"));
+                }
             }
         };
         btActive.addMouseListener(listener);

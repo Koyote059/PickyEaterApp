@@ -9,6 +9,7 @@ import pickyeater.basics.food.Quantity;
 import pickyeater.basics.groceries.Groceries;
 import pickyeater.basics.groceries.GroceriesCheckList;
 import pickyeater.executors.GroceriesExecutor;
+import pickyeater.themes.ColorButtons;
 import pickyeater.utils.MouseClickListener;
 
 import javax.imageio.ImageIO;
@@ -66,12 +67,7 @@ public class GroceriesPage extends PickyPage  {
         });
 
 
-        btDailyProgress.setBackground(Color.decode("#FFFFFF"));
-        btDiet.setBackground(Color.decode("#FFFFFF"));
-        btFood.setBackground(Color.decode("#FFFFFF"));
-        btGroceries.setBackground(Color.decode("#B1EA9D"));
-        btUser.setBackground(Color.decode("#FFFFFF"));
-        btSettings.setBackground(Color.decode("#FFFFFF"));
+        new ColorButtons().ColorLeftButtons(btGroceries, btDailyProgress, btSettings, btDiet, btUser);
 
         setNavigationMenuListeners();
         Optional<Groceries> groceriesOptional = groceriesExecutor.getGroceries();

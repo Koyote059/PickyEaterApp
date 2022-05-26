@@ -10,6 +10,7 @@ import pickyeater.UI.leftbuttons.PanelButtonsConverter;
 import pickyeater.basics.user.User;
 import pickyeater.executors.ExecutorProvider;
 import pickyeater.executors.user.UserExecutor;
+import pickyeater.themes.ColorButtons;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -76,13 +77,7 @@ public class UserPage extends PickyPage {
         txtFats.setText(df.format(user.getUserGoal().getRequiredNutrients().getFats()));
         txtCalories.setText(df.format(user.getUserGoal().getRequiredNutrients().getCalories()));
 
-        btDailyProgress.setBackground(Color.decode("#FFFFFF"));
-        btDiet.setBackground(Color.decode("#FFFFFF"));
-        btGroceries.setBackground(Color.decode("#FFFFFF"));
-        btUser.setBackground(Color.decode("#B1EA9D"));
-        btSettings.setBackground(Color.decode("#FFFFFF"));
-
-
+        new ColorButtons().ColorLeftButtons(btUser, btDailyProgress, btSettings, btGroceries, btDiet);
 
         btEditMode.addActionListener(e -> {
             PickyPage userEditModePage = new UserEditModePage(parent);

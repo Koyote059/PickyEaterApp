@@ -6,6 +6,8 @@ package pickyeater.UI.registerpage;
 
 import pickyeater.basics.user.WeightGoal;
 import pickyeater.executors.user.RegisterExecutor;
+import pickyeater.themes.filehandler.ThemeHandler;
+import pickyeater.themes.filehandler.ThemesEnum;
 
 import javax.swing.*;
 import java.awt.*;
@@ -25,10 +27,15 @@ public class Register3 extends JFrame {
         setResizable(false);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setVisible(true);
-
+        if (new ThemeHandler().ReadTheme() == ThemesEnum.LIGHT_THEME) {
         btLoseWeight.setBackground(Color.decode("#FFFFFF"));
         btGainWeight.setBackground(Color.decode("#FFFFFF"));
         btMaintainWeight.setBackground(Color.decode("#FFFFFF"));
+        } else if (new ThemeHandler().ReadTheme() == ThemesEnum.DARK_THEME) {
+            btLoseWeight.setBackground(Color.decode("#000000"));
+            btGainWeight.setBackground(Color.decode("#000000"));
+            btMaintainWeight.setBackground(Color.decode("#000000"));
+        }
 
         btLoseWeight.addActionListener(actionEvent -> {
             registerExecutor.getUserBuilder().setWeightVariationGoal(WeightGoal.LOSE_WEIGHT);
@@ -55,36 +62,60 @@ public class Register3 extends JFrame {
             @Override
             public void mouseEntered(MouseEvent e) {
                 super.mouseEntered(e);
-                btLoseWeight.setBackground(Color.decode("#B1EA9D"));
-                btGainWeight.setBackground(Color.decode("#FFFFFF"));
-                btMaintainWeight.setBackground(Color.decode("#FFFFFF"));
+                if (new ThemeHandler().ReadTheme() == ThemesEnum.LIGHT_THEME) {
+                    btLoseWeight.setBackground(Color.decode("#B1EA9D"));
+                    btGainWeight.setBackground(Color.decode("#FFFFFF"));
+                    btMaintainWeight.setBackground(Color.decode("#FFFFFF"));
+                } else if (new ThemeHandler().ReadTheme() == ThemesEnum.DARK_THEME) {
+                    btLoseWeight.setBackground(Color.decode("#32AB5E"));
+                    btGainWeight.setBackground(Color.decode("#000000"));
+                    btMaintainWeight.setBackground(Color.decode("#000000"));
+                }
             }
         });
         btGainWeight.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseEntered(MouseEvent e) {
                 super.mouseEntered(e);
-                btLoseWeight.setBackground(Color.decode("#FFFFFF"));
-                btGainWeight.setBackground(Color.decode("#B1EA9D"));
-                btMaintainWeight.setBackground(Color.decode("#FFFFFF"));
+                if (new ThemeHandler().ReadTheme() == ThemesEnum.LIGHT_THEME) {
+                    btLoseWeight.setBackground(Color.decode("#FFFFFF"));
+                    btGainWeight.setBackground(Color.decode("#B1EA9D"));
+                    btMaintainWeight.setBackground(Color.decode("#FFFFFF"));
+                } else if (new ThemeHandler().ReadTheme() == ThemesEnum.DARK_THEME) {
+                    btLoseWeight.setBackground(Color.decode("#000000"));
+                    btGainWeight.setBackground(Color.decode("#32AB5E"));
+                    btMaintainWeight.setBackground(Color.decode("#000000"));
+                }
             }
         });
         btMaintainWeight.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseEntered(MouseEvent e) {
                 super.mouseEntered(e);
-                btLoseWeight.setBackground(Color.decode("#FFFFFF"));
-                btGainWeight.setBackground(Color.decode("#FFFFFF"));
-                btMaintainWeight.setBackground(Color.decode("#B1EA9D"));
+                if (new ThemeHandler().ReadTheme() == ThemesEnum.LIGHT_THEME) {
+                    btLoseWeight.setBackground(Color.decode("#FFFFFF"));
+                    btGainWeight.setBackground(Color.decode("#FFFFFF"));
+                    btMaintainWeight.setBackground(Color.decode("#B1EA9D"));
+                } else if (new ThemeHandler().ReadTheme() == ThemesEnum.DARK_THEME) {
+                    btLoseWeight.setBackground(Color.decode("#000000"));
+                    btGainWeight.setBackground(Color.decode("#000000"));
+                    btMaintainWeight.setBackground(Color.decode("#32AB5E"));
+                }
             }
         });
         MouseAdapter listener = new MouseAdapter() {
             @Override
             public void mouseExited(MouseEvent e) {
                 super.mouseExited(e);
-                btLoseWeight.setBackground(Color.decode("#FFFFFF"));
-                btGainWeight.setBackground(Color.decode("#FFFFFF"));
-                btMaintainWeight.setBackground(Color.decode("#FFFFFF"));
+                if (new ThemeHandler().ReadTheme() == ThemesEnum.LIGHT_THEME) {
+                    btLoseWeight.setBackground(Color.decode("#FFFFFF"));
+                    btGainWeight.setBackground(Color.decode("#FFFFFF"));
+                    btMaintainWeight.setBackground(Color.decode("#FFFFFF"));
+                } else if (new ThemeHandler().ReadTheme() == ThemesEnum.DARK_THEME) {
+                    btLoseWeight.setBackground(Color.decode("#000000"));
+                    btGainWeight.setBackground(Color.decode("#000000"));
+                    btMaintainWeight.setBackground(Color.decode("#000000"));
+                }
             }
         };
         btGainWeight.addMouseListener(listener);

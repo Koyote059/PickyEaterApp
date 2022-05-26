@@ -34,6 +34,5 @@ public class main {
             new MainFrame();
             MainFrame.changePage(PanelButtons.PROGRESS);
         }
-
     }
 }

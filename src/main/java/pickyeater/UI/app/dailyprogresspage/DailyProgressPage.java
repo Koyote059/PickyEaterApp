@@ -11,6 +11,7 @@ import pickyeater.UI.leftbuttons.PanelButtonsConverter;
 import pickyeater.basics.food.Meal;
 import pickyeater.executors.DailyProgressExecutor;
 import pickyeater.executors.ExecutorProvider;
+import pickyeater.themes.ColorButtons;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -39,11 +40,7 @@ public class DailyProgressPage extends PickyPage {
         super(parent);
         setLayout(new BorderLayout());
         add(mainPanel,BorderLayout.CENTER);
-        btDailyProgress.setBackground(Color.decode("#B1EA9D"));
-        btDiet.setBackground(Color.decode("#FFFFFF"));
-        btGroceries.setBackground(Color.decode("#FFFFFF"));
-        btUser.setBackground(Color.decode("#FFFFFF"));
-        btSettings.setBackground(Color.decode("#FFFFFF"));
+        new ColorButtons().ColorLeftButtons(btDailyProgress, btDiet, btGroceries, btUser, btSettings);
         dailyProgressExecutor = ExecutorProvider.getDailyProgressExecutor();
         btAddEatenMeals.addActionListener(e -> {
             MealsChooser chooser = new MealsChooser(parent);
