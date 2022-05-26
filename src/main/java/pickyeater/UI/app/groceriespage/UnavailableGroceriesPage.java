@@ -25,7 +25,7 @@ public class UnavailableGroceriesPage extends PickyPage {
 
     public UnavailableGroceriesPage(JFrame parent) {
         super(parent);
-
+        new ColorButtons().ColorLeftButtons(btGroceries, btDailyProgress, btSettings, btDiet, btUser);
         setLayout(new BorderLayout());
         add(mainPanel,BorderLayout.CENTER);
 
@@ -33,7 +33,6 @@ public class UnavailableGroceriesPage extends PickyPage {
             PickyPage groceriesPage = new GroceriesPage(groceriesExecutor,parent);
             groceriesPage.showPage();
         }
-        new ColorButtons().ColorLeftButtons(btGroceries, btDailyProgress, btSettings, btDiet, btUser);
         setNavigationMenuListeners();
         generateGroceriesButton.addActionListener( e -> {
             if(groceriesExecutor.isGroceriesAvailable()){

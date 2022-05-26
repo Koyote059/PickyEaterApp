@@ -35,7 +35,6 @@ public class MealPlanUnavailablePage extends PickyPage {
         this.mealPlanCreator = ExecutorProvider.getMealPlanExecutor();
         new ColorButtons().ColorLeftButtons(btDiet, btDailyProgress, btSettings, btGroceries, btUser);
 
-
         setLayout(new BorderLayout());
         add(mainPanel,BorderLayout.CENTER);
         setNavigationMenuListeners();
