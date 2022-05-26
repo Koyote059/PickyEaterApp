@@ -76,7 +76,7 @@ public class MealCreator extends JDialog  {
         });
         JScrollPane scrollPane = new JScrollPane();
         scrollPane.setViewportView(ingredientsTable);
-        scrollPane.setPreferredSize(new Dimension(150,250));
+        //scrollPane.setPreferredSize(new Dimension(150,250));
         mainPanel.add(BorderLayout.LINE_END, scrollPane);
 
         JPanel buttonPanel = new JPanel(new BorderLayout());
@@ -140,8 +140,9 @@ public class MealCreator extends JDialog  {
         draw();
         pack();
 
-        setLocationRelativeTo(null);
+        setSize(new Dimension(677,507));
         setResizable(false);
+        setLocationRelativeTo(parent);
     }
 
     private void draw() {

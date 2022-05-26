@@ -14,6 +14,7 @@ import pickyeater.basics.mealplan.PickyMealPlan;
 import pickyeater.basics.user.User;
 import pickyeater.executors.ExecutorProvider;
 import pickyeater.executors.MealPlanCreatorExecutor;
+import pickyeater.themes.ColorButtons;
 
 import javax.swing.*;
 import java.awt.*;
@@ -32,12 +33,7 @@ public class MealPlanUnavailablePage extends PickyPage {
     public MealPlanUnavailablePage(JFrame parent) {
         super(parent);
         this.mealPlanCreator = ExecutorProvider.getMealPlanExecutor();
-        btDailyProgress.setBackground(Color.decode("#FFFFFF"));
-        btDiet.setBackground(Color.decode("#B1EA9D"));
-        btGroceries.setBackground(Color.decode("#FFFFFF"));
-        btUser.setBackground(Color.decode("#FFFFFF"));
-        btSettings.setBackground(Color.decode("#FFFFFF"));
-
+        new ColorButtons().ColorLeftButtons(btDiet, btDailyProgress, btSettings, btGroceries, btUser);
 
         setLayout(new BorderLayout());
         add(mainPanel,BorderLayout.CENTER);

@@ -7,7 +7,11 @@ import pickyeater.UI.choosers.MealsChooser;
 import pickyeater.UI.leftbuttons.PanelButtonsConverter;
 import pickyeater.UI.registerpage.Register1;
 import pickyeater.executors.ExecutorProvider;
+import pickyeater.executors.SettingsExecutor;
+import pickyeater.themes.ColorButtons;
 import pickyeater.themes.SystemTheme;
+import pickyeater.themes.filehandler.ThemeHandler;
+import pickyeater.themes.filehandler.ThemesEnum;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -36,18 +40,19 @@ public class SettingsPage extends PickyPage {
 
     public SettingsPage(JFrame parent) {
         super(parent);
-        btDailyProgress.setBackground(Color.decode("#FFFFFF"));
-        btDiet.setBackground(Color.decode("#FFFFFF"));
-        btGroceries.setBackground(Color.decode("#FFFFFF"));
-        btUser.setBackground(Color.decode("#FFFFFF"));
-        btSettings.setBackground(Color.decode("#B1EA9D"));
+        new ColorButtons().ColorLeftButtons(btSettings, btDailyProgress, btDiet, btGroceries, btUser);
+        ThemesEnum te = new ThemeHandler().ReadTheme();
+        if (te == ThemesEnum.LIGHT_THEME) {
+            cbTheme.setSelectedIndex(0);
+        } else if (te == ThemesEnum.DARK_THEME) {
+            cbTheme.setSelectedIndex(1);
+        } else if (te == ThemesEnum.GREEN_THEME) {
+            cbTheme.setSelectedIndex(2);
+        }
         txtDeletingZone.setForeground(Color.red);
         btDeleteUser.setForeground(Color.red);
-        btDeleteUser.setBackground(Color.white);
         btResetMeals.setForeground(Color.red);
-        btResetMeals.setBackground(Color.white);
         btResetIngredients.setForeground(Color.red);
-        btResetIngredients.setBackground(Color.white);
 
         txtImage.setText("");
         try {
@@ -84,11 +89,11 @@ public class SettingsPage extends PickyPage {
 
         cbTheme.addActionListener(e -> {
             if (cbTheme.getSelectedIndex() == 0){
-                new SystemTheme().theme1();
+                ExecutorProvider.getSettingsExecutor().changeTheme(ThemesEnum.LIGHT_THEME);
             } else if (cbTheme.getSelectedIndex() == 1) {
-                new SystemTheme().theme2();
+                ExecutorProvider.getSettingsExecutor().changeTheme(ThemesEnum.DARK_THEME);
             } else if (cbTheme.getSelectedIndex() == 2) {
-                new SystemTheme().theme0();
+                ExecutorProvider.getSettingsExecutor().changeTheme(ThemesEnum.GREEN_THEME);
             }
             SwingUtilities.updateComponentTreeUI(MainFrame.getFrames()[0]);
         });
@@ -117,6 +122,4 @@ public class SettingsPage extends PickyPage {
         btGroceries.addActionListener(listener);
         btDiet.addActionListener(listener);
     }
-
-
 }

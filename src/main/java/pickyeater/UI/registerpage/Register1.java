@@ -5,6 +5,9 @@ package pickyeater.UI.registerpage;
  */
 import com.toedter.calendar.JDateChooser;
 import pickyeater.executors.user.RegisterExecutor;
+import pickyeater.themes.ColorButtons;
+import pickyeater.themes.filehandler.ThemeHandler;
+import pickyeater.themes.filehandler.ThemesEnum;
 import pickyeater.utils.AgeCalculator;
 import pickyeater.algorithms.BodyFatCalculator;
 import pickyeater.algorithms.DeurenbergCalculator;
@@ -33,6 +36,7 @@ public class Register1 extends JFrame{
 
     public Register1() {
         RegisterExecutor registerExecutor = ExecutorProvider.getRegisterExecutor();
+        ColorButtons cB = new ColorButtons();
         this.userBuilder = registerExecutor.getUserBuilder();
         setContentPane(mainPanel);
         setSize(677, 507);    //pack();
@@ -41,18 +45,18 @@ public class Register1 extends JFrame{
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setVisible(true);
 
-        btMale.setBackground(Color.decode("#FFFFFF"));
-        btFemale.setBackground(Color.decode("#FFFFFF"));
+        cB.ColorButtonWhite(btMale);
+        cB.ColorButtonWhite(btFemale);
 
         // Sex
         btMale.addActionListener(actionEvent -> {
-            btMale.setBackground(Color.decode("#B1EA9D"));
-            btFemale.setBackground(Color.decode("#FFFFFF"));
+            cB.ColorButtonGreen(btMale);
+            cB.ColorButtonWhite(btFemale);
             userBuilder.setSex(Sex.MALE);
         });
         btFemale.addActionListener(actionEvent -> {
-            btMale.setBackground(Color.decode("#FFFFFF"));
-            btFemale.setBackground(Color.decode("#B1EA9D"));
+            cB.ColorButtonWhite(btMale);
+            cB.ColorButtonGreen(btFemale);
             userBuilder.setSex(Sex.FEMALE);
         });
 

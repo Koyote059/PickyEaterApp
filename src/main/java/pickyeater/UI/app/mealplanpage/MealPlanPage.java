@@ -12,6 +12,7 @@ import pickyeater.basics.food.Meal;
 import pickyeater.basics.mealplan.DailyMealPlan;
 import pickyeater.executors.ExecutorProvider;
 import pickyeater.executors.MealPlanViewerExecutor;
+import pickyeater.themes.ColorButtons;
 import pickyeater.utils.MouseClickListener;
 
 import javax.imageio.ImageIO;
@@ -86,11 +87,7 @@ public class MealPlanPage extends PickyPage {
         tableModel.addColumn("Meals");
         tableModel.addColumn("Quantity");
 
-        btDailyProgress.setBackground(Color.decode("#FFFFFF"));
-        btDiet.setBackground(Color.decode("#B1EA9D"));
-        btGroceries.setBackground(Color.decode("#FFFFFF"));
-        btUser.setBackground(Color.decode("#FFFFFF"));
-        btSettings.setBackground(Color.decode("#FFFFFF"));
+        new ColorButtons().ColorLeftButtons(btDiet, btDailyProgress, btSettings, btGroceries, btUser);
 
         setButtonsListeners(parent);
         dailyMealsTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);

@@ -21,6 +21,7 @@ import pickyeater.builders.PickyUserBuilder;
 import pickyeater.builders.UserBuilder;
 import pickyeater.executors.ExecutorProvider;
 import pickyeater.executors.user.UserEditModeExecutor;
+import pickyeater.themes.ColorButtons;
 import pickyeater.utils.AgeCalculator;
 import pickyeater.utils.JCalendarToLocalDate;
 import pickyeater.utils.StringToNumber;
@@ -116,11 +117,7 @@ public class UserEditModePage extends PickyPage {
         tfFats.setText(df.format(user.getUserGoal().getRequiredNutrients().getFats()));
         txtCalories.setText(df.format(user.getUserGoal().getRequiredNutrients().getCalories()));
 
-        btDailyProgress.setBackground(Color.decode("#FFFFFF"));
-        btDiet.setBackground(Color.decode("#FFFFFF"));
-        btGroceries.setBackground(Color.decode("#FFFFFF"));
-        btUser.setBackground(Color.decode("#B1EA9D"));
-        btSettings.setBackground(Color.decode("#FFFFFF"));
+        new ColorButtons().ColorLeftButtons(btUser, btDailyProgress, btSettings, btGroceries, btDiet);
 
         newUserBuilder.setDateOfBirth(new JCalendarToLocalDate().jCalToLocDate(jBirthdayChooser.getDate()));
 

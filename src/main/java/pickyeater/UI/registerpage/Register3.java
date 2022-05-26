@@ -6,6 +6,9 @@ package pickyeater.UI.registerpage;
 
 import pickyeater.basics.user.WeightGoal;
 import pickyeater.executors.user.RegisterExecutor;
+import pickyeater.themes.ColorButtons;
+import pickyeater.themes.filehandler.ThemeHandler;
+import pickyeater.themes.filehandler.ThemesEnum;
 
 import javax.swing.*;
 import java.awt.*;
@@ -26,9 +29,10 @@ public class Register3 extends JFrame {
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setVisible(true);
 
-        btLoseWeight.setBackground(Color.decode("#FFFFFF"));
-        btGainWeight.setBackground(Color.decode("#FFFFFF"));
-        btMaintainWeight.setBackground(Color.decode("#FFFFFF"));
+        ColorButtons cB = new ColorButtons();
+        cB.ColorButtonWhite(btGainWeight);
+        cB.ColorButtonWhite(btMaintainWeight);
+        cB.ColorButtonWhite(btLoseWeight);
 
         btLoseWeight.addActionListener(actionEvent -> {
             registerExecutor.getUserBuilder().setWeightVariationGoal(WeightGoal.LOSE_WEIGHT);
@@ -55,36 +59,36 @@ public class Register3 extends JFrame {
             @Override
             public void mouseEntered(MouseEvent e) {
                 super.mouseEntered(e);
-                btLoseWeight.setBackground(Color.decode("#B1EA9D"));
-                btGainWeight.setBackground(Color.decode("#FFFFFF"));
-                btMaintainWeight.setBackground(Color.decode("#FFFFFF"));
+                cB.ColorButtonWhite(btGainWeight);
+                cB.ColorButtonWhite(btMaintainWeight);
+                cB.ColorButtonGreen(btLoseWeight);
             }
         });
         btGainWeight.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseEntered(MouseEvent e) {
                 super.mouseEntered(e);
-                btLoseWeight.setBackground(Color.decode("#FFFFFF"));
-                btGainWeight.setBackground(Color.decode("#B1EA9D"));
-                btMaintainWeight.setBackground(Color.decode("#FFFFFF"));
+                cB.ColorButtonGreen(btGainWeight);
+                cB.ColorButtonWhite(btMaintainWeight);
+                cB.ColorButtonWhite(btLoseWeight);
             }
         });
         btMaintainWeight.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseEntered(MouseEvent e) {
                 super.mouseEntered(e);
-                btLoseWeight.setBackground(Color.decode("#FFFFFF"));
-                btGainWeight.setBackground(Color.decode("#FFFFFF"));
-                btMaintainWeight.setBackground(Color.decode("#B1EA9D"));
+                cB.ColorButtonWhite(btGainWeight);
+                cB.ColorButtonGreen(btMaintainWeight);
+                cB.ColorButtonWhite(btLoseWeight);
             }
         });
         MouseAdapter listener = new MouseAdapter() {
             @Override
             public void mouseExited(MouseEvent e) {
                 super.mouseExited(e);
-                btLoseWeight.setBackground(Color.decode("#FFFFFF"));
-                btGainWeight.setBackground(Color.decode("#FFFFFF"));
-                btMaintainWeight.setBackground(Color.decode("#FFFFFF"));
+                cB.ColorButtonWhite(btGainWeight);
+                cB.ColorButtonWhite(btMaintainWeight);
+                cB.ColorButtonWhite(btLoseWeight);
             }
         };
         btGainWeight.addMouseListener(listener);

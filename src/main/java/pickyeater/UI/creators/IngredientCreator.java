@@ -156,8 +156,9 @@ public class IngredientCreator extends JDialog {
 
         setContentPane(mainPanel);
         pack();
-        setLocationRelativeTo(null);
+        setSize(new Dimension(677,507));
         setResizable(false);
+        setLocationRelativeTo(parent);
 
     }
 

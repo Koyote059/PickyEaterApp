@@ -130,9 +130,9 @@ public class IngredientChooser extends JDialog {
         buttonsPanel.add(doneButton);
         add(BorderLayout.PAGE_END,buttonsPanel);
 
-        setSize(new Dimension(550,455));
+        setSize(new Dimension(677,507));
         setResizable(false);
-        setLocationRelativeTo(null);
+        setLocationRelativeTo(parent);
     }
 
     private void populateIngredientsList(){

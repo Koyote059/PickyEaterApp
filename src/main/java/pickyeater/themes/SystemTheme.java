@@ -36,9 +36,6 @@ public class SystemTheme {
 
         UIManager.put("Button.background", Color.decode("#FFFFFF"));
         UIManager.put("ProgressBar.foreground", Color.decode("#B1EA9D"));
-//        UIManager.put("Panel.background", Color.decode("#B1EA9D"));
-//        UIManager.put("List.background", Color.decode("#B1EA9D"));
-//        UIManager.put("Table.background", Color.decode("#B1EA9D"));
 
         setDefaultFont();
 
@@ -53,11 +50,8 @@ public class SystemTheme {
             System.err.println( "Failed to initialize LaF" );
         }
 
-        UIManager.put("Button.background", Color.decode("#000000"));
+        //UIManager.put("Button.background", Color.decode("#000000"));
         UIManager.put("ProgressBar.foreground", Color.decode("#32AB5E"));
-        //        UIManager.put("Panel.background", Color.decode("#B1EA9D"));
-        //        UIManager.put("List.background", Color.decode("#B1EA9D"));
-        //        UIManager.put("Table.background", Color.decode("#B1EA9D"));
 
         setDefaultFont();
 

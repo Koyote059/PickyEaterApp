@@ -141,9 +141,9 @@ public class MealsChooser extends JDialog {
         buttonsPanel.add(doneButton);
         add(BorderLayout.PAGE_END,buttonsPanel);
 
-        setSize(new Dimension(455,455));
+        setSize(new Dimension(677,507));
         setResizable(false);
-        setLocationRelativeTo(null);
+        setLocationRelativeTo(parent);
     }
 
     private void populateMealList(){

@@ -1,11 +1,17 @@
 package pickyeater.executors;
 
 import pickyeater.managers.EaterManager;
+import pickyeater.themes.filehandler.ThemeHandler;
+import pickyeater.themes.filehandler.ThemesEnum;
 
 public class SettingsExecutor {
     private final EaterManager eaterManager;
     public SettingsExecutor(EaterManager eaterManager) {
         this.eaterManager = eaterManager;
+    }
+
+    public void changeTheme(ThemesEnum themesEnum){
+        new ThemeHandler().ChangeTheme(themesEnum);
     }
 
     public void deleteUser(){

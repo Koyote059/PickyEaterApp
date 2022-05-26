@@ -5,6 +5,9 @@ package pickyeater.UI.registerpage;
  */
 import pickyeater.basics.user.LifeStyle;
 import pickyeater.executors.user.RegisterExecutor;
+import pickyeater.themes.ColorButtons;
+import pickyeater.themes.filehandler.ThemeHandler;
+import pickyeater.themes.filehandler.ThemesEnum;
 
 import javax.swing.*;
 import java.awt.*;
@@ -25,11 +28,12 @@ public class Register2 extends JFrame {
         setResizable(false);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setVisible(true);
+        ColorButtons cB = new ColorButtons();
 
-        btSedentary.setBackground(Color.decode("#FFFFFF"));
-        btSlightlyActive.setBackground(Color.decode("#FFFFFF"));
-        btActive.setBackground(Color.decode("#FFFFFF"));
-        btVeryActive.setBackground(Color.decode("#FFFFFF"));
+        cB.ColorButtonWhite(btSedentary);
+        cB.ColorButtonWhite(btSlightlyActive);
+        cB.ColorButtonWhite(btActive);
+        cB.ColorButtonWhite(btVeryActive);
 
         btSedentary.addActionListener(actionEvent -> {
             registerExecutor.getUserBuilder().setLifeStyle(LifeStyle.SEDENTARY);
@@ -59,50 +63,50 @@ public class Register2 extends JFrame {
             @Override
             public void mouseEntered(MouseEvent e) {
                 super.mouseEntered(e);
-                btSedentary.setBackground(Color.decode("#B1EA9D"));
-                btSlightlyActive.setBackground(Color.decode("#FFFFFF"));
-                btActive.setBackground(Color.decode("#FFFFFF"));
-                btVeryActive.setBackground(Color.decode("#FFFFFF"));
+                cB.ColorButtonGreen(btSedentary);
+                cB.ColorButtonWhite(btSlightlyActive);
+                cB.ColorButtonWhite(btActive);
+                cB.ColorButtonWhite(btVeryActive);
             }
         });
         btSlightlyActive.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseEntered(MouseEvent e) {
                 super.mouseEntered(e);
-                btSedentary.setBackground(Color.decode("#FFFFFF"));
-                btSlightlyActive.setBackground(Color.decode("#B1EA9D"));
-                btActive.setBackground(Color.decode("#FFFFFF"));
-                btVeryActive.setBackground(Color.decode("#FFFFFF"));
+                cB.ColorButtonWhite(btSedentary);
+                cB.ColorButtonGreen(btSlightlyActive);
+                cB.ColorButtonWhite(btActive);
+                cB.ColorButtonWhite(btVeryActive);
             }
         });
         btActive.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseEntered(MouseEvent e) {
                 super.mouseEntered(e);
-                btSedentary.setBackground(Color.decode("#FFFFFF"));
-                btSlightlyActive.setBackground(Color.decode("#FFFFFF"));
-                btActive.setBackground(Color.decode("#B1EA9D"));
-                btVeryActive.setBackground(Color.decode("#FFFFFF"));
+                cB.ColorButtonWhite(btSedentary);
+                cB.ColorButtonWhite(btSlightlyActive);
+                cB.ColorButtonGreen(btActive);
+                cB.ColorButtonWhite(btVeryActive);
             }
         });
         btVeryActive.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseEntered(MouseEvent e) {
                 super.mouseEntered(e);
-                btSedentary.setBackground(Color.decode("#FFFFFF"));
-                btSlightlyActive.setBackground(Color.decode("#FFFFFF"));
-                btActive.setBackground(Color.decode("#FFFFFF"));
-                btVeryActive.setBackground(Color.decode("#B1EA9D"));
+                cB.ColorButtonWhite(btSedentary);
+                cB.ColorButtonWhite(btSlightlyActive);
+                cB.ColorButtonWhite(btActive);
+                cB.ColorButtonGreen(btVeryActive);
             }
         });
         MouseAdapter listener = new MouseAdapter() {
             @Override
             public void mouseExited(MouseEvent e) {
                 super.mouseExited(e);
-                btSedentary.setBackground(Color.decode("#FFFFFF"));
-                btSlightlyActive.setBackground(Color.decode("#FFFFFF"));
-                btActive.setBackground(Color.decode("#FFFFFF"));
-                btVeryActive.setBackground(Color.decode("#FFFFFF"));
+                cB.ColorButtonWhite(btSedentary);
+                cB.ColorButtonWhite(btSlightlyActive);
+                cB.ColorButtonWhite(btActive);
+                cB.ColorButtonWhite(btVeryActive);
             }
         };
         btActive.addMouseListener(listener);
@@ -112,7 +116,6 @@ public class Register2 extends JFrame {
     }
     private void next(RegisterExecutor registerExecutor){
         if (registerExecutor.getUserBuilder().getLifeStyle() != null){
-            //JOptionPane.showMessageDialog(buttonPanel, "Lifestyle: " + lifeStyle);
             setVisible(false);
             new Register3(registerExecutor);
         }

@@ -11,6 +11,7 @@ import pickyeater.UI.leftbuttons.PanelButtonsConverter;
 import pickyeater.basics.food.Meal;
 import pickyeater.executors.DailyProgressExecutor;
 import pickyeater.executors.ExecutorProvider;
+import pickyeater.themes.ColorButtons;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -39,11 +40,7 @@ public class DailyProgressPage extends PickyPage {
         super(parent);
         setLayout(new BorderLayout());
         add(mainPanel,BorderLayout.CENTER);
-        btDailyProgress.setBackground(Color.decode("#B1EA9D"));
-        btDiet.setBackground(Color.decode("#FFFFFF"));
-        btGroceries.setBackground(Color.decode("#FFFFFF"));
-        btUser.setBackground(Color.decode("#FFFFFF"));
-        btSettings.setBackground(Color.decode("#FFFFFF"));
+        new ColorButtons().ColorLeftButtons(btDailyProgress, btDiet, btGroceries, btUser, btSettings);
         dailyProgressExecutor = ExecutorProvider.getDailyProgressExecutor();
         btAddEatenMeals.addActionListener(e -> {
             MealsChooser chooser = new MealsChooser(parent);
@@ -99,6 +96,7 @@ public class DailyProgressPage extends PickyPage {
     }
 
     private void draw() {
+        DecimalFormat df = new DecimalFormat("0.00");
         DefaultTableModel model = new DefaultTableModel();
         model.addColumn("Name");
         model.addColumn("Quantity");
@@ -107,7 +105,7 @@ public class DailyProgressPage extends PickyPage {
         for (Meal meal : dailyProgressExecutor.getEatenMeals()) {
             float ingredientQuantity = meal.getWeight();
             Object[]  row= new Object[]{
-                    meal.getName(), meal.getWeight()
+                    meal.getName(), df.format(meal.getWeight())
             };
             model.addRow(row);
         }
@@ -117,10 +115,12 @@ public class DailyProgressPage extends PickyPage {
 
     @Override
     public void showPage(){
-        cbConsumed.insertItemAt("Calories: " + dailyProgressExecutor.getEatenCalories() + "/" + dailyProgressExecutor.getCaloriesToEat(), 0);
-        cbConsumed.insertItemAt("Proteins: " + dailyProgressExecutor.getEatenProteins() + "/" + dailyProgressExecutor.getProteinsToEat(), 1);
-        cbConsumed.insertItemAt("Carbs: " + dailyProgressExecutor.getEatenCarbs() + "/" + dailyProgressExecutor.getCarbsToEat(), 2);
-        cbConsumed.insertItemAt("Fats: " + dailyProgressExecutor.getEatenFats() + "/" + dailyProgressExecutor.getFatsToEat(), 3);
+        DecimalFormat df = new DecimalFormat("0.00");
+        cbConsumed.removeAllItems();
+        cbConsumed.insertItemAt("Calories: " + df.format(dailyProgressExecutor.getEatenCalories()) + "/" + df.format(dailyProgressExecutor.getCaloriesToEat()), 0);
+        cbConsumed.insertItemAt("Proteins: " + df.format(dailyProgressExecutor.getEatenProteins()) + "/" + df.format(dailyProgressExecutor.getProteinsToEat()), 1);
+        cbConsumed.insertItemAt("Carbs: " + df.format(dailyProgressExecutor.getEatenCarbs()) + "/" + df.format(dailyProgressExecutor.getCarbsToEat()), 2);
+        cbConsumed.insertItemAt("Fats: " + df.format(dailyProgressExecutor.getEatenFats()) + "/" + df.format(dailyProgressExecutor.getFatsToEat()), 3);
         cbConsumed.setSelectedIndex(0);
         txtBurntCalories.setText(Integer.toString(dailyProgressExecutor.getBurntCalories()));
         draw();

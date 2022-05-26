@@ -5,6 +5,7 @@ import pickyeater.UI.app.PickyPage;
 import pickyeater.UI.leftbuttons.PanelButtonsConverter;
 import pickyeater.executors.ExecutorProvider;
 import pickyeater.executors.GroceriesExecutor;
+import pickyeater.themes.ColorButtons;
 
 import javax.swing.*;
 import java.awt.*;
@@ -24,7 +25,7 @@ public class UnavailableGroceriesPage extends PickyPage {
 
     public UnavailableGroceriesPage(JFrame parent) {
         super(parent);
-
+        new ColorButtons().ColorLeftButtons(btGroceries, btDailyProgress, btSettings, btDiet, btUser);
         setLayout(new BorderLayout());
         add(mainPanel,BorderLayout.CENTER);
 
@@ -32,11 +33,6 @@ public class UnavailableGroceriesPage extends PickyPage {
             PickyPage groceriesPage = new GroceriesPage(groceriesExecutor,parent);
             groceriesPage.showPage();
         }
-        btDailyProgress.setBackground(Color.decode("#FFFFFF"));
-        btDiet.setBackground(Color.decode("#FFFFFF"));
-        btGroceries.setBackground(Color.decode("#B1EA9D"));
-        btUser.setBackground(Color.decode("#FFFFFF"));
-        btSettings.setBackground(Color.decode("#FFFFFF"));
         setNavigationMenuListeners();
         generateGroceriesButton.addActionListener( e -> {
             if(groceriesExecutor.isGroceriesAvailable()){
