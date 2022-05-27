@@ -18,6 +18,7 @@ import pickyeater.executors.user.RegisterExecutor;
 import pickyeater.utils.StringToNumber;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.MouseAdapter;
@@ -39,6 +40,7 @@ public class Register4 extends JFrame {
     public Register4(RegisterExecutor registerExecutor) {
         setContentPane(mainPanel);
         setSize(677, 507);
+        setLocation(Toolkit.getDefaultToolkit().getScreenSize().width/2 - 677/2,Toolkit.getDefaultToolkit().getScreenSize().height/2 - 507/2);
         setResizable(false);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setVisible(true);

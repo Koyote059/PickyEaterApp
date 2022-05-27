@@ -35,7 +35,8 @@ public class MainFrame extends JFrame {
         setSize(new Dimension(677,507));
         setResizable(false);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        //setLocationRelativeTo(null);
+        setLocation(Toolkit.getDefaultToolkit().getScreenSize().width/2 - 677/2,
+                Toolkit.getDefaultToolkit().getScreenSize().height/2 - 507/2);
     }
 
     public static void changePage(PanelButtons panelButton){

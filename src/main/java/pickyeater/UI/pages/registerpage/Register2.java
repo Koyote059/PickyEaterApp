@@ -10,6 +10,7 @@ import pickyeater.executors.user.RegisterExecutor;
 import pickyeater.UI.themes.ColorButtons;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.*;
 
 public class Register2 extends JFrame {
@@ -24,7 +25,7 @@ public class Register2 extends JFrame {
     public Register2(RegisterExecutor registerExecutor) {
         setContentPane(mainPanel);
         setSize(677, 507);    //pack();
-        //setLocation(350,150);
+        setLocation(Toolkit.getDefaultToolkit().getScreenSize().width/2 - 677/2,Toolkit.getDefaultToolkit().getScreenSize().height/2 - 507/2);
         setResizable(false);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setVisible(true);
