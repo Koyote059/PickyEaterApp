@@ -60,9 +60,6 @@ public class Register1 extends JFrame{
 
         draw();
 
-        cB.ColorButtonWhite(btMale);
-        cB.ColorButtonWhite(btFemale);
-
         // Sex
         btMale.addActionListener(actionEvent -> {
             cB.ColorButtonGreen(btMale);
@@ -161,6 +158,9 @@ public class Register1 extends JFrame{
     }
 
     private void draw(){
+        new ColorButtons().ColorButtonWhite(btMale);
+        new ColorButtons().ColorButtonWhite(btFemale);
+
         txtChangeTheme.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
         if (new ThemeHandler().ReadTheme() == ThemesEnum.DARK_THEME){
             try {
