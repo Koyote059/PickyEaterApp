@@ -33,15 +33,14 @@ public class DailyProgressPage extends PickyPage {
     private JProgressBar bar;
     private JComboBox cbConsumed;
     private JLabel txtBurntCalories;
-    DailyProgressExecutor dailyProgressExecutor;
-    JFrame parent;
+    private DailyProgressExecutor dailyProgressExecutor;
 
     public DailyProgressPage(JFrame parent) {
         super(parent);
         setLayout(new BorderLayout());
         add(mainPanel,BorderLayout.CENTER);
         new ColorButtons().ColorLeftButtons(btDailyProgress, btDiet, btGroceries, btUser, btSettings);
-        dailyProgressExecutor = ExecutorProvider.getDailyProgressExecutor();
+        this.dailyProgressExecutor = ExecutorProvider.getDailyProgressExecutor();
         btAddEatenMeals.addActionListener(e -> {
             MealsChooser chooser = new MealsChooser(parent);
             Optional<Meal> mealOptional = chooser.getMeal();
@@ -97,11 +96,18 @@ public class DailyProgressPage extends PickyPage {
 
     private void draw() {
         DecimalFormat df = new DecimalFormat("0.00");
+
+        cbConsumed.removeAllItems();
+        cbConsumed.insertItemAt("Calories: " + df.format(dailyProgressExecutor.getEatenCalories()) + "/" + df.format(dailyProgressExecutor.getCaloriesToEat()), 0);
+        cbConsumed.insertItemAt("Proteins: " + df.format(dailyProgressExecutor.getEatenProteins()) + "/" + df.format(dailyProgressExecutor.getProteinsToEat()), 1);
+        cbConsumed.insertItemAt("Carbs: " + df.format(dailyProgressExecutor.getEatenCarbs()) + "/" + df.format(dailyProgressExecutor.getCarbsToEat()), 2);
+        cbConsumed.insertItemAt("Fats: " + df.format(dailyProgressExecutor.getEatenFats()) + "/" + df.format(dailyProgressExecutor.getFatsToEat()), 3);
+        cbConsumed.setSelectedIndex(0);
+
         DefaultTableModel model = new DefaultTableModel();
         model.addColumn("Name");
         model.addColumn("Quantity");
 
-        DailyProgressExecutor dailyProgressExecutor = ExecutorProvider.getDailyProgressExecutor();
         for (Meal meal : dailyProgressExecutor.getEatenMeals()) {
             float ingredientQuantity = meal.getWeight();
             Object[]  row= new Object[]{
@@ -115,13 +121,6 @@ public class DailyProgressPage extends PickyPage {
 
     @Override
     public void showPage(){
-        DecimalFormat df = new DecimalFormat("0.00");
-        cbConsumed.removeAllItems();
-        cbConsumed.insertItemAt("Calories: " + df.format(dailyProgressExecutor.getEatenCalories()) + "/" + df.format(dailyProgressExecutor.getCaloriesToEat()), 0);
-        cbConsumed.insertItemAt("Proteins: " + df.format(dailyProgressExecutor.getEatenProteins()) + "/" + df.format(dailyProgressExecutor.getProteinsToEat()), 1);
-        cbConsumed.insertItemAt("Carbs: " + df.format(dailyProgressExecutor.getEatenCarbs()) + "/" + df.format(dailyProgressExecutor.getCarbsToEat()), 2);
-        cbConsumed.insertItemAt("Fats: " + df.format(dailyProgressExecutor.getEatenFats()) + "/" + df.format(dailyProgressExecutor.getFatsToEat()), 3);
-        cbConsumed.setSelectedIndex(0);
         txtBurntCalories.setText(Integer.toString(dailyProgressExecutor.getBurntCalories()));
         draw();
         progressBar(dailyProgressExecutor.getEatenCalories(), dailyProgressExecutor.getCaloriesToEat());
