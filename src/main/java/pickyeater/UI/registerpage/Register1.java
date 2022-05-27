@@ -39,12 +39,6 @@ public class Register1 extends JFrame{
     private JTextField tfBodyfat;
     private JDateChooser jBirthdayChooser;
     private JLabel txtChangeTheme;
-    private JPanel p1;
-    private JPanel p2;
-    private JPanel p3;
-    private JPanel p4;
-    private JPanel p5;
-    private JPanel p6;
     private final UserBuilder userBuilder;
 
     public Register1() {
