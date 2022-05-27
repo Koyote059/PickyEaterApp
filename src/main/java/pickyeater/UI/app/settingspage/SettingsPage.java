@@ -95,7 +95,12 @@ public class SettingsPage extends PickyPage {
             } else if (cbTheme.getSelectedIndex() == 2) {
                 ExecutorProvider.getSettingsExecutor().changeTheme(ThemesEnum.GREEN_THEME);
             }
-            SwingUtilities.updateComponentTreeUI(MainFrame.getFrames()[0]);
+            for (int i = 0; getRootPane().getComponentCount() > i; i++) {
+                SwingUtilities.updateComponentTreeUI(getRootPane().getComponent(i));
+            }
+            for (int i = 0; parent.getComponentCount() > i; i++) {
+                SwingUtilities.updateComponentTreeUI(parent.getComponent(i));
+            }
         });
 
         manageMealsButton.addActionListener( l -> {

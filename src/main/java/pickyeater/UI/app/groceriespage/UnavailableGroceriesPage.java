@@ -3,7 +3,6 @@ package pickyeater.UI.app.groceriespage;
 import pickyeater.UI.app.MainFrame;
 import pickyeater.UI.app.PickyPage;
 import pickyeater.UI.leftbuttons.PanelButtonsConverter;
-import pickyeater.basics.groceries.GroceriesGenerator;
 import pickyeater.executors.ExecutorProvider;
 import pickyeater.executors.GroceriesExecutor;
 import pickyeater.themes.ColorButtons;
@@ -20,9 +19,7 @@ public class UnavailableGroceriesPage extends PickyPage {
     private JButton btDiet;
     private JButton generateGroceriesButton;
     private JPanel mainPanel;
-
     private GroceriesExecutor groceriesExecutor = ExecutorProvider.getGroceriesExecutor();
-
 
     public UnavailableGroceriesPage(JFrame parent) {
         super(parent);
@@ -40,8 +37,6 @@ public class UnavailableGroceriesPage extends PickyPage {
                 JOptionPane.showMessageDialog(this,"Unavailable Meal Plan!\n You need to create a Meal Plan in order to generate groceries...");
             }
         });
-
-
     }
 
     private void setNavigationMenuListeners(){

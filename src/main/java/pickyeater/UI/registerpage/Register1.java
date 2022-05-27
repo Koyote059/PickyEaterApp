@@ -17,8 +17,14 @@ import pickyeater.executors.ExecutorProvider;
 import pickyeater.utils.JCalendarToLocalDate;
 import pickyeater.utils.StringToNumber;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.time.LocalDate;
 
 public class Register1 extends JFrame{
@@ -32,6 +38,13 @@ public class Register1 extends JFrame{
     private JTextField tfHeight;
     private JTextField tfBodyfat;
     private JDateChooser jBirthdayChooser;
+    private JLabel txtChangeTheme;
+    private JPanel p1;
+    private JPanel p2;
+    private JPanel p3;
+    private JPanel p4;
+    private JPanel p5;
+    private JPanel p6;
     private final UserBuilder userBuilder;
 
     public Register1() {
@@ -44,6 +57,8 @@ public class Register1 extends JFrame{
         //setLocation(350,150);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setVisible(true);
+
+        draw();
 
         cB.ColorButtonWhite(btMale);
         cB.ColorButtonWhite(btFemale);
@@ -126,6 +141,43 @@ public class Register1 extends JFrame{
                 next(registerExecutor);
             }
         });
+        txtChangeTheme.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                super.mouseClicked(e);
+                if (new ThemeHandler().ReadTheme().equals(ThemesEnum.DARK_THEME)){
+                    new ThemeHandler().ChangeTheme(ThemesEnum.LIGHT_THEME);
+                    draw();
+                } else {
+                    new ThemeHandler().ChangeTheme(ThemesEnum.DARK_THEME);
+                    draw();
+                }
+
+                for (int i = 0; rootPane.getComponentCount() > i; i++) {
+                    SwingUtilities.updateComponentTreeUI(rootPane.getComponent(i));
+                }
+            }
+        });
+    }
+
+    private void draw(){
+        txtChangeTheme.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+        if (new ThemeHandler().ReadTheme() == ThemesEnum.DARK_THEME){
+            try {
+                BufferedImage binImage = ImageIO.read(new File("res/images/sun.png"));
+                txtChangeTheme.setIcon(new ImageIcon(binImage.getScaledInstance(30,30,Image.SCALE_SMOOTH)));
+                txtChangeTheme.setText("");
+            } catch (IOException | NullPointerException ignored) {
+            }
+        } else {
+            try {
+                new ThemeHandler().ReadTheme();
+                BufferedImage binImage = ImageIO.read(new File("res/images/moon.png"));
+                txtChangeTheme.setIcon(new ImageIcon(binImage.getScaledInstance(30,30,Image.SCALE_SMOOTH)));
+                txtChangeTheme.setText("");
+            } catch (IOException | NullPointerException ignored) {
+            }
+        }
     }
 
     private void next(RegisterExecutor registerExecutor){
@@ -143,5 +195,12 @@ public class Register1 extends JFrame{
     }
     private void createUIComponents() {
         jBirthdayChooser = new JDateChooser();
+    }
+
+    public static void updateComponentTreeUI0(Component c) {
+        SwingUtilities.updateComponentTreeUI(c);
+        c.invalidate();
+        c.validate();
+        c.repaint();
     }
 }

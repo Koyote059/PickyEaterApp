@@ -13,7 +13,12 @@ import static java.lang.Integer.parseInt;
 public class JCalendarToLocalDate {
 
     public LocalDate jCalToLocDate(Date date){
-        return date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+        try {
+            return date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+        } catch (NullPointerException e){
+            return LocalDate.now();
+        }
+
     }
 
     /*

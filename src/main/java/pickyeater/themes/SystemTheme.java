@@ -23,40 +23,30 @@ public class SystemTheme {
 
     setPEFont();
 
-    UIManager.put("ProgressBar.foreground", Color.GREEN);
-    UIManager.put("Button.background", Color.GREEN);
+    //UIManager.put("ProgressBar.foreground", Color.GREEN);
+    //UIManager.put("Button.background", Color.GREEN);
     }
 
     public void theme1(){
+        //UIManager.put("Button.background", Color.decode("#FFFFFF"));
+        UIManager.put("ProgressBar.foreground", Color.decode("#B1EA9D"));
         try {
             UIManager.setLookAndFeel( new FlatLightLaf() );
         } catch( Exception ex ) {
             System.err.println( "Failed to initialize LaF" );
         }
-
-        UIManager.put("Button.background", Color.decode("#FFFFFF"));
-        UIManager.put("ProgressBar.foreground", Color.decode("#B1EA9D"));
-
         setDefaultFont();
-
-        Color defaultGreen = Color.decode("#B1EA9D");
-        Color defaultWhite = Color.decode("#FFFFFF");
     }
 
     public void theme2(){
+        //UIManager.put("Button.background", Color.decode("#505454"));
+        UIManager.put("ProgressBar.foreground", Color.decode("#32AB5E"));
         try {
             UIManager.setLookAndFeel( new MyDarkerLaf() );
         } catch( Exception ex ) {
             System.err.println( "Failed to initialize LaF" );
         }
-
-        //UIManager.put("Button.background", Color.decode("#000000"));
-        UIManager.put("ProgressBar.foreground", Color.decode("#32AB5E"));
-
         setDefaultFont();
-
-        Color defaultGreen = Color.decode("#32AB5E");
-        Color defaultWhite = Color.decode("#000000");
     }
 
     public static void setUIFont (javax.swing.plaf.FontUIResource f){
