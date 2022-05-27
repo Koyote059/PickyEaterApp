@@ -1,18 +1,22 @@
-package pickyeater.UI.pages.app.mealplanpage;
+package pickyeater.UI.app.mealplanpage;
 
 /**
  * @author Claudio Di Maio
  */
 
-import pickyeater.UI.pages.app.MainFrame;
-import pickyeater.UI.pages.app.PickyPage;
-import pickyeater.UI.pages.choosers.MealInfoJDialog;
-import pickyeater.UI.pages.leftbuttons.PanelButtonsConverter;
+import pickyeater.UI.app.MainFrame;
+import pickyeater.UI.app.PickyPage;
+import pickyeater.UI.app.mealplanpage.utils.MealRowPopupMenu;
+import pickyeater.UI.choosers.FoodPopupMenu;
+import pickyeater.UI.choosers.MealInfoJDialog;
+import pickyeater.UI.creators.IngredientCreator;
+import pickyeater.UI.leftbuttons.PanelButtonsConverter;
+import pickyeater.basics.food.Ingredient;
 import pickyeater.basics.food.Meal;
 import pickyeater.basics.mealplan.DailyMealPlan;
 import pickyeater.executors.ExecutorProvider;
 import pickyeater.executors.MealPlanViewerExecutor;
-import pickyeater.UI.themes.ColorButtons;
+import pickyeater.themes.ColorButtons;
 import pickyeater.utils.MouseClickListener;
 
 import javax.imageio.ImageIO;
@@ -44,6 +48,7 @@ public class MealPlanPage extends PickyPage {
     private JTable dailyMealsTable;
     private JLabel txtBin;
     private final MealPlanViewerExecutor executor;
+    private List<Meal> actualMealsList = null;
 
     private LocalDate actualDate;
     public MealPlanPage(JFrame parent) {
@@ -58,19 +63,6 @@ public class MealPlanPage extends PickyPage {
             txtBin.setText("");
         } catch (IOException | NullPointerException ignored) {
         }
-
-        txtBin.addMouseListener(new MouseClickListener() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                int result = JOptionPane.showConfirmDialog(mainPanel,"Are you sure you want to delete it?","Deleting  " +
-                        "groceries",JOptionPane.YES_NO_OPTION);
-                if(result == JOptionPane.YES_OPTION){
-                    executor.deleteMealPlan();
-                    PickyPage mealPlanUnavailablePage = new MealPlanUnavailablePage(parent);
-                    mealPlanUnavailablePage.showPage();
-                }
-            }
-        });
 
         executor = ExecutorProvider.getMealPlanViewerExecutor();
 
@@ -92,19 +84,19 @@ public class MealPlanPage extends PickyPage {
         setButtonsListeners(parent);
         dailyMealsTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         dailyMealsTable.removeEditor();
+
         setNavigationMenuListeners();
 
     }
 
     private void setUpContent(DailyMealPlan dailyMealPlan){
         txtDay.setText(actualDate.format(DateTimeFormatter.ofPattern("dd-MMM-yyyy")));
-        List<Meal> meals = dailyMealPlan.getMeals();
+        actualMealsList = dailyMealPlan.getMeals();
         DefaultTableModel tableModel = (DefaultTableModel) dailyMealsTable.getModel();
         tableModel.setRowCount(0);
         DecimalFormat formatter = new DecimalFormat();
         formatter.setMaximumFractionDigits(2);
-        for (int i = 0; i < meals.size(); i++) {
-            Meal meal = meals.get(i);
+        for (Meal meal : actualMealsList) {
             Object[] row = new Object[]{
                     meal.getName(),
                     formatter.format(meal.getWeight()) + " g"
@@ -165,6 +157,41 @@ public class MealPlanPage extends PickyPage {
                 DailyMealPlan dailyMealPlan = dailyMealPlanOptional.get();
                 Meal meal = dailyMealPlan.getMeals().get(selectedIndex);
                 new MealInfoJDialog(parent,meal).run();
+            }
+        });
+
+        txtBin.addMouseListener(new MouseClickListener() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                int result = JOptionPane.showConfirmDialog(mainPanel,"Are you sure you want to delete it?","Deleting  " +
+                        "groceries",JOptionPane.YES_NO_OPTION);
+                if(result == JOptionPane.YES_OPTION){
+                    executor.deleteMealPlan();
+                    PickyPage mealPlanUnavailablePage = new MealPlanUnavailablePage(parent);
+                    mealPlanUnavailablePage.showPage();
+                }
+            }
+        });
+
+        dailyMealsTable.addMouseListener(new MouseClickListener() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                if(SwingUtilities.isRightMouseButton(e)){
+                    Point point = MouseInfo.getPointerInfo().getLocation();
+                    Point framePoint = parent.getLocation();
+                    Point realPoint = new Point(point.x - framePoint.x,point.y - framePoint.y);
+                    int selectedIndex = dailyMealsTable.rowAtPoint(e.getPoint());
+                    if(selectedIndex<0) return;
+                    dailyMealsTable.setRowSelectionInterval(selectedIndex,selectedIndex);
+                    Meal selectedMeal = actualMealsList.get(selectedIndex);
+                    MealRowPopupMenu popupMenu = new MealRowPopupMenu();
+                    popupMenu.addEatenMealsItemListener(l -> {
+                        executor.addToEatenMeals(selectedMeal);
+                        JOptionPane.showMessageDialog(parent,"Added to eaten meals!");
+                    });
+                    popupMenu.show(parent,realPoint.x, realPoint.y);
+
+                }
             }
         });
     }

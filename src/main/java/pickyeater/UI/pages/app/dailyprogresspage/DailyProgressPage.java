@@ -1,17 +1,17 @@
-package pickyeater.UI.pages.app.dailyprogresspage;
+package pickyeater.UI.app.dailyprogresspage;
 
 /**
  * @author Claudio Di Maio
  */
 
-import pickyeater.UI.pages.app.MainFrame;
-import pickyeater.UI.pages.app.PickyPage;
-import pickyeater.UI.pages.choosers.MealsChooser;
-import pickyeater.UI.pages.leftbuttons.PanelButtonsConverter;
+import pickyeater.UI.app.MainFrame;
+import pickyeater.UI.app.PickyPage;
+import pickyeater.UI.choosers.MealsChooser;
+import pickyeater.UI.leftbuttons.PanelButtonsConverter;
 import pickyeater.basics.food.Meal;
 import pickyeater.executors.DailyProgressExecutor;
 import pickyeater.executors.ExecutorProvider;
-import pickyeater.UI.themes.ColorButtons;
+import pickyeater.themes.ColorButtons;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -33,14 +33,18 @@ public class DailyProgressPage extends PickyPage {
     private JProgressBar bar;
     private JComboBox cbConsumed;
     private JLabel txtBurntCalories;
-    private DailyProgressExecutor dailyProgressExecutor;
+    DailyProgressExecutor dailyProgressExecutor;
+    JFrame parent;
+
+    int burntCalories;
 
     public DailyProgressPage(JFrame parent) {
         super(parent);
         setLayout(new BorderLayout());
         add(mainPanel,BorderLayout.CENTER);
         new ColorButtons().ColorLeftButtons(btDailyProgress, btDiet, btGroceries, btUser, btSettings);
-        this.dailyProgressExecutor = ExecutorProvider.getDailyProgressExecutor();
+        dailyProgressExecutor = ExecutorProvider.getDailyProgressExecutor();
+        burntCalories = dailyProgressExecutor.getBurntCalories();
         btAddEatenMeals.addActionListener(e -> {
             MealsChooser chooser = new MealsChooser(parent);
             Optional<Meal> mealOptional = chooser.getMeal();
@@ -65,6 +69,7 @@ public class DailyProgressPage extends PickyPage {
                 progressBar(dailyProgressExecutor.getEatenFats(), dailyProgressExecutor.getFatsToEat());
             }
         });
+
         tableEatenMeals.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         setNavigationMenuListeners();
     }
@@ -96,6 +101,21 @@ public class DailyProgressPage extends PickyPage {
 
     private void draw() {
         DecimalFormat df = new DecimalFormat("0.00");
+        DefaultTableModel model = new DefaultTableModel();
+        model.addColumn("Name");
+        model.addColumn("Quantity");
+
+        DailyProgressExecutor dailyProgressExecutor = ExecutorProvider.getDailyProgressExecutor();
+        for (Meal meal : dailyProgressExecutor.getEatenMeals()) {
+            float mealQuantity = meal.getWeight();
+            Object[]  row= new Object[]{
+                    meal.getName(), df.format(mealQuantity)
+            };
+            model.addRow(row);
+        }
+
+        txtBurntCalories.setText(String.valueOf(dailyProgressExecutor.getBurntCalories()));
+        tableEatenMeals.setModel(model);
 
         cbConsumed.removeAllItems();
         cbConsumed.insertItemAt("Calories: " + df.format(dailyProgressExecutor.getEatenCalories()) + "/" + df.format(dailyProgressExecutor.getCaloriesToEat()), 0);
@@ -103,27 +123,14 @@ public class DailyProgressPage extends PickyPage {
         cbConsumed.insertItemAt("Carbs: " + df.format(dailyProgressExecutor.getEatenCarbs()) + "/" + df.format(dailyProgressExecutor.getCarbsToEat()), 2);
         cbConsumed.insertItemAt("Fats: " + df.format(dailyProgressExecutor.getEatenFats()) + "/" + df.format(dailyProgressExecutor.getFatsToEat()), 3);
         cbConsumed.setSelectedIndex(0);
-
-        DefaultTableModel model = new DefaultTableModel();
-        model.addColumn("Name");
-        model.addColumn("Quantity");
-
-        for (Meal meal : dailyProgressExecutor.getEatenMeals()) {
-            float ingredientQuantity = meal.getWeight();
-            Object[]  row= new Object[]{
-                    meal.getName(), df.format(meal.getWeight())
-            };
-            model.addRow(row);
-        }
-
-        tableEatenMeals.setModel(model);
+        progressBar(dailyProgressExecutor.getEatenCalories(), dailyProgressExecutor.getCaloriesToEat());
     }
 
     @Override
     public void showPage(){
-        txtBurntCalories.setText(Integer.toString(dailyProgressExecutor.getBurntCalories()));
+        DecimalFormat df = new DecimalFormat("0.00");
+
         draw();
-        progressBar(dailyProgressExecutor.getEatenCalories(), dailyProgressExecutor.getCaloriesToEat());
         super.showPage();
     }
 }

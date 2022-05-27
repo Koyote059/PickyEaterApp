@@ -97,8 +97,8 @@ public class IngredientChooser extends JDialog {
                     Point framePoint = parent.getLocation();
                     Point realPoint = new Point(point.x - framePoint.x,point.y - framePoint.y);
                     int selectedIndex = ingredientsList.locationToIndex(e.getPoint());
-                    ingredientsList.setSelectedIndex(selectedIndex);
                     if(selectedIndex<0) return;
+                    ingredientsList.setSelectedIndex(selectedIndex);
                     Ingredient selectedIngredient = searchedIngredients.get(selectedIndex);
                     FoodPopupMenu popupMenu = new FoodPopupMenu();
                     popupMenu.addDeleteListener(l -> {

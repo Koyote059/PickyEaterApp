@@ -1,8 +1,13 @@
 package pickyeater.executors;
 
+import pickyeater.basics.groceries.Groceries;
+import pickyeater.basics.user.User;
 import pickyeater.managers.EaterManager;
-import pickyeater.UI.themes.filehandler.ThemeHandler;
-import pickyeater.UI.themes.filehandler.ThemesEnum;
+import pickyeater.managers.UserManager;
+import pickyeater.themes.filehandler.ThemeHandler;
+import pickyeater.themes.filehandler.ThemesEnum;
+
+import java.util.Optional;
 
 public class SettingsExecutor {
     private final EaterManager eaterManager;
@@ -28,5 +33,11 @@ public class SettingsExecutor {
     public void resetIngredients(){
         // TODO: Reset Ingredients
         System.out.println("INGREDIENTS RESETTED (not really)");
+    }
+
+    public void deleteGroceries() {
+        UserManager userManager = eaterManager.getUserManager();
+        Optional<Groceries> groceriesOptional = userManager.getGroceries();
+        groceriesOptional.ifPresent(userManager::deleteGroceries);
     }
 }

@@ -8,7 +8,7 @@ public class MealQuantityConverter {
     public Meal convert(Meal meal, int newWeight){
         MealBuilder mealBuilder = new PickyMealBuilder();
         mealBuilder.setName(meal.getName());
-        float weightRatio = newWeight/100f;
+        float weightRatio = newWeight/meal.getWeight();
         for (Ingredient ingredient : meal.getIngredients()) {
             IngredientBuilder ingredientBuilder = new PickyIngredientBuilder(ingredient);
             Quantity quantity = ingredient.getQuantity();

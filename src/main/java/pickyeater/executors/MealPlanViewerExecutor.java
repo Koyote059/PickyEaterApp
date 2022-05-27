@@ -1,7 +1,9 @@
 package pickyeater.executors;
 
+import pickyeater.basics.food.Meal;
 import pickyeater.basics.mealplan.DailyMealPlan;
 import pickyeater.basics.mealplan.MealPlan;
+import pickyeater.basics.user.DailyProgresses;
 import pickyeater.basics.user.User;
 import pickyeater.managers.EaterManager;
 import pickyeater.managers.UserManager;
@@ -53,5 +55,13 @@ public class MealPlanViewerExecutor {
         UserManager userManager = eaterManager.getUserManager();
         User user = userManager.getUser().get();
         userManager.deleteMealPlan(user);
+    }
+
+    public void addToEatenMeals(Meal meal) {
+        UserManager userManager = eaterManager.getUserManager();
+        User user = userManager.getUser().get();
+        DailyProgresses dailyProgresses = user.getDailyProgresses();
+        dailyProgresses.addEatenMeal(meal);
+        userManager.saveUser(user);
     }
 }
