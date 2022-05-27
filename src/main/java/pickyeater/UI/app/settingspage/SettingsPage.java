@@ -1,6 +1,5 @@
 package pickyeater.UI.app.settingspage;
 
-import com.sun.tools.javac.Main;
 import pickyeater.UI.app.MainFrame;
 import pickyeater.UI.app.PickyPage;
 import pickyeater.UI.choosers.IngredientChooser;
@@ -95,16 +94,9 @@ public class SettingsPage extends PickyPage {
                 ExecutorProvider.getSettingsExecutor().changeTheme(ThemesEnum.GREEN_THEME);
             }
 
-            for (int i = 0; MainFrame.getFrames().length < i; i++){
-                SwingUtilities.updateComponentTreeUI(MainFrame.getFrames()[i]);
-            }
-            for (int i = 0; parent.getComponentCount() < i; i++){
-                SwingUtilities.updateComponentTreeUI(parent.getComponent(i));
-            }
-
-            parent.dispose();
             new MainFrame();
             MainFrame.changePage(PanelButtons.SETTINGS);
+            parent.dispose();
         });
 
         manageMealsButton.addActionListener( l -> {
