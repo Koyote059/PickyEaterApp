@@ -3,7 +3,7 @@ import org.knowm.xchart.PieChart;
 import org.knowm.xchart.XChartPanel;
 import org.knowm.xchart.style.PieStyler;
 import org.knowm.xchart.style.Styler;
-import pickyeater.UI.choosers.MealInfoJDialog;
+import pickyeater.UI.pages.choosers.MealInfoJDialog;
 import pickyeater.basics.food.Meal;
 import pickyeater.basics.food.Nutrients;
 import pickyeater.executors.ExecutorProvider;

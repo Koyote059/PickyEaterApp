@@ -4,21 +4,21 @@ package pickyeater;
  * @author Claudio Di Maio
  */
 
-import pickyeater.UI.app.MainFrame;
-import pickyeater.UI.leftbuttons.PanelButtons;
-import pickyeater.UI.registerpage.WelcomePage;
+import pickyeater.UI.pages.app.MainFrame;
+import pickyeater.UI.pages.leftbuttons.PanelButtons;
+import pickyeater.UI.pages.registerpage.WelcomePage;
 import pickyeater.database.*;
 import pickyeater.executors.ExecutorProvider;
 import pickyeater.managers.EaterManager;
 import pickyeater.managers.PickyEaterManager;
-import pickyeater.themes.filehandler.ThemeHandler;
+import pickyeater.UI.themes.filehandler.ThemeHandler;
 
 public class main {
     public static void main(String[] args) {
 
         new ThemeHandler().ReadTheme();
 
-        //PickyEatersDatabase pickyEatersDB = new SQLPickyEaterDB("PickyEatersDB.sqlite");
+        //PickyEatersDatabase pickyEatersDB = new SQLPickyEaterDB("DatabasePickEater.sqlite");
         PickyEatersDatabase pickyEatersDB = new SQLPickyEaterDB("dbDiProva.sqlite");
 
         EaterManager eaterManager = new PickyEaterManager(
