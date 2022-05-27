@@ -64,10 +64,11 @@ public class SettingsPage extends PickyPage {
         add(mainPanel,BorderLayout.CENTER);
 
         btDeleteUser.addActionListener(e -> {
-            int x = JOptionPane.showConfirmDialog(SettingsPage.this.mainPanel, "Are you sure? All your info will be lost forever",
+            int choice = JOptionPane.showConfirmDialog(SettingsPage.this.mainPanel, "Are you sure? All your info will be lost forever",
                     "Delete user", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
-            if (x == 0){
+            if (choice == JOptionPane.YES_OPTION){
                 ExecutorProvider.getSettingsExecutor().deleteUser();
+                ExecutorProvider.getSettingsExecutor().deleteGroceries();
                 parent.dispose();
                 new Register1();
             }
