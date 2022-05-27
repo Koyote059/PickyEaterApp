@@ -84,6 +84,7 @@ public class MealPlanPage extends PickyPage {
         setButtonsListeners(parent);
         dailyMealsTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         dailyMealsTable.removeEditor();
+
         setNavigationMenuListeners();
 
     }
