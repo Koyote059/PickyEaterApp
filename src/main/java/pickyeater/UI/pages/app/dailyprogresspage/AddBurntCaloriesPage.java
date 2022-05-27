@@ -35,9 +35,9 @@ public class AddBurntCaloriesPage extends JDialog {
                 JOptionPane.showMessageDialog(mainPanel, "Insert valid number", "", JOptionPane.ERROR_MESSAGE);
             }
         });
-        pack();
-        setResizable(false);
-        setLocationRelativeTo(null);
+        pack(); // TODO -> FIX
+        //setResizable(false);
+        setLocationRelativeTo(parent);
     }
 
 

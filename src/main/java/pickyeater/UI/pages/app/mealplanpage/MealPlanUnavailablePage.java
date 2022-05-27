@@ -26,8 +26,8 @@ public class MealPlanUnavailablePage extends PickyPage {
     private JButton btUser;
     private JButton btGroceries;
     private JButton btDiet;
-    private JButton generateMealPlanButton;
-    private JButton automaticGenerateMealPlanButton;
+    private JButton btCreateMealPlan;
+    private JButton btAutomaticGenerateMealPlan;
     private MealPlanCreatorExecutor mealPlanCreator;
     public MealPlanUnavailablePage(JFrame parent) {
         super(parent);
@@ -38,7 +38,7 @@ public class MealPlanUnavailablePage extends PickyPage {
         add(mainPanel,BorderLayout.CENTER);
         setNavigationMenuListeners();
 
-        generateMealPlanButton.addActionListener(e -> {
+        btCreateMealPlan.addActionListener(e -> {
             if(mealPlanCreator.getMeals().size()<5){
                 JOptionPane.showMessageDialog(this,"Unable to create a meal plan.\n Insufficient meals!");
                 return;
@@ -47,7 +47,7 @@ public class MealPlanUnavailablePage extends PickyPage {
             mealPlanGeneratorPage.showPage();
         });
 
-        automaticGenerateMealPlanButton.addActionListener(e -> {
+        btAutomaticGenerateMealPlan.addActionListener(e -> {
             if(mealPlanCreator.getMeals().size()<5){
                 JOptionPane.showMessageDialog(this,"Unable to create a meal plan.\n Insufficient meals!");
                 return;
@@ -56,8 +56,7 @@ public class MealPlanUnavailablePage extends PickyPage {
             User user = mealPlanCreator.getUser();
 
             MealPlan mealPlan = mealPlanGenerator.generate(mealPlanCreator.getMeals(),
-                                user.getUserGoal().getRequiredNutrients(),
-                    7,4);
+                    user.getUserGoal().getRequiredNutrients(),7,4);
             PickyPage mealPlanGeneratorPage = new MealPlanGeneratorPage(mealPlanCreator,mealPlan,parent);
             mealPlanGeneratorPage.showPage();
         });

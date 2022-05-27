@@ -54,8 +54,8 @@ public class SettingsPage extends PickyPage {
 
         txtImage.setText("");
         try {
-            BufferedImage binImage = ImageIO.read(new File("res/images/binForeverB.png"));
-            txtImage.setIcon(new ImageIcon(binImage.getScaledInstance(40,40,Image.SCALE_SMOOTH)));
+            BufferedImage binImage = ImageIO.read(new File("res/images/binIconR.png"));
+            txtImage.setIcon(new ImageIcon(binImage.getScaledInstance(30,30, Image.SCALE_SMOOTH)));
         } catch (IOException | NullPointerException ignored) {
         }
         setLayout(new BorderLayout());
