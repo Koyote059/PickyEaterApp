@@ -1,9 +1,8 @@
 package notusedpages.foodpage;
 
-import pickyeater.UI.app.MainFrame;
-import pickyeater.UI.app.PickyPage;
-import pickyeater.UI.leftbuttons.PanelButtons;
-import pickyeater.UI.leftbuttons.PanelButtonsConverter;
+import pickyeater.UI.pages.app.MainFrame;
+import pickyeater.UI.pages.app.PickyPage;
+import pickyeater.UI.pages.leftbuttons.PanelButtonsConverter;
 import pickyeater.basics.food.QuantityType;
 import pickyeater.builders.IngredientBuilder;
 import pickyeater.executors.ExecutorProvider;

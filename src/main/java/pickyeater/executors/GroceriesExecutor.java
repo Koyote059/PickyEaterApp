@@ -1,6 +1,5 @@
 package pickyeater.executors;
 
-import pickyeater.UI.app.groceriespage.GroceriesPage;
 import pickyeater.basics.groceries.Groceries;
 import pickyeater.basics.groceries.GroceriesCheckList;
 import pickyeater.basics.groceries.GroceriesGenerator;

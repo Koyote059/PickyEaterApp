@@ -1,8 +1,8 @@
 package pickyeater.executors;
 
 import pickyeater.managers.EaterManager;
-import pickyeater.themes.filehandler.ThemeHandler;
-import pickyeater.themes.filehandler.ThemesEnum;
+import pickyeater.UI.themes.filehandler.ThemeHandler;
+import pickyeater.UI.themes.filehandler.ThemesEnum;
 
 public class SettingsExecutor {
     private final EaterManager eaterManager;
