@@ -6,6 +6,7 @@ package pickyeater.UI.app.dailyprogresspage;
 
 import pickyeater.UI.app.MainFrame;
 import pickyeater.UI.app.PickyPage;
+import pickyeater.UI.app.groceriespage.GroceriesPage;
 import pickyeater.UI.choosers.MealsChooser;
 import pickyeater.UI.leftbuttons.PanelButtonsConverter;
 import pickyeater.basics.food.Meal;

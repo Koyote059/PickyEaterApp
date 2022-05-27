@@ -1,22 +1,21 @@
 package pickyeater.UI.app.settingspage;
 
+import com.sun.tools.javac.Main;
 import pickyeater.UI.app.MainFrame;
 import pickyeater.UI.app.PickyPage;
 import pickyeater.UI.choosers.IngredientChooser;
 import pickyeater.UI.choosers.MealsChooser;
+import pickyeater.UI.leftbuttons.PanelButtons;
 import pickyeater.UI.leftbuttons.PanelButtonsConverter;
 import pickyeater.UI.registerpage.Register1;
 import pickyeater.executors.ExecutorProvider;
-import pickyeater.executors.SettingsExecutor;
 import pickyeater.themes.ColorButtons;
-import pickyeater.themes.SystemTheme;
 import pickyeater.themes.filehandler.ThemeHandler;
 import pickyeater.themes.filehandler.ThemesEnum;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -95,12 +94,17 @@ public class SettingsPage extends PickyPage {
             } else if (cbTheme.getSelectedIndex() == 2) {
                 ExecutorProvider.getSettingsExecutor().changeTheme(ThemesEnum.GREEN_THEME);
             }
-            for (int i = 0; getRootPane().getComponentCount() > i; i++) {
-                SwingUtilities.updateComponentTreeUI(getRootPane().getComponent(i));
+
+            for (int i = 0; MainFrame.getFrames().length < i; i++){
+                SwingUtilities.updateComponentTreeUI(MainFrame.getFrames()[i]);
             }
-            for (int i = 0; parent.getComponentCount() > i; i++) {
+            for (int i = 0; parent.getComponentCount() < i; i++){
                 SwingUtilities.updateComponentTreeUI(parent.getComponent(i));
             }
+
+            parent.dispose();
+            new MainFrame();
+            MainFrame.changePage(PanelButtons.SETTINGS);
         });
 
         manageMealsButton.addActionListener( l -> {

@@ -7,8 +7,9 @@ import javax.swing.*;
 import java.awt.*;
 
 public class ColorButtons {
+    private ThemesEnum te;
     public void ColorLeftButtons(JButton btSelected, JButton bt1, JButton bt2, JButton bt3, JButton bt4) {
-        ThemesEnum te = new ThemeHandler().ReadTheme();
+        this.te = new ThemeHandler().ReadTheme();
         ColorButtonGreen(btSelected);
         ColorButtonWhite(bt1);
         ColorButtonWhite(bt2);
@@ -17,7 +18,7 @@ public class ColorButtons {
     }
 
     public void ColorButtonGreen(JButton btSelected) {
-        ThemesEnum te = new ThemeHandler().ReadTheme();
+        this.te = new ThemeHandler().ReadTheme();
         if (te == ThemesEnum.LIGHT_THEME) {
             btSelected.setBackground(Color.decode("#B1EA9D"));
         } else if (te == ThemesEnum.DARK_THEME) {
@@ -28,7 +29,7 @@ public class ColorButtons {
     }
 
     public void ColorButtonWhite(JButton btSelected) {
-        ThemesEnum te = new ThemeHandler().ReadTheme();
+        this.te = new ThemeHandler().ReadTheme();
         if (te == ThemesEnum.LIGHT_THEME) {
             btSelected.setBackground(Color.decode("#FFFFFF"));
         } else if (te == ThemesEnum.DARK_THEME) {
