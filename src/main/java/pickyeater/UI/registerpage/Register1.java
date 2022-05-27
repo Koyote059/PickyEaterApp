@@ -190,11 +190,4 @@ public class Register1 extends JFrame{
     private void createUIComponents() {
         jBirthdayChooser = new JDateChooser();
     }
-
-    public static void updateComponentTreeUI0(Component c) {
-        SwingUtilities.updateComponentTreeUI(c);
-        c.invalidate();
-        c.validate();
-        c.repaint();
-    }
 }
