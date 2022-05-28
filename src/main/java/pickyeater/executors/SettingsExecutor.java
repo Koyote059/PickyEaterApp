@@ -1,11 +1,10 @@
 package pickyeater.executors;
 
+import pickyeater.UI.themes.filehandler.ThemeHandler;
+import pickyeater.UI.themes.filehandler.ThemesEnum;
 import pickyeater.basics.groceries.Groceries;
-import pickyeater.basics.user.User;
 import pickyeater.managers.EaterManager;
 import pickyeater.managers.UserManager;
-import pickyeater.themes.filehandler.ThemeHandler;
-import pickyeater.themes.filehandler.ThemesEnum;
 
 import java.util.Optional;
 

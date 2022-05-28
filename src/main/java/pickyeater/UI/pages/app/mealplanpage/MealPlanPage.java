@@ -1,22 +1,19 @@
-package pickyeater.UI.app.mealplanpage;
+package pickyeater.UI.pages.app.mealplanpage;
 
 /**
  * @author Claudio Di Maio
  */
 
-import pickyeater.UI.app.MainFrame;
-import pickyeater.UI.app.PickyPage;
+import pickyeater.UI.pages.app.MainFrame;
+import pickyeater.UI.pages.app.PickyPage;
 import pickyeater.UI.app.mealplanpage.utils.MealRowPopupMenu;
-import pickyeater.UI.choosers.FoodPopupMenu;
-import pickyeater.UI.choosers.MealInfoJDialog;
-import pickyeater.UI.creators.IngredientCreator;
-import pickyeater.UI.leftbuttons.PanelButtonsConverter;
-import pickyeater.basics.food.Ingredient;
+import pickyeater.UI.pages.choosers.MealInfoJDialog;
+import pickyeater.UI.pages.leftbuttons.PanelButtonsConverter;
 import pickyeater.basics.food.Meal;
 import pickyeater.basics.mealplan.DailyMealPlan;
 import pickyeater.executors.ExecutorProvider;
 import pickyeater.executors.MealPlanViewerExecutor;
-import pickyeater.themes.ColorButtons;
+import pickyeater.UI.themes.ColorButtons;
 import pickyeater.utils.MouseClickListener;
 
 import javax.imageio.ImageIO;
