@@ -5,7 +5,8 @@ Progetti a breve termine - Essenziali:
 
 Progetti a breve termine:
 - Inserire un grafico in user della cronologia dei progressi giornalieri
-- Aggiungi TOOLTIP o simile per elementi che richiedono il tasto destro
+- Aggiungi TOOLTIP o simile per elementi che richiedono il tasto destro/doppio tasto
+- Catch exceptions quando si prova ad aggiungere meal senza ingredienti / non ci sono meals / non ci sono ingredienti
 
 Progetti a medio termine:
 - Popolare il database
