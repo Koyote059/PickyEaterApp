@@ -6,6 +6,7 @@ package pickyeater;
 
 import pickyeater.UI.pages.app.MainFrame;
 import pickyeater.UI.pages.leftbuttons.PanelButtons;
+import pickyeater.UI.pages.registerpage.RegisterMainFrame;
 import pickyeater.UI.pages.registerpage.WelcomePage;
 import pickyeater.database.*;
 import pickyeater.executors.ExecutorProvider;
@@ -27,7 +28,6 @@ public class main {
                 pickyEatersDB.getMealsDatabase(),pickyEatersDB.getGroceriesDatabase());
 
         ExecutorProvider.setEaterManager(eaterManager);
-
         if (eaterManager.getUserManager().getUser().isEmpty()) {  // User Database is empty
             new WelcomePage();
         } else {  // Go to the app

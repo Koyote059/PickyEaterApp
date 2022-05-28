@@ -4,6 +4,7 @@ package pickyeater.UI.pages.registerpage;
  * @author Claudio Di Maio
  */
 
+import pickyeater.UI.pages.app.PickyPage;
 import pickyeater.UI.themes.filehandler.ThemeHandler;
 import pickyeater.UI.themes.filehandler.ThemesEnum;
 import pickyeater.basics.user.WeightGoal;
@@ -14,7 +15,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 
-public class Register3 extends JFrame {
+public class Register3 extends PickyPage {
     private JButton btLoseWeight;
     private JButton btGainWeight;
     private JButton btMaintainWeight;
@@ -22,17 +23,15 @@ public class Register3 extends JFrame {
     private JButton btBack;
     private JLabel txtChangeTheme;
 
-    public Register3(RegisterExecutor registerExecutor) {
-        setContentPane(mainPanel);
-        setSize(677, 507);    //pack();
-        setLocation(Toolkit.getDefaultToolkit().getScreenSize().width/2 - 677/2,Toolkit.getDefaultToolkit().getScreenSize().height/2 - 507/2);
-        setResizable(false);
-        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        setVisible(true);
+    public Register3(RegisterExecutor registerExecutor,JFrame parent) {
+        super(parent);
+        //setSize(677, 507);    //pack();
+        //setLocation(Toolkit.getDefaultToolkit().getScreenSize().width/2 - 677/2,Toolkit.getDefaultToolkit().getScreenSize().height/2 - 507/2);
+
 
         ColorButtons cB = new ColorButtons();
-        draw();
-
+        setLayout(new BorderLayout());
+        add(mainPanel,BorderLayout.CENTER);
         btLoseWeight.addActionListener(actionEvent -> {
             registerExecutor.getUserBuilder().setWeightVariationGoal(WeightGoal.LOSE_WEIGHT);
 
@@ -50,10 +49,7 @@ public class Register3 extends JFrame {
         });
 
     btBack.addComponentListener(new ComponentAdapter() { } );
-        btBack.addActionListener(actionEvent -> {
-            new Register2(registerExecutor);
-            setVisible(false);
-        });
+        btBack.addActionListener(actionEvent -> RegisterMainFrame.changePage(2));
         btLoseWeight.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseEntered(MouseEvent e) {
@@ -105,16 +101,15 @@ public class Register3 extends JFrame {
                     draw();
                 }
 
-                for (int i = 0; rootPane.getComponentCount() > i; i++) {
-                    SwingUtilities.updateComponentTreeUI(rootPane.getComponent(i));
+                for (int i = 0; getComponentCount() > i; i++) {
+                    SwingUtilities.updateComponentTreeUI(getComponent(i));
                 }
             }
         });
     }
     private void next(RegisterExecutor registerExecutor){
         if (registerExecutor.getUserBuilder().getWeightVariationGoal() != null){
-            new Register4(registerExecutor);
-            setVisible(false);
+            RegisterMainFrame.changePage(4);
         }
     }
 
@@ -125,5 +120,11 @@ public class Register3 extends JFrame {
         cB.ColorButtonWhite(btLoseWeight);
 
         new RegisterChangeTheme(txtChangeTheme);
+    }
+
+    @Override
+    public void showPage() {
+        draw();
+        super.showPage();
     }
 }
