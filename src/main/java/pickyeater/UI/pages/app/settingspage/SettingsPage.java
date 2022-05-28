@@ -7,6 +7,7 @@ import pickyeater.UI.pages.choosers.MealsChooser;
 import pickyeater.UI.pages.leftbuttons.PanelButtons;
 import pickyeater.UI.pages.leftbuttons.PanelButtonsConverter;
 import pickyeater.UI.pages.registerpage.Register1;
+import pickyeater.UI.pages.registerpage.RegisterMainFrame;
 import pickyeater.executors.ExecutorProvider;
 import pickyeater.UI.themes.ColorButtons;
 import pickyeater.UI.themes.filehandler.ThemeHandler;
@@ -68,7 +69,7 @@ public class SettingsPage extends PickyPage {
                 ExecutorProvider.getSettingsExecutor().deleteUser();
                 ExecutorProvider.getSettingsExecutor().deleteGroceries();
                 parent.dispose();
-                new Register1();
+                new RegisterMainFrame();
             }
         });
         btResetMeals.addActionListener(e -> {

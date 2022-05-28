@@ -71,19 +71,19 @@ public class SQLSafeQueryExecutor {
             resultSet = statement.executeQuery(
                     String.format("SELECT MealCompositions.mealName AS mealName,\n" +
                             "       Ingredients.ingredientName AS ingredientName,\n" +
-                            "       MealCompositions.quantity AS quantity,\n" +
+                            "       MealCompositions.quantity * ingredientsRatio AS quantity,\n" +
                             "       quantityType,\n" +
                             "       ingredientsRatio,\n" +
                             "       gramsPerQuantity,\n" +
-                            "       price * ( ingredientsRatio * gramsPerQuantity * MealCompositions.quantity / 100) AS price,\n" +
-                            "       complexCarbs * ( ingredientsRatio * gramsPerQuantity * MealCompositions.quantity / 100) AS complexCarbs,\n" +
-                            "       simpleCarbs * ( ingredientsRatio * gramsPerQuantity * MealCompositions.quantity / 100) AS simpleCarbs,\n" +
-                            "       fibers * ( ingredientsRatio * gramsPerQuantity * MealCompositions.quantity / 100) AS fibers,\n" +
-                            "       saturatedFats * ( ingredientsRatio * gramsPerQuantity * MealCompositions.quantity / 100) AS saturatedFats,\n" +
-                            "       unSaturatedFats * ( ingredientsRatio * gramsPerQuantity * MealCompositions.quantity / 100) AS unSaturatedFats,\n" +
-                            "       transFats * ( ingredientsRatio * gramsPerQuantity * MealCompositions.quantity / 100) AS transFats,\n" +
-                            "       proteins * ( ingredientsRatio * gramsPerQuantity * MealCompositions.quantity / 100) AS proteins,\n" +
-                            "       alcohol * ( ingredientsRatio * gramsPerQuantity * MealCompositions.quantity / 100) AS alcohol\n" +
+                            "       price * ( gramsPerQuantity * MealCompositions.quantity / 100) AS price,\n" +
+                            "       complexCarbs * ( gramsPerQuantity * MealCompositions.quantity / 100) AS complexCarbs,\n" +
+                            "       simpleCarbs * ( gramsPerQuantity * MealCompositions.quantity / 100) AS simpleCarbs,\n" +
+                            "       fibers * ( gramsPerQuantity * MealCompositions.quantity / 100) AS fibers,\n" +
+                            "       saturatedFats * ( gramsPerQuantity * MealCompositions.quantity / 100) AS saturatedFats,\n" +
+                            "       unSaturatedFats * ( gramsPerQuantity * MealCompositions.quantity / 100) AS unSaturatedFats,\n" +
+                            "       transFats * ( gramsPerQuantity * MealCompositions.quantity / 100) AS transFats,\n" +
+                            "       proteins * ( gramsPerQuantity * MealCompositions.quantity / 100) AS proteins,\n" +
+                            "       alcohol * ( gramsPerQuantity * MealCompositions.quantity / 100) AS alcohol\n" +
                             "FROM Meals LEFT JOIN MealCompositions ON Meals.mealName = MealCompositions.mealName\n" +
                             "LEFT JOIN Ingredients ON MealCompositions.ingredientName = Ingredients.ingredientName\n" +
                             "LEFT JOIN EatenMeals ON MealCompositions.mealName = EatenMeals.mealName\n" +

@@ -4,8 +4,10 @@ package pickyeater.UI.pages.registerpage;
  * @author Claudio Di Maio
  */
 import pickyeater.UI.pages.app.MainFrame;
+import pickyeater.UI.pages.app.PickyPage;
 import pickyeater.UI.themes.filehandler.ThemeHandler;
 import pickyeater.UI.themes.filehandler.ThemesEnum;
+import pickyeater.builders.PickyDailyMealPlanBuilder;
 import pickyeater.utils.AgeCalculator;
 import pickyeater.UI.pages.leftbuttons.PanelButtons;
 import pickyeater.algorithms.HarrisBenedictCalculator;
@@ -25,7 +27,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.text.DecimalFormat;
 
-public class Register4 extends JFrame {
+public class Register4 extends PickyPage {
     private JPanel mainPanel;
     private JButton btBack;
     private JButton btDone;
@@ -36,36 +38,29 @@ public class Register4 extends JFrame {
     private JButton btReset;
     private JLabel txtChangeTheme;
     NutrientsBuilder nutrientsBuilder = new PickyNutrientsBuilder();
+    private final UserBuilder userBuilder;
 
-    public Register4(RegisterExecutor registerExecutor) {
-        setContentPane(mainPanel);
-        setSize(677, 507);
-        setLocation(Toolkit.getDefaultToolkit().getScreenSize().width/2 - 677/2,Toolkit.getDefaultToolkit().getScreenSize().height/2 - 507/2);
-        setResizable(false);
-        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        setVisible(true);
+    public Register4(RegisterExecutor registerExecutor,JFrame parent) {
+        super(parent);
+        userBuilder = registerExecutor.getUserBuilder();
+        //setLocation(Toolkit.getDefaultToolkit().getScreenSize().width/2 - 677/2,Toolkit.getDefaultToolkit().getScreenSize().height/2 - 507/2);
+        setLayout(new BorderLayout());
+        add(mainPanel,BorderLayout.CENTER);
 
-        new RegisterChangeTheme(txtChangeTheme);
-
-        UserBuilder userBuilder = registerExecutor.getUserBuilder();
-        resetNutrients(userBuilder);
         StringToNumber stn = new StringToNumber();
-
         btBack.addActionListener(actionEvent -> {
-            new Register3(registerExecutor);
-            setVisible(false);
+            RegisterMainFrame.changePage(3);
         });
 
         btDone.addActionListener(actionEvent -> {
 
             JOptionPane.showMessageDialog(mainPanel, "Selected:"  + "\n" + "Calories: " + nutrientsBuilder.getCalories() + "\n" + "Proteins: " + nutrientsBuilder.getProteins() + "\n" + "Carbs: " + nutrientsBuilder.getCarbs() + "\n" + "Fats: " + nutrientsBuilder.getFats());
-
             userBuilder.setRequiredNutrients(nutrientsBuilder.build());
             registerExecutor.saveUser(userBuilder.build());
 
             new MainFrame();
             MainFrame.changePage(PanelButtons.PROGRESS);
-            setVisible(false);
+            parent.dispose();
         });
 
         btReset.addActionListener(actionEvent -> resetNutrients(userBuilder));
@@ -107,8 +102,8 @@ public class Register4 extends JFrame {
                     new RegisterChangeTheme(txtChangeTheme);
                 }
 
-                for (int i = 0; rootPane.getComponentCount() > i; i++) {
-                    SwingUtilities.updateComponentTreeUI(rootPane.getComponent(i));
+                for (int i = 0; getComponentCount() > i; i++) {
+                    SwingUtilities.updateComponentTreeUI(getComponent(i));
                 }
             }
         });
@@ -132,4 +127,10 @@ public class Register4 extends JFrame {
         nutrientsBuilder.setProteins(new StringToNumber().convertPositiveFloat(tfProteins.getText()));
     }
 
+    @Override
+    public void showPage() {
+        resetNutrients(userBuilder);
+        new RegisterChangeTheme(txtChangeTheme);
+        super.showPage();
+    }
 }

@@ -36,8 +36,8 @@ public class WelcomePage extends JFrame implements ActionListener {
             @Override
             public void mouseReleased(MouseEvent e) {
                 super.mouseReleased(e);
-                new Register1();
                 setVisible(false);
+                new RegisterMainFrame();
             }
         });
 

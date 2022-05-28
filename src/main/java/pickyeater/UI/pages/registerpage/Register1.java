@@ -4,6 +4,7 @@ package pickyeater.UI.pages.registerpage;
  * @author Claudio Di Maio
  */
 import com.toedter.calendar.JDateChooser;
+import pickyeater.UI.pages.app.PickyPage;
 import pickyeater.executors.user.RegisterExecutor;
 import pickyeater.UI.themes.ColorButtons;
 import pickyeater.UI.themes.filehandler.ThemeHandler;
@@ -27,7 +28,7 @@ import java.io.File;
 import java.io.IOException;
 import java.time.LocalDate;
 
-public class Register1 extends JFrame{
+public class Register1 extends PickyPage {
     private JPanel mainPanel;
     private JPanel panelZeroOne;
     private JTextField tfName;
@@ -41,18 +42,14 @@ public class Register1 extends JFrame{
     private JLabel txtChangeTheme;
     private final UserBuilder userBuilder;
 
-    public Register1() {
-        RegisterExecutor registerExecutor = ExecutorProvider.getRegisterExecutor();
+    public Register1(RegisterExecutor registerExecutor, JFrame parent) {
+        super(parent);
         ColorButtons cB = new ColorButtons();
         this.userBuilder = registerExecutor.getUserBuilder();
-        setContentPane(mainPanel);
-        setSize(677, 507);    //pack();
-        setResizable(false);
-        setLocation(Toolkit.getDefaultToolkit().getScreenSize().width/2 - 677/2,Toolkit.getDefaultToolkit().getScreenSize().height/2 - 507/2);
-        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        setVisible(true);
-
-        draw();
+        setLayout(new BorderLayout());
+        add(mainPanel,BorderLayout.CENTER);
+        parent.setSize(677, 507);    //pack();
+        //setLocation(Toolkit.getDefaultToolkit().getScreenSize().width/2 - 677/2,Toolkit.getDefaultToolkit().getScreenSize().height/2 - 507/2);
 
         // Sex
         btMale.addActionListener(actionEvent -> {
@@ -144,8 +141,8 @@ public class Register1 extends JFrame{
                     draw();
                 }
 
-                for (int i = 0; rootPane.getComponentCount() > i; i++) {
-                    SwingUtilities.updateComponentTreeUI(rootPane.getComponent(i));
+                for (int i = 0; getComponentCount() > i; i++) {
+                    SwingUtilities.updateComponentTreeUI(getComponent(i));
                 }
             }
         });
@@ -154,7 +151,6 @@ public class Register1 extends JFrame{
     private void draw(){
         new ColorButtons().ColorButtonWhite(btMale);
         new ColorButtons().ColorButtonWhite(btFemale);
-
         new RegisterChangeTheme(txtChangeTheme);
     }
 
@@ -166,12 +162,16 @@ public class Register1 extends JFrame{
                  new AgeCalculator().age(userBuilder.getDateOfBirth()), userBuilder.getSex()));
             }
             JOptionPane.showMessageDialog(panelZeroOne, "Selected:" + "\n" + "Name: " + userBuilder.getName() + "\n" + "Height: " + userBuilder.getHeight() + "cm\n" + "Weight: " + userBuilder.getWeight() + "Kg\n" + "Birthday: " + userBuilder.getDateOfBirth() + "\n" + "Sex: " + userBuilder.getSex() + "\n" + "Body fat: " + userBuilder.getBodyFat() + "%");
-
-            new Register2(registerExecutor);
-            setVisible(false);
+            RegisterMainFrame.changePage(2);
         }
     }
     private void createUIComponents() {
         jBirthdayChooser = new JDateChooser();
+    }
+
+    @Override
+    public void showPage() {
+        draw();
+        super.showPage();
     }
 }

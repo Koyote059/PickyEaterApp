@@ -3,8 +3,11 @@ package pickyeater.UI.pages.registerpage;
 /**
  * @author Claudio Di Maio
  */
+import pickyeater.UI.pages.app.MainFrame;
+import pickyeater.UI.pages.app.PickyPage;
 import pickyeater.UI.themes.filehandler.ThemeHandler;
 import pickyeater.UI.themes.filehandler.ThemesEnum;
+import pickyeater.basics.mealplan.PickyMealPlan;
 import pickyeater.basics.user.LifeStyle;
 import pickyeater.executors.user.RegisterExecutor;
 import pickyeater.UI.themes.ColorButtons;
@@ -13,7 +16,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 
-public class Register2 extends JFrame {
+public class Register2 extends PickyPage {
     private JButton btSedentary;
     private JButton btVeryActive;
     private JButton btSlightlyActive;
@@ -22,16 +25,13 @@ public class Register2 extends JFrame {
     private JButton btBack;
     private JLabel txtChangeTheme;
 
-    public Register2(RegisterExecutor registerExecutor) {
-        setContentPane(mainPanel);
-        setSize(677, 507);    //pack();
-        setLocation(Toolkit.getDefaultToolkit().getScreenSize().width/2 - 677/2,Toolkit.getDefaultToolkit().getScreenSize().height/2 - 507/2);
-        setResizable(false);
-        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        setVisible(true);
+    public Register2(RegisterExecutor registerExecutor,JFrame parent) {
+        super(parent);
+        //setSize(677, 507);    //pack();
+        //setLocation(Toolkit.getDefaultToolkit().getScreenSize().width/2 - 677/2,Toolkit.getDefaultToolkit().getScreenSize().height/2 - 507/2);
         ColorButtons cB = new ColorButtons();
-
-        draw();
+        setLayout(new BorderLayout());
+        add(mainPanel,BorderLayout.CENTER);
 
         btSedentary.addActionListener(actionEvent -> {
             registerExecutor.getUserBuilder().setLifeStyle(LifeStyle.SEDENTARY);
@@ -53,10 +53,7 @@ public class Register2 extends JFrame {
             next(registerExecutor);
         });
     btBack.addComponentListener(new ComponentAdapter() { } );
-        btBack.addActionListener(actionEvent -> {
-            new Register1();
-            setVisible(false);
-        });
+        btBack.addActionListener(actionEvent -> RegisterMainFrame.changePage(1));
         btSedentary.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseEntered(MouseEvent e) {
@@ -123,16 +120,15 @@ public class Register2 extends JFrame {
                     draw();
                 }
 
-                for (int i = 0; rootPane.getComponentCount() > i; i++) {
-                    SwingUtilities.updateComponentTreeUI(rootPane.getComponent(i));
+                for (int i = 0; getComponentCount() > i; i++) {
+                    SwingUtilities.updateComponentTreeUI(getComponent(i));
                 }
             }
         });
     }
     private void next(RegisterExecutor registerExecutor){
         if (registerExecutor.getUserBuilder().getLifeStyle() != null){
-            new Register3(registerExecutor);
-            setVisible(false);
+            RegisterMainFrame.changePage(3);
         }
     }
 
@@ -144,5 +140,11 @@ public class Register2 extends JFrame {
         cB.ColorButtonWhite(btVeryActive);
 
         new RegisterChangeTheme(txtChangeTheme);
+    }
+
+    @Override
+    public void showPage() {
+        draw();
+        super.showPage();
     }
 }
