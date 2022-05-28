@@ -101,9 +101,7 @@ public class Register3 extends PickyPage {
                     draw();
                 }
 
-                for (int i = 0; getComponentCount() > i; i++) {
-                    SwingUtilities.updateComponentTreeUI(getComponent(i));
-                }
+                SwingUtilities.updateComponentTreeUI(parent);
             }
         });
     }

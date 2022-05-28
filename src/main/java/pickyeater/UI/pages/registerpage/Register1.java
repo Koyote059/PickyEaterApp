@@ -5,27 +5,22 @@ package pickyeater.UI.pages.registerpage;
  */
 import com.toedter.calendar.JDateChooser;
 import pickyeater.UI.pages.app.PickyPage;
-import pickyeater.executors.user.RegisterExecutor;
 import pickyeater.UI.themes.ColorButtons;
 import pickyeater.UI.themes.filehandler.ThemeHandler;
 import pickyeater.UI.themes.filehandler.ThemesEnum;
-import pickyeater.utils.AgeCalculator;
 import pickyeater.algorithms.BodyFatCalculator;
 import pickyeater.algorithms.DeurenbergCalculator;
 import pickyeater.basics.user.Sex;
 import pickyeater.builders.UserBuilder;
-import pickyeater.executors.ExecutorProvider;
+import pickyeater.executors.user.RegisterExecutor;
+import pickyeater.utils.AgeCalculator;
 import pickyeater.utils.JCalendarToLocalDate;
 import pickyeater.utils.StringToNumber;
 
-import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
 import java.time.LocalDate;
 
 public class Register1 extends PickyPage {
@@ -140,10 +135,11 @@ public class Register1 extends PickyPage {
                     new ThemeHandler().ChangeTheme(ThemesEnum.DARK_THEME);
                     draw();
                 }
-
                 for (int i = 0; getComponentCount() > i; i++) {
                     SwingUtilities.updateComponentTreeUI(getComponent(i));
                 }
+
+                SwingUtilities.updateComponentTreeUI(parent);
             }
         });
     }

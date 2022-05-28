@@ -3,18 +3,18 @@ package pickyeater.UI.pages.registerpage;
 /**
  * @author Claudio Di Maio
  */
-import pickyeater.UI.pages.app.MainFrame;
 import pickyeater.UI.pages.app.PickyPage;
+import pickyeater.UI.themes.ColorButtons;
 import pickyeater.UI.themes.filehandler.ThemeHandler;
 import pickyeater.UI.themes.filehandler.ThemesEnum;
-import pickyeater.basics.mealplan.PickyMealPlan;
 import pickyeater.basics.user.LifeStyle;
 import pickyeater.executors.user.RegisterExecutor;
-import pickyeater.UI.themes.ColorButtons;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.*;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class Register2 extends PickyPage {
     private JButton btSedentary;
@@ -27,8 +27,6 @@ public class Register2 extends PickyPage {
 
     public Register2(RegisterExecutor registerExecutor,JFrame parent) {
         super(parent);
-        //setSize(677, 507);    //pack();
-        //setLocation(Toolkit.getDefaultToolkit().getScreenSize().width/2 - 677/2,Toolkit.getDefaultToolkit().getScreenSize().height/2 - 507/2);
         ColorButtons cB = new ColorButtons();
         setLayout(new BorderLayout());
         add(mainPanel,BorderLayout.CENTER);
@@ -120,9 +118,7 @@ public class Register2 extends PickyPage {
                     draw();
                 }
 
-                for (int i = 0; getComponentCount() > i; i++) {
-                    SwingUtilities.updateComponentTreeUI(getComponent(i));
-                }
+                SwingUtilities.updateComponentTreeUI(parent);
             }
         });
     }
