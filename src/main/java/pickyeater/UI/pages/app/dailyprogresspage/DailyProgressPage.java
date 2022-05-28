@@ -1,17 +1,17 @@
-package pickyeater.UI.app.dailyprogresspage;
+package pickyeater.UI.pages.app.dailyprogresspage;
 
 /**
  * @author Claudio Di Maio
  */
 
-import pickyeater.UI.app.MainFrame;
-import pickyeater.UI.app.PickyPage;
-import pickyeater.UI.choosers.MealsChooser;
-import pickyeater.UI.leftbuttons.PanelButtonsConverter;
+import pickyeater.UI.pages.app.MainFrame;
+import pickyeater.UI.pages.app.PickyPage;
+import pickyeater.UI.pages.choosers.MealsChooser;
+import pickyeater.UI.pages.leftbuttons.PanelButtonsConverter;
 import pickyeater.basics.food.Meal;
 import pickyeater.executors.DailyProgressExecutor;
 import pickyeater.executors.ExecutorProvider;
-import pickyeater.themes.ColorButtons;
+import pickyeater.UI.themes.ColorButtons;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
