@@ -1,5 +1,6 @@
 package pickyeater.executors;
 
+import pickyeater.UI.pages.app.dailyprogresspage.DailyProgressPage;
 import pickyeater.basics.food.Ingredient;
 import pickyeater.basics.food.Meal;
 import pickyeater.basics.food.Nutrients;
@@ -11,6 +12,7 @@ import pickyeater.executors.searcher.MealSearcherExecutor;
 import pickyeater.managers.EaterManager;
 import pickyeater.managers.UserManager;
 
+import java.time.LocalDate;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
@@ -28,6 +30,9 @@ public class DailyProgressExecutor {
         } else {
             this.user = userOptional.get();
         }
+
+        DailyProgresses dailyProgresses = user.getDailyProgresses();
+        if(dailyProgresses.getDate().isBefore(LocalDate.now())) user.resetDailyProgresses();
     }
 
     public DailyProgresses getUserDailyProgresses() {
