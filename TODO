@@ -1,8 +1,6 @@
 
 Progetti a breve termine - Essenziali:
 - Sistemare il fatto che le pagine si aprono ricorsivamente (Fede)
-- Inserire una terza colonna nella tabella di "DailyProgresses" in maniera tale che indichi qual è il tipo di quantità ( gr,ml o pz )
-- Aggiungi la possibilità di rimuovere/modificare meal nella tabella in dailyProgresses.
 - Catch exceptions quando si prova ad aggiungere meal senza ingredienti / non ci sono meals / non ci sono ingredienti
 - Modificare il DB in maniera tale che ci siano più controlli stretti con triggers ecc... (Fede)
 - Aggiungi TOOLTIP o simile per elementi che richiedono il tasto destro/doppio tasto (Fede)
