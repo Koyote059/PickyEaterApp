@@ -145,9 +145,18 @@ public class Register1 extends PickyPage {
     }
 
     private void draw(){
-        new ColorButtons().ColorButtonWhite(btMale);
-        new ColorButtons().ColorButtonWhite(btFemale);
         new RegisterChangeTheme(txtChangeTheme);
+        ColorButtons cb = new ColorButtons();
+        if (userBuilder.getSex() == Sex.MALE){
+            cb.ColorButtonGreen(btMale);
+            cb.ColorButtonWhite(btFemale);
+        } else if (userBuilder.getSex() == Sex.FEMALE){
+            cb.ColorButtonWhite(btMale);
+            cb.ColorButtonGreen(btFemale);
+        } else {
+            cb.ColorButtonWhite(btMale);
+            cb.ColorButtonWhite(btFemale);
+        }
     }
 
     private void next(RegisterExecutor registerExecutor){
