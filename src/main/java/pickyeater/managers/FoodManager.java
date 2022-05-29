@@ -26,4 +26,8 @@ public interface FoodManager {
     void deleteMeal(Meal meal);
 
     void deleteIngredient(Ingredient ingredient);
+
+    boolean hasIngredient(String name);
+
+    boolean hasMeal(String mealName);
 }

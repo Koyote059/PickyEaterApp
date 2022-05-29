@@ -58,4 +58,9 @@ public class CreateMealExecutor {
     public MealQuantityConverter getMealQuantityConverter() {
         return new MealQuantityConverter();
     }
+
+    public boolean existsMeal(String mealName) {
+        FoodManager foodManager = eaterManager.getFoodManager();
+        return foodManager.hasMeal(mealName);
+    }
 }
