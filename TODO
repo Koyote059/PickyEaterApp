@@ -1,7 +1,9 @@
 
 Progetti a breve termine - Essenziali:
-- Catch exceptions quando si prova ad aggiungere meal senza ingredienti / non ci sono meals / non ci sono ingredienti
-- Modificare il DB in maniera tale che ci siano più controlli stretti con triggers ecc... (Fede)
+- Controlla come createIngredient salva i dati nel DB
+- Modificare il DB in maniera tale che ci siano più controlli stretti con triggers ecc... ( Per esempio se elimini Meal elimini anche MealCompositions, o
+che non puoi eliminare un ingrediente se è usato da varie parti (tanto lavoro) , o che non puoi inserire un meal senza ingredienti )
+- Inserisci controlli in MealCreator
 - Aggiungi TOOLTIP o simile per elementi che richiedono il tasto destro/doppio tasto (Fede)
 - Aggiungi TOOLTIP o spiegare con una scritta che in ManageMeal e ManageIngredient puoi cercare meal inserendo il nome del meal voluto e premendo invio + se possibile togliere che si deve premere invio per aggiornare la lista (si aggiorna ogni volta che un tasto viene premuto all'interno del textField)
 - Aggiungi TOOLTIP o simile per spiegare che gli ingredienti in MealCreator sono calcolati in base alle calorie che portano, non alla quantità di proteins/fats/carbs (E consultare terzi per chidere se dovrebbe invece contenere la percentuale di carbs/fats/proteins come gli altri grafici)
