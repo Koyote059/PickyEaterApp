@@ -35,10 +35,6 @@ public class DailyProgressExecutor {
         if(dailyProgresses.getDate().isBefore(LocalDate.now())) user.resetDailyProgresses();
     }
 
-    public DailyProgresses getUserDailyProgresses() {
-        return this.user.getDailyProgresses();
-    }
-
     public MealSearcherExecutor getMealSearcher() {
         return new MealSearcherExecutor(this.eaterManager);
     }
@@ -112,6 +108,13 @@ public class DailyProgressExecutor {
     public void addEatenMeal(Meal meal) {
         DailyProgresses progresses = user.getDailyProgresses();
         progresses.addEatenMeal(meal);
+        UserManager manager = eaterManager.getUserManager();
+        manager.saveUser(user);
+    }
+
+    public void removeEatenMeal(Meal meal) {
+        DailyProgresses progresses = user.getDailyProgresses();
+        progresses.removeEatenMeal(meal);
         UserManager manager = eaterManager.getUserManager();
         manager.saveUser(user);
     }

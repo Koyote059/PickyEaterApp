@@ -6,18 +6,24 @@ package pickyeater.UI.pages.app.dailyprogresspage;
 
 import pickyeater.UI.pages.app.MainFrame;
 import pickyeater.UI.pages.app.PickyPage;
+import pickyeater.UI.pages.app.dailyprogresspage.utils.EatenMealsPopupMenu;
 import pickyeater.UI.pages.choosers.MealsChooser;
+import pickyeater.UI.pages.creators.MealCreator;
 import pickyeater.UI.pages.leftbuttons.PanelButtonsConverter;
 import pickyeater.basics.food.Meal;
 import pickyeater.executors.DailyProgressExecutor;
 import pickyeater.executors.ExecutorProvider;
 import pickyeater.UI.themes.ColorButtons;
+import pickyeater.utils.MouseClickListener;
 
+import java.util.List;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
 import java.text.DecimalFormat;
+import java.util.ArrayList;
 import java.util.Optional;
 
 public class DailyProgressPage extends PickyPage {
@@ -29,13 +35,14 @@ public class DailyProgressPage extends PickyPage {
     private JButton btDiet;
     private JButton btAddEatenMeals;
     private JButton btAddBurntCalories;
+
+    List<Meal> meals = new ArrayList<>();
     private JTable tableEatenMeals;
     private JProgressBar bar;
     private JComboBox cbConsumed;
     private JLabel txtBurntCalories;
     DailyProgressExecutor dailyProgressExecutor;
     JFrame parent;
-
     int burntCalories;
 
     public DailyProgressPage(JFrame parent) {
@@ -71,6 +78,30 @@ public class DailyProgressPage extends PickyPage {
         });
 
         tableEatenMeals.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+
+        tableEatenMeals.addMouseListener(new MouseClickListener() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                if(SwingUtilities.isRightMouseButton(e)){
+                    Point point = MouseInfo.getPointerInfo().getLocation();
+                    Point framePoint = parent.getLocation();
+                    Point realPoint = new Point(point.x - framePoint.x,point.y - framePoint.y);
+                    int selectedIndex = tableEatenMeals.rowAtPoint(e.getPoint());
+                    if(selectedIndex<0) return;
+                    tableEatenMeals.setRowSelectionInterval(selectedIndex,selectedIndex);
+                    Meal selectedMeal = meals.get(selectedIndex);
+                    EatenMealsPopupMenu popupMenu = new EatenMealsPopupMenu();
+                    popupMenu.addRemoveListener( l -> {
+                        int choice = JOptionPane.showConfirmDialog(parent,"Are you sure you want to delete it?");
+                        if(choice != JOptionPane.YES_OPTION) return;
+                        dailyProgressExecutor.removeEatenMeal(selectedMeal);
+                        draw();
+                    });
+                    popupMenu.show(parent,realPoint.x, realPoint.y);
+
+                }
+            }
+        });
         setNavigationMenuListeners();
     }
     private void progressBar(float eaten, float toEat){
@@ -104,12 +135,14 @@ public class DailyProgressPage extends PickyPage {
         DefaultTableModel model = new DefaultTableModel();
         model.addColumn("Name");
         model.addColumn("Quantity");
+        model.addColumn("");
 
-        DailyProgressExecutor dailyProgressExecutor = ExecutorProvider.getDailyProgressExecutor();
-        for (Meal meal : dailyProgressExecutor.getEatenMeals()) {
+        meals = dailyProgressExecutor.getEatenMeals();
+        for (Meal meal : meals) {
+
             float mealQuantity = meal.getWeight();
             Object[]  row= new Object[]{
-                    meal.getName(), df.format(mealQuantity)
+                    meal.getName(), df.format(mealQuantity), "gr"
             };
             model.addRow(row);
         }
