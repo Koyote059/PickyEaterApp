@@ -9,6 +9,10 @@ import pickyeater.basics.food.Ingredient;
 import pickyeater.basics.food.Meal;
 import pickyeater.basics.food.Quantity;
 
+import java.util.Collection;
+import java.util.List;
+import java.util.Set;
+
 public interface MealBuilder {
     void setName(String name);
 
@@ -16,4 +20,6 @@ public interface MealBuilder {
 
     Meal build();
     String getName();
+
+    Set<Ingredient> getIngredients();
 }

@@ -31,12 +31,12 @@ public class MainFrame extends JFrame {
         changePage(PanelButtons.PROGRESS);
         setVisible(true);
         instance = this;
-
-        setSize(new Dimension(677,507));
         setResizable(false);
+        setSize(new Dimension(677,507));
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocation(Toolkit.getDefaultToolkit().getScreenSize().width/2 - 677/2,
                 Toolkit.getDefaultToolkit().getScreenSize().height/2 - 507/2);
+
     }
 
     public static void changePage(PanelButtons panelButton){

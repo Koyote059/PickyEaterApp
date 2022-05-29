@@ -41,4 +41,9 @@ public class PickyMealBuilder implements MealBuilder {
     public String getName() {
         return name;
     }
+
+    @Override
+    public Set<Ingredient> getIngredients() {
+        return Collections.unmodifiableSet(ingredients);
+    }
 }

@@ -1,13 +1,16 @@
 package pickyeater.UI.pages.creators;
 
+import org.sqlite.util.StringUtils;
 import pickyeater.basics.food.*;
 import pickyeater.builders.IngredientBuilder;
 import pickyeater.builders.NutrientsBuilder;
 import pickyeater.executors.ExecutorProvider;
 import pickyeater.executors.creators.CreateIngredientExecutor;
+import pickyeater.utils.Checker;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.Locale;
 
 public class IngredientCreator extends JDialog {
 
@@ -21,6 +24,8 @@ public class IngredientCreator extends JDialog {
     private JTextField carbsTextField;
     private JTextField fatsTextField;
     private JButton saveButton;
+
+    private JLabel priceLabel;
     private JButton cancelButton;
     private CreateIngredientExecutor executor = ExecutorProvider.getCreateIngredientExecutor();
 
@@ -59,20 +64,29 @@ public class IngredientCreator extends JDialog {
                 case "Grams" -> {
                     gramsPerQuantityTextField.setVisible(false);
                     gramsQuantityLabel.setVisible(false);
+                    priceLabel.setText("Price per 100 g: ");
                 }
-                case "Milliliters","Pieces" -> {
+                case "Pieces" -> {
                     gramsPerQuantityTextField.setVisible(true);
                     gramsQuantityLabel.setVisible(true);
+                    gramsQuantityLabel.setText("Insert grams per piece: ");
+                    priceLabel.setText("Price per piece: ");
+                }
+                case "Milliliters" -> {
+                    gramsPerQuantityTextField.setVisible(true);
+                    gramsQuantityLabel.setVisible(true);
+                    gramsQuantityLabel.setText("Insert grams per 100 ml: ");
+                    priceLabel.setText("Price per 100ml: ");
                 }
             }
-            pack();
+
         });
         constraints.gridx=1;
         constraints.gridy=1;
         mainPanel.add(quantityTypeBox,constraints);
 
 
-        gramsQuantityLabel = new JLabel("Grams per unit: ");
+        gramsQuantityLabel = new JLabel("Grams per piece: ");
         constraints.gridx=0;
         constraints.gridy=2;
         mainPanel.add(gramsQuantityLabel,constraints);
@@ -84,7 +98,7 @@ public class IngredientCreator extends JDialog {
         constraints.gridy=2;
         mainPanel.add(gramsPerQuantityTextField,constraints);
 
-        JLabel priceLabel = new JLabel("Price per quantity: ");
+        priceLabel = new JLabel("Price per 100 grams: ");
         constraints.gridx=0;
         constraints.gridy=3;
         mainPanel.add(priceLabel,constraints);
@@ -140,6 +154,10 @@ public class IngredientCreator extends JDialog {
             } else {
                 Ingredient ingredient = buildIngredient();
                 if(ingredient==null) return;
+                if(executor.hasIngredient(ingredient.getName())){
+                    JOptionPane.showMessageDialog(parent,ingredient.getName() + " already exists!");
+                    return;
+                }
                 executor.saveIngredient(ingredient);
             }
             this.dispose();
@@ -232,10 +250,56 @@ public class IngredientCreator extends JDialog {
             }
         }
 
+        if(selectedName.length()>20){
+            JOptionPane.showMessageDialog(getParent(),"Name is too long!");
+            return null;
+        }
+
+        if(selectedName.length()<3){
+            JOptionPane.showMessageDialog(getParent(),"Name is too short!");
+            return null;
+        }
+
+        if(!Checker.isAlpha(selectedName)) {
+            JOptionPane.showMessageDialog(getParent(),"Name can only contain alphanumeric characters!");
+            return null;
+        }
+
+        if(price<0){
+            JOptionPane.showMessageDialog(getParent(),"Price cannot be negative!");
+            return null;
+        }
+
+        if(proteins<0){
+            JOptionPane.showMessageDialog(getParent(),"Proteins cannot be negative!");
+            return null;
+        }
+
+        if(carbs<0){
+            JOptionPane.showMessageDialog(getParent(),"Carbs cannot be negative!");
+            return null;
+        }
+
+        if(fats<0){
+            JOptionPane.showMessageDialog(getParent(),"Fats cannot be negative!");
+            return null;
+        }
+
+        if(fats+proteins+carbs>100){
+            JOptionPane.showMessageDialog(getParent(),"The nutrients' sum cannot be over 100 grams!");
+            return null;
+        }
+
+        if(gramsPerQuantity<0){
+            JOptionPane.showMessageDialog(getParent(),"Grams per quantity cannot be negative!");
+            return null;
+        }
+
+
 
         /* Getting values */
         IngredientBuilder ingredientBuilder = executor.getIngredientBuilder();
-        ingredientBuilder.setName(nameTextField.getText());
+        ingredientBuilder.setName(selectedName.toUpperCase(Locale.ROOT));
         ingredientBuilder.setQuantity(new PickyQuantity(quantity,quantityType,gramsPerQuantity));
         ingredientBuilder.setPrice(price);
         NutrientsBuilder nutrientsBuilder = executor.getNutrientsBuilder();

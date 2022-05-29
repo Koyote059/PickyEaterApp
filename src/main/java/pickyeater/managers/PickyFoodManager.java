@@ -59,4 +59,9 @@ public class PickyFoodManager implements FoodManager {
         this.ingredientsDatabase.deleteIngredient(ingredient);
 
     }
+
+    @Override
+    public boolean hasIngredient(String name) {
+        return this.ingredientsDatabase.hasIngredient(name);
+    }
 }

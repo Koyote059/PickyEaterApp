@@ -9,6 +9,7 @@ import pickyeater.basics.food.*;
 import pickyeater.builders.MealBuilder;
 import pickyeater.executors.ExecutorProvider;
 import pickyeater.executors.creators.CreateMealExecutor;
+import pickyeater.utils.Checker;
 import pickyeater.utils.MealQuantityConverter;
 import pickyeater.utils.MouseClickListener;
 
@@ -121,7 +122,29 @@ public class MealCreator extends JDialog  {
         });
 
         doneButton.addActionListener(e ->{
-            mealBuilder.setName(mealNameField.getText());
+            String mealName = mealNameField.getText();
+
+            if(mealName.length()>20){
+                JOptionPane.showMessageDialog(getParent(),"Name is too long!");
+                return;
+            }
+
+            if(mealName.length()<3){
+                JOptionPane.showMessageDialog(getParent(),"Name is too short!");
+                return;
+            }
+
+            if(!Checker.isAlpha(mealName)) {
+                JOptionPane.showMessageDialog(getParent(),"Name can only contain alphanumeric characters!");
+                return;
+            }
+
+            if(mealBuilder.getIngredients().size()==0){
+                JOptionPane.showMessageDialog(getParent(),"You must add at least 1 ingredient!");
+                return;
+            }
+
+            mealBuilder.setName(mealName);
             Meal meal = mealBuilder.build();
             MealQuantityConverter mealQuantityConverter = executor.getMealQuantityConverter();
             Meal convertedMeal = mealQuantityConverter.convert(meal,100);
