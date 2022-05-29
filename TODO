@@ -9,6 +9,7 @@ che non puoi eliminare un ingrediente se è usato da varie parti (tanto lavoro) 
 - Aggiungi TOOLTIP o spiegare con una scritta che in ManageMeal e ManageIngredient puoi cercare meal inserendo il nome del meal voluto e premendo invio + se possibile togliere che si deve premere invio per aggiornare la lista (si aggiorna ogni volta che un tasto viene premuto all'interno del textField)
 - Aggiungi TOOLTIP o simile per spiegare che gli ingredienti in MealCreator sono calcolati in base alle calorie che portano, non alla quantità di proteins/fats/carbs (E consultare terzi per chidere se dovrebbe invece contenere la percentuale di carbs/fats/proteins come gli altri grafici)
 - Aggiugnere pulsanti in Settings che portano direttamente ad AddMeal e AddIngredient, senza dover passare da ManageMeal (Claudio)
+- Aggiungere possibilità di rimuovere Meals mangiati (Se è già possibile farlo usare scritte per spiegare come (tooltip etc))
 
 Progetti a breve termine:
 - Inserire un grafico in user della cronologia dei progressi giornalieri
