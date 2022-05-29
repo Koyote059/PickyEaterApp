@@ -61,7 +61,12 @@ public class PickyFoodManager implements FoodManager {
     }
 
     @Override
-    public boolean hasIngredient(String name) {
-        return this.ingredientsDatabase.hasIngredient(name);
+    public boolean hasIngredient(String ingredientName) {
+        return this.ingredientsDatabase.hasIngredient(ingredientName);
+    }
+
+    @Override
+    public boolean hasMeal(String mealName) {
+        return this.mealsDatabase.hasMeal(mealName);
     }
 }

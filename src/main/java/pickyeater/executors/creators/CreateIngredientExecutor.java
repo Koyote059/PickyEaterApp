@@ -64,7 +64,7 @@ public class CreateIngredientExecutor {
         return createIngredient(name, quantityType, grams, price, nutrients);
     }
 
-    public boolean hasIngredient(String name) {
+    public boolean existsIngredient(String name) {
         FoodManager foodManager = this.eaterManager.getFoodManager();
         return foodManager.hasIngredient(name);
     }

@@ -28,4 +28,6 @@ public interface FoodManager {
     void deleteIngredient(Ingredient ingredient);
 
     boolean hasIngredient(String name);
+
+    boolean hasMeal(String mealName);
 }

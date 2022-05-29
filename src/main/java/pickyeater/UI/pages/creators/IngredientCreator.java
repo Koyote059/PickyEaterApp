@@ -1,6 +1,5 @@
 package pickyeater.UI.pages.creators;
 
-import org.sqlite.util.StringUtils;
 import pickyeater.basics.food.*;
 import pickyeater.builders.IngredientBuilder;
 import pickyeater.builders.NutrientsBuilder;
@@ -154,7 +153,7 @@ public class IngredientCreator extends JDialog {
             } else {
                 Ingredient ingredient = buildIngredient();
                 if(ingredient==null) return;
-                if(executor.hasIngredient(ingredient.getName())){
+                if(executor.existsIngredient(ingredient.getName())){
                     JOptionPane.showMessageDialog(parent,ingredient.getName() + " already exists!");
                     return;
                 }

@@ -144,6 +144,11 @@ public class MealCreator extends JDialog  {
                 return;
             }
 
+            if(executor.existsMeal(mealName)) {
+                JOptionPane.showMessageDialog(getParent(),mealName + " already exists!");
+                return;
+            }
+
             mealBuilder.setName(mealName);
             Meal meal = mealBuilder.build();
             MealQuantityConverter mealQuantityConverter = executor.getMealQuantityConverter();
