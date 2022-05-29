@@ -219,10 +219,7 @@ public class IngredientCreator extends JDialog {
         switch (selectedItem){
             case "Grams" -> quantityType = QuantityType.GRAMS;
             case "Milliliters" -> quantityType = QuantityType.MILLILITERS;
-            case "Pieces" -> {
-                quantityType = QuantityType.PIECES;
-                quantity = 1;
-            }
+            case "Pieces" -> quantityType = QuantityType.PIECES;
             default -> throw new IllegalStateException("Unexpected value: " + selectedItem);
         }
 

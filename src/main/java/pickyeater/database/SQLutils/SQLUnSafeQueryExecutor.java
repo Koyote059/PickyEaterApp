@@ -104,8 +104,8 @@ public class SQLUnSafeQueryExecutor {
                                 " UPDATE SET quantity = %s ",
                         ingredient.getName(),
                         meal.getName(),
-                        ingredient.getQuantity().getGramsPerQuantity(),
-                        String.format("%f", ingredient.getQuantity().getGramsPerQuantity()).replaceAll(",","."));
+                        String.format("%f", ingredient.getQuantity().getAmount()).replaceAll(",","."),
+                        String.format("%f", ingredient.getQuantity().getAmount()).replaceAll(",","."));
                 statement.execute(mealCompositionQuery);
             }
         }

@@ -5,6 +5,8 @@ import pickyeater.database.SQLutils.SQLExecutorManager;
 import pickyeater.database.SQLutils.SQLCreator;
 import pickyeater.database.SQLutils.SQLSafeQueryExecutor;
 import pickyeater.database.SQLutils.SQLUnSafeQueryExecutor;
+import pickyeater.utils.IngredientQuantityConverter;
+import pickyeater.utils.MealQuantityConverter;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -23,10 +25,16 @@ public class SQLMealsDB implements MealsDatabase {
 
     @Override
     public void saveMeal(Meal meal)  {
+        Meal savingMeal;
+        if(meal.getWeight()!=100){
+            MealQuantityConverter converter = new MealQuantityConverter();
+            savingMeal = converter.convert(meal,100);
+        } else savingMeal = meal;
+
         try {
             SQLUnSafeQueryExecutor executor = queryExecutor.getUnSafeQueryExecutor();
-            executor.insertIntoMealsTable(meal.getName());
-            executor.insertIntoMealCompositionsTable(meal);
+            executor.insertIntoMealsTable(savingMeal.getName());
+            executor.insertIntoMealCompositionsTable(savingMeal);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }

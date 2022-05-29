@@ -86,7 +86,7 @@ public class SQLSafeQueryExecutor {
                             "       alcohol * ( gramsPerQuantity * MealCompositions.quantity / 100) AS alcohol\n" +
                             "FROM Meals LEFT JOIN MealCompositions ON Meals.mealName = MealCompositions.mealName\n" +
                             "LEFT JOIN Ingredients ON MealCompositions.ingredientName = Ingredients.ingredientName\n" +
-                            "LEFT JOIN EatenMeals ON MealCompositions.mealName = EatenMeals.mealName\n" +
+                            "JOIN EatenMeals ON MealCompositions.mealName = EatenMeals.mealName\n" +
                             "WHERE username = '%s'\n" +
                             "ORDER BY mealNumber;",username));
             cachedRowSet = cache(resultSet);
@@ -143,7 +143,7 @@ public class SQLSafeQueryExecutor {
                     "       proteins * ( ingredientsRatio * MealCompositions.quantity * gramsPerQuantity / 100) as proteins,\n" +
                     "       alcohol * ( ingredientsRatio * MealCompositions.quantity * gramsPerQuantity / 100) AS alcohol\n" +
                     "FROM\n" +
-                    "    DailyMeals JOIN Meals ON DailyMeals.mealName = Meals.mealName     " +
+                    "    DailyMeals JOIN Meals ON DailyMeals.mealName = Meals.mealName" +
                     "    LEFT JOIN MealCompositions ON DailyMeals.mealName = MealCompositions.mealName\n" +
                     "    LEFT JOIN Ingredients on MealCompositions.ingredientName = Ingredients.ingredientName\n" +
                     "WHERE username = '%s'\n" +
