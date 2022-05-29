@@ -1,10 +1,12 @@
 package pickyeater.database;
 
 import pickyeater.basics.food.Ingredient;
+import pickyeater.basics.food.Quantity;
 import pickyeater.database.SQLutils.SQLExecutorManager;
 import pickyeater.database.SQLutils.SQLCreator;
 import pickyeater.database.SQLutils.SQLSafeQueryExecutor;
 import pickyeater.database.SQLutils.SQLUnSafeQueryExecutor;
+import pickyeater.utils.IngredientQuantityConverter;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -23,9 +25,16 @@ public class SQLIngredientsDB implements IngredientsDatabase {
 
     @Override
     public void saveIngredient(Ingredient ingredient) {
+        Quantity quantity = ingredient.getQuantity();
+        Ingredient savingIngredient;
+        if(quantity.getAmount()!=100){
+            IngredientQuantityConverter converter = new IngredientQuantityConverter();
+           savingIngredient =  converter.convert(ingredient,100);
+        } else savingIngredient = ingredient;
+
         try {
             SQLUnSafeQueryExecutor executor = queryExecutor.getUnSafeQueryExecutor();
-            executor.insertIntoIngredientsTable(ingredient);
+            executor.insertIntoIngredientsTable(savingIngredient);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }

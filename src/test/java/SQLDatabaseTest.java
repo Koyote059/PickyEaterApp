@@ -10,6 +10,8 @@ import pickyeater.basics.mealplan.MealPlan;
 import pickyeater.basics.user.*;
 import pickyeater.builders.*;
 import pickyeater.database.*;
+import pickyeater.utils.IngredientQuantityConverter;
+import pickyeater.utils.MealQuantityConverter;
 
 import java.time.LocalDate;
 import java.util.*;
@@ -69,6 +71,58 @@ public class SQLDatabaseTest {
 
         }
         userDatabase.saveUser(user);
+    }
+
+    @Test
+    public void ingredientQuantityConverterTests(){
+        IngredientQuantityConverter converter = new IngredientQuantityConverter();
+        Ingredient ingredient = getRandomIngredient("Pollo");
+        System.out.println(ingredient);
+
+        Ingredient convertedIngredient = converter.convert(ingredient,100);
+        System.out.println(convertedIngredient);
+    }
+
+    @Test
+    public void mealQuantityConverterTests(){
+        this.ingredients = getIngredients();
+        MealQuantityConverter converter = new MealQuantityConverter();
+        Meal meal = getRandomMeal("Lasagna");
+        System.out.println(meal);
+        System.out.println(meal.getWeight());
+
+        Meal convertedMeal = converter.convert(meal,100);
+        System.out.println(convertedMeal);
+        System.out.println(convertedMeal.getWeight());
+    }
+
+    @Test
+    public void ingredientDatabaseTest(){
+        Ingredient mela = getRandomIngredient("Mela");
+        ingredientsDatabase.saveIngredient(mela);
+        System.out.println(mela);
+
+        Ingredient i = ingredientsDatabase.loadIngredient("Mela").get();
+        System.out.println(i);
+    }
+
+    @Test
+    public void mealDatabaseTest(){
+        this.ingredients = getIngredients();
+        this.meals = getMeals();
+
+        ingredients.forEach(ingredientsDatabase::saveIngredient);
+
+        Meal meal = meals.get(Math.abs(new Random().nextInt()%meals.size()));
+        System.out.println(meal);
+        System.out.println(meal.getWeight());
+        mealsDatabase.saveMeal(meal);
+
+        MealQuantityConverter converter = new MealQuantityConverter();
+
+        Meal convertedMeal = mealsDatabase.loadMeal(meal.getName()).get();
+        System.out.println(convertedMeal);
+        System.out.println(convertedMeal.getWeight());
     }
 
     private User getUser(){
@@ -155,9 +209,11 @@ public class SQLDatabaseTest {
         ingredientBuilder.setName(name);
         Random random = new Random();
         QuantityType quantityType = null;
+        float gramsPerQuantity = random.nextFloat()%100;
         switch (Math.abs(random.nextInt()%3)){
             case 0:
                 quantityType = QuantityType.GRAMS;
+                gramsPerQuantity = 1;
                 break;
             case 1:
                 quantityType = QuantityType.MILLILITERS;
@@ -166,7 +222,7 @@ public class SQLDatabaseTest {
                 quantityType = QuantityType.PIECES;
                 break;
         }
-        ingredientBuilder.setQuantity(new PickyQuantity(random.nextFloat()%100,quantityType,random.nextFloat()%100));
+        ingredientBuilder.setQuantity(new PickyQuantity(random.nextFloat(),quantityType,gramsPerQuantity));
         NutrientsBuilder nutrientsBuilder = new PickyNutrientsBuilder();
         nutrientsBuilder.setComplexCarbs(random.nextFloat()%100);
         nutrientsBuilder.setSimpleCarbs(random.nextFloat()%100);
@@ -207,7 +263,7 @@ public class SQLDatabaseTest {
         MealBuilder mealBuilder = new PickyMealBuilder();
         mealBuilder.setName(name);
         Random random = new Random();
-        int bound = random.nextInt()%(ingredients.size()/3)+4;
+        int bound = Math.abs(random.nextInt()%(ingredients.size()/3))+4;
         for(int i = 0; i< bound; i++){
             Ingredient ingredient = ingredients.get(Math.abs(random.nextInt()%ingredients.size()));
             mealBuilder.addIngredients(ingredient);

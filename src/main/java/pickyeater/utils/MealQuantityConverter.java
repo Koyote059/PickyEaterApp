@@ -5,21 +5,16 @@ import pickyeater.builders.*;
 
 public class MealQuantityConverter {
 
-    public Meal convert(Meal meal, int newWeight){
+    public Meal convert(Meal meal, float newWeight){
         MealBuilder mealBuilder = new PickyMealBuilder();
         mealBuilder.setName(meal.getName());
-        float weightRatio = newWeight/meal.getWeight();
+        float ratio = newWeight/meal.getWeight();
         for (Ingredient ingredient : meal.getIngredients()) {
-            IngredientBuilder ingredientBuilder = new PickyIngredientBuilder(ingredient);
+            IngredientQuantityConverter converter = new IngredientQuantityConverter();
             Quantity quantity = ingredient.getQuantity();
-            ingredientBuilder.setQuantity(
-                    new PickyQuantity(quantity.getAmount()*weightRatio,
-                            quantity.getQuantityType(),
-                            quantity.getGramsPerQuantity()));
-            NutrientsQuantityConverter nutrientsConverter = new NutrientsQuantityConverter();
-            Nutrients newNutrients = nutrientsConverter.convert(meal.getNutrients(), newWeight);
-            ingredientBuilder.setNutrients(newNutrients);
-            mealBuilder.addIngredients(ingredientBuilder.build());
+            Ingredient convertedIngredient = converter.convert(
+                    ingredient, quantity.getAmount() * ratio);
+            mealBuilder.addIngredients(convertedIngredient);
         }
         return mealBuilder.build();
     }

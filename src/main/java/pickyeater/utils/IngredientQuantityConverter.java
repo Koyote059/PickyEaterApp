@@ -9,17 +9,17 @@ import pickyeater.builders.PickyIngredientBuilder;
 
 public class IngredientQuantityConverter {
 
-    public Ingredient convert(Ingredient ingredient, int newWeight) {
+    public Ingredient convert(Ingredient ingredient, float newQuantity) {
         IngredientBuilder ingredientBuilder = new PickyIngredientBuilder();
-        float weightRatio = newWeight/100f;
         Quantity quantity = ingredient.getQuantity();
+        float ratio = newQuantity/quantity.getAmount();
         ingredientBuilder.setQuantity(new PickyQuantity(
-                quantity.getAmount()*weightRatio,
+                quantity.getAmount()*ratio,
                 quantity.getQuantityType(),
                 quantity.getGramsPerQuantity()
         ));
 
-        ingredientBuilder.setPrice(ingredient.getPrice() * weightRatio);
+        ingredientBuilder.setPrice(ingredient.getPrice() * ratio);
         ingredientBuilder.setName(ingredient.getName());
         String tags[] = new String[ingredient.getTags().size()];
         for (int i = 0; i < ingredient.getTags().size(); i++) {
@@ -28,7 +28,7 @@ public class IngredientQuantityConverter {
         ingredientBuilder.addTags(tags);
         ingredientBuilder.setName(ingredient.getName());
         NutrientsQuantityConverter nutrientsQuantityConverter = new NutrientsQuantityConverter();
-        Nutrients newNutrients = nutrientsQuantityConverter.convert(ingredient.getNutrients(),newWeight);
+        Nutrients newNutrients = nutrientsQuantityConverter.convert(ingredient.getNutrients(),ratio);
         ingredientBuilder.setNutrients(newNutrients);
         return ingredientBuilder.build();
     }
