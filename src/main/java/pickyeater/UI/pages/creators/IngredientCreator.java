@@ -5,7 +5,7 @@ import pickyeater.builders.IngredientBuilder;
 import pickyeater.builders.NutrientsBuilder;
 import pickyeater.executors.ExecutorProvider;
 import pickyeater.executors.creators.CreateIngredientExecutor;
-import pickyeater.utils.Checker;
+import pickyeater.utils.StringsUtils;
 
 import javax.swing.*;
 import java.awt.*;
@@ -259,7 +259,7 @@ public class IngredientCreator extends JDialog {
             return null;
         }
 
-        if(!Checker.isAlpha(selectedName)) {
+        if(!StringsUtils.isAlpha(selectedName)) {
             JOptionPane.showMessageDialog(getParent(),"Name can only contain alphanumeric characters!");
             return null;
         }
@@ -298,7 +298,7 @@ public class IngredientCreator extends JDialog {
 
         /* Getting values */
         IngredientBuilder ingredientBuilder = executor.getIngredientBuilder();
-        ingredientBuilder.setName(selectedName.toUpperCase(Locale.ROOT));
+        ingredientBuilder.setName(StringsUtils.capitalize(selectedName));
         ingredientBuilder.setQuantity(new PickyQuantity(quantity,quantityType,gramsPerQuantity));
         ingredientBuilder.setPrice(price);
         NutrientsBuilder nutrientsBuilder = executor.getNutrientsBuilder();

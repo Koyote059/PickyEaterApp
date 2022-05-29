@@ -9,7 +9,7 @@ import pickyeater.basics.food.*;
 import pickyeater.builders.MealBuilder;
 import pickyeater.executors.ExecutorProvider;
 import pickyeater.executors.creators.CreateMealExecutor;
-import pickyeater.utils.Checker;
+import pickyeater.utils.StringsUtils;
 import pickyeater.utils.MealQuantityConverter;
 import pickyeater.utils.MouseClickListener;
 
@@ -134,7 +134,7 @@ public class MealCreator extends JDialog  {
                 return;
             }
 
-            if(!Checker.isAlpha(mealName)) {
+            if(!StringsUtils.isAlpha(mealName)) {
                 JOptionPane.showMessageDialog(getParent(),"Name can only contain alphanumeric characters!");
                 return;
             }
@@ -149,7 +149,8 @@ public class MealCreator extends JDialog  {
                 return;
             }
 
-            mealBuilder.setName(mealName);
+
+            mealBuilder.setName(StringsUtils.capitalize(mealName));
             Meal meal = mealBuilder.build();
             MealQuantityConverter mealQuantityConverter = executor.getMealQuantityConverter();
             Meal convertedMeal = mealQuantityConverter.convert(meal,100);
