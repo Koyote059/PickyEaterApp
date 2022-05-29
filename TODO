@@ -1,13 +1,14 @@
 
 Progetti a breve termine - Essenziali:
-- Sistemare il fatto che le pagine si aprono ricorsivamente
+- Sistemare il fatto che le pagine si aprono ricorsivamente (Fede)
 - Aggiustare la pagina Daily Progresses ( è buggata )
 - Catch exceptions quando si prova ad aggiungere meal senza ingredienti / non ci sono meals / non ci sono ingredienti
-- Modificare il DB in maniera tale che ci siano più controlli stretti con triggers ecc...
+- Modificare il DB in maniera tale che ci siano più controlli stretti con triggers ecc... (Fede)
+- Aggiungi TOOLTIP o simile per elementi che richiedono il tasto destro/doppio tasto (Fede)
 
 Progetti a breve termine:
 - Inserire un grafico in user della cronologia dei progressi giornalieri
-- Aggiungi TOOLTIP o simile per elementi che richiedono il tasto destro/doppio tasto
+- Mettere immagini nelle RegisterPages (Claudio)
 
 Progetti a medio termine:
 - Popolare il database
