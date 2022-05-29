@@ -3,6 +3,7 @@ Progetti a breve termine - Essenziali:
 - Catch exceptions quando si prova ad aggiungere meal senza ingredienti / non ci sono meals / non ci sono ingredienti
 - Modificare il DB in maniera tale che ci siano più controlli stretti con triggers ecc... (Fede)
 - Aggiungi TOOLTIP o simile per elementi che richiedono il tasto destro/doppio tasto (Fede)
+- Aggiungi TOOLTIP o spiegare con una scritta che in ManageMeal e ManageIngredient puoi cercare meal inserendo il nome del meal voluto e premendo invio + se possibile togliere che si deve premere invio per aggiornare la lista (si aggiorna ogni volta che un tasto viene premuto all'interno del textField)
 
 Progetti a breve termine:
 - Inserire un grafico in user della cronologia dei progressi giornalieri
