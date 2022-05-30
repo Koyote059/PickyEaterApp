@@ -1,7 +1,6 @@
 
 Progetti a breve termine - Essenziali:
 - Controlla come createIngredient salva i dati nel DB
-- DB: fai in maniera tale che se cambio il nome ad un meal/ingredient, lo faccia ovunque esso sia utilizzato
 - Cercare dove mancano i controlli e inserirli ( ricorda, il databse supporta solo caratteri alfanumerici! )
 - Togli il fatto che ogni volta che modifichi utente, crei utente o cose del genere ti esce il JDialog che ti fa il riassunto delle cose ( Proposta da fede )
 - Aggiungi TOOLTIP o simile per elementi che richiedono il tasto destro/doppio tasto (Fede)
