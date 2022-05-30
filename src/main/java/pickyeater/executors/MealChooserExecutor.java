@@ -30,4 +30,9 @@ public class MealChooserExecutor {
         FoodManager foodManager = eaterManager.getFoodManager();
         foodManager.deleteMeal(meal);
     }
+
+    public boolean isMealUsed(Meal meal) {
+        FoodManager foodManager = eaterManager.getFoodManager();
+        return foodManager.isMealUsed(meal);
+    }
 }

@@ -29,7 +29,7 @@ public class MainFrame extends JFrame {
         pages.put(UserPage.class.getName(),new UserPage(this));
         pages.put(SettingsPage.class.getName(),new SettingsPage(this));
         changePage(PanelButtons.PROGRESS);
-        setResizable(false);
+        setResizable(true);
         setVisible(true);
         instance = this;
         setSize(new Dimension(677,507));

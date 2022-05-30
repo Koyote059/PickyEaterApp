@@ -45,8 +45,8 @@ public class SQLExecutorManager {
                     "    mealName VARCHAR(32),\n" +
                     "    quantity REAL,\n" +
                     "    CONSTRAINT PK_MEALCOMPOSITIONS PRIMARY KEY (ingredientName,mealName),\n" +
-                    "    CONSTRAINT FK_MEALCOMPOSITIONS_INGREDIENTNAME FOREIGN KEY (ingredientName) REFERENCES Ingredients,\n" +
-                    "    CONSTRAINT FK_MEALCOMPOSITIONS_MEALNAME FOREIGN KEY (mealName) REFERENCES Meals\n" +
+                    "    CONSTRAINT FK_MEALCOMPOSITIONS_INGREDIENTNAME FOREIGN KEY (ingredientName) REFERENCES Ingredients, \n" +
+                    "    CONSTRAINT FK_MEALCOMPOSITIONS_MEALNAME FOREIGN KEY (mealName) REFERENCES Meals ON DELETE CASCADE \n" +
                     ")");
         }
 
@@ -78,7 +78,7 @@ public class SQLExecutorManager {
                     "    username VARCHAR(32),\n" +
                     "    beginningDay LONG,\n" +
                     "    CONSTRAINT PK_MEALPLAN PRIMARY KEY (username),\n" +
-                    "    CONSTRAINT FK_MEALPLAN_USERNAME FOREIGN KEY (username) REFERENCES User\n" +
+                    "    CONSTRAINT FK_MEALPLAN_USERNAME FOREIGN KEY (username) REFERENCES User ON DELETE CASCADE\n" +
                     ")");
         }
 
@@ -90,8 +90,8 @@ public class SQLExecutorManager {
                     "    mealNumber TINYINT,\n" +
                     "    ingredientsRatio REAL,\n" + // ingredientsRatio = ingredientWeightInDailyMeals/ingredientWeightInMeals
                     "    CONSTRAINT PK_DAILYMEALS PRIMARY KEY (mealName,username,dayNumber,mealNumber),\n" +
-                    "    CONSTRAINT FK_DAILYMEALS_MEALNAME FOREIGN KEY (mealName) REFERENCES Meals,\n" +
-                    "    CONSTRAINT FK_DAILYMEALS_USERNAME FOREIGN KEY (username) REFERENCES MealPlan\n" +
+                    "    CONSTRAINT FK_DAILYMEALS_MEALNAME FOREIGN KEY (mealName) REFERENCES Meals, " +
+                    "    CONSTRAINT FK_DAILYMEALS_USERNAME FOREIGN KEY (username) REFERENCES MealPlan ON DELETE CASCADE\n" +
                     ")");
         }
 
@@ -101,7 +101,7 @@ public class SQLExecutorManager {
                     "    burnedCalories SMALLINT,\n" +
                     "    date SMALLINT,\n" +
                     "    CONSTRAINT PK_DAILYPROGRESSES PRIMARY KEY (username),\n" +
-                    "    CONSTRAINT FK_DAILYPROGRESSES_USERNAME FOREIGN KEY (username) REFERENCES User\n" +
+                    "    CONSTRAINT FK_DAILYPROGRESSES_USERNAME FOREIGN KEY (username) REFERENCES User ON DELETE CASCADE\n" +
                     ")");
 
         }
@@ -113,9 +113,9 @@ public class SQLExecutorManager {
                     "    quantity REAL,\n" +
                     "    status VARCHAR(16),\n" +
                     "    CONSTRAINT PK_DAILYPROGRESSES PRIMARY KEY (username,ingredientName),\n" +
-                    "    CONSTRAINT FK_DAILYPROGRESSES_USERNAME FOREIGN KEY (username) REFERENCES User,\n" +
+                    "    CONSTRAINT FK_DAILYPROGRESSES_USERNAME FOREIGN KEY (username) REFERENCES User ON DELETE CASCADE,\n" +
                     "    CONSTRAINT FK_DAILYPROGRESSES_INGREDIENTNAME FOREIGN KEY (ingredientName) REFERENCES Ingredients,\n" +
-                    "    CONSTRAINT ILLEGAL_ARGUMENT_STATUS CHECK (status = 'MISSING' OR status = 'NEEDED' OR status = 'TAKEN')" +
+                    "   CONSTRAINT ILLEGAL_ARGUMENT_STATUS CHECK (status = 'MISSING' OR status = 'NEEDED' OR status = 'TAKEN')" +
                     ")");
         }
 
@@ -127,7 +127,7 @@ public class SQLExecutorManager {
                     "    ingredientsRatio REAL,\n" + // ingredientsRatio = ingredientWeightInEatenMeals/ingredientWeightInMeals
                     "    CONSTRAINT PK_DAILYPROGRESSES PRIMARY KEY (username,mealName,mealNumber),\n" +
                     "    CONSTRAINT FK_EATENMEALS FOREIGN KEY (mealName) REFERENCES Meals,\n" +
-                    "    CONSTRAINT FK_DAILYPROGRESSES_USERNAME FOREIGN KEY (username) REFERENCES DailyProgresses\n" +
+                    "    CONSTRAINT FK_DAILYPROGRESSES_USERNAME FOREIGN KEY (username) REFERENCES DailyProgresses ON DELETE CASCADE\n" +
                     ")");
         }
 

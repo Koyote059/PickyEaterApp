@@ -11,6 +11,6 @@ public interface MealsDatabase {
     boolean hasMeal(String mealName);
     Set<Meal> loadEveryMeal();
     Set<Meal> getMealsThatStartWith(String string);
-
+    boolean isMealUsed(Meal meal);
     void deleteMeal(Meal meal);
 }

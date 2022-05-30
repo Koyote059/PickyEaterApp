@@ -51,13 +51,14 @@ public class PickyFoodManager implements FoodManager {
 
     @Override
     public void deleteMeal(Meal meal) {
+        if(isMealUsed(meal)) return;
         this.mealsDatabase.deleteMeal(meal);
     }
 
     @Override
     public void deleteIngredient(Ingredient ingredient) {
+        if(isIngredientUsed(ingredient)) return;
         this.ingredientsDatabase.deleteIngredient(ingredient);
-
     }
 
     @Override
@@ -68,5 +69,15 @@ public class PickyFoodManager implements FoodManager {
     @Override
     public boolean hasMeal(String mealName) {
         return this.mealsDatabase.hasMeal(mealName);
+    }
+
+    @Override
+    public boolean isMealUsed(Meal meal) {
+        return mealsDatabase.isMealUsed(meal);
+    }
+
+    @Override
+    public boolean isIngredientUsed(Ingredient ingredient) {
+        return ingredientsDatabase.isIngredientUsed(ingredient);
     }
 }

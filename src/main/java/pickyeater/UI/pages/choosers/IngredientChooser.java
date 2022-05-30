@@ -102,6 +102,10 @@ public class IngredientChooser extends JDialog {
                     Ingredient selectedIngredient = searchedIngredients.get(selectedIndex);
                     FoodPopupMenu popupMenu = new FoodPopupMenu();
                     popupMenu.addDeleteListener(l -> {
+                        if(ingredientsSearcherExecutor.isIngredientUsed(selectedIngredient)){
+                            JOptionPane.showMessageDialog(parent,"Cannot delete this ingredient as it's being used!");
+                            return;
+                        }
                         int choice = JOptionPane.showConfirmDialog(parent,"Are you sure you want to delete it?");
                         if(choice != JOptionPane.YES_OPTION) return;
                         ingredientsSearcherExecutor.deleteIngredient(selectedIngredient);
