@@ -63,4 +63,9 @@ public class CreateMealExecutor {
         FoodManager foodManager = eaterManager.getFoodManager();
         return foodManager.hasMeal(mealName);
     }
+
+    public void deleteMeal(Meal meal) {
+        FoodManager foodManager = eaterManager.getFoodManager();
+        foodManager.deleteMeal(meal);
+    }
 }

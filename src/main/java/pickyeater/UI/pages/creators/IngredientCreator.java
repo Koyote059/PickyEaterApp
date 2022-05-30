@@ -9,7 +9,6 @@ import pickyeater.utils.StringsUtils;
 
 import javax.swing.*;
 import java.awt.*;
-import java.util.Locale;
 
 public class IngredientCreator extends JDialog {
 
@@ -28,7 +27,8 @@ public class IngredientCreator extends JDialog {
     private JButton cancelButton;
     private CreateIngredientExecutor executor = ExecutorProvider.getCreateIngredientExecutor();
 
-    private Ingredient editingIngredient = null;
+    private Ingredient startingIngredient = null;
+    private boolean isIngredientEditing = false;
 
     public IngredientCreator(JFrame parent){
         super(parent,"IngredientCreator",true);
@@ -148,17 +148,18 @@ public class IngredientCreator extends JDialog {
 
         saveButton = new JButton("Save");
         saveButton.addActionListener( e -> {
-            if(editingIngredient!=null){
-                editingIngredient = buildIngredient();
-            } else {
-                Ingredient ingredient = buildIngredient();
-                if(ingredient==null) return;
-                if(executor.existsIngredient(ingredient.getName())){
-                    JOptionPane.showMessageDialog(parent,ingredient.getName() + " already exists!");
-                    return;
-                }
-                executor.saveIngredient(ingredient);
+
+
+
+            Ingredient ingredient = buildIngredient();
+            if(ingredient==null) return;
+            if(!isIngredientEditing && executor.existsIngredient(ingredient.getName())){
+                JOptionPane.showMessageDialog(parent,ingredient.getName() + " already exists!");
+                return;
             }
+
+            if(isIngredientEditing) executor.deleteIngredient(startingIngredient);
+            executor.saveIngredient(ingredient);
             this.dispose();
         });
         constraints.gridx=0;
@@ -184,8 +185,9 @@ public class IngredientCreator extends JDialog {
         setVisible(true);
     }
 
-    public Ingredient editIngredient(Ingredient ingredient){
-        editingIngredient = ingredient;
+    public void editIngredient(Ingredient ingredient){
+        isIngredientEditing = true;
+        startingIngredient = ingredient;
         nameTextField.setText(ingredient.getName());
         priceTextField.setText(String.valueOf(ingredient.getPrice()));
         Nutrients nutrients = ingredient.getNutrients();
@@ -200,7 +202,6 @@ public class IngredientCreator extends JDialog {
         }
         gramsPerQuantityTextField.setText(String.valueOf(quantity.getGramsPerQuantity()));
         setVisible(true);
-        return editingIngredient;
     }
 
     private Ingredient buildIngredient(){

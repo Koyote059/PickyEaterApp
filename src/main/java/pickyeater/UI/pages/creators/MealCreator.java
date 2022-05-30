@@ -34,7 +34,9 @@ public class MealCreator extends JDialog  {
 
     private CreateMealExecutor executor = ExecutorProvider.getCreateMealExecutor();
     private MealBuilder mealBuilder = executor.getMealBuilder();
-    private Meal editingMeal = null;
+
+    private Meal startingMeal = null;
+    private boolean isMealEditing = false;
     public MealCreator(JFrame parent) {
         super(parent,"Meal Creator",true);
         mainPanel = new JPanel(new BorderLayout());
@@ -106,15 +108,6 @@ public class MealCreator extends JDialog  {
                         draw();
                     });
 
-                    popupMenu.addEditListener( l -> {
-                        IngredientCreator creator = new IngredientCreator(parent);
-                        Ingredient newIngredient = creator.editIngredient(selectedIngredient);
-                        if(selectedIngredient == newIngredient) return;
-                        ingredients.remove(selectedIngredient);
-                        ingredients.add(newIngredient);
-                        draw();
-                    });
-
                     popupMenu.show(parent,realPoint.x, realPoint.y);
 
                 }
@@ -124,7 +117,7 @@ public class MealCreator extends JDialog  {
         doneButton.addActionListener(e ->{
             String mealName = mealNameField.getText();
 
-            if(mealName.length()>20){
+            if(mealName.length()>30){
                 JOptionPane.showMessageDialog(getParent(),"Name is too long!");
                 return;
             }
@@ -144,21 +137,20 @@ public class MealCreator extends JDialog  {
                 return;
             }
 
-            if(executor.existsMeal(mealName)) {
+            if(!isMealEditing && executor.existsMeal(mealName)) {
                 JOptionPane.showMessageDialog(getParent(),mealName + " already exists!");
                 return;
             }
 
-
             mealBuilder.setName(StringsUtils.capitalize(mealName));
             Meal meal = mealBuilder.build();
+
             MealQuantityConverter mealQuantityConverter = executor.getMealQuantityConverter();
             Meal convertedMeal = mealQuantityConverter.convert(meal,100);
-            if(editingMeal != null){
-                editingMeal = convertedMeal;
-            } else {
-                executor.saveMeal(convertedMeal);
+            if(isMealEditing){
+                executor.deleteMeal(startingMeal);
             }
+            executor.saveMeal(convertedMeal);
             dispose();
         });
         buttonPanel.add(BorderLayout.LINE_END,doneButton);
@@ -231,12 +223,13 @@ public class MealCreator extends JDialog  {
         setVisible(true);
     }
 
-    public Meal editMeal(Meal meal) {
-        editingMeal = meal;
+    public void editMeal(Meal meal) {
+        isMealEditing = true;
+        startingMeal = meal;
         mealNameField.setText(meal.getName());
+        mealBuilder.addIngredients(meal.getIngredients().toArray(new Ingredient[0]));
         ingredients.addAll(meal.getIngredients());
         draw();
         setVisible(true);
-        return editingMeal;
     }
 }
