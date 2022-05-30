@@ -16,7 +16,7 @@ import pickyeater.UI.themes.filehandler.ThemeHandler;
 public class ApplicationMain {
     public static void main(String[] args) {
 
-        new ThemeHandler().ReadTheme();
+        ThemeHandler.ReadTheme();
 
         //PickyEatersDatabase pickyEatersDB = new SQLPickyEaterDB("DatabasePickEater.sqlite");
         PickyEatersDatabase pickyEatersDB = new SQLPickyEaterDB("dbDiProva.sqlite");

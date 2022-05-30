@@ -6,7 +6,6 @@ import pickyeater.UI.pages.choosers.IngredientChooser;
 import pickyeater.UI.pages.choosers.MealsChooser;
 import pickyeater.UI.pages.leftbuttons.PanelButtons;
 import pickyeater.UI.pages.leftbuttons.PanelButtonsConverter;
-import pickyeater.UI.pages.registerpage.Register1;
 import pickyeater.UI.pages.registerpage.RegisterMainFrame;
 import pickyeater.executors.ExecutorProvider;
 import pickyeater.UI.themes.ColorButtons;
@@ -39,8 +38,8 @@ public class SettingsPage extends PickyPage {
 
     public SettingsPage(JFrame parent) {
         super(parent);
-        new ColorButtons().ColorLeftButtons(btSettings, btDailyProgress, btDiet, btGroceries, btUser);
-        ThemesEnum te = new ThemeHandler().ReadTheme();
+        ColorButtons.ColorLeftButtons(btSettings, btDailyProgress, btDiet, btGroceries, btUser);
+        ThemesEnum te = ThemeHandler.ReadTheme();
         if (te == ThemesEnum.LIGHT_THEME) {
             cbTheme.setSelectedIndex(0);
         } else if (te == ThemesEnum.DARK_THEME) {

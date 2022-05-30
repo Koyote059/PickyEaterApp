@@ -7,7 +7,7 @@ import java.io.FileWriter;
 import java.util.Scanner;
 
 public class FileHandler {
-    public void createFile() {
+    public static void createFile() {
         try {
             File myObj = new File("res/themes.txt");
             if (!myObj.createNewFile()) {
@@ -19,7 +19,7 @@ public class FileHandler {
         }
     }
 
-    public void writeFile(ThemesEnum themesEnum) {
+    public static void writeFile(ThemesEnum themesEnum) {
         try {
             FileWriter myWriter = new FileWriter("res/themes.txt");
             myWriter.write(themesEnum.toString());
@@ -31,7 +31,7 @@ public class FileHandler {
         }
     }
 
-    public String readFile() {
+    public static String readFile() {
         String data = "";
         try {
             File myObj = new File("res/themes.txt");
@@ -49,7 +49,7 @@ public class FileHandler {
         return data;
     }
 
-    public void deleteFile() {
+    public static void deleteFile() {
         File myObj = new File("res/themes.txt");
         if (!myObj.delete()) {
             System.out.println("Failed to delete the file.");

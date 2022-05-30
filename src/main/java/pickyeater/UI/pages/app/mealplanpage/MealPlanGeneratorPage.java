@@ -52,16 +52,21 @@ public class MealPlanGeneratorPage extends PickyPage {
             for (DailyMealPlanColumn column : columns) {
                 mealPlanBuilder.addDailyMealPlan(column.getDailyMealPlan());
             }
+            parent.setSize(new Dimension(677,507));
             mealPlanCreator.saveMealPlan(mealPlanBuilder.build());
             MainFrame.changePage(PanelButtons.DIET);
 
         });
 
-        cancelButton.addActionListener( e -> MainFrame.changePage(PanelButtons.DIET));
+        cancelButton.addActionListener( e -> {
+            parent.setSize(new Dimension(677,507));
+            MainFrame.changePage(PanelButtons.DIET);
+        });
         GridLayout gridLayout = new GridLayout();
         gridLayout.setRows(1);
         columns.add(new DailyMealPlanColumn(parent));
-        setPreferredSize(new Dimension(800,370));
+        setPreferredSize(new Dimension(677,507));
+        setSize(new Dimension(677,507));
     }
 
     public void draw(){
