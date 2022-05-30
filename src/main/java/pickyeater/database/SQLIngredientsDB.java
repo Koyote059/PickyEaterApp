@@ -2,10 +2,7 @@ package pickyeater.database;
 
 import pickyeater.basics.food.Ingredient;
 import pickyeater.basics.food.Quantity;
-import pickyeater.database.SQLutils.SQLExecutorManager;
-import pickyeater.database.SQLutils.SQLCreator;
-import pickyeater.database.SQLutils.SQLSafeQueryExecutor;
-import pickyeater.database.SQLutils.SQLUnSafeQueryExecutor;
+import pickyeater.database.SQLutils.*;
 import pickyeater.utils.IngredientQuantityConverter;
 
 import java.sql.ResultSet;
@@ -25,14 +22,18 @@ public class SQLIngredientsDB implements IngredientsDatabase {
 
     @Override
     public void saveIngredient(Ingredient ingredient) {
-        Quantity quantity = ingredient.getQuantity();
-        Ingredient savingIngredient;
-        if(quantity.getAmount()!=100){
-            IngredientQuantityConverter converter = new IngredientQuantityConverter();
-           savingIngredient =  converter.convert(ingredient,100);
-        } else savingIngredient = ingredient;
-
         try {
+            if(DBChecker.isWordIllegal(ingredient.getName())) throw new SQLException("Illegal name: " + ingredient.getName());
+
+            Quantity quantity = ingredient.getQuantity();
+            Ingredient savingIngredient;
+
+
+            if(quantity.getAmount()!=100){
+                IngredientQuantityConverter converter = new IngredientQuantityConverter();
+                savingIngredient =  converter.convert(ingredient,100);
+            } else savingIngredient = ingredient;
+
             SQLUnSafeQueryExecutor executor = queryExecutor.getUnSafeQueryExecutor();
             executor.insertIntoIngredientsTable(savingIngredient);
         } catch (SQLException e) {
@@ -43,6 +44,7 @@ public class SQLIngredientsDB implements IngredientsDatabase {
     @Override
     public Optional<Ingredient> loadIngredient(String ingredientName) {
         try {
+            if(DBChecker.isWordIllegal(ingredientName)) throw new SQLException("Illegal name: " + ingredientName);
             SQLSafeQueryExecutor executor = queryExecutor.getSafeQueryExecutor();
             SQLCreator sqlCreator = new SQLCreator();
             ResultSet resultSet = executor.selectIngredient(ingredientName);
@@ -57,6 +59,7 @@ public class SQLIngredientsDB implements IngredientsDatabase {
     @Override
     public boolean hasIngredient(String ingredientName) {
         try {
+            if(DBChecker.isWordIllegal(ingredientName)) throw new SQLException("Illegal name: " + ingredientName);
             SQLSafeQueryExecutor executor = queryExecutor.getSafeQueryExecutor();
             ResultSet resultSet = executor.selectIngredient(ingredientName);
             return resultSet.next();
@@ -66,7 +69,7 @@ public class SQLIngredientsDB implements IngredientsDatabase {
     }
 
     @Override
-    public Set<Ingredient> loadEveryIngredient() {
+    public Set<Ingredient> loadEveryIngredient() { // Todo check if name is legal
         try {
             SQLSafeQueryExecutor executor = queryExecutor.getSafeQueryExecutor();
             SQLCreator sqlCreator = new SQLCreator();
@@ -81,6 +84,7 @@ public class SQLIngredientsDB implements IngredientsDatabase {
     @Override
     public Set<Ingredient> getIngredientsThatStartWith(String name) {
         try {
+            if(DBChecker.isWordIllegal(name)) throw new SQLException("Illegal name: " + name);
             SQLSafeQueryExecutor executor = queryExecutor.getSafeQueryExecutor();
             SQLCreator sqlCreator = new SQLCreator();
             ResultSet resultSet = executor.selectIngredientsThatStartWith(name);
@@ -92,8 +96,21 @@ public class SQLIngredientsDB implements IngredientsDatabase {
     }
 
     @Override
+    public boolean isIngredientUsed(Ingredient ingredient) {
+        try {
+            if(DBChecker.isWordIllegal(ingredient.getName())) throw new SQLException("Illegal name: " + ingredient.getName());
+            SQLSafeQueryExecutor executor = queryExecutor.getSafeQueryExecutor();
+            ResultSet resultSet = executor.findIngredientInTables(ingredient.getName());
+            return resultSet.next();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    @Override
     public void deleteIngredient(Ingredient ingredient) {
         try {
+            if(DBChecker.isWordIllegal(ingredient.getName())) throw new SQLException("Illegal name: " + ingredient.getName());
             SQLUnSafeQueryExecutor executor = queryExecutor.getUnSafeQueryExecutor();
             executor.deleteFromIngredientsTable(ingredient.getName());
         } catch (SQLException e) {

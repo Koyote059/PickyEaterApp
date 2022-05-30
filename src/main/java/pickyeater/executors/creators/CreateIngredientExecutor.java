@@ -68,4 +68,14 @@ public class CreateIngredientExecutor {
         FoodManager foodManager = this.eaterManager.getFoodManager();
         return foodManager.hasIngredient(name);
     }
+
+    public void deleteIngredient(Ingredient ingredient) {
+        FoodManager foodManager = this.eaterManager.getFoodManager();
+        foodManager.deleteIngredient(ingredient);
+    }
+
+    public boolean isIngredientUsed(Ingredient ingredient) {
+        FoodManager foodManager = this.eaterManager.getFoodManager();
+        return foodManager.isIngredientUsed(ingredient);
+    }
 }

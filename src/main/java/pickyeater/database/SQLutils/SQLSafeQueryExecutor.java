@@ -256,6 +256,45 @@ public class SQLSafeQueryExecutor {
         }
         return cachedRowSet;
     }
+
+    public ResultSet findMealInTables(String mealName) throws SQLException {
+        Connection connection = DBManager.getConnection();
+        CachedRowSet cachedRowSet;
+
+        try(Statement statement = connection.createStatement()){
+            String query =  String.format("" +
+                    "SELECT mealName\n" +
+                    "FROM DailyMeals\n" +
+                    "WHERE MealName = '%s'\n" +
+                    "UNION\n" +
+                    "SELECT mealName\n" +
+                    "FROM EatenMeals\n" +
+                    "WHERE MealName = '%s" +
+                    "'", mealName, mealName);
+            ResultSet resultSet = statement.executeQuery(query);
+            cachedRowSet = cache(resultSet);
+        }
+        return cachedRowSet;
+    }
+
+    public ResultSet findIngredientInTables(String ingredientName) throws SQLException {
+        Connection connection = DBManager.getConnection();
+        CachedRowSet cachedRowSet;
+
+        try(Statement statement = connection.createStatement()){
+            String query =  String.format("SELECT ingredientName\n" +
+                    "FROM main.GroceriesItems\n" +
+                    "WHERE ingredientName='%s'\n" +
+                    "UNION\n" +
+                    "SELECT ingredientName\n" +
+                    "FROM main.MealCompositions\n" +
+                    "WHERE ingredientName='%s'", ingredientName, ingredientName);
+            ResultSet resultSet = statement.executeQuery(query);
+            cachedRowSet = cache(resultSet);
+        }
+        return cachedRowSet;
+    }
+
     private CachedRowSet cache(ResultSet resultSet) throws SQLException {
         CachedRowSet cachedRowSet = RowSetProvider.newFactory().createCachedRowSet();
         if(!resultSet.isBeforeFirst()){

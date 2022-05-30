@@ -30,4 +30,8 @@ public interface FoodManager {
     boolean hasIngredient(String name);
 
     boolean hasMeal(String mealName);
+
+    boolean isMealUsed(Meal meal);
+
+    boolean isIngredientUsed(Ingredient ingredient);
 }

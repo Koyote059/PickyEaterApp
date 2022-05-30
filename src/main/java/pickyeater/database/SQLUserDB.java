@@ -3,10 +3,7 @@ package pickyeater.database;
 import pickyeater.basics.mealplan.MealPlan;
 import pickyeater.basics.user.DailyProgresses;
 import pickyeater.basics.user.User;
-import pickyeater.database.SQLutils.SQLExecutorManager;
-import pickyeater.database.SQLutils.SQLCreator;
-import pickyeater.database.SQLutils.SQLSafeQueryExecutor;
-import pickyeater.database.SQLutils.SQLUnSafeQueryExecutor;
+import pickyeater.database.SQLutils.*;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -42,6 +39,7 @@ public class SQLUserDB implements UserDatabase {
     @Override
     public void saveUser(User user) {
         try {
+            if(DBChecker.isWordIllegal(user.getName())) throw new SQLException("Illegal name: " + user.getName());
             SQLUnSafeQueryExecutor executor = queryExecutor.getUnSafeQueryExecutor();
             executor.inertIntoUserTable(user);
             Optional<MealPlan> mealPlanOptional = user.getMealPlan();
@@ -64,12 +62,13 @@ public class SQLUserDB implements UserDatabase {
     @Override
     public void deleteUser(User user) {
         try {
+            if(DBChecker.isWordIllegal(user.getName())) throw new SQLException("Illegal name: " + user.getName());
             SQLUnSafeQueryExecutor executor = queryExecutor.getUnSafeQueryExecutor();
             executor.deleteFromUserTable(user.getName());
-            executor.deleteFromDailyMealsTable(user.getName());
-            executor.deleteFromEatenMealsTable(user.getName());
-            executor.deleteFromMealPlanTable(user.getName());
-            executor.deleteFromDailyProgressesTable(user.getName());
+            //executor.deleteFromDailyMealsTable(user.getName()); In teoria questi 4
+            //executor.deleteFromEatenMealsTable(user.getName()); non dovrebbero servire
+            //executor.deleteFromMealPlanTable(user.getName());
+            //executor.deleteFromDailyProgressesTable(user.getName());
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
