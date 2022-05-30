@@ -6,7 +6,6 @@ package pickyeater;
 
 import pickyeater.UI.pages.app.MainFrame;
 import pickyeater.UI.pages.leftbuttons.PanelButtons;
-import pickyeater.UI.pages.registerpage.RegisterMainFrame;
 import pickyeater.UI.pages.registerpage.WelcomePage;
 import pickyeater.database.*;
 import pickyeater.executors.ExecutorProvider;
@@ -14,7 +13,7 @@ import pickyeater.managers.EaterManager;
 import pickyeater.managers.PickyEaterManager;
 import pickyeater.UI.themes.filehandler.ThemeHandler;
 
-public class main {
+public class ApplicationMain {
     public static void main(String[] args) {
 
         new ThemeHandler().ReadTheme();

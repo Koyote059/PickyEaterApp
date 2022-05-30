@@ -1,13 +1,6 @@
 package pickyeater.UI.pages.registerpage;
 
-import pickyeater.UI.pages.app.MainFrame;
 import pickyeater.UI.pages.app.PickyPage;
-import pickyeater.UI.pages.app.dailyprogresspage.DailyProgressPage;
-import pickyeater.UI.pages.app.groceriespage.UnavailableGroceriesPage;
-import pickyeater.UI.pages.app.mealplanpage.MealPlanPage;
-import pickyeater.UI.pages.app.settingspage.SettingsPage;
-import pickyeater.UI.pages.app.userpage.UserPage;
-import pickyeater.UI.pages.leftbuttons.PanelButtons;
 import pickyeater.executors.ExecutorProvider;
 import pickyeater.executors.user.RegisterExecutor;
 
@@ -17,14 +10,10 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class RegisterMainFrame extends JFrame {
-
-    private final Container container;
-    private static RegisterMainFrame instance;
-
     private static final Map<String, PickyPage> pages = new HashMap<>();
 
     public RegisterMainFrame(){
-        container = getContentPane();
+        Container container = getContentPane();
         CardLayout layout = new CardLayout();
         container.setLayout(layout);
         RegisterExecutor registerExecutor = ExecutorProvider.getRegisterExecutor();
@@ -32,12 +21,11 @@ public class RegisterMainFrame extends JFrame {
         pages.put(Register2.class.getName(),new Register2(registerExecutor,this));
         pages.put(Register3.class.getName(),new Register3(registerExecutor,this));
         pages.put(Register4.class.getName(),new Register4(registerExecutor,this));
-
         setVisible(true);
-        instance = this;
-
         setSize(677, 507);
+        setResizable(false);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
         setLocation(Toolkit.getDefaultToolkit().getScreenSize().width/2 - 677/2,
                 Toolkit.getDefaultToolkit().getScreenSize().height/2 - 507/2);
         changePage(1);

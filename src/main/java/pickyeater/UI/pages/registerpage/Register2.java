@@ -3,18 +3,22 @@ package pickyeater.UI.pages.registerpage;
 /**
  * @author Claudio Di Maio
  */
-import pickyeater.UI.pages.app.MainFrame;
 import pickyeater.UI.pages.app.PickyPage;
+import pickyeater.UI.themes.ColorButtons;
 import pickyeater.UI.themes.filehandler.ThemeHandler;
 import pickyeater.UI.themes.filehandler.ThemesEnum;
-import pickyeater.basics.mealplan.PickyMealPlan;
 import pickyeater.basics.user.LifeStyle;
 import pickyeater.executors.user.RegisterExecutor;
-import pickyeater.UI.themes.ColorButtons;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.*;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 
 public class Register2 extends PickyPage {
     private JButton btSedentary;
@@ -24,11 +28,13 @@ public class Register2 extends PickyPage {
     private JPanel mainPanel;
     private JButton btBack;
     private JLabel txtChangeTheme;
+    private JLabel txtS;
+    private JLabel txtSA;
+    private JLabel txtA;
+    private JLabel txtVA;
 
     public Register2(RegisterExecutor registerExecutor,JFrame parent) {
         super(parent);
-        //setSize(677, 507);    //pack();
-        //setLocation(Toolkit.getDefaultToolkit().getScreenSize().width/2 - 677/2,Toolkit.getDefaultToolkit().getScreenSize().height/2 - 507/2);
         ColorButtons cB = new ColorButtons();
         setLayout(new BorderLayout());
         add(mainPanel,BorderLayout.CENTER);
@@ -120,9 +126,7 @@ public class Register2 extends PickyPage {
                     draw();
                 }
 
-                for (int i = 0; getComponentCount() > i; i++) {
-                    SwingUtilities.updateComponentTreeUI(getComponent(i));
-                }
+                SwingUtilities.updateComponentTreeUI(parent);
             }
         });
     }
@@ -144,6 +148,25 @@ public class Register2 extends PickyPage {
 
     @Override
     public void showPage() {
+        txtS.setText("");
+        txtSA.setText("");
+        txtA.setText("");
+        txtVA.setText("");
+        try {
+            BufferedImage imgS = ImageIO.read(new File("res/images/lifestyle/S.png"));
+            txtS.setIcon(new ImageIcon(imgS.getScaledInstance(-1, 90, Image.SCALE_SMOOTH)));
+
+            BufferedImage imgSA = ImageIO.read(new File("res/images/lifestyle/SA.png"));
+            txtSA.setIcon(new ImageIcon(imgSA.getScaledInstance(-1,90, Image.SCALE_SMOOTH)));
+
+            BufferedImage imgA = ImageIO.read(new File("res/images/lifestyle/A.png"));
+            txtA.setIcon(new ImageIcon(imgA.getScaledInstance(-1,90, Image.SCALE_SMOOTH)));
+
+            BufferedImage imgVA = ImageIO.read(new File("res/images/lifestyle/VA.png"));
+            txtVA.setIcon(new ImageIcon(imgVA.getScaledInstance(-1,90, Image.SCALE_SMOOTH)));
+        } catch (IOException | NullPointerException ignored) {
+            System.out.println("Couldn't process iamge");
+        }
         draw();
         super.showPage();
     }

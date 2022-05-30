@@ -16,6 +16,8 @@ import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -28,7 +30,7 @@ public class UserPage extends PickyPage {
     private JButton btUser;
     private JButton btGroceries;
     private JButton btDiet;
-    private JButton btEditMode;
+    private JLabel txtEditMode;
     private JLabel txtName;
     private JLabel txtHeight;
     private JLabel txtWeight;
@@ -53,11 +55,11 @@ public class UserPage extends PickyPage {
         setLayout(new BorderLayout());
         add(mainPanel,BorderLayout.CENTER);
 
-        btEditMode.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+        txtEditMode.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
         try {
             BufferedImage binImage = ImageIO.read(new File("res/images/accounteditB.png"));
-            btEditMode.setIcon(new ImageIcon(binImage.getScaledInstance(40,40,Image.SCALE_SMOOTH)));
-            btEditMode.setText("");
+            txtEditMode.setIcon(new ImageIcon(binImage.getScaledInstance(40,40,Image.SCALE_SMOOTH)));
+            txtEditMode.setText("");
         } catch (IOException | NullPointerException ignored) {
         }
 
@@ -79,9 +81,13 @@ public class UserPage extends PickyPage {
 
         new ColorButtons().ColorLeftButtons(btUser, btDailyProgress, btSettings, btGroceries, btDiet);
 
-        btEditMode.addActionListener(e -> {
-            PickyPage userEditModePage = new UserEditModePage(parent);
-            userEditModePage.showPage();
+        txtEditMode.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                super.mouseClicked(e);
+                PickyPage userEditModePage = new UserEditModePage(parent);
+                userEditModePage.showPage();
+            }
         });
 
         setNavigationMenuListeners();

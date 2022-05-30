@@ -5,11 +5,9 @@ package pickyeater.UI.pages.registerpage;
  */
 import pickyeater.UI.pages.app.MainFrame;
 import pickyeater.UI.pages.app.PickyPage;
+import pickyeater.UI.pages.leftbuttons.PanelButtons;
 import pickyeater.UI.themes.filehandler.ThemeHandler;
 import pickyeater.UI.themes.filehandler.ThemesEnum;
-import pickyeater.builders.PickyDailyMealPlanBuilder;
-import pickyeater.utils.AgeCalculator;
-import pickyeater.UI.pages.leftbuttons.PanelButtons;
 import pickyeater.algorithms.HarrisBenedictCalculator;
 import pickyeater.algorithms.NutrientsRequirementCalculator;
 import pickyeater.basics.food.Nutrients;
@@ -17,12 +15,12 @@ import pickyeater.builders.NutrientsBuilder;
 import pickyeater.builders.PickyNutrientsBuilder;
 import pickyeater.builders.UserBuilder;
 import pickyeater.executors.user.RegisterExecutor;
+import pickyeater.utils.AgeCalculator;
 import pickyeater.utils.StringToNumber;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
-import java.awt.event.KeyAdapter;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.text.DecimalFormat;
@@ -102,9 +100,7 @@ public class Register4 extends PickyPage {
                     new RegisterChangeTheme(txtChangeTheme);
                 }
 
-                for (int i = 0; getComponentCount() > i; i++) {
-                    SwingUtilities.updateComponentTreeUI(getComponent(i));
-                }
+                SwingUtilities.updateComponentTreeUI(parent);
             }
         });
     }
