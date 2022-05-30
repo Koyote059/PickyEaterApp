@@ -25,6 +25,7 @@ public class MealsChooser extends JDialog {
     private List<Meal> searchedMeals;
     private JButton cancelButton;
     private Meal returningMeal = null;
+    private JPanel mealPanel = null;
     private JTextField mealQuantityTextField = new JTextField("100");
     private final MealChooserExecutor mealSearcherExecutor = ExecutorProvider.getMealChooserExecutor();
 
@@ -171,7 +172,6 @@ public class MealsChooser extends JDialog {
         pieChart.addSeries("Proteins",mealNutrients.getProteins());
         pieChart.addSeries("Carbs",mealNutrients.getCarbs());
         pieChart.addSeries("Fats",mealNutrients.getFats());
-        JPanel mealPanel = new JPanel(new BorderLayout());
         PieStyler styler = pieChart.getStyler();
         styler.setToolTipType(Styler.ToolTipType.yLabels);
         styler.setToolTipsEnabled(true);
@@ -179,8 +179,10 @@ public class MealsChooser extends JDialog {
         BorderLayout layout = (BorderLayout) getLayout();
         JPanel previousPanel = (JPanel) layout.getLayoutComponent(BorderLayout.LINE_START);
         if(previousPanel!=null) remove(previousPanel);
-        mealPanel.add(BorderLayout.PAGE_START,chartPanel);
         mealQuantityTextField.setText("100");
+        if(mealPanel!=null) remove(mealPanel);
+        mealPanel = new JPanel(new BorderLayout());
+        mealPanel.add(BorderLayout.PAGE_START,chartPanel);
         mealPanel.add(BorderLayout.PAGE_END,mealQuantityTextField);
         add(BorderLayout.LINE_START,mealPanel);
         revalidate();

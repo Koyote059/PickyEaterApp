@@ -24,6 +24,9 @@ public class IngredientChooser extends JDialog {
     private JList ingredientsList;
     private List<Ingredient> searchedIngredients;
     private JButton cancelButton;
+    private XChartPanel<PieChart> chartPanel;
+
+    private JPanel mealPanel = null;
     private Ingredient returningIngredient = null;
     private JTextField mealQuantityTextField = new JTextField("100");;
     private final IngredientSearcherExecutor ingredientsSearcherExecutor = ExecutorProvider.getIngredientSearcherExecutor();
@@ -34,6 +37,7 @@ public class IngredientChooser extends JDialog {
         searchBar = new JTextField();
         ingredientsList = new JList();
         setLayout(new BorderLayout());
+
         JPanel ingredientListPanel = new JPanel(new GridBagLayout());
         JScrollPane scrollPane = new JScrollPane(ingredientsList);
         GridBagConstraints constraints = new GridBagConstraints();
@@ -71,6 +75,9 @@ public class IngredientChooser extends JDialog {
                 showPieChart();
             }
         });
+
+
+
         showPieChart();
         cancelButton = new JButton("Cancel");
         cancelButton.addActionListener( e -> dispose());
@@ -161,16 +168,17 @@ public class IngredientChooser extends JDialog {
         pieChart.addSeries("Proteins",ingredientNutrients.getProteins());
         pieChart.addSeries("Carbs",ingredientNutrients.getCarbs());
         pieChart.addSeries("Fats",ingredientNutrients.getFats());
-        JPanel mealPanel = new JPanel(new BorderLayout());
         PieStyler styler = pieChart.getStyler();
         styler.setToolTipType(Styler.ToolTipType.yLabels);
         styler.setToolTipsEnabled(true);
-        XChartPanel<PieChart> chartPanel = new XChartPanel<>(pieChart);
+        chartPanel = new XChartPanel<>(pieChart);
         BorderLayout layout = (BorderLayout) getLayout();
         JPanel previousPanel = (JPanel) layout.getLayoutComponent(BorderLayout.LINE_START);
         if(previousPanel!=null) remove(previousPanel);
-        mealPanel.add(BorderLayout.PAGE_START,chartPanel);
         mealQuantityTextField.setText("100");
+        if(mealPanel!=null) remove(mealPanel);
+        mealPanel = new JPanel(new BorderLayout());
+        mealPanel.add(BorderLayout.PAGE_START,chartPanel);
         mealPanel.add(BorderLayout.PAGE_END,mealQuantityTextField);
         add(BorderLayout.LINE_START,mealPanel);
         revalidate();
