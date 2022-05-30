@@ -19,4 +19,15 @@ public class StringsUtils {
         }
         return stringBuilder.toString();
     }
+
+    public static String toTitle(String string){
+        StringBuilder stringBuilder = new StringBuilder(string);
+        StringBuilder ris = new StringBuilder();
+        if (string.contains("_")) {
+            ris.append(capitalize(stringBuilder.substring(0, string.indexOf("_"))) + " " + capitalize(stringBuilder.substring(string.indexOf("_") + 1, string.length())));
+        } else {
+            ris.append(capitalize(string));
+        }
+        return ris.toString();
+    }
 }

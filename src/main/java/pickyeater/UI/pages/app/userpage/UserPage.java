@@ -11,6 +11,7 @@ import pickyeater.basics.user.User;
 import pickyeater.executors.ExecutorProvider;
 import pickyeater.executors.user.UserExecutor;
 import pickyeater.UI.themes.ColorButtons;
+import pickyeater.utils.StringsUtils;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -64,15 +65,17 @@ public class UserPage extends PickyPage {
         } catch (IOException | NullPointerException ignored) {
         }
 
+        StringsUtils su = new StringsUtils();
+
         // User:
         txtName.setText(user.getName());
-        txtSex.setText(user.getUserStatus().getSex().toString());
+        txtSex.setText(su.toTitle(user.getUserStatus().getSex().toString()));
         txtDateOfBirth.setText(user.getUserStatus().getDateOfBirth().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")));
         txtHeight.setText(df.format(user.getUserStatus().getHeight()) + " cm");
         txtWeight.setText(df.format(user.getUserStatus().getWeight()) + " Kg");
         txtBodyFat.setText(df.format(user.getUserStatus().getBodyFat()) + " %");
-        txtLifestyle.setText(user.getUserGoal().getLifeStyle().toString());
-        txtWeightGoal.setText(user.getUserGoal().getWeightVariationGoal().toString());
+        txtLifestyle.setText(su.toTitle(user.getUserGoal().getLifeStyle().toString()));
+        txtWeightGoal.setText(su.toTitle(user.getUserGoal().getWeightVariationGoal().toString()));
 
         // Nutrients:
         txtProteins.setText(df.format(user.getUserGoal().getRequiredNutrients().getProteins()));

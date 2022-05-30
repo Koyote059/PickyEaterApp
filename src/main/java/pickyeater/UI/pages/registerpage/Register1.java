@@ -82,7 +82,7 @@ public class Register1 extends PickyPage {
 
             // Weight
             if (!tfWeight.getText().isEmpty()) {
-                userBuilder.setWeight(new StringToNumber().convertPositiveFloat(tfWeight.getText()));
+                userBuilder.setWeight(StringToNumber.convertPositiveFloat(tfWeight.getText()));
                 if (userBuilder.getWeight() > 800 || userBuilder.getWeight() < 10){
                     JOptionPane.showMessageDialog(panelZeroOne, "Insert valid weight", "Error", JOptionPane.ERROR_MESSAGE);
                     userBuilder.setWeight(0);
@@ -93,7 +93,7 @@ public class Register1 extends PickyPage {
 
             // Height
             if (!tfHeight.getText().isEmpty()) {
-                userBuilder.setHeight(new StringToNumber().convertPositiveInteger(tfHeight.getText()));
+                userBuilder.setHeight(StringToNumber.convertPositiveInteger(tfHeight.getText()));
                 if (userBuilder.getHeight() > 300 || userBuilder.getHeight() < 10){
                     JOptionPane.showMessageDialog(panelZeroOne, "Insert valid height", "Error", JOptionPane.ERROR_MESSAGE);
                     userBuilder.setHeight(0);
@@ -114,15 +114,15 @@ public class Register1 extends PickyPage {
 
             // BodyFat
             if (!tfBodyfat.getText().isEmpty()) {
-                userBuilder.setBodyFat(new StringToNumber().convertPositiveFloat(tfBodyfat.getText()));
+                userBuilder.setBodyFat(StringToNumber.convertPositiveFloat(tfBodyfat.getText()));
                 if (userBuilder.getBodyFat() < 0 | userBuilder.getBodyFat() > 100){
                     JOptionPane.showMessageDialog(panelZeroOne, "Insert valid body-fat percentage", "Error", JOptionPane.ERROR_MESSAGE);
                 userBuilder.setBodyFat(0);
                 } else {
-                    next(registerExecutor);
+                    next();
                 }
             } else {
-                next(registerExecutor);
+                next();
             }
         });
         txtChangeTheme.addMouseListener(new MouseAdapter() {
@@ -160,7 +160,7 @@ public class Register1 extends PickyPage {
         }
     }
 
-    private void next(RegisterExecutor registerExecutor){
+    private void next(){
         if (userBuilder.getName() != null && userBuilder.getSex() != null && userBuilder.getWeight() != 0 && userBuilder.getHeight() != 0 && userBuilder.getDateOfBirth() != null) {
             if (userBuilder.getBodyFat() == 0) {
                 BodyFatCalculator bodyFatCalculator = new DeurenbergCalculator();

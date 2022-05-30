@@ -331,6 +331,7 @@
                     </constraints>
                     <properties>
                       <text value="BODYFAT"/>
+                      <toolTipText value="Leave empty and save to calculate automatically"/>
                     </properties>
                   </component>
                   <component id="fcf80" class="javax.swing.JComboBox" binding="cbLifestyle">
