@@ -11,6 +11,7 @@ che non puoi eliminare un ingrediente se è usato da varie parti (tanto lavoro) 
 - Aggiugnere pulsanti in Settings che portano direttamente ad AddMeal e AddIngredient, senza dover passare da ManageMeal (Claudio)
 - Aggiungere possibilità di rimuovere Meals mangiati (Se è già possibile farlo usare scritte per spiegare come (tooltip etc))
 - Quando in MealPlanPage si aggiunge un MealPlan, fare in modo che le schede non cambino dimensione
+- Risolvere bug in DailyProgressPage (Eaten Meals list) -> Non somma la quantità di meals con lo stesso nome e sistemare database (quando viene chiuso e riaperta l'app)
 
 Progetti a breve termine:
 - Inserire un grafico in user della cronologia dei progressi giornalieri
