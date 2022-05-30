@@ -12,6 +12,7 @@ che non puoi eliminare un ingrediente se è usato da varie parti (tanto lavoro) 
 - Aggiungere possibilità di rimuovere Meals mangiati (Se è già possibile farlo usare scritte per spiegare come (tooltip etc))
 - Quando in MealPlanPage si aggiunge un MealPlan, fare in modo che le schede non cambino dimensione
 - Risolvere bug in DailyProgressPage (Eaten Meals list) -> Non somma la quantità di meals con lo stesso nome e sistemare database (quando viene chiuso e riaperta l'app)
+- Risolvere bug in UserPage: se si modifica l'user va per forza chiusa e riaperta l'app per notare cambiamenti in UserPage (Possibile fix: Fare refresh della pagina quando si sialva in UserEditMode)
 
 Progetti a breve termine:
 - Inserire un grafico in user della cronologia dei progressi giornalieri
