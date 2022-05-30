@@ -44,11 +44,7 @@ public class Register4 extends PickyPage {
         //setLocation(Toolkit.getDefaultToolkit().getScreenSize().width/2 - 677/2,Toolkit.getDefaultToolkit().getScreenSize().height/2 - 507/2);
         setLayout(new BorderLayout());
         add(mainPanel,BorderLayout.CENTER);
-
-        StringToNumber stn = new StringToNumber();
-        btBack.addActionListener(actionEvent -> {
-            RegisterMainFrame.changePage(3);
-        });
+        btBack.addActionListener(actionEvent -> RegisterMainFrame.changePage(3));
 
         btDone.addActionListener(actionEvent -> {
 
@@ -64,22 +60,22 @@ public class Register4 extends PickyPage {
         btReset.addActionListener(actionEvent -> resetNutrients(userBuilder));
 
         ActionListener listener = actionEvent -> {
-            if (stn.convertPositiveDouble(tfProteins.getText()) > 5000 | stn.convertPositiveDouble(tfProteins.getText()) < 0){
+            if (StringToNumber.convertPositiveDouble(tfProteins.getText()) > 5000 | StringToNumber.convertPositiveDouble(tfProteins.getText()) < 0){
                 JOptionPane.showMessageDialog(mainPanel, "Insert valid number in Proteins", "Error", JOptionPane.ERROR_MESSAGE);
             } else {
-                nutrientsBuilder.setProteins(stn.convertPositiveFloat(tfProteins.getText()));
+                nutrientsBuilder.setProteins(StringToNumber.convertPositiveFloat(tfProteins.getText()));
             }
 
-            if (stn.convertPositiveDouble(tfFats.getText()) > 5000 | stn.convertPositiveDouble(tfFats.getText()) < 0){
+            if (StringToNumber.convertPositiveDouble(tfFats.getText()) > 5000 | StringToNumber.convertPositiveDouble(tfFats.getText()) < 0){
                 JOptionPane.showMessageDialog(mainPanel, "Insert valid number in Fats", "Error", JOptionPane.ERROR_MESSAGE);
             } else {
-                nutrientsBuilder.setUnSaturatedFats(stn.convertPositiveFloat(tfFats.getText()));
+                nutrientsBuilder.setUnSaturatedFats(StringToNumber.convertPositiveFloat(tfFats.getText()));
             }
 
-            if (stn.convertPositiveFloat(tfCarbs.getText()) > 5000 | stn.convertPositiveFloat(tfCarbs.getText()) < 0){
+            if (StringToNumber.convertPositiveFloat(tfCarbs.getText()) > 5000 | StringToNumber.convertPositiveFloat(tfCarbs.getText()) < 0){
                 JOptionPane.showMessageDialog(mainPanel, "Insert valid number in Carbs", "Error", JOptionPane.ERROR_MESSAGE);
             } else {
-                nutrientsBuilder.setComplexCarbs(stn.convertPositiveFloat(tfCarbs.getText()));
+                nutrientsBuilder.setComplexCarbs(StringToNumber.convertPositiveFloat(tfCarbs.getText()));
             }
 
             txtCalories.setText(Double.toString(nutrientsBuilder.getCalories()));
@@ -94,12 +90,10 @@ public class Register4 extends PickyPage {
                 super.mouseClicked(e);
                 if (new ThemeHandler().ReadTheme().equals(ThemesEnum.DARK_THEME)){
                     new ThemeHandler().ChangeTheme(ThemesEnum.LIGHT_THEME);
-                    new RegisterChangeTheme(txtChangeTheme);
                 } else {
                     new ThemeHandler().ChangeTheme(ThemesEnum.DARK_THEME);
-                    new RegisterChangeTheme(txtChangeTheme);
                 }
-
+                new RegisterChangeTheme(txtChangeTheme);
                 SwingUtilities.updateComponentTreeUI(parent);
             }
         });
@@ -118,9 +112,9 @@ public class Register4 extends PickyPage {
         tfFats.setText(df.format(nutrients.getFats()));
 
         // save also to newNutrientsTmp
-        nutrientsBuilder.setComplexCarbs(new StringToNumber().convertPositiveFloat(tfCarbs.getText()));
-        nutrientsBuilder.setUnSaturatedFats(new StringToNumber().convertPositiveFloat(tfFats.getText()));
-        nutrientsBuilder.setProteins(new StringToNumber().convertPositiveFloat(tfProteins.getText()));
+        nutrientsBuilder.setComplexCarbs(StringToNumber.convertPositiveFloat(tfCarbs.getText()));
+        nutrientsBuilder.setUnSaturatedFats(StringToNumber.convertPositiveFloat(tfFats.getText()));
+        nutrientsBuilder.setProteins(StringToNumber.convertPositiveFloat(tfProteins.getText()));
     }
 
     @Override

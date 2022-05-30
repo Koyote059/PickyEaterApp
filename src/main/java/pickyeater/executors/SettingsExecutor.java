@@ -15,7 +15,7 @@ public class SettingsExecutor {
     }
 
     public void changeTheme(ThemesEnum themesEnum){
-        new ThemeHandler().ChangeTheme(themesEnum);
+        ThemeHandler.ChangeTheme(themesEnum);
     }
 
     public void deleteUser(){

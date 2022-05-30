@@ -5,29 +5,24 @@ import pickyeater.UI.themes.mydarkerlaf.MyDarkerLaf;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.Enumeration;
 
 public class SystemTheme {
 
-    public void theme0(){
+    public static void theme0(){
     try {
         UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-    } catch (ClassNotFoundException e) {
-        throw new RuntimeException(e);
-    } catch (InstantiationException e) {
-        throw new RuntimeException(e);
-    } catch (IllegalAccessException e) {
-        throw new RuntimeException(e);
-    } catch (UnsupportedLookAndFeelException e) {
+    } catch (ClassNotFoundException | InstantiationException | IllegalAccessException |
+             UnsupportedLookAndFeelException e) {
         throw new RuntimeException(e);
     }
-
-    setPEFont();
+        setPEFont();
 
     //UIManager.put("ProgressBar.foreground", Color.GREEN);
     //UIManager.put("Button.background", Color.GREEN);
     }
 
-    public void theme1(){
+    public static void theme1(){
         //UIManager.put("Button.background", Color.decode("#FFFFFF"));
         UIManager.put("ProgressBar.foreground", Color.decode("#B1EA9D"));
         try {
@@ -38,7 +33,7 @@ public class SystemTheme {
         setDefaultFont();
     }
 
-    public void theme2(){
+    public static void theme2(){
         //UIManager.put("Button.background", Color.decode("#505454"));
         UIManager.put("ProgressBar.foreground", Color.decode("#32AB5E"));
         try {
@@ -50,7 +45,7 @@ public class SystemTheme {
     }
 
     public static void setUIFont (javax.swing.plaf.FontUIResource f){
-        java.util.Enumeration keys = UIManager.getDefaults().keys();
+        Enumeration<Object> keys = UIManager.getDefaults().keys();
         while (keys.hasMoreElements()) {
             Object key = keys.nextElement();
             Object value = UIManager.get (key);

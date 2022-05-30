@@ -2,7 +2,7 @@ package pickyeater.utils;
 
 public class StringToNumber {
 
-    public float convertFloat(String s){
+    public static float convertFloat(String s){
         if (s.contains(",")) {
             s = convertCommaToDot(s);
         }
@@ -15,7 +15,7 @@ public class StringToNumber {
         return ris;
     }
 
-    public float convertPositiveFloat(String s){
+    public static float convertPositiveFloat(String s){
         if (s.contains(",")) {
             s = convertCommaToDot(s);
         }
@@ -31,7 +31,7 @@ public class StringToNumber {
         return ris;
     }
 
-    public double convertDouble(String s){
+    public static double convertDouble(String s){
         if (s.contains(",")) {
             s = convertCommaToDot(s);
         }
@@ -44,7 +44,7 @@ public class StringToNumber {
         return ris;
     }
 
-    public double convertPositiveDouble(String s){
+    public static double convertPositiveDouble(String s){
         if (s.contains(",")) {
             s = convertCommaToDot(s);
         }
@@ -60,7 +60,7 @@ public class StringToNumber {
         return ris;
     }
 
-    public int convertInteger(String s){
+    public static int convertInteger(String s){
         int ris = 0;
         try {
             ris = Integer.parseInt(s);
@@ -70,7 +70,7 @@ public class StringToNumber {
         return ris;
     }
 
-    public int convertPositiveInteger(String s) {
+    public static int convertPositiveInteger(String s) {
         int ris = 0;
         try {
             ris = Integer.parseInt(s);
@@ -83,7 +83,7 @@ public class StringToNumber {
         return ris;
     }
 
-    public String convertCommaToDot(String s){
+    private static String convertCommaToDot(String s){
         StringBuilder stringBuilder = new StringBuilder(s);
         stringBuilder.setCharAt(stringBuilder.indexOf(","), '.');
         return stringBuilder.toString();
