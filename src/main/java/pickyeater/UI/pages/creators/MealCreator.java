@@ -117,6 +117,11 @@ public class MealCreator extends JDialog  {
         doneButton.addActionListener(e ->{
             String mealName = mealNameField.getText();
 
+            if(isMealEditing && executor.isMealUsed(startingMeal)){
+                JOptionPane.showMessageDialog(getParent(),"You can't edit the meal's name as it's been used!");
+                return;
+            }
+
             if(mealName.length()>30){
                 JOptionPane.showMessageDialog(getParent(),"Name is too long!");
                 return;

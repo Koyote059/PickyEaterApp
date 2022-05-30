@@ -250,6 +250,11 @@ public class IngredientCreator extends JDialog {
             }
         }
 
+        if(isIngredientEditing && executor.isIngredientUsed(startingIngredient)){
+            JOptionPane.showMessageDialog(getParent(),"You can't edit the meal's name as it's been used!");
+            return null;
+        }
+
         if(selectedName.length()>20){
             JOptionPane.showMessageDialog(getParent(),"Name is too long!");
             return null;
