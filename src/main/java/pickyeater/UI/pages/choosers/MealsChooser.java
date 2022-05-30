@@ -111,8 +111,13 @@ public class MealsChooser extends JDialog {
                     Meal selectedMeal = searchedMeals.get(selectedIndex);
                     FoodPopupMenu popupMenu = new FoodPopupMenu();
                     popupMenu.addDeleteListener(l -> {
+                        if(mealSearcherExecutor.isMealUsed(selectedMeal)){
+                            JOptionPane.showMessageDialog(parent,"Cannot delete this meal as it's being used!");
+                            return;
+                        }
                         int choice = JOptionPane.showConfirmDialog(parent,"Are you sure you want to delete it?");
                         if(choice != JOptionPane.YES_OPTION) return;
+                        mealSearcherExecutor.deleteMeal(selectedMeal);
                         searchedMeals.remove(selectedMeal);
                         populateMealList();
                         showPieChart();
@@ -120,10 +125,9 @@ public class MealsChooser extends JDialog {
 
                     popupMenu.addEditListener( l -> {
                         MealCreator creator = new MealCreator(parent);
-                        Meal newMeals = creator.editMeal(selectedMeal);
-                        if(selectedMeal == newMeals) return;
-                        searchedMeals.remove(selectedMeal);
-                        searchedMeals.add(newMeals);
+                        creator.editMeal(selectedMeal);
+                        String text = searchBar.getText();
+                        searchedMeals = new ArrayList<>(mealSearcherExecutor.getMealsThatStartWith(text));
                         populateMealList();
                         showPieChart();
                     });

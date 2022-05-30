@@ -52,4 +52,9 @@ public class IngredientSearcherExecutor {
         FoodManager foodManager = this.eaterManager.getFoodManager();
         foodManager.saveIngredient(ingredient);
     }
+
+    public boolean isIngredientUsed(Ingredient ingredient) {
+        FoodManager foodManager = this.eaterManager.getFoodManager();
+        return foodManager.isIngredientUsed(ingredient);
+    }
 }

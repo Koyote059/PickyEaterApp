@@ -1,10 +1,8 @@
 
 Progetti a breve termine - Essenziali:
 - Controlla come createIngredient salva i dati nel DB
-- Modificare il DB in maniera tale che ci siano più controlli stretti con triggers ecc... (
-che non puoi eliminare un ingrediente se è usato da varie parti (tanto lavoro) , la stessa cosa per dailymeals/eatenmeals o che non puoi inserire un meal senza ingredienti )
-- DB: fai in maniera tale che se cambio il nome ad un meal/ingredient, lo faccia ovunque esso sia utilizzato
 - Cercare dove mancano i controlli e inserirli ( ricorda, il databse supporta solo caratteri alfanumerici! )
+- Togli il fatto che ogni volta che modifichi utente, crei utente o cose del genere ti esce il JDialog che ti fa il riassunto delle cose ( Proposta da fede )
 - Aggiungi TOOLTIP o simile per elementi che richiedono il tasto destro/doppio tasto (Fede)
 - Aggiungi TOOLTIP o spiegare con una scritta che in ManageMeal e ManageIngredient puoi cercare meal inserendo il nome del meal voluto e premendo invio + se possibile togliere che si deve premere invio per aggiornare la lista (si aggiorna ogni volta che un tasto viene premuto all'interno del textField)
 - Aggiungi TOOLTIP o simile per spiegare che gli ingredienti in MealCreator sono calcolati in base alle calorie che portano, non alla quantità di proteins/fats/carbs (E consultare terzi per chidere se dovrebbe invece contenere la percentuale di carbs/fats/proteins come gli altri grafici)
@@ -12,6 +10,7 @@ che non puoi eliminare un ingrediente se è usato da varie parti (tanto lavoro) 
 - Aggiungere possibilità di rimuovere Meals mangiati (Se è già possibile farlo usare scritte per spiegare come (tooltip etc))
 - Quando in MealPlanPage si aggiunge un MealPlan, fare in modo che le schede non cambino dimensione
 - Risolvere bug in DailyProgressPage (Eaten Meals list) -> Non somma la quantità di meals con lo stesso nome e sistemare database (quando viene chiuso e riaperta l'app)
+- Risolvere bug in UserPage: se si modifica l'user va per forza chiusa e riaperta l'app per notare cambiamenti in UserPage (Possibile fix: Fare refresh della pagina quando si sialva in UserEditMode)
 
 Progetti a breve termine:
 - Inserire un grafico in user della cronologia dei progressi giornalieri
