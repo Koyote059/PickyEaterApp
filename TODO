@@ -1,8 +1,6 @@
 
 Progetti a breve termine - Essenziali:
 - Controlla come createIngredient salva i dati nel DB
-- Modificare il DB in maniera tale che ci siano più controlli stretti con triggers ecc... (
-che non puoi eliminare un ingrediente se è usato da varie parti (tanto lavoro) , la stessa cosa per dailymeals/eatenmeals o che non puoi inserire un meal senza ingredienti )
 - DB: fai in maniera tale che se cambio il nome ad un meal/ingredient, lo faccia ovunque esso sia utilizzato
 - Cercare dove mancano i controlli e inserirli ( ricorda, il databse supporta solo caratteri alfanumerici! )
 - Aggiungi TOOLTIP o simile per elementi che richiedono il tasto destro/doppio tasto (Fede)
