@@ -1,8 +1,8 @@
 
 Progetti a breve termine - Essenziali:
 - Controlla come createIngredient salva i dati nel DB
-- Modificare il DB in maniera tale che ci siano più controlli stretti con triggers ecc... ( Per esempio se elimini Meal elimini anche MealCompositions, o
-che non puoi eliminare un ingrediente se è usato da varie parti (tanto lavoro) , o che non puoi inserire un meal senza ingredienti )
+- Modificare il DB in maniera tale che ci siano più controlli stretti con triggers ecc... (
+che non puoi eliminare un ingrediente se è usato da varie parti (tanto lavoro) , la stessa cosa per dailymeals/eatenmeals o che non puoi inserire un meal senza ingredienti )
 - Cercare dove mancano i controlli e inserirli ( ricorda, il databse supporta solo caratteri alfanumerici! )
 - Aggiungi TOOLTIP o simile per elementi che richiedono il tasto destro/doppio tasto (Fede)
 - Aggiungi TOOLTIP o spiegare con una scritta che in ManageMeal e ManageIngredient puoi cercare meal inserendo il nome del meal voluto e premendo invio + se possibile togliere che si deve premere invio per aggiornare la lista (si aggiorna ogni volta che un tasto viene premuto all'interno del textField)
