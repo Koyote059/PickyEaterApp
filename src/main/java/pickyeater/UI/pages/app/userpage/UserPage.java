@@ -22,6 +22,7 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.text.DecimalFormat;
+import java.time.format.DateTimeFormatter;
 
 public class UserPage extends PickyPage {
     private JPanel mainPanel;
@@ -66,10 +67,10 @@ public class UserPage extends PickyPage {
         // User:
         txtName.setText(user.getName());
         txtSex.setText(user.getUserStatus().getSex().toString());
-        txtDateOfBirth.setText(user.getUserStatus().getDateOfBirth().toString());
-        txtHeight.setText(df.format(user.getUserStatus().getHeight()));
-        txtWeight.setText(df.format(user.getUserStatus().getWeight()));
-        txtBodyFat.setText(df.format(user.getUserStatus().getBodyFat()));
+        txtDateOfBirth.setText(user.getUserStatus().getDateOfBirth().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")));
+        txtHeight.setText(df.format(user.getUserStatus().getHeight()) + " cm");
+        txtWeight.setText(df.format(user.getUserStatus().getWeight()) + " Kg");
+        txtBodyFat.setText(df.format(user.getUserStatus().getBodyFat()) + " %");
         txtLifestyle.setText(user.getUserGoal().getLifeStyle().toString());
         txtWeightGoal.setText(user.getUserGoal().getWeightVariationGoal().toString());
 

@@ -26,12 +26,16 @@ import pickyeater.utils.AgeCalculator;
 import pickyeater.utils.JCalendarToLocalDate;
 import pickyeater.utils.StringToNumber;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
+import java.io.File;
+import java.io.IOException;
 import java.text.DecimalFormat;
 import java.time.LocalDate;
 import java.time.ZoneId;
@@ -67,6 +71,13 @@ public class UserEditModePage extends PickyPage {
         UserEditModeExecutor userEditModeExecutor = ExecutorProvider.getUserEditModeExecutor();
         User user = userEditModeExecutor.getUser();
         UserBuilder newUserBuilder = new PickyUserBuilder();
+
+        btUpdateNutrients.setToolTipText("It'll automatically calculate the nutrients using your stats");
+        try {
+            BufferedImage binImage = ImageIO.read(new File("res/images/updateIcon.png"));
+            btUpdateNutrients.setIcon(new ImageIcon(binImage.getScaledInstance(16,16,Image.SCALE_SMOOTH)));
+        } catch (IOException | NullPointerException ignored) {
+        }
 
         setLayout(new BorderLayout());
         add(mainPanel,BorderLayout.CENTER);
