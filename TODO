@@ -1,6 +1,5 @@
 
 Progetti a breve termine - Essenziali:
-- Controlla come createIngredient salva i dati nel DB
 - Cercare dove mancano i controlli e inserirli ( ricorda, il databse supporta solo caratteri alfanumerici! )
 - Togli il fatto che ogni volta che modifichi utente, crei utente o cose del genere ti esce il JDialog che ti fa il riassunto delle cose ( Proposta da fede )
 - Aggiungi TOOLTIP o simile per elementi che richiedono il tasto destro/doppio tasto (Fede)
@@ -15,6 +14,8 @@ Progetti a breve termine:
 - Inserire un grafico in user della cronologia dei progressi giornalieri
 - Sistemare il fatto che le pagine si aprono ricorsivamente (Fede)
 - Mettere immagini nelle RegisterPages (Claudio)  V
+- Aggiungere tipo ( pz, ml, g ) dopo la barra di inserimento quantità dei creator
+- Aggiungi alla barra di ricerca dei nomi un'immagine che lo fa capire
 
 Progetti a medio termine:
 - Popolare il database
