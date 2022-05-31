@@ -39,7 +39,7 @@ public class SQLCreator {
         nutrientsBuilder.setUnSaturatedFats(userRS.getFloat("neededFats"));
         nutrientsBuilder.setProteins(userRS.getFloat("neededProteins"));
         userBuilder.setRequiredNutrients(nutrientsBuilder.build());
-        List<Meal> eatenMeals = getMeals(eatenMealsRS);
+        List<Meal> eatenMeals = getEatenMeals(eatenMealsRS);
         if(dailyProgressesRS.next()){
             int burnedCalories = dailyProgressesRS.getInt("burnedCalories");
             long dateEpoch = dailyProgressesRS.getLong("date");
@@ -113,6 +113,34 @@ public class SQLCreator {
                 meals.add(mealBuilder.build());
                 mealBuilder = new PickyMealBuilder();
                 previousName = mealName;
+            }
+            String ingredientName = resultSet.getString("ingredientName");
+            if(ingredientName != null) mealBuilder.addIngredients(getIngredient(resultSet));
+        }
+
+        if(previousName!=null){
+            mealBuilder.setName(previousName);
+            meals.add(mealBuilder.build());
+        }
+
+        return meals;
+    }
+
+    public List<Meal> getEatenMeals(ResultSet resultSet) throws SQLException {
+        List<Meal> meals = new ArrayList<>();
+        String previousName = null;
+        int previousNumber = 0;
+        MealBuilder mealBuilder = new PickyMealBuilder();
+        while(resultSet.next()){
+            int mealNumber = resultSet.getInt("mealNumber");
+            String mealName = resultSet.getString("mealName");
+            if(previousName==null) previousName = mealName;
+            if(previousNumber<mealNumber) {
+                mealBuilder.setName(previousName);
+                meals.add(mealBuilder.build());
+                mealBuilder = new PickyMealBuilder();
+                previousName = mealName;
+                previousNumber = mealNumber;
             }
             String ingredientName = resultSet.getString("ingredientName");
             if(ingredientName != null) mealBuilder.addIngredients(getIngredient(resultSet));

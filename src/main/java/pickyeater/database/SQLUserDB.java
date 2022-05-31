@@ -1,5 +1,6 @@
 package pickyeater.database;
 
+import pickyeater.basics.food.Meal;
 import pickyeater.basics.mealplan.MealPlan;
 import pickyeater.basics.user.DailyProgresses;
 import pickyeater.basics.user.User;

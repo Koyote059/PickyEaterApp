@@ -75,6 +75,7 @@ public class SQLSafeQueryExecutor {
                             "       quantityType,\n" +
                             "       ingredientsRatio,\n" +
                             "       gramsPerQuantity,\n" +
+                            "       mealNumber,\n" +
                             "       price * ( gramsPerQuantity * MealCompositions.quantity / 100) AS price,\n" +
                             "       complexCarbs * ( gramsPerQuantity * MealCompositions.quantity / 100) AS complexCarbs,\n" +
                             "       simpleCarbs * ( gramsPerQuantity * MealCompositions.quantity / 100) AS simpleCarbs,\n" +
