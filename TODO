@@ -1,12 +1,11 @@
 
 Progetti a breve termine - Essenziali:
-- Cercare dove mancano i controlli e inserirli ( ricorda, il databse supporta solo caratteri alfanumerici! )
+- Inserire in giro controlli per i numeri ( che devono essere positivi in genere e che non devono superare un certo limite, per il DB )
 - Aggiugnere pulsanti in Settings che portano direttamente ad AddMeal e AddIngredient, senza dover passare da ManageMeal (Claudio)
 - Aggiungere possibilità di rimuovere Meals mangiati (Se è già possibile farlo usare scritte per spiegare come (tooltip etc))
-- Aggiusta meal plan generator: rimuovi il fatto che cliccando su un ingrediente si elimina, inserire tendina per spostare sopra e sotto gli ingredienti 
-per eliminare dailyMeal. Spostare il pulsante per aggiungere il meal in una barra in'alto. Aggiungere scritta sopra ogni DailyMealPlan ( es. Day1, Day2... ).
+- Aggiusta meal plan generator: Spostare il pulsante per aggiungere il meal in una barra in'alto. Aggiungere scritta sopra ogni DailyMealPlan ( es. Day1, Day2... ).
 Col tasto destro sulla scritta si aprirà una tendina che permetterà di eliminare il mealPlan. Aggiungere 2 pulsanti affianco a "+" per spostare i meal
-plan a destra e a sinistra.
+plan a destra e a sinistra. Aggiungi tooltips per tutte ste cose.
 
 Progetti a breve termine:
 - Inserire un grafico in user della cronologia dei progressi giornalieri
