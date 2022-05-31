@@ -25,6 +25,7 @@ import pickyeater.UI.themes.ColorButtons;
 import pickyeater.utils.AgeCalculator;
 import pickyeater.utils.JCalendarToLocalDate;
 import pickyeater.utils.StringToNumber;
+import pickyeater.utils.StringsUtils;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -235,7 +236,7 @@ public class UserEditModePage extends PickyPage {
         // Name
         if (!tfName.getText().isEmpty()) {
             userBuilder.setName(tfName.getText());
-            if (userBuilder.getName().length() > 20) {
+            if (userBuilder.getName().length() > 20 || !StringsUtils.isAlpha(userBuilder.getName())){
                 JOptionPane.showMessageDialog(panelOne, "Insert valid name", "Error", JOptionPane.ERROR_MESSAGE);
                 userBuilder.setName(null);
             }
@@ -313,7 +314,10 @@ public class UserEditModePage extends PickyPage {
 
         // Save user
         ExecutorProvider.getUserEditModeExecutor().saveUser(userBuilder.build());
+
+        new MainFrame();
         MainFrame.changePage(PanelButtons.USER);
+        parent.dispose();
     }
     private void resetNutrients(UserBuilder userBuilder){
         NutrientsRequirementCalculator nutrientsCalculated = new HarrisBenedictCalculator();

@@ -32,7 +32,7 @@ public class IngredientChooser extends JDialog {
     private Ingredient returningIngredient = null;
 
     private JPanel mealQuantityPanel = new JPanel(new GridBagLayout());
-    private JTextField mealQuantityTextField = new JTextField("100");;
+    private JTextField mealQuantityTextField = new JTextField("100");
     private final IngredientSearcherExecutor ingredientsSearcherExecutor = ExecutorProvider.getIngredientSearcherExecutor();
     private JLabel mealQuantityTypeLabel = new JLabel(" g");
 
@@ -41,6 +41,7 @@ public class IngredientChooser extends JDialog {
         add(new JPanel());
         searchBar = new JTextField();
         ingredientsList = new JList();
+        ingredientsList.setToolTipText("Right click to delete/edit ingredient");
         setLayout(new BorderLayout());
 
         JPanel ingredientListPanel = new JPanel(new GridBagLayout());
@@ -82,8 +83,12 @@ public class IngredientChooser extends JDialog {
         });
 
 
-
-        showPieChart();
+        if (!searchedIngredients.isEmpty()) {
+            showPieChart();
+        } else {
+            JOptionPane.showMessageDialog(parent, "Error 404, Ingredients not found", "Error 404",
+                    JOptionPane.ERROR_MESSAGE);
+        }
         cancelButton = new JButton("Cancel");
         cancelButton.addActionListener( e -> dispose());
         JButton doneButton = new JButton("Done");
