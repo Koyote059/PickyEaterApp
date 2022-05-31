@@ -1,6 +1,5 @@
 
 Progetti a breve termine - Essenziali:
-- Controlla come createIngredient salva i dati nel DB
 - Cercare dove mancano i controlli e inserirli ( ricorda, il databse supporta solo caratteri alfanumerici! )
 - Togli il fatto che ogni volta che modifichi utente, crei utente o cose del genere ti esce il JDialog che ti fa il riassunto delle cose ( Proposta da fede )
 - Aggiungi TOOLTIP o simile per elementi che richiedono il tasto destro/doppio tasto (Fede)
@@ -8,14 +7,20 @@ Progetti a breve termine - Essenziali:
 - Aggiungi TOOLTIP o simile per spiegare che gli ingredienti in MealCreator sono calcolati in base alle calorie che portano, non alla quantità di proteins/fats/carbs (E consultare terzi per chidere se dovrebbe invece contenere la percentuale di carbs/fats/proteins come gli altri grafici)
 - Aggiugnere pulsanti in Settings che portano direttamente ad AddMeal e AddIngredient, senza dover passare da ManageMeal (Claudio)
 - Aggiungere possibilità di rimuovere Meals mangiati (Se è già possibile farlo usare scritte per spiegare come (tooltip etc))
-- Quando in MealPlanPage si aggiunge un MealPlan, fare in modo che le schede non cambino dimensione
-- Risolvere bug in DailyProgressPage (Eaten Meals list) -> Non somma la quantità di meals con lo stesso nome e sistemare database (quando viene chiuso e riaperta l'app)
 - Risolvere bug in UserPage: se si modifica l'user va per forza chiusa e riaperta l'app per notare cambiamenti in UserPage (Possibile fix: Fare refresh della pagina quando si sialva in UserEditMode)
+- Aggiusta meal plan generator: rimuovi il fatto che cliccando su un ingrediente si elimina, inserire tendina per spostare sopra e sotto gli ingredienti 
+per eliminare dailyMeal. Spostare il pulsante per aggiungere il meal in una barra in'alto. Aggiungere scritta sopra ogni DailyMealPlan ( es. Day1, Day2... ).
+Col tasto destro sulla scritta si aprirà una tendina che permetterà di eliminare il mealPlan. Aggiungere 2 pulsanti affianco a "+" per spostare i meal
+plan a destra e a sinistra.
 
 Progetti a breve termine:
 - Inserire un grafico in user della cronologia dei progressi giornalieri
 - Sistemare il fatto che le pagine si aprono ricorsivamente (Fede)
 - Mettere immagini nelle RegisterPages (Claudio)  V
+- Aggiungere tipo ( pz, ml, g ) dopo la barra di inserimento quantità dei creator
+- Aggiungi alla barra di ricerca dei nomi un'immagine che lo fa capire
+- Creare una classe esterna per unire i grafici dei PieChart ( magari estendendo JPanel o simile ). Sarebbe utile creare un'interfaccia comune per meals e ingredients.
+- Creare una classe esterna per il quantity chooser
 
 Progetti a medio termine:
 - Popolare il database

@@ -3,6 +3,7 @@ package pickyeater.UI.pages.creators;
 import org.knowm.xchart.PieChart;
 import org.knowm.xchart.XChartPanel;
 import org.knowm.xchart.style.PieStyler;
+import org.knowm.xchart.style.Styler;
 import pickyeater.UI.pages.choosers.FoodPopupMenu;
 import pickyeater.UI.pages.choosers.IngredientChooser;
 import pickyeater.basics.food.*;
@@ -12,6 +13,7 @@ import pickyeater.executors.creators.CreateMealExecutor;
 import pickyeater.utils.StringsUtils;
 import pickyeater.utils.MealQuantityConverter;
 import pickyeater.utils.MouseClickListener;
+import pickyeater.utils.ValuesConverter;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -29,7 +31,10 @@ public class MealCreator extends JDialog  {
 
     private JTable ingredientsTable;
     private JTextField mealNameField;
-
+    private JLabel mealQuantityTypeLabel = new JLabel(" g");
+    private XChartPanel<PieChart> chartPanel;
+    private JTextField mealQuantityTextField = new JTextField("100");;
+    private JPanel mealPanel = null;
     private List<Ingredient> ingredients = new ArrayList<>();
 
     private CreateMealExecutor executor = ExecutorProvider.getCreateMealExecutor();
@@ -205,23 +210,27 @@ public class MealCreator extends JDialog  {
     private void showPieChart(){
         int selectedItem = ingredientsTable.getSelectedRow();
         if(selectedItem==-1) return;
-        Ingredient ingredient = ingredients.get(selectedItem);
-        Nutrients ingredientNutrients = ingredient.getNutrients();
+        Ingredient selectedIngredient = ingredients.get(selectedItem);
+        QuantityType quantityType = selectedIngredient.getQuantity().getQuantityType();
+        Nutrients ingredientNutrients = selectedIngredient.getNutrients();
         PieChart pieChart = new PieChart(300,300);
-        pieChart.setTitle(ingredient.getName());
+        pieChart.setTitle(selectedIngredient.getName());
         pieChart.addSeries("Proteins",ingredientNutrients.getProteins());
         pieChart.addSeries("Carbs",ingredientNutrients.getCarbs());
         pieChart.addSeries("Fats",ingredientNutrients.getFats());
-        JPanel ingredientPane = new JPanel(new BorderLayout());
         PieStyler styler = pieChart.getStyler();
+        styler.setToolTipType(Styler.ToolTipType.yLabels);
         styler.setToolTipsEnabled(true);
-        XChartPanel<PieChart> chartPanel = new XChartPanel<>(pieChart);
+        chartPanel = new XChartPanel<>(pieChart);
         BorderLayout layout = (BorderLayout) getLayout();
         JPanel previousPanel = (JPanel) layout.getLayoutComponent(BorderLayout.LINE_START);
         if(previousPanel!=null) remove(previousPanel);
-        ingredientPane.add(BorderLayout.PAGE_START,chartPanel);
-        mainPanel.add(BorderLayout.LINE_START,chartPanel);
-
+        mealQuantityTextField.setText("100");
+        if(mealPanel!=null) remove(mealPanel);
+        mealPanel = new JPanel(new BorderLayout());
+        mealPanel.add(BorderLayout.PAGE_START,chartPanel);
+        add(BorderLayout.LINE_START,mealPanel);
+        revalidate();
     }
 
     public void createMeal() {

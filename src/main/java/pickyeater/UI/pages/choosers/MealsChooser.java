@@ -25,7 +25,10 @@ public class MealsChooser extends JDialog {
     private List<Meal> searchedMeals;
     private JButton cancelButton;
     private Meal returningMeal = null;
+    private JPanel mealPanel = null;
     private JTextField mealQuantityTextField = new JTextField("100");
+    private JPanel mealQuantityPanel = new JPanel(new GridBagLayout());
+    private JLabel mealQuantityTypeLabel = new JLabel("g");
     private final MealChooserExecutor mealSearcherExecutor = ExecutorProvider.getMealChooserExecutor();
 
     public MealsChooser(JFrame parent) {
@@ -171,7 +174,6 @@ public class MealsChooser extends JDialog {
         pieChart.addSeries("Proteins",mealNutrients.getProteins());
         pieChart.addSeries("Carbs",mealNutrients.getCarbs());
         pieChart.addSeries("Fats",mealNutrients.getFats());
-        JPanel mealPanel = new JPanel(new BorderLayout());
         PieStyler styler = pieChart.getStyler();
         styler.setToolTipType(Styler.ToolTipType.yLabels);
         styler.setToolTipsEnabled(true);
@@ -179,23 +181,38 @@ public class MealsChooser extends JDialog {
         BorderLayout layout = (BorderLayout) getLayout();
         JPanel previousPanel = (JPanel) layout.getLayoutComponent(BorderLayout.LINE_START);
         if(previousPanel!=null) remove(previousPanel);
-        mealPanel.add(BorderLayout.PAGE_START,chartPanel);
         mealQuantityTextField.setText("100");
-        mealPanel.add(BorderLayout.PAGE_END,mealQuantityTextField);
+        if(mealPanel!=null) remove(mealPanel);
+        mealPanel = new JPanel(new BorderLayout());
+        mealPanel.add(BorderLayout.PAGE_START,chartPanel);
+
+
+        GridBagConstraints constraints = new GridBagConstraints();
+        constraints.gridx = constraints.gridy = 0;
+        constraints.fill=100;
+        constraints.gridwidth= 1;
+
+        mealQuantityPanel.add(mealQuantityTextField,constraints);
+        constraints.gridx = 20;
+        constraints.gridwidth = 1;
+
+        mealQuantityPanel.add(mealQuantityTypeLabel,constraints);
+
+        mealPanel.add(BorderLayout.PAGE_END,mealQuantityPanel);
         add(BorderLayout.LINE_START,mealPanel);
         revalidate();
     }
 
     public void manageMeals() {
         cancelButton.setVisible(false);
-        mealQuantityTextField.setVisible(false);
+        mealQuantityPanel.setVisible(false);
         setVisible(true);
     }
 
     public Optional<Meal> getMeal(){
         setVisible(true);
         cancelButton.setVisible(true);
-        mealQuantityTextField.setVisible(true);
+        mealQuantityPanel.setVisible(true);
         return Optional.ofNullable(returningMeal);
     }
 }
