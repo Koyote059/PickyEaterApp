@@ -314,7 +314,10 @@ public class UserEditModePage extends PickyPage {
 
         // Save user
         ExecutorProvider.getUserEditModeExecutor().saveUser(userBuilder.build());
+
+        new MainFrame();
         MainFrame.changePage(PanelButtons.USER);
+        parent.dispose();
     }
     private void resetNutrients(UserBuilder userBuilder){
         NutrientsRequirementCalculator nutrientsCalculated = new HarrisBenedictCalculator();
