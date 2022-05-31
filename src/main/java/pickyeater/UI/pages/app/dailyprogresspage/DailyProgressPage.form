@@ -110,7 +110,9 @@
                     <children>
                       <component id="4efb4" class="javax.swing.JTable" binding="tableEatenMeals">
                         <constraints/>
-                        <properties/>
+                        <properties>
+                          <toolTipText value="Right click to remove"/>
+                        </properties>
                       </component>
                     </children>
                   </scrollpane>

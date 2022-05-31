@@ -39,6 +39,7 @@ public class MealsChooser extends JDialog {
         GridBagConstraints constraints = new GridBagConstraints();
         constraints.gridx = 0;
         constraints.gridy = 0;
+        mealsList.setToolTipText("Double click to check ingredients, right click to delete/edit meal");
         ingredientListPanel.add(new JScrollPane(mealsList),constraints);
         constraints.gridy = 1;
         JButton addMealButton = new JButton("Create meal");
