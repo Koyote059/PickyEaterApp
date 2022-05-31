@@ -12,6 +12,7 @@ import pickyeater.executors.ExecutorProvider;
 import pickyeater.executors.searcher.IngredientSearcherExecutor;
 import pickyeater.utils.IngredientQuantityConverter;
 import pickyeater.utils.MouseClickListener;
+import pickyeater.utils.StringsUtils;
 import pickyeater.utils.ValuesConverter;
 
 import javax.swing.*;
@@ -66,6 +67,10 @@ public class IngredientChooser extends JDialog {
 
         searchBar.addActionListener( l ->{
             String text = l.getActionCommand();
+            if(!StringsUtils.isAlpha(text)){
+                JOptionPane.showMessageDialog(parent,"You can only search alphanumeric characters!");
+                return;
+            }
             searchedIngredients = new ArrayList<>(ingredientsSearcherExecutor.getIngredientsThatStartWith(text));
             populateIngredientsList();
         });
@@ -134,8 +139,11 @@ public class IngredientChooser extends JDialog {
                     popupMenu.addEditListener( l -> {
                         IngredientCreator creator = new IngredientCreator(parent);
                         creator.editIngredient(selectedIngredient);
-                        String name = searchBar.getText();
-                        searchedIngredients = new ArrayList<>(ingredientsSearcherExecutor.getIngredientsThatStartWith(name));
+                        String text = searchBar.getText();
+                        if(!StringsUtils.isAlpha(text)){
+                            return;
+                        }
+                        searchedIngredients = new ArrayList<>(ingredientsSearcherExecutor.getIngredientsThatStartWith(text));
                         populateIngredientsList();
                         showPieChart();
                     });

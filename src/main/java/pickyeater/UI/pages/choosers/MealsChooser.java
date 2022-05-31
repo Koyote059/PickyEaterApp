@@ -11,6 +11,7 @@ import pickyeater.executors.ExecutorProvider;
 import pickyeater.executors.MealChooserExecutor;
 import pickyeater.utils.MealQuantityConverter;
 import pickyeater.utils.MouseClickListener;
+import pickyeater.utils.StringsUtils;
 
 import javax.swing.*;
 import java.awt.*;
@@ -57,6 +58,10 @@ public class MealsChooser extends JDialog {
 
         searchBar.addActionListener( l ->{
             String text = l.getActionCommand();
+            if(!StringsUtils.isAlpha(text)){
+                JOptionPane.showMessageDialog(parent,"You can only search alphanumeric characters!");
+                return;
+            }
             searchedMeals = new ArrayList<>(mealSearcherExecutor.getMealsThatStartWith(text));
             populateMealList();
         });
@@ -138,6 +143,9 @@ public class MealsChooser extends JDialog {
                         MealCreator creator = new MealCreator(parent);
                         creator.editMeal(selectedMeal);
                         String text = searchBar.getText();
+                        if(!StringsUtils.isAlpha(text)){
+                            return;
+                        }
                         searchedMeals = new ArrayList<>(mealSearcherExecutor.getMealsThatStartWith(text));
                         populateMealList();
                         showPieChart();
