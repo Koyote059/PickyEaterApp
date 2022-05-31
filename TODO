@@ -18,7 +18,7 @@ Progetti a breve termine:
 -< Togli il fatto che ogni volta che modifichi utente, crei utente o cose del genere ti esce il JDialog che ti fa il riassunto delle cose ( Proposta da fede )
 -> Rendere opzionale i JDialog che fa il riassunto delle cose (Riproposta di cla)
 - Aggiungi TOOLTIP o spiegare con una scritta che in ManageMeal e ManageIngredient puoi cercare meal inserendo il nome del meal voluto e premendo invio + se possibile togliere che si deve premere invio per aggiornare la lista (si aggiorna ogni volta che un tasto viene premuto all'interno del textField)
-- Cambiare nome dei pulsanti, jlabel etc seguendo questo stile: (es: parolaButton in btParola, parolaLable in txtParola, parolaComboBox in cbParola, parolaTable in tableParola) ( Proposta da Cla )
+-< Cambiare nome dei pulsanti, jlabel etc seguendo questo stile: (es: parolaButton in btParola, parolaLable in txtParola, parolaComboBox in cbParola, parolaTable in tableParola) ( Proposta da Cla )
 
 Progetti a medio termine:
 - Popolare il database
