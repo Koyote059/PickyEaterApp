@@ -16,6 +16,7 @@ import pickyeater.executors.user.RegisterExecutor;
 import pickyeater.utils.AgeCalculator;
 import pickyeater.utils.JCalendarToLocalDate;
 import pickyeater.utils.StringToNumber;
+import pickyeater.utils.StringsUtils;
 
 import javax.swing.*;
 import java.awt.*;
@@ -72,7 +73,7 @@ public class Register1 extends PickyPage {
             // Name
             if (!tfName.getText().isEmpty()) {
                 userBuilder.setName(tfName.getText());
-                if (userBuilder.getName().length() > 20){
+                if (userBuilder.getName().length() > 20 || !StringsUtils.isAlpha(userBuilder.getName())){
                     JOptionPane.showMessageDialog(panelZeroOne, "Insert valid name", "Error", JOptionPane.ERROR_MESSAGE);
                     userBuilder.setName(null);
                 }

@@ -14,7 +14,8 @@ import pickyeater.utils.MouseClickListener;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -22,6 +23,7 @@ import java.util.Optional;
 public class MealsChooser extends JDialog {
     private JTextField searchBar;
     private JList mealsList;
+    private JLabel txt;
     private List<Meal> searchedMeals;
     private JButton cancelButton;
     private Meal returningMeal = null;
@@ -39,7 +41,6 @@ public class MealsChooser extends JDialog {
         GridBagConstraints constraints = new GridBagConstraints();
         constraints.gridx = 0;
         constraints.gridy = 0;
-        mealsList.setToolTipText("Double click to check ingredients, right click to delete/edit meal");
         ingredientListPanel.add(new JScrollPane(mealsList),constraints);
         constraints.gridy = 1;
         JButton addMealButton = new JButton("Create meal");
@@ -62,6 +63,7 @@ public class MealsChooser extends JDialog {
         searchedMeals = new ArrayList<>(mealSearcherExecutor.getEveryMeal());
         populateMealList();
         mealsList.setMinimumSize(new Dimension(300,300));
+        mealsList.setToolTipText("Double click to check ingredients, right click to delete/edit meal");
         mealsList.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
         mealsList.addMouseListener(new MouseAdapter() {
             @Override
@@ -80,7 +82,12 @@ public class MealsChooser extends JDialog {
                 new MealInfoJDialog(parent,meal).run();
             }
         });
-        showPieChart();
+        if (!searchedMeals.isEmpty()) {
+            showPieChart();
+        } else {
+            JOptionPane.showMessageDialog(parent, "Error 404, Meals not found", "Error 404",
+                    JOptionPane.ERROR_MESSAGE);
+        }
         cancelButton = new JButton("Cancel");
         cancelButton.addActionListener( e -> dispose());
         JButton doneButton = new JButton("Done");

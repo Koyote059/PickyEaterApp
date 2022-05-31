@@ -83,8 +83,12 @@ public class IngredientChooser extends JDialog {
         });
 
 
-
-        showPieChart();
+        if (!searchedIngredients.isEmpty()) {
+            showPieChart();
+        } else {
+            JOptionPane.showMessageDialog(parent, "Error 404, Ingredients not found", "Error 404",
+                    JOptionPane.ERROR_MESSAGE);
+        }
         cancelButton = new JButton("Cancel");
         cancelButton.addActionListener( e -> dispose());
         JButton doneButton = new JButton("Done");
