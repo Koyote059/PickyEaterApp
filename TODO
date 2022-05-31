@@ -20,7 +20,7 @@ Progetti a breve termine:
 - Aggiungi TOOLTIP o spiegare con una scritta che in ManageMeal e ManageIngredient puoi cercare meal inserendo il nome del meal voluto e premendo invio + se possibile togliere che si deve premere invio per aggiornare la lista (si aggiorna ogni volta che un tasto viene premuto all'interno del textField)
 -< Cambiare nome dei pulsanti, jlabel etc seguendo questo stile: (es: parolaButton in btParola, parolaLable in txtParola, parolaComboBox in cbParola, parolaTable in tableParola) ( Proposta da Cla )
 
-Progetti a medio termine:
+Progetti a medio termine - Essenziali:
 - Popolare il database
 - Far funzionare i pulasnti che resettano i meal e gli ingredient (o togliergli completamente)
 - Sistemare in genere il design e la grafica
