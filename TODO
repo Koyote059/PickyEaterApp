@@ -1,6 +1,5 @@
 
 Progetti a breve termine - Essenziali:
-- Continua il lavoro di mettere il tipo affianco alla barra quantity dei creators ( FEDE - OGGI)
 - Risolvi il bug della pieChart buggata nel MealCreator ( FEDE - OGGI )
 
 - Cercare dove mancano i controlli e inserirli ( ricorda, il databse supporta solo caratteri alfanumerici! )
@@ -24,6 +23,7 @@ Progetti a medio termine:
 - Far funzionare i pulasnti che resettano i meal e gli ingredient (o togliergli completamente)
 - Sistemare in genere il design e la grafica
 - Testing e debug
+- Creare una classe esterna per unire i grafici dei PieChart ( magari estendendo JPanel o simile ). Sarebbe utile creare un'interfaccia comune per meals e ingredients.
 
 Progetti e lungo termine:
 - Fornire l'app a terzi per chiedere pareri
