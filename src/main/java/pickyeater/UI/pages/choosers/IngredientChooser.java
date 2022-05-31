@@ -7,10 +7,12 @@ import org.knowm.xchart.style.Styler;
 import pickyeater.UI.pages.creators.IngredientCreator;
 import pickyeater.basics.food.Ingredient;
 import pickyeater.basics.food.Nutrients;
+import pickyeater.basics.food.QuantityType;
 import pickyeater.executors.ExecutorProvider;
 import pickyeater.executors.searcher.IngredientSearcherExecutor;
 import pickyeater.utils.IngredientQuantityConverter;
 import pickyeater.utils.MouseClickListener;
+import pickyeater.utils.ValuesConverter;
 
 import javax.swing.*;
 import java.awt.*;
@@ -28,8 +30,11 @@ public class IngredientChooser extends JDialog {
 
     private JPanel mealPanel = null;
     private Ingredient returningIngredient = null;
+
+    private JPanel mealQuantityPanel = new JPanel(new GridBagLayout());
     private JTextField mealQuantityTextField = new JTextField("100");;
     private final IngredientSearcherExecutor ingredientsSearcherExecutor = ExecutorProvider.getIngredientSearcherExecutor();
+    private JLabel mealQuantityTypeLabel = new JLabel(" g");
 
     public IngredientChooser(JFrame parent) {
         super(parent,"Ingredient Chooser",true);
@@ -162,6 +167,8 @@ public class IngredientChooser extends JDialog {
     private void showPieChart(){
         int selectedItem = ingredientsList.getSelectedIndex();
         Ingredient selectedIngredient = searchedIngredients.get(selectedItem);
+        QuantityType quantityType = selectedIngredient.getQuantity().getQuantityType();
+        mealQuantityTypeLabel.setText(ValuesConverter.convertQuantityTypeValue(quantityType));
         Nutrients ingredientNutrients = selectedIngredient.getNutrients();
         PieChart pieChart = new PieChart(300,300);
         pieChart.setTitle(selectedIngredient.getName());
@@ -179,21 +186,33 @@ public class IngredientChooser extends JDialog {
         if(mealPanel!=null) remove(mealPanel);
         mealPanel = new JPanel(new BorderLayout());
         mealPanel.add(BorderLayout.PAGE_START,chartPanel);
-        mealPanel.add(BorderLayout.PAGE_END,mealQuantityTextField);
+
+        GridBagConstraints constraints = new GridBagConstraints();
+        constraints.gridx = constraints.gridy = 0;
+        constraints.ipadx=1;
+        constraints.gridwidth= 20;
+
+        mealQuantityPanel.add(mealQuantityTextField,constraints);
+        constraints.gridx = 20;
+        constraints.gridwidth = 1;
+
+        mealQuantityPanel.add(mealQuantityTypeLabel,constraints);
+
+        mealPanel.add(BorderLayout.PAGE_END,mealQuantityPanel);
         add(BorderLayout.LINE_START,mealPanel);
         revalidate();
     }
 
     public void manageIngredients() {
         cancelButton.setVisible(false);
-        mealQuantityTextField.setVisible(false);
+        mealQuantityPanel.setVisible(false);
         setVisible(true);
     }
 
     public Optional<Ingredient> getIngredient(){
         setVisible(true);
         cancelButton.setVisible(true);
-        mealQuantityTextField.setVisible(true);
+        mealQuantityPanel.setVisible(true);
         return Optional.ofNullable(returningIngredient);
     }
 }

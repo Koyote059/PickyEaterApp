@@ -27,6 +27,8 @@ public class MealsChooser extends JDialog {
     private Meal returningMeal = null;
     private JPanel mealPanel = null;
     private JTextField mealQuantityTextField = new JTextField("100");
+    private JPanel mealQuantityPanel = new JPanel(new GridBagLayout());
+    private JLabel mealQuantityTypeLabel = new JLabel("g");
     private final MealChooserExecutor mealSearcherExecutor = ExecutorProvider.getMealChooserExecutor();
 
     public MealsChooser(JFrame parent) {
@@ -183,21 +185,34 @@ public class MealsChooser extends JDialog {
         if(mealPanel!=null) remove(mealPanel);
         mealPanel = new JPanel(new BorderLayout());
         mealPanel.add(BorderLayout.PAGE_START,chartPanel);
-        mealPanel.add(BorderLayout.PAGE_END,mealQuantityTextField);
+
+
+        GridBagConstraints constraints = new GridBagConstraints();
+        constraints.gridx = constraints.gridy = 0;
+        constraints.fill=100;
+        constraints.gridwidth= 1;
+
+        mealQuantityPanel.add(mealQuantityTextField,constraints);
+        constraints.gridx = 20;
+        constraints.gridwidth = 1;
+
+        mealQuantityPanel.add(mealQuantityTypeLabel,constraints);
+
+        mealPanel.add(BorderLayout.PAGE_END,mealQuantityPanel);
         add(BorderLayout.LINE_START,mealPanel);
         revalidate();
     }
 
     public void manageMeals() {
         cancelButton.setVisible(false);
-        mealQuantityTextField.setVisible(false);
+        mealQuantityPanel.setVisible(false);
         setVisible(true);
     }
 
     public Optional<Meal> getMeal(){
         setVisible(true);
         cancelButton.setVisible(true);
-        mealQuantityTextField.setVisible(true);
+        mealQuantityPanel.setVisible(true);
         return Optional.ofNullable(returningMeal);
     }
 }
