@@ -1,7 +1,5 @@
 
 Progetti a breve termine - Essenziali:
-- Risolvi il bug della pieChart buggata nel MealCreator ( FEDE - OGGI )
-
 - Cercare dove mancano i controlli e inserirli ( ricorda, il databse supporta solo caratteri alfanumerici! )
 - Togli il fatto che ogni volta che modifichi utente, crei utente o cose del genere ti esce il JDialog che ti fa il riassunto delle cose ( Proposta da fede )
 - Aggiungi TOOLTIP o simile per elementi che richiedono il tasto destro/doppio tasto (Fede)
@@ -17,13 +15,14 @@ Progetti a breve termine:
 - Mettere immagini nelle RegisterPages (Claudio)  V
 - Aggiungere tipo ( pz, ml, g ) dopo la barra di inserimento quantità dei creator
 - Aggiungi alla barra di ricerca dei nomi un'immagine che lo fa capire
+- Creare una classe esterna per unire i grafici dei PieChart ( magari estendendo JPanel o simile ). Sarebbe utile creare un'interfaccia comune per meals e ingredients.
+- Creare una classe esterna per il quantity chooser
 
 Progetti a medio termine:
 - Popolare il database
 - Far funzionare i pulasnti che resettano i meal e gli ingredient (o togliergli completamente)
 - Sistemare in genere il design e la grafica
 - Testing e debug
-- Creare una classe esterna per unire i grafici dei PieChart ( magari estendendo JPanel o simile ). Sarebbe utile creare un'interfaccia comune per meals e ingredients.
 
 Progetti e lungo termine:
 - Fornire l'app a terzi per chiedere pareri
