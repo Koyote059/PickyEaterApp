@@ -27,10 +27,9 @@ public class IngredientSearcherExecutor {
     }
 
     public Object[] getAllIngredientsObj() {
-        ExecutorProvider executorProvider = new ExecutorProvider();
-        Set<Ingredient> ingredientSet = executorProvider.getEaterManager().getFoodManager().getIngredients();
+        Set<Ingredient> ingredientSet = ExecutorProvider.getEaterManager().getFoodManager().getIngredients();
         int tmpSize = ingredientSet.size();
-        Object objects[] = new Object[tmpSize];
+        Object[] objects = new Object[tmpSize];
         for (Iterator<Ingredient> it = ingredientSet.iterator(); it.hasNext(); tmpSize--) {
             Ingredient ingredient = it.next();
             objects[tmpSize - 1] = ingredient.getName();

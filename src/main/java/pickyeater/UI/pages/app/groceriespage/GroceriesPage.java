@@ -40,7 +40,6 @@ public class GroceriesPage extends PickyPage {
     private JLabel priceLabel;
     private final GroceriesExecutor groceriesExecutor;
     private final GroceriesCheckList groceriesCheckList;
-    private final Groceries groceries;
 
     public GroceriesPage(GroceriesExecutor groceriesExecutor, JFrame parent) {
         super(parent);
@@ -73,7 +72,7 @@ public class GroceriesPage extends PickyPage {
         Optional<Groceries> groceriesOptional = groceriesExecutor.getGroceries();
         if (groceriesOptional.isEmpty())
             throw new RuntimeException("Error in Groceries Database!");
-        groceries = groceriesOptional.get();
+        Groceries groceries = groceriesOptional.get();
         groceriesCheckList = groceries.generateCheckList();
         ingredientsTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         DefaultTableModel model = new DefaultTableModel() {

@@ -27,18 +27,15 @@ import java.util.Optional;
 
 public class IngredientChooser extends JDialog {
     private final IngredientSearcherExecutor ingredientsSearcherExecutor = ExecutorProvider.getIngredientSearcherExecutor();
-    private JTextField searchBar;
-    private JList ingredientsList;
-    private JLabel txtSearchIngredient = new JLabel("Search Ingredients:");
-    private JPanel panelSearchBar = new JPanel();
+    private final JTextField searchBar;
+    private final JList ingredientsList;
     private List<Ingredient> searchedIngredients;
-    private JButton cancelButton;
-    private XChartPanel<PieChart> chartPanel;
+    private final JButton cancelButton;
     private JPanel mealPanel = null;
     private Ingredient returningIngredient = null;
-    private JPanel ingredientQuantityPanel = new JPanel(new GridBagLayout());
-    private JTextField ingredientQuantityTextField = new JTextField();
-    private JLabel ingredientQuantityTypeLabel = new JLabel(" g");
+    private final JPanel ingredientQuantityPanel = new JPanel(new GridBagLayout());
+    private final JTextField ingredientQuantityTextField = new JTextField();
+    private final JLabel ingredientQuantityTypeLabel = new JLabel(" g");
 
     public IngredientChooser(JFrame parent) {
         super(parent, "Ingredient Chooser", true);
@@ -56,7 +53,9 @@ public class IngredientChooser extends JDialog {
         JButton addIngredientButton = new JButton("Create ingredient");
         constraints.gridy = 1;
         ingredientListPanel.add(addIngredientButton, constraints);
+        JPanel panelSearchBar = new JPanel();
         panelSearchBar.setLayout(new BorderLayout());
+        JLabel txtSearchIngredient = new JLabel("Search Ingredients:");
         panelSearchBar.add(BorderLayout.WEST, txtSearchIngredient);
         panelSearchBar.add(BorderLayout.CENTER, searchBar);
         add(BorderLayout.NORTH, panelSearchBar);
@@ -183,7 +182,7 @@ public class IngredientChooser extends JDialog {
         PieStyler styler = pieChart.getStyler();
         styler.setToolTipType(Styler.ToolTipType.yLabels);
         styler.setToolTipsEnabled(true);
-        chartPanel = new XChartPanel<>(pieChart);
+        XChartPanel<PieChart> chartPanel = new XChartPanel<>(pieChart);
         BorderLayout layout = (BorderLayout) getLayout();
         JPanel previousPanel = (JPanel) layout.getLayoutComponent(BorderLayout.LINE_START);
         if (previousPanel != null)

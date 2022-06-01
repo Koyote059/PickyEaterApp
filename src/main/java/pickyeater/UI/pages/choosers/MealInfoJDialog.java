@@ -14,9 +14,7 @@ import java.text.DecimalFormat;
 import java.util.Set;
 
 public class MealInfoJDialog extends JDialog {
-    private JButton okButton;
-    private JPanel mainPanel;
-    private JTable ingredientsTable;
+    private final JTable ingredientsTable;
 
     public MealInfoJDialog(Frame parent, Meal meal) {
         super(parent, meal.getName(), true);
@@ -27,9 +25,9 @@ public class MealInfoJDialog extends JDialog {
         pieChart.addSeries("Fats", 40);
         JPanel chartPanel = new XChartPanel<>(pieChart);
         pieChart.getStyler().setToolTipType(Styler.ToolTipType.xAndYLabels);
-        mainPanel = new JPanel(new BorderLayout());
+        JPanel mainPanel = new JPanel(new BorderLayout());
         mainPanel.add(BorderLayout.LINE_START, chartPanel);
-        okButton = new JButton("Ok");
+        JButton okButton = new JButton("Ok");
         okButton.setHorizontalAlignment(SwingConstants.CENTER);
         okButton.setVerticalAlignment(SwingConstants.CENTER);
         okButton.addActionListener(e -> dispose());

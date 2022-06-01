@@ -14,11 +14,9 @@ import java.util.Map;
 
 public class MainFrame extends JFrame {
     private static final Map<String, PickyPage> pages = new HashMap<>();
-    private static MainFrame instance;
-    private final Container container;
 
     public MainFrame() {
-        container = getContentPane();
+        Container container = getContentPane();
         CardLayout layout = new CardLayout();
         container.setLayout(layout);
         pages.put(DailyProgressPage.class.getName(), new DailyProgressPage(this));
@@ -28,7 +26,7 @@ public class MainFrame extends JFrame {
         pages.put(SettingsPage.class.getName(), new SettingsPage(this));
         changePage(PanelButtons.PROGRESS);
         setVisible(true);
-        instance = this;
+        MainFrame instance = this;
         setSize(new Dimension(677, 507));
         setResizable(false);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

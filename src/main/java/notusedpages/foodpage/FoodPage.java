@@ -38,16 +38,12 @@ public class FoodPage extends PickyPage {
         btGroceries.setBackground(Color.decode("#FFFFFF"));
         btUser.setBackground(Color.decode("#FFFFFF"));
         btSettings.setBackground(Color.decode("#FFFFFF"));
-        //        btSearchMeal.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-        //        btSearchIngredient.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
         try {
             BufferedImage binImage = ImageIO.read(new File("res/images/search1B.png"));
             btSearchMeal.setIcon(new ImageIcon(binImage.getScaledInstance(30, 30, Image.SCALE_SMOOTH)));
             btSearchIngredient.setIcon(new ImageIcon(binImage.getScaledInstance(30, 30, Image.SCALE_SMOOTH)));
         } catch (IOException | NullPointerException ignored) {
         }
-        //        btAddMeal.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-        //        btAddIngredient.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
         try {
             BufferedImage binImage = ImageIO.read(new File("res/images/addB.png"));
             btAddMeal.setIcon(new ImageIcon(binImage.getScaledInstance(30, 30, Image.SCALE_SMOOTH)));

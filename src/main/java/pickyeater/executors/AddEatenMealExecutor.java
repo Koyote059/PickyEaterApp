@@ -19,21 +19,4 @@ public class AddEatenMealExecutor {
         dailyProgresses.addEatenMeal(eatenMeal);
         userManager.saveUser(userManager.getUser().get());
     }
-
-    /*
-    // TODO - FINISH and add to AddEatenMealPage
-    public Meal getIn100Grams(Meal meal, int quantity){
-        Set<Ingredient> ingredientSet = meal.getIngredients();
-        Ingredient ingredient;
-        IngredientBuilder ingredientBuilder = new PickyIngredientBuilder();
-
-        for (int i = 0; i < ingredientSet.size(); i++) {
-            ingredient = ingredientSet.iterator().next();
-
-            ingredientBuilder.setNutrients();
-        }
-
-        return new PickyMeal(ingredientSet, meal.getName());
-    }
-     */
 }

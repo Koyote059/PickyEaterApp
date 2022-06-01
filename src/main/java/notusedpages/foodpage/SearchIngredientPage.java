@@ -32,7 +32,7 @@ public class SearchIngredientPage extends PickyPage {
     private JLabel txtProteins;
     private JLabel txtIngredientStats;
     private JPanel panelPieChart;
-    private IngredientSearcherExecutor ingredientSearcherExecutor;
+    private final IngredientSearcherExecutor ingredientSearcherExecutor;
 
     public SearchIngredientPage(JFrame parent) {
         super(parent);
@@ -45,15 +45,6 @@ public class SearchIngredientPage extends PickyPage {
         ingredientSearcherExecutor = ExecutorProvider.getIngredientSearcherExecutor();
         setLayout(new BorderLayout());
         add(mainPanel, BorderLayout.CENTER);
-
-        /*
-        // TODO: ingredient = first ingredient in index
-        txtIngredientStats.setText(meal.getName() + " stats");
-        txtCalories.setText(Double.toString(meal.getNutrients().getCalories()));
-        txtCarbs.setText(Double.toString(meal.getNutrients().getCarbs()));
-        txtProteins.setText(Double.toString(meal.getNutrients().getProteins()));
-        txtFats.setText(Double.toString(meal.getNutrients().getFats()));
-         */
         setNavigationMenuListeners();
         //btDone.addActionListener(e -> MainFrame.changePage(PanelButtons.FOOD));
         listIngredients.addComponentListener(new ComponentAdapter() {

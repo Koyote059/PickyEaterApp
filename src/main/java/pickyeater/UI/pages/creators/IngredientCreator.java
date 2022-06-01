@@ -11,25 +11,22 @@ import javax.swing.*;
 import java.awt.*;
 
 public class IngredientCreator extends JDialog {
-    private JPanel mainPanel;
-    private JTextField nameTextField;
-    private JComboBox<String> quantityTypeBox;
+    private final JTextField nameTextField;
+    private final JComboBox<String> quantityTypeBox;
     private JLabel gramsQuantityLabel;
     private JTextField gramsPerQuantityTextField;
-    private JTextField proteinsTextField;
-    private JTextField priceTextField;
-    private JTextField carbsTextField;
-    private JTextField fatsTextField;
-    private JButton saveButton;
+    private final JTextField proteinsTextField;
+    private final JTextField priceTextField;
+    private final JTextField carbsTextField;
+    private final JTextField fatsTextField;
     private JLabel priceLabel;
-    private JButton cancelButton;
-    private CreateIngredientExecutor executor = ExecutorProvider.getCreateIngredientExecutor();
+    private final CreateIngredientExecutor executor = ExecutorProvider.getCreateIngredientExecutor();
     private Ingredient startingIngredient = null;
     private boolean isIngredientEditing = false;
 
     public IngredientCreator(JFrame parent) {
         super(parent, "IngredientCreator", true);
-        mainPanel = new JPanel(new GridBagLayout());
+        JPanel mainPanel = new JPanel(new GridBagLayout());
         GridBagConstraints constraints = new GridBagConstraints();
         constraints.insets = new Insets(5, 5, 5, 5);
         constraints.anchor = GridBagConstraints.LINE_START;
@@ -124,7 +121,7 @@ public class IngredientCreator extends JDialog {
         constraints.gridx = 1;
         constraints.gridy = 7;
         mainPanel.add(fatsTextField, constraints);
-        saveButton = new JButton("Save");
+        JButton saveButton = new JButton("Save");
         saveButton.addActionListener(e -> {
             Ingredient ingredient = buildIngredient();
             if (ingredient == null)
@@ -141,7 +138,7 @@ public class IngredientCreator extends JDialog {
         constraints.gridx = 0;
         constraints.gridy = 8;
         mainPanel.add(saveButton, constraints);
-        cancelButton = new JButton("Cancel");
+        JButton cancelButton = new JButton("Cancel");
         cancelButton.addActionListener(e -> this.dispose());
         constraints.gridx = 1;
         constraints.gridy = 8;

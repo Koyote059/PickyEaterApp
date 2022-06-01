@@ -27,9 +27,8 @@ public class MealPlanGeneratorPage extends PickyPage {
     private JPanel mainPanel;
     private JButton doneButton;
     private JButton cancelButton;
-    private JPanel topPanel;
-    private JScrollPane scrollPane;
-    private MealPlanBuilder mealPlanBuilder;
+    private final JPanel topPanel;
+    private final MealPlanBuilder mealPlanBuilder;
 
     public MealPlanGeneratorPage(MealPlanCreatorExecutor mealPlanCreator, MealPlan mealPlan, JFrame parent) {
         this(mealPlanCreator, parent);
@@ -46,7 +45,7 @@ public class MealPlanGeneratorPage extends PickyPage {
         super(parent);
         mainPanel.setLayout(new BorderLayout());
         topPanel = new JPanel(new ScrollPaneLayout());
-        scrollPane = new JScrollPane(topPanel);
+        JScrollPane scrollPane = new JScrollPane(topPanel);
         mainPanel.removeAll();
         mainPanel.add(BorderLayout.CENTER, scrollPane);
         setLayout(new BorderLayout());
