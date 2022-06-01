@@ -1,21 +1,15 @@
 
 Progetti a breve termine - Essenziali:
-- Inserire in giro controlli per i numeri ( che devono essere positivi in genere e che non devono superare un certo limite, per il DB )
 - Aggiugnere pulsanti in Settings che portano direttamente ad AddMeal e AddIngredient, senza dover passare da ManageMeal (Claudio)
-- Aggiusta meal plan generator: Spostare il pulsante per aggiungere il meal in una barra in'alto. Aggiungere scritta sopra ogni DailyMealPlan ( es. Day1, Day2... ).
-Col tasto destro sulla scritta si aprirà una tendina che permetterà di eliminare il mealPlan. Aggiungere 2 pulsanti affianco a "+" per spostare i meal
-plan a destra e a sinistra. Aggiungi tooltips per tutte ste cose.
+
 
 Progetti a breve termine:
 - Inserire un grafico in user della cronologia dei progressi giornalieri
 - Sistemare il fatto che le pagine si aprono ricorsivamente (Fede)
-- Aggiungere tipo ( pz, ml, g ) dopo la barra di inserimento quantità dei creator
-- Aggiungi alla barra di ricerca dei nomi un'immagine che lo fa capire
 - Creare una classe esterna per unire i grafici dei PieChart ( magari estendendo JPanel o simile ). Sarebbe utile creare un'interfaccia comune per meals e ingredients.
 - Creare una classe esterna per il quantity chooser
 -< Togli il fatto che ogni volta che modifichi utente, crei utente o cose del genere ti esce il JDialog che ti fa il riassunto delle cose ( Proposta da fede )
 -> Rendere opzionale i JDialog che fa il riassunto delle cose (Riproposta di cla)
-- Aggiungi TOOLTIP o spiegare con una scritta che in ManageMeal e ManageIngredient puoi cercare meal inserendo il nome del meal voluto e premendo invio + se possibile togliere che si deve premere invio per aggiornare la lista (si aggiorna ogni volta che un tasto viene premuto all'interno del textField)
 -< Cambiare nome dei pulsanti, jlabel etc seguendo questo stile: (es: parolaButton in btParola, parolaLable in txtParola, parolaComboBox in cbParola, parolaTable in tableParola) ( Proposta da Cla )
 
 Progetti a medio termine - Essenziali:
