@@ -57,6 +57,8 @@ public class MealPlanPage extends PickyPage {
         }
         executor = ExecutorProvider.getMealPlanViewerExecutor();
         actualDate = LocalDate.now();
+        dailyMealsTable.getTableHeader().setReorderingAllowed(false);
+
         dailyMealsTable.setModel(new DefaultTableModel() {
             @Override
             public boolean isCellEditable(int row, int column) {

@@ -38,6 +38,7 @@ public class DailyMealPlanColumn implements ActionListener {
         };
         tableModel.addColumn("Name");
         tableModel.addColumn("Quantity");
+        table.getTableHeader().setReorderingAllowed(false);
         table.setModel(tableModel);
         table.addMouseListener(new MouseClickListener() {
             @Override
