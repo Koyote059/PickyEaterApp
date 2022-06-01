@@ -6,6 +6,7 @@ import pickyeater.basics.food.Meal;
 import pickyeater.basics.mealplan.DailyMealPlan;
 import pickyeater.builders.DailyMealPlanBuilder;
 import pickyeater.builders.PickyDailyMealPlanBuilder;
+import pickyeater.utils.MouseClickListener;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -13,22 +14,24 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 import java.text.DecimalFormat;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
-public class DailyMealPlanColumn implements ActionListener, MouseListener {
+public class DailyMealPlanColumn implements ActionListener {
 
     private final JPanel pane;
     private final JTable table;
-    private final JFrame frame;
-
+    private final JFrame parent;
+    private final List<Meal> meals = new ArrayList<>();
     private final DailyMealPlanBuilder dailyMealPlanBuilder = new PickyDailyMealPlanBuilder();
 
-    public DailyMealPlanColumn(JFrame frame){
-        this.frame = frame;
+    public DailyMealPlanColumn(JFrame parent){
+        this.parent = parent;
         table = new JTable();
+        table.setToolTipText("Right click to move/remove");
         DefaultTableModel tableModel = new DefaultTableModel(){
             @Override
             public boolean isCellEditable(int row, int column) {
@@ -38,23 +41,55 @@ public class DailyMealPlanColumn implements ActionListener, MouseListener {
         tableModel.addColumn("Name");
         tableModel.addColumn("Quantity");
         table.setModel(tableModel);
-        table.addMouseListener(this);
-        JScrollPane scrollPane = new JScrollPane();
+        table.addMouseListener(new MouseClickListener() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                if(SwingUtilities.isRightMouseButton(e)){
+                    Point point = MouseInfo.getPointerInfo().getLocation();
+                    Point framePoint = parent.getLocation();
+                    Point realPoint = new Point(point.x - framePoint.x,point.y - framePoint.y);
+                    int selectedIndex = table.rowAtPoint(e.getPoint());
+                    table.setRowSelectionInterval(selectedIndex,selectedIndex);
+                    if(selectedIndex<0) return;
+                    Meal selectedMeal = meals.get(selectedIndex);
+                    ColumnPopupmenu popupMenu = new ColumnPopupmenu();
+                    popupMenu.addRemoveListener(e1 -> {
+                        dailyMealPlanBuilder.removeMeal(selectedIndex);
+                        meals.remove(selectedMeal);
+                        refresh();
+                    });
+                    popupMenu.addTakeUpListener(e1 -> {
+                        if(selectedIndex==0) return;
+                        Collections.swap(meals,selectedIndex,selectedIndex-1);
+                        refresh();
+                    });
+                    popupMenu.addTakeDownListener(e1 -> {
+                        if(selectedIndex==(meals.size()-1)) return;
+                        Collections.swap(meals,selectedIndex,selectedIndex+1);
+                        refresh();
+                    });
+                    popupMenu.show(parent,realPoint.x, realPoint.y);
+
+                }
+            }
+        });        JScrollPane scrollPane = new JScrollPane();
         scrollPane.setViewportView(table);
         scrollPane.setPreferredSize(new Dimension(150,250));
         pane = new JPanel(new BorderLayout());
-        pane.add(BorderLayout.PAGE_START,scrollPane);
+        pane.add(BorderLayout.CENTER,scrollPane);
+
         JButton addMealButton = new JButton("+");
         addMealButton.addActionListener(this);
+        addMealButton.setToolTipText("Click to add meal");
         pane.add(BorderLayout.PAGE_END,addMealButton);
         refresh();
     }
-
     @Override
     public void actionPerformed(ActionEvent e) {
-        MealsChooser chooser = new MealsChooser(frame);
+        MealsChooser chooser = new MealsChooser(parent);
         Optional<Meal> mealOptional = chooser.getMeal();
         if(mealOptional.isEmpty()) return;
+        meals.add(mealOptional.get());
         dailyMealPlanBuilder.addMeal(mealOptional.get());
         refresh();
     }
@@ -66,7 +101,7 @@ public class DailyMealPlanColumn implements ActionListener, MouseListener {
     private void refresh(){
         DefaultTableModel model = (DefaultTableModel) table.getModel();
         model.setNumRows(0);
-        for (Meal meal : dailyMealPlanBuilder.getMeals()) {
+        for (Meal meal : meals) {
             String mealName = meal.getName();
             DecimalFormat formatter = new DecimalFormat();
             formatter.setMaximumFractionDigits(2);
@@ -82,39 +117,9 @@ public class DailyMealPlanColumn implements ActionListener, MouseListener {
         table.revalidate();
     }
 
-
-    @Override
-    public void mouseClicked(MouseEvent e) {
-
-    }
-
-    @Override
-    public void mousePressed(MouseEvent e) {
-
-    }
-
-    @Override
-    public void mouseReleased(MouseEvent e) {
-        Point point = e.getPoint();
-        int row = table.rowAtPoint(point);
-        int column = table.columnAtPoint(point);
-        if(column==-1 || row == -1) return;
-        dailyMealPlanBuilder.removeMeal(row);
-        refresh();
-    }
-
-    @Override
-    public void mouseEntered(MouseEvent e) {
-
-    }
-
-    @Override
-    public void mouseExited(MouseEvent e) {
-
-    }
-
     public void addMeals(List<Meal> meals) {
         meals.forEach(dailyMealPlanBuilder::addMeal);
+        this.meals.addAll(meals);
         refresh();
     }
 
