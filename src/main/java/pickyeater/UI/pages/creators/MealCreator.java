@@ -87,6 +87,7 @@ public class MealCreator extends JDialog {
         cancelButton.addActionListener(e -> dispose());
         buttonPanel.add(BorderLayout.LINE_START, cancelButton);
         JButton doneButton = new JButton("Done");
+        ingredientsTable.getTableHeader().setReorderingAllowed(false);
         ingredientsTable.addMouseListener(new MouseClickListener() {
             @Override
             public void mouseClicked(MouseEvent e) {

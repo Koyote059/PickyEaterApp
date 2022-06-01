@@ -6,6 +6,7 @@ import pickyeater.UI.pages.app.dailyprogresspage.utils.EatenMealsPopupMenu;
 import pickyeater.UI.pages.choosers.MealsChooser;
 import pickyeater.UI.pages.leftbuttons.PanelButtonsConverter;
 import pickyeater.UI.themes.ColorButtons;
+import pickyeater.basics.food.Ingredient;
 import pickyeater.basics.food.Meal;
 import pickyeater.executors.DailyProgressExecutor;
 import pickyeater.executors.ExecutorProvider;
@@ -98,17 +99,25 @@ public class DailyProgressPage extends PickyPage {
 
     private void draw() {
         DecimalFormat df = new DecimalFormat("0.00");
-        DefaultTableModel model = new DefaultTableModel();
+        DefaultTableModel model = new DefaultTableModel(){
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return false;
+            }
+        };
         model.addColumn("Name");
         model.addColumn("Quantity");
         model.addColumn("");
         meals = dailyProgressExecutor.getEatenMeals();
         for (Meal meal : meals) {
+            System.out.println("\n");
             float mealQuantity = meal.getWeight();
             Object[] row = new Object[]{meal.getName(), df.format(mealQuantity), "gr"};
             model.addRow(row);
         }
         txtBurntCalories.setText(String.valueOf(dailyProgressExecutor.getBurntCalories()));
+        tableEatenMeals.getTableHeader().setReorderingAllowed(false);
+
         tableEatenMeals.setModel(model);
         cbConsumed.removeAllItems();
         cbConsumed.insertItemAt("Calories: " + df.format(dailyProgressExecutor.getEatenCalories()) + "/" + df.format(dailyProgressExecutor.getCaloriesToEat()), 0);
