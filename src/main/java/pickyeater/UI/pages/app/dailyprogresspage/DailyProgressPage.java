@@ -22,10 +22,8 @@ import java.util.List;
 import java.util.Optional;
 
 public class DailyProgressPage extends PickyPage {
-    List<Meal> meals = new ArrayList<>();
-    DailyProgressExecutor dailyProgressExecutor;
-    JFrame parent;
-    int burntCalories;
+    private List<Meal> meals = new ArrayList<>();
+    private final DailyProgressExecutor dailyProgressExecutor;
     private JPanel mainPanel;
     private JButton btSettings;
     private JButton btDailyProgress;
@@ -45,7 +43,6 @@ public class DailyProgressPage extends PickyPage {
         add(mainPanel, BorderLayout.CENTER);
         ColorButtons.ColorLeftButtons(btDailyProgress, btDiet, btGroceries, btUser, btSettings);
         dailyProgressExecutor = ExecutorProvider.getDailyProgressExecutor();
-        burntCalories = dailyProgressExecutor.getBurntCalories();
         btAddEatenMeals.addActionListener(e -> {
             MealsChooser chooser = new MealsChooser(parent);
             Optional<Meal> mealOptional = chooser.getMeal();
@@ -148,7 +145,6 @@ public class DailyProgressPage extends PickyPage {
 
     @Override
     public void showPage() {
-        DecimalFormat df = new DecimalFormat("0.00");
         draw();
         super.showPage();
     }
