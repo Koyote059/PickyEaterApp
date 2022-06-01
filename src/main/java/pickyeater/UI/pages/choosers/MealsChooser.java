@@ -11,10 +11,12 @@ import pickyeater.executors.ExecutorProvider;
 import pickyeater.executors.MealChooserExecutor;
 import pickyeater.utils.MealQuantityConverter;
 import pickyeater.utils.MouseClickListener;
-import pickyeater.utils.StringsUtils;
+import pickyeater.utils.StringToNumber;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
@@ -24,12 +26,13 @@ import java.util.Optional;
 public class MealsChooser extends JDialog {
     private JTextField searchBar;
     private JList mealsList;
-    private JLabel txt;
+    private JLabel txtSearchMeal = new JLabel("Search Meals:");
+    private JPanel panelSearchBar = new JPanel();
     private List<Meal> searchedMeals;
     private JButton cancelButton;
     private Meal returningMeal = null;
     private JPanel mealPanel = null;
-    private JTextField mealQuantityTextField = new JTextField("100");
+    private JTextField mealQuantityTextField = new JTextField();
     private JPanel mealQuantityPanel = new JPanel(new GridBagLayout());
     private JLabel mealQuantityTypeLabel = new JLabel("g");
     private final MealChooserExecutor mealSearcherExecutor = ExecutorProvider.getMealChooserExecutor();
@@ -37,7 +40,10 @@ public class MealsChooser extends JDialog {
     public MealsChooser(JFrame parent) {
         super(parent,"Meals Chooser",true);
         setLayout(new BorderLayout());
-        add(BorderLayout.PAGE_START,searchBar);
+        panelSearchBar.setLayout(new BorderLayout());
+        panelSearchBar.add(BorderLayout.WEST, txtSearchMeal);
+        panelSearchBar.add(BorderLayout.CENTER, searchBar);
+        add(BorderLayout.NORTH, panelSearchBar);
         JPanel ingredientListPanel = new JPanel(new GridBagLayout());
         GridBagConstraints constraints = new GridBagConstraints();
         constraints.gridx = 0;
@@ -47,6 +53,7 @@ public class MealsChooser extends JDialog {
         JButton addMealButton = new JButton("Create meal");
         ingredientListPanel.add(addMealButton,constraints);
         add(BorderLayout.LINE_END,ingredientListPanel);
+        mealQuantityTextField.setToolTipText("If left void it puts automatically 100g");
 
         addMealButton.addActionListener( l -> {
             MealCreator creator = new MealCreator(parent);
@@ -55,15 +62,13 @@ public class MealsChooser extends JDialog {
             populateMealList();
             showPieChart();
         });
-
-        searchBar.addActionListener( l ->{
-            String text = l.getActionCommand();
-            if(!StringsUtils.isAlpha(text)){
-                JOptionPane.showMessageDialog(parent,"You can only search alphanumeric characters!");
-                return;
+        searchBar.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyTyped(KeyEvent e) {
+                String text = searchBar.getText();
+                searchedMeals = new ArrayList<>(mealSearcherExecutor.getMealsThatStartWith(text));
+                populateMealList();
             }
-            searchedMeals = new ArrayList<>(mealSearcherExecutor.getMealsThatStartWith(text));
-            populateMealList();
         });
         searchedMeals = new ArrayList<>(mealSearcherExecutor.getEveryMeal());
         populateMealList();
@@ -104,14 +109,14 @@ public class MealsChooser extends JDialog {
             }
             Meal meal = searchedMeals.get(selectedItem);
             MealQuantityConverter mealQuantityConverter = new MealQuantityConverter();
-            String quantity = mealQuantityTextField.getText();
-            try {
-                int returningWeight = Integer.parseInt(quantity);
-                returningMeal = mealQuantityConverter.convert(meal,returningWeight);
-                dispose();
-            } catch (NumberFormatException exception){
-                JOptionPane.showMessageDialog(this,"Invalid meal quantity!");
+            int returningWeight;
+            if (mealQuantityTextField.getText().isEmpty()) {
+                returningWeight = 100;
+            } else {
+                returningWeight = StringToNumber.convertPositiveInteger(mealQuantityTextField.getText());
             }
+            returningMeal = mealQuantityConverter.convert(meal, returningWeight);
+            dispose();
         });
 
         mealsList.addMouseListener(new MouseClickListener() {
@@ -143,9 +148,6 @@ public class MealsChooser extends JDialog {
                         MealCreator creator = new MealCreator(parent);
                         creator.editMeal(selectedMeal);
                         String text = searchBar.getText();
-                        if(!StringsUtils.isAlpha(text)){
-                            return;
-                        }
                         searchedMeals = new ArrayList<>(mealSearcherExecutor.getMealsThatStartWith(text));
                         populateMealList();
                         showPieChart();
@@ -197,7 +199,6 @@ public class MealsChooser extends JDialog {
         BorderLayout layout = (BorderLayout) getLayout();
         JPanel previousPanel = (JPanel) layout.getLayoutComponent(BorderLayout.LINE_START);
         if(previousPanel!=null) remove(previousPanel);
-        mealQuantityTextField.setText("100");
         if(mealPanel!=null) remove(mealPanel);
         mealPanel = new JPanel(new BorderLayout());
         mealPanel.add(BorderLayout.PAGE_START,chartPanel);
