@@ -23,7 +23,7 @@ public class WelcomePage extends JFrame implements ActionListener {
         setContentPane(mainPanel);
         setSize(677, 507);
         setLocation(Toolkit.getDefaultToolkit().getScreenSize().width/2 - 677/2,Toolkit.getDefaultToolkit().getScreenSize().height/2 - 507/2);
-        setResizable(true);
+        setResizable(false);
         coloredPanel.setBackground(Color.decode("#B1EA9D"));
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setVisible(true);
