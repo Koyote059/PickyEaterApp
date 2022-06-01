@@ -12,6 +12,7 @@ import pickyeater.executors.MealChooserExecutor;
 import pickyeater.utils.MealQuantityConverter;
 import pickyeater.utils.MouseClickListener;
 import pickyeater.utils.StringToNumber;
+import pickyeater.utils.StringsUtils;
 
 import javax.swing.*;
 import java.awt.*;
@@ -65,7 +66,8 @@ public class MealsChooser extends JDialog {
             @Override
             public void keyTyped(KeyEvent e) {
                 String text = searchBar.getText();
-                searchedMeals = new ArrayList<>(mealSearcherExecutor.getMealsThatStartWith(text));
+                if(!StringsUtils.isAlpha(text)) searchedMeals = new ArrayList<>();
+                else searchedMeals = new ArrayList<>(mealSearcherExecutor.getMealsThatStartWith(text));
                 populateMealList();
             }
         });

@@ -82,7 +82,14 @@ public class GroceriesPage extends PickyPage {
                     return Boolean.class;
                 return super.getColumnClass(columnIndex);
             }
+
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return false;
+            }
         };
+
+        ingredientsTable.getTableHeader().setReorderingAllowed(false);
         ingredientsTable.setModel(model);
         model.addTableModelListener(e -> {
             int column = e.getColumn();
