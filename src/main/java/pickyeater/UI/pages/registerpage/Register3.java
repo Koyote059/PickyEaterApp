@@ -11,9 +11,13 @@ import pickyeater.basics.user.WeightGoal;
 import pickyeater.executors.user.RegisterExecutor;
 import pickyeater.UI.themes.ColorButtons;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 
 public class Register3 extends PickyPage {
     private JButton btLoseWeight;
@@ -22,6 +26,9 @@ public class Register3 extends PickyPage {
     private JPanel mainPanel;
     private JButton btBack;
     private JLabel txtChangeTheme;
+    private JLabel txtMW;
+    private JLabel txtLW;
+    private JLabel txtGW;
 
     public Register3(RegisterExecutor registerExecutor,JFrame parent) {
         super(parent);
@@ -111,7 +118,21 @@ public class Register3 extends PickyPage {
         }
     }
 
-    private void draw(){
+    private void draw() {
+        txtLW.setText("");
+        txtMW.setText("");
+        txtGW.setText("");
+        try {
+            BufferedImage imgS = ImageIO.read(new File("res/images/goal/LW.png"));
+            txtLW.setIcon(new ImageIcon(imgS.getScaledInstance(-1, 90, Image.SCALE_SMOOTH)));
+            BufferedImage imgSA = ImageIO.read(new File("res/images/goal/MW.png"));
+            txtMW.setIcon(new ImageIcon(imgSA.getScaledInstance(-1, 90, Image.SCALE_SMOOTH)));
+            BufferedImage imgA = ImageIO.read(new File("res/images/goal/GW.png"));
+            txtGW.setIcon(new ImageIcon(imgA.getScaledInstance(-1, 90, Image.SCALE_SMOOTH)));
+        } catch (IOException | NullPointerException ignored) {
+            System.out.println("Couldn't process iamge");
+        }
+
         ColorButtons cB = new ColorButtons();
         cB.ColorButtonWhite(btGainWeight);
         cB.ColorButtonWhite(btMaintainWeight);
