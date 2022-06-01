@@ -1,20 +1,10 @@
 package pickyeater.utils;
 
+/**
+ * Converts strings like "123.513" and "123,513" in doulbe/float/integer
+ * Numbers < 0, > 10000, and invalid numbers will make the function return 0
+ */
 public class StringToNumber {
-
-    public static float convertFloat(String s){
-        if (s.contains(",")) {
-            s = convertCommaToDot(s);
-        }
-        float ris = 0;
-        try {
-            ris = Float.parseFloat(s);
-        } catch (NumberFormatException exception){
-            ris = 0;
-        }
-        return ris;
-    }
-
     public static float convertPositiveFloat(String s){
         if (s.contains(",")) {
             s = convertCommaToDot(s);
@@ -22,22 +12,9 @@ public class StringToNumber {
         float ris = 0;
         try {
             ris = Float.parseFloat(s);
-            if (ris < 0){
+            if (ris < 0 || ris > 10000){
                 ris = 0;
             }
-        } catch (NumberFormatException exception){
-            ris = 0;
-        }
-        return ris;
-    }
-
-    public static double convertDouble(String s){
-        if (s.contains(",")) {
-            s = convertCommaToDot(s);
-        }
-        double ris = 0;
-        try {
-            ris = Double.parseDouble(s);
         } catch (NumberFormatException exception){
             ris = 0;
         }
@@ -51,19 +28,9 @@ public class StringToNumber {
         double ris = 0;
         try {
             ris = Double.parseDouble(s);
-            if (ris < 0){
+            if (ris < 0 || ris > 10000){
                 ris = 0;
             }
-        } catch (NumberFormatException exception){
-            ris = 0;
-        }
-        return ris;
-    }
-
-    public static int convertInteger(String s){
-        int ris = 0;
-        try {
-            ris = Integer.parseInt(s);
         } catch (NumberFormatException exception){
             ris = 0;
         }
@@ -74,7 +41,7 @@ public class StringToNumber {
         int ris = 0;
         try {
             ris = Integer.parseInt(s);
-            if (ris < 0){
+            if (ris < 0 || ris > 10000){
                 ris = 0;
             }
         } catch (NumberFormatException exception){
