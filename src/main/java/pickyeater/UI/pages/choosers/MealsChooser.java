@@ -30,12 +30,12 @@ public class MealsChooser extends JDialog {
     private JLabel txtSearchMeal = new JLabel("Search Meals:");
     private JPanel panelSearchBar = new JPanel();
     private List<Meal> searchedMeals;
-    private JButton cancelButton;
+    private final JButton cancelButton;
     private Meal returningMeal = null;
     private JPanel mealPanel = null;
-    private JTextField mealQuantityTextField = new JTextField();
-    private JPanel mealQuantityPanel = new JPanel(new GridBagLayout());
-    private JLabel mealQuantityTypeLabel = new JLabel("g");
+    private final JTextField mealQuantityTextField = new JTextField();
+    private final JPanel mealQuantityPanel = new JPanel(new GridBagLayout());
+    private final JLabel mealQuantityTypeLabel = new JLabel("g");
 
     public MealsChooser(JFrame parent) {
         super(parent, "Meals Chooser", true);

@@ -24,7 +24,7 @@ public class MealPlanUnavailablePage extends PickyPage {
     private JButton btDiet;
     private JButton btCreateMealPlan;
     private JButton btAutomaticGenerateMealPlan;
-    private MealPlanCreatorExecutor mealPlanCreator;
+    private final MealPlanCreatorExecutor mealPlanCreator;
 
     public MealPlanUnavailablePage(JFrame parent) {
         super(parent);

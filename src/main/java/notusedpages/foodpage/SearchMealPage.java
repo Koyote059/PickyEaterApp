@@ -45,15 +45,6 @@ public class SearchMealPage extends PickyPage {
         setLayout(new BorderLayout());
         add(mainPanel, BorderLayout.CENTER);
         mealSearcherExecutor = ExecutorProvider.getMealSearcherExecutor();
-
-        /*
-        // TODO: meal = first meal in index
-        txtMealStats.setText(meal.getName() + " stats");
-        txtCalories.setText(Double.toString(meal.getNutrients().getCalories()));
-        txtCarbs.setText(Double.toString(meal.getNutrients().getCarbs()));
-        txtProteins.setText(Double.toString(meal.getNutrients().getProteins()));
-        txtFats.setText(Double.toString(meal.getNutrients().getFats()));
-         */
         setNavigationMenuListeners();
         btDone.addActionListener(e -> {
             //MainFrame.changePage(PanelButtons.FOOD);

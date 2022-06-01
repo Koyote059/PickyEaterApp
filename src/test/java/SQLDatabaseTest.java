@@ -2,19 +2,21 @@ import org.junit.jupiter.api.Test;
 import pickyeater.algorithms.HarrisBenedictCalculator;
 import pickyeater.algorithms.NutrientsRequirementCalculator;
 import pickyeater.basics.food.*;
-import pickyeater.basics.groceries.Groceries;
-import pickyeater.basics.groceries.GroceriesCheckList;
-import pickyeater.basics.groceries.PickyGroceries;
 import pickyeater.basics.mealplan.DailyMealPlan;
 import pickyeater.basics.mealplan.MealPlan;
-import pickyeater.basics.user.*;
+import pickyeater.basics.user.LifeStyle;
+import pickyeater.basics.user.Sex;
+import pickyeater.basics.user.User;
+import pickyeater.basics.user.WeightGoal;
 import pickyeater.builders.*;
 import pickyeater.database.*;
 import pickyeater.utils.IngredientQuantityConverter;
 import pickyeater.utils.MealQuantityConverter;
 
 import java.time.LocalDate;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
 
 public class SQLDatabaseTest {
     SQLPickyEaterDB database = new SQLPickyEaterDB("dbDiProva.sqlite");
@@ -165,7 +167,7 @@ public class SQLDatabaseTest {
             Random random = new Random();
             int bound = random.nextInt()%6+3;
             for(int i = 0;i<bound;i++){
-                Meal meal = meals.get(Math.abs(random.nextInt()%meals.size()));;
+                Meal meal = meals.get(Math.abs(random.nextInt()%meals.size()));
                 dailyMealPlanBuilder.addMeal(meal);
             }
             mealPlanBuilder.addDailyMealPlan(dailyMealPlanBuilder.build());

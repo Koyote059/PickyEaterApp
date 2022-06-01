@@ -19,7 +19,7 @@ public class UnavailableGroceriesPage extends PickyPage {
     private JButton btDiet;
     private JButton generateGroceriesButton;
     private JPanel mainPanel;
-    private GroceriesExecutor groceriesExecutor = ExecutorProvider.getGroceriesExecutor();
+    private final GroceriesExecutor groceriesExecutor = ExecutorProvider.getGroceriesExecutor();
 
     public UnavailableGroceriesPage(JFrame parent) {
         super(parent);

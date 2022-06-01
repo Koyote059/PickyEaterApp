@@ -16,8 +16,6 @@ public class SystemTheme {
             throw new RuntimeException(e);
         }
         setPEFont();
-        //UIManager.put("ProgressBar.foreground", Color.GREEN);
-        //UIManager.put("Button.background", Color.GREEN);
     }
 
     public static void setPEFont() {

@@ -28,11 +28,8 @@ public class MealsChooser extends JDialog {
     private JList mealsList;
     private JPanel mealPanel;
     private JLabel labelIcon;
-
-
-    private JTextField mealQuantityTextField;
     private List<Meal> searchedMeals;
-    private Meal returningMeal = null;
+    private final Meal returningMeal = null;
     private final MealChooserExecutor mealSearcherExecutor = ExecutorProvider.getMealChooserExecutor();
 
     public MealsChooser(Frame parent){
@@ -119,8 +116,8 @@ public class MealsChooser extends JDialog {
         JPanel previousPanel = (JPanel) layout.getLayoutComponent(BorderLayout.LINE_START);
         if(previousPanel!=null) remove(previousPanel);
         mealPanel.add(BorderLayout.PAGE_START,chartPanel);
-        mealQuantityTextField = new JTextField("100");
-        mealPanel.add(BorderLayout.PAGE_END,mealQuantityTextField);
+        JTextField mealQuantityTextField = new JTextField("100");
+        mealPanel.add(BorderLayout.PAGE_END, mealQuantityTextField);
         add(BorderLayout.LINE_START,mealPanel);
         revalidate();
     }

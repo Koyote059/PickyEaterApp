@@ -28,22 +28,20 @@ import java.util.List;
 import java.util.Optional;
 
 public class MealCreator extends JDialog {
-    private JPanel mainPanel;
-    private JTable ingredientsTable;
-    private JTextField mealNameField;
-    private JLabel mealQuantityTypeLabel = new JLabel(" g");
-    private XChartPanel<PieChart> chartPanel;
-    private JTextField mealQuantityTextField = new JTextField("100");
+    private final JTable ingredientsTable;
+    private final JTextField mealNameField;
+    private final JLabel mealQuantityTypeLabel = new JLabel(" g");
+    private final JTextField mealQuantityTextField = new JTextField("100");
     private JPanel mealPanel = null;
-    private List<Ingredient> ingredients = new ArrayList<>();
-    private CreateMealExecutor executor = ExecutorProvider.getCreateMealExecutor();
-    private MealBuilder mealBuilder = executor.getMealBuilder();
+    private final List<Ingredient> ingredients = new ArrayList<>();
+    private final CreateMealExecutor executor = ExecutorProvider.getCreateMealExecutor();
+    private final MealBuilder mealBuilder = executor.getMealBuilder();
     private Meal startingMeal = null;
     private boolean isMealEditing = false;
 
     public MealCreator(JFrame parent) {
         super(parent, "Meal Creator", true);
-        mainPanel = new JPanel(new BorderLayout());
+        JPanel mainPanel = new JPanel(new BorderLayout());
         JPanel customMealPanel = new JPanel(new BorderLayout());
         mealNameField = new JTextField("Insert here the meal's name");
         customMealPanel.add(BorderLayout.PAGE_START, mealNameField);
@@ -183,7 +181,7 @@ public class MealCreator extends JDialog {
         PieStyler styler = pieChart.getStyler();
         styler.setToolTipType(Styler.ToolTipType.yLabels);
         styler.setToolTipsEnabled(true);
-        chartPanel = new XChartPanel<>(pieChart);
+        XChartPanel<PieChart> chartPanel = new XChartPanel<>(pieChart);
         BorderLayout layout = (BorderLayout) getLayout();
         JPanel previousPanel = (JPanel) layout.getLayoutComponent(BorderLayout.LINE_START);
         if (previousPanel != null)
