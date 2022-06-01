@@ -56,8 +56,9 @@ public class IngredientChooser extends JDialog {
         JButton addIngredientButton = new JButton("Create ingredient");
         constraints.gridy=1;
         ingredientListPanel.add(addIngredientButton,constraints);
+        panelSearchBar.setLayout(new BorderLayout());
         panelSearchBar.add(BorderLayout.WEST, txtSearchIngredient);
-        panelSearchBar.add(BorderLayout.EAST, searchBar);
+        panelSearchBar.add(BorderLayout.CENTER, searchBar);
         add(BorderLayout.NORTH, panelSearchBar);
         add(BorderLayout.LINE_END, ingredientListPanel);
         ingredientQuantityTextField.setToolTipText("If left void it puts automatically 100g");

@@ -16,7 +16,7 @@
         </constraints>
         <properties/>
       </component>
-      <grid id="43663" binding="panelSearchBar" layout-manager="BorderLayout" hgap="0" vgap="0">
+      <grid id="43663" binding="panelSearchBar" layout-manager="GridBagLayout">
         <constraints>
           <grid row="0" column="0" row-span="1" col-span="2" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
         </constraints>
@@ -24,13 +24,19 @@
         <border type="none"/>
         <children>
           <component id="695b2" class="javax.swing.JLabel" binding="txtSearchMeal">
-            <constraints border-constraint="West"/>
+            <constraints>
+              <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+              <gridbag weightx="1.0" weighty="0.0"/>
+            </constraints>
             <properties>
               <text value="Search Meals:"/>
             </properties>
           </component>
           <component id="127e3" class="javax.swing.JTextField" binding="searchBar">
-            <constraints border-constraint="Center"/>
+            <constraints>
+              <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+              <gridbag weightx="1.0" weighty="0.0"/>
+            </constraints>
             <properties/>
           </component>
         </children>

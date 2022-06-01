@@ -40,8 +40,9 @@ public class MealsChooser extends JDialog {
     public MealsChooser(JFrame parent) {
         super(parent,"Meals Chooser",true);
         setLayout(new BorderLayout());
+        panelSearchBar.setLayout(new BorderLayout());
         panelSearchBar.add(BorderLayout.WEST, txtSearchMeal);
-        panelSearchBar.add(BorderLayout.EAST, searchBar);
+        panelSearchBar.add(BorderLayout.CENTER, searchBar);
         add(BorderLayout.NORTH, panelSearchBar);
         JPanel ingredientListPanel = new JPanel(new GridBagLayout());
         GridBagConstraints constraints = new GridBagConstraints();
