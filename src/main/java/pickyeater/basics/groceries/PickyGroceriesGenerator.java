@@ -5,15 +5,9 @@ import pickyeater.basics.mealplan.MealPlan;
 /**
  * @author Claudio Di Maio
  */
-
-public class PickyGroceriesGenerator implements GroceriesGenerator{
-
-
+public class PickyGroceriesGenerator implements GroceriesGenerator {
     /**
-
-
-
-    /**
+     * /**
      * generate(MealPlan mealPlan): Generates the list of ingredients needed, and returns them in Groceries format
      */
     @Override

@@ -5,8 +5,7 @@ import java.util.Objects;
 /**
  * @author Claudio Di Maio
  */
-
-public class PickyNutrients implements Nutrients{
+public class PickyNutrients implements Nutrients {
     private final float proteins;
     private final float complexCarbs;
     private final float simpleCarbs;
@@ -16,8 +15,7 @@ public class PickyNutrients implements Nutrients{
     private final float transFats;
     private final float alcohol;
 
-    public PickyNutrients(float proteins, float complexCarbs, float simpleCarbs, float fibers,
-                          float saturatedFats, float unSaturatedFats, float transFats, float alcohol) {
+    public PickyNutrients(float proteins, float complexCarbs, float simpleCarbs, float fibers, float saturatedFats, float unSaturatedFats, float transFats, float alcohol) {
         this.proteins = proteins;
         this.complexCarbs = complexCarbs;
         this.simpleCarbs = simpleCarbs;
@@ -29,16 +27,30 @@ public class PickyNutrients implements Nutrients{
     }
 
     @Override
+    public int hashCode() {
+        return Objects.hash(proteins, complexCarbs, simpleCarbs, fibers, saturatedFats, unSaturatedFats, transFats, alcohol);
+    }    @Override
     public float getProteins() {
         return proteins;
     }
 
     @Override
+    public boolean equals(Object o) {
+        if (this == o)
+            return true;
+        if (o == null || getClass() != o.getClass())
+            return false;
+        PickyNutrients that = (PickyNutrients) o;
+        return Double.compare(that.proteins, proteins) == 0 && Double.compare(that.complexCarbs, complexCarbs) == 0 && Double.compare(that.simpleCarbs, simpleCarbs) == 0 && Double.compare(that.fibers, fibers) == 0 && Double.compare(that.saturatedFats, saturatedFats) == 0 && Double.compare(that.unSaturatedFats, unSaturatedFats) == 0 && Double.compare(that.transFats, transFats) == 0 && Double.compare(that.alcohol, alcohol) == 0;
+    }    @Override
     public float getComplexCarbs() {
         return complexCarbs;
     }
 
     @Override
+    public String toString() {
+        return "PickyNutrients{" + "proteins=" + proteins + ", complexCarbs=" + complexCarbs + ", simpleCarbs=" + simpleCarbs + ", fibers=" + fibers + ", saturatedFats=" + saturatedFats + ", unSaturatedFats=" + unSaturatedFats + ", transFats=" + transFats + ", alcohol=" + alcohol + '}';
+    }    @Override
     public float getSimpleCarbs() {
         return simpleCarbs;
     }
@@ -70,12 +82,12 @@ public class PickyNutrients implements Nutrients{
 
     @Override
     public float getCarbs() {
-        return complexCarbs+simpleCarbs+fibers;
+        return complexCarbs + simpleCarbs + fibers;
     }
 
     @Override
     public float getFats() {
-        return saturatedFats+unSaturatedFats+transFats;
+        return saturatedFats + unSaturatedFats + transFats;
     }
 
     @Override
@@ -84,27 +96,12 @@ public class PickyNutrients implements Nutrients{
         NutrientType c = NutrientType.CARBOHYDRATE;
         NutrientType f = NutrientType.FAT;
         NutrientType a = NutrientType.ALCOHOL;
-
         return getProteins() * p.getCaloriesPerGram() + getCarbs() * c.getCaloriesPerGram() + getFats() * f.caloriesPerGram + getAlcohol() * a.caloriesPerGram;
     }
 
-    @Override
-    public String toString() {
-        return "PickyNutrients{" + "proteins=" + proteins + ", complexCarbs=" + complexCarbs + ", simpleCarbs=" + simpleCarbs + ", fibers=" + fibers + ", saturatedFats=" + saturatedFats + ", unSaturatedFats=" + unSaturatedFats + ", transFats=" + transFats + ", alcohol=" + alcohol + '}';
-    }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o)
-            return true;
-        if (o == null || getClass() != o.getClass())
-            return false;
-        PickyNutrients that = (PickyNutrients) o;
-        return Double.compare(that.proteins, proteins) == 0 && Double.compare(that.complexCarbs, complexCarbs) == 0 && Double.compare(that.simpleCarbs, simpleCarbs) == 0 && Double.compare(that.fibers, fibers) == 0 && Double.compare(that.saturatedFats, saturatedFats) == 0 && Double.compare(that.unSaturatedFats, unSaturatedFats) == 0 && Double.compare(that.transFats, transFats) == 0 && Double.compare(that.alcohol, alcohol) == 0;
-    }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(proteins, complexCarbs, simpleCarbs, fibers, saturatedFats, unSaturatedFats, transFats, alcohol);
-    }
+
+
+
 }

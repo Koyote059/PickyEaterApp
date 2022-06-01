@@ -7,7 +7,6 @@ import java.time.LocalDate;
 import java.util.List;
 
 public interface DailyProgresses {
-
     void addEatenMeal(Meal meal);
     void removeEatenMeal(Meal meal);
     Nutrients getEatenNutrients();
@@ -15,6 +14,4 @@ public interface DailyProgresses {
     void addBurnedCalories(float calories);
     int getBurnedCalories();
     LocalDate getDate();
-
-
 }

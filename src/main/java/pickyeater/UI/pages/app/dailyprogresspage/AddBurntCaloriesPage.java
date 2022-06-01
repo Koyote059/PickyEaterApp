@@ -14,19 +14,17 @@ public class AddBurntCaloriesPage extends JDialog {
     private JTextField tfBurntCalories;
 
     public AddBurntCaloriesPage(JFrame parent) {
-        super(parent,"Add Burnt Calories",true);
-
+        super(parent, "Add Burnt Calories", true);
         setLayout(new BorderLayout());
-        add(mainPanel,BorderLayout.CENTER);
-
+        add(mainPanel, BorderLayout.CENTER);
         btCancel.addActionListener(e -> dispose());
         btSave.addActionListener(e -> {
-            int burntCal = (int) new StringToNumber().convertPositiveFloat(tfBurntCalories.getText());
+            int burntCal = (int) StringToNumber.convertPositiveFloat(tfBurntCalories.getText());
             if (burntCal != 0) {
                 if (!tfActivityName.getText().isEmpty()) {
                     JOptionPane.showMessageDialog(mainPanel, "Activity name: " + tfActivityName.getText() + "\n" + "Burnt Calories: " + tfBurntCalories.getText());
                 } else {
-                    JOptionPane.showMessageDialog(mainPanel,  "Burnt Calories: " + tfBurntCalories.getText());
+                    JOptionPane.showMessageDialog(mainPanel, "Burnt Calories: " + tfBurntCalories.getText());
                 }
                 ExecutorProvider.getAddBurntCaloriesExecutor().setBurntCalories(burntCal);
                 dispose();

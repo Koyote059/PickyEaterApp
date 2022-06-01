@@ -2,8 +2,8 @@ package pickyeater.UI.themes.filehandler;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.io.FileWriter;
+import java.io.IOException;
 import java.util.Scanner;
 
 public class FileHandler {
@@ -24,7 +24,7 @@ public class FileHandler {
             FileWriter myWriter = new FileWriter("res/themes.txt");
             myWriter.write(themesEnum.toString());
             myWriter.close();
-//            System.out.println("Successfully wrote to the file.");
+            //            System.out.println("Successfully wrote to the file.");
         } catch (IOException e) {
             System.out.println("An error occurred.");
             e.printStackTrace();
@@ -38,7 +38,7 @@ public class FileHandler {
             Scanner myReader = new Scanner(myObj);
             while (myReader.hasNextLine()) {
                 data = myReader.nextLine();
-//                System.out.println(data);
+                //                System.out.println(data);
             }
             myReader.close();
             return data;

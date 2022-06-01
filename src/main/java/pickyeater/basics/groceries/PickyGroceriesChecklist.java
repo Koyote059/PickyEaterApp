@@ -9,9 +9,7 @@ import java.util.Set;
 /**
  * @author Claudio Di Maio
  */
-
 public class PickyGroceriesChecklist implements GroceriesCheckList {
-
     private final Set<Ingredient> neededIngredients;
     private final Set<Ingredient> missingIngredients;
     private final Set<Ingredient> takenIngredients;
@@ -38,10 +36,12 @@ public class PickyGroceriesChecklist implements GroceriesCheckList {
     public Set<Ingredient> getNeededIngredients() {
         return Collections.unmodifiableSet(neededIngredients);
     }
+
     @Override
     public Set<Ingredient> getMissingIngredients() {
         return Collections.unmodifiableSet(missingIngredients);
     }
+
     @Override
     public Set<Ingredient> getTakenIngredients() {
         return Collections.unmodifiableSet(takenIngredients);
@@ -52,7 +52,7 @@ public class PickyGroceriesChecklist implements GroceriesCheckList {
      */
     @Override
     public void checkIngredient(Ingredient ingredient) {
-        if (neededIngredients.contains(ingredient)){
+        if (neededIngredients.contains(ingredient)) {
             neededIngredients.remove(ingredient);
             takenIngredients.add(ingredient);
         }
@@ -60,7 +60,7 @@ public class PickyGroceriesChecklist implements GroceriesCheckList {
 
     @Override
     public void unCheckIngredient(Ingredient ingredient) {
-        if (takenIngredients.contains(ingredient)){
+        if (takenIngredients.contains(ingredient)) {
             takenIngredients.remove(ingredient);
             neededIngredients.add(ingredient);
         }
@@ -68,7 +68,7 @@ public class PickyGroceriesChecklist implements GroceriesCheckList {
 
     @Override
     public void setMissingIngredient(Ingredient ingredient) {
-        if (neededIngredients.contains(ingredient)){
+        if (neededIngredients.contains(ingredient)) {
             neededIngredients.remove(ingredient);
             missingIngredients.add(ingredient);
         }
@@ -76,7 +76,7 @@ public class PickyGroceriesChecklist implements GroceriesCheckList {
 
     @Override
     public void unSetMissingIngredient(Ingredient ingredient) {
-        if (missingIngredients.contains(ingredient)){
+        if (missingIngredients.contains(ingredient)) {
             missingIngredients.remove(ingredient);
             neededIngredients.add(ingredient);
         }
@@ -84,10 +84,6 @@ public class PickyGroceriesChecklist implements GroceriesCheckList {
 
     @Override
     public String toString() {
-        return "PickyGroceriesChecklist{" +
-                "neededIngredients=" + neededIngredients +
-                ", missingIngredients=" + missingIngredients +
-                ", takenIngredients=" + takenIngredients +
-                '}';
+        return "PickyGroceriesChecklist{" + "neededIngredients=" + neededIngredients + ", missingIngredients=" + missingIngredients + ", takenIngredients=" + takenIngredients + '}';
     }
 }

@@ -12,5 +12,4 @@ public interface User {
     void setMealPlan(MealPlan mealPlan);
     DailyProgresses getDailyProgresses();
     void resetDailyProgresses();
-
 }

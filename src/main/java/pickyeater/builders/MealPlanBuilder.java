@@ -2,7 +2,6 @@
 // Source code recreated from a .class file by IntelliJ IDEA
 // (powered by FernFlower decompiler)
 //
-
 package pickyeater.builders;
 
 import pickyeater.basics.mealplan.DailyMealPlan;
@@ -13,20 +12,12 @@ import java.util.List;
 
 public interface MealPlanBuilder {
     DailyMealPlan getDailyMealPlan(int day);
-
     int getDays();
-
-    void setDailyMealPlan(int day, DailyMealPlan dailyMealPlan);
-
     void setDays(int days);
-
+    void setDailyMealPlan(int day, DailyMealPlan dailyMealPlan);
     LocalDate getBeginningDay();
-
     void setBeginningDay(LocalDate toLocalDate);
-
     void addDailyMealPlan(DailyMealPlan build);
-
     MealPlan build();
-
     List<DailyMealPlan> getDailyMealPlans();
 }

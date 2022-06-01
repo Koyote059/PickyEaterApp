@@ -12,8 +12,8 @@ import pickyeater.managers.UserManager;
 import java.util.Optional;
 
 public class GroceriesExecutor {
-
     private final EaterManager eaterManager;
+
     public GroceriesExecutor(EaterManager eaterManager) {
         this.eaterManager = eaterManager;
     }
@@ -37,7 +37,8 @@ public class GroceriesExecutor {
     public void deleteGroceries() {
         UserManager userManager = eaterManager.getUserManager();
         Optional<Groceries> groceriesOptional = userManager.getGroceries();
-        if(groceriesOptional.isEmpty()) return;
+        if (groceriesOptional.isEmpty())
+            return;
         Groceries groceries = groceriesOptional.get();
         userManager.deleteGroceries(groceries);
     }
@@ -47,7 +48,6 @@ public class GroceriesExecutor {
         Optional<Groceries> groceriesOptional = userManager.getGroceries();
         return groceriesOptional.isPresent();
     }
-
 
     public void generateGroceries() {
         GroceriesGenerator generator = new PickyGroceriesGenerator();

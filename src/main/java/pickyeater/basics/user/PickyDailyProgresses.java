@@ -12,12 +12,13 @@ import java.util.Collections;
 import java.util.List;
 
 public class PickyDailyProgresses implements DailyProgresses {
-
-    private int burnedCalories = 0;
     private final List<Meal> eatenMeals = new ArrayList<>();
     private final LocalDate date = LocalDate.now(); // Todo constructor with localdate
+    private int burnedCalories = 0;
 
-    public  PickyDailyProgresses(){}
+    public PickyDailyProgresses() {
+    }
+
     public PickyDailyProgresses(int burnedCalories, Collection<Meal> eatenMeals) {
         this.burnedCalories = burnedCalories;
         this.eatenMeals.addAll(eatenMeals);
@@ -33,14 +34,22 @@ public class PickyDailyProgresses implements DailyProgresses {
         eatenMeals.remove(meal);
     }
 
+    public Nutrients getEatenNutrients() {
+        NutrientsAccumulator nutrientsAccumulator = new PickyNutrientsAccumulator();
+        for (Meal eatenMeal : eatenMeals) {
+            nutrientsAccumulator.sumNutrients(eatenMeal.getNutrients());
+        }
+        return nutrientsAccumulator.generateNutrients();
+    }
+
     @Override
-    public List<Meal> getEatenMeals(){
+    public List<Meal> getEatenMeals() {
         return Collections.unmodifiableList(eatenMeals);
     }
 
     @Override
     public void addBurnedCalories(float calories) {
-        burnedCalories +=calories;
+        burnedCalories += calories;
     }
 
     @Override
@@ -53,19 +62,8 @@ public class PickyDailyProgresses implements DailyProgresses {
         return date;
     }
 
-    public Nutrients getEatenNutrients(){
-        NutrientsAccumulator nutrientsAccumulator = new PickyNutrientsAccumulator();
-        for (Meal eatenMeal : eatenMeals) {
-            nutrientsAccumulator.sumNutrients(eatenMeal.getNutrients());
-        }
-        return nutrientsAccumulator.generateNutrients();
-    }
-
     @Override
     public String toString() {
-        return "PickyDailyProgresses{" +
-                "burnedCalories=" + burnedCalories +
-                ", eatenMeals=" + eatenMeals +
-                '}';
+        return "PickyDailyProgresses{" + "burnedCalories=" + burnedCalories + ", eatenMeals=" + eatenMeals + '}';
     }
 }

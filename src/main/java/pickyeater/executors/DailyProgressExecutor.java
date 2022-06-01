@@ -1,13 +1,8 @@
 package pickyeater.executors;
 
-import pickyeater.UI.pages.app.dailyprogresspage.DailyProgressPage;
-import pickyeater.basics.food.Ingredient;
 import pickyeater.basics.food.Meal;
-import pickyeater.basics.food.Nutrients;
-import pickyeater.basics.mealplan.DailyMealPlan;
 import pickyeater.basics.user.DailyProgresses;
 import pickyeater.basics.user.User;
-import pickyeater.basics.user.UserGoal;
 import pickyeater.executors.searcher.MealSearcherExecutor;
 import pickyeater.managers.EaterManager;
 import pickyeater.managers.UserManager;
@@ -16,7 +11,6 @@ import java.time.LocalDate;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
-import java.util.Set;
 
 public class DailyProgressExecutor {
     private final EaterManager eaterManager;
@@ -30,9 +24,9 @@ public class DailyProgressExecutor {
         } else {
             this.user = userOptional.get();
         }
-
         DailyProgresses dailyProgresses = user.getDailyProgresses();
-        if(dailyProgresses.getDate().isBefore(LocalDate.now())) user.resetDailyProgresses();
+        if (dailyProgresses.getDate().isBefore(LocalDate.now()))
+            user.resetDailyProgresses();
     }
 
     public MealSearcherExecutor getMealSearcher() {
@@ -43,43 +37,39 @@ public class DailyProgressExecutor {
         this.eaterManager.getUserManager().saveUser(this.user);
     }
 
-    public List<Meal> getEatenMeals(){
-        return user.getDailyProgresses().getEatenMeals();
-    }
-
-    public int getBurntCalories(){
+    public int getBurntCalories() {
         return user.getDailyProgresses().getBurnedCalories();
     }
 
-    public float getEatenCalories(){
+    public float getEatenCalories() {
         return user.getDailyProgresses().getEatenNutrients().getCalories();
     }
 
-    public float getEatenProteins(){
+    public float getEatenProteins() {
         return user.getDailyProgresses().getEatenNutrients().getProteins();
     }
 
-    public float getEatenCarbs(){
+    public float getEatenCarbs() {
         return user.getDailyProgresses().getEatenNutrients().getCarbs();
     }
 
-    public float getEatenFats(){
+    public float getEatenFats() {
         return user.getDailyProgresses().getEatenNutrients().getFats();
     }
 
-    public float getCaloriesToEat(){
+    public float getCaloriesToEat() {
         return user.getUserGoal().getRequiredNutrients().getCalories();
     }
 
-    public float getProteinsToEat(){
+    public float getProteinsToEat() {
         return user.getUserGoal().getRequiredNutrients().getProteins();
     }
 
-    public float getCarbsToEat(){
+    public float getCarbsToEat() {
         return user.getUserGoal().getRequiredNutrients().getCarbs();
     }
 
-    public float getFatsToEat(){
+    public float getFatsToEat() {
         return user.getUserGoal().getRequiredNutrients().getFats();
     }
 
@@ -92,6 +82,10 @@ public class DailyProgressExecutor {
             objects[tmpSize - 1] = meal.getName();
         }
         return objects;
+    }
+
+    public List<Meal> getEatenMeals() {
+        return user.getDailyProgresses().getEatenMeals();
     }
 
     public Object[] getAllMealsQuantityObj() {

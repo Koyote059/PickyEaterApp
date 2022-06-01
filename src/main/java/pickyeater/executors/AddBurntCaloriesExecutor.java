@@ -1,17 +1,13 @@
 package pickyeater.executors;
 
-import pickyeater.basics.food.Nutrients;
 import pickyeater.basics.user.DailyProgresses;
 import pickyeater.basics.user.User;
 import pickyeater.managers.EaterManager;
 import pickyeater.managers.UserManager;
 
 public class AddBurntCaloriesExecutor {
-
     private final EaterManager eaterManager;
-
     private final DailyProgresses dailyProgresses;
-
     private final User user;
 
     public AddBurntCaloriesExecutor(EaterManager eaterManager) {
@@ -20,7 +16,7 @@ public class AddBurntCaloriesExecutor {
         this.dailyProgresses = user.getDailyProgresses();
     }
 
-    public void setBurntCalories(float calories){
+    public void setBurntCalories(float calories) {
         UserManager userManager = eaterManager.getUserManager();
         dailyProgresses.addBurnedCalories(calories);
         userManager.saveUser(user);

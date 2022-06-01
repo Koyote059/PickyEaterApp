@@ -3,7 +3,6 @@ package pickyeater.basics.food;
 /**
  * @author Claudio Di Maio
  */
-
 public class PickyNutrientsAccumulator implements NutrientsAccumulator {
     private float proteins = 0;
     private float complexCarbs = 0;
@@ -13,7 +12,6 @@ public class PickyNutrientsAccumulator implements NutrientsAccumulator {
     private float unSaturatedFats = 0;
     private float transFats = 0;
     private float alcohol = 0;
-
     private float calories = 0;
 
     @Override

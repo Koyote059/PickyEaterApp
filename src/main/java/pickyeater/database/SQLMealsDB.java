@@ -12,24 +12,25 @@ import java.util.Optional;
 import java.util.Set;
 
 public class SQLMealsDB implements MealsDatabase {
-
-    private  final SQLExecutorManager queryExecutor;
+    private final SQLExecutorManager queryExecutor;
 
     public SQLMealsDB(SQLExecutorManager queryExecutor) {
         this.queryExecutor = queryExecutor;
     }
 
     @Override
-    public void saveMeal(Meal meal)  {
-
+    public void saveMeal(Meal meal) {
         try {
-            if(DBChecker.isWordIllegal(meal.getName())) throw new SQLException("Illegal name: " + meal.getName());
-            if(meal.getIngredients().size()==0) throw new RuntimeException("Cannot store an empty meal!");
+            if (DBChecker.isWordIllegal(meal.getName()))
+                throw new SQLException("Illegal name: " + meal.getName());
+            if (meal.getIngredients().size() == 0)
+                throw new RuntimeException("Cannot store an empty meal!");
             Meal savingMeal;
-            if(meal.getWeight()!=100){
+            if (meal.getWeight() != 100) {
                 MealQuantityConverter converter = new MealQuantityConverter();
-                savingMeal = converter.convert(meal,100);
-            } else savingMeal = meal;
+                savingMeal = converter.convert(meal, 100);
+            } else
+                savingMeal = meal;
             SQLUnSafeQueryExecutor executor = queryExecutor.getUnSafeQueryExecutor();
             executor.insertIntoMealsTable(savingMeal.getName());
             executor.insertIntoMealCompositionsTable(savingMeal);
@@ -41,12 +42,14 @@ public class SQLMealsDB implements MealsDatabase {
     @Override
     public Optional<Meal> loadMeal(String mealName) {
         try {
-            if(DBChecker.isWordIllegal(mealName)) throw new SQLException("Illegal name: " + mealName);
+            if (DBChecker.isWordIllegal(mealName))
+                throw new SQLException("Illegal name: " + mealName);
             SQLSafeQueryExecutor executor = queryExecutor.getSafeQueryExecutor();
             SQLCreator sqlCreator = new SQLCreator();
             ResultSet resultSet = executor.selectMeal(mealName);
             List<Meal> meals = sqlCreator.getMeals(resultSet);
-            if(meals.isEmpty()) return Optional.empty();
+            if (meals.isEmpty())
+                return Optional.empty();
             return Optional.ofNullable(meals.get(0));
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -56,7 +59,8 @@ public class SQLMealsDB implements MealsDatabase {
     @Override
     public boolean hasMeal(String mealName) {
         try {
-            if(DBChecker.isWordIllegal(mealName)) throw new SQLException("Illegal name: " + mealName);
+            if (DBChecker.isWordIllegal(mealName))
+                throw new SQLException("Illegal name: " + mealName);
             SQLSafeQueryExecutor executor = queryExecutor.getSafeQueryExecutor();
             ResultSet resultSet = executor.selectMeal(mealName);
             return resultSet.next();
@@ -81,8 +85,8 @@ public class SQLMealsDB implements MealsDatabase {
     @Override
     public Set<Meal> getMealsThatStartWith(String name) {
         try {
-            if(DBChecker.isWordIllegal(name)) throw new SQLException("Illegal name: " + name);
-
+            if (DBChecker.isWordIllegal(name))
+                throw new SQLException("Illegal name: " + name);
             SQLSafeQueryExecutor executor = queryExecutor.getSafeQueryExecutor();
             SQLCreator sqlCreator = new SQLCreator();
             ResultSet resultSet = executor.selectMealsThatStartWith(name);
@@ -96,7 +100,8 @@ public class SQLMealsDB implements MealsDatabase {
     @Override
     public boolean isMealUsed(Meal meal) {
         try {
-            if(DBChecker.isWordIllegal(meal.getName())) throw new SQLException("Illegal name: " + meal.getName());
+            if (DBChecker.isWordIllegal(meal.getName()))
+                throw new SQLException("Illegal name: " + meal.getName());
             SQLSafeQueryExecutor executor = queryExecutor.getSafeQueryExecutor();
             ResultSet resultSet = executor.findMealInTables(meal.getName());
             return resultSet.next();
@@ -108,7 +113,8 @@ public class SQLMealsDB implements MealsDatabase {
     @Override
     public void deleteMeal(Meal meal) {
         try {
-            if(DBChecker.isWordIllegal(meal.getName())) throw new SQLException("Illegal name: " + meal.getName());
+            if (DBChecker.isWordIllegal(meal.getName()))
+                throw new SQLException("Illegal name: " + meal.getName());
             SQLUnSafeQueryExecutor executor = queryExecutor.getUnSafeQueryExecutor();
             executor.deleteFromMealsTable(meal.getName());
             //executor.deleteFromMealCompositionsTable(meal.getName()); // Useless, in theory. Cascade should do it for us.

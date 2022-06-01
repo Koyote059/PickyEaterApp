@@ -1,9 +1,9 @@
 package pickyeater.managers;
 
-import pickyeater.database.IngredientsDatabase;
-import pickyeater.database.MealsDatabase;
 import pickyeater.basics.food.Ingredient;
 import pickyeater.basics.food.Meal;
+import pickyeater.database.IngredientsDatabase;
+import pickyeater.database.MealsDatabase;
 
 import java.util.Optional;
 import java.util.Set;
@@ -51,13 +51,15 @@ public class PickyFoodManager implements FoodManager {
 
     @Override
     public void deleteMeal(Meal meal) {
-        if(isMealUsed(meal)) return;
+        if (isMealUsed(meal))
+            return;
         this.mealsDatabase.deleteMeal(meal);
     }
 
     @Override
     public void deleteIngredient(Ingredient ingredient) {
-        if(isIngredientUsed(ingredient)) return;
+        if (isIngredientUsed(ingredient))
+            return;
         this.ingredientsDatabase.deleteIngredient(ingredient);
     }
 

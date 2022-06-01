@@ -11,16 +11,16 @@ public class PickyUser implements User {
     private DailyProgresses dailyProgresses;
     private MealPlan mealPlan;
 
+    public PickyUser(String name, UserStatus userStatus, UserGoal userGoal, DailyProgresses dailyProgresses) {
+        this(name, userStatus, userGoal, dailyProgresses, null);
+    }
+
     public PickyUser(String name, UserStatus userStatus, UserGoal userGoal, DailyProgresses dailyProgresses, MealPlan mealPlan) {
         this.name = name;
         this.userStatus = userStatus;
         this.userGoal = userGoal;
         this.mealPlan = mealPlan;
         this.dailyProgresses = dailyProgresses;
-    }
-
-    public PickyUser(String name, UserStatus userStatus, UserGoal userGoal, DailyProgresses dailyProgresses) {
-        this(name, userStatus, userGoal, dailyProgresses, null);
     }
 
     @Override
@@ -40,8 +40,14 @@ public class PickyUser implements User {
 
     @Override
     public Optional<MealPlan> getMealPlan() {
-        if(mealPlan == null) return Optional.empty();
+        if (mealPlan == null)
+            return Optional.empty();
         return Optional.of(mealPlan);
+    }
+
+    @Override
+    public void setMealPlan(MealPlan mealPlan) {
+        this.mealPlan = mealPlan;
     }
 
     @Override
@@ -55,19 +61,7 @@ public class PickyUser implements User {
     }
 
     @Override
-    public void setMealPlan(MealPlan mealPlan) {
-        this.mealPlan = mealPlan;
-    }
-  
-    @Override
     public String toString() {
-        return "PickyUser{" +
-                "name='" + name + '\n' +
-                ", userStatus=" + userStatus + '\n' +
-                ", userGoal=" + userGoal + '\n' +
-                ", dailyProgresses=" + dailyProgresses + '\n' +
-                ", mealPlan=" + mealPlan + '\n' +
-                '}';
+        return "PickyUser{" + "name='" + name + '\n' + ", userStatus=" + userStatus + '\n' + ", userGoal=" + userGoal + '\n' + ", dailyProgresses=" + dailyProgresses + '\n' + ", mealPlan=" + mealPlan + '\n' + '}';
     }
-
 }

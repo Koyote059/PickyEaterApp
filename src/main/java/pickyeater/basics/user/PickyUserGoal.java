@@ -3,10 +3,8 @@ package pickyeater.basics.user;
 import pickyeater.basics.food.Nutrients;
 
 public class PickyUserGoal implements UserGoal {
-
     private final LifeStyle lifeStyle;
     private final WeightGoal weightVariationGoal;
-
     private final Nutrients requiredNutrients;
 
     public PickyUserGoal(LifeStyle lifeStyle, WeightGoal weightVariationGoal, Nutrients requiredNutrients) {
@@ -32,10 +30,6 @@ public class PickyUserGoal implements UserGoal {
 
     @Override
     public String toString() {
-        return "PickyUserGoal{" +
-                "lifeStyle=" + lifeStyle +
-                ", weightVariationGoal=" + weightVariationGoal +
-                ", requiredNutrients=" + requiredNutrients +
-                '}';
+        return "PickyUserGoal{" + "lifeStyle=" + lifeStyle + ", weightVariationGoal=" + weightVariationGoal + ", requiredNutrients=" + requiredNutrients + '}';
     }
 }

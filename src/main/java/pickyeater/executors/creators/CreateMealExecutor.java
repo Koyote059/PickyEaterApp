@@ -1,10 +1,9 @@
 package pickyeater.executors.creators;
 
 import pickyeater.basics.food.Ingredient;
-import pickyeater.builders.IngredientBuilder;
+import pickyeater.basics.food.Meal;
 import pickyeater.builders.MealBuilder;
 import pickyeater.builders.PickyMealBuilder;
-import pickyeater.basics.food.Meal;
 import pickyeater.executors.ExecutorProvider;
 import pickyeater.executors.searcher.IngredientSearcherExecutor;
 import pickyeater.managers.EaterManager;
@@ -34,13 +33,13 @@ public class CreateMealExecutor {
         foodManager.saveMeal(meal);
     }
 
-    public void appendToSet(Set<Ingredient> ingredientSet, String item){
+    public void appendToSet(Set<Ingredient> ingredientSet, String item) {
         ingredientSet.add(ExecutorProvider.getIngredientSearcherExecutor().getIngredientByName(item).get());
     }
 
     public Object[] getAllSelectedIngredientsObj(Set<Ingredient> ingredientSet) {
         int tmpSize = ingredientSet.size();
-        Object objects[] = new Object[tmpSize];
+        Object[] objects = new Object[tmpSize];
         for (Iterator<Ingredient> it = ingredientSet.iterator(); it.hasNext(); tmpSize--) {
             Ingredient ingredient = it.next();
             objects[tmpSize - 1] = ingredient.getName();
@@ -48,7 +47,7 @@ public class CreateMealExecutor {
         return objects;
     }
 
-    public void addIngredients(MealBuilder mealBuilder, Set<Ingredient> ingredients){
+    public void addIngredients(MealBuilder mealBuilder, Set<Ingredient> ingredients) {
         int tmpSize = ingredients.size();
         for (Iterator<Ingredient> it = ingredients.iterator(); it.hasNext(); tmpSize--) {
             mealBuilder.addIngredients(it.next());

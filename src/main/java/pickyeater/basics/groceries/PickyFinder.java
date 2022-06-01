@@ -4,28 +4,27 @@ import pickyeater.basics.food.*;
 import pickyeater.basics.mealplan.DailyMealPlan;
 import pickyeater.basics.mealplan.MealPlan;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 /**
  * @author Claudio Di Maio
  */
-
 public class PickyFinder implements Finder {
     /**
      * Gets ingredient from MealPlan
      */
-
     @Override
     public Set<Ingredient> getIngredients(MealPlan mealPlan) {
         List<DailyMealPlan> dailyMealPlans = mealPlan.getDailyMealPlans();
-
         List<Meal> meals = new ArrayList<>();
-        for (DailyMealPlan dailyMealPlan : dailyMealPlans){
+        for (DailyMealPlan dailyMealPlan : dailyMealPlans) {
             meals.addAll(dailyMealPlan.getMeals());
         }
-
         Set<Ingredient> ingredients = new HashSet<>();
-        for (Meal meal : meals){
+        for (Meal meal : meals) {
             ingredients = sumIngredients(ingredients, meal.getIngredients());
         }
         return ingredients;
@@ -58,21 +57,9 @@ public class PickyFinder implements Finder {
      */
     @Override
     public Ingredient sumIngredient(Ingredient dst, Ingredient src) {
-        Nutrients newNutrients = new PickyNutrients(dst.getNutrients().getProteins() + src.getNutrients().getProteins(),
-                dst.getNutrients().getComplexCarbs() + src.getNutrients().getComplexCarbs(),
-                dst.getNutrients().getSimpleCarbs() + src.getNutrients().getSimpleCarbs(),
-                dst.getNutrients().getFibers() + src.getNutrients().getFibers(),
-                dst.getNutrients().getSaturatedFats() + src.getNutrients().getSaturatedFats(),
-                dst.getNutrients().getUnSaturatedFats() + src.getNutrients().getUnSaturatedFats(),
-                dst.getNutrients().getTransFats() + src.getNutrients().getTransFats(),
-                dst.getNutrients().getAlcohol() + src.getNutrients().getAlcohol());
-
-        Quantity newQuantity = new PickyQuantity(dst.getQuantity().getAmount() + src.getQuantity().getAmount(),
-                src.getQuantity().getQuantityType(),
-                dst.getQuantity().getGramsPerQuantity() + src.getQuantity().getGramsPerQuantity());
-
+        Nutrients newNutrients = new PickyNutrients(dst.getNutrients().getProteins() + src.getNutrients().getProteins(), dst.getNutrients().getComplexCarbs() + src.getNutrients().getComplexCarbs(), dst.getNutrients().getSimpleCarbs() + src.getNutrients().getSimpleCarbs(), dst.getNutrients().getFibers() + src.getNutrients().getFibers(), dst.getNutrients().getSaturatedFats() + src.getNutrients().getSaturatedFats(), dst.getNutrients().getUnSaturatedFats() + src.getNutrients().getUnSaturatedFats(), dst.getNutrients().getTransFats() + src.getNutrients().getTransFats(), dst.getNutrients().getAlcohol() + src.getNutrients().getAlcohol());
+        Quantity newQuantity = new PickyQuantity(dst.getQuantity().getAmount() + src.getQuantity().getAmount(), src.getQuantity().getQuantityType(), dst.getQuantity().getGramsPerQuantity() + src.getQuantity().getGramsPerQuantity());
         float newPrice = dst.getPrice() + src.getPrice();
-
         return new PickyIngredient(newNutrients, src.getName(), newPrice, newQuantity, src.getTags());
     }
 }

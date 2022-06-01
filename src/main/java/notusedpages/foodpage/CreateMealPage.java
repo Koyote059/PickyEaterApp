@@ -13,7 +13,6 @@ import pickyeater.executors.searcher.MealSearcherExecutor;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -41,35 +40,25 @@ public class CreateMealPage extends PickyPage {
 
     public CreateMealPage(JFrame parent) {
         super(parent);
-
         setLayout(new BorderLayout());
-        add(mainPanel,BorderLayout.CENTER);
+        add(mainPanel, BorderLayout.CENTER);
         btDailyProgress.setBackground(Color.decode("#FFFFFF"));
         btDiet.setBackground(Color.decode("#FFFFFF"));
         btFood.setBackground(Color.decode("#B1EA9D"));
         btGroceries.setBackground(Color.decode("#FFFFFF"));
         btUser.setBackground(Color.decode("#FFFFFF"));
         btSettings.setBackground(Color.decode("#FFFFFF"));
-
         ingredientSearcherExecutor = ExecutorProvider.getIngredientSearcherExecutor();
         mealSearcherExecutor = ExecutorProvider.getMealSearcherExecutor();
         createMealExecutor = ExecutorProvider.getCreateMealExecutor();
-
         Set<Ingredient> ingredientSelectedSet = new HashSet<>();
-
         setNavigationMenuListeners();
-
-        btSave.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                MealBuilder meal = new PickyMealBuilder();
-
-                meal.setName(tfName.getText());
-                createMealExecutor.addIngredients(meal, ingredientSelectedSet);
-
-                createMealExecutor.saveMeal(meal.build());
-                //MainFrame.changePage(PanelButtons.FOOD);
-            }
+        btSave.addActionListener(e -> {
+            MealBuilder meal = new PickyMealBuilder();
+            meal.setName(tfName.getText());
+            createMealExecutor.addIngredients(meal, ingredientSelectedSet);
+            createMealExecutor.saveMeal(meal.build());
+            //MainFrame.changePage(PanelButtons.FOOD);
         });
         //btCancel.addActionListener(e -> MainFrame.changePage(PanelButtons.FOOD));
         btAddIngredient.addActionListener(e -> {
@@ -86,7 +75,7 @@ public class CreateMealPage extends PickyPage {
         });
     }
 
-    private void setNavigationMenuListeners(){
+    private void setNavigationMenuListeners() {
         ActionListener listener = e -> {
             String cmd = e.getActionCommand();
             setVisible(false);

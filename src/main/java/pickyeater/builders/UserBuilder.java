@@ -2,7 +2,6 @@
 // Source code recreated from a .class file by IntelliJ IDEA
 // (powered by FernFlower decompiler)
 //
-
 package pickyeater.builders;
 
 import pickyeater.basics.food.Meal;
@@ -12,30 +11,29 @@ import pickyeater.basics.user.*;
 
 import java.time.LocalDate;
 import java.util.Collection;
-import java.util.Date;
 
 public interface UserBuilder {
-    void setName(String name);
     String getName();
-    void setWeight(float weight);
+    void setName(String name);
     float getWeight();
-    void setHeight(int height);
+    void setWeight(float weight);
     int getHeight();
-    void setBodyFat(float bodyFat);
+    void setHeight(int height);
     float getBodyFat();
-    void setDateOfBirth(LocalDate dateOfBirth);
+    void setBodyFat(float bodyFat);
     LocalDate getDateOfBirth();
-    void setSex(Sex sex);
+    void setDateOfBirth(LocalDate dateOfBirth);
     Sex getSex();
-    void setLifeStyle(LifeStyle lifeStyle);
+    void setSex(Sex sex);
     LifeStyle getLifeStyle();
-    void setWeightVariationGoal(WeightGoal weightVariationGoal);
+    void setLifeStyle(LifeStyle lifeStyle);
     WeightGoal getWeightVariationGoal();
-    void setRequiredNutrients(Nutrients nutrients);
+    void setWeightVariationGoal(WeightGoal weightVariationGoal);
     Nutrients getRequiredNutrients();
+    void setRequiredNutrients(Nutrients nutrients);
     void setDailyProgresses(Collection<Meal> eatenMeals, int burnedCalories);
     DailyProgresses getDailyProgresses();
-    void setMealPlan(MealPlan mealPlan);
     MealPlan getMealPlan();
+    void setMealPlan(MealPlan mealPlan);
     User build();
 }

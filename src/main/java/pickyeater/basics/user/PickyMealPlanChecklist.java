@@ -1,31 +1,32 @@
 package pickyeater.basics.user;
 
-import pickyeater.basics.mealplan.DailyMealPlan;
 import pickyeater.basics.food.Meal;
+import pickyeater.basics.mealplan.DailyMealPlan;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
 public class PickyMealPlanChecklist implements MealPlanChecklist {
-
     private final List<Meal> mealsToEat;
     private final List<Meal> eatenMeals = new ArrayList<>();
 
-    public PickyMealPlanChecklist(DailyMealPlan dailyMealPlan){
+    public PickyMealPlanChecklist(DailyMealPlan dailyMealPlan) {
         mealsToEat = dailyMealPlan.getMeals();
     }
 
     @Override
     public void addEatenMeal(Meal meal) {
-        if(!mealsToEat.contains(meal)) return;
+        if (!mealsToEat.contains(meal))
+            return;
         mealsToEat.remove(meal);
         eatenMeals.add(meal);
     }
 
     @Override
-    public void removeEatenMeal(Meal meal){
-        if(!eatenMeals.contains(meal)) return;
+    public void removeEatenMeal(Meal meal) {
+        if (!eatenMeals.contains(meal))
+            return;
         eatenMeals.remove(meal);
         mealsToEat.add(meal);
     }
@@ -37,20 +38,17 @@ public class PickyMealPlanChecklist implements MealPlanChecklist {
     }
 
     @Override
-    public List<Meal> getEatenMeals(){
+    public List<Meal> getEatenMeals() {
         return Collections.unmodifiableList(eatenMeals);
     }
 
     @Override
-    public List<Meal> getMealsToEat(){
+    public List<Meal> getMealsToEat() {
         return Collections.unmodifiableList(mealsToEat);
     }
 
     @Override
     public String toString() {
-        return "PickyMealPlanChecklist{" +
-                "mealsToEat=" + mealsToEat +
-                ", eatenMeals=" + eatenMeals +
-                '}';
+        return "PickyMealPlanChecklist{" + "mealsToEat=" + mealsToEat + ", eatenMeals=" + eatenMeals + '}';
     }
 }

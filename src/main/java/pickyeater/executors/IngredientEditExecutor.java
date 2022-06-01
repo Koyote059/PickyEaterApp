@@ -5,7 +5,6 @@ import pickyeater.managers.EaterManager;
 import pickyeater.managers.FoodManager;
 
 public class IngredientEditExecutor {
-
     private final EaterManager eaterManager;
 
     public IngredientEditExecutor(EaterManager eaterManager) {

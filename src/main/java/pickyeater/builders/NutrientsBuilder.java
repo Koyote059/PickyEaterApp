@@ -2,35 +2,29 @@
 // Source code recreated from a .class file by IntelliJ IDEA
 // (powered by FernFlower decompiler)
 //
-
 package pickyeater.builders;
 
 import pickyeater.basics.food.Nutrients;
 
 public interface NutrientsBuilder {
-
-    void setSimpleCarbs(float simpleCarbs);
     float getSimpleCarbs();
-    void setComplexCarbs(float complexCarbs);
+    void setSimpleCarbs(float simpleCarbs);
     float getComplexCarbs();
-    void setFibers(float fibers);
+    void setComplexCarbs(float complexCarbs);
     float getFibers();
-    void setProteins(float proteins);
+    void setFibers(float fibers);
     float getProteins();
-    void setAlcohol(float alcohol);
+    void setProteins(float proteins);
     float getAlcohol();
-    void setSaturatedFats(float saturatedFats);
+    void setAlcohol(float alcohol);
     float getSaturatedFats();
-    void setUnSaturatedFats(float unSaturatedFats);
+    void setSaturatedFats(float saturatedFats);
     float getUnSaturatedFats();
-    void setTransFats(float transFats);
+    void setUnSaturatedFats(float unSaturatedFats);
     float getTransFats();
-
+    void setTransFats(float transFats);
     float getCarbs();
     float getFats();
-
-
     float getCalories();
-
     Nutrients build();
 }

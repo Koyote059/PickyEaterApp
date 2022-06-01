@@ -42,11 +42,8 @@ public class SearchMealPage extends PickyPage {
         btGroceries.setBackground(Color.decode("#FFFFFF"));
         btUser.setBackground(Color.decode("#FFFFFF"));
         btSettings.setBackground(Color.decode("#FFFFFF"));
-
-
         setLayout(new BorderLayout());
-        add(mainPanel,BorderLayout.CENTER);
-
+        add(mainPanel, BorderLayout.CENTER);
         mealSearcherExecutor = ExecutorProvider.getMealSearcherExecutor();
 
         /*
@@ -57,7 +54,6 @@ public class SearchMealPage extends PickyPage {
         txtProteins.setText(Double.toString(meal.getNutrients().getProteins()));
         txtFats.setText(Double.toString(meal.getNutrients().getFats()));
          */
-
         setNavigationMenuListeners();
         btDone.addActionListener(e -> {
             //MainFrame.changePage(PanelButtons.FOOD);
@@ -68,24 +64,23 @@ public class SearchMealPage extends PickyPage {
             @Override
             public void mouseReleased(MouseEvent e) {
                 super.mouseReleased(e);
-                Optional<Meal> mealOptional =
-                        mealSearcherExecutor.getMealByName((String) listMeals.getSelectedValue());
-                if(mealOptional.isEmpty()){
+                Optional<Meal> mealOptional = mealSearcherExecutor.getMealByName((String) listMeals.getSelectedValue());
+                if (mealOptional.isEmpty()) {
                     throw new RuntimeException("Missing ingredient from database : " + listMeals.getSelectedValue());
                 } else {
-                Meal meal = mealOptional.get();
-                DecimalFormat df = new DecimalFormat("0.000");
-                txtMealStats.setText(meal.getName());
-                txtCalories.setText(df.format(meal.getNutrients().getCalories()));
-                txtCarbs.setText(df.format(meal.getNutrients().getCarbs()));
-                txtProteins.setText(df.format(meal.getNutrients().getProteins()));
-                txtFats.setText(df.format(meal.getNutrients().getFats()));
-            }
+                    Meal meal = mealOptional.get();
+                    DecimalFormat df = new DecimalFormat("0.000");
+                    txtMealStats.setText(meal.getName());
+                    txtCalories.setText(df.format(meal.getNutrients().getCalories()));
+                    txtCarbs.setText(df.format(meal.getNutrients().getCarbs()));
+                    txtProteins.setText(df.format(meal.getNutrients().getProteins()));
+                    txtFats.setText(df.format(meal.getNutrients().getFats()));
+                }
             }
         });
     }
 
-    private void setNavigationMenuListeners(){
+    private void setNavigationMenuListeners() {
         ActionListener listener = e -> {
             String cmd = e.getActionCommand();
             MainFrame.changePage(new PanelButtonsConverter(cmd).Convert());

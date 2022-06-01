@@ -1,16 +1,12 @@
 package pickyeater.UI.pages.app.userpage;
 
-/**
- * @author Claudio Di Maio
- */
-
 import pickyeater.UI.pages.app.MainFrame;
 import pickyeater.UI.pages.app.PickyPage;
 import pickyeater.UI.pages.leftbuttons.PanelButtonsConverter;
+import pickyeater.UI.themes.ColorButtons;
 import pickyeater.basics.user.User;
 import pickyeater.executors.ExecutorProvider;
 import pickyeater.executors.user.UserExecutor;
-import pickyeater.UI.themes.ColorButtons;
 import pickyeater.utils.StringsUtils;
 
 import javax.imageio.ImageIO;
@@ -49,42 +45,33 @@ public class UserPage extends PickyPage {
     public UserPage(JFrame parent) {
         super(parent);
         UserExecutor userExecutor = ExecutorProvider.getUserExecutor();
-
         User user = userExecutor.getUser();
-
         DecimalFormat df = new DecimalFormat("0.00");
-
         setLayout(new BorderLayout());
-        add(mainPanel,BorderLayout.CENTER);
-
+        add(mainPanel, BorderLayout.CENTER);
         txtEditMode.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
         try {
             BufferedImage binImage = ImageIO.read(new File("res/images/accounteditB.png"));
-            txtEditMode.setIcon(new ImageIcon(binImage.getScaledInstance(40,40,Image.SCALE_SMOOTH)));
+            txtEditMode.setIcon(new ImageIcon(binImage.getScaledInstance(40, 40, Image.SCALE_SMOOTH)));
             txtEditMode.setText("");
         } catch (IOException | NullPointerException ignored) {
         }
 
-        StringsUtils su = new StringsUtils();
-
         // User:
         txtName.setText(user.getName());
-        txtSex.setText(su.toTitle(user.getUserStatus().getSex().toString()));
+        txtSex.setText(StringsUtils.toTitle(user.getUserStatus().getSex().toString()));
         txtDateOfBirth.setText(user.getUserStatus().getDateOfBirth().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")));
         txtHeight.setText(df.format(user.getUserStatus().getHeight()) + " cm");
         txtWeight.setText(df.format(user.getUserStatus().getWeight()) + " Kg");
         txtBodyFat.setText(df.format(user.getUserStatus().getBodyFat()) + " %");
-        txtLifestyle.setText(su.toTitle(user.getUserGoal().getLifeStyle().toString()));
-        txtWeightGoal.setText(su.toTitle(user.getUserGoal().getWeightVariationGoal().toString()));
-
+        txtLifestyle.setText(StringsUtils.toTitle(user.getUserGoal().getLifeStyle().toString()));
+        txtWeightGoal.setText(StringsUtils.toTitle(user.getUserGoal().getWeightVariationGoal().toString()));
         // Nutrients:
         txtProteins.setText(df.format(user.getUserGoal().getRequiredNutrients().getProteins()));
         txtCarbs.setText(df.format(user.getUserGoal().getRequiredNutrients().getCarbs()));
         txtFats.setText(df.format(user.getUserGoal().getRequiredNutrients().getFats()));
         txtCalories.setText(df.format(user.getUserGoal().getRequiredNutrients().getCalories()));
-
-        new ColorButtons().ColorLeftButtons(btUser, btDailyProgress, btSettings, btGroceries, btDiet);
-
+        ColorButtons.ColorLeftButtons(btUser, btDailyProgress, btSettings, btGroceries, btDiet);
         txtEditMode.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -93,21 +80,18 @@ public class UserPage extends PickyPage {
                 userEditModePage.showPage();
             }
         });
-
         setNavigationMenuListeners();
     }
 
-    public void setNavigationMenuListeners(){
+    public void setNavigationMenuListeners() {
         ActionListener listener = e -> {
             String cmd = e.getActionCommand();
             setVisible(false);
             MainFrame.changePage(new PanelButtonsConverter(cmd).Convert());
         };
-
         btSettings.addActionListener(listener);
         btDailyProgress.addActionListener(listener);
         btGroceries.addActionListener(listener);
         btDiet.addActionListener(listener);
     }
-
 }

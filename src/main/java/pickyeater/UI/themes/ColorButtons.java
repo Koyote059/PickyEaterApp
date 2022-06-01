@@ -1,7 +1,7 @@
 package pickyeater.UI.themes;
 
-import pickyeater.UI.themes.filehandler.ThemesEnum;
 import pickyeater.UI.themes.filehandler.ThemeHandler;
+import pickyeater.UI.themes.filehandler.ThemesEnum;
 
 import javax.swing.*;
 import java.awt.*;
@@ -20,10 +20,8 @@ public class ColorButtons {
         ThemesEnum te = ThemeHandler.ReadTheme();
         if (te == ThemesEnum.LIGHT_THEME) {
             btSelected.setBackground(Color.decode("#B1EA9D"));
-        } else if (te == ThemesEnum.DARK_THEME) {
+        } else { // if (te == ThemesEnum.DARK_THEME)
             btSelected.setBackground(Color.decode("#32AB5E"));
-        } else if (te == ThemesEnum.GREEN_THEME) {
-
         }
     }
 
@@ -31,10 +29,8 @@ public class ColorButtons {
         ThemesEnum te = ThemeHandler.ReadTheme();
         if (te == ThemesEnum.LIGHT_THEME) {
             btSelected.setBackground(Color.decode("#FFFFFF"));
-        } else if (te == ThemesEnum.DARK_THEME) {
+        } else { // if (te == ThemesEnum.DARK_THEME)
             btSelected.setBackground(Color.decode("#505454"));
-        } else if (te == ThemesEnum.GREEN_THEME) {
-
         }
     }
 }

@@ -11,8 +11,6 @@ public interface IngredientsDatabase {
     boolean hasIngredient(String ingredientName);
     Set<Ingredient> loadEveryIngredient();
     Set<Ingredient> getIngredientsThatStartWith(String string);
-
     boolean isIngredientUsed(Ingredient ingredient);
     void deleteIngredient(Ingredient ingredient);
-
 }

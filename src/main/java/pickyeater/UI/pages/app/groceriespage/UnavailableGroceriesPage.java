@@ -3,9 +3,9 @@ package pickyeater.UI.pages.app.groceriespage;
 import pickyeater.UI.pages.app.MainFrame;
 import pickyeater.UI.pages.app.PickyPage;
 import pickyeater.UI.pages.leftbuttons.PanelButtonsConverter;
+import pickyeater.UI.themes.ColorButtons;
 import pickyeater.executors.ExecutorProvider;
 import pickyeater.executors.GroceriesExecutor;
-import pickyeater.UI.themes.ColorButtons;
 
 import javax.swing.*;
 import java.awt.*;
@@ -23,23 +23,22 @@ public class UnavailableGroceriesPage extends PickyPage {
 
     public UnavailableGroceriesPage(JFrame parent) {
         super(parent);
-        new ColorButtons().ColorLeftButtons(btGroceries, btDailyProgress, btSettings, btDiet, btUser);
+        ColorButtons.ColorLeftButtons(btGroceries, btDailyProgress, btSettings, btDiet, btUser);
         setLayout(new BorderLayout());
-        add(mainPanel,BorderLayout.CENTER);
-
+        add(mainPanel, BorderLayout.CENTER);
         setNavigationMenuListeners();
-        generateGroceriesButton.addActionListener( e -> {
-            if(groceriesExecutor.isGroceriesAvailable()){
+        generateGroceriesButton.addActionListener(e -> {
+            if (groceriesExecutor.isGroceriesAvailable()) {
                 groceriesExecutor.generateGroceries();
-                PickyPage groceriesPage = new GroceriesPage(groceriesExecutor,parent);
+                PickyPage groceriesPage = new GroceriesPage(groceriesExecutor, parent);
                 groceriesPage.showPage();
             } else {
-                JOptionPane.showMessageDialog(this,"Unavailable Meal Plan!\n You need to create a Meal Plan in order to generate groceries...");
+                JOptionPane.showMessageDialog(this, "Unavailable Meal Plan!\n You need to create a Meal Plan in order to generate groceries...");
             }
         });
     }
 
-    private void setNavigationMenuListeners(){
+    private void setNavigationMenuListeners() {
         ActionListener listener = e -> {
             String cmd = e.getActionCommand();
             setVisible(false);
@@ -53,9 +52,10 @@ public class UnavailableGroceriesPage extends PickyPage {
 
     @Override
     public void showPage() {
-        if(groceriesExecutor.isGroceriesGenerated()) {
+        if (groceriesExecutor.isGroceriesGenerated()) {
             PickyPage groceriesPage = new GroceriesPage(groceriesExecutor, parent);
             groceriesPage.showPage();
-        } else super.showPage();
+        } else
+            super.showPage();
     }
 }

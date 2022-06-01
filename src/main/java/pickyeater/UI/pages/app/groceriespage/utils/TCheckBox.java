@@ -2,15 +2,16 @@ package pickyeater.UI.pages.app.groceriespage.utils;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.*;
-
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class TCheckBox extends JCheckBox implements Icon, ActionListener {
-
     final static boolean MIDasSELECTED = true;  //consider mid-state as selected ?
+    final static Icon icon = UIManager.getIcon("CheckBox.icon");
 
-
-    public TCheckBox() { this(""); }
+    public TCheckBox() {
+        this("");
+    }
 
     public TCheckBox(String text) {
         super(text);
@@ -26,9 +27,9 @@ public class TCheckBox extends JCheckBox implements Icon, ActionListener {
          * 2 fully selected
          */
         super(text, sel > 1 ? true : false);
-
         switch (sel) {
-            case 2: setSelected(true);
+            case 2:
+                setSelected(true);
             case 1:
             case 0:
                 putClientProperty("SelectionState", sel);
@@ -41,45 +42,31 @@ public class TCheckBox extends JCheckBox implements Icon, ActionListener {
     }
 
     @Override
-    public boolean isSelected() {
-        if (MIDasSELECTED && (getSelectionState() > 0)) return true;
-        else return super.isSelected();
+    public void paintIcon(Component c, Graphics g, int x, int y) {
+        icon.paintIcon(c, g, x, y);
+        if (getSelectionState() != 1)
+            return;
+        int w = getIconWidth();
+        int h = getIconHeight();
+        g.setColor(c.isEnabled() ? new Color(51, 51, 51) : new Color(122, 138, 153));
+        g.fillRect(x + 4, y + 4, w - 8, h - 8);
+        if (!c.isEnabled())
+            return;
+        g.setColor(new Color(81, 81, 81));
+        g.drawRect(x + 4, y + 4, w - 9, h - 9);
     }
 
     public int getSelectionState() {
-        return (getClientProperty("SelectionState") != null ? (int)getClientProperty("SelectionState") :
-                super.isSelected() ? 2 :
-                        0);
+        return (getClientProperty("SelectionState") != null ? (int) getClientProperty("SelectionState") : super.isSelected() ? 2 : 0);
     }
 
     public void setSelectionState(int sel) {
         switch (sel) {
-            case 2: setSelected(true);
-                break;
-            case 1:
-            case 0: setSelected(false);
-                break;
-            default: throw new IllegalArgumentException();
+            case 2 -> setSelected(true);
+            case 1, 0 -> setSelected(false);
+            default -> throw new IllegalArgumentException();
         }
         putClientProperty("SelectionState", sel);
-    }
-
-
-    final static Icon icon = UIManager.getIcon("CheckBox.icon");
-
-    @Override
-    public void paintIcon(Component c, Graphics g, int x, int y) {
-        icon.paintIcon(c, g, x, y);
-        if (getSelectionState() != 1) return;
-
-        int w = getIconWidth();
-        int h = getIconHeight();
-        g.setColor(c.isEnabled() ? new Color(51, 51, 51) : new Color(122, 138, 153));
-        g.fillRect(x+4, y+4, w-8, h-8);
-
-        if (!c.isEnabled()) return;
-        g.setColor(new Color(81, 81, 81));
-        g.drawRect(x+4, y+4, w-9, h-9);
     }
 
     @Override
@@ -93,15 +80,20 @@ public class TCheckBox extends JCheckBox implements Icon, ActionListener {
     }
 
     public void actionPerformed(ActionEvent e) {
-        TCheckBox tcb = (TCheckBox)e.getSource();
+        TCheckBox tcb = (TCheckBox) e.getSource();
         if (tcb.getSelectionState() == 0)
             tcb.setSelected(false);
-
-        tcb.putClientProperty("SelectionState", tcb.getSelectionState() == 2 ? 0 :
-                tcb.getSelectionState() + 1);
-
+        tcb.putClientProperty("SelectionState", tcb.getSelectionState() == 2 ? 0 : tcb.getSelectionState() + 1);
         // test
-        System.out.println(">>>>IS SELECTED: "+tcb.isSelected());
-        System.out.println(">>>>IN MID STATE: "+(tcb.getSelectionState()==1));
+        System.out.println(">>>>IS SELECTED: " + tcb.isSelected());
+        System.out.println(">>>>IN MID STATE: " + (tcb.getSelectionState() == 1));
+    }
+
+    @Override
+    public boolean isSelected() {
+        if (MIDasSELECTED && (getSelectionState() > 0))
+            return true;
+        else
+            return super.isSelected();
     }
 }

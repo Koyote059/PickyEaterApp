@@ -15,34 +15,30 @@ public class RandomMealPlanGenerator implements MealPlanGenerator {
     public MealPlan generate(Collection<Meal> availableMeals, Nutrients requiredNutrients, int days, int mealsInADay) {
         MealPlanBuilder mealPlanBuilder = new PickyMealPlanBuilder();
         mealPlanBuilder.setBeginningDay(LocalDate.now());
-
-
-        for(int i=0; i<days; i++){
+        for (int i = 0; i < days; i++) {
             List<Meal> meals = new ArrayList<>(mealsInADay);
-            for(int j=0; j<mealsInADay; j++){
+            for (int j = 0; j < mealsInADay; j++) {
                 Meal meal = getRandomMeal(new ArrayList<>(availableMeals));
-                if(meals.contains(meal)){
+                if (meals.contains(meal)) {
                     j--;
                     continue;
                 }
                 meals.add(meal);
             }
             DailyMealPlanBuilder dailyMealPlanBuilder = new PickyDailyMealPlanBuilder();
-            List<Meal> normalizeMeals = normalizeMeals(requiredNutrients,meals,mealsInADay);
+            List<Meal> normalizeMeals = normalizeMeals(requiredNutrients, meals, mealsInADay);
             normalizeMeals.forEach(dailyMealPlanBuilder::addMeal);
             mealPlanBuilder.addDailyMealPlan(dailyMealPlanBuilder.build());
         }
-
-
         return mealPlanBuilder.build();
     }
 
-    private Meal getRandomMeal(List<Meal> availableMeals){
+    private Meal getRandomMeal(List<Meal> availableMeals) {
         Random random = new Random();
         return availableMeals.get(random.nextInt(availableMeals.size()));
     }
 
-    private List<Meal> normalizeMeals(Nutrients requiredNutrients, List<Meal> meals, int mealsInADay){
+    private List<Meal> normalizeMeals(Nutrients requiredNutrients, List<Meal> meals, int mealsInADay) {
         List<Meal> normalizedMeals = new ArrayList<>(mealsInADay);
         for (Meal meal : meals) {
             float mealCalories = meal.getNutrients().getCalories();
@@ -54,23 +50,17 @@ public class RandomMealPlanGenerator implements MealPlanGenerator {
             for (Ingredient ingredient : meal.getIngredients()) {
                 IngredientBuilder ingredientBuilder = new PickyIngredientBuilder(ingredient);
                 Quantity ingredientQuantity = ingredient.getQuantity();
-                ingredientBuilder.setQuantity(new PickyQuantity(
-                        ingredientQuantity.getAmount()*mealCaloriesRatio,
-                        ingredientQuantity.getQuantityType(),
-                        ingredientQuantity.getGramsPerQuantity()
-                ));
-
+                ingredientBuilder.setQuantity(new PickyQuantity(ingredientQuantity.getAmount() * mealCaloriesRatio, ingredientQuantity.getQuantityType(), ingredientQuantity.getGramsPerQuantity()));
                 NutrientsBuilder nutrientsBuilder = new PickyNutrientsBuilder();
                 Nutrients ingredientNutrients = ingredient.getNutrients();
-                nutrientsBuilder.setComplexCarbs(ingredientNutrients.getComplexCarbs()*mealCaloriesRatio);
-                nutrientsBuilder.setSimpleCarbs(ingredientNutrients.getSimpleCarbs()*mealCaloriesRatio);
-                nutrientsBuilder.setFibers(ingredientNutrients.getFibers()*mealCaloriesRatio);
-                nutrientsBuilder.setSaturatedFats(ingredientNutrients.getSaturatedFats()*mealCaloriesRatio);
-                nutrientsBuilder.setUnSaturatedFats(ingredientNutrients.getUnSaturatedFats()*mealCaloriesRatio);
-                nutrientsBuilder.setTransFats(ingredientNutrients.getTransFats()*mealCaloriesRatio);
-                nutrientsBuilder.setProteins(ingredientNutrients.getProteins()*mealCaloriesRatio);
-                nutrientsBuilder.setAlcohol(ingredientNutrients.getAlcohol()*mealCaloriesRatio);
-
+                nutrientsBuilder.setComplexCarbs(ingredientNutrients.getComplexCarbs() * mealCaloriesRatio);
+                nutrientsBuilder.setSimpleCarbs(ingredientNutrients.getSimpleCarbs() * mealCaloriesRatio);
+                nutrientsBuilder.setFibers(ingredientNutrients.getFibers() * mealCaloriesRatio);
+                nutrientsBuilder.setSaturatedFats(ingredientNutrients.getSaturatedFats() * mealCaloriesRatio);
+                nutrientsBuilder.setUnSaturatedFats(ingredientNutrients.getUnSaturatedFats() * mealCaloriesRatio);
+                nutrientsBuilder.setTransFats(ingredientNutrients.getTransFats() * mealCaloriesRatio);
+                nutrientsBuilder.setProteins(ingredientNutrients.getProteins() * mealCaloriesRatio);
+                nutrientsBuilder.setAlcohol(ingredientNutrients.getAlcohol() * mealCaloriesRatio);
                 ingredientBuilder.setNutrients(nutrientsBuilder.build());
                 mealBuilder.addIngredients(ingredientBuilder.build());
             }

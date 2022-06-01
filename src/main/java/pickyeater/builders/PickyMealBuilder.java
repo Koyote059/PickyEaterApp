@@ -2,10 +2,11 @@
 // Source code recreated from a .class file by IntelliJ IDEA
 // (powered by FernFlower decompiler)
 //
-
 package pickyeater.builders;
 
-import pickyeater.basics.food.*;
+import pickyeater.basics.food.Ingredient;
+import pickyeater.basics.food.Meal;
+import pickyeater.basics.food.PickyMeal;
 
 import java.util.*;
 
@@ -19,10 +20,6 @@ public class PickyMealBuilder implements MealBuilder {
     public PickyMealBuilder(Meal meal) {
         this.name = meal.getName();
         this.ingredients = meal.getIngredients();
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     public void addIngredients(Ingredient... ingredients) {
@@ -40,6 +37,10 @@ public class PickyMealBuilder implements MealBuilder {
     @Override
     public String getName() {
         return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     @Override

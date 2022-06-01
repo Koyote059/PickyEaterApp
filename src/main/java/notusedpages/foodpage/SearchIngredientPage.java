@@ -42,11 +42,9 @@ public class SearchIngredientPage extends PickyPage {
         btGroceries.setBackground(Color.decode("#FFFFFF"));
         btUser.setBackground(Color.decode("#FFFFFF"));
         btSettings.setBackground(Color.decode("#FFFFFF"));
-
         ingredientSearcherExecutor = ExecutorProvider.getIngredientSearcherExecutor();
-
         setLayout(new BorderLayout());
-        add(mainPanel,BorderLayout.CENTER);
+        add(mainPanel, BorderLayout.CENTER);
 
         /*
         // TODO: ingredient = first ingredient in index
@@ -56,7 +54,6 @@ public class SearchIngredientPage extends PickyPage {
         txtProteins.setText(Double.toString(meal.getNutrients().getProteins()));
         txtFats.setText(Double.toString(meal.getNutrients().getFats()));
          */
-
         setNavigationMenuListeners();
         //btDone.addActionListener(e -> MainFrame.changePage(PanelButtons.FOOD));
         listIngredients.addComponentListener(new ComponentAdapter() {
@@ -65,10 +62,8 @@ public class SearchIngredientPage extends PickyPage {
             @Override
             public void mouseReleased(MouseEvent e) {
                 super.mouseReleased(e);
-
-                Optional<Ingredient> ingredientOptional =
-                        ingredientSearcherExecutor.getIngredientByName((String) listIngredients.getSelectedValue());
-                if(ingredientOptional.isEmpty()){
+                Optional<Ingredient> ingredientOptional = ingredientSearcherExecutor.getIngredientByName((String) listIngredients.getSelectedValue());
+                if (ingredientOptional.isEmpty()) {
                     throw new RuntimeException("Missing ingredient from database : " + listIngredients.getSelectedValue());
                 } else {
                     Ingredient ingredient = ingredientOptional.get();
@@ -84,7 +79,7 @@ public class SearchIngredientPage extends PickyPage {
         });
     }
 
-    private void setNavigationMenuListeners(){
+    private void setNavigationMenuListeners() {
         ActionListener listener = e -> {
             String cmd = e.getActionCommand();
             MainFrame.changePage(new PanelButtonsConverter(cmd).Convert());
@@ -95,7 +90,6 @@ public class SearchIngredientPage extends PickyPage {
         btGroceries.addActionListener(listener);
         btDiet.addActionListener(listener);
     }
-
 
     @Override
     public void showPage() {

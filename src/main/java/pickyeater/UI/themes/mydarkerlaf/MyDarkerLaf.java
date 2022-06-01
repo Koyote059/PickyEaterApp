@@ -4,7 +4,7 @@ import com.formdev.flatlaf.FlatDarkLaf;
 
 public class MyDarkerLaf extends FlatDarkLaf {
     public static boolean setup() {
-        return setup( new MyDarkerLaf() );
+        return setup(new MyDarkerLaf());
     }
 
     @Override

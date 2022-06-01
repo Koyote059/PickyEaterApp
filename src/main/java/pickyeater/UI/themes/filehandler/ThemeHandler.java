@@ -13,21 +13,21 @@ public class ThemeHandler {
         }
     }
 
-    public static ThemesEnum ReadTheme(){
+    public static ThemesEnum ReadTheme() {
         String t = FileHandler.readFile();
-        if (t.equals("")){
+        if (t.equals("")) {
             FileHandler.createFile();
             FileHandler.writeFile(ThemesEnum.LIGHT_THEME);
             SystemTheme.theme1();
             return ThemesEnum.LIGHT_THEME;
         } else {
-            if (t.equals(ThemesEnum.LIGHT_THEME.toString())){
+            if (t.equals(ThemesEnum.LIGHT_THEME.toString())) {
                 SystemTheme.theme1();
                 return ThemesEnum.LIGHT_THEME;
-            } else if (t.equals(ThemesEnum.DARK_THEME.toString())){
+            } else if (t.equals(ThemesEnum.DARK_THEME.toString())) {
                 SystemTheme.theme2();
                 return ThemesEnum.DARK_THEME;
-            } else if (t.equals(ThemesEnum.GREEN_THEME.toString())){
+            } else if (t.equals(ThemesEnum.GREEN_THEME.toString())) {
                 SystemTheme.theme0();
                 return ThemesEnum.GREEN_THEME;
             } else {

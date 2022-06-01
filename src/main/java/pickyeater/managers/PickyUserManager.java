@@ -1,4 +1,3 @@
-
 package pickyeater.managers;
 
 import pickyeater.basics.groceries.Groceries;
@@ -31,7 +30,7 @@ public class PickyUserManager implements UserManager {
     }
 
     public Optional<User> getUser() {
-        if(user == null){
+        if (user == null) {
             Optional<User> userOptional = userDatabase.loadUser();
             userOptional.ifPresent(value -> user = value);
         }
@@ -45,7 +44,7 @@ public class PickyUserManager implements UserManager {
 
     @Override
     public Optional<Groceries> getGroceries() {
-        if(groceries==null){
+        if (groceries == null) {
             Optional<Groceries> groceriesOptional = groceriesDatabase.getGroceries();
             groceriesOptional.ifPresent(value -> groceries = value);
         }
@@ -55,7 +54,6 @@ public class PickyUserManager implements UserManager {
     @Override
     public void deleteGroceries(Groceries groceries) {
         groceriesDatabase.deleteGroceries(groceries);
-
         this.groceries = null;
     }
 

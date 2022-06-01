@@ -13,32 +13,29 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class MainFrame extends JFrame {
-
-    private final Container container;
+    private static final Map<String, PickyPage> pages = new HashMap<>();
     private static MainFrame instance;
-
-    private static final Map<String,PickyPage> pages = new HashMap<>();
+    private final Container container;
 
     public MainFrame() {
         container = getContentPane();
         CardLayout layout = new CardLayout();
         container.setLayout(layout);
-        pages.put(DailyProgressPage.class.getName(),new DailyProgressPage(this));
-        pages.put(UnavailableGroceriesPage.class.getName(),new UnavailableGroceriesPage(this));
-        pages.put(MealPlanPage.class.getName(),new MealPlanPage(this));
-        pages.put(UserPage.class.getName(),new UserPage(this));
-        pages.put(SettingsPage.class.getName(),new SettingsPage(this));
+        pages.put(DailyProgressPage.class.getName(), new DailyProgressPage(this));
+        pages.put(UnavailableGroceriesPage.class.getName(), new UnavailableGroceriesPage(this));
+        pages.put(MealPlanPage.class.getName(), new MealPlanPage(this));
+        pages.put(UserPage.class.getName(), new UserPage(this));
+        pages.put(SettingsPage.class.getName(), new SettingsPage(this));
         changePage(PanelButtons.PROGRESS);
         setVisible(true);
         instance = this;
-        setSize(new Dimension(677,507));
+        setSize(new Dimension(677, 507));
         setResizable(false);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setLocation(Toolkit.getDefaultToolkit().getScreenSize().width/2 - 677/2,
-                Toolkit.getDefaultToolkit().getScreenSize().height/2 - 507/2);
+        setLocation(Toolkit.getDefaultToolkit().getScreenSize().width / 2 - 677 / 2, Toolkit.getDefaultToolkit().getScreenSize().height / 2 - 507 / 2);
     }
 
-    public static void changePage(PanelButtons panelButton){
+    public static void changePage(PanelButtons panelButton) {
         switch (panelButton) {
             case PROGRESS -> pages.get(DailyProgressPage.class.getName()).showPage();
             case DIET -> pages.get(MealPlanPage.class.getName()).showPage();

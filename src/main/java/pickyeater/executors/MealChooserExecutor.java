@@ -4,12 +4,9 @@ import pickyeater.basics.food.Meal;
 import pickyeater.managers.EaterManager;
 import pickyeater.managers.FoodManager;
 
-import javax.swing.*;
-import java.util.List;
 import java.util.Set;
 
 public class MealChooserExecutor {
-
     private final EaterManager eaterManager;
 
     public MealChooserExecutor(EaterManager eaterManager) {

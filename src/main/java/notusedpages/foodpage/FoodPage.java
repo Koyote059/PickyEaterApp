@@ -16,7 +16,6 @@ import java.io.File;
 import java.io.IOException;
 
 public class FoodPage extends PickyPage {
-
     private JPanel mainPanel;
     private JButton btSettings;
     private JButton btDailyProgress;
@@ -33,36 +32,30 @@ public class FoodPage extends PickyPage {
 
     public FoodPage(JFrame parent) {
         super(parent);
-
         btDailyProgress.setBackground(Color.decode("#FFFFFF"));
         btDiet.setBackground(Color.decode("#FFFFFF"));
         btFood.setBackground(Color.decode("#B1EA9D"));
         btGroceries.setBackground(Color.decode("#FFFFFF"));
         btUser.setBackground(Color.decode("#FFFFFF"));
         btSettings.setBackground(Color.decode("#FFFFFF"));
-
-//        btSearchMeal.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-//        btSearchIngredient.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+        //        btSearchMeal.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+        //        btSearchIngredient.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
         try {
             BufferedImage binImage = ImageIO.read(new File("res/images/search1B.png"));
-            btSearchMeal.setIcon(new ImageIcon(binImage.getScaledInstance(30,30,Image.SCALE_SMOOTH)));
-            btSearchIngredient.setIcon(new ImageIcon(binImage.getScaledInstance(30,30,Image.SCALE_SMOOTH)));
+            btSearchMeal.setIcon(new ImageIcon(binImage.getScaledInstance(30, 30, Image.SCALE_SMOOTH)));
+            btSearchIngredient.setIcon(new ImageIcon(binImage.getScaledInstance(30, 30, Image.SCALE_SMOOTH)));
         } catch (IOException | NullPointerException ignored) {
         }
-
         //        btAddMeal.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
         //        btAddIngredient.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
         try {
             BufferedImage binImage = ImageIO.read(new File("res/images/addB.png"));
-            btAddMeal.setIcon(new ImageIcon(binImage.getScaledInstance(30,30,Image.SCALE_SMOOTH)));
-            btAddIngredient.setIcon(new ImageIcon(binImage.getScaledInstance(30,30,Image.SCALE_SMOOTH)));
+            btAddMeal.setIcon(new ImageIcon(binImage.getScaledInstance(30, 30, Image.SCALE_SMOOTH)));
+            btAddIngredient.setIcon(new ImageIcon(binImage.getScaledInstance(30, 30, Image.SCALE_SMOOTH)));
         } catch (IOException | NullPointerException ignored) {
         }
-
         listMeals.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         listIngredients.setSelectionMode((ListSelectionModel.SINGLE_SELECTION));
-
-
         btSearchMeal.addActionListener(e -> {
             PickyPage searchMealPage = new SearchMealPage(parent);
             searchMealPage.showPage();
@@ -80,14 +73,11 @@ public class FoodPage extends PickyPage {
             pickyPage.showPage();
         });
         setNavigationMenuListeners();
-
-
-
         setLayout(new BorderLayout());
-        add(mainPanel,BorderLayout.CENTER);
+        add(mainPanel, BorderLayout.CENTER);
     }
 
-    private void setNavigationMenuListeners(){
+    private void setNavigationMenuListeners() {
         ActionListener listener = e -> {
             String cmd = e.getActionCommand();
             MainFrame.changePage(new PanelButtonsConverter(cmd).Convert());
@@ -97,11 +87,11 @@ public class FoodPage extends PickyPage {
         btUser.addActionListener(listener);
         btGroceries.addActionListener(listener);
         btDiet.addActionListener(listener);
-        btSettings.setSize(new Dimension(200,85));
-        btUser.setSize(new Dimension(200,85));
-        btGroceries.setSize(new Dimension(200,85));
-        btFood.setSize(new Dimension(200,85));
-        btDiet.setSize(new Dimension(200,85));
+        btSettings.setSize(new Dimension(200, 85));
+        btUser.setSize(new Dimension(200, 85));
+        btGroceries.setSize(new Dimension(200, 85));
+        btFood.setSize(new Dimension(200, 85));
+        btDiet.setSize(new Dimension(200, 85));
     }
 
     @Override

@@ -2,7 +2,6 @@
 // Source code recreated from a .class file by IntelliJ IDEA
 // (powered by FernFlower decompiler)
 //
-
 package pickyeater.builders;
 
 import pickyeater.basics.food.NutrientType;
@@ -19,41 +18,13 @@ public class PickyNutrientsBuilder implements NutrientsBuilder {
     private float transFats;
     private float alcohol;
 
-    public void setProteins(float proteins) {
-        this.proteins = proteins;
-    }
-
-    public void setComplexCarbs(float complexCarbs) {
-        this.complexCarbs = complexCarbs;
+    @Override
+    public float getSimpleCarbs() {
+        return simpleCarbs;
     }
 
     public void setSimpleCarbs(float simpleCarbs) {
         this.simpleCarbs = simpleCarbs;
-    }
-
-    public void setFibers(float fibers) {
-        this.fibers = fibers;
-    }
-
-    public void setSaturatedFats(float saturatedFats) {
-        this.saturatedFats = saturatedFats;
-    }
-
-    public void setUnSaturatedFats(float unSaturatedFats) {
-        this.unSaturatedFats = unSaturatedFats;
-    }
-
-    public void setTransFats(float transFats) {
-        this.transFats = transFats;
-    }
-
-    public void setAlcohol(float alcohol) {
-        this.alcohol = alcohol;
-    }
-
-    @Override
-    public float getProteins() {
-        return proteins;
     }
 
     @Override
@@ -61,9 +32,8 @@ public class PickyNutrientsBuilder implements NutrientsBuilder {
         return complexCarbs;
     }
 
-    @Override
-    public float getSimpleCarbs() {
-        return simpleCarbs;
+    public void setComplexCarbs(float complexCarbs) {
+        this.complexCarbs = complexCarbs;
     }
 
     @Override
@@ -71,9 +41,35 @@ public class PickyNutrientsBuilder implements NutrientsBuilder {
         return fibers;
     }
 
+    public void setFibers(float fibers) {
+        this.fibers = fibers;
+    }
+
+    @Override
+    public float getProteins() {
+        return proteins;
+    }
+
+    public void setProteins(float proteins) {
+        this.proteins = proteins;
+    }
+
+    @Override
+    public float getAlcohol() {
+        return alcohol;
+    }
+
+    public void setAlcohol(float alcohol) {
+        this.alcohol = alcohol;
+    }
+
     @Override
     public float getSaturatedFats() {
         return saturatedFats;
+    }
+
+    public void setSaturatedFats(float saturatedFats) {
+        this.saturatedFats = saturatedFats;
     }
 
     @Override
@@ -81,9 +77,17 @@ public class PickyNutrientsBuilder implements NutrientsBuilder {
         return unSaturatedFats;
     }
 
+    public void setUnSaturatedFats(float unSaturatedFats) {
+        this.unSaturatedFats = unSaturatedFats;
+    }
+
     @Override
     public float getTransFats() {
         return transFats;
+    }
+
+    public void setTransFats(float transFats) {
+        this.transFats = transFats;
     }
 
     @Override
@@ -97,20 +101,13 @@ public class PickyNutrientsBuilder implements NutrientsBuilder {
     }
 
     @Override
-    public float getAlcohol() {
-        return alcohol;
-    }
-
-    @Override
     public float getCalories() {
         NutrientType p = NutrientType.PROTEIN;
         NutrientType c = NutrientType.CARBOHYDRATE;
         NutrientType f = NutrientType.FAT;
         NutrientType a = NutrientType.ALCOHOL;
-
-        return (float) (getProteins() * p.getCaloriesPerGram() + getCarbs() * c.getCaloriesPerGram() + getFats() * f.getCaloriesPerGram() + getAlcohol() * a.getCaloriesPerGram());
+        return getProteins() * p.getCaloriesPerGram() + getCarbs() * c.getCaloriesPerGram() + getFats() * f.getCaloriesPerGram() + getAlcohol() * a.getCaloriesPerGram();
     }
-
 
     public Nutrients build() {
         return new PickyNutrients(this.proteins, this.complexCarbs, this.simpleCarbs, this.fibers, this.saturatedFats, this.unSaturatedFats, this.transFats, this.alcohol);

@@ -5,7 +5,6 @@ import pickyeater.database.SQLutils.SQLExecutorManager;
 import java.sql.SQLException;
 
 public class SQLPickyEaterDB implements PickyEatersDatabase {
-
     private final IngredientsDatabase ingredientsDatabase;
     private final MealsDatabase mealsDatabase;
     private final UserDatabase userDatabase;
@@ -19,7 +18,6 @@ public class SQLPickyEaterDB implements PickyEatersDatabase {
             this.mealsDatabase = new SQLMealsDB(queryExecutor);
             this.userDatabase = new SQLUserDB(queryExecutor);
             this.groceriesDatabase = new SQLGroceriesDatabase(queryExecutor);
-
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }

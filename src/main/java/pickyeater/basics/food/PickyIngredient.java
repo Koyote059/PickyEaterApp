@@ -6,7 +6,6 @@ import java.util.Objects;
 /**
  * @author Claudio Di Maio
  */
-
 public class PickyIngredient implements Ingredient {
     private final Nutrients nutrients;
     private final String name;
@@ -23,8 +22,8 @@ public class PickyIngredient implements Ingredient {
     }
 
     @Override
-    public Nutrients getNutrients() {
-        return nutrients;
+    public Quantity getQuantity() {
+        return quantity;
     }
 
     @Override
@@ -33,13 +32,13 @@ public class PickyIngredient implements Ingredient {
     }
 
     @Override
-    public float getPrice() {
-        return price;
+    public Nutrients getNutrients() {
+        return nutrients;
     }
 
     @Override
-    public Quantity getQuantity() {
-        return quantity;
+    public float getPrice() {
+        return price;
     }
 
     @Override
@@ -48,14 +47,8 @@ public class PickyIngredient implements Ingredient {
     }
 
     @Override
-    public String toString() {
-        return "PickyIngredient{" +
-                "nutrients=" + nutrients +
-                ", name='" + name + '\'' +
-                ", price=" + price +
-                ", quantity=" + quantity +
-                ", tags=" + tags +
-                '}';
+    public int hashCode() {
+        return Objects.hash(name);
     }
 
     /**
@@ -72,7 +65,7 @@ public class PickyIngredient implements Ingredient {
     }
 
     @Override
-    public int hashCode() {
-        return Objects.hash(name);
+    public String toString() {
+        return "PickyIngredient{" + "nutrients=" + nutrients + ", name='" + name + '\'' + ", price=" + price + ", quantity=" + quantity + ", tags=" + tags + '}';
     }
 }

@@ -1,11 +1,11 @@
 package pickyeater.executors;
 
+import pickyeater.basics.mealplan.MealPlan;
+import pickyeater.basics.user.User;
 import pickyeater.builders.MealPlanBuilder;
 import pickyeater.builders.PickyMealPlanBuilder;
 import pickyeater.executors.searcher.MealSearcherExecutor;
 import pickyeater.managers.EaterManager;
-import pickyeater.basics.mealplan.MealPlan;
-import pickyeater.basics.user.User;
 import pickyeater.managers.UserManager;
 
 import java.util.Optional;

@@ -13,10 +13,8 @@ import java.util.TimeZone;
 public class DBManager {
     public static final String JDBC_Driver_SQLite = "org.sqlite.JDBC";
     public static final String JDBC_URL_SQLite = String.format("jdbc:sqlite:%s", "pickyEater.sqlite");
-
     public static final String JDBC_Driver_MySQL = "com.mysql.cj.jdbc.Driver";
     public static final String JDBC_URL_MySQL = "jdbc:mysql://localhost:3306/jdbc_schema?user=nicola&password=qwertyuio&serverTimezone=" + TimeZone.getDefault().getID();
-
     public static String JDBC_Driver = null;
     public static String JDBC_URL = null;
     static Connection connection;
@@ -45,7 +43,6 @@ public class DBManager {
         if (connection == null) {
             throw new IllegalStateException("Illegal request. Connection not established");
         }
-
         DatabaseMetaData md = connection.getMetaData();
         System.out.println("-- ResultSet Type --");
         System.out.println("Supports TYPE_FORWARD_ONLY: " + md.supportsResultSetType(ResultSet.TYPE_FORWARD_ONLY));

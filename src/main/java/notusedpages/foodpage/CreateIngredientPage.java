@@ -14,7 +14,6 @@ import java.awt.*;
 import java.awt.event.ActionListener;
 
 public class CreateIngredientPage extends PickyPage {
-
     private JPanel mainPanel;
     private JButton btSettings;
     private JButton btDailyProgress;
@@ -35,44 +34,34 @@ public class CreateIngredientPage extends PickyPage {
     private JTextField tfCarbs;
     private JTextField tfFats;
     private QuantityType quantityType;
-    private IngredientSearcherExecutor ingredientSearcherExecutor;
+    private final IngredientSearcherExecutor ingredientSearcherExecutor;
 
     public CreateIngredientPage(JFrame parent) {
         super(parent);
-
         setLayout(new BorderLayout());
-        add(mainPanel,BorderLayout.CENTER);
-
+        add(mainPanel, BorderLayout.CENTER);
         btDailyProgress.setBackground(Color.decode("#FFFFFF"));
         btDiet.setBackground(Color.decode("#FFFFFF"));
         btFood.setBackground(Color.decode("#B1EA9D"));
         btGroceries.setBackground(Color.decode("#FFFFFF"));
         btUser.setBackground(Color.decode("#FFFFFF"));
         btSettings.setBackground(Color.decode("#FFFFFF"));
-
         quantityType = QuantityType.GRAMS;
-
         CreateIngredientExecutor createIngredientExecutor = ExecutorProvider.getCreateIngredientExecutor();
         ingredientSearcherExecutor = ExecutorProvider.getIngredientSearcherExecutor();
-
         txtQuantity.setVisible(false);
         tfQuantity.setVisible(false);
         txtQuantityType.setVisible(false);
-
         setNavigationMenuListeners();
         //btCancel.addActionListener(e -> MainFrame.changePage(PanelButtons.FOOD));
         btSave.addActionListener(e -> {
-            IngredientBuilder ingredientBuilder = createIngredientExecutor.createIngredient(tfName.getText(),
-                    quantityType, tfQuantity.getText(), tfPrice.getText(), tfProteins.getText(),
-                    tfCarbs.getText(), tfFats.getText());
-
+            IngredientBuilder ingredientBuilder = createIngredientExecutor.createIngredient(tfName.getText(), quantityType, tfQuantity.getText(), tfPrice.getText(), tfProteins.getText(), tfCarbs.getText(), tfFats.getText());
             createIngredientExecutor.saveIngredient(ingredientBuilder.build());
-
             PickyPage createIngredientPage = new CreateIngredientPage(parent);
             createIngredientPage.showPage();
         });
         cbQuantityType.addActionListener(e -> {
-            if (cbQuantityType.getSelectedIndex() == 0){
+            if (cbQuantityType.getSelectedIndex() == 0) {
                 txtQuantity.setVisible(false);
                 tfQuantity.setVisible(false);
                 txtQuantityType.setVisible(false);
@@ -91,7 +80,7 @@ public class CreateIngredientPage extends PickyPage {
         });
     }
 
-    private void setNavigationMenuListeners(){
+    private void setNavigationMenuListeners() {
         ActionListener listener = e -> {
             String cmd = e.getActionCommand();
             setVisible(false);

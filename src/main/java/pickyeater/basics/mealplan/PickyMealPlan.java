@@ -5,8 +5,6 @@ import java.util.Collections;
 import java.util.List;
 
 public class PickyMealPlan implements MealPlan {
-
-
     private final List<DailyMealPlan> dailyMealPlans;
     private final LocalDate beginningDay;
 
@@ -27,9 +25,6 @@ public class PickyMealPlan implements MealPlan {
 
     @Override
     public String toString() {
-        return "PickyMealPlan{" +
-                "dailyMealPlans=" + dailyMealPlans +
-                ", beginningDay=" + beginningDay +
-                '}';
+        return "PickyMealPlan{" + "dailyMealPlans=" + dailyMealPlans + ", beginningDay=" + beginningDay + '}';
     }
 }

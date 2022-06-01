@@ -9,14 +9,13 @@ import pickyeater.managers.EaterManager;
 import pickyeater.managers.FoodManager;
 import pickyeater.managers.UserManager;
 
-import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
 public class MealPlanCreatorExecutor {
-
     private final EaterManager eaterManager;
     private final MealPlanBuilder mealPlanBuilder = new PickyMealPlanBuilder();
+
     public MealPlanCreatorExecutor(EaterManager eaterManager) {
         this.eaterManager = eaterManager;
     }
@@ -31,7 +30,7 @@ public class MealPlanCreatorExecutor {
         return userOptional.get();
     }
 
-    public Set<Meal> getMeals(){
+    public Set<Meal> getMeals() {
         FoodManager foodManager = eaterManager.getFoodManager();
         return foodManager.getMeals();
     }

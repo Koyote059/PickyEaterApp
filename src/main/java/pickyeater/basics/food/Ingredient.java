@@ -5,7 +5,6 @@ import java.util.List;
 /**
  * @author Claudio Di Maio
  */
-
 public interface Ingredient {
     Quantity getQuantity();
     String getName();

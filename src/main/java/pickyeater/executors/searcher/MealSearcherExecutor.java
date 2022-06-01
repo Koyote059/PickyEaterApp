@@ -28,10 +28,9 @@ public class MealSearcherExecutor extends JFrame {
     }
 
     public Object[] getAllMealsObj() {
-        ExecutorProvider executorProvider = new ExecutorProvider();
-        Set<Meal> mealSet = executorProvider.getEaterManager().getFoodManager().getMeals();
+        Set<Meal> mealSet = ExecutorProvider.getEaterManager().getFoodManager().getMeals();
         int tmpSize = mealSet.size();
-        Object objects[] = new Object[tmpSize];
+        Object[] objects = new Object[tmpSize];
         for (Iterator<Meal> it = mealSet.iterator(); it.hasNext(); tmpSize--) {
             Meal meal = it.next();
             objects[tmpSize - 1] = meal.getName();
@@ -44,8 +43,6 @@ public class MealSearcherExecutor extends JFrame {
         return foodManager.getMeal(mealName);
     }
 
-    public void createUIComponents(){
-
+    public void createUIComponents() {
     }
-
 }

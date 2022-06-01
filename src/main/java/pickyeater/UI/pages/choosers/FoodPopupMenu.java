@@ -4,11 +4,10 @@ import javax.swing.*;
 import java.awt.event.ActionListener;
 
 public class FoodPopupMenu extends JPopupMenu {
-
     private final JMenuItem deleteItem = new JMenuItem("Delete");
     private final JMenuItem editItem = new JMenuItem("Edit");
 
-    public FoodPopupMenu(){
+    public FoodPopupMenu() {
         add(deleteItem);
         add(editItem);
     }

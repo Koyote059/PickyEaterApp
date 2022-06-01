@@ -3,7 +3,6 @@ package pickyeater.basics.food;
 /**
  * @author Claudio Di Maio
  */
-
 public interface Nutrients {
     float getProteins();
     float getSimpleCarbs();

@@ -9,7 +9,6 @@ import java.util.Collections;
 import java.util.List;
 
 public class PickyDailyMealPlan implements DailyMealPlan {
-
     private final List<Meal> meals;
 
     public PickyDailyMealPlan(List<Meal> meals) {
@@ -24,14 +23,13 @@ public class PickyDailyMealPlan implements DailyMealPlan {
     @Override
     public Nutrients getNutrients() {
         NutrientsAccumulator accumulator = new PickyNutrientsAccumulator();
-        for(Meal meal: meals) accumulator.sumNutrients(meal.getNutrients());
+        for (Meal meal : meals)
+            accumulator.sumNutrients(meal.getNutrients());
         return accumulator.generateNutrients();
     }
 
     @Override
     public String toString() {
-        return "PickyDailyMealPlan{" +
-                "meals=" + meals +
-                '}';
+        return "PickyDailyMealPlan{" + "meals=" + meals + '}';
     }
 }

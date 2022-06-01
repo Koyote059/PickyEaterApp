@@ -1,23 +1,22 @@
 package pickyeater.UI.pages.registerpage;
 
-/**
- * @author Claudio Di Maio
- */
-
 import pickyeater.UI.pages.app.PickyPage;
+import pickyeater.UI.themes.ColorButtons;
 import pickyeater.UI.themes.filehandler.ThemeHandler;
 import pickyeater.UI.themes.filehandler.ThemesEnum;
 import pickyeater.basics.user.WeightGoal;
 import pickyeater.executors.user.RegisterExecutor;
-import pickyeater.UI.themes.ColorButtons;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.*;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.Objects;
 
 public class Register3 extends PickyPage {
     private JButton btLoseWeight;
@@ -30,67 +29,60 @@ public class Register3 extends PickyPage {
     private JLabel txtLW;
     private JLabel txtGW;
 
-    public Register3(RegisterExecutor registerExecutor,JFrame parent) {
+    public Register3(RegisterExecutor registerExecutor, JFrame parent) {
         super(parent);
-        //setSize(677, 507);    //pack();
-        //setLocation(Toolkit.getDefaultToolkit().getScreenSize().width/2 - 677/2,Toolkit.getDefaultToolkit().getScreenSize().height/2 - 507/2);
 
-
-        ColorButtons cB = new ColorButtons();
         setLayout(new BorderLayout());
-        add(mainPanel,BorderLayout.CENTER);
+        add(mainPanel, BorderLayout.CENTER);
         btLoseWeight.addActionListener(actionEvent -> {
             registerExecutor.getUserBuilder().setWeightVariationGoal(WeightGoal.LOSE_WEIGHT);
-
             next(registerExecutor);
         });
         btGainWeight.addActionListener(actionEvent -> {
             registerExecutor.getUserBuilder().setWeightVariationGoal(WeightGoal.INCREASE_WEIGHT);
-
             next(registerExecutor);
         });
         btMaintainWeight.addActionListener(actionEvent -> {
             registerExecutor.getUserBuilder().setWeightVariationGoal(WeightGoal.MAINTAIN_WEIGHT);
-
             next(registerExecutor);
         });
-
-    btBack.addComponentListener(new ComponentAdapter() { } );
+        btBack.addComponentListener(new ComponentAdapter() {
+        });
         btBack.addActionListener(actionEvent -> RegisterMainFrame.changePage(2));
         btLoseWeight.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseEntered(MouseEvent e) {
                 super.mouseEntered(e);
-                cB.ColorButtonWhite(btGainWeight);
-                cB.ColorButtonWhite(btMaintainWeight);
-                cB.ColorButtonGreen(btLoseWeight);
+                ColorButtons.ColorButtonWhite(btGainWeight);
+                ColorButtons.ColorButtonWhite(btMaintainWeight);
+                ColorButtons.ColorButtonGreen(btLoseWeight);
             }
         });
         btGainWeight.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseEntered(MouseEvent e) {
                 super.mouseEntered(e);
-                cB.ColorButtonGreen(btGainWeight);
-                cB.ColorButtonWhite(btMaintainWeight);
-                cB.ColorButtonWhite(btLoseWeight);
+                ColorButtons.ColorButtonGreen(btGainWeight);
+                ColorButtons.ColorButtonWhite(btMaintainWeight);
+                ColorButtons.ColorButtonWhite(btLoseWeight);
             }
         });
         btMaintainWeight.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseEntered(MouseEvent e) {
                 super.mouseEntered(e);
-                cB.ColorButtonWhite(btGainWeight);
-                cB.ColorButtonGreen(btMaintainWeight);
-                cB.ColorButtonWhite(btLoseWeight);
+                ColorButtons.ColorButtonWhite(btGainWeight);
+                ColorButtons.ColorButtonGreen(btMaintainWeight);
+                ColorButtons.ColorButtonWhite(btLoseWeight);
             }
         });
         MouseAdapter listener = new MouseAdapter() {
             @Override
             public void mouseExited(MouseEvent e) {
                 super.mouseExited(e);
-                cB.ColorButtonWhite(btGainWeight);
-                cB.ColorButtonWhite(btMaintainWeight);
-                cB.ColorButtonWhite(btLoseWeight);
+                ColorButtons.ColorButtonWhite(btGainWeight);
+                ColorButtons.ColorButtonWhite(btMaintainWeight);
+                ColorButtons.ColorButtonWhite(btLoseWeight);
             }
         };
         btGainWeight.addMouseListener(listener);
@@ -100,20 +92,20 @@ public class Register3 extends PickyPage {
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
-                if (new ThemeHandler().ReadTheme().equals(ThemesEnum.DARK_THEME)){
-                    new ThemeHandler().ChangeTheme(ThemesEnum.LIGHT_THEME);
+                if (Objects.equals(ThemeHandler.ReadTheme(), ThemesEnum.DARK_THEME)) {
+                    ThemeHandler.ChangeTheme(ThemesEnum.LIGHT_THEME);
                     draw();
                 } else {
-                    new ThemeHandler().ChangeTheme(ThemesEnum.DARK_THEME);
+                    ThemeHandler.ChangeTheme(ThemesEnum.DARK_THEME);
                     draw();
                 }
-
                 SwingUtilities.updateComponentTreeUI(parent);
             }
         });
     }
-    private void next(RegisterExecutor registerExecutor){
-        if (registerExecutor.getUserBuilder().getWeightVariationGoal() != null){
+
+    private void next(RegisterExecutor registerExecutor) {
+        if (registerExecutor.getUserBuilder().getWeightVariationGoal() != null) {
             RegisterMainFrame.changePage(4);
         }
     }
@@ -133,11 +125,9 @@ public class Register3 extends PickyPage {
             System.out.println("Couldn't process iamge");
         }
 
-        ColorButtons cB = new ColorButtons();
-        cB.ColorButtonWhite(btGainWeight);
-        cB.ColorButtonWhite(btMaintainWeight);
-        cB.ColorButtonWhite(btLoseWeight);
-
+        ColorButtons.ColorButtonWhite(btGainWeight);
+        ColorButtons.ColorButtonWhite(btMaintainWeight);
+        ColorButtons.ColorButtonWhite(btLoseWeight);
         new RegisterChangeTheme(txtChangeTheme);
     }
 

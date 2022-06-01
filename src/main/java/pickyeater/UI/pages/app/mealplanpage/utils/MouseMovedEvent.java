@@ -6,7 +6,5 @@ import java.awt.event.MouseMotionListener;
 public abstract class MouseMovedEvent implements MouseMotionListener {
     @Override
     public void mouseDragged(MouseEvent e) {
-
     }
-
 }

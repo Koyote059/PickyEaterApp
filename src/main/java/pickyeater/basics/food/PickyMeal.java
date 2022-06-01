@@ -2,7 +2,7 @@ package pickyeater.basics.food;
 
 import java.util.*;
 
-public class PickyMeal implements Meal{
+public class PickyMeal implements Meal {
     private final Set<Ingredient> ingredients;
     private final String name;
 
@@ -12,22 +12,13 @@ public class PickyMeal implements Meal{
     }
 
     @Override
-    public Set<Ingredient> getIngredients() {
-        return ingredients;
-    }
-
-    @Override
-    public float getWeight() {
-        float weight = 0;
-        for (Ingredient ingredient : ingredients) {
-            weight+=ingredient.getQuantity().getAmount();
-        }
-        return weight;
-    }
-
-    @Override
     public String getName() {
         return name;
+    }
+
+    @Override
+    public Set<Ingredient> getIngredients() {
+        return ingredients;
     }
 
     @Override
@@ -37,15 +28,22 @@ public class PickyMeal implements Meal{
             return new ArrayList<>();
         } else {
             List<String> tags = new LinkedList<>(ingredientIterator.next().getTags());
-
             while (ingredientIterator.hasNext()) {
                 Ingredient ingredient = ingredientIterator.next();
                 List<String> ingredientTags = ingredient.getTags();
                 tags.removeIf(tag -> !ingredientTags.contains(tag));
             }
-
             return tags;
         }
+    }
+
+    @Override
+    public float getWeight() {
+        float weight = 0;
+        for (Ingredient ingredient : ingredients) {
+            weight += ingredient.getQuantity().getAmount();
+        }
+        return weight;
     }
 
     /**

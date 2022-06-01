@@ -8,8 +8,7 @@ public class ColumnPopupmenu extends JPopupMenu {
     private final JMenuItem takeUp = new JMenuItem("Take up");
     private final JMenuItem takeDown = new JMenuItem("Take down");
 
-
-    public ColumnPopupmenu(){
+    public ColumnPopupmenu() {
         add(remove);
         add(takeUp);
         add(takeDown);
@@ -26,5 +25,4 @@ public class ColumnPopupmenu extends JPopupMenu {
     public void addTakeDownListener(ActionListener l) {
         takeDown.addActionListener(l);
     }
-
 }
