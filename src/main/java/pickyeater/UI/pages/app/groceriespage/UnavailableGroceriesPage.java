@@ -7,9 +7,13 @@ import pickyeater.UI.themes.ColorButtons;
 import pickyeater.executors.ExecutorProvider;
 import pickyeater.executors.GroceriesExecutor;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 
 public class UnavailableGroceriesPage extends PickyPage {
     private JButton btSettings;
@@ -19,6 +23,7 @@ public class UnavailableGroceriesPage extends PickyPage {
     private JButton btDiet;
     private JButton generateGroceriesButton;
     private JPanel mainPanel;
+    private JLabel txt404;
     private final GroceriesExecutor groceriesExecutor = ExecutorProvider.getGroceriesExecutor();
 
     public UnavailableGroceriesPage(JFrame parent) {
@@ -52,6 +57,13 @@ public class UnavailableGroceriesPage extends PickyPage {
 
     @Override
     public void showPage() {
+        txt404.setText("");
+        try {
+            BufferedImage img404 = ImageIO.read(new File("res/images/404.png"));
+            txt404.setIcon(new ImageIcon(img404.getScaledInstance(-1, 350, Image.SCALE_SMOOTH)));
+        } catch (IOException | NullPointerException ignored) {
+            System.out.println("Couldn't process image");
+        }
         if (groceriesExecutor.isGroceriesGenerated()) {
             PickyPage groceriesPage = new GroceriesPage(groceriesExecutor, parent);
             groceriesPage.showPage();
