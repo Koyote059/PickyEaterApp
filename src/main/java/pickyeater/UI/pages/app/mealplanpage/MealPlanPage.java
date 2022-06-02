@@ -165,7 +165,7 @@ public class MealPlanPage extends PickyPage {
     }
 
     private void setUpContent(DailyMealPlan dailyMealPlan) {
-        txtDay.setText(actualDate.format(DateTimeFormatter.ofPattern("dd/MMM/yyyy")));
+        txtDay.setText(actualDate.format(DateTimeFormatter.ofPattern("dd/MM/yyyy")));
         actualMealsList = dailyMealPlan.getMeals();
         DefaultTableModel tableModel = (DefaultTableModel) dailyMealsTable.getModel();
         tableModel.setRowCount(0);
