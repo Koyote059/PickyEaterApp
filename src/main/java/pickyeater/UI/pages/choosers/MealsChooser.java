@@ -185,6 +185,7 @@ public class MealsChooser extends JDialog {
         if (selectedItem == -1)
             return;
         Meal selectedMeal = searchedMeals.get(selectedItem);
+
         Nutrients mealNutrients = selectedMeal.getNutrients();
         PieChart pieChart = new PieChart(300, 300);
         pieChart.setTitle(selectedMeal.getName());

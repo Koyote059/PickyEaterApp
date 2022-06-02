@@ -15,6 +15,7 @@ public class NutrientsQuantityConverter {
         nutrientsBuilder.setSimpleCarbs(nutrients.getSimpleCarbs() * weightRatio);
         nutrientsBuilder.setComplexCarbs(nutrients.getComplexCarbs() * weightRatio);
         nutrientsBuilder.setFibers(nutrients.getFibers() * weightRatio);
-        return nutrientsBuilder.build();
+        Nutrients newNutrients = nutrientsBuilder.build();
+        return newNutrients;
     }
 }

@@ -149,11 +149,13 @@ public class MealCreator extends JDialog {
             mealBuilder.setName(StringsUtils.capitalize(mealName));
             Meal meal = mealBuilder.build();
             MealQuantityConverter mealQuantityConverter = executor.getMealQuantityConverter();
+
             Meal convertedMeal = mealQuantityConverter.convert(meal, 100);
             if (isMealEditing) {
                 executor.deleteMeal(startingMeal);
             }
             executor.saveMeal(convertedMeal);
+
             dispose();
         });
         buttonPanel.add(BorderLayout.LINE_END, doneButton);
