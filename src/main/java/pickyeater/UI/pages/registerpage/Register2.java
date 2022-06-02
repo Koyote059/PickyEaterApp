@@ -146,15 +146,15 @@ public class Register2 extends PickyPage {
         txtVA.setText("");
         try {
             BufferedImage imgS = ImageIO.read(new File("res/images/lifestyle/S.png"));
-            txtS.setIcon(new ImageIcon(imgS.getScaledInstance(-1, 90, Image.SCALE_SMOOTH)));
+            txtS.setIcon(new ImageIcon(imgS.getScaledInstance(-1, 95, Image.SCALE_SMOOTH)));
             BufferedImage imgSA = ImageIO.read(new File("res/images/lifestyle/SA.png"));
-            txtSA.setIcon(new ImageIcon(imgSA.getScaledInstance(-1, 90, Image.SCALE_SMOOTH)));
+            txtSA.setIcon(new ImageIcon(imgSA.getScaledInstance(-1, 95, Image.SCALE_SMOOTH)));
             BufferedImage imgA = ImageIO.read(new File("res/images/lifestyle/A.png"));
-            txtA.setIcon(new ImageIcon(imgA.getScaledInstance(-1, 90, Image.SCALE_SMOOTH)));
+            txtA.setIcon(new ImageIcon(imgA.getScaledInstance(-1, 95, Image.SCALE_SMOOTH)));
             BufferedImage imgVA = ImageIO.read(new File("res/images/lifestyle/VA.png"));
-            txtVA.setIcon(new ImageIcon(imgVA.getScaledInstance(-1, 90, Image.SCALE_SMOOTH)));
+            txtVA.setIcon(new ImageIcon(imgVA.getScaledInstance(-1, 95, Image.SCALE_SMOOTH)));
         } catch (IOException | NullPointerException ignored) {
-            System.out.println("Couldn't process iamge");
+            System.out.println("Couldn't process image");
         }
         draw();
         super.showPage();

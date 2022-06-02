@@ -116,13 +116,13 @@ public class Register3 extends PickyPage {
         txtGW.setText("");
         try {
             BufferedImage imgS = ImageIO.read(new File("res/images/goal/LW.png"));
-            txtLW.setIcon(new ImageIcon(imgS.getScaledInstance(-1, 90, Image.SCALE_SMOOTH)));
+            txtLW.setIcon(new ImageIcon(imgS.getScaledInstance(-1, 195, Image.SCALE_SMOOTH)));
             BufferedImage imgSA = ImageIO.read(new File("res/images/goal/MW.png"));
-            txtMW.setIcon(new ImageIcon(imgSA.getScaledInstance(-1, 90, Image.SCALE_SMOOTH)));
+            txtMW.setIcon(new ImageIcon(imgSA.getScaledInstance(-1, 195, Image.SCALE_SMOOTH)));
             BufferedImage imgA = ImageIO.read(new File("res/images/goal/GW.png"));
-            txtGW.setIcon(new ImageIcon(imgA.getScaledInstance(-1, 90, Image.SCALE_SMOOTH)));
+            txtGW.setIcon(new ImageIcon(imgA.getScaledInstance(-1, 195, Image.SCALE_SMOOTH)));
         } catch (IOException | NullPointerException ignored) {
-            System.out.println("Couldn't process iamge");
+            System.out.println("Couldn't process image");
         }
 
         ColorButtons.ColorButtonWhite(btGainWeight);
