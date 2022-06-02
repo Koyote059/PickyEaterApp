@@ -171,9 +171,17 @@ public class IngredientChooser extends JDialog {
         Ingredient selectedIngredient = searchedIngredients.get(selectedItem);
         QuantityType quantityType = selectedIngredient.getQuantity().getQuantityType();
         ingredientQuantityTypeLabel.setText(ValuesConverter.convertQuantityTypeValue(quantityType));
-        Nutrients ingredientNutrients = selectedIngredient.getNutrients();
+        Ingredient highLightedIngredient;
+        if(quantityType.equals(QuantityType.PIECES)){
+            IngredientQuantityConverter converter = new IngredientQuantityConverter();
+            highLightedIngredient = converter.convert(selectedIngredient,1);
+        } else {
+            highLightedIngredient = selectedIngredient;
+        }
+        Nutrients ingredientNutrients = highLightedIngredient.getNutrients();
+
         PieChart pieChart = new PieChart(300, 300);
-        pieChart.setTitle(selectedIngredient.getName());
+        pieChart.setTitle(highLightedIngredient.getName());
         pieChart.addSeries("Proteins", ingredientNutrients.getProteins());
         pieChart.addSeries("Carbs", ingredientNutrients.getCarbs());
         pieChart.addSeries("Fats", ingredientNutrients.getFats());

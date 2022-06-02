@@ -13,6 +13,7 @@ import pickyeater.basics.food.QuantityType;
 import pickyeater.builders.MealBuilder;
 import pickyeater.executors.ExecutorProvider;
 import pickyeater.executors.creators.CreateMealExecutor;
+import pickyeater.utils.IngredientQuantityConverter;
 import pickyeater.utils.MealQuantityConverter;
 import pickyeater.utils.MouseClickListener;
 import pickyeater.utils.StringsUtils;
@@ -173,9 +174,17 @@ public class MealCreator extends JDialog {
             return;
         Ingredient selectedIngredient = ingredients.get(selectedItem);
         QuantityType quantityType = selectedIngredient.getQuantity().getQuantityType();
-        Nutrients ingredientNutrients = selectedIngredient.getNutrients();
+        Ingredient highlightedIngredient;
+        if(quantityType.equals(QuantityType.PIECES)){
+            IngredientQuantityConverter converter = new IngredientQuantityConverter();
+            highlightedIngredient = converter.convert(selectedIngredient,1);
+        } else {
+            highlightedIngredient = selectedIngredient;
+        }
+
+        Nutrients ingredientNutrients = highlightedIngredient.getNutrients();
         PieChart pieChart = new PieChart(300, 300);
-        pieChart.setTitle(selectedIngredient.getName());
+        pieChart.setTitle(highlightedIngredient.getName());
         pieChart.addSeries("Proteins", ingredientNutrients.getProteins());
         pieChart.addSeries("Carbs", ingredientNutrients.getCarbs());
         pieChart.addSeries("Fats", ingredientNutrients.getFats());

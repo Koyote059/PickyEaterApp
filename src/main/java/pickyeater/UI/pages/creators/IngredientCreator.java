@@ -5,6 +5,7 @@ import pickyeater.builders.IngredientBuilder;
 import pickyeater.builders.NutrientsBuilder;
 import pickyeater.executors.ExecutorProvider;
 import pickyeater.executors.creators.CreateIngredientExecutor;
+import pickyeater.utils.NutrientsQuantityConverter;
 import pickyeater.utils.StringsUtils;
 
 import javax.swing.*;
@@ -20,6 +21,8 @@ public class IngredientCreator extends JDialog {
     private final JTextField carbsTextField;
     private final JTextField fatsTextField;
     private JLabel priceLabel;
+
+    private JLabel nutrientsLabel;
     private final CreateIngredientExecutor executor = ExecutorProvider.getCreateIngredientExecutor();
     private Ingredient startingIngredient = null;
     private boolean isIngredientEditing = false;
@@ -55,18 +58,21 @@ public class IngredientCreator extends JDialog {
                     gramsPerQuantityTextField.setVisible(false);
                     gramsQuantityLabel.setVisible(false);
                     priceLabel.setText("Price per 100 g: ");
+                    nutrientsLabel.setText("Nutrients per 100 g: ");
                 }
                 case "Pieces" -> {
                     gramsPerQuantityTextField.setVisible(true);
                     gramsQuantityLabel.setVisible(true);
                     gramsQuantityLabel.setText("Insert grams per piece: ");
                     priceLabel.setText("Price per piece: ");
+                    nutrientsLabel.setText("Nutrients per 1 pz: ");
                 }
                 case "Milliliters" -> {
                     gramsPerQuantityTextField.setVisible(true);
                     gramsQuantityLabel.setVisible(true);
                     gramsQuantityLabel.setText("Insert grams per 100 ml: ");
                     priceLabel.setText("Price per 100ml: ");
+                    nutrientsLabel.setText("Nutrients per 100 ml: ");
                 }
             }
         });
@@ -91,7 +97,7 @@ public class IngredientCreator extends JDialog {
         constraints.gridx = 1;
         constraints.gridy = 3;
         mainPanel.add(priceTextField, constraints);
-        JLabel nutrientsLabel = new JLabel("Nutrients per 100 gram: ");
+        nutrientsLabel = new JLabel("Nutrients per 100 gram: ");
         constraints.gridx = 0;
         constraints.gridy = 4;
         constraints.gridwidth = 2;
@@ -242,9 +248,12 @@ public class IngredientCreator extends JDialog {
         ingredientBuilder.setQuantity(new PickyQuantity(quantity, quantityType, gramsPerQuantity));
         ingredientBuilder.setPrice(price);
         NutrientsBuilder nutrientsBuilder = executor.getNutrientsBuilder();
+
         nutrientsBuilder.setComplexCarbs(carbs);
         nutrientsBuilder.setProteins(proteins);
         nutrientsBuilder.setUnSaturatedFats(fats);
+
+
         ingredientBuilder.setNutrients(nutrientsBuilder.build());
         return ingredientBuilder.build();
     }
