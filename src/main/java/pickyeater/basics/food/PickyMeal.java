@@ -41,7 +41,8 @@ public class PickyMeal implements Meal {
     public float getWeight() {
         float weight = 0;
         for (Ingredient ingredient : ingredients) {
-            weight += ingredient.getQuantity().getAmount();
+            Quantity quantity = ingredient.getQuantity();
+            weight += quantity.getAmount() * quantity.getGramsPerQuantity();
         }
         return weight;
     }
