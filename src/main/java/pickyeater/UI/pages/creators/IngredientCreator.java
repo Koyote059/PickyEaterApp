@@ -231,8 +231,8 @@ public class IngredientCreator extends JDialog {
             JOptionPane.showMessageDialog(getParent(), "Fats cannot be negative!");
             return null;
         }
-        if (fats + proteins + carbs > 100) {
-            JOptionPane.showMessageDialog(getParent(), "The nutrients' sum cannot be over 100 grams!");
+        if (fats + proteins + carbs > gramsPerQuantity*quantity) {
+            JOptionPane.showMessageDialog(getParent(), "The nutrients' sum cannot exceed the ingredient weight!");
             return null;
         }
         if (gramsPerQuantity < 0) {

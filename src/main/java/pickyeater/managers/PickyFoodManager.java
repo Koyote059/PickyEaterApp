@@ -35,6 +35,7 @@ public class PickyFoodManager implements FoodManager {
 
     public Optional<Meal> getMeal(String mealName) {
         return this.mealsDatabase.loadMeal(mealName);
+
     }
 
     public Optional<Ingredient> getIngredient(String ingredientName) {
