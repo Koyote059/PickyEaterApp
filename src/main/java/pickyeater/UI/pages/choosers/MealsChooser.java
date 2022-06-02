@@ -21,6 +21,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 
@@ -54,6 +55,7 @@ public class MealsChooser extends JDialog {
         JButton addMealButton = new JButton("Create meal");
         ingredientListPanel.add(addMealButton, constraints);
         add(BorderLayout.LINE_END, ingredientListPanel);
+        Comparator<? super Meal> comparator = Comparator.comparing(Meal::getName);
         mealQuantityTextField.setToolTipText("If left void it puts automatically 100g");
         addMealButton.addActionListener(l -> {
             MealCreator creator = new MealCreator(parent);
@@ -68,10 +70,12 @@ public class MealsChooser extends JDialog {
                 String text = searchBar.getText();
                 if(!StringsUtils.isAlpha(text)) searchedMeals = new ArrayList<>();
                 else searchedMeals = new ArrayList<>(mealSearcherExecutor.getMealsThatStartWith(text));
+                searchedMeals.sort(comparator);
                 populateMealList();
             }
         });
         searchedMeals = new ArrayList<>(mealSearcherExecutor.getEveryMeal());
+        searchedMeals.sort(comparator);
         populateMealList();
         mealsList.setMinimumSize(new Dimension(300, 300));
         mealsList.setToolTipText("Double click to check ingredients, right click to delete/edit meal");

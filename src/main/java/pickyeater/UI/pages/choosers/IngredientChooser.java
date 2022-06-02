@@ -19,6 +19,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 
@@ -57,6 +58,7 @@ public class IngredientChooser extends JDialog {
         panelSearchBar.add(BorderLayout.CENTER, searchBar);
         add(BorderLayout.NORTH, panelSearchBar);
         add(BorderLayout.LINE_END, ingredientListPanel);
+        Comparator<? super Ingredient> comparator = Comparator.comparing(Ingredient::getName);
         ingredientQuantityTextField.setToolTipText("If left void it puts automatically 100g/100ml/1pz");
         addIngredientButton.addActionListener(l -> {
             IngredientCreator creator = new IngredientCreator(parent);
@@ -71,10 +73,12 @@ public class IngredientChooser extends JDialog {
                 String text = searchBar.getText();
                 if(!StringsUtils.isAlpha(text)) searchedIngredients = new ArrayList<>();
                 else searchedIngredients = new ArrayList<>(ingredientsSearcherExecutor.getIngredientsThatStartWith(text));
+                searchedIngredients.sort(comparator);
                 populateIngredientsList();
             }
         });
         searchedIngredients = new ArrayList<>(ingredientsSearcherExecutor.getAllIngredients());
+        searchedIngredients.sort(comparator);
         populateIngredientsList();
         ingredientsList.setMinimumSize(new Dimension(300, 300));
         ingredientsList.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
