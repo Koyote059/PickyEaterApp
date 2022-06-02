@@ -24,33 +24,35 @@
             <properties/>
             <border type="none"/>
             <children>
-              <component id="5e72d" class="javax.swing.JButton" binding="btGainWeight">
+              <component id="bc737" class="javax.swing.JLabel" binding="txtLW">
                 <constraints>
-                  <grid row="0" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+                  <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
                 </constraints>
                 <properties>
-                  <text value="Gain Weight"/>
-                </properties>
-              </component>
-              <component id="c00e2" class="javax.swing.JButton" binding="btMaintainWeight">
-                <constraints>
-                  <grid row="1" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
-                </constraints>
-                <properties>
-                  <text value="Mainain Weight"/>
+                  <horizontalAlignment value="0"/>
+                  <horizontalTextPosition value="0"/>
+                  <text value="null"/>
                 </properties>
               </component>
               <component id="8ba2" class="javax.swing.JButton" binding="btLoseWeight">
                 <constraints>
-                  <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+                  <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
                 </constraints>
                 <properties>
                   <text value="Lose Weight"/>
                 </properties>
               </component>
+              <component id="c00e2" class="javax.swing.JButton" binding="btMaintainWeight">
+                <constraints>
+                  <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <text value="Mainain Weight"/>
+                </properties>
+              </component>
               <component id="4c77d" class="javax.swing.JLabel" binding="txtMW">
                 <constraints>
-                  <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+                  <grid row="1" column="1" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
                 </constraints>
                 <properties>
                   <horizontalAlignment value="0"/>
@@ -58,19 +60,17 @@
                   <text value="null"/>
                 </properties>
               </component>
-              <component id="bc737" class="javax.swing.JLabel" binding="txtLW">
+              <component id="5e72d" class="javax.swing.JButton" binding="btGainWeight">
                 <constraints>
-                  <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+                  <grid row="1" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
                 </constraints>
                 <properties>
-                  <horizontalAlignment value="0"/>
-                  <horizontalTextPosition value="0"/>
-                  <text value="null"/>
+                  <text value="Gain Weight"/>
                 </properties>
               </component>
               <component id="d3829" class="javax.swing.JLabel" binding="txtGW">
                 <constraints>
-                  <grid row="1" column="2" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+                  <grid row="0" column="2" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
                 </constraints>
                 <properties>
                   <horizontalAlignment value="0"/>

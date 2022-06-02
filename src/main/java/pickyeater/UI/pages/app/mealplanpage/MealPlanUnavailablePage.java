@@ -11,9 +11,13 @@ import pickyeater.basics.user.User;
 import pickyeater.executors.ExecutorProvider;
 import pickyeater.executors.MealPlanCreatorExecutor;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 
 public class MealPlanUnavailablePage extends PickyPage {
     private JPanel mainPanel;
@@ -24,10 +28,12 @@ public class MealPlanUnavailablePage extends PickyPage {
     private JButton btDiet;
     private JButton btCreateMealPlan;
     private JButton btAutomaticGenerateMealPlan;
+    private JLabel txt404;
     private final MealPlanCreatorExecutor mealPlanCreator;
 
     public MealPlanUnavailablePage(JFrame parent) {
         super(parent);
+        showImage();
         this.mealPlanCreator = ExecutorProvider.getMealPlanExecutor();
         ColorButtons.ColorLeftButtons(btDiet, btDailyProgress, btSettings, btGroceries, btUser);
         setLayout(new BorderLayout());
@@ -64,5 +70,14 @@ public class MealPlanUnavailablePage extends PickyPage {
         btDailyProgress.addActionListener(listener);
         btUser.addActionListener(listener);
         btGroceries.addActionListener(listener);
+    }
+    private void showImage(){
+        txt404.setText("");
+        try {
+            BufferedImage img404 = ImageIO.read(new File("res/images/404.png"));
+            txt404.setIcon(new ImageIcon(img404.getScaledInstance(-1, 350, Image.SCALE_SMOOTH)));
+        } catch (IOException | NullPointerException ignored) {
+            System.out.println("Couldn't process image");
+        }
     }
 }

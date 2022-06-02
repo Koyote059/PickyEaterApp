@@ -4,6 +4,8 @@ import pickyeater.UI.pages.app.MainFrame;
 import pickyeater.UI.pages.app.PickyPage;
 import pickyeater.UI.pages.choosers.IngredientChooser;
 import pickyeater.UI.pages.choosers.MealsChooser;
+import pickyeater.UI.pages.creators.IngredientCreator;
+import pickyeater.UI.pages.creators.MealCreator;
 import pickyeater.UI.pages.leftbuttons.PanelButtons;
 import pickyeater.UI.pages.leftbuttons.PanelButtonsConverter;
 import pickyeater.UI.pages.registerpage.RegisterMainFrame;
@@ -35,9 +37,14 @@ public class SettingsPage extends PickyPage {
     private JLabel txtImage;
     private JButton manageMealsButton;
     private JButton manageIngredientsButton;
+    private JLabel txtResetMeals;
+    private JLabel txtResetIngredients;
+    private JButton btAddMeal;
+    private JButton btAddIngredient;
 
     public SettingsPage(JFrame parent) {
         super(parent);
+        makeInvisible();    // TODO: Remove when ResetMeal and ResetIngredients work
         ColorButtons.ColorLeftButtons(btSettings, btDailyProgress, btDiet, btGroceries, btUser);
         ThemesEnum te = ThemeHandler.ReadTheme();
         if (te == ThemesEnum.LIGHT_THEME) {
@@ -96,10 +103,12 @@ public class SettingsPage extends PickyPage {
             MealsChooser chooser = new MealsChooser(parent);
             chooser.manageMeals();
         });
+        btAddMeal.addActionListener(e -> new MealCreator(parent).createMeal());
         manageIngredientsButton.addActionListener(l -> {
             IngredientChooser chooser = new IngredientChooser(parent);
             chooser.manageIngredients();
         });
+        btAddIngredient.addActionListener(e -> new IngredientCreator(parent).createIngredient());
         setNavigationMenuListeners();
     }
 
@@ -113,5 +122,15 @@ public class SettingsPage extends PickyPage {
         btUser.addActionListener(listener);
         btGroceries.addActionListener(listener);
         btDiet.addActionListener(listener);
+    }
+
+    /**
+     * makes invisible ResetMeal and ResetIngredient
+     */
+    private void makeInvisible(){
+        btResetMeals.setVisible(false);
+        btResetIngredients.setVisible(false);
+        txtResetMeals.setVisible(false);
+        txtResetIngredients.setVisible(false);
     }
 }
