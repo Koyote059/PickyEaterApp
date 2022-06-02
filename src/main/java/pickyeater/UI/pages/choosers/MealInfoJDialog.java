@@ -18,6 +18,9 @@ public class MealInfoJDialog extends JDialog {
 
     public MealInfoJDialog(Frame parent, Meal meal) {
         super(parent, meal.getName(), true);
+        setSize(parent.getSize());
+        setPreferredSize(parent.getSize());
+        setLocationRelativeTo(parent);
         setName("Meal Info - " + meal.getName());
         PieChart pieChart = new PieChart(410, 330);
         pieChart.addSeries("Proteins", 120);
@@ -44,7 +47,7 @@ public class MealInfoJDialog extends JDialog {
         ingredientsTable.removeEditor();
         JScrollPane scrollPane = new JScrollPane();
         scrollPane.setViewportView(ingredientsTable);
-        scrollPane.setPreferredSize(new Dimension(150, 250));
+        scrollPane.setPreferredSize(new Dimension(250, 250));
         mainPanel.add(BorderLayout.LINE_END, scrollPane);
         JPanel buttonPanel = new JPanel();
         buttonPanel.add(okButton);
