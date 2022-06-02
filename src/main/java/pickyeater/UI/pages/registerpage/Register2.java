@@ -10,7 +10,6 @@ import pickyeater.executors.user.RegisterExecutor;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ComponentAdapter;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
@@ -51,9 +50,10 @@ public class Register2 extends PickyPage {
             registerExecutor.getUserBuilder().setLifeStyle(LifeStyle.VERY_ACTIVE);
             next(registerExecutor);
         });
-        btBack.addComponentListener(new ComponentAdapter() {
+        btBack.addActionListener(e -> {
+            registerExecutor.getUserBuilder().setBodyFat(0);
+            RegisterMainFrame.changePage(1);
         });
-        btBack.addActionListener(actionEvent -> RegisterMainFrame.changePage(1));
         btSedentary.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseEntered(MouseEvent e) {

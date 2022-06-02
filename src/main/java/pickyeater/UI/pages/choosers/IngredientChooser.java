@@ -52,12 +52,12 @@ public class IngredientChooser extends JDialog {
         ingredientListPanel.add(addIngredientButton, constraints);
         JPanel panelSearchBar = new JPanel();
         panelSearchBar.setLayout(new BorderLayout());
-        JLabel txtSearchIngredient = new JLabel("Search Ingredients:");
+        JLabel txtSearchIngredient = new JLabel("Search Ingredients: ");
         panelSearchBar.add(BorderLayout.WEST, txtSearchIngredient);
         panelSearchBar.add(BorderLayout.CENTER, searchBar);
         add(BorderLayout.NORTH, panelSearchBar);
         add(BorderLayout.LINE_END, ingredientListPanel);
-        ingredientQuantityTextField.setToolTipText("If left void it puts automatically 100g");
+        ingredientQuantityTextField.setToolTipText("If left void it puts automatically 100g/100ml/1pz");
         addIngredientButton.addActionListener(l -> {
             IngredientCreator creator = new IngredientCreator(parent);
             creator.createIngredient();
@@ -99,7 +99,11 @@ public class IngredientChooser extends JDialog {
             IngredientQuantityConverter ingredientQuantityConverter = new IngredientQuantityConverter();
             int returningWeight;
             if (ingredientQuantityTextField.getText().isEmpty()) {
-                returningWeight = 100;
+                if (ingredient.getQuantity().getQuantityType() == QuantityType.PIECES) {    // If pices
+                    returningWeight = 1;
+                } else {        // if g/ml
+                    returningWeight = 100;
+                }
             } else {
                 returningWeight = StringToNumber.convertPositiveInteger(ingredientQuantityTextField.getText());
             }
@@ -124,7 +128,8 @@ public class IngredientChooser extends JDialog {
                             JOptionPane.showMessageDialog(parent, "Cannot delete this ingredient as it's being used!");
                             return;
                         }
-                        int choice = JOptionPane.showConfirmDialog(parent, "Are you sure you want to delete it?");
+                        int choice = JOptionPane.showConfirmDialog(parent, "Are you sure you want to delete it?",
+                                "", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
                         if (choice != JOptionPane.YES_OPTION)
                             return;
                         ingredientsSearcherExecutor.deleteIngredient(selectedIngredient);

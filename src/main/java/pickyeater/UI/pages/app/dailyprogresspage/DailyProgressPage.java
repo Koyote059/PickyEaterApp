@@ -6,7 +6,6 @@ import pickyeater.UI.pages.app.dailyprogresspage.utils.EatenMealsPopupMenu;
 import pickyeater.UI.pages.choosers.MealsChooser;
 import pickyeater.UI.pages.leftbuttons.PanelButtonsConverter;
 import pickyeater.UI.themes.ColorButtons;
-import pickyeater.basics.food.Ingredient;
 import pickyeater.basics.food.Meal;
 import pickyeater.executors.DailyProgressExecutor;
 import pickyeater.executors.ExecutorProvider;
@@ -84,7 +83,8 @@ public class DailyProgressPage extends PickyPage {
                     Meal selectedMeal = meals.get(selectedIndex);
                     EatenMealsPopupMenu popupMenu = new EatenMealsPopupMenu();
                     popupMenu.addRemoveListener(l -> {
-                        int choice = JOptionPane.showConfirmDialog(parent, "Are you sure you want to delete it?");
+                        int choice = JOptionPane.showConfirmDialog(parent, "Are you sure you want to delete it?",
+                                "", JOptionPane.YES_NO_OPTION);
                         if (choice != JOptionPane.YES_OPTION)
                             return;
                         dailyProgressExecutor.removeEatenMeal(selectedMeal);

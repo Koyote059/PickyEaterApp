@@ -41,8 +41,7 @@ public class Register1 extends PickyPage {
         this.userBuilder = registerExecutor.getUserBuilder();
         setLayout(new BorderLayout());
         add(mainPanel, BorderLayout.CENTER);
-        parent.setSize(677, 507);    //pack();
-        //setLocation(Toolkit.getDefaultToolkit().getScreenSize().width/2 - 677/2,Toolkit.getDefaultToolkit().getScreenSize().height/2 - 507/2);
+        parent.setSize(677, 507);
         // Sex
         btMale.addActionListener(actionEvent -> {
             ColorButtons.ColorButtonGreen(btMale);

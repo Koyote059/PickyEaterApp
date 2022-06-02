@@ -31,6 +31,8 @@ import java.util.Optional;
 public class MealCreator extends JDialog {
     private final JTable ingredientsTable;
     private final JTextField mealNameField;
+    private final JLabel txtInsertName = new JLabel("Insert here the meal's name: ");
+    private final JPanel panelInsertName = new JPanel();
     private final JLabel mealQuantityTypeLabel = new JLabel(" g");
     private final JTextField mealQuantityTextField = new JTextField("100");
     private JPanel mealPanel = null;
@@ -44,8 +46,12 @@ public class MealCreator extends JDialog {
         super(parent, "Meal Creator", true);
         JPanel mainPanel = new JPanel(new BorderLayout());
         JPanel customMealPanel = new JPanel(new BorderLayout());
-        mealNameField = new JTextField("Insert here the meal's name");
-        customMealPanel.add(BorderLayout.PAGE_START, mealNameField);
+        mealNameField = new JTextField();
+        panelInsertName.setLayout(new BorderLayout());
+        panelInsertName.add(BorderLayout.WEST, txtInsertName);
+        panelInsertName.add(BorderLayout.CENTER, mealNameField);
+
+        customMealPanel.add(BorderLayout.PAGE_START, panelInsertName);
         JButton addIngredientButton = new JButton("Add ingredient");
         addIngredientButton.addActionListener(e -> {
             IngredientChooser ingredientChooser = new IngredientChooser(parent);
@@ -103,7 +109,8 @@ public class MealCreator extends JDialog {
                     Ingredient selectedIngredient = ingredients.get(selectedIndex);
                     FoodPopupMenu popupMenu = new FoodPopupMenu();
                     popupMenu.addDeleteListener(l -> {
-                        int choice = JOptionPane.showConfirmDialog(parent, "Are you sure you want to delete it?");
+                        int choice = JOptionPane.showConfirmDialog(parent, "Are you sure you want to delete it?",
+                                "", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
                         if (choice != JOptionPane.YES_OPTION)
                             return;
                         ingredients.remove(selectedIngredient);
@@ -217,7 +224,7 @@ public class MealCreator extends JDialog {
                 case GRAMS -> suffix = "gr";
                 case MILLILITERS -> suffix = "ml";
                 case PIECES -> suffix = "pz";
-                default -> suffix = "";
+                default -> suffix = "Error";
             }
             DecimalFormat formatter = new DecimalFormat();
             formatter.setMaximumFractionDigits(2);

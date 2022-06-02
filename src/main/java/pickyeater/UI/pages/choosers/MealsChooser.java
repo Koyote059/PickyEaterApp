@@ -28,7 +28,7 @@ public class MealsChooser extends JDialog {
     private final MealChooserExecutor mealSearcherExecutor = ExecutorProvider.getMealChooserExecutor();
     private JTextField searchBar;
     private JList mealsList;
-    private JLabel txtSearchMeal = new JLabel("Search Meals:");
+    private JLabel txtSearchMeal = new JLabel("Search Meals: ");
     private JPanel panelSearchBar = new JPanel();
     private List<Meal> searchedMeals;
     private final JButton cancelButton;
