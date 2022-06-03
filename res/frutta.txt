@@ -1,7 +1,6 @@
 Nome                Grammi	Proteine	Fats	Carbs
 
-Albicocche
-Alchechengi
+Albicocche          2,49€/KG  1,4 g 0,4 g 11 g
 Ananas
 Arance
 Aronia
