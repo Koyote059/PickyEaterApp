@@ -47,4 +47,9 @@ public class PickyMealBuilder implements MealBuilder {
     public Set<Ingredient> getIngredients() {
         return Collections.unmodifiableSet(ingredients);
     }
+
+    @Override
+    public void remove(Ingredient selectedIngredient) {
+        ingredients.remove(selectedIngredient);
+    }
 }

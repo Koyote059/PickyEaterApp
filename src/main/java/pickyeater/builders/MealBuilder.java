@@ -15,4 +15,6 @@ public interface MealBuilder {
     String getName();
     void setName(String name);
     Set<Ingredient> getIngredients();
+
+    void remove(Ingredient selectedIngredient);
 }
