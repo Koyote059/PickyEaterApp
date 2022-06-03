@@ -5,6 +5,7 @@ import org.knowm.xchart.XChartPanel;
 import org.knowm.xchart.style.PieStyler;
 import org.knowm.xchart.style.Styler;
 import pickyeater.UI.pages.creators.MealCreator;
+import pickyeater.UI.pages.utils.NutrientsPieChart;
 import pickyeater.basics.food.Meal;
 import pickyeater.basics.food.Nutrients;
 import pickyeater.executors.ExecutorProvider;
@@ -28,6 +29,7 @@ import java.util.Optional;
 
 public class MealsChooser extends JDialog {
     private final MealChooserExecutor mealSearcherExecutor = ExecutorProvider.getMealChooserExecutor();
+    private final NutrientsPieChart nutrientsPieChart;
     private JTextField searchBar;
     private JList mealsList;
     private JLabel txtSearchMeal = new JLabel("Search Meals: ");
@@ -100,11 +102,7 @@ public class MealsChooser extends JDialog {
                 new MealInfoJDialog(parent, meal).run();
             }
         });
-        if (!searchedMeals.isEmpty()) {
-            showPieChart();
-        } else {
-            JOptionPane.showMessageDialog(parent, "Error 404, Meals not found", "Error 404", JOptionPane.ERROR_MESSAGE);
-        }
+
         cancelButton = new JButton("Cancel");
         cancelButton.addActionListener(e -> dispose());
         JButton doneButton = new JButton("Done");
@@ -172,6 +170,21 @@ public class MealsChooser extends JDialog {
                 }
             }
         });
+        nutrientsPieChart = new NutrientsPieChart();
+        mealPanel.add(BorderLayout.CENTER, nutrientsPieChart.getPanel());
+        mealQuantityPanel.add(BorderLayout.CENTER,mealQuantityTextField);
+        mealQuantityPanel.setBorder(new EmptyBorder(5,10,0,10));
+        mealQuantityTextField.setBorder(new EmptyBorder(0,5,0,0));
+        mealQuantityPanel.add(BorderLayout.LINE_END, mealQuantityTypeLabel);
+        mealPanel.add(BorderLayout.PAGE_END, mealQuantityPanel);
+        add(BorderLayout.LINE_START, mealPanel);
+
+        if (!searchedMeals.isEmpty()) {
+            showPieChart();
+        } else {
+            JOptionPane.showMessageDialog(parent, "Error 404, Meals not found", "Error 404", JOptionPane.ERROR_MESSAGE);
+        }
+
         JPanel buttonsPanel = new JPanel();
         buttonsPanel.add(cancelButton);
         buttonsPanel.add(doneButton);
@@ -199,30 +212,9 @@ public class MealsChooser extends JDialog {
         if (selectedItem == -1)
             return;
         Meal selectedMeal = searchedMeals.get(selectedItem);
-
         Nutrients mealNutrients = selectedMeal.getNutrients();
-        PieChart pieChart = new PieChart(410, 330);
-        pieChart.setTitle(selectedMeal.getName());
-        pieChart.addSeries("Proteins", mealNutrients.getProteins());
-        pieChart.addSeries("Carbs", mealNutrients.getCarbs());
-        pieChart.addSeries("Fats", mealNutrients.getFats());
-        PieStyler styler = pieChart.getStyler();
-        styler.setToolTipType(Styler.ToolTipType.yLabels);
-        styler.setToolTipsEnabled(true);
-        XChartPanel<PieChart> chartPanel = new XChartPanel<>(pieChart);
-        BorderLayout layout = (BorderLayout) getLayout();
-        JPanel previousPanel = (JPanel) layout.getLayoutComponent(BorderLayout.LINE_START);
-        if (previousPanel != null)
-            remove(previousPanel);
-        mealPanel.removeAll();
-        mealPanel.add(BorderLayout.CENTER, chartPanel);
-
-        mealQuantityPanel.add(BorderLayout.CENTER,mealQuantityTextField);
-        mealQuantityPanel.setBorder(new EmptyBorder(5,10,0,10));
-        mealQuantityTextField.setBorder(new EmptyBorder(0,5,0,0));
-        mealQuantityPanel.add(BorderLayout.LINE_END, mealQuantityTypeLabel);
-        mealPanel.add(BorderLayout.PAGE_END, mealQuantityPanel);
-        add(BorderLayout.LINE_START, mealPanel);
+        nutrientsPieChart.setNutrients(mealNutrients);
+        nutrientsPieChart.setName(selectedMeal.getName());
         revalidate();
     }
 
