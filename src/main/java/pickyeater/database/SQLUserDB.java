@@ -67,10 +67,10 @@ public class SQLUserDB implements UserDatabase {
                 throw new SQLException("Illegal name: " + user.getName());
             SQLUnSafeQueryExecutor executor = queryExecutor.getUnSafeQueryExecutor();
             executor.deleteFromUserTable(user.getName());
-            //executor.deleteFromDailyMealsTable(user.getName()); In teoria questi 4
-            //executor.deleteFromEatenMealsTable(user.getName()); non dovrebbero servire
-            //executor.deleteFromMealPlanTable(user.getName());
-            //executor.deleteFromDailyProgressesTable(user.getName());
+            executor.deleteFromDailyMealsTable(user.getName());
+            executor.deleteFromEatenMealsTable(user.getName());
+            executor.deleteFromMealPlanTable(user.getName());
+            executor.deleteFromDailyProgressesTable(user.getName());
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
