@@ -74,7 +74,7 @@ public class MealsChooser extends JDialog {
         searchedMeals = new ArrayList<>(mealSearcherExecutor.getEveryMeal());
         searchedMeals.sort(comparator);
         populateMealList();
-        mealsList.setMinimumSize(new Dimension(300, 300));
+        mealsList.setMinimumSize(new Dimension(250, 250));
         if(isChoosing){
             mealsList.setToolTipText("Double click to check ingredients, right click to delete/edit meal");
         } else {
@@ -201,7 +201,7 @@ public class MealsChooser extends JDialog {
         Meal selectedMeal = searchedMeals.get(selectedItem);
 
         Nutrients mealNutrients = selectedMeal.getNutrients();
-        PieChart pieChart = new PieChart(300, 300);
+        PieChart pieChart = new PieChart(410, 330);
         pieChart.setTitle(selectedMeal.getName());
         pieChart.addSeries("Proteins", mealNutrients.getProteins());
         pieChart.addSeries("Carbs", mealNutrients.getCarbs());

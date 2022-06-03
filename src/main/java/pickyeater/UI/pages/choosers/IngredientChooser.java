@@ -77,7 +77,7 @@ public class IngredientChooser extends JDialog {
         searchedIngredients = new ArrayList<>(ingredientsSearcherExecutor.getAllIngredients());
         searchedIngredients.sort(comparator);
         populateIngredientsList();
-        ingredientsList.setMinimumSize(new Dimension(300, 300));
+        ingredientsList.setMinimumSize(new Dimension(250, 250));
         ingredientsList.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
         ingredientsList.addMouseListener(new MouseAdapter() {
             @Override
@@ -194,7 +194,7 @@ public class IngredientChooser extends JDialog {
         }
         Nutrients ingredientNutrients = highLightedIngredient.getNutrients();
 
-        PieChart pieChart = new PieChart(300, 300);
+        PieChart pieChart = new PieChart(410, 330);
         pieChart.setTitle(highLightedIngredient.getName());
         pieChart.addSeries("Proteins", ingredientNutrients.getProteins());
         pieChart.addSeries("Carbs", ingredientNutrients.getCarbs());
