@@ -15,6 +15,7 @@ import pickyeater.utils.StringToNumber;
 import pickyeater.utils.StringsUtils;
 
 import javax.swing.*;
+import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
@@ -34,10 +35,13 @@ public class MealsChooser extends JDialog {
     private List<Meal> searchedMeals;
     private final JButton cancelButton;
     private Meal returningMeal = null;
-    private JPanel mealPanel = null;
+    private JPanel mealPanel = new JPanel(new BorderLayout());
     private final JTextField mealQuantityTextField = new JTextField();
-    private final JPanel mealQuantityPanel = new JPanel(new GridBagLayout());
+    private final JPanel mealQuantityPanel = new JPanel(new BorderLayout());
     private final JLabel mealQuantityTypeLabel = new JLabel("g");
+
+    private final JPanel centerPanel = new JPanel(new GridLayout(1,2));
+    private boolean isChoosing;
 
     public MealsChooser(JFrame parent) {
         super(parent, "Meals Chooser", true);
@@ -46,24 +50,14 @@ public class MealsChooser extends JDialog {
         panelSearchBar.add(BorderLayout.WEST, txtSearchMeal);
         panelSearchBar.add(BorderLayout.CENTER, searchBar);
         add(BorderLayout.NORTH, panelSearchBar);
-        JPanel ingredientListPanel = new JPanel(new GridBagLayout());
-        GridBagConstraints constraints = new GridBagConstraints();
-        constraints.gridx = 0;
-        constraints.gridy = 0;
-        ingredientListPanel.add(new JScrollPane(mealsList), constraints);
-        constraints.gridy = 1;
-        JButton addMealButton = new JButton("Create meal");
-        ingredientListPanel.add(addMealButton, constraints);
-        add(BorderLayout.LINE_END, ingredientListPanel);
+        JPanel ingredientListPanel = new JPanel(new BorderLayout());
+
+        ingredientListPanel.add(BorderLayout.CENTER, new JScrollPane(mealsList));
+        add(BorderLayout.CENTER,centerPanel);
+        centerPanel.add(mealPanel);
+        centerPanel.add(ingredientListPanel);
         Comparator<? super Meal> comparator = Comparator.comparing(Meal::getName);
         mealQuantityTextField.setToolTipText("If left void it puts automatically 100g");
-        addMealButton.addActionListener(l -> {
-            MealCreator creator = new MealCreator(parent);
-            creator.createMeal();
-            searchedMeals = new ArrayList<>(mealSearcherExecutor.getEveryMeal());
-            populateMealList();
-            showPieChart();
-        });
         searchBar.addKeyListener(new KeyAdapter() {
             @Override
             public void keyTyped(KeyEvent e) {
@@ -78,7 +72,11 @@ public class MealsChooser extends JDialog {
         searchedMeals.sort(comparator);
         populateMealList();
         mealsList.setMinimumSize(new Dimension(300, 300));
-        mealsList.setToolTipText("Double click to check ingredients, right click to delete/edit meal");
+        if(isChoosing){
+            mealsList.setToolTipText("Double click to check ingredients, right click to delete/edit meal");
+        } else {
+            mealsList.setToolTipText("Double click to check ingredients");
+        }
         mealsList.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
         mealsList.addMouseListener(new MouseAdapter() {
             @Override
@@ -127,6 +125,7 @@ public class MealsChooser extends JDialog {
         mealsList.addMouseListener(new MouseClickListener() {
             @Override
             public void mouseClicked(MouseEvent e) {
+                if(isChoosing) return;
                 if (SwingUtilities.isRightMouseButton(e)) {
                     Point point = MouseInfo.getPointerInfo().getLocation();
                     Point framePoint = parent.getLocation();
@@ -204,18 +203,13 @@ public class MealsChooser extends JDialog {
         JPanel previousPanel = (JPanel) layout.getLayoutComponent(BorderLayout.LINE_START);
         if (previousPanel != null)
             remove(previousPanel);
-        if (mealPanel != null)
-            remove(mealPanel);
-        mealPanel = new JPanel(new BorderLayout());
-        mealPanel.add(BorderLayout.PAGE_START, chartPanel);
-        GridBagConstraints constraints = new GridBagConstraints();
-        constraints.gridx = constraints.gridy = 0;
-        constraints.fill = 100;
-        constraints.gridwidth = 1;
-        mealQuantityPanel.add(mealQuantityTextField, constraints);
-        constraints.gridx = 20;
-        constraints.gridwidth = 1;
-        mealQuantityPanel.add(mealQuantityTypeLabel, constraints);
+        mealPanel.removeAll();
+        mealPanel.add(BorderLayout.CENTER, chartPanel);
+
+        mealQuantityPanel.add(BorderLayout.CENTER,mealQuantityTextField);
+        mealQuantityPanel.setBorder(new EmptyBorder(5,10,0,10));
+        mealQuantityTextField.setBorder(new EmptyBorder(0,5,0,0));
+        mealQuantityPanel.add(BorderLayout.LINE_END, mealQuantityTypeLabel);
         mealPanel.add(BorderLayout.PAGE_END, mealQuantityPanel);
         add(BorderLayout.LINE_START, mealPanel);
         revalidate();
@@ -224,13 +218,15 @@ public class MealsChooser extends JDialog {
     public void manageMeals() {
         cancelButton.setVisible(false);
         mealQuantityPanel.setVisible(false);
+        isChoosing = false;
         setVisible(true);
     }
 
     public Optional<Meal> getMeal() {
-        setVisible(true);
         cancelButton.setVisible(true);
         mealQuantityPanel.setVisible(true);
+        isChoosing = true;
+        setVisible(true);
         return Optional.ofNullable(returningMeal);
     }
 }

@@ -13,6 +13,7 @@ import pickyeater.executors.searcher.IngredientSearcherExecutor;
 import pickyeater.utils.*;
 
 import javax.swing.*;
+import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
@@ -29,44 +30,37 @@ public class IngredientChooser extends JDialog {
     private final JList ingredientsList;
     private List<Ingredient> searchedIngredients;
     private final JButton cancelButton;
-    private JPanel mealPanel = null;
+    private JPanel mealPanel = new JPanel(new BorderLayout());
     private Ingredient returningIngredient = null;
-    private final JPanel ingredientQuantityPanel = new JPanel(new GridBagLayout());
+    private final JPanel ingredientQuantityPanel = new JPanel(new BorderLayout());
     private final JTextField ingredientQuantityTextField = new JTextField();
     private final JLabel ingredientQuantityTypeLabel = new JLabel(" g");
+    private final JPanel centerPanel = new JPanel(new GridLayout(1,2));
+    private boolean isChoosing = false;
 
     public IngredientChooser(JFrame parent) {
         super(parent, "Ingredient Chooser", true);
         add(new JPanel());
         searchBar = new JTextField();
         ingredientsList = new JList();
-        ingredientsList.setToolTipText("Right click to delete/edit ingredient");
+        if(!isChoosing){
+            ingredientsList.setToolTipText("Right click to delete/edit ingredient");
+        }
         setLayout(new BorderLayout());
-        JPanel ingredientListPanel = new JPanel(new GridBagLayout());
+        JPanel ingredientListPanel = new JPanel(new BorderLayout());
         JScrollPane scrollPane = new JScrollPane(ingredientsList);
-        GridBagConstraints constraints = new GridBagConstraints();
-        constraints.gridx = 0;
-        constraints.gridy = 0;
-        ingredientListPanel.add(scrollPane, constraints);
-        JButton addIngredientButton = new JButton("Create ingredient");
-        constraints.gridy = 1;
-        ingredientListPanel.add(addIngredientButton, constraints);
+        ingredientListPanel.add(BorderLayout.CENTER, scrollPane);
         JPanel panelSearchBar = new JPanel();
         panelSearchBar.setLayout(new BorderLayout());
         JLabel txtSearchIngredient = new JLabel("Search Ingredients: ");
         panelSearchBar.add(BorderLayout.WEST, txtSearchIngredient);
         panelSearchBar.add(BorderLayout.CENTER, searchBar);
         add(BorderLayout.NORTH, panelSearchBar);
-        add(BorderLayout.LINE_END, ingredientListPanel);
+        add(BorderLayout.CENTER,centerPanel);
+        centerPanel.add(mealPanel);
+        centerPanel.add(ingredientListPanel);
         Comparator<? super Ingredient> comparator = Comparator.comparing(Ingredient::getName);
         ingredientQuantityTextField.setToolTipText("If left void it puts automatically 100g/100ml/1pz");
-        addIngredientButton.addActionListener(l -> {
-            IngredientCreator creator = new IngredientCreator(parent);
-            creator.createIngredient();
-            searchedIngredients = new ArrayList<>(ingredientsSearcherExecutor.getAllIngredients());
-            populateIngredientsList();
-            showPieChart();
-        });
         searchBar.addKeyListener(new KeyAdapter() {
             @Override
             public void keyTyped(KeyEvent e) {
@@ -117,6 +111,7 @@ public class IngredientChooser extends JDialog {
         ingredientsList.addMouseListener(new MouseClickListener() {
             @Override
             public void mouseClicked(MouseEvent e) {
+                if(isChoosing) return;
                 if (SwingUtilities.isRightMouseButton(e)) {
                     Point point = MouseInfo.getPointerInfo().getLocation();
                     Point framePoint = parent.getLocation();
@@ -202,18 +197,14 @@ public class IngredientChooser extends JDialog {
         JPanel previousPanel = (JPanel) layout.getLayoutComponent(BorderLayout.LINE_START);
         if (previousPanel != null)
             remove(previousPanel);
-        if (mealPanel != null)
-            remove(mealPanel);
-        mealPanel = new JPanel(new BorderLayout());
-        mealPanel.add(BorderLayout.PAGE_START, chartPanel);
-        GridBagConstraints constraints = new GridBagConstraints();
-        constraints.gridx = constraints.gridy = 0;
-        constraints.ipadx = 1;
-        constraints.gridwidth = 20;
-        ingredientQuantityPanel.add(ingredientQuantityTextField, constraints);
-        constraints.gridx = 20;
-        constraints.gridwidth = 1;
-        ingredientQuantityPanel.add(ingredientQuantityTypeLabel, constraints);
+        mealPanel.removeAll();
+        mealPanel.add(BorderLayout.CENTER, chartPanel);
+        ingredientQuantityPanel.setBorder(new EmptyBorder(5,10,0,10));
+        ingredientQuantityTextField.setBorder(new EmptyBorder(0,5,0,0));
+        ingredientQuantityPanel.removeAll();
+        ingredientQuantityPanel.add(BorderLayout.CENTER,ingredientQuantityTextField);
+
+        ingredientQuantityPanel.add(BorderLayout.LINE_END,ingredientQuantityTypeLabel);
         mealPanel.add(BorderLayout.PAGE_END, ingredientQuantityPanel);
         add(BorderLayout.LINE_START, mealPanel);
         revalidate();
@@ -222,13 +213,15 @@ public class IngredientChooser extends JDialog {
     public void manageIngredients() {
         cancelButton.setVisible(false);
         ingredientQuantityPanel.setVisible(false);
+        isChoosing = false;
         setVisible(true);
     }
 
     public Optional<Ingredient> getIngredient() {
-        setVisible(true);
         cancelButton.setVisible(true);
         ingredientQuantityPanel.setVisible(true);
+        isChoosing = true;
+        setVisible(true);
         return Optional.ofNullable(returningIngredient);
     }
 }
