@@ -94,6 +94,7 @@ public class IngredientChooser extends JDialog {
         JButton doneButton = new JButton("Done");
         doneButton.addActionListener(e -> {
             int selectedItem = ingredientsList.getSelectedIndex();
+            if(selectedItem==-1) return;
             Ingredient ingredient = searchedIngredients.get(selectedItem);
             IngredientQuantityConverter ingredientQuantityConverter = new IngredientQuantityConverter();
             int returningWeight;
