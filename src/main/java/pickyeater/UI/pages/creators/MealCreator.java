@@ -4,7 +4,6 @@ import org.knowm.xchart.PieChart;
 import org.knowm.xchart.XChartPanel;
 import org.knowm.xchart.style.PieStyler;
 import org.knowm.xchart.style.Styler;
-import pickyeater.UI.pages.choosers.FoodPopupMenu;
 import pickyeater.UI.pages.choosers.IngredientChooser;
 import pickyeater.basics.food.Ingredient;
 import pickyeater.basics.food.Meal;
@@ -107,6 +106,7 @@ public class MealCreator extends JDialog {
                     if (selectedIndex < 0)
                         return;
                     Ingredient selectedIngredient = ingredients.get(selectedIndex);
+                    /*
                     FoodPopupMenu popupMenu = new FoodPopupMenu();
                     popupMenu.addDeleteListener(l -> {
                         int choice = JOptionPane.showConfirmDialog(parent, "Are you sure you want to delete it?",
@@ -117,6 +117,8 @@ public class MealCreator extends JDialog {
                         draw();
                     });
                     popupMenu.show(parent, realPoint.x, realPoint.y);
+
+                     */
                 }
             }
         });

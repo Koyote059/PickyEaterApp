@@ -37,6 +37,9 @@ public class IngredientChooser extends JDialog {
     private final JLabel ingredientQuantityTypeLabel = new JLabel(" g");
     private final JPanel centerPanel = new JPanel(new GridLayout(1,2));
     private boolean isChoosing = false;
+    private JPopupMenu popup;
+    private final JMenuItem deleteItem = new JMenuItem("Delete");
+    private final JMenuItem editItem = new JMenuItem("Edit");
 
     public IngredientChooser(JFrame parent) {
         super(parent, "Ingredient Chooser", true);
@@ -60,7 +63,7 @@ public class IngredientChooser extends JDialog {
         centerPanel.add(mealPanel);
         centerPanel.add(ingredientListPanel);
         Comparator<? super Ingredient> comparator = Comparator.comparing(Ingredient::getName);
-        ingredientQuantityTextField.setToolTipText("If left void it puts automatically 100g/100ml/1pz");
+        ingredientQuantityTextField.setToolTipText("Left void it'll put automatically 100g/100ml/1pz");
         searchBar.addKeyListener(new KeyAdapter() {
             @Override
             public void keyTyped(KeyEvent e) {
@@ -121,14 +124,22 @@ public class IngredientChooser extends JDialog {
                         return;
                     ingredientsList.setSelectedIndex(selectedIndex);
                     Ingredient selectedIngredient = searchedIngredients.get(selectedIndex);
-                    FoodPopupMenu popupMenu = new FoodPopupMenu();
-                    popupMenu.addDeleteListener(l -> {
+                    popup = new JPopupMenu();
+                    // add menu items to popup
+                    popup.add(deleteItem);
+                    popup.addSeparator();
+                    popup.add(editItem);
+                    ingredientsList.addMouseListener(new MouseAdapter() {
+                        public void mouseReleased(MouseEvent me) {
+                            showPopup(me); // showPopup() is our own user-defined method
+                        }
+                    });
+                    deleteItem.addActionListener(l -> {
                         if (ingredientsSearcherExecutor.isIngredientUsed(selectedIngredient)) {
-                            JOptionPane.showMessageDialog(parent, "Cannot delete this ingredient as it's being used!");
+                            JOptionPane.showMessageDialog(parent, "Cannot delete this meal as it's being used!");
                             return;
                         }
-                        int choice = JOptionPane.showConfirmDialog(parent, "Are you sure you want to delete it?",
-                                "", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+                        int choice = JOptionPane.showConfirmDialog(parent, "Are you sure you want to delete it?");
                         if (choice != JOptionPane.YES_OPTION)
                             return;
                         ingredientsSearcherExecutor.deleteIngredient(selectedIngredient);
@@ -136,15 +147,14 @@ public class IngredientChooser extends JDialog {
                         populateIngredientsList();
                         showPieChart();
                     });
-                    popupMenu.addEditListener(l -> {
+                    editItem.addActionListener(l -> {
                         IngredientCreator creator = new IngredientCreator(parent);
                         creator.editIngredient(selectedIngredient);
-                        String name = searchBar.getText();
-                        searchedIngredients = new ArrayList<>(ingredientsSearcherExecutor.getIngredientsThatStartWith(name));
+                        String text = searchBar.getText();
+                        searchedIngredients = new ArrayList<>(ingredientsSearcherExecutor.getIngredientsThatStartWith(text));
                         populateIngredientsList();
                         showPieChart();
                     });
-                    popupMenu.show(parent, realPoint.x, realPoint.y);
                 }
             }
         });
@@ -223,5 +233,10 @@ public class IngredientChooser extends JDialog {
         isChoosing = true;
         setVisible(true);
         return Optional.ofNullable(returningIngredient);
+    }
+
+    private void showPopup(MouseEvent me) {
+        if(me.isPopupTrigger())
+            popup.show(me.getComponent(), me.getX(), me.getY());
     }
 }

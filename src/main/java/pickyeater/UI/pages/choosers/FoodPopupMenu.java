@@ -1,5 +1,5 @@
 package pickyeater.UI.pages.choosers;
-
+/*
 import javax.swing.*;
 import java.awt.event.ActionListener;
 
@@ -9,6 +9,7 @@ public class FoodPopupMenu extends JPopupMenu {
 
     public FoodPopupMenu() {
         add(deleteItem);
+        add(new JSeparator());
         add(editItem);
     }
 
@@ -20,3 +21,4 @@ public class FoodPopupMenu extends JPopupMenu {
         editItem.addActionListener(l);
     }
 }
+ */
