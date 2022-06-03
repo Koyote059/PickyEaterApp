@@ -1,4 +1,4 @@
-Nome		            Grammi per pezzo	Proteine	Fats		Carbs
+Nome                Grammi	Proteine	Fats	Carbs
 
 Albicocche
 Alchechengi
