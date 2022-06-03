@@ -4,11 +4,7 @@ Progetti a breve termine - Essenziali:
 
 
 Progetti a breve termine:
-- Inserire un grafico in user della cronologia dei progressi giornalieri
-- Sistemare il fatto che le pagine si aprono ricorsivamente (Fede)
-- Creare una classe esterna per unire i grafici dei PieChart ( magari estendendo JPanel o simile ). Sarebbe utile creare un'interfaccia comune per meals e ingredients.
-- Creare una classe esterna per il quantity chooser (?)
-- Proposta: nei meal creator il grafico dovrebbe indicare i nutrienti del meal e non dei singoli ingredienti ( fede )
+- Inserire un grafico in user della cronologia dei progressi giornalieri (?)
 -> Rendere opzionale i JDialog che fa il riassunto delle cose (Riproposta di cla)
 
 Progetti a medio termine - Essenziali:
