@@ -199,7 +199,7 @@ public class IngredientCreator extends JDialog {
                 return null;
             }
         }
-        if (isIngredientEditing && executor.isIngredientUsed(startingIngredient)) {
+        if (isIngredientEditing && !startingIngredient.getName().equals(selectedName)) {
             JOptionPane.showMessageDialog(getParent(), "You can't edit the meal's name as it's been used!");
             return null;
         }
