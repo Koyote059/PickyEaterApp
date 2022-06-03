@@ -42,6 +42,9 @@ public class MealsChooser extends JDialog {
 
     private final JPanel centerPanel = new JPanel(new GridLayout(1,2));
     private boolean isChoosing;
+    private JPopupMenu popup;
+    private final JMenuItem deleteItem = new JMenuItem("Delete");
+    private final JMenuItem editItem = new JMenuItem("Edit");
 
     public MealsChooser(JFrame parent) {
         super(parent, "Meals Chooser", true);
@@ -57,7 +60,7 @@ public class MealsChooser extends JDialog {
         centerPanel.add(mealPanel);
         centerPanel.add(ingredientListPanel);
         Comparator<? super Meal> comparator = Comparator.comparing(Meal::getName);
-        mealQuantityTextField.setToolTipText("If left void it puts automatically 100g");
+        mealQuantityTextField.setToolTipText("Left void it'll put automatically 100g");
         searchBar.addKeyListener(new KeyAdapter() {
             @Override
             public void keyTyped(KeyEvent e) {
@@ -71,7 +74,7 @@ public class MealsChooser extends JDialog {
         searchedMeals = new ArrayList<>(mealSearcherExecutor.getEveryMeal());
         searchedMeals.sort(comparator);
         populateMealList();
-        mealsList.setMinimumSize(new Dimension(300, 300));
+        mealsList.setMinimumSize(new Dimension(250, 250));
         if(isChoosing){
             mealsList.setToolTipText("Double click to check ingredients, right click to delete/edit meal");
         } else {
@@ -135,8 +138,17 @@ public class MealsChooser extends JDialog {
                     if (selectedIndex < 0)
                         return;
                     Meal selectedMeal = searchedMeals.get(selectedIndex);
-                    FoodPopupMenu popupMenu = new FoodPopupMenu();
-                    popupMenu.addDeleteListener(l -> {
+                    popup = new JPopupMenu();
+                    // add menu items to popup
+                    popup.add(deleteItem);
+                    popup.addSeparator();
+                    popup.add(editItem);
+                    mealsList.addMouseListener(new MouseAdapter() {
+                        public void mouseReleased(MouseEvent me) {
+                            showPopup(me); // showPopup() is our own user-defined method
+                        }
+                    });
+                    deleteItem.addActionListener(l -> {
                         if (mealSearcherExecutor.isMealUsed(selectedMeal)) {
                             JOptionPane.showMessageDialog(parent, "Cannot delete this meal as it's being used!");
                             return;
@@ -149,7 +161,7 @@ public class MealsChooser extends JDialog {
                         populateMealList();
                         showPieChart();
                     });
-                    popupMenu.addEditListener(l -> {
+                    editItem.addActionListener(l -> {
                         MealCreator creator = new MealCreator(parent);
                         creator.editMeal(selectedMeal);
                         String text = searchBar.getText();
@@ -157,7 +169,6 @@ public class MealsChooser extends JDialog {
                         populateMealList();
                         showPieChart();
                     });
-                    popupMenu.show(parent, realPoint.x, realPoint.y);
                 }
             }
         });
@@ -190,7 +201,7 @@ public class MealsChooser extends JDialog {
         Meal selectedMeal = searchedMeals.get(selectedItem);
 
         Nutrients mealNutrients = selectedMeal.getNutrients();
-        PieChart pieChart = new PieChart(300, 300);
+        PieChart pieChart = new PieChart(410, 330);
         pieChart.setTitle(selectedMeal.getName());
         pieChart.addSeries("Proteins", mealNutrients.getProteins());
         pieChart.addSeries("Carbs", mealNutrients.getCarbs());
@@ -228,5 +239,10 @@ public class MealsChooser extends JDialog {
         isChoosing = true;
         setVisible(true);
         return Optional.ofNullable(returningMeal);
+    }
+
+    private void showPopup(MouseEvent me) {
+        if(me.isPopupTrigger())
+            popup.show(me.getComponent(), me.getX(), me.getY());
     }
 }

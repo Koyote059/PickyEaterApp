@@ -4,7 +4,6 @@ import org.knowm.xchart.PieChart;
 import org.knowm.xchart.XChartPanel;
 import org.knowm.xchart.style.PieStyler;
 import org.knowm.xchart.style.Styler;
-import pickyeater.UI.pages.choosers.FoodPopupMenu;
 import pickyeater.UI.pages.choosers.IngredientChooser;
 import pickyeater.basics.food.Ingredient;
 import pickyeater.basics.food.Meal;
@@ -41,6 +40,9 @@ public class MealCreator extends JDialog {
     private final MealBuilder mealBuilder = executor.getMealBuilder();
     private Meal startingMeal = null;
     private boolean isMealEditing = false;
+    private JPopupMenu popup;
+    private final JMenuItem deleteItem = new JMenuItem("Delete");
+    private final JMenuItem editItem = new JMenuItem("Edit");
 
     public MealCreator(JFrame parent) {
         super(parent, "Meal Creator", true);
@@ -86,10 +88,11 @@ public class MealCreator extends JDialog {
             }
         });
         JScrollPane scrollPane = new JScrollPane();
+        scrollPane.setPreferredSize(new Dimension(250, 250));
         scrollPane.setViewportView(ingredientsTable);
         //scrollPane.setPreferredSize(new Dimension(150,250));
         mainPanel.add(BorderLayout.LINE_END, scrollPane);
-        JPanel buttonPanel = new JPanel(new BorderLayout());
+        JPanel buttonPanel = new JPanel(new GridLayout());
         JButton cancelButton = new JButton("Cancel");
         cancelButton.addActionListener(e -> dispose());
         buttonPanel.add(BorderLayout.LINE_START, cancelButton);
@@ -107,8 +110,14 @@ public class MealCreator extends JDialog {
                     if (selectedIndex < 0)
                         return;
                     Ingredient selectedIngredient = ingredients.get(selectedIndex);
-                    FoodPopupMenu popupMenu = new FoodPopupMenu();
-                    popupMenu.addDeleteListener(l -> {
+                    popup = new JPopupMenu();
+                    popup.add(deleteItem);
+                    ingredientsTable.addMouseListener(new MouseAdapter() {
+                        public void mouseReleased(MouseEvent me) {
+                            showPopup(me); // showPopup() is our own user-defined method
+                        }
+                    });
+                    deleteItem.addActionListener(l -> {
                         int choice = JOptionPane.showConfirmDialog(parent, "Are you sure you want to delete it?",
                                 "", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
                         if (choice != JOptionPane.YES_OPTION)
@@ -116,7 +125,6 @@ public class MealCreator extends JDialog {
                         ingredients.remove(selectedIngredient);
                         draw();
                     });
-                    popupMenu.show(parent, realPoint.x, realPoint.y);
                 }
             }
         });
@@ -158,12 +166,13 @@ public class MealCreator extends JDialog {
 
             dispose();
         });
-        buttonPanel.add(BorderLayout.LINE_END, doneButton);
+        buttonPanel.add(BorderLayout.CENTER, doneButton);
         mainPanel.add(BorderLayout.PAGE_END, buttonPanel);
         setContentPane(mainPanel);
         draw();
         pack();
         setSize(new Dimension(677, 507));
+        setPreferredSize(new Dimension(677, 507));
         setResizable(false);
         setLocationRelativeTo(parent);
     }
@@ -192,7 +201,7 @@ public class MealCreator extends JDialog {
         }
 
         Nutrients ingredientNutrients = highlightedIngredient.getNutrients();
-        PieChart pieChart = new PieChart(300, 300);
+        PieChart pieChart = new PieChart(410, 330);
         pieChart.setTitle(highlightedIngredient.getName());
         pieChart.addSeries("Proteins", ingredientNutrients.getProteins());
         pieChart.addSeries("Carbs", ingredientNutrients.getCarbs());
@@ -247,5 +256,9 @@ public class MealCreator extends JDialog {
         ingredients.addAll(meal.getIngredients());
         draw();
         setVisible(true);
+    }
+    private void showPopup(MouseEvent me) {
+        if(me.isPopupTrigger())
+            popup.show(me.getComponent(), me.getX(), me.getY());
     }
 }
