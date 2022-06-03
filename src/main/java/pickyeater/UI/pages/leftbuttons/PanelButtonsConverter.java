@@ -11,7 +11,7 @@ public class PanelButtonsConverter {
         switch (command) {
             case "Daily Progress":
                 return PanelButtons.PROGRESS;
-            case "Meal Plan (Diet)":
+            case "Meal Plan":
                 return PanelButtons.DIET;
             case "Groceries":
                 return PanelButtons.GROCERIES;
