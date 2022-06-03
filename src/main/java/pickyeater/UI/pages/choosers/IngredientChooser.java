@@ -5,6 +5,7 @@ import org.knowm.xchart.XChartPanel;
 import org.knowm.xchart.style.PieStyler;
 import org.knowm.xchart.style.Styler;
 import pickyeater.UI.pages.creators.IngredientCreator;
+import pickyeater.UI.pages.utils.NutrientsPieChart;
 import pickyeater.basics.food.Ingredient;
 import pickyeater.basics.food.Nutrients;
 import pickyeater.basics.food.QuantityType;
@@ -28,6 +29,7 @@ public class IngredientChooser extends JDialog {
     private final IngredientSearcherExecutor ingredientsSearcherExecutor = ExecutorProvider.getIngredientSearcherExecutor();
     private final JTextField searchBar;
     private final JList ingredientsList;
+    private final NutrientsPieChart nutrientsPieChart;
     private List<Ingredient> searchedIngredients;
     private final JButton cancelButton;
     private JPanel mealPanel = new JPanel(new BorderLayout());
@@ -86,11 +88,7 @@ public class IngredientChooser extends JDialog {
                 showPieChart();
             }
         });
-        if (!searchedIngredients.isEmpty()) {
-            showPieChart();
-        } else {
-            JOptionPane.showMessageDialog(parent, "Error 404, Ingredients not found", "Error 404", JOptionPane.ERROR_MESSAGE);
-        }
+
         cancelButton = new JButton("Cancel");
         cancelButton.addActionListener(e -> dispose());
         JButton doneButton = new JButton("Done");
@@ -158,6 +156,22 @@ public class IngredientChooser extends JDialog {
                 }
             }
         });
+
+        nutrientsPieChart = new NutrientsPieChart();
+        mealPanel.add(BorderLayout.CENTER, nutrientsPieChart.getPanel());
+        ingredientQuantityPanel.add(BorderLayout.CENTER,ingredientQuantityTextField);
+        ingredientQuantityPanel.setBorder(new EmptyBorder(5,10,0,10));
+        ingredientQuantityTextField.setBorder(new EmptyBorder(0,5,0,0));
+        ingredientQuantityPanel.add(BorderLayout.LINE_END, ingredientQuantityTypeLabel);
+        mealPanel.add(BorderLayout.PAGE_END, ingredientQuantityPanel);
+        add(BorderLayout.LINE_START, mealPanel);
+
+        if (!searchedIngredients.isEmpty()) {
+            showPieChart();
+        } else {
+            JOptionPane.showMessageDialog(parent, "Error 404, Ingredients not found", "Error 404", JOptionPane.ERROR_MESSAGE);
+        }
+
         JPanel buttonsPanel = new JPanel();
         buttonsPanel.add(cancelButton);
         buttonsPanel.add(doneButton);
@@ -193,30 +207,8 @@ public class IngredientChooser extends JDialog {
             highLightedIngredient = selectedIngredient;
         }
         Nutrients ingredientNutrients = highLightedIngredient.getNutrients();
-
-        PieChart pieChart = new PieChart(410, 330);
-        pieChart.setTitle(highLightedIngredient.getName());
-        pieChart.addSeries("Proteins", ingredientNutrients.getProteins());
-        pieChart.addSeries("Carbs", ingredientNutrients.getCarbs());
-        pieChart.addSeries("Fats", ingredientNutrients.getFats());
-        PieStyler styler = pieChart.getStyler();
-        styler.setToolTipType(Styler.ToolTipType.yLabels);
-        styler.setToolTipsEnabled(true);
-        XChartPanel<PieChart> chartPanel = new XChartPanel<>(pieChart);
-        BorderLayout layout = (BorderLayout) getLayout();
-        JPanel previousPanel = (JPanel) layout.getLayoutComponent(BorderLayout.LINE_START);
-        if (previousPanel != null)
-            remove(previousPanel);
-        mealPanel.removeAll();
-        mealPanel.add(BorderLayout.CENTER, chartPanel);
-        ingredientQuantityPanel.setBorder(new EmptyBorder(5,10,0,10));
-        ingredientQuantityTextField.setBorder(new EmptyBorder(0,5,0,0));
-        ingredientQuantityPanel.removeAll();
-        ingredientQuantityPanel.add(BorderLayout.CENTER,ingredientQuantityTextField);
-
-        ingredientQuantityPanel.add(BorderLayout.LINE_END,ingredientQuantityTypeLabel);
-        mealPanel.add(BorderLayout.PAGE_END, ingredientQuantityPanel);
-        add(BorderLayout.LINE_START, mealPanel);
+        nutrientsPieChart.setNutrients(ingredientNutrients);
+        nutrientsPieChart.setName(highLightedIngredient.getName());
         revalidate();
     }
 
