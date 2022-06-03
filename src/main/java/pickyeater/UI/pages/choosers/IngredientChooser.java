@@ -93,31 +93,36 @@ public class IngredientChooser extends JDialog {
         cancelButton.addActionListener(e -> dispose());
         JButton doneButton = new JButton("Done");
         doneButton.addActionListener(e -> {
+            if(!isChoosing) dispose();
             int selectedItem = ingredientsList.getSelectedIndex();
             if(selectedItem==-1) return;
             Ingredient ingredient = searchedIngredients.get(selectedItem);
             IngredientQuantityConverter ingredientQuantityConverter = new IngredientQuantityConverter();
-            int returningWeight;
+            int returningQuantity;
+
+
             if (ingredientQuantityTextField.getText().isEmpty()) {
-                if (ingredient.getQuantity().getQuantityType() == QuantityType.PIECES) {    // If pices
-                    returningWeight = 1;
-                } else {        // if g/ml
-                    returningWeight = 100;
+                if (ingredient.getQuantity().getQuantityType() == QuantityType.PIECES) {
+                    returningQuantity = 1;
+                } else {
+                    returningQuantity = 100;
                 }
             } else {
-                returningWeight = StringToNumber.convertPositiveInteger(ingredientQuantityTextField.getText());
+                try {
+                    returningQuantity = Integer.parseInt(ingredientQuantityTextField.getText());
+                } catch (NumberFormatException ex){
+                    JOptionPane.showMessageDialog(parent,"Insert a valid quantity!");
+                    return;
+                }
             }
-            returningIngredient = ingredientQuantityConverter.convert(ingredient, returningWeight);
+            returningIngredient = ingredientQuantityConverter.convert(ingredient, returningQuantity);
             dispose();
         });
         ingredientsList.addMouseListener(new MouseClickListener() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 if(isChoosing) return;
-                if (SwingUtilities.isRightMouseButton(e)) {
-                    Point point = MouseInfo.getPointerInfo().getLocation();
-                    Point framePoint = parent.getLocation();
-                    Point realPoint = new Point(point.x - framePoint.x, point.y - framePoint.y);
+                if (e.isPopupTrigger() || SwingUtilities.isRightMouseButton(e)) {
                     int selectedIndex = ingredientsList.locationToIndex(e.getPoint());
                     if (selectedIndex < 0)
                         return;
@@ -128,11 +133,7 @@ public class IngredientChooser extends JDialog {
                     popup.add(deleteItem);
                     popup.addSeparator();
                     popup.add(editItem);
-                    ingredientsList.addMouseListener(new MouseAdapter() {
-                        public void mouseReleased(MouseEvent me) {
-                            showPopup(me); // showPopup() is our own user-defined method
-                        }
-                    });
+                    popup.show(e.getComponent(), e.getX(), e.getY()); // Shows popup
                     deleteItem.addActionListener(l -> {
                         if (ingredientsSearcherExecutor.isIngredientUsed(selectedIngredient)) {
                             JOptionPane.showMessageDialog(parent, "Cannot delete this meal as it's being used!");
@@ -197,6 +198,7 @@ public class IngredientChooser extends JDialog {
 
     private void showPieChart() {
         int selectedItem = ingredientsList.getSelectedIndex();
+        if(selectedItem==-1) return;
         Ingredient selectedIngredient = searchedIngredients.get(selectedItem);
         QuantityType quantityType = selectedIngredient.getQuantity().getQuantityType();
         ingredientQuantityTypeLabel.setText(ValuesConverter.convertQuantityTypeValue(quantityType));
@@ -226,10 +228,5 @@ public class IngredientChooser extends JDialog {
         isChoosing = true;
         setVisible(true);
         return Optional.ofNullable(returningIngredient);
-    }
-
-    private void showPopup(MouseEvent me) {
-        if(me.isPopupTrigger())
-            popup.show(me.getComponent(), me.getX(), me.getY());
     }
 }

@@ -117,7 +117,7 @@ public class SQLMealsDB implements MealsDatabase {
                 throw new SQLException("Illegal name: " + meal.getName());
             SQLUnSafeQueryExecutor executor = queryExecutor.getUnSafeQueryExecutor();
             executor.deleteFromMealsTable(meal.getName());
-            //executor.deleteFromMealCompositionsTable(meal.getName()); // Useless, in theory. Cascade should do it for us.
+            executor.deleteFromMealCompositionsTable(meal.getName()); // Useless, in theory. Cascade should do it for us.
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }

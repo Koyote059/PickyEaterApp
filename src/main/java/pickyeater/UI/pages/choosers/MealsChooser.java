@@ -107,6 +107,7 @@ public class MealsChooser extends JDialog {
         cancelButton.addActionListener(e -> dispose());
         JButton doneButton = new JButton("Done");
         doneButton.addActionListener(e -> {
+            if(!isChoosing) dispose();
             int selectedItem = mealsList.getSelectedIndex();
             if (selectedItem == -1) {
                 dispose();
