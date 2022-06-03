@@ -191,7 +191,6 @@
                       <model>
                         <item value="Light"/>
                         <item value="Dark"/>
-                        <item value="Green"/>
                       </model>
                     </properties>
                   </component>
