@@ -1,0 +1,60 @@
+Nome		            Grammi per pezzo	Proteine	Fats		Carbs
+
+Albicocche
+Alchechengi
+Ananas
+Arance
+Aronia
+Avocado
+Banana
+Cachi
+Carambola
+Castagne
+Ciliegie
+Cocco
+Cocomero
+Datteri
+Durian
+Fichi
+Fichi d’India
+Fragole
+Frutto del drago
+Frutto della passione
+Gelso
+Giuggiole
+Guava
+Jackfruit
+Kiwano
+Kiwi
+Kumquat
+Lamponi
+Limone
+Litchi
+Mandarino
+Mandorla
+Mango
+Mangostano
+Mela
+Mela Cotogna
+Melograno
+Melone Mirtillo
+More Nespole
+Nocciole
+Noci
+Noci di macadamia
+Noci Pecan
+Noni
+Olive
+Papaya
+Pere
+Pesca
+Pinoli
+Pistacchi
+Platano
+Pomelo
+Pompelmo rosa
+Prugne
+Prugne Umeboshi
+Tamarindo
+Uva
+Uva sultanina
