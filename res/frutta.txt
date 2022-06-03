@@ -1,7 +1,7 @@
 Nome                Grammi	    Proteine	Fats	    Carbs     Prezzo
 
-Albicocche          X           1,4 g     0,4 g     11 g      2,49€/KG
-Ananas              1,5 kg      0,5 g     0,1 g     13g       X
+Albicocche          37           1,4 g     0,4 g     11 g      2,49€/KG
+Ananas              1,5 kg      0,5 g     0,1 g     13g       1.5$/Kg
 Arance              115         0.7g      0.2       12        0.5$/Kg
 Avocado             300         2         15        9         15$/KG
 Banana              57.5        1.1       0.3       23        0.88$/Kg
