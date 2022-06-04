@@ -11,7 +11,7 @@ import pickyeater.basics.user.Sex;
 import pickyeater.builders.UserBuilder;
 import pickyeater.executors.user.RegisterExecutor;
 import pickyeater.utils.AgeCalculator;
-import pickyeater.utils.JCalendarToLocalDate;
+import pickyeater.utils.JCalUtils;
 import pickyeater.utils.StringToNumber;
 import pickyeater.utils.StringsUtils;
 
@@ -41,6 +41,7 @@ public class Register1 extends PickyPage {
     private JLabel txtBirthday;
     private JLabel txtSex;
     private JLabel txtBodyfat;
+    private final LocalDate nineteen = LocalDate.of(1900, 01, 01);
 
     public Register1(RegisterExecutor registerExecutor, JFrame parent) {
         super(parent);
@@ -61,8 +62,8 @@ public class Register1 extends PickyPage {
         });
         // Birthday
         jBirthdayChooser.addPropertyChangeListener(propertyChangeEvent -> {
-            userBuilder.setDateOfBirth(new JCalendarToLocalDate().jCalToLocDate(jBirthdayChooser.getDate()));
-            if (LocalDate.now().compareTo(userBuilder.getDateOfBirth()) <= 0) {   //TODO: If a person is older than 150 years old -> null
+            userBuilder.setDateOfBirth(JCalUtils.jCalToLocDate(jBirthdayChooser.getDate()));
+            if (LocalDate.now().compareTo(userBuilder.getDateOfBirth()) <= 0 || JCalUtils.youngerThan(userBuilder.getDateOfBirth(), nineteen)) {
                 userBuilder.setDateOfBirth(null);
             }
         });
@@ -71,6 +72,7 @@ public class Register1 extends PickyPage {
             if (!tfName.getText().isEmpty()) {
                 userBuilder.setName(tfName.getText());
                 if (userBuilder.getName().length() > 20 || !StringsUtils.isAlpha(userBuilder.getName())) {
+                    txtName.setForeground(Color.red);
                     JOptionPane.showMessageDialog(panelZeroOne, "Insert valid name", "Error", JOptionPane.ERROR_MESSAGE);
                     userBuilder.setName(null);
                 }
@@ -82,6 +84,7 @@ public class Register1 extends PickyPage {
             if (!tfWeight.getText().isEmpty()) {
                 userBuilder.setWeight(StringToNumber.convertPositiveFloat(tfWeight.getText()));
                 if (userBuilder.getWeight() > 800 || userBuilder.getWeight() < 10) {
+                    txtWeight.setForeground(Color.red);
                     JOptionPane.showMessageDialog(panelZeroOne, "Insert valid weight", "Error", JOptionPane.ERROR_MESSAGE);
                     userBuilder.setWeight(0);
                 }
@@ -93,6 +96,7 @@ public class Register1 extends PickyPage {
             if (!tfHeight.getText().isEmpty()) {
                 userBuilder.setHeight(StringToNumber.convertPositiveInteger(tfHeight.getText()));
                 if (userBuilder.getHeight() > 300 || userBuilder.getHeight() < 10) {
+                    txtHeight.setForeground(Color.red);
                     JOptionPane.showMessageDialog(panelZeroOne, "Insert valid height", "Error", JOptionPane.ERROR_MESSAGE);
                     userBuilder.setHeight(0);
                 }
@@ -114,6 +118,7 @@ public class Register1 extends PickyPage {
             if (!tfBodyfat.getText().isEmpty()) {
                 userBuilder.setBodyFat(StringToNumber.convertPositiveFloat(tfBodyfat.getText()));
                 if (userBuilder.getBodyFat() < 0 | userBuilder.getBodyFat() > 100) {
+                    txtBodyfat.setForeground(Color.red);
                     JOptionPane.showMessageDialog(panelZeroOne, "Insert valid body-fat percentage", "Error", JOptionPane.ERROR_MESSAGE);
                     userBuilder.setBodyFat(0);
                 } else {
@@ -186,6 +191,7 @@ public class Register1 extends PickyPage {
             txtHeight.setForeground(null);
             txtSex.setForeground(null);
             txtBirthday.setForeground(null);
+            txtBodyfat.setForeground(null);
         });
         timer.start();
     }
