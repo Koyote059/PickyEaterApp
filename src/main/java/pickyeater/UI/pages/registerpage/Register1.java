@@ -35,6 +35,12 @@ public class Register1 extends PickyPage {
     private JTextField tfBodyfat;
     private JDateChooser jBirthdayChooser;
     private JLabel txtChangeTheme;
+    private JLabel txtName;
+    private JLabel txtHeight;
+    private JLabel txtWeight;
+    private JLabel txtBirthday;
+    private JLabel txtSex;
+    private JLabel txtBodyfat;
 
     public Register1(RegisterExecutor registerExecutor, JFrame parent) {
         super(parent);
@@ -69,7 +75,8 @@ public class Register1 extends PickyPage {
                     userBuilder.setName(null);
                 }
             } else {
-                JOptionPane.showMessageDialog(panelZeroOne, "Missing name", "Warning", JOptionPane.WARNING_MESSAGE);
+                txtName.setForeground(Color.red);
+                //JOptionPane.showMessageDialog(panelZeroOne, "Missing name", "Warning", JOptionPane.WARNING_MESSAGE);
             }
             // Weight
             if (!tfWeight.getText().isEmpty()) {
@@ -79,7 +86,8 @@ public class Register1 extends PickyPage {
                     userBuilder.setWeight(0);
                 }
             } else {
-                JOptionPane.showMessageDialog(panelZeroOne, "Missing weight", "Warning", JOptionPane.WARNING_MESSAGE);
+                txtWeight.setForeground(Color.red);
+                //JOptionPane.showMessageDialog(panelZeroOne, "Missing weight", "Warning", JOptionPane.WARNING_MESSAGE);
             }
             // Height
             if (!tfHeight.getText().isEmpty()) {
@@ -89,15 +97,18 @@ public class Register1 extends PickyPage {
                     userBuilder.setHeight(0);
                 }
             } else {
-                JOptionPane.showMessageDialog(panelZeroOne, "Missing height", "Warning", JOptionPane.WARNING_MESSAGE);
+                txtHeight.setForeground(Color.red);
+                //JOptionPane.showMessageDialog(panelZeroOne, "Missing height", "Warning", JOptionPane.WARNING_MESSAGE);
             }
             // Birthday
             if (userBuilder.getDateOfBirth() == null) {
-                JOptionPane.showMessageDialog(panelZeroOne, "Insert valid birthday", "Error", JOptionPane.ERROR_MESSAGE);
+                txtBirthday.setForeground(Color.red);
+    //JOptionPane.showMessageDialog(panelZeroOne, "Insert valid birthday", "Error", JOptionPane.ERROR_MESSAGE);
             }
             // Sex
             if (userBuilder.getSex() == null) {
-                JOptionPane.showMessageDialog(panelZeroOne, "Missing sex", "Warning", JOptionPane.WARNING_MESSAGE);
+                txtSex.setForeground(Color.red);
+                //JOptionPane.showMessageDialog(panelZeroOne, "Missing sex", "Warning", JOptionPane.WARNING_MESSAGE);
             }
             // BodyFat
             if (!tfBodyfat.getText().isEmpty()) {
@@ -132,6 +143,7 @@ public class Register1 extends PickyPage {
     }
 
     private void next() {
+        timer();
         if (userBuilder.getName() != null && userBuilder.getSex() != null && userBuilder.getWeight() != 0 && userBuilder.getHeight() != 0 && userBuilder.getDateOfBirth() != null) {
             if (userBuilder.getBodyFat() == 0) {
                 BodyFatCalculator bodyFatCalculator = new DeurenbergCalculator();
@@ -165,5 +177,16 @@ public class Register1 extends PickyPage {
     public void showPage() {
         draw();
         super.showPage();
+    }
+
+    private void timer(){
+        Timer timer = new Timer(3000, e -> {
+            txtName.setForeground(null);
+            txtWeight.setForeground(null);
+            txtHeight.setForeground(null);
+            txtSex.setForeground(null);
+            txtBirthday.setForeground(null);
+        });
+        timer.start();
     }
 }
