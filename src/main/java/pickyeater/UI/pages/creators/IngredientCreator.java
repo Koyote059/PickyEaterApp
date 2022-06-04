@@ -166,11 +166,14 @@ public class IngredientCreator extends JDialog {
         String selectedGramsPerQuantity = gramsPerQuantityTextField.getText();
         float price, proteins, carbs, fats;
         float gramsPerQuantity = 1;
+
+
+
         try {
-            price = Float.parseFloat(selectedPrice);
-            proteins = Float.parseFloat(selectedProteins);
-            carbs = Float.parseFloat(selectedCarbs);
-            fats = Float.parseFloat(selectedFats);
+            price = StringToNumber.convertPositiveFloatException(selectedPrice);
+            proteins = StringToNumber.convertPositiveFloatException(selectedProteins);
+            carbs = StringToNumber.convertPositiveFloatException(selectedCarbs);
+            fats = StringToNumber.convertPositiveFloatException(selectedFats);
         } catch (NumberFormatException e) {
             JOptionPane.showMessageDialog(getParent(), "Incorrect parameters!");
             return null;

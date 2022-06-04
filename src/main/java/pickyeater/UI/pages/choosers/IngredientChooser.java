@@ -1,9 +1,5 @@
 package pickyeater.UI.pages.choosers;
 
-import org.knowm.xchart.PieChart;
-import org.knowm.xchart.XChartPanel;
-import org.knowm.xchart.style.PieStyler;
-import org.knowm.xchart.style.Styler;
 import pickyeater.UI.pages.creators.IngredientCreator;
 import pickyeater.UI.pages.utils.NutrientsPieChart;
 import pickyeater.basics.food.Ingredient;
@@ -91,7 +87,7 @@ public class IngredientChooser extends JDialog {
             if(selectedItem==-1) return;
             Ingredient ingredient = searchedIngredients.get(selectedItem);
             IngredientQuantityConverter ingredientQuantityConverter = new IngredientQuantityConverter();
-            int returningQuantity;
+            float returningQuantity;
 
 
             if (ingredientQuantityTextField.getText().isEmpty()) {
@@ -102,7 +98,7 @@ public class IngredientChooser extends JDialog {
                 }
             } else {
                 try {
-                    returningQuantity = Integer.parseInt(ingredientQuantityTextField.getText());
+                    returningQuantity = StringToNumber.convertPositiveFloatException(ingredientQuantityTextField.getText());
                 } catch (NumberFormatException ex){
                     JOptionPane.showMessageDialog(parent,"Insert a valid quantity!");
                     return;

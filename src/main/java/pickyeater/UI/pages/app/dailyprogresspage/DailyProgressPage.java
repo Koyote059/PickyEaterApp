@@ -80,7 +80,7 @@ public class DailyProgressPage extends PickyPage {
                     Meal selectedMeal = meals.get(selectedIndex);
                     EatenMealsPopupMenu popupMenu = new EatenMealsPopupMenu();
                     popupMenu.addRemoveListener(l -> {
-                        int choice = JOptionPane.showConfirmDialog(parent, "Are you sure you want to delete it?",
+                        int choice = JOptionPane.showConfirmDialog(parent, "Are you sure you want to remove it?",
                                 "", JOptionPane.YES_NO_OPTION);
                         if (choice != JOptionPane.YES_OPTION)
                             return;

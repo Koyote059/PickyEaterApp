@@ -80,4 +80,5 @@ public class MealPlanUnavailablePage extends PickyPage {
             System.out.println("Couldn't process image");
         }
     }
+
 }

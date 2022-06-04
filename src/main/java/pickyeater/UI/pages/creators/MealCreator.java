@@ -123,11 +123,11 @@ public class MealCreator extends JDialog {
                         return;
                     Ingredient selectedIngredient = ingredients.get(selectedIndex);
                     JPopupMenu popup = new JPopupMenu();
-                    JMenuItem deleteItem = new JMenuItem("Delete");
+                    JMenuItem deleteItem = new JMenuItem("Remove");
                     popup.add(deleteItem);
                     popup.show(e.getComponent(), e.getX(), e.getY());
                     deleteItem.addActionListener(l -> {
-                        int choice = JOptionPane.showConfirmDialog(parent, "Are you sure you want to delete it?",
+                        int choice = JOptionPane.showConfirmDialog(parent, "Are you sure you want to remove it?",
                                 "", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
                         if (choice != JOptionPane.YES_OPTION)
                             return;

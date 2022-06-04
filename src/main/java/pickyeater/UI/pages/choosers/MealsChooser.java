@@ -110,11 +110,16 @@ public class MealsChooser extends JDialog {
             }
             Meal meal = searchedMeals.get(selectedItem);
             MealQuantityConverter mealQuantityConverter = new MealQuantityConverter();
-            int returningWeight;
+            float returningWeight;
             if (mealQuantityTextField.getText().isEmpty()) {
                 returningWeight = 100;
             } else {
-                returningWeight = StringToNumber.convertPositiveInteger(mealQuantityTextField.getText());
+                try {
+                    returningWeight = StringToNumber.convertPositiveFloatException(mealQuantityTextField.getText());
+                } catch (NumberFormatException ex){
+                    JOptionPane.showMessageDialog(getParent(), "Insert valid quantity!");
+                    return;
+                }
             }
             returningMeal = mealQuantityConverter.convert(meal, returningWeight);
             dispose();
