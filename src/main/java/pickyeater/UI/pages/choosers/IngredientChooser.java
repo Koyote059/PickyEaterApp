@@ -107,9 +107,10 @@ public class IngredientChooser extends JDialog {
             returningIngredient = ingredientQuantityConverter.convert(ingredient, returningQuantity);
             dispose();
         });
-        ingredientsList.addMouseListener(new MouseClickListener() {
+        ingredientsList.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
+                super.mouseClicked(e);
                 if(isChoosing) return;
                 if (e.isPopupTrigger() || SwingUtilities.isRightMouseButton(e)) {
                     int selectedIndex = ingredientsList.locationToIndex(e.getPoint());

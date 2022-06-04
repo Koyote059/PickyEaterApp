@@ -10,13 +10,13 @@ import pickyeater.basics.food.Meal;
 import pickyeater.basics.mealplan.DailyMealPlan;
 import pickyeater.executors.ExecutorProvider;
 import pickyeater.executors.MealPlanViewerExecutor;
-import pickyeater.utils.MouseClickListener;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -102,9 +102,10 @@ public class MealPlanPage extends PickyPage {
             }
             setUpContent(dailyMealPlanOptional.get());
         });
-        dailyMealsTable.addMouseListener(new MouseClickListener() {
+        dailyMealsTable.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
+                super.mouseClicked(e);
                 if (e.getClickCount() < 2)
                     return;
                 int selectedIndex = dailyMealsTable.getSelectedRow();
@@ -118,9 +119,10 @@ public class MealPlanPage extends PickyPage {
                 new MealInfoJDialog(parent, meal).run();
             }
         });
-        txtBin.addMouseListener(new MouseClickListener() {
+        txtBin.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
+                super.mouseClicked(e);
                 int result = JOptionPane.showConfirmDialog(mainPanel, "Are you sure you want to delete it?", "Deleting  " + "groceries", JOptionPane.YES_NO_OPTION);
                 if (result == JOptionPane.YES_OPTION) {
                     executor.deleteMealPlan();
@@ -129,9 +131,10 @@ public class MealPlanPage extends PickyPage {
                 }
             }
         });
-        dailyMealsTable.addMouseListener(new MouseClickListener() {
+        dailyMealsTable.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
+                super.mouseClicked(e);
                 if (SwingUtilities.isRightMouseButton(e) || e.isPopupTrigger()) {
                     int selectedIndex = dailyMealsTable.rowAtPoint(e.getPoint());
                     if (selectedIndex < 0)

@@ -9,12 +9,12 @@ import pickyeater.UI.themes.ColorButtons;
 import pickyeater.basics.food.Meal;
 import pickyeater.executors.DailyProgressExecutor;
 import pickyeater.executors.ExecutorProvider;
-import pickyeater.utils.MouseClickListener;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
@@ -69,9 +69,10 @@ public class DailyProgressPage extends PickyPage {
             }
         });
         tableEatenMeals.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-        tableEatenMeals.addMouseListener(new MouseClickListener() {
+        tableEatenMeals.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
+                super.mouseClicked(e);
                 if (SwingUtilities.isRightMouseButton(e) || e.isPopupTrigger()) {
                     int selectedIndex = tableEatenMeals.rowAtPoint(e.getPoint());
                     if (selectedIndex < 0)

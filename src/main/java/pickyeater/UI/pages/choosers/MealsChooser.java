@@ -1,9 +1,5 @@
 package pickyeater.UI.pages.choosers;
 
-import org.knowm.xchart.PieChart;
-import org.knowm.xchart.XChartPanel;
-import org.knowm.xchart.style.PieStyler;
-import org.knowm.xchart.style.Styler;
 import pickyeater.UI.pages.creators.MealCreator;
 import pickyeater.UI.pages.utils.NutrientsPieChart;
 import pickyeater.basics.food.Meal;
@@ -11,7 +7,6 @@ import pickyeater.basics.food.Nutrients;
 import pickyeater.executors.ExecutorProvider;
 import pickyeater.executors.MealChooserExecutor;
 import pickyeater.utils.MealQuantityConverter;
-import pickyeater.utils.MouseClickListener;
 import pickyeater.utils.StringToNumber;
 import pickyeater.utils.StringsUtils;
 
@@ -85,9 +80,10 @@ public class MealsChooser extends JDialog {
                 showPieChart();
             }
         });
-        mealsList.addMouseListener(new MouseClickListener() {
+        mealsList.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
+                super.mouseClicked(e);
                 if (e.getClickCount() < 2)
                     return;
                 int selectedIndex = mealsList.getSelectedIndex();
@@ -124,9 +120,10 @@ public class MealsChooser extends JDialog {
             returningMeal = mealQuantityConverter.convert(meal, returningWeight);
             dispose();
         });
-        mealsList.addMouseListener(new MouseClickListener() {
+        mealsList.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
+                super.mouseClicked(e);
                 if(isChoosing) return;
                 if (SwingUtilities.isRightMouseButton(e) || e.isPopupTrigger()) {
                     int selectedIndex = mealsList.locationToIndex(e.getPoint());

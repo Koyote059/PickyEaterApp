@@ -5,13 +5,13 @@ import pickyeater.basics.food.Meal;
 import pickyeater.basics.mealplan.DailyMealPlan;
 import pickyeater.builders.DailyMealPlanBuilder;
 import pickyeater.builders.PickyDailyMealPlanBuilder;
-import pickyeater.utils.MouseClickListener;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
@@ -40,9 +40,10 @@ public class DailyMealPlanColumn implements ActionListener {
         tableModel.addColumn("Quantity");
         table.getTableHeader().setReorderingAllowed(false);
         table.setModel(tableModel);
-        table.addMouseListener(new MouseClickListener() {
+        table.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
+                super.mouseClicked(e);
                 if (SwingUtilities.isRightMouseButton(e) || e.isPopupTrigger()) {
                     int selectedIndex = table.rowAtPoint(e.getPoint());
                     table.setRowSelectionInterval(selectedIndex, selectedIndex);
