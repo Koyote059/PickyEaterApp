@@ -26,11 +26,11 @@ public class SQLMealsDB implements MealsDatabase {
             if (meal.getIngredients().size() == 0)
                 throw new RuntimeException("Cannot store an empty meal!");
             Meal savingMeal;
-            if (meal.getWeight() != 100) {
+           /* if (meal.getWeight() != 100) {
                 MealQuantityConverter converter = new MealQuantityConverter();
-                savingMeal = converter.convert(meal, 100);
-            } else
-                savingMeal = meal;
+                savingMeal = converter.convert(meal, 100); // TODO REMOVE ALL IF
+            } else */
+            savingMeal = meal;
             SQLUnSafeQueryExecutor executor = queryExecutor.getUnSafeQueryExecutor();
             executor.insertIntoMealsTable(savingMeal.getName());
             executor.insertIntoMealCompositionsTable(savingMeal);
