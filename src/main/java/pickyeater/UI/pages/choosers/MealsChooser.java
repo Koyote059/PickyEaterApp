@@ -44,9 +44,7 @@ public class MealsChooser extends JDialog {
 
     private final JPanel centerPanel = new JPanel(new GridLayout(1,2));
     private boolean isChoosing;
-    private JPopupMenu popup;
-    private final JMenuItem deleteItem = new JMenuItem("Delete");
-    private final JMenuItem editItem = new JMenuItem("Edit");
+
 
     public MealsChooser(JFrame parent) {
         super(parent, "Meals Chooser", true);
@@ -61,7 +59,6 @@ public class MealsChooser extends JDialog {
         add(BorderLayout.CENTER,centerPanel);
         centerPanel.add(mealPanel);
         centerPanel.add(ingredientListPanel);
-        Comparator<? super Meal> comparator = Comparator.comparing(Meal::getName);
         mealQuantityTextField.setToolTipText("Left void it'll put automatically 100g");
         searchBar.addKeyListener(new KeyAdapter() {
             @Override
@@ -69,12 +66,10 @@ public class MealsChooser extends JDialog {
                 String text = searchBar.getText();
                 if(!StringsUtils.isAlpha(text)) searchedMeals = new ArrayList<>();
                 else searchedMeals = new ArrayList<>(mealSearcherExecutor.getMealsThatStartWith(text));
-                searchedMeals.sort(comparator);
                 populateMealList();
             }
         });
         searchedMeals = new ArrayList<>(mealSearcherExecutor.getEveryMeal());
-        searchedMeals.sort(comparator);
         populateMealList();
         mealsList.setMinimumSize(new Dimension(250, 250));
         if(isChoosing){
@@ -134,7 +129,9 @@ public class MealsChooser extends JDialog {
                     if (selectedIndex < 0)
                         return;
                     Meal selectedMeal = searchedMeals.get(selectedIndex);
-                    popup = new JPopupMenu();
+                    JPopupMenu popup = new JPopupMenu();
+                    JMenuItem deleteItem = new JMenuItem("Delete");
+                    JMenuItem editItem = new JMenuItem("Edit");
                     // add menu items to popup
                     popup.add(deleteItem);
                     popup.addSeparator();
@@ -189,7 +186,11 @@ public class MealsChooser extends JDialog {
     }
 
     private void populateMealList() {
+        Comparator<? super Meal> comparator = Comparator.comparing(Meal::getName);
+        searchedMeals.sort(comparator);
+
         Object[] listData = new Object[searchedMeals.size()];
+
         for (int i = 0; i < searchedMeals.size(); i++) {
             Meal meal = searchedMeals.get(i);
             listData[i] = meal.getName();

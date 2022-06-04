@@ -43,9 +43,6 @@ public class MealCreator extends JDialog {
     private final MealBuilder mealBuilder = executor.getMealBuilder();
     private Meal startingMeal = null;
     private boolean isMealEditing = false;
-    private JPopupMenu popup;
-    private final JMenuItem deleteItem = new JMenuItem("Delete");
-    private final JMenuItem editItem = new JMenuItem("Edit");
     private NutrientsPieChart nutrientsPieChart;
 
     public MealCreator(JFrame parent) {
@@ -125,7 +122,8 @@ public class MealCreator extends JDialog {
                     if (selectedIndex < 0)
                         return;
                     Ingredient selectedIngredient = ingredients.get(selectedIndex);
-                    popup = new JPopupMenu();
+                    JPopupMenu popup = new JPopupMenu();
+                    JMenuItem deleteItem = new JMenuItem("Delete");
                     popup.add(deleteItem);
                     popup.show(e.getComponent(), e.getX(), e.getY());
                     deleteItem.addActionListener(l -> {
