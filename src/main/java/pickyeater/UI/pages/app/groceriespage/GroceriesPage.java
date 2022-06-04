@@ -85,7 +85,7 @@ public class GroceriesPage extends PickyPage {
 
             @Override
             public boolean isCellEditable(int row, int column) {
-                return false;
+                return column == 0;
             }
         };
 
