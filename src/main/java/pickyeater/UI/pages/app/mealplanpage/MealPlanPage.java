@@ -132,10 +132,7 @@ public class MealPlanPage extends PickyPage {
         dailyMealsTable.addMouseListener(new MouseClickListener() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                if (SwingUtilities.isRightMouseButton(e)) {
-                    Point point = MouseInfo.getPointerInfo().getLocation();
-                    Point framePoint = parent.getLocation();
-                    Point realPoint = new Point(point.x - framePoint.x, point.y - framePoint.y);
+                if (SwingUtilities.isRightMouseButton(e) || e.isPopupTrigger()) {
                     int selectedIndex = dailyMealsTable.rowAtPoint(e.getPoint());
                     if (selectedIndex < 0)
                         return;
@@ -146,7 +143,7 @@ public class MealPlanPage extends PickyPage {
                         executor.addToEatenMeals(selectedMeal);
                         JOptionPane.showMessageDialog(parent, "Added to eaten meals!");
                     });
-                    popupMenu.show(parent, realPoint.x, realPoint.y);
+                    popupMenu.show(e.getComponent(), e.getX(), e.getY());
                 }
             }
         });

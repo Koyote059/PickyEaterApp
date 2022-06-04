@@ -119,10 +119,7 @@ public class MealCreator extends JDialog {
         ingredientsTable.addMouseListener(new MouseClickListener() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                if (SwingUtilities.isRightMouseButton(e)) {
-                    Point point = MouseInfo.getPointerInfo().getLocation();
-                    Point framePoint = parent.getLocation();
-                    Point realPoint = new Point(point.x - framePoint.x, point.y - framePoint.y);
+                if (SwingUtilities.isRightMouseButton(e) || e.isPopupTrigger()) {
                     int selectedIndex = ingredientsTable.rowAtPoint(e.getPoint());
                     ingredientsTable.setRowSelectionInterval(selectedIndex, selectedIndex);
                     if (selectedIndex < 0)
@@ -130,11 +127,7 @@ public class MealCreator extends JDialog {
                     Ingredient selectedIngredient = ingredients.get(selectedIndex);
                     popup = new JPopupMenu();
                     popup.add(deleteItem);
-                    ingredientsTable.addMouseListener(new MouseAdapter() {
-                        public void mouseReleased(MouseEvent me) {
-                            showPopup(me); // showPopup() is our own user-defined method
-                        }
-                    });
+                    popup.show(e.getComponent(), e.getX(), e.getY());
                     deleteItem.addActionListener(l -> {
                         int choice = JOptionPane.showConfirmDialog(parent, "Are you sure you want to delete it?",
                                 "", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
@@ -252,8 +245,5 @@ public class MealCreator extends JDialog {
         draw();
         setVisible(true);
     }
-    private void showPopup(MouseEvent me) {
-        if(me.isPopupTrigger())
-            popup.show(me.getComponent(), me.getX(), me.getY());
-    }
+
 }

@@ -128,10 +128,7 @@ public class MealsChooser extends JDialog {
             @Override
             public void mouseClicked(MouseEvent e) {
                 if(isChoosing) return;
-                if (SwingUtilities.isRightMouseButton(e)) {
-                    Point point = MouseInfo.getPointerInfo().getLocation();
-                    Point framePoint = parent.getLocation();
-                    Point realPoint = new Point(point.x - framePoint.x, point.y - framePoint.y);
+                if (SwingUtilities.isRightMouseButton(e) || e.isPopupTrigger()) {
                     int selectedIndex = mealsList.locationToIndex(e.getPoint());
                     mealsList.setSelectedIndex(selectedIndex);
                     if (selectedIndex < 0)
@@ -142,11 +139,7 @@ public class MealsChooser extends JDialog {
                     popup.add(deleteItem);
                     popup.addSeparator();
                     popup.add(editItem);
-                    mealsList.addMouseListener(new MouseAdapter() {
-                        public void mouseReleased(MouseEvent me) {
-                            showPopup(me); // showPopup() is our own user-defined method
-                        }
-                    });
+                    popup.show(e.getComponent(), e.getX(), e.getY());
                     deleteItem.addActionListener(l -> {
                         if (mealSearcherExecutor.isMealUsed(selectedMeal)) {
                             JOptionPane.showMessageDialog(parent, "Cannot delete this meal as it's being used!");
@@ -232,10 +225,5 @@ public class MealsChooser extends JDialog {
         isChoosing = true;
         setVisible(true);
         return Optional.ofNullable(returningMeal);
-    }
-
-    private void showPopup(MouseEvent me) {
-        if(me.isPopupTrigger())
-            popup.show(me.getComponent(), me.getX(), me.getY());
     }
 }

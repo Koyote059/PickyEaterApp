@@ -90,10 +90,7 @@ public class MealPlanGeneratorPage extends PickyPage {
             dayLabel.addMouseListener(new MouseClickListener() {
                 @Override
                 public void mouseClicked(MouseEvent e) {
-                    if (SwingUtilities.isRightMouseButton(e)) {
-                        Point point = MouseInfo.getPointerInfo().getLocation();
-                        Point framePoint = parent.getLocation();
-                        Point realPoint = new Point(point.x - framePoint.x, point.y - framePoint.y);
+                    if (SwingUtilities.isRightMouseButton(e) || e.isPopupTrigger()) {
                         JPopupMenu popupMenu = new JPopupMenu();
                         JMenuItem removeItem = new JMenuItem("Remove");
                         removeItem.addActionListener(e1 -> {
@@ -103,7 +100,7 @@ public class MealPlanGeneratorPage extends PickyPage {
                             draw();
                         });
                         popupMenu.add(removeItem);
-                        popupMenu.show(parent, realPoint.x, realPoint.y);
+                        popupMenu.show(e.getComponent(), e.getX(), e.getY());
                     }
                 }
             });

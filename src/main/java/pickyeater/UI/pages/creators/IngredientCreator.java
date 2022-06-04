@@ -5,8 +5,7 @@ import pickyeater.builders.IngredientBuilder;
 import pickyeater.builders.NutrientsBuilder;
 import pickyeater.executors.ExecutorProvider;
 import pickyeater.executors.creators.CreateIngredientExecutor;
-import pickyeater.utils.NutrientsQuantityConverter;
-import pickyeater.utils.StringsUtils;
+import pickyeater.utils.*;
 
 import javax.swing.*;
 import java.awt.*;
@@ -267,20 +266,27 @@ public class IngredientCreator extends JDialog {
 
     public void editIngredient(Ingredient ingredient) {
         isIngredientEditing = true;
-        startingIngredient = ingredient;
-        nameTextField.setText(ingredient.getName());
-        priceTextField.setText(String.valueOf(ingredient.getPrice()));
-        Nutrients nutrients = ingredient.getNutrients();
-        proteinsTextField.setText(String.valueOf(nutrients.getProteins()));
-        carbsTextField.setText(String.valueOf(nutrients.getCarbs()));
-        fatsTextField.setText(String.valueOf(nutrients.getFats()));
+
         Quantity quantity = ingredient.getQuantity();
+        startingIngredient = ingredient;
         switch (quantity.getQuantityType()) {
             case GRAMS -> quantityTypeBox.setSelectedItem("Grams");
-            case PIECES -> quantityTypeBox.setSelectedItem("Pieces");
+            case PIECES ->{
+                quantityTypeBox.setSelectedItem("Pieces");
+                IngredientQuantityConverter converter = new IngredientQuantityConverter();
+                startingIngredient = converter.convert(ingredient,1);
+            }
             case MILLILITERS -> quantityTypeBox.setSelectedItem("Milliliters");
         }
-        gramsPerQuantityTextField.setText(String.valueOf(quantity.getGramsPerQuantity()));
+
+        nameTextField.setText(startingIngredient.getName());
+        priceTextField.setText(ValuesConverter.convertFloat(startingIngredient.getPrice()));
+        Nutrients nutrients = startingIngredient.getNutrients();
+        proteinsTextField.setText(ValuesConverter.convertFloat(nutrients.getProteins()));
+        carbsTextField.setText(ValuesConverter.convertFloat(nutrients.getCarbs()));
+        fatsTextField.setText(ValuesConverter.convertFloat(nutrients.getFats()));
+
+        gramsPerQuantityTextField.setText(ValuesConverter.convertFloat(quantity.getGramsPerQuantity()));
         setVisible(true);
     }
 }
