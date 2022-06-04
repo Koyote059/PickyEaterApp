@@ -131,7 +131,8 @@ public class IngredientChooser extends JDialog {
                             JOptionPane.showMessageDialog(parent, "Cannot delete this meal as it's being used!");
                             return;
                         }
-                        int choice = JOptionPane.showConfirmDialog(parent, "Are you sure you want to delete it?");
+                        int choice = JOptionPane.showConfirmDialog(parent, "Are you sure you want to delete it?", "",
+                                JOptionPane.YES_NO_OPTION);
                         if (choice != JOptionPane.YES_OPTION)
                             return;
                         ingredientsSearcherExecutor.deleteIngredient(selectedIngredient);
