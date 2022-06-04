@@ -72,10 +72,7 @@ public class DailyProgressPage extends PickyPage {
         tableEatenMeals.addMouseListener(new MouseClickListener() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                if (SwingUtilities.isRightMouseButton(e)) {
-                    Point point = MouseInfo.getPointerInfo().getLocation();
-                    Point framePoint = parent.getLocation();
-                    Point realPoint = new Point(point.x - framePoint.x, point.y - framePoint.y);
+                if (SwingUtilities.isRightMouseButton(e) || e.isPopupTrigger()) {
                     int selectedIndex = tableEatenMeals.rowAtPoint(e.getPoint());
                     if (selectedIndex < 0)
                         return;
@@ -83,14 +80,14 @@ public class DailyProgressPage extends PickyPage {
                     Meal selectedMeal = meals.get(selectedIndex);
                     EatenMealsPopupMenu popupMenu = new EatenMealsPopupMenu();
                     popupMenu.addRemoveListener(l -> {
-                        int choice = JOptionPane.showConfirmDialog(parent, "Are you sure you want to delete it?",
+                        int choice = JOptionPane.showConfirmDialog(parent, "Are you sure you want to remove it?",
                                 "", JOptionPane.YES_NO_OPTION);
                         if (choice != JOptionPane.YES_OPTION)
                             return;
                         dailyProgressExecutor.removeEatenMeal(selectedMeal);
                         draw();
                     });
-                    popupMenu.show(parent, realPoint.x, realPoint.y);
+                    popupMenu.show(e.getComponent(), e.getX(), e.getY());
                 }
             }
         });

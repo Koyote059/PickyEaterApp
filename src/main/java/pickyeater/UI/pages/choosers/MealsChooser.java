@@ -44,9 +44,7 @@ public class MealsChooser extends JDialog {
 
     private final JPanel centerPanel = new JPanel(new GridLayout(1,2));
     private boolean isChoosing;
-    private JPopupMenu popup;
-    private final JMenuItem deleteItem = new JMenuItem("Delete");
-    private final JMenuItem editItem = new JMenuItem("Edit");
+
 
     public MealsChooser(JFrame parent) {
         super(parent, "Meals Chooser", true);
@@ -61,7 +59,6 @@ public class MealsChooser extends JDialog {
         add(BorderLayout.CENTER,centerPanel);
         centerPanel.add(mealPanel);
         centerPanel.add(ingredientListPanel);
-        Comparator<? super Meal> comparator = Comparator.comparing(Meal::getName);
         mealQuantityTextField.setToolTipText("Left void it'll put automatically 100g");
         searchBar.addKeyListener(new KeyAdapter() {
             @Override
@@ -69,12 +66,10 @@ public class MealsChooser extends JDialog {
                 String text = searchBar.getText();
                 if(!StringsUtils.isAlpha(text)) searchedMeals = new ArrayList<>();
                 else searchedMeals = new ArrayList<>(mealSearcherExecutor.getMealsThatStartWith(text));
-                searchedMeals.sort(comparator);
                 populateMealList();
             }
         });
         searchedMeals = new ArrayList<>(mealSearcherExecutor.getEveryMeal());
-        searchedMeals.sort(comparator);
         populateMealList();
         mealsList.setMinimumSize(new Dimension(250, 250));
         if(isChoosing){
@@ -115,11 +110,16 @@ public class MealsChooser extends JDialog {
             }
             Meal meal = searchedMeals.get(selectedItem);
             MealQuantityConverter mealQuantityConverter = new MealQuantityConverter();
-            int returningWeight;
+            float returningWeight;
             if (mealQuantityTextField.getText().isEmpty()) {
                 returningWeight = 100;
             } else {
-                returningWeight = StringToNumber.convertPositiveInteger(mealQuantityTextField.getText());
+                try {
+                    returningWeight = StringToNumber.convertPositiveFloatException(mealQuantityTextField.getText());
+                } catch (NumberFormatException ex){
+                    JOptionPane.showMessageDialog(getParent(), "Insert valid quantity!");
+                    return;
+                }
             }
             returningMeal = mealQuantityConverter.convert(meal, returningWeight);
             dispose();
@@ -128,25 +128,20 @@ public class MealsChooser extends JDialog {
             @Override
             public void mouseClicked(MouseEvent e) {
                 if(isChoosing) return;
-                if (SwingUtilities.isRightMouseButton(e)) {
-                    Point point = MouseInfo.getPointerInfo().getLocation();
-                    Point framePoint = parent.getLocation();
-                    Point realPoint = new Point(point.x - framePoint.x, point.y - framePoint.y);
+                if (SwingUtilities.isRightMouseButton(e) || e.isPopupTrigger()) {
                     int selectedIndex = mealsList.locationToIndex(e.getPoint());
                     mealsList.setSelectedIndex(selectedIndex);
                     if (selectedIndex < 0)
                         return;
                     Meal selectedMeal = searchedMeals.get(selectedIndex);
-                    popup = new JPopupMenu();
+                    JPopupMenu popup = new JPopupMenu();
+                    JMenuItem deleteItem = new JMenuItem("Delete");
+                    JMenuItem editItem = new JMenuItem("Edit");
                     // add menu items to popup
                     popup.add(deleteItem);
                     popup.addSeparator();
                     popup.add(editItem);
-                    mealsList.addMouseListener(new MouseAdapter() {
-                        public void mouseReleased(MouseEvent me) {
-                            showPopup(me); // showPopup() is our own user-defined method
-                        }
-                    });
+                    popup.show(e.getComponent(), e.getX(), e.getY());
                     deleteItem.addActionListener(l -> {
                         if (mealSearcherExecutor.isMealUsed(selectedMeal)) {
                             JOptionPane.showMessageDialog(parent, "Cannot delete this meal as it's being used!");
@@ -196,7 +191,11 @@ public class MealsChooser extends JDialog {
     }
 
     private void populateMealList() {
+        Comparator<? super Meal> comparator = Comparator.comparing(Meal::getName);
+        searchedMeals.sort(comparator);
+
         Object[] listData = new Object[searchedMeals.size()];
+
         for (int i = 0; i < searchedMeals.size(); i++) {
             Meal meal = searchedMeals.get(i);
             listData[i] = meal.getName();
@@ -232,10 +231,5 @@ public class MealsChooser extends JDialog {
         isChoosing = true;
         setVisible(true);
         return Optional.ofNullable(returningMeal);
-    }
-
-    private void showPopup(MouseEvent me) {
-        if(me.isPopupTrigger())
-            popup.show(me.getComponent(), me.getX(), me.getY());
     }
 }

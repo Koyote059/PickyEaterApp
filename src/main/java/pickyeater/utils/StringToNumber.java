@@ -21,6 +21,15 @@ public class StringToNumber {
         return ris;
     }
 
+    public static float convertPositiveFloatException(String s) throws NumberFormatException {
+        if (s.contains(",")) {
+            s = convertCommaToDot(s);
+        }
+        float ret =  Float.parseFloat(s);
+        if(ret<0) throw new NumberFormatException();
+        return ret;
+    }
+
     private static String convertCommaToDot(String s) {
         StringBuilder stringBuilder = new StringBuilder(s);
         stringBuilder.setCharAt(stringBuilder.indexOf(","), '.');

@@ -1,9 +1,5 @@
 package pickyeater.UI.pages.choosers;
 
-import org.knowm.xchart.PieChart;
-import org.knowm.xchart.XChartPanel;
-import org.knowm.xchart.style.PieStyler;
-import org.knowm.xchart.style.Styler;
 import pickyeater.UI.pages.creators.IngredientCreator;
 import pickyeater.UI.pages.utils.NutrientsPieChart;
 import pickyeater.basics.food.Ingredient;
@@ -20,10 +16,8 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.util.ArrayList;
-import java.util.Comparator;
+import java.util.*;
 import java.util.List;
-import java.util.Optional;
 
 public class IngredientChooser extends JDialog {
     private final IngredientSearcherExecutor ingredientsSearcherExecutor = ExecutorProvider.getIngredientSearcherExecutor();
@@ -39,9 +33,7 @@ public class IngredientChooser extends JDialog {
     private final JLabel ingredientQuantityTypeLabel = new JLabel(" g");
     private final JPanel centerPanel = new JPanel(new GridLayout(1,2));
     private boolean isChoosing = false;
-    private JPopupMenu popup;
-    private final JMenuItem deleteItem = new JMenuItem("Delete");
-    private final JMenuItem editItem = new JMenuItem("Edit");
+
 
     public IngredientChooser(JFrame parent) {
         super(parent, "Ingredient Chooser", true);
@@ -64,7 +56,6 @@ public class IngredientChooser extends JDialog {
         add(BorderLayout.CENTER,centerPanel);
         centerPanel.add(mealPanel);
         centerPanel.add(ingredientListPanel);
-        Comparator<? super Ingredient> comparator = Comparator.comparing(Ingredient::getName);
         ingredientQuantityTextField.setToolTipText("Left void it'll put automatically 100g/100ml/1pz");
         searchBar.addKeyListener(new KeyAdapter() {
             @Override
@@ -72,12 +63,10 @@ public class IngredientChooser extends JDialog {
                 String text = searchBar.getText();
                 if(!StringsUtils.isAlpha(text)) searchedIngredients = new ArrayList<>();
                 else searchedIngredients = new ArrayList<>(ingredientsSearcherExecutor.getIngredientsThatStartWith(text));
-                searchedIngredients.sort(comparator);
                 populateIngredientsList();
             }
         });
         searchedIngredients = new ArrayList<>(ingredientsSearcherExecutor.getAllIngredients());
-        searchedIngredients.sort(comparator);
         populateIngredientsList();
         ingredientsList.setMinimumSize(new Dimension(250, 250));
         ingredientsList.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
@@ -98,7 +87,7 @@ public class IngredientChooser extends JDialog {
             if(selectedItem==-1) return;
             Ingredient ingredient = searchedIngredients.get(selectedItem);
             IngredientQuantityConverter ingredientQuantityConverter = new IngredientQuantityConverter();
-            int returningQuantity;
+            float returningQuantity;
 
 
             if (ingredientQuantityTextField.getText().isEmpty()) {
@@ -109,7 +98,7 @@ public class IngredientChooser extends JDialog {
                 }
             } else {
                 try {
-                    returningQuantity = Integer.parseInt(ingredientQuantityTextField.getText());
+                    returningQuantity = StringToNumber.convertPositiveFloatException(ingredientQuantityTextField.getText());
                 } catch (NumberFormatException ex){
                     JOptionPane.showMessageDialog(parent,"Insert a valid quantity!");
                     return;
@@ -128,8 +117,10 @@ public class IngredientChooser extends JDialog {
                         return;
                     ingredientsList.setSelectedIndex(selectedIndex);
                     Ingredient selectedIngredient = searchedIngredients.get(selectedIndex);
-                    popup = new JPopupMenu();
+                    JPopupMenu popup = new JPopupMenu();
                     // add menu items to popup
+                    JMenuItem deleteItem = new JMenuItem("Delete");
+                    JMenuItem editItem = new JMenuItem("Edit");
                     popup.add(deleteItem);
                     popup.addSeparator();
                     popup.add(editItem);
@@ -184,6 +175,10 @@ public class IngredientChooser extends JDialog {
     }
 
     private void populateIngredientsList() {
+        ingredientsList.removeAll();
+        Comparator<? super Ingredient> comparator = Comparator.comparing(Ingredient::getName);
+        searchedIngredients.sort(comparator);
+
         Object[] listData = new Object[searchedIngredients.size()];
         for (int i = 0; i < searchedIngredients.size(); i++) {
             Ingredient ingredient = searchedIngredients.get(i);
