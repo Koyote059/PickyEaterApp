@@ -10,7 +10,6 @@ import pickyeater.basics.food.Quantity;
 import pickyeater.basics.groceries.Groceries;
 import pickyeater.basics.groceries.GroceriesCheckList;
 import pickyeater.executors.GroceriesExecutor;
-import pickyeater.utils.MouseClickListener;
 import pickyeater.utils.ValuesConverter;
 
 import javax.imageio.ImageIO;
@@ -18,6 +17,7 @@ import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.WindowEvent;
 import java.awt.image.BufferedImage;
@@ -56,9 +56,10 @@ public class GroceriesPage extends PickyPage {
                 groceriesExecutor.saveGroceries(groceriesCheckList);
             }
         });
-        binLabel.addMouseListener(new MouseClickListener() {
+        binLabel.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
+                super.mouseClicked(e);
                 int result = JOptionPane.showConfirmDialog(mainPanel, "Are you sure you want to delete it?", "Deleting  " + "groceries", JOptionPane.YES_NO_OPTION);
                 if (result == JOptionPane.YES_OPTION) {
                     groceriesExecutor.deleteGroceries();

@@ -16,7 +16,7 @@
         <properties/>
         <border type="none"/>
         <children>
-          <component id="793b9" class="javax.swing.JLabel">
+          <component id="793b9" class="javax.swing.JLabel" binding="txtName">
             <constraints>
               <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
             </constraints>
@@ -24,7 +24,7 @@
               <text value="Name"/>
             </properties>
           </component>
-          <component id="d7b58" class="javax.swing.JLabel">
+          <component id="d7b58" class="javax.swing.JLabel" binding="txtHeight">
             <constraints>
               <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
             </constraints>
@@ -32,7 +32,7 @@
               <text value="Height"/>
             </properties>
           </component>
-          <component id="96ec9" class="javax.swing.JLabel">
+          <component id="96ec9" class="javax.swing.JLabel" binding="txtBirthday">
             <constraints>
               <grid row="4" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
             </constraints>
@@ -40,7 +40,7 @@
               <text value="Birthday"/>
             </properties>
           </component>
-          <component id="cc34f" class="javax.swing.JLabel">
+          <component id="cc34f" class="javax.swing.JLabel" binding="txtSex">
             <constraints>
               <grid row="5" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
             </constraints>
@@ -48,7 +48,7 @@
               <text value="Sex"/>
             </properties>
           </component>
-          <component id="f66bc" class="javax.swing.JLabel">
+          <component id="f66bc" class="javax.swing.JLabel" binding="txtBodyfat">
             <constraints>
               <grid row="6" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
             </constraints>
@@ -110,7 +110,7 @@
               <text value="cm"/>
             </properties>
           </component>
-          <component id="29074" class="javax.swing.JLabel">
+          <component id="29074" class="javax.swing.JLabel" binding="txtWeight">
             <constraints>
               <grid row="3" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
             </constraints>

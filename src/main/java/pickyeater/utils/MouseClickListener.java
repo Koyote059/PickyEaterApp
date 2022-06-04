@@ -1,5 +1,5 @@
 package pickyeater.utils;
-
+/*
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
@@ -20,3 +20,4 @@ public abstract class MouseClickListener implements MouseListener {
     public void mouseExited(MouseEvent e) {
     }
 }
+ */

@@ -22,7 +22,7 @@ import pickyeater.builders.UserBuilder;
 import pickyeater.executors.ExecutorProvider;
 import pickyeater.executors.user.UserEditModeExecutor;
 import pickyeater.utils.AgeCalculator;
-import pickyeater.utils.JCalendarToLocalDate;
+import pickyeater.utils.JCalUtils;
 import pickyeater.utils.StringToNumber;
 import pickyeater.utils.StringsUtils;
 
@@ -121,7 +121,7 @@ public class UserEditModePage extends PickyPage {
         tfFats.setText(df.format(user.getUserGoal().getRequiredNutrients().getFats()));
         txtCalories.setText(df.format(user.getUserGoal().getRequiredNutrients().getCalories()));
         ColorButtons.ColorLeftButtons(btUser, btDailyProgress, btSettings, btGroceries, btDiet);
-        newUserBuilder.setDateOfBirth(new JCalendarToLocalDate().jCalToLocDate(jBirthdayChooser.getDate()));
+        newUserBuilder.setDateOfBirth(JCalUtils.jCalToLocDate(jBirthdayChooser.getDate()));
         ActionListener listener = e -> {
             String cmd = e.getActionCommand();
             setVisible(false);
@@ -134,7 +134,7 @@ public class UserEditModePage extends PickyPage {
         btDiet.addActionListener(listener);
         // Birthday
         jBirthdayChooser.addPropertyChangeListener(propertyChangeEvent -> {
-            newUserBuilder.setDateOfBirth(new JCalendarToLocalDate().jCalToLocDate(jBirthdayChooser.getDate()));
+            newUserBuilder.setDateOfBirth(JCalUtils.jCalToLocDate(jBirthdayChooser.getDate()));
             if (LocalDate.now().compareTo(newUserBuilder.getDateOfBirth()) <= 0) {   //TODO: If a person is older than 150 years old -> null
                 newUserBuilder.setDateOfBirth(null);
             }

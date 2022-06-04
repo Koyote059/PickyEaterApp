@@ -1,25 +1,15 @@
 package pickyeater.UI.pages.creators;
 
-import org.knowm.xchart.PieChart;
-import org.knowm.xchart.XChartPanel;
-import org.knowm.xchart.style.PieStyler;
-import org.knowm.xchart.style.Styler;
 import pickyeater.UI.pages.choosers.IngredientChooser;
 import pickyeater.UI.pages.utils.NutrientsPieChart;
 import pickyeater.basics.food.*;
 import pickyeater.basics.groceries.PickyFinder;
 import pickyeater.builders.MealBuilder;
-import pickyeater.builders.NutrientsBuilder;
-import pickyeater.builders.PickyNutrientsBuilder;
 import pickyeater.executors.ExecutorProvider;
 import pickyeater.executors.creators.CreateMealExecutor;
-import pickyeater.utils.IngredientQuantityConverter;
-import pickyeater.utils.MealQuantityConverter;
-import pickyeater.utils.MouseClickListener;
 import pickyeater.utils.StringsUtils;
 
 import javax.swing.*;
-import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
@@ -50,9 +40,7 @@ public class MealCreator extends JDialog {
         JPanel mainPanel = new JPanel(new BorderLayout());
         JPanel customMealPanel = new JPanel(new BorderLayout());
         mealNameField = new JTextField();
-        mealNameField.addActionListener( listener -> {
-            showPieChart();
-        });
+        mealNameField.addActionListener( listener -> showPieChart());
         panelInsertName.setLayout(new BorderLayout());
         panelInsertName.add(BorderLayout.WEST, txtInsertName);
         panelInsertName.add(BorderLayout.CENTER, mealNameField);
@@ -113,9 +101,10 @@ public class MealCreator extends JDialog {
         buttonPanel.add(BorderLayout.LINE_START, cancelButton);
         JButton doneButton = new JButton("Done");
         ingredientsTable.getTableHeader().setReorderingAllowed(false);
-        ingredientsTable.addMouseListener(new MouseClickListener() {
+        ingredientsTable.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
+                super.mouseClicked(e);
                 if (SwingUtilities.isRightMouseButton(e) || e.isPopupTrigger()) {
                     int selectedIndex = ingredientsTable.rowAtPoint(e.getPoint());
                     ingredientsTable.setRowSelectionInterval(selectedIndex, selectedIndex);

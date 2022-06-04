@@ -107,9 +107,10 @@ public class IngredientChooser extends JDialog {
             returningIngredient = ingredientQuantityConverter.convert(ingredient, returningQuantity);
             dispose();
         });
-        ingredientsList.addMouseListener(new MouseClickListener() {
+        ingredientsList.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
+                super.mouseClicked(e);
                 if(isChoosing) return;
                 if (e.isPopupTrigger() || SwingUtilities.isRightMouseButton(e)) {
                     int selectedIndex = ingredientsList.locationToIndex(e.getPoint());
@@ -130,7 +131,8 @@ public class IngredientChooser extends JDialog {
                             JOptionPane.showMessageDialog(parent, "Cannot delete this meal as it's being used!");
                             return;
                         }
-                        int choice = JOptionPane.showConfirmDialog(parent, "Are you sure you want to delete it?");
+                        int choice = JOptionPane.showConfirmDialog(parent, "Are you sure you want to delete it?", "",
+                                JOptionPane.YES_NO_OPTION);
                         if (choice != JOptionPane.YES_OPTION)
                             return;
                         ingredientsSearcherExecutor.deleteIngredient(selectedIngredient);

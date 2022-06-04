@@ -9,11 +9,11 @@ import pickyeater.basics.mealplan.DailyMealPlan;
 import pickyeater.basics.mealplan.MealPlan;
 import pickyeater.builders.MealPlanBuilder;
 import pickyeater.executors.MealPlanCreatorExecutor;
-import pickyeater.utils.MouseClickListener;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -87,9 +87,10 @@ public class MealPlanGeneratorPage extends PickyPage {
             dayLabel.setHorizontalTextPosition(SwingConstants.CENTER);
             dayLabel.setHorizontalAlignment(SwingConstants.CENTER);
             int finalI = i;
-            dayLabel.addMouseListener(new MouseClickListener() {
+            dayLabel.addMouseListener(new MouseAdapter() {
                 @Override
                 public void mouseClicked(MouseEvent e) {
+                    super.mouseClicked(e);
                     if (SwingUtilities.isRightMouseButton(e) || e.isPopupTrigger()) {
                         JPopupMenu popupMenu = new JPopupMenu();
                         JMenuItem removeItem = new JMenuItem("Remove");
@@ -118,9 +119,10 @@ public class MealPlanGeneratorPage extends PickyPage {
             } catch (IOException | NullPointerException ignored) {
                 leftArrowComponent = new JButton("<");
             }
-            leftArrowComponent.addMouseListener(new MouseClickListener() {
+            leftArrowComponent.addMouseListener(new MouseAdapter() {
                 @Override
                 public void mouseClicked(MouseEvent e) {
+                    super.mouseClicked(e);
                     if (e.getClickCount() != 1 || finalI == 0)
                         return;
                     Collections.swap(columns, finalI, finalI - 1);
@@ -137,9 +139,10 @@ public class MealPlanGeneratorPage extends PickyPage {
             } catch (IOException | NullPointerException ignored) {
                 rightArrowComponent = new JButton("<");
             }
-            rightArrowComponent.addMouseListener(new MouseClickListener() {
+            rightArrowComponent.addMouseListener(new MouseAdapter() {
                 @Override
                 public void mouseClicked(MouseEvent e) {
+                    super.mouseClicked(e);
                     if (e.getClickCount() != 1 || finalI == (columns.size() - 1))
                         return;
                     Collections.swap(columns, finalI, finalI + 1);
