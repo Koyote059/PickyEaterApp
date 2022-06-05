@@ -25,10 +25,11 @@ public class PopulateDatabase {
         ExecutorProvider.setEaterManager(eaterManager);
 
         Ingredient ingredient;
-        ingredient = buildIngredient("Avocado", "1.5", "2", "9", "15", "300", "Pieces");
-        System.out.println(ingredient);
-        saveInDatabase(ingredient);
+        //ingredient = buildIngredient("Avocado", "1.5", "2", "9", "15", "300", "Pieces");
+        //System.out.println(ingredient);
+        //saveInDatabase(ingredient);
         ingredient = buildIngredient("Banana", "0.088", "1.1", "23", "0.3", "57.5", "Pieces");
+        System.out.println(ingredient);
         saveInDatabase(ingredient);
         ingredient = buildIngredient("Cachi", "0.135", "0.58", "18.9", "0.19", "300", "Pieces");
         saveInDatabase(ingredient);
@@ -213,7 +214,8 @@ public class PopulateDatabase {
     }
 
     private void saveInDatabase(Ingredient ingredient) {
-        deleteInDatabase(ingredient);
+        // If database needs to be cleaned:
+        //deleteInDatabase(ingredient);
         if (ingredient == null)
             return;
         if (ExecutorProvider.getCreateIngredientExecutor().existsIngredient(ingredient.getName())) {
@@ -222,8 +224,8 @@ public class PopulateDatabase {
         }
         ExecutorProvider.getCreateIngredientExecutor().saveIngredient(ingredient);
 
-        // If database needs to be cleaned:
-        deleteInDatabase(ingredient);
+                // If database needs to be cleaned:
+        //deleteInDatabase(ingredient);
     }
 
     private void deleteInDatabase(Ingredient ingredient){
