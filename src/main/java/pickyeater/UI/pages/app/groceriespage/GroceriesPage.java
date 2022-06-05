@@ -133,10 +133,9 @@ public class GroceriesPage extends PickyPage {
         model.addColumn("Taken");
         model.addColumn("Name");
         model.addColumn("Quantity");
-        model.addColumn("");
         for (Ingredient ingredient : groceriesCheckList.getNeededIngredients()) {
             Quantity quantity = ingredient.getQuantity();
-            Object[] row = new Object[]{false, ingredient.getName(), ValuesConverter.convertFloat(quantity.getAmount()), ValuesConverter.convertQuantityTypeValue(quantity.getQuantityType())};
+            Object[] row = new Object[]{false, ingredient.getName(), ValuesConverter.convertFloat(quantity.getAmount()) + " " + ValuesConverter.convertQuantityTypeValue(quantity.getQuantityType())};
             model.addRow(row);
             ingredients.add(ingredient);
         }

@@ -112,12 +112,22 @@ public class IngredientChooser extends JDialog {
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
                 if(isChoosing) return;
+
+                int selectedIndex = ingredientsList.locationToIndex(e.getPoint());
+                if (selectedIndex < 0)
+                    return;
+                ingredientsList.setSelectedIndex(selectedIndex);
+                Ingredient selectedIngredient = searchedIngredients.get(selectedIndex);
+
+                if(e.getClickCount()==2){
+                    IngredientInfoJDialog ingredientInfoJDialog  = new IngredientInfoJDialog(parent,selectedIngredient);
+                    setVisible(false);
+                    ingredientInfoJDialog.setVisible(true);
+                    setVisible(true);
+                    return;
+                }
+
                 if (e.isPopupTrigger() || SwingUtilities.isRightMouseButton(e)) {
-                    int selectedIndex = ingredientsList.locationToIndex(e.getPoint());
-                    if (selectedIndex < 0)
-                        return;
-                    ingredientsList.setSelectedIndex(selectedIndex);
-                    Ingredient selectedIngredient = searchedIngredients.get(selectedIndex);
                     JPopupMenu popup = new JPopupMenu();
                     // add menu items to popup
                     JMenuItem deleteItem = new JMenuItem("Delete");

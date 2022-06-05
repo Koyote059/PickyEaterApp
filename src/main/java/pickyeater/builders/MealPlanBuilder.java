@@ -17,7 +17,7 @@ public interface MealPlanBuilder {
     void setDailyMealPlan(int day, DailyMealPlan dailyMealPlan);
     LocalDate getBeginningDay();
     void setBeginningDay(LocalDate toLocalDate);
-    void addDailyMealPlan(DailyMealPlan build);
+    void addDailyMealPlan(DailyMealPlan dailyMealPlan);
     MealPlan build();
     List<DailyMealPlan> getDailyMealPlans();
 }

@@ -29,6 +29,7 @@ public class MealPlanUnavailablePage extends PickyPage {
     private JButton btCreateMealPlan;
     private JButton btAutomaticGenerateMealPlan;
     private JLabel txt404;
+    private JPanel buttonsPanel;
     private final MealPlanCreatorExecutor mealPlanCreator;
 
     public MealPlanUnavailablePage(JFrame parent) {
@@ -81,4 +82,11 @@ public class MealPlanUnavailablePage extends PickyPage {
         }
     }
 
+    private void createUIComponents() {
+        buttonsPanel = new JPanel(new GridLayout(1,2));
+        btCreateMealPlan = new JButton("Create Meal Plan");
+        btAutomaticGenerateMealPlan = new JButton("Generate Meal Plan");
+        buttonsPanel.add(btCreateMealPlan);
+        buttonsPanel.add(btAutomaticGenerateMealPlan);
+    }
 }

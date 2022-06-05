@@ -90,7 +90,9 @@ public class MealsChooser extends JDialog {
                 if (selectedIndex < 0)
                     return;
                 Meal meal = searchedMeals.get(selectedIndex);
+                setVisible(false);
                 new MealInfoJDialog(parent, meal).run();
+                setVisible(true);
             }
         });
 
