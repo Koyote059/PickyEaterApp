@@ -213,6 +213,7 @@ public class PopulateDatabase {
     }
 
     private void saveInDatabase(Ingredient ingredient) {
+        deleteInDatabase(ingredient);
         if (ingredient == null)
             return;
         if (ExecutorProvider.getCreateIngredientExecutor().existsIngredient(ingredient.getName())) {
@@ -222,7 +223,7 @@ public class PopulateDatabase {
         ExecutorProvider.getCreateIngredientExecutor().saveIngredient(ingredient);
 
         // If database needs to be cleaned:
-        //deleteInDatabase(ingredient);
+        deleteInDatabase(ingredient);
     }
 
     private void deleteInDatabase(Ingredient ingredient){
