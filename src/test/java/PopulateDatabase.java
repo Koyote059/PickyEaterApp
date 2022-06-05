@@ -221,13 +221,14 @@ public class PopulateDatabase {
         }
         ExecutorProvider.getCreateIngredientExecutor().saveIngredient(ingredient);
 
-        deleteInDatabase(ingredient);
+        // If database needs to be cleaned:
+        //deleteInDatabase(ingredient);
     }
 
     private void deleteInDatabase(Ingredient ingredient){
         if (ExecutorProvider.getCreateIngredientExecutor().existsIngredient(ingredient.getName())) {
             ExecutorProvider.getCreateIngredientExecutor().deleteIngredient(ingredient);
-            System.err.println(ingredient.getName() + " Deleted!");
+            System.out.println(ingredient.getName() + " Deleted!");
         }
     }
 }
