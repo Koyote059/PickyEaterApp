@@ -13,7 +13,7 @@ Cocomero            15kg        0.6       0.2       8         1$/Kg
 Datteri             7           2.5       0.4       75        X
 Durian              3kg         1.47      5         27        40$/Kg
 Fichi               50          0.9       0.2       11.2      6$/kg
-
+------------------------------------------------------------------------------------
 Nome                Prezzo 	    Proteine    Carbs       Fats        Grammi
 Fichi d’India       2.98/KG     0.8         13          0.1         160
 Fragole             3.98/kg     0.7         8           0.3         50
@@ -30,7 +30,7 @@ Mandarino           1.8/Kg      0.9         17.6        0.3         100
 Mandorla            5/Kg        21.2        21.69       50          1.2
 Mango               2           0.8         15          0.4         500
 Mela                1.7/kg      0.3         14          0.2         225
-
+------------------------------------------------------------------------------------
 Melograno
 Melone Mirtillo
 More Nespole

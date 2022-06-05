@@ -56,26 +56,36 @@ public class PopulateDatabase {
         ExecutorProvider.setEaterManager(eaterManager);
 
         Ingredient ingredient;
-        ingredient = buildIngredient("", "", "", "", "", "", "Pieces");
+        ingredient = buildIngredient("Fichi d India", "0.4736", "0.8", "13", "0.1", "160", "Pieces");
         System.out.println(ingredient);
         saveInDatabase(ingredient);
-        ingredient = buildIngredient("", "", "", "", "", "", "Pieces");
+        ingredient = buildIngredient("Fragole", "0.12", "0.7", "8", "0.3", "50", "Pieces");
         saveInDatabase(ingredient);
-        ingredient = buildIngredient("", "", "", "", "", "", "Pieces");
+        ingredient = buildIngredient("Frutto del drago (Small)", "5", "4", "82", "11", "150", "Pieces");
         saveInDatabase(ingredient);
-        ingredient = buildIngredient("", "", "", "", "", "", "Pieces");
+        ingredient = buildIngredient("Frutto del drago (Medium)", "7.5", "4", "82", "11", "375", "Pieces");
         saveInDatabase(ingredient);
-        ingredient = buildIngredient("", "", "", "", "", "", "Pieces");
+        ingredient = buildIngredient("Frutto del drago (Big)", "10", "4", "82", "11", "600", "Pieces");
         saveInDatabase(ingredient);
-        ingredient = buildIngredient("", "", "", "", "", "", "Pieces");
+        ingredient = buildIngredient("Frutto della passione", "1", "2.2", "23", "0.7", "18", "Pieces");
         saveInDatabase(ingredient);
-        ingredient = buildIngredient("", "", "", "", "", "", "Pieces");
+        ingredient = buildIngredient("Gelso", "0", "1.4", "10", "0.4", "2.1", "Pieces");
         saveInDatabase(ingredient);
-        ingredient = buildIngredient("", "", "", "", "", "", "Pieces");
+        ingredient = buildIngredient("Giuggiole", "3.45", "1.2", "20.53", "0.2", "115", "Pieces");
         saveInDatabase(ingredient);
-        ingredient = buildIngredient("", "", "", "", "", "", "Pieces");
+        ingredient = buildIngredient("Kiwi", "0.23", "1.1", "15", "0.5", "75", "Pieces");
         saveInDatabase(ingredient);
-        ingredient = buildIngredient("", "", "", "", "", "", "Pieces");
+        ingredient = buildIngredient("Lamponi", "2.4", "1.2", "15", "0.7", "100", "Grams");
+        saveInDatabase(ingredient);
+        ingredient = buildIngredient("Limone", "0.10", "1.1", "9", "0.3", "110", "Pieces");
+        saveInDatabase(ingredient);
+        ingredient = buildIngredient("Mandarino", "0.18", "0.9", "17.6", "0.3", "100", "Pieces");
+        saveInDatabase(ingredient);
+        ingredient = buildIngredient("Mandorla", "2.5", "21.2", "21.69", "50", "1.2", "Pieces");
+        saveInDatabase(ingredient);
+        ingredient = buildIngredient("Mango", "2", "0.8", "15", "0.4", "500", "Pieces");
+        saveInDatabase(ingredient);
+        ingredient = buildIngredient("Mela", "0.38", "0.3", "14", "0.2", "225", "Pieces");
         saveInDatabase(ingredient);
         /**
          * "Grams", "Milliliters", "Pieces"
