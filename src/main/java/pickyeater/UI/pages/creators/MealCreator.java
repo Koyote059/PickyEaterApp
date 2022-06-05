@@ -129,7 +129,7 @@ public class MealCreator extends JDialog {
         });
         doneButton.addActionListener(e -> {
             String mealName = mealNameField.getText();
-            if (isMealEditing && executor.isMealUsed(startingMeal)) {
+            if (isMealEditing && executor.isMealUsed(startingMeal) && (!startingMeal.getName().equals(mealName))) {
                 JOptionPane.showMessageDialog(getParent(), "You can't edit the meal's name as it's been used!");
                 return;
             }
