@@ -195,7 +195,7 @@ public class IngredientCreator extends JDialog {
         }
         if (!quantityType.equals(QuantityType.GRAMS)) {
             try {
-                gramsPerQuantity = Float.parseFloat(selectedGramsPerQuantity);
+                gramsPerQuantity = StringToNumber.convertPositiveFloatException(selectedGramsPerQuantity);
                 if(quantityType.equals(QuantityType.MILLILITERS)){
                     gramsPerQuantity/=100;
                 }

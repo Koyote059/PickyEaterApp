@@ -10,6 +10,9 @@ import pickyeater.executors.ExecutorProvider;
 import pickyeater.managers.EaterManager;
 import pickyeater.managers.PickyEaterManager;
 
+import javax.swing.*;
+import java.awt.*;
+
 public class ApplicationMain {
     public static void main(String[] args) {
         ThemeHandler.ReadTheme();
@@ -18,10 +21,12 @@ public class ApplicationMain {
         EaterManager eaterManager = new PickyEaterManager(pickyEatersDB.getUserDatabase(), pickyEatersDB.getIngredientsDatabase(), pickyEatersDB.getMealsDatabase(), pickyEatersDB.getGroceriesDatabase());
         ExecutorProvider.setEaterManager(eaterManager);
         if (eaterManager.getUserManager().getUser().isEmpty()) {  // User Database is empty
-            new WelcomePage();
+            SwingUtilities.invokeLater(WelcomePage::new);
         } else {  // Go to the app
-            new MainFrame();
-            MainFrame.changePage(PanelButtons.PROGRESS);
+            EventQueue.invokeLater(() -> {
+                new MainFrame();
+                MainFrame.changePage(PanelButtons.PROGRESS);
+            });
         }
     }
 }
