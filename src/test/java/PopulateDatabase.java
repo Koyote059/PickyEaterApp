@@ -61,11 +61,11 @@ public class PopulateDatabase {
         saveInDatabase(ingredient);
         ingredient = buildIngredient("Fragole", "0.12", "0.7", "8", "0.3", "50", "Pieces");
         saveInDatabase(ingredient);
-        ingredient = buildIngredient("Frutto del drago (Small)", "5", "4", "82", "11", "150", "Pieces");
+        ingredient = buildIngredient("Frutto del drago Small", "5", "4", "82", "11", "150", "Pieces");
         saveInDatabase(ingredient);
-        ingredient = buildIngredient("Frutto del drago (Medium)", "7.5", "4", "82", "11", "375", "Pieces");
+        ingredient = buildIngredient("Frutto del drago Medium", "7.5", "4", "82", "11", "375", "Pieces");
         saveInDatabase(ingredient);
-        ingredient = buildIngredient("Frutto del drago (Big)", "10", "4", "82", "11", "600", "Pieces");
+        ingredient = buildIngredient("Frutto del drago Big", "10", "4", "82", "11", "600", "Pieces");
         saveInDatabase(ingredient);
         ingredient = buildIngredient("Frutto della passione", "1", "2.2", "23", "0.7", "18", "Pieces");
         saveInDatabase(ingredient);
