@@ -13,26 +13,24 @@ Cocomero            15kg        0.6       0.2       8         1$/Kg
 Datteri             7           2.5       0.4       75        X
 Durian              3kg         1.47      5         27        40$/Kg
 Fichi               50          0.9       0.2       11.2      6$/kg
-Fichi d’India
-Fragole
-Frutto del drago
-Frutto della passione
-Gelso
-Giuggiole
-Guava
-Jackfruit
-Kiwano
-Kiwi
-Kumquat
-Lamponi
-Limone
-Litchi
-Mandarino
-Mandorla
-Mango
-Mangostano
-Mela
-Mela Cotogna
+
+Nome                Prezzo 	    Proteine    Carbs       Fats        Grammi
+Fichi d’India       2.98/KG     0.8         13          0.1         160
+Fragole             3.98/kg     0.7         8           0.3         50
+Frutto del drago s  5           4           82          11          150
+Frutto del drago m  7.5         4           82          11          375
+Frutto del drago b  10          4           82          11          600
+Frutto della passione   1       2.2         23          0.7         18
+Gelso               X           1.4         10          0.4         2.1
+Giuggiole           30/Kg       1.2         20.53       0.2         115
+Kiwi                3/Kg        1.1         15          0.5         75
+Lamponi             24/Kg       1.2         15          0.7         100g (NO PIECES)
+Limone              0.5/Kg      1.1         9           0.3         110
+Mandarino           1.8/Kg      0.9         17.6        0.3         100
+Mandorla            5/Kg        21.2        21.69       50          1.2
+Mango               2           0.8         15          0.4         500
+Mela                1.7/kg      0.3         14          0.2         225
+
 Melograno
 Melone Mirtillo
 More Nespole

@@ -51,6 +51,38 @@ public class PopulateDatabase {
 
     }
 
+    @Test
+    public void populate2(){
+        ExecutorProvider.setEaterManager(eaterManager);
+
+        Ingredient ingredient;
+        ingredient = buildIngredient("", "", "", "", "", "", "Pieces");
+        System.out.println(ingredient);
+        saveInDatabase(ingredient);
+        ingredient = buildIngredient("", "", "", "", "", "", "Pieces");
+        saveInDatabase(ingredient);
+        ingredient = buildIngredient("", "", "", "", "", "", "Pieces");
+        saveInDatabase(ingredient);
+        ingredient = buildIngredient("", "", "", "", "", "", "Pieces");
+        saveInDatabase(ingredient);
+        ingredient = buildIngredient("", "", "", "", "", "", "Pieces");
+        saveInDatabase(ingredient);
+        ingredient = buildIngredient("", "", "", "", "", "", "Pieces");
+        saveInDatabase(ingredient);
+        ingredient = buildIngredient("", "", "", "", "", "", "Pieces");
+        saveInDatabase(ingredient);
+        ingredient = buildIngredient("", "", "", "", "", "", "Pieces");
+        saveInDatabase(ingredient);
+        ingredient = buildIngredient("", "", "", "", "", "", "Pieces");
+        saveInDatabase(ingredient);
+        ingredient = buildIngredient("", "", "", "", "", "", "Pieces");
+        saveInDatabase(ingredient);
+        /**
+         * "Grams", "Milliliters", "Pieces"
+         */
+
+    }
+
     private Ingredient buildIngredient(String selectedName, String selectedPrice, String selectedProteins, String selectedCarbs, String selectedFats, String selectedGramsPerQuantity, String selectedItem) {
         float price, proteins, carbs, fats;
         float gramsPerQuantity = 1;
