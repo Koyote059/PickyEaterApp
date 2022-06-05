@@ -12,6 +12,7 @@ import pickyeater.executors.MealPlanCreatorExecutor;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
+import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -43,9 +44,11 @@ public class MealPlanGeneratorPage extends PickyPage {
 
     public MealPlanGeneratorPage(MealPlanCreatorExecutor mealPlanCreator, JFrame parent) {
         super(parent);
+
         mainPanel.setLayout(new BorderLayout());
         topPanel = new JPanel(new ScrollPaneLayout());
         JScrollPane scrollPane = new JScrollPane(topPanel);
+        scrollPane.getVerticalScrollBar().setUnitIncrement(16);
         mainPanel.removeAll();
         mainPanel.add(BorderLayout.CENTER, scrollPane);
         setLayout(new BorderLayout());
@@ -78,7 +81,9 @@ public class MealPlanGeneratorPage extends PickyPage {
 
     public void draw() {
         topPanel.removeAll();
-        topPanel.setLayout(new GridLayout(1, columns.size() + 1));
+        BoxLayout boxLayout = new BoxLayout(topPanel,BoxLayout.Y_AXIS);
+        topPanel.setLayout(boxLayout);
+        //topPanel.setLayout(new GridLayout(1, columns.size() + 1));
         for (int i = 0; i < columns.size(); i++) {
             DailyMealPlanColumn column = columns.get(i);
             Component component = column.getComponent();
@@ -156,7 +161,7 @@ public class MealPlanGeneratorPage extends PickyPage {
             dayNamePanel.add(BorderLayout.LINE_END, rightArrowComponent);
             dailyMealPlanColumnPanel.add(BorderLayout.PAGE_START, dayNamePanel);
             dailyMealPlanColumnPanel.add(BorderLayout.CENTER, component);
-            dailyMealPlanColumnPanel.setSize(new Dimension(125, 305));
+            dailyMealPlanColumnPanel.setMinimumSize(new Dimension(400,400));
             topPanel.add(dailyMealPlanColumnPanel);
         }
         JButton addTableButton = new JButton();
@@ -172,7 +177,10 @@ public class MealPlanGeneratorPage extends PickyPage {
             draw();
             revalidate();
         });
+        topPanel.add(Box.createRigidArea(new Dimension(5,5)));
         topPanel.add(addTableButton);
+        topPanel.add(Box.createRigidArea(new Dimension(5,5)));
+        addTableButton.setAlignmentX(Component.CENTER_ALIGNMENT);
         revalidate();
     }
 
