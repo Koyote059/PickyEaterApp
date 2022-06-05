@@ -10,10 +10,7 @@ import pickyeater.basics.user.User;
 import pickyeater.basics.user.UserGoal;
 import pickyeater.basics.user.UserStatus;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Set;
@@ -143,7 +140,14 @@ public class SQLUnSafeQueryExecutor {
             for (int mealNumber = 0; mealNumber < meals.size(); mealNumber++) {
                 Meal meal = meals.get(mealNumber);
                 try (Statement statement = connection.createStatement()) {
-                    float ingredientsRatio = meal.getWeight() / 100;
+                    ResultSet rs = statement.executeQuery("SELECT SUM(MC.quantity*I.gramsPerQuantity) AS mealWeight\n" +
+                            "FROM Meals M LEFT JOIN MealCompositions MC ON M.mealName = MC.mealName\n" +
+                            "LEFT JOIN Ingredients I ON I.ingredientName=MC.ingredientName\n" +
+                            "WHERE M.mealName = '" + meal.getName() + "'");
+                    rs.next();
+                    float mealWeight = rs.getFloat("mealWeight");
+                    rs.close();
+                    float ingredientsRatio = meal.getWeight() / mealWeight;
                     String query = String.format("INSERT INTO DailyMeals (mealName, username, dayNumber, mealNumber,ingredientsRatio)" + " VALUES ('%s','%s',%d,%d,%s)", meal.getName(), userName, dayNumber, mealNumber, String.format("%f", ingredientsRatio).replaceAll(",", "."));
                     statement.execute(query);
                 }
@@ -175,8 +179,19 @@ public class SQLUnSafeQueryExecutor {
         for (int i = 0; i < eatenMeals.size(); i++) {
             Meal eatenMeal = eatenMeals.get(i);
             try (Statement statement = connection.createStatement()) {
-                float ingredientsRatio = eatenMeal.getWeight() / 100;
-                statement.execute(String.format("INSERT INTO EatenMeals (username, mealName, mealNumber, ingredientsRatio)" + " VALUES ('%s','%s',%d,%s)", userName, eatenMeal.getName(), i, String.format("%f", ingredientsRatio).replaceAll(",", ".")));
+                ResultSet rs = statement.executeQuery("SELECT SUM(MC.quantity*I.gramsPerQuantity) AS mealWeight\n" +
+                        "FROM Meals M LEFT JOIN MealCompositions MC ON M.mealName = MC.mealName\n" +
+                        "LEFT JOIN Ingredients I ON I.ingredientName=MC.ingredientName\n" +
+                        "WHERE M.mealName = '" + eatenMeal.getName() + "'");
+                rs.next();
+                float mealWeight = rs.getFloat("mealWeight");
+                rs.close();
+                float ingredientsRatio = eatenMeal.getWeight() / mealWeight;
+                statement.execute(String.format("INSERT INTO EatenMeals (username, mealName, mealNumber, ingredientsRatio)" + " VALUES ('%s','%s',%d,%s)",
+                        userName,
+                        eatenMeal.getName(),
+                        i,
+                        String.format("%f", ingredientsRatio).replaceAll(",", ".")));
             }
         }
         connection.commit();
