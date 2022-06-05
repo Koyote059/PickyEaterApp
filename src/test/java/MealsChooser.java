@@ -8,7 +8,6 @@ import pickyeater.basics.food.Meal;
 import pickyeater.basics.food.Nutrients;
 import pickyeater.executors.ExecutorProvider;
 import pickyeater.executors.MealChooserExecutor;
-import pickyeater.utils.MouseClickListener;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -73,9 +72,10 @@ public class MealsChooser extends JDialog {
                 showPieChart();
             }
         });
-        mealsList.addMouseListener(new MouseClickListener() {
+        mealsList.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
+                super.mouseClicked(e);
                 if(e.getClickCount()<2) return;
                 int selectedIndex = mealsList.getSelectedIndex();
                 if(selectedIndex<0) return;

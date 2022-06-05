@@ -1,11 +1,9 @@
 import pickyeater.UI.pages.app.mealplanpage.utils.DailyMealPlanColumn;
-import pickyeater.utils.MouseClickListener;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
-import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableColumn;
 import java.awt.*;
+import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -54,9 +52,10 @@ public class MPGeneratorTest extends JFrame {
             dayLabel.setHorizontalAlignment(SwingConstants.CENTER);
             int finalI = i;
             JFrame t = this;
-            dayLabel.addMouseListener(new MouseClickListener() {
+            dayLabel.addMouseListener(new MouseAdapter() {
                 @Override
                 public void mouseClicked(MouseEvent e) {
+                    super.mouseClicked(e);
                     if(SwingUtilities.isRightMouseButton(e)){
                         Point point = MouseInfo.getPointerInfo().getLocation();
                         Point framePoint = getLocation();
@@ -93,9 +92,10 @@ public class MPGeneratorTest extends JFrame {
                 leftArrowComponent = new JButton("<");
             }
 
-            leftArrowComponent.addMouseListener(new MouseClickListener() {
+            leftArrowComponent.addMouseListener(new MouseAdapter() {
                 @Override
                 public void mouseClicked(MouseEvent e) {
+                    super.mouseClicked(e);
                     if(e.getClickCount()!=1 || finalI==0) return;
                     Collections.swap(columns,finalI,finalI-1);
                     draw();
@@ -113,9 +113,10 @@ public class MPGeneratorTest extends JFrame {
                 rightArrowComponent = new JButton("<");
             }
 
-            rightArrowComponent.addMouseListener(new MouseClickListener() {
+            rightArrowComponent.addMouseListener(new MouseAdapter() {
                 @Override
                 public void mouseClicked(MouseEvent e) {
+                    super.mouseClicked(e);
                     if(e.getClickCount()!=1 || finalI==(columns.size()-1)) return;
                     Collections.swap(columns,finalI,finalI+1);
                     draw();
