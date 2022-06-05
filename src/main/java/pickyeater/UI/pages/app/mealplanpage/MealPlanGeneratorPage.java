@@ -8,6 +8,7 @@ import pickyeater.basics.food.Meal;
 import pickyeater.basics.mealplan.DailyMealPlan;
 import pickyeater.basics.mealplan.MealPlan;
 import pickyeater.builders.MealPlanBuilder;
+import pickyeater.executors.ExecutorProvider;
 import pickyeater.executors.MealPlanCreatorExecutor;
 
 import javax.imageio.ImageIO;
@@ -24,6 +25,8 @@ import java.util.Collections;
 import java.util.List;
 
 public class MealPlanGeneratorPage extends PickyPage {
+
+    private boolean isEditing = false;
     List<DailyMealPlanColumn> columns = new ArrayList<>();
     private JPanel mainPanel;
     private JButton doneButton;
@@ -65,7 +68,6 @@ public class MealPlanGeneratorPage extends PickyPage {
             }
             parent.setSize(new Dimension(677, 507));
             mealPlanCreator.saveMealPlan(mealPlanBuilder.build());
-            System.out.println("Done");
             MainFrame.changePage(PanelButtons.DIET);
         });
         cancelButton.addActionListener(e -> {
@@ -77,6 +79,11 @@ public class MealPlanGeneratorPage extends PickyPage {
         columns.add(new DailyMealPlanColumn(parent));
         setPreferredSize(new Dimension(677, 507));
         setSize(new Dimension(677, 507));
+    }
+
+    public MealPlanGeneratorPage(MealPlan mealPlan, JFrame parent) {
+        this(ExecutorProvider.getMealPlanExecutor(),mealPlan,parent);
+        isEditing = true;
     }
 
     public void draw() {
