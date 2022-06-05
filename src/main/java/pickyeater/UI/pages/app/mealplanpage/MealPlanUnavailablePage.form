@@ -85,26 +85,11 @@
                       <text value="Meal Plan Unavailable"/>
                     </properties>
                   </component>
-                  <grid id="96fa2" layout-manager="BorderLayout" hgap="0" vgap="0">
+                  <grid id="96fa2" binding="buttonsPanel" custom-create="true" layout-manager="BorderLayout" hgap="0" vgap="0">
                     <constraints border-constraint="South"/>
                     <properties/>
                     <border type="none"/>
-                    <children>
-                      <component id="aecfe" class="javax.swing.JButton" binding="btCreateMealPlan">
-                        <constraints border-constraint="Center"/>
-                        <properties>
-                          <text value="       Create Meal Plan       "/>
-                        </properties>
-                      </component>
-                      <component id="d9d55" class="javax.swing.JButton" binding="btAutomaticGenerateMealPlan">
-                        <constraints border-constraint="East"/>
-                        <properties>
-                          <hideActionText value="false"/>
-                          <text value="Automatic Generate Meal Plan"/>
-                          <toolTipText value=""/>
-                        </properties>
-                      </component>
-                    </children>
+                    <children/>
                   </grid>
                 </children>
               </grid>

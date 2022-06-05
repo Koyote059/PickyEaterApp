@@ -105,12 +105,11 @@ public class DailyProgressPage extends PickyPage {
         };
         model.addColumn("Name");
         model.addColumn("Quantity");
-        model.addColumn("");
         meals = dailyProgressExecutor.getEatenMeals();
         for (Meal meal : meals) {
             System.out.println("\n");
             float mealQuantity = meal.getWeight();
-            Object[] row = new Object[]{meal.getName(), df.format(mealQuantity), "gr"};
+            Object[] row = new Object[]{meal.getName(), df.format(mealQuantity) + " gr"};
             model.addRow(row);
         }
         txtBurntCalories.setText(String.valueOf(dailyProgressExecutor.getBurntCalories()));
