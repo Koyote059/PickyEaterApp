@@ -71,8 +71,10 @@ public class SettingsPage extends PickyPage {
             if (choice == JOptionPane.YES_OPTION) {
                 ExecutorProvider.getSettingsExecutor().deleteUser();
                 ExecutorProvider.getSettingsExecutor().deleteGroceries();
-                parent.dispose();
-                new RegisterMainFrame();
+                EventQueue.invokeLater(() -> {
+                    parent.dispose();
+                    new RegisterMainFrame();
+                });
             }
         });
         btResetMeals.addActionListener(e -> {
@@ -108,7 +110,8 @@ public class SettingsPage extends PickyPage {
             IngredientChooser chooser = new IngredientChooser(parent);
             chooser.manageIngredients();
         });
-        btAddIngredient.addActionListener(e -> new IngredientCreator(parent).createIngredient());
+        //btAddIngredient.addActionListener(e -> new IngredientCreator(parent).createIngredient());
+        btAddIngredient.addActionListener(e -> EventQueue.invokeLater(() -> new IngredientCreator(parent).createIngredient()));
         setNavigationMenuListeners();
     }
 
