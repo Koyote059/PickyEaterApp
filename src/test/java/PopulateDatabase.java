@@ -9,6 +9,7 @@ import pickyeater.database.SQLPickyEaterDB;
 import pickyeater.executors.ExecutorProvider;
 import pickyeater.managers.EaterManager;
 import pickyeater.managers.PickyEaterManager;
+import pickyeater.utils.StringToNumber;
 import pickyeater.utils.StringsUtils;
 
 public class PopulateDatabase {
@@ -61,13 +62,13 @@ public class PopulateDatabase {
         saveInDatabase(ingredient);
         ingredient = buildIngredient("Fragole", "0.12", "0.7", "8", "0.3", "50", "Pieces");
         saveInDatabase(ingredient);
-        ingredient = buildIngredient("Frutto del drago Small", "5", "4", "82", "11", "150", "Pieces");
+        ingredient = buildIngredient("Frutto drago Sml", "5", "4", "82", "11", "150", "Pieces");
         saveInDatabase(ingredient);
-        ingredient = buildIngredient("Frutto del drago Medium", "7.5", "4", "82", "11", "375", "Pieces");
+        ingredient = buildIngredient("Frutto drago Mid", "7.5", "4", "82", "11", "375", "Pieces");
         saveInDatabase(ingredient);
-        ingredient = buildIngredient("Frutto del drago Big", "10", "4", "82", "11", "600", "Pieces");
+        ingredient = buildIngredient("Frutto drago Big", "10", "4", "82", "11", "600", "Pieces");
         saveInDatabase(ingredient);
-        ingredient = buildIngredient("Frutto della passione", "1", "2.2", "23", "0.7", "18", "Pieces");
+        ingredient = buildIngredient("Frutto passione", "1", "2.2", "23", "0.7", "18", "Pieces");
         saveInDatabase(ingredient);
         ingredient = buildIngredient("Gelso", "0", "1.4", "10", "0.4", "2.1", "Pieces");
         saveInDatabase(ingredient);
@@ -97,14 +98,18 @@ public class PopulateDatabase {
         float price, proteins, carbs, fats;
         float gramsPerQuantity = 1;
         try {
-            price = Float.parseFloat(selectedPrice);
-            proteins = Float.parseFloat(selectedProteins);
-            carbs = Float.parseFloat(selectedCarbs);
-            fats = Float.parseFloat(selectedFats);
+            price = StringToNumber.convertPositiveFloatException(selectedPrice);
+            proteins = StringToNumber.convertPositiveFloatException(selectedProteins);
+            carbs = StringToNumber.convertPositiveFloatException(selectedCarbs);
+            fats = StringToNumber.convertPositiveFloatException(selectedFats);
         } catch (NumberFormatException e) {
+            System.err.println("PRASE FAIL");
+            System.out.println(selectedName);
             return null;
         }
         if (selectedName.equals("") || selectedItem == null) {
+            System.err.println("NAME VOID/SELECTED NAME = NULL");
+            System.out.println(selectedName);
             return null;
         }
         QuantityType quantityType;
@@ -120,52 +125,76 @@ public class PopulateDatabase {
         }
         if (!quantityType.equals(QuantityType.GRAMS)) {
             try {
-                gramsPerQuantity = Float.parseFloat(selectedGramsPerQuantity);
+                gramsPerQuantity = StringToNumber.convertPositiveFloatException(selectedGramsPerQuantity);
                 if(quantityType.equals(QuantityType.MILLILITERS)){
                     gramsPerQuantity/=100;
                 }
             } catch (NumberFormatException e) {
+                System.err.println("NumberFormatException");
+                System.out.println(selectedName);
                 return null;
             }
         }
+        /**
+         * Sistemo carbs, fats, proteins
+         */
+        carbs = carbs * gramsPerQuantity / 100;
+        fats = fats * gramsPerQuantity / 100;
+        proteins = proteins * gramsPerQuantity / 100;
+
         if (selectedName.length() > 20) {
-            //JOptionPane.showMessageDialog(getParent(), "Name is too long!");
+            System.err.println("Name is too long!");
+            System.out.println(selectedName);
             return null;
         }
         if (selectedName.length() < 3) {
+            System.err.println("Name is too short!");
+            System.out.println(selectedName);
             //JOptionPane.showMessageDialog(getParent(), "Name is too short!");
             return null;
         }
         if (!StringsUtils.isAlpha(selectedName)) {
+            System.err.println("Name can only contain alphanumeric characters");
+            System.out.println(selectedName);
             //JOptionPane.showMessageDialog(getParent(), "Name can only contain alphanumeric characters!");
             return null;
         }
         if (price < 0) {
+            System.err.println("Price cannot be negative");
+            System.out.println(selectedName);
             //JOptionPane.showMessageDialog(getParent(), "Price cannot be negative!");
             return null;
         }
         if (proteins < 0) {
+            System.err.println("Proteins cannot be negative");
+            System.out.println(selectedName);
             //JOptionPane.showMessageDialog(getParent(), "Proteins cannot be negative!");
             return null;
         }
         if (carbs < 0) {
+            System.err.println("Carbs cannot be negative");
+            System.out.println(selectedName);
             //JOptionPane.showMessageDialog(getParent(), "Carbs cannot be negative!");
             return null;
         }
         if (fats < 0) {
+            System.err.println("Fats cannot be negative");
+            System.out.println(selectedName);
             //JOptionPane.showMessageDialog(getParent(), "Fats cannot be negative!");
             return null;
         }
         if (fats + proteins + carbs > gramsPerQuantity*quantity) {
+            System.err.println("The nutrients' sum cannot exceed the ingredient weight");
+            System.out.println(selectedName);
             //JOptionPane.showMessageDialog(getParent(), "The nutrients' sum cannot exceed the ingredient weight!");
             return null;
         }
         if (gramsPerQuantity < 0) {
+            System.err.println("Grams per quantity cannot be negative");
+            System.out.println(selectedName);
             //JOptionPane.showMessageDialog(getParent(), "Grams per quantity cannot be negative!");
             return null;
         }
-
-
 
         /* Getting values */
         IngredientBuilder ingredientBuilder = ExecutorProvider.getCreateIngredientExecutor().getIngredientBuilder();
@@ -187,9 +216,18 @@ public class PopulateDatabase {
         if (ingredient == null)
             return;
         if (ExecutorProvider.getCreateIngredientExecutor().existsIngredient(ingredient.getName())) {
-            //JOptionPane.showMessageDialog(parent, ingredient.getName() + " already exists!");
+            System.err.println(ingredient.getName() + " already exists!");
             return;
         }
         ExecutorProvider.getCreateIngredientExecutor().saveIngredient(ingredient);
+
+        deleteInDatabase(ingredient);
+    }
+
+    private void deleteInDatabase(Ingredient ingredient){
+        if (ExecutorProvider.getCreateIngredientExecutor().existsIngredient(ingredient.getName())) {
+            ExecutorProvider.getCreateIngredientExecutor().deleteIngredient(ingredient);
+            System.err.println(ingredient.getName() + " Deleted!");
+        }
     }
 }
