@@ -39,7 +39,7 @@ public class GroceriesPage extends PickyPage {
     private JTable ingredientsTable;
     private JLabel priceLabel;
     private final GroceriesExecutor groceriesExecutor;
-    private final GroceriesCheckList groceriesCheckList;
+    private GroceriesCheckList groceriesCheckList;
 
     public GroceriesPage(GroceriesExecutor groceriesExecutor, JFrame parent) {
         super(parent);
@@ -49,11 +49,12 @@ public class GroceriesPage extends PickyPage {
             BufferedImage binImage = ImageIO.read(new File("res/images/binIcon.png"));
             binLabel.setIcon(new ImageIcon(binImage.getScaledInstance(30, 30, Image.SCALE_SMOOTH)));
         } catch (IOException | NullPointerException ignored) {
+            binLabel.setText("X");
         }
         parent.addWindowListener(new WindowCloseListener() {
             @Override
             public void windowClosing(WindowEvent e) {
-                groceriesExecutor.saveGroceries(groceriesCheckList);
+                if(groceriesCheckList!=null) groceriesExecutor.saveGroceries(groceriesCheckList);
             }
         });
         binLabel.addMouseListener(new MouseAdapter() {
@@ -65,6 +66,7 @@ public class GroceriesPage extends PickyPage {
                     groceriesExecutor.deleteGroceries();
                     PickyPage page = new UnavailableGroceriesPage(parent);
                     page.showPage();
+                    groceriesCheckList=null;
                 }
             }
         });

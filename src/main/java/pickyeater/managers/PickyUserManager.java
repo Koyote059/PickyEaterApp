@@ -34,6 +34,7 @@ public class PickyUserManager implements UserManager {
             Optional<User> userOptional = userDatabase.loadUser();
             userOptional.ifPresent(value -> user = value);
         }
+
         return Optional.ofNullable(this.user);
     }
 

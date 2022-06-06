@@ -167,9 +167,7 @@ public class MealPlanPage extends PickyPage {
                     throw new RuntimeException("Error i dailyMealPlan Database: missing value.");
                 DailyMealPlan dailyMealPlan = dailyMealPlanOptional.get();
                 Meal meal = dailyMealPlan.getMeals().get(selectedIndex);
-                setVisible(false);
                 new MealInfoJDialog(parent, meal).run();
-                setVisible(true);
             }
         });
         dailyMealsTable.addMouseListener(new MouseAdapter() {

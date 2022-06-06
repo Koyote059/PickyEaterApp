@@ -4,6 +4,7 @@ import pickyeater.UI.pages.app.MainFrame;
 import pickyeater.UI.pages.app.PickyPage;
 import pickyeater.UI.pages.leftbuttons.PanelButtonsConverter;
 import pickyeater.UI.themes.ColorButtons;
+import pickyeater.algorithms.GreedyMealPlanGenerator;
 import pickyeater.algorithms.MealPlanGenerator;
 import pickyeater.algorithms.RandomMealPlanGenerator;
 import pickyeater.basics.mealplan.MealPlan;
@@ -53,7 +54,7 @@ public class MealPlanUnavailablePage extends PickyPage {
                 JOptionPane.showMessageDialog(this, "Unable to create a meal plan.\n Insufficient meals!");
                 return;
             }
-            MealPlanGenerator mealPlanGenerator = new RandomMealPlanGenerator();
+            MealPlanGenerator mealPlanGenerator = new GreedyMealPlanGenerator();
             User user = mealPlanCreator.getUser();
             MealPlan mealPlan = mealPlanGenerator.generate(mealPlanCreator.getMeals(), user.getUserGoal().getRequiredNutrients(), 7, 4);
             PickyPage mealPlanGeneratorPage = new MealPlanGeneratorPage(mealPlanCreator, mealPlan, parent);
