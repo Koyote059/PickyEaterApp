@@ -64,9 +64,9 @@ public class GroceriesPage extends PickyPage {
                 int result = JOptionPane.showConfirmDialog(mainPanel, "Are you sure you want to delete it?", "Deleting  " + "groceries", JOptionPane.YES_NO_OPTION);
                 if (result == JOptionPane.YES_OPTION) {
                     groceriesExecutor.deleteGroceries();
+                    groceriesCheckList=null;
                     PickyPage page = new UnavailableGroceriesPage(parent);
                     page.showPage();
-                    groceriesCheckList=null;
                 }
             }
         });
