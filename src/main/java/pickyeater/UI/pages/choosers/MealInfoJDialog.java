@@ -1,8 +1,5 @@
 package pickyeater.UI.pages.choosers;
 
-import org.knowm.xchart.PieChart;
-import org.knowm.xchart.XChartPanel;
-import org.knowm.xchart.style.Styler;
 import pickyeater.UI.pages.utils.NutrientsPieChart;
 import pickyeater.basics.food.Ingredient;
 import pickyeater.basics.food.Meal;
@@ -72,9 +69,5 @@ public class MealInfoJDialog extends JDialog {
             Object[] row = new Object[]{ingredientName, formatter.format(ingredientQuantity) + " " + suffix};
             tableModel.addRow(row);
         }
-    }
-
-    public void run() {
-        this.setVisible(true);
     }
 }
