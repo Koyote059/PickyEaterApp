@@ -80,7 +80,7 @@ public class MealsChooser extends JDialog {
                 int selectedIndex = mealsList.getSelectedIndex();
                 if(selectedIndex<0) return;
                 Meal meal = searchedMeals.get(selectedIndex);
-                new MealInfoJDialog(parent,meal).run();
+                new MealInfoJDialog(parent,meal).setVisible(true);
             }
         });
 

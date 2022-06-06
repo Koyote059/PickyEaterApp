@@ -12,7 +12,6 @@ import pickyeater.basics.mealplan.MealPlan;
 import pickyeater.builders.MealPlanBuilder;
 import pickyeater.builders.PickyMealPlanBuilder;
 import pickyeater.executors.ExecutorProvider;
-import pickyeater.executors.MealPlanCreatorExecutor;
 import pickyeater.executors.MealPlanViewerExecutor;
 
 import javax.imageio.ImageIO;
@@ -167,7 +166,7 @@ public class MealPlanPage extends PickyPage {
                     throw new RuntimeException("Error i dailyMealPlan Database: missing value.");
                 DailyMealPlan dailyMealPlan = dailyMealPlanOptional.get();
                 Meal meal = dailyMealPlan.getMeals().get(selectedIndex);
-                new MealInfoJDialog(parent, meal).run();
+                new MealInfoJDialog(parent, meal).setVisible(true);
             }
         });
         dailyMealsTable.addMouseListener(new MouseAdapter() {

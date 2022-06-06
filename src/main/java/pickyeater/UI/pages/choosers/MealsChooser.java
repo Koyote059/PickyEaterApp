@@ -91,7 +91,7 @@ public class MealsChooser extends JDialog {
                     return;
                 Meal meal = searchedMeals.get(selectedIndex);
                 setVisible(false);
-                new MealInfoJDialog(parent, meal).run();
+                new MealInfoJDialog(parent, meal).setVisible(true);
                 setVisible(true);
             }
         });
