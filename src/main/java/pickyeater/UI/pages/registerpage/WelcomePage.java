@@ -6,17 +6,21 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.Random;
+import java.util.random.RandomGenerator;
 
 public class WelcomePage extends JFrame implements ActionListener {
     Image logo;
     Timer timer;
     int xVelocity = 1;
     int yVelocity = 2;
-    int x = 250;
-    int y = 250;
+    private final RandomGenerator randomGenerator = new Random();
+    int x = randomGenerator.nextInt(1, 400);
+    int y = randomGenerator.nextInt(1, 400);
     private JPanel mainPanel;
     private JPanel coloredPanel;
     private JLabel txtWelcome;
+    private boolean clr = true;
 
     public WelcomePage() {
         txtWelcome.setFont(new Font("Bauhaus 93", Font.PLAIN, 50));
@@ -51,12 +55,26 @@ public class WelcomePage extends JFrame implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         if (x >= getWidth() - logo.getWidth(null) | x <= 0) {
             xVelocity = xVelocity * -1;
+            changeColorOnImpact();
         }
         if (y >= getHeight() - logo.getHeight(null) | y <= 0) {
             yVelocity = yVelocity * -1;
+            changeColorOnImpact();
         }
         x = x + xVelocity;
         y = y + yVelocity;
         repaint();
+    }
+
+    private void changeColorOnImpact(){
+        if (clr){
+            txtWelcome.setForeground(Color.decode("#B1EA9D"));
+            coloredPanel.setBackground(Color.decode("#32AB5E"));
+            clr = false;
+        } else {
+            txtWelcome.setForeground(Color.decode("#32AB5E"));
+            coloredPanel.setBackground(Color.decode("#B1EA9D"));
+            clr = true;
+        }
     }
 }
