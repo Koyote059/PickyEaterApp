@@ -67,7 +67,6 @@ public class UnavailableGroceriesPage extends PickyPage {
         if (groceriesExecutor.isGroceriesGenerated()) {
             PickyPage groceriesPage = new GroceriesPage(groceriesExecutor, parent);
             groceriesPage.showPage();
-        } else
-            super.showPage();
+        } else super.showPage();
     }
 }

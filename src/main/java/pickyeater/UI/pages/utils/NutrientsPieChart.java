@@ -1,13 +1,13 @@
 package pickyeater.UI.pages.utils;
 
 import org.knowm.xchart.PieChart;
+import org.knowm.xchart.PieSeries;
 import org.knowm.xchart.XChartPanel;
 import org.knowm.xchart.style.PieStyler;
 import org.knowm.xchart.style.Styler;
 import pickyeater.basics.food.Nutrients;
 
 import javax.swing.*;
-import java.awt.*;
 
 public class NutrientsPieChart {
 

@@ -156,8 +156,16 @@ public class MealsChooser extends JDialog {
                         showPieChart();
                     });
                     editItem.addActionListener(l -> {
+                        if(mealSearcherExecutor.isMealUsed(selectedMeal)) {
+                            int choice = JOptionPane.showConfirmDialog(parent, "This meal is used somewhere. \nAre you sure you want to edit it?", "",
+                                    JOptionPane.YES_NO_OPTION);
+                            if (choice != JOptionPane.YES_OPTION)
+                                return;
+                        }
                         MealCreator creator = new MealCreator(parent);
+                        setVisible(false);
                         creator.editMeal(selectedMeal);
+                        setVisible(true);
                         String text = searchBar.getText();
                         searchedMeals = new ArrayList<>(mealSearcherExecutor.getMealsThatStartWith(text));
                         populateMealList();

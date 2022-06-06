@@ -151,8 +151,16 @@ public class IngredientChooser extends JDialog {
                         showPieChart();
                     });
                     editItem.addActionListener(l -> {
+                        if(ingredientsSearcherExecutor.isIngredientUsed(selectedIngredient)) {
+                            int choice = JOptionPane.showConfirmDialog(parent, "This ingredient is used somewhere. \nAre you sure you want to edit it?", "",
+                                    JOptionPane.YES_NO_OPTION);
+                            if (choice != JOptionPane.YES_OPTION)
+                                return;
+                        }
                         IngredientCreator creator = new IngredientCreator(parent);
+                        setVisible(false);
                         creator.editIngredient(selectedIngredient);
+                        setVisible(true);
                         String text = searchBar.getText();
                         searchedIngredients = new ArrayList<>(ingredientsSearcherExecutor.getIngredientsThatStartWith(text));
                         populateIngredientsList();
