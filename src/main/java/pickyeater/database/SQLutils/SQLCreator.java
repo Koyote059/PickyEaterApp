@@ -78,7 +78,7 @@ public class SQLCreator {
         return meals;
     }
 
-    public Optional<MealPlan> getMealPlan(ResultSet mealPlanRS, ResultSet dailyMealsRS) throws SQLException {
+    public Optional<MealPlan> getMealPlan1(ResultSet mealPlanRS, ResultSet dailyMealsRS) throws SQLException {
         MealPlanBuilder mealPlanBuilder = new PickyMealPlanBuilder();
         if (mealPlanRS.next()) {
             long beginningDayEpoch = mealPlanRS.getLong("beginningDay");
@@ -97,7 +97,7 @@ public class SQLCreator {
         while (dailyMealsRS.next()) {
             int dayNumber = dailyMealsRS.getInt("dayNumber");
             String mealName = dailyMealsRS.getString("mealName");
-            if (dayNumber > prevDayNumber || !mealName.equals(prevMealName)) {
+            if (dayNumber > prevDayNumber || !mealName.equals(prevMealName)){
                 mealBuilder.setName(prevMealName);
                 prevMealName = mealName;
                 dailyMealPlanBuilder.addMeal(mealBuilder.build());
@@ -116,6 +116,67 @@ public class SQLCreator {
         }
         mealPlanBuilder.addDailyMealPlan(dailyMealPlanBuilder.build());
         return Optional.of(mealPlanBuilder.build());
+    }
+
+    public Optional<MealPlan> getMealPlan(ResultSet mealPlanRS, ResultSet dailyMealsRS) throws SQLException {
+        MealPlanBuilder mealPlanBuilder = new PickyMealPlanBuilder();
+        if (mealPlanRS.next()) {
+            long beginningDayEpoch = mealPlanRS.getLong("beginningDay");
+            mealPlanBuilder.setBeginningDay(LocalDate.ofEpochDay(beginningDayEpoch));
+        } else return Optional.empty();
+        if (!dailyMealsRS.next())
+            return Optional.ofNullable(mealPlanBuilder.build());
+
+        DailyMealPlanBuilder dailyMealPlanBuilder = new PickyDailyMealPlanBuilder();
+        int previousDay = -1;
+        int previousMealNumber = -1;
+        String previousMealName = null;
+        MealBuilder mealBuilder = new PickyMealBuilder();
+        while (dailyMealsRS.next()) {
+            int dayNumber = dailyMealsRS.getInt("dayNumber");
+            int mealNumber = dailyMealsRS.getInt("mealNumber");
+            String mealName = dailyMealsRS.getString("mealName");
+            String ingredientName = dailyMealsRS.getString("ingredientName");
+            Ingredient ingredient = null;
+            if(ingredientName!=null) ingredient = getIngredient(dailyMealsRS);
+            if(previousDay==-1){
+                previousDay = dayNumber;
+                previousMealNumber = mealNumber;
+                previousMealName = mealName;
+            }
+
+            // Se è cambiato il giorno
+            if(previousDay!=dayNumber){
+                mealBuilder.setName(previousMealName);
+                dailyMealPlanBuilder.addMeal(mealBuilder.build());
+                mealPlanBuilder.addDailyMealPlan(dailyMealPlanBuilder.build());
+                dailyMealPlanBuilder = new PickyDailyMealPlanBuilder();
+                mealBuilder = new PickyMealBuilder();
+                previousDay = dayNumber;
+                previousMealNumber = mealNumber;
+                previousMealName = mealName;
+            }
+
+            // Se è cambiato il pasto
+            if(previousMealNumber!=mealNumber){
+                mealBuilder.setName(previousMealName);
+                dailyMealPlanBuilder.addMeal(mealBuilder.build());
+                mealBuilder = new PickyMealBuilder();
+                previousMealNumber = mealNumber;
+                previousMealName = mealName;
+            }
+
+            if(ingredientName!=null) mealBuilder.addIngredients(ingredient);
+
+        }
+
+        if(previousMealName!=null){
+            mealBuilder.setName(previousMealName);
+            dailyMealPlanBuilder.addMeal(mealBuilder.build());
+            mealPlanBuilder.addDailyMealPlan(dailyMealPlanBuilder.build());
+        }
+
+        return Optional.ofNullable(mealPlanBuilder.build());
     }
 
     private Ingredient getIngredient(ResultSet resultSet) throws SQLException {
