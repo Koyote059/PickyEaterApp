@@ -1,104 +1,172 @@
 package pickyeater.UI.pages.choosers;
 
 import pickyeater.UI.pages.utils.NutrientsPieChart;
-import pickyeater.basics.food.Ingredient;
-import pickyeater.basics.food.Nutrients;
-import pickyeater.basics.food.Quantity;
-import pickyeater.basics.food.QuantityType;
+import pickyeater.basics.food.*;
+import pickyeater.executors.ExecutorProvider;
+import pickyeater.executors.creators.CreateIngredientExecutor;
 import pickyeater.utils.IngredientQuantityConverter;
 import pickyeater.utils.ValuesConverter;
 
 import javax.swing.*;
-import javax.swing.border.EmptyBorder;
+import javax.swing.border.BevelBorder;
 import java.awt.*;
 
+import static pickyeater.basics.food.QuantityType.*;
+
 public class IngredientInfoJDialog extends JDialog {
+    private JTextField nameTextField;
+    private JTextField quantityTypeField;
+    private JLabel gramsQuantityLabel;
+    private JTextField gramsPerQuantityTextField;
+    private JTextField proteinsTextField;
+    private JTextField priceTextField;
+    private JTextField carbsTextField;
+    private JTextField fatsTextField;
+    private JLabel priceLabel;
 
-    private final Ingredient ingredient;
-    private final NutrientsPieChart nutrientsPieChart;
-    private final JPanel ingredientInfoPanel = new JPanel();
-    private final JButton doneButton = new JButton("Done");
+    private JLabel nutrientsLabel;
+    private Ingredient startingIngredient = null;
+    private boolean isIngredientEditing = false;
 
-    public IngredientInfoJDialog(Frame parent, Ingredient ingredient) {
-        super(parent, ingredient.getName() ,true);
-        this.ingredient = ingredient;
-        this.nutrientsPieChart = new NutrientsPieChart(ingredient.getNutrients(),ingredient.getName());
-        setLayout(new BorderLayout());
-        add(BorderLayout.CENTER,nutrientsPieChart.getPanel());
-        add(BorderLayout.LINE_END,ingredientInfoPanel);
-        JPanel buttonPanel = new JPanel();
-        buttonPanel.add(doneButton);
-        add(BorderLayout.PAGE_END,buttonPanel);
-        doneButton.setAlignmentX(Container.CENTER_ALIGNMENT);
-        doneButton.setHorizontalAlignment(SwingConstants.CENTER);
+    public IngredientInfoJDialog(JFrame parent, Ingredient ingredient) {
+        super(parent, "IngredientCreator", true);
+        Quantity quantity = ingredient.getQuantity();
+        if(quantity.getQuantityType().equals(PIECES)) {
+            IngredientQuantityConverter converter = new IngredientQuantityConverter();
+            ingredient = converter.convert(ingredient,1);
+        }
 
-        doneButton.addActionListener(e -> dispose());
-        fillIngredientInfoPanel();
-        setResizable(false);
+        JButton doneButton = new JButton("Done");
+        doneButton.addActionListener(e -> this.dispose());
+        JPanel mainPanel = new JPanel(new BorderLayout());
+        JPanel infoPanel = fillIngredientInfoPanel(ingredient,quantity);
+        NutrientsPieChart nutrientsPieChart = new NutrientsPieChart();
+        nutrientsPieChart.setName(ingredient.getName());
+        nutrientsPieChart.setNutrients(ingredient.getNutrients());
+        mainPanel.add(infoPanel,BorderLayout.CENTER);
+        JPanel chartPanel = nutrientsPieChart.getPanel();
+        chartPanel.setMaximumSize(new Dimension(100,100));
+        mainPanel.add(chartPanel,BorderLayout.LINE_START);
+        mainPanel.add(doneButton,BorderLayout.PAGE_END);
+        setContentPane(mainPanel);
         pack();
         setSize(new Dimension(677, 507));
+        setResizable(false);
         setLocationRelativeTo(parent);
     }
 
-    private void fillIngredientInfoPanel(){
-
-        Ingredient displayingIngredient;
-
-        if(ingredient.getQuantity().getQuantityType().equals(QuantityType.PIECES)){
-            displayingIngredient = new IngredientQuantityConverter().convert(ingredient,1);
-        } else {
-            displayingIngredient = ingredient;
-        }
-
-        Quantity quantity = displayingIngredient.getQuantity();
-        String quantitySuffix = quantity.getAmount() + " " + ValuesConverter.convertQuantityTypeValue(quantity.getQuantityType());
-
-        ingredientInfoPanel.setLayout(new GridBagLayout());
-        ingredientInfoPanel.setBorder(new EmptyBorder(10,10,10,10));
+    private JPanel fillIngredientInfoPanel(Ingredient ingredient,Quantity quantity){
+        JPanel infoPanel = new JPanel(new GridBagLayout());
         GridBagConstraints constraints = new GridBagConstraints();
-        constraints.gridx = constraints.gridy = 0;
-        constraints.ipadx = 1;
-        JLabel priceLabel = new JLabel("Price per " + quantitySuffix +": ");
-        priceLabel.setHorizontalTextPosition(SwingConstants.LEFT);
-        ingredientInfoPanel.add(priceLabel,constraints);
+        constraints.insets = new Insets(5, 1, 5, 3);
+        JLabel nameLabel = new JLabel("Name: ");
+        constraints.gridx = 0;
+        constraints.gridy = 0;
+        infoPanel.add(nameLabel, constraints);
+        nameTextField = new JTextField(ingredient.getName());
+        nameTextField.setHorizontalAlignment(JTextField.LEFT);
+        nameTextField.setEditable(false);
         constraints.gridx = 1;
-        ingredientInfoPanel.add(new JLabel(ValuesConverter.convertFloat(displayingIngredient.getPrice())),constraints);
+        constraints.gridy = 0;
+        infoPanel.add(nameTextField, constraints);
+        JLabel quantityTypeLabel = new JLabel("Quantity type: ");
         constraints.gridx = 0;
         constraints.gridy = 1;
-        constraints.weightx=3;
-        Nutrients nutrients = displayingIngredient.getNutrients();
-        ingredientInfoPanel.add(new JLabel("Nutrients per " + quantitySuffix + ": "),constraints);
-        constraints.weightx = 1;
-        constraints.gridy=2;
-        constraints.gridx=1;
-        ingredientInfoPanel.add(new JLabel("Proteins: "),constraints);
-        constraints.gridx=2;
-        ingredientInfoPanel.add(new JLabel(ValuesConverter.convertFloat(nutrients.getProteins())),constraints);
-        constraints.gridy=3;
-        constraints.gridx=1;
-        ingredientInfoPanel.add(new JLabel("Carbs: "),constraints);
-        constraints.gridx=2;
-        ingredientInfoPanel.add(new JLabel(ValuesConverter.convertFloat(nutrients.getCarbs())),constraints);
-        constraints.gridy=4;
-        constraints.gridx=1;
-        ingredientInfoPanel.add(new JLabel("Fats: "),constraints);
-        constraints.gridx=2;
-        ingredientInfoPanel.add(new JLabel(ValuesConverter.convertFloat(nutrients.getFats())),constraints);
-        constraints.gridy=5;
-        constraints.gridx=1;
-        ingredientInfoPanel.add(new JLabel("Total calories: "),constraints);
-        constraints.gridx=2;
-        ingredientInfoPanel.add(new JLabel(ValuesConverter.convertFloat(nutrients.getCalories())),constraints);
+        infoPanel.add(quantityTypeLabel, constraints);
+        gramsQuantityLabel = new JLabel("Grams per piece: ");
+        constraints.gridx = 0;
+        constraints.gridy = 2;
+        infoPanel.add(gramsQuantityLabel, constraints);
+        gramsPerQuantityTextField = new JTextField();
 
-        if(quantity.getQuantityType()==QuantityType.GRAMS) return;
-        float weight = quantity.getGramsPerQuantity();
-        if(quantity.getQuantityType().equals(QuantityType.MILLILITERS)) weight*=100;
-        constraints.gridy=6;
-        constraints.gridx=0;
-        ingredientInfoPanel.add(new JLabel("Weight per " + quantitySuffix + ": "),constraints);
-        constraints.gridx=1;
-        ingredientInfoPanel.add(new JLabel(ValuesConverter.convertFloat(weight) + " g"),constraints);
+        gramsPerQuantityTextField.setEditable(false);
+        gramsPerQuantityTextField.setVisible(false);
+        gramsQuantityLabel.setVisible(false);
+        constraints.gridx = 1;
+        constraints.gridy = 2;
+        infoPanel.add(gramsPerQuantityTextField, constraints);
+        priceLabel = new JLabel("Price per 100 grams: ");
+        constraints.gridx = 0;
+        constraints.gridy = 3;
+        infoPanel.add(priceLabel, constraints);
+        priceTextField = new JTextField(ValuesConverter.convertFloat(ingredient.getPrice()));
+        priceTextField.setEditable(false);
+        constraints.gridx = 1;
+        constraints.gridy = 3;
+        infoPanel.add(priceTextField, constraints);
+        JSeparator separator = new JSeparator();
+        constraints.gridx = 0;
+        constraints.gridy = 4;
+        constraints.gridwidth = 2;
+        infoPanel.add(separator, constraints);
+        nutrientsLabel = new JLabel("Nutrients per 100 gram: ");
+        constraints.gridx = 0;
+        constraints.gridy = 5;
+        constraints.gridwidth = 2;
+        infoPanel.add(nutrientsLabel, constraints);
+        constraints.gridwidth = 1;
+        JLabel proteinsLabel = new JLabel("Proteins: ");
+        constraints.gridx = 0;
+        constraints.gridy = 6;
+        infoPanel.add(proteinsLabel, constraints);
+        Nutrients nutrients = ingredient.getNutrients();
+        proteinsTextField = new JTextField(ValuesConverter.convertFloat(nutrients.getProteins()));
+        proteinsTextField.setEditable(false);
+        constraints.gridx = 1;
+        constraints.gridy = 6;
+        infoPanel.add(proteinsTextField, constraints);
+        JLabel carbsLabel = new JLabel("Carbs: ");
+        constraints.gridx = 0;
+        constraints.gridy = 7;
+        infoPanel.add(carbsLabel, constraints);
+        carbsTextField = new JTextField(ValuesConverter.convertFloat(nutrients.getCarbs()));
+        carbsTextField.setEditable(false);
+        constraints.gridx = 1;
+        constraints.gridy = 7;
+        infoPanel.add(carbsTextField, constraints);
+        JLabel fatsLabel = new JLabel("Fats: ");
+        constraints.gridx = 0;
+        constraints.gridy = 8;
+        infoPanel.add(fatsLabel, constraints);
+        fatsTextField = new JTextField(ValuesConverter.convertFloat(nutrients.getFats()));
+        fatsTextField.setEditable(false);
+        constraints.gridx = 1;
+        constraints.gridy = 8;
+        infoPanel.add(fatsTextField, constraints);
 
+        quantityTypeField = new JTextField();
+        quantityTypeField.setEditable(false);
+        switch (quantity.getQuantityType()) {
+            case GRAMS -> {
+                gramsPerQuantityTextField.setVisible(false);
+                gramsQuantityLabel.setVisible(false);
+                quantityTypeField.setText("Grams");
+                priceLabel.setText("Price per 100 g: ");
+                nutrientsLabel.setText("Nutrients per 100 g: ");
+            }
+            case PIECES -> {
+                gramsPerQuantityTextField.setVisible(true);
+                gramsPerQuantityTextField.setText(ValuesConverter.convertFloat(quantity.getGramsPerQuantity()));
+                gramsQuantityLabel.setVisible(true);
+                quantityTypeField.setText("Pieces");
+                gramsQuantityLabel.setText("Grams per piece: ");
+                priceLabel.setText("Price per piece: ");
+                nutrientsLabel.setText("Nutrients per piece: ");
+            }
+            case MILLILITERS -> {
+                gramsPerQuantityTextField.setVisible(true);
+                gramsQuantityLabel.setVisible(true);
+                quantityTypeField.setText("Milliliters");
+                gramsPerQuantityTextField.setText(ValuesConverter.convertFloat(quantity.getGramsPerQuantity()*100));
+                gramsQuantityLabel.setText("Grams per 100 ml: ");
+                priceLabel.setText("Price per 100ml: ");
+                nutrientsLabel.setText("Nutrients per 100 ml: ");
+            }
+        }
+        constraints.gridx = 1;
+        constraints.gridy = 1;
+        infoPanel.add(quantityTypeField, constraints);
+        return infoPanel;
     }
 
 
