@@ -1,13 +1,13 @@
 package pickyeater.UI.pages.utils;
 
 import org.knowm.xchart.PieChart;
-import org.knowm.xchart.PieSeries;
 import org.knowm.xchart.XChartPanel;
 import org.knowm.xchart.style.PieStyler;
 import org.knowm.xchart.style.Styler;
 import pickyeater.basics.food.Nutrients;
 
 import javax.swing.*;
+import java.awt.*;
 
 public class NutrientsPieChart {
 
@@ -22,6 +22,8 @@ public class NutrientsPieChart {
         PieStyler styler = pieChart.getStyler();
         styler.setToolTipType(Styler.ToolTipType.yLabels);
         styler.setToolTipsEnabled(true);
+        Color[] colors = {Color.decode("#32AB5E"), Color.decode("#83D078"), Color.decode("#B1EA9D")};
+        styler.setSeriesColors(colors);
         chartPanel = new XChartPanel<>(pieChart);
     }
 
@@ -34,6 +36,8 @@ public class NutrientsPieChart {
         PieStyler styler = pieChart.getStyler();
         styler.setToolTipType(Styler.ToolTipType.yLabels);
         styler.setToolTipsEnabled(true);
+        Color[] colors = {Color.decode("#32AB5E"), Color.decode("#83D078"), Color.decode("#B1EA9D")};
+        styler.setSeriesColors(colors);
         chartPanel = new XChartPanel<>(pieChart);
     }
 
