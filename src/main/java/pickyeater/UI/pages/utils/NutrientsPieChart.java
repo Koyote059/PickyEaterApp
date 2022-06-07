@@ -20,16 +20,7 @@ public class NutrientsPieChart {
         pieChart.addSeries("Proteins", nutrients.getProteins());
         pieChart.addSeries("Carbs", nutrients.getCarbs());
         pieChart.addSeries("Fats", nutrients.getFats());
-        PieStyler styler = pieChart.getStyler();
-        styler.setToolTipType(Styler.ToolTipType.yLabels);
-        styler.setToolTipsEnabled(true);
-        Color[] colors = {Color.decode("#32AB5E"), Color.decode("#83D078"), Color.decode("#B1EA9D")};
-        styler.setSeriesColors(colors);
-        styler.setChartBackgroundColor(SystemTheme.getPanelColor());
-        styler.setLegendBackgroundColor(SystemTheme.getButtonColor());
-        styler.setPlotBackgroundColor(SystemTheme.getPanelColor());
-        styler.setLegendBorderColor(SystemTheme.getPanelColor());
-        styler.setPlotBorderColor(SystemTheme.getPanelColor());
+        stylePieChart(pieChart.getStyler());
         chartPanel = new XChartPanel<>(pieChart);
     }
 
@@ -39,16 +30,7 @@ public class NutrientsPieChart {
         pieChart.addSeries("Proteins", 0);
         pieChart.addSeries("Carbs", 0);
         pieChart.addSeries("Fats", 0);
-        PieStyler styler = pieChart.getStyler();
-        styler.setToolTipType(Styler.ToolTipType.yLabels);
-        styler.setToolTipsEnabled(true);
-        Color[] colors = {Color.decode("#32AB5E"), Color.decode("#83D078"), Color.decode("#B1EA9D")};
-        styler.setSeriesColors(colors);
-        styler.setChartBackgroundColor(SystemTheme.getPanelColor());
-        styler.setLegendBackgroundColor(SystemTheme.getButtonColor());
-        styler.setPlotBackgroundColor(SystemTheme.getPanelColor());
-        styler.setLegendBorderColor(SystemTheme.getPanelColor());
-        styler.setPlotBorderColor(SystemTheme.getPanelColor());
+        stylePieChart(pieChart.getStyler());
         chartPanel = new XChartPanel<>(pieChart);
     }
 
@@ -68,5 +50,20 @@ public class NutrientsPieChart {
         PieChart pieChart = chartPanel.getChart();
         pieChart.setTitle(name);
         chartPanel.repaint();
+    }
+
+    private void stylePieChart(PieStyler styler){
+        styler.setToolTipType(Styler.ToolTipType.yLabels);
+        styler.setToolTipsEnabled(true);
+        Color[] colors = {Color.decode("#32AB5E"), Color.decode("#83D078"), Color.decode("#B1EA9D")};
+        styler.setSeriesColors(colors);
+        styler.setChartBackgroundColor(SystemTheme.getPanelColor());
+        styler.setLegendBackgroundColor(SystemTheme.getButtonColor());
+        styler.setPlotBackgroundColor(SystemTheme.getPanelColor());
+        styler.setLegendBorderColor(SystemTheme.getPanelColor());
+        styler.setPlotBorderColor(SystemTheme.getPanelColor());
+        styler.setLabelsFontColor(SystemTheme.getLabelColor());
+        styler.setLabelsFont(SystemTheme.getFont());
+        styler.setChartTitleFont(SystemTheme.getFont());
     }
 }

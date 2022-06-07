@@ -64,4 +64,11 @@ public class SystemTheme {
     public static Color getPanelColor(){
         return UIManager.getColor("Panel.background");
     }
+
+    public static Color getLabelColor(){
+        return UIManager.getColor("Label.foreground");
+    }
+    public static Font getFont(){
+        return new javax.swing.plaf.FontUIResource("Helvetica", Font.BOLD, 16);
+    }
 }
