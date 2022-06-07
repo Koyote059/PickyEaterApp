@@ -64,10 +64,8 @@ public class IngredientChooser extends JDialog {
         ingredientQuantityTextField.setToolTipText("Left void it'll put automatically 100g/100ml/1pz");
         searchBar.addKeyListener(new KeyAdapter() {
             @Override
-            public void keyTyped(KeyEvent e) {
+            public void keyReleased(KeyEvent e) {
                 String text = searchBar.getText();
-                if (StringsUtils.isAlpha(Character.toString(e.getKeyChar())))
-                    text = searchBar.getText() + e.getKeyChar();
                 if(!StringsUtils.isAlpha(text)) searchedIngredients = new ArrayList<>();
                 else searchedIngredients = new ArrayList<>(ingredientsSearcherExecutor.getIngredientsThatStartWith(text));
                 populateIngredientsList();
