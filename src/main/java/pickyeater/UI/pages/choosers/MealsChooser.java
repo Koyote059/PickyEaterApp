@@ -59,6 +59,8 @@ public class MealsChooser extends JDialog {
             @Override
             public void keyTyped(KeyEvent e) {
                 String text = searchBar.getText();
+                if (StringsUtils.isAlpha(Character.toString(e.getKeyChar())))
+                    text = searchBar.getText() + e.getKeyChar();
                 if(!StringsUtils.isAlpha(text)) searchedMeals = new ArrayList<>();
                 else searchedMeals = new ArrayList<>(mealSearcherExecutor.getMealsThatStartWith(text));
                 populateMealList();

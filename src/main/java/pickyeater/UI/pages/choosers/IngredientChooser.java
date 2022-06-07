@@ -7,7 +7,10 @@ import pickyeater.basics.food.Nutrients;
 import pickyeater.basics.food.QuantityType;
 import pickyeater.executors.ExecutorProvider;
 import pickyeater.executors.searcher.IngredientSearcherExecutor;
-import pickyeater.utils.*;
+import pickyeater.utils.IngredientQuantityConverter;
+import pickyeater.utils.StringToNumber;
+import pickyeater.utils.StringsUtils;
+import pickyeater.utils.ValuesConverter;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -16,8 +19,10 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
+import java.util.Optional;
 
 public class IngredientChooser extends JDialog {
     private final IngredientSearcherExecutor ingredientsSearcherExecutor = ExecutorProvider.getIngredientSearcherExecutor();
@@ -61,6 +66,8 @@ public class IngredientChooser extends JDialog {
             @Override
             public void keyTyped(KeyEvent e) {
                 String text = searchBar.getText();
+                if (StringsUtils.isAlpha(Character.toString(e.getKeyChar())))
+                    text = searchBar.getText() + e.getKeyChar();
                 if(!StringsUtils.isAlpha(text)) searchedIngredients = new ArrayList<>();
                 else searchedIngredients = new ArrayList<>(ingredientsSearcherExecutor.getIngredientsThatStartWith(text));
                 populateIngredientsList();
