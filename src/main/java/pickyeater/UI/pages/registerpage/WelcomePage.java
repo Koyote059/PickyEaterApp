@@ -39,8 +39,8 @@ public class WelcomePage extends JFrame implements ActionListener {
             @Override
             public void mouseReleased(MouseEvent e) {
                 super.mouseReleased(e);
+                EventQueue.invokeLater(() -> new RegisterMainFrame());
                 setVisible(false);
-                new RegisterMainFrame();
             }
         });
     }
