@@ -4,6 +4,7 @@ import org.knowm.xchart.PieChart;
 import org.knowm.xchart.XChartPanel;
 import org.knowm.xchart.style.PieStyler;
 import org.knowm.xchart.style.Styler;
+import pickyeater.UI.themes.SystemTheme;
 import pickyeater.basics.food.Nutrients;
 
 import javax.swing.*;
@@ -24,6 +25,11 @@ public class NutrientsPieChart {
         styler.setToolTipsEnabled(true);
         Color[] colors = {Color.decode("#32AB5E"), Color.decode("#83D078"), Color.decode("#B1EA9D")};
         styler.setSeriesColors(colors);
+        styler.setChartBackgroundColor(SystemTheme.getPanelColor());
+        styler.setLegendBackgroundColor(SystemTheme.getButtonColor());
+        styler.setPlotBackgroundColor(SystemTheme.getPanelColor());
+        styler.setLegendBorderColor(SystemTheme.getPanelColor());
+        styler.setPlotBorderColor(SystemTheme.getPanelColor());
         chartPanel = new XChartPanel<>(pieChart);
     }
 
@@ -38,6 +44,11 @@ public class NutrientsPieChart {
         styler.setToolTipsEnabled(true);
         Color[] colors = {Color.decode("#32AB5E"), Color.decode("#83D078"), Color.decode("#B1EA9D")};
         styler.setSeriesColors(colors);
+        styler.setChartBackgroundColor(SystemTheme.getPanelColor());
+        styler.setLegendBackgroundColor(SystemTheme.getButtonColor());
+        styler.setPlotBackgroundColor(SystemTheme.getPanelColor());
+        styler.setLegendBorderColor(SystemTheme.getPanelColor());
+        styler.setPlotBorderColor(SystemTheme.getPanelColor());
         chartPanel = new XChartPanel<>(pieChart);
     }
 

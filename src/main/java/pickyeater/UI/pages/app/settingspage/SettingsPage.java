@@ -49,10 +49,8 @@ public class SettingsPage extends PickyPage {
         ThemesEnum te = ThemeHandler.ReadTheme();
         if (te == ThemesEnum.LIGHT_THEME) {
             cbTheme.setSelectedIndex(0);
-        } else if (te == ThemesEnum.DARK_THEME) {
+        } else { //if (te == ThemesEnum.DARK_THEME)
             cbTheme.setSelectedIndex(1);
-        } else if (te == ThemesEnum.GREEN_THEME) {
-            cbTheme.setSelectedIndex(2);
         }
         txtDeletingZone.setForeground(Color.red);
         btDeleteUser.setForeground(Color.red);
@@ -92,28 +90,22 @@ public class SettingsPage extends PickyPage {
         cbTheme.addActionListener(e -> {
             if (cbTheme.getSelectedIndex() == 0) {
                 ExecutorProvider.getSettingsExecutor().changeTheme(ThemesEnum.LIGHT_THEME);
-            } else if (cbTheme.getSelectedIndex() == 1) {
+            } else { //if (cbTheme.getSelectedIndex() == 1) {
                 ExecutorProvider.getSettingsExecutor().changeTheme(ThemesEnum.DARK_THEME);
-            } else if (cbTheme.getSelectedIndex() == 2) {
-                ExecutorProvider.getSettingsExecutor().changeTheme(ThemesEnum.GREEN_THEME);
             }
             new MainFrame();
             MainFrame.changePage(PanelButtons.SETTINGS);
             parent.dispose();
         });
-        manageMealsButton.addActionListener(l -> {
-            EventQueue.invokeLater(() -> {
-                MealsChooser chooser = new MealsChooser(parent);
-                chooser.manageMeals();
-            });
-        });
+        manageMealsButton.addActionListener(l -> EventQueue.invokeLater(() -> {
+            MealsChooser chooser = new MealsChooser(parent);
+            chooser.manageMeals();
+        }));
         btAddMeal.addActionListener(e -> EventQueue.invokeLater(() ->new MealCreator(parent).createMeal()));
-        manageIngredientsButton.addActionListener(l -> {
-            EventQueue.invokeLater(() -> {
-                IngredientChooser chooser = new IngredientChooser(parent);
-                chooser.manageIngredients();
-            });
-        });
+        manageIngredientsButton.addActionListener(l -> EventQueue.invokeLater(() -> {
+            IngredientChooser chooser = new IngredientChooser(parent);
+            chooser.manageIngredients();
+        }));
         //btAddIngredient.addActionListener(e -> new IngredientCreator(parent).createIngredient());
         btAddIngredient.addActionListener(e -> EventQueue.invokeLater(() -> new IngredientCreator(parent).createIngredient()));
         setNavigationMenuListeners();
