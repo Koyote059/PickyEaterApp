@@ -48,7 +48,6 @@ public class SystemTheme {
     }
 
     public static void theme2() {
-        //UIManager.put("Button.background", Color.decode("#505454"));
         UIManager.put("ProgressBar.foreground", Color.decode("#32AB5E"));
         try {
             UIManager.setLookAndFeel(new MyDarkerLaf());
@@ -56,5 +55,20 @@ public class SystemTheme {
             System.err.println("Failed to initialize LaF");
         }
         setDefaultFont();
+    }
+
+    public static Color getButtonColor(){
+        return UIManager.getColor("Button.background");
+    }
+
+    public static Color getPanelColor(){
+        return UIManager.getColor("Panel.background");
+    }
+
+    public static Color getLabelColor(){
+        return UIManager.getColor("Label.foreground");
+    }
+    public static Font getFont(){
+        return new javax.swing.plaf.FontUIResource("Helvetica", Font.BOLD, 16);
     }
 }

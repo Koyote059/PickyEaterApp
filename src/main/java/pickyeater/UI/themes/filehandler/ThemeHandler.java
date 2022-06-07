@@ -27,9 +27,6 @@ public class ThemeHandler {
             } else if (t.equals(ThemesEnum.DARK_THEME.toString())) {
                 SystemTheme.theme2();
                 return ThemesEnum.DARK_THEME;
-            } else if (t.equals(ThemesEnum.GREEN_THEME.toString())) {
-                SystemTheme.theme0();
-                return ThemesEnum.GREEN_THEME;
             } else {
                 System.out.println("Error in ThemeHandler -> ThemesEnum not found");
                 FileHandler.deleteFile();
