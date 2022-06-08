@@ -2,7 +2,7 @@ package pickyeater.UI.pages.app.mealplanpage;
 
 import pickyeater.UI.pages.app.MainFrame;
 import pickyeater.UI.pages.app.PickyPage;
-import pickyeater.UI.pages.app.mealplanpage.utils.MealRowPopupMenu;
+import pickyeater.utils.pagesutils.MealRowPopupMenu;
 import pickyeater.UI.pages.choosers.MealInfoJDialog;
 import pickyeater.UI.pages.leftbuttons.PanelButtonsConverter;
 import pickyeater.UI.themes.ColorButtons;

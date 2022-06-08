@@ -1,4 +1,4 @@
-package pickyeater.UI.pages.utils;
+package pickyeater.utils.pagesutils;
 
 import org.knowm.xchart.PieChart;
 import org.knowm.xchart.XChartPanel;

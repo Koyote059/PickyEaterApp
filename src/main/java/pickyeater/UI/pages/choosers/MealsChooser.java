@@ -1,7 +1,7 @@
 package pickyeater.UI.pages.choosers;
 
 import pickyeater.UI.pages.creators.MealCreator;
-import pickyeater.UI.pages.utils.NutrientsPieChart;
+import pickyeater.utils.pagesutils.NutrientsPieChart;
 import pickyeater.basics.food.Meal;
 import pickyeater.basics.food.Nutrients;
 import pickyeater.executors.ExecutorProvider;

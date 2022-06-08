@@ -1,4 +1,4 @@
-package pickyeater.UI.pages.app.groceriespage.utils;
+package pickyeater.utils.pagesutils;
 
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;

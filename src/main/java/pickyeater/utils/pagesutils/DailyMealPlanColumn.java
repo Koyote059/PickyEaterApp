@@ -1,4 +1,4 @@
-package pickyeater.UI.pages.app.mealplanpage.utils;
+package pickyeater.utils.pagesutils;
 
 import pickyeater.UI.pages.choosers.MealsChooser;
 import pickyeater.basics.food.Meal;

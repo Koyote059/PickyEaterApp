@@ -1,4 +1,4 @@
-package pickyeater.UI.pages.app.dailyprogresspage.utils;
+package pickyeater.utils.pagesutils;
 
 import javax.swing.*;
 import java.awt.event.ActionListener;

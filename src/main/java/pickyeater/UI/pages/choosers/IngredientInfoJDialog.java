@@ -1,14 +1,11 @@
 package pickyeater.UI.pages.choosers;
 
-import pickyeater.UI.pages.utils.NutrientsPieChart;
+import pickyeater.utils.pagesutils.NutrientsPieChart;
 import pickyeater.basics.food.*;
-import pickyeater.executors.ExecutorProvider;
-import pickyeater.executors.creators.CreateIngredientExecutor;
 import pickyeater.utils.IngredientQuantityConverter;
 import pickyeater.utils.ValuesConverter;
 
 import javax.swing.*;
-import javax.swing.border.BevelBorder;
 import java.awt.*;
 
 import static pickyeater.basics.food.QuantityType.*;

@@ -2,7 +2,7 @@ package pickyeater.UI.pages.app.mealplanpage;
 
 import pickyeater.UI.pages.app.MainFrame;
 import pickyeater.UI.pages.app.PickyPage;
-import pickyeater.UI.pages.app.mealplanpage.utils.DailyMealPlanColumn;
+import pickyeater.utils.pagesutils.DailyMealPlanColumn;
 import pickyeater.UI.pages.leftbuttons.PanelButtons;
 import pickyeater.basics.food.Meal;
 import pickyeater.basics.mealplan.DailyMealPlan;
@@ -13,7 +13,6 @@ import pickyeater.executors.MealPlanCreatorExecutor;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
-import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
