@@ -96,7 +96,7 @@ public class PopulateDatabase {
     }
 
     @Test
-    public void pupulate3(){
+    public void populate3(){
         ExecutorProvider.setEaterManager(eaterManager);
 
         Ingredient ingredient;
