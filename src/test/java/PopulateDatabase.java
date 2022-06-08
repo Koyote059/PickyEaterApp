@@ -95,6 +95,47 @@ public class PopulateDatabase {
 
     }
 
+    @Test
+    public void populate3(){
+        ExecutorProvider.setEaterManager(eaterManager);
+
+        Ingredient ingredient;
+
+        ingredient = buildIngredient("Melograno", "5.95", "1.7", "19", "1.2", "850", "Pieces");
+        System.out.println(ingredient);
+        saveInDatabase(ingredient);
+        ingredient = buildIngredient("Melone", "9.5", "0.8", "8", "0.2", "2000", "Pieces");
+        saveInDatabase(ingredient);
+        ingredient = buildIngredient("Mirtillo", "1.25", "0.9", "5.1", "0.2", "100", "Grams");
+        saveInDatabase(ingredient);
+        ingredient = buildIngredient("Nocciole", "0.23", "15", "17", "61", "100", "Grams");
+        saveInDatabase(ingredient);
+        ingredient = buildIngredient("Noci", "0.3", "20", "21", "65", "100", "Grams");
+        saveInDatabase(ingredient);
+        ingredient = buildIngredient("Noci di macadamia", "30", "8", "14", "76", "1000", "Grams");
+        saveInDatabase(ingredient);
+        ingredient = buildIngredient("Olive", "0.45", "0.8", "5", "11", "100", "Grams");
+        saveInDatabase(ingredient);
+        ingredient = buildIngredient("Papaya", "3", "0.4", "6.9", "0.1", "600", "Pieces");
+        saveInDatabase(ingredient);
+        ingredient = buildIngredient("Pere", "0.425", "0.4", "15", "0.1", "170", "Pieces");
+        saveInDatabase(ingredient);
+        ingredient = buildIngredient("Pesca", "0.1575", "0.91", "9.54", "0.25", "175", "Pieces");
+        saveInDatabase(ingredient);
+        ingredient = buildIngredient("Pinoli", "1", "14", "13", "68", "100", "Grams");
+        saveInDatabase(ingredient);
+        ingredient = buildIngredient("Pistacchi", "1.68", "20", "27.51", "45", "100", "Grams");
+        saveInDatabase(ingredient);
+        ingredient = buildIngredient("Pomelo", "4.47", "0.8", "10", "0.01", "1500", "Pieces");
+        saveInDatabase(ingredient);
+        ingredient = buildIngredient("Prugne", "1.3", "0.7", "11", "0.3", "65", "Pieces");
+        saveInDatabase(ingredient);
+        ingredient = buildIngredient("Uva", "0.1", "0.6", "17", "0.4", "100", "Grams");
+        saveInDatabase(ingredient);
+        ingredient = buildIngredient("Uva sultanina", "0.4", "3.1", "79", "0.5", "100", "Grams");
+        saveInDatabase(ingredient);
+    }
+
     private Ingredient buildIngredient(String selectedName, String selectedPrice, String selectedProteins, String selectedCarbs, String selectedFats, String selectedGramsPerQuantity, String selectedItem) {
         float price, proteins, carbs, fats;
         float gramsPerQuantity = 1;

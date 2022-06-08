@@ -1,4 +1,4 @@
-import pickyeater.UI.pages.app.mealplanpage.utils.DailyMealPlanColumn;
+import pickyeater.utils.pagesutils.DailyMealPlanColumn;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;

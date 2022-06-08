@@ -2,7 +2,7 @@ package pickyeater.UI.pages.app.groceriespage;
 
 import pickyeater.UI.pages.app.MainFrame;
 import pickyeater.UI.pages.app.PickyPage;
-import pickyeater.UI.pages.app.groceriespage.utils.WindowCloseListener;
+import pickyeater.utils.pagesutils.WindowCloseListener;
 import pickyeater.UI.pages.leftbuttons.PanelButtonsConverter;
 import pickyeater.UI.themes.ColorButtons;
 import pickyeater.basics.food.Ingredient;

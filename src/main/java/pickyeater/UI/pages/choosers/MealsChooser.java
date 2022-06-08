@@ -1,7 +1,7 @@
 package pickyeater.UI.pages.choosers;
 
 import pickyeater.UI.pages.creators.MealCreator;
-import pickyeater.UI.pages.utils.NutrientsPieChart;
+import pickyeater.utils.pagesutils.NutrientsPieChart;
 import pickyeater.basics.food.Meal;
 import pickyeater.basics.food.Nutrients;
 import pickyeater.executors.ExecutorProvider;
@@ -57,7 +57,7 @@ public class MealsChooser extends JDialog {
         mealQuantityTextField.setToolTipText("Left void it'll put automatically 100g");
         searchBar.addKeyListener(new KeyAdapter() {
             @Override
-            public void keyTyped(KeyEvent e) {
+            public void keyReleased(KeyEvent e) {
                 String text = searchBar.getText();
                 if(!StringsUtils.isAlpha(text)) searchedMeals = new ArrayList<>();
                 else searchedMeals = new ArrayList<>(mealSearcherExecutor.getMealsThatStartWith(text));
