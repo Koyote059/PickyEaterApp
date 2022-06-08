@@ -31,6 +31,7 @@ Mandorla            5/Kg        21.2        21.69       50          1.2
 Mango               2           0.8         15          0.4         500
 Mela                1.7/kg      0.3         14          0.2         225
 ------------------------------------------------------------------------------------
+ingredient = buildIngredient("Mela", "0.38", "0.3", "14", "0.2", "225", "Pieces");
 Melograno
 Melone
 Mirtillo
@@ -47,3 +48,21 @@ Pomelo
 Prugne
 Uva
 Uva sultanina
+
+nome, prezzo, prot, carbs, fats, grammi per pezzo, pezzo
+ingredient = buildIngredient("Melograno", "7$/kg", "1.7", "19", "1.2", "850", "Pieces");
+ingredient = buildIngredient("Melone", "9.5", "0.8", "8", "0.2", "2000", "Pieces");
+ingredient = buildIngredient("Mirtillo", "12.5/Kg", "0.9", "5.1", "0.2", "2.5", "Pieces");
+ingredient = buildIngredient("Nocciole", "2.3/kg", "15", "17", "61", "5", "Pieces");
+ingredient = buildIngredient("Noci", "3/Kg", "20", "21", "65", "4.5", "Pieces");
+ingredient = buildIngredient("Noci di macadamia", "30", "8", "14", "76", "1000", "Grams");
+ingredient = buildIngredient("Olive", "4.5/kg", "0.8", "5", "11", "5", "Pieces");
+ingredient = buildIngredient("Papaya", "3", "0.4", "6.9", "0.1", "600", "Pieces");
+ingredient = buildIngredient("Pere", "2.5/Kg", "0.4", "15", "0.1", "170", "Pieces");
+ingredient = buildIngredient("Pesca", "0.9/Kg", "0.91", "9.54", "0.25", "175", "Pieces");
+ingredient = buildIngredient("Pinoli", "1", "14", "13", "68", "100", "Grams");
+ingredient = buildIngredient("Pistacchi", "1.68", "20", "27.51", "45", "100", "Grams");
+ingredient = buildIngredient("Pomelo", "2.98/kg", "0.8", "10", "0.01", "1500", "Pieces");
+ingredient = buildIngredient("Prugne", "20/kg", "0.7", "11", "0.3", "65", "Pieces");
+ingredient = buildIngredient("Uva", "1/kg", "0.6", "17", "0.4", "100", "Grams");
+ingredient = buildIngredient("Uva sultanina", "4/kg", "3.1", "79", "0.5", "100", "Grams");
