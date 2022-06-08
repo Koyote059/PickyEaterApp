@@ -236,6 +236,7 @@ public class IngredientCreator extends JDialog {
             JOptionPane.showMessageDialog(getParent(), "Fats cannot be negative!");
             return null;
         }
+
         if (fats + proteins + carbs > gramsPerQuantity*quantity) {
             JOptionPane.showMessageDialog(getParent(), "The nutrients' sum cannot exceed the ingredient weight!");
             return null;
@@ -272,14 +273,22 @@ public class IngredientCreator extends JDialog {
 
         Quantity quantity = ingredient.getQuantity();
         startingIngredient = ingredient;
+        String displayingGramsPerQuantity = "";
         switch (quantity.getQuantityType()) {
-            case GRAMS -> quantityTypeBox.setSelectedItem("Grams");
+            case GRAMS -> {
+                displayingGramsPerQuantity = ValuesConverter.convertFloat(quantity.getGramsPerQuantity());
+                quantityTypeBox.setSelectedItem("Grams");
+            }
             case PIECES ->{
                 quantityTypeBox.setSelectedItem("Pieces");
+                displayingGramsPerQuantity = ValuesConverter.convertFloat(quantity.getGramsPerQuantity());
                 IngredientQuantityConverter converter = new IngredientQuantityConverter();
                 startingIngredient = converter.convert(ingredient,1);
             }
-            case MILLILITERS -> quantityTypeBox.setSelectedItem("Milliliters");
+            case MILLILITERS -> {
+                displayingGramsPerQuantity = ValuesConverter.convertFloat(quantity.getGramsPerQuantity()*100);
+                quantityTypeBox.setSelectedItem("Milliliters");
+            }
         }
 
         nameTextField.setText(startingIngredient.getName());
@@ -289,7 +298,7 @@ public class IngredientCreator extends JDialog {
         carbsTextField.setText(ValuesConverter.convertFloat(nutrients.getCarbs()));
         fatsTextField.setText(ValuesConverter.convertFloat(nutrients.getFats()));
 
-        gramsPerQuantityTextField.setText(ValuesConverter.convertFloat(quantity.getGramsPerQuantity()));
+        gramsPerQuantityTextField.setText(displayingGramsPerQuantity);
         setVisible(true);
     }
 }
