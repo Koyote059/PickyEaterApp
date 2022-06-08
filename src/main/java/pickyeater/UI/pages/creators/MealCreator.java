@@ -1,6 +1,8 @@
 package pickyeater.UI.pages.creators;
 
+import pickyeater.UI.pages.app.MainFrame;
 import pickyeater.UI.pages.choosers.IngredientChooser;
+import pickyeater.UI.pages.leftbuttons.PanelButtons;
 import pickyeater.utils.pagesutils.NutrientsPieChart;
 import pickyeater.basics.food.*;
 import pickyeater.basics.groceries.PickyFinder;
@@ -161,6 +163,9 @@ public class MealCreator extends JDialog {
             }
             executor.saveMeal(meal);
 
+            new MainFrame();
+            MainFrame.changePage(PanelButtons.SETTINGS);
+            parent.dispose();
             dispose();
         });
         buttonPanel.add(BorderLayout.CENTER, doneButton);
