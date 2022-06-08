@@ -32,24 +32,18 @@ Mango               2           0.8         15          0.4         500
 Mela                1.7/kg      0.3         14          0.2         225
 ------------------------------------------------------------------------------------
 Melograno
-Melone Mirtillo
-More Nespole
+Melone
+Mirtillo
 Nocciole
 Noci
 Noci di macadamia
-Noci Pecan
-Noni
 Olive
 Papaya
 Pere
 Pesca
 Pinoli
 Pistacchi
-Platano
 Pomelo
-Pompelmo rosa
 Prugne
-Prugne Umeboshi
-Tamarindo
 Uva
 Uva sultanina
