@@ -112,6 +112,9 @@ public class IngredientChooser extends JDialog {
             returningIngredient = ingredientQuantityConverter.convert(ingredient, returningQuantity);
             dispose();
         });
+
+
+
         ingredientsList.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -125,7 +128,7 @@ public class IngredientChooser extends JDialog {
                 Ingredient selectedIngredient = searchedIngredients.get(selectedIndex);
 
                 if(e.getClickCount()==2){
-                    IngredientInfoJDialog ingredientInfoJDialog  = new IngredientInfoJDialog(parent,selectedIngredient);
+                    IngredientInfoJDialog ingredientInfoJDialog  = new IngredientInfoJDialog(parent,selectedIngredient,getLocation());
                     setVisible(false);
                     ingredientInfoJDialog.setVisible(true);
                     setVisible(true);
