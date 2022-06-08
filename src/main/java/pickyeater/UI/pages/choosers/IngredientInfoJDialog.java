@@ -25,7 +25,7 @@ public class IngredientInfoJDialog extends JDialog {
     private Ingredient startingIngredient = null;
     private boolean isIngredientEditing = false;
 
-    public IngredientInfoJDialog(JFrame parent, Ingredient ingredient) {
+    public IngredientInfoJDialog(JFrame parent, Ingredient ingredient, Point location) {
         super(parent, "IngredientCreator", true);
         Quantity quantity = ingredient.getQuantity();
         if(quantity.getQuantityType().equals(PIECES)) {
@@ -49,7 +49,7 @@ public class IngredientInfoJDialog extends JDialog {
         pack();
         setSize(new Dimension(677, 507));
         setResizable(false);
-        setLocationRelativeTo(parent);
+        setLocation(location);
     }
 
     private JPanel fillIngredientInfoPanel(Ingredient ingredient,Quantity quantity){
