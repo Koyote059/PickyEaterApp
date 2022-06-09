@@ -101,13 +101,13 @@ public class SettingsPage extends PickyPage {
             MealsChooser chooser = new MealsChooser(parent);
             chooser.manageMeals();
         }));
-        btAddMeal.addActionListener(e -> EventQueue.invokeLater(() ->new MealCreator(parent).createMeal()));
+        btAddMeal.addActionListener(e -> EventQueue.invokeLater(() ->new MealCreator(parent,getLocation()).createMeal()));
         manageIngredientsButton.addActionListener(l -> EventQueue.invokeLater(() -> {
             IngredientChooser chooser = new IngredientChooser(parent);
             chooser.manageIngredients();
         }));
         //btAddIngredient.addActionListener(e -> new IngredientCreator(parent).createIngredient());
-        btAddIngredient.addActionListener(e -> EventQueue.invokeLater(() -> new IngredientCreator(parent).createIngredient()));
+        btAddIngredient.addActionListener(e -> EventQueue.invokeLater(() -> new IngredientCreator(parent,getLocation()).createIngredient()));
         setNavigationMenuListeners();
     }
 

@@ -165,7 +165,7 @@ public class IngredientChooser extends JDialog {
                             if (choice != JOptionPane.YES_OPTION)
                                 return;
                         }
-                        IngredientCreator creator = new IngredientCreator(parent);
+                        IngredientCreator creator = new IngredientCreator(parent,getLocation());
                         setVisible(false);
                         creator.editIngredient(selectedIngredient);
                         setVisible(true);

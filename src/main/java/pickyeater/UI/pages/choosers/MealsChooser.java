@@ -162,7 +162,7 @@ public class MealsChooser extends JDialog {
                             if (choice != JOptionPane.YES_OPTION)
                                 return;
                         }
-                        MealCreator creator = new MealCreator(parent);
+                        MealCreator creator = new MealCreator(parent,getLocation());
                         setVisible(false);
                         creator.editMeal(selectedMeal);
                         setVisible(true);

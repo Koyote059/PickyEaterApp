@@ -8,6 +8,7 @@ import pickyeater.executors.creators.CreateIngredientExecutor;
 import pickyeater.utils.*;
 
 import javax.swing.*;
+import javax.xml.stream.Location;
 import java.awt.*;
 
 public class IngredientCreator extends JDialog {
@@ -26,7 +27,7 @@ public class IngredientCreator extends JDialog {
     private Ingredient startingIngredient = null;
     private boolean isIngredientEditing = false;
 
-    public IngredientCreator(JFrame parent) {
+    public IngredientCreator(JFrame parent, Point location) {
         super(parent, "IngredientCreator", true);
         JPanel mainPanel = new JPanel(new GridBagLayout());
         GridBagConstraints constraints = new GridBagConstraints();
@@ -152,7 +153,7 @@ public class IngredientCreator extends JDialog {
         pack();
         setSize(new Dimension(677, 507));
         setResizable(false);
-        setLocationRelativeTo(parent);
+        setLocation(location);
     }
 
     private Ingredient buildIngredient() {
