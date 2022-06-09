@@ -26,7 +26,7 @@ public class IngredientInfoJDialog extends JDialog {
     private boolean isIngredientEditing = false;
 
     public IngredientInfoJDialog(JFrame parent, Ingredient ingredient, Point location) {
-        super(parent, "IngredientCreator", true);
+        super(parent, ingredient.getName() + " - Info", true);
         Quantity quantity = ingredient.getQuantity();
         if(quantity.getQuantityType().equals(PIECES)) {
             IngredientQuantityConverter converter = new IngredientQuantityConverter();
@@ -145,7 +145,7 @@ public class IngredientInfoJDialog extends JDialog {
                 gramsPerQuantityTextField.setVisible(true);
                 gramsPerQuantityTextField.setText(ValuesConverter.convertFloat(quantity.getGramsPerQuantity()));
                 gramsQuantityLabel.setVisible(true);
-                quantityTypeField.setText("Pieces");
+                quantityTypeField.setText("Piece");
                 gramsQuantityLabel.setText("Grams per piece: ");
                 priceLabel.setText("Price per piece: ");
                 nutrientsLabel.setText("Nutrients per piece: ");
