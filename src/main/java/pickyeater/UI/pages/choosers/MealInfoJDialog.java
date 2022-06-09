@@ -14,12 +14,12 @@ import java.util.Set;
 public class MealInfoJDialog extends JDialog {
     private final JTable ingredientsTable;
 
-    public MealInfoJDialog(Frame parent, Meal meal,Point location) {
+    public MealInfoJDialog(JFrame parent, Meal meal) {
         super(parent, meal.getName(), true);
         setSize(parent.getSize());
         setPreferredSize(parent.getSize());
-        setLocation(location);
-        setName("Meal Info - " + meal.getName());
+        setLocationRelativeTo(parent);
+        setName(meal.getName()+ " - Info");
         NutrientsPieChart nutrientsPieChart = new NutrientsPieChart(meal.getNutrients(),meal.getName());
         JPanel mainPanel = new JPanel(new BorderLayout());
         mainPanel.add(BorderLayout.LINE_START, nutrientsPieChart.getPanel());
@@ -51,6 +51,11 @@ public class MealInfoJDialog extends JDialog {
         populateTable(meal.getIngredients());
         setContentPane(mainPanel);
         pack();
+    }
+
+    public MealInfoJDialog(JFrame parent, Meal meal,Point location){
+        this(parent,meal);
+        setLocation(location);
     }
 
     private void populateTable(Set<Ingredient> ingredients) {

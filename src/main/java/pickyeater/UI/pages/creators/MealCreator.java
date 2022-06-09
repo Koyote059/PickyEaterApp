@@ -37,7 +37,7 @@ public class MealCreator extends JDialog {
     private boolean isMealEditing = false;
     private NutrientsPieChart nutrientsPieChart;
 
-    public MealCreator(JFrame parent,Point location) {
+    public MealCreator(JFrame parent) {
         super(parent, "Meal Creator", true);
         JPanel mainPanel = new JPanel(new BorderLayout());
         JPanel customMealPanel = new JPanel(new BorderLayout());
@@ -50,7 +50,7 @@ public class MealCreator extends JDialog {
         customMealPanel.add(BorderLayout.PAGE_START, panelInsertName);
         JButton addIngredientButton = new JButton("Add ingredient");
         addIngredientButton.addActionListener(e -> {
-            IngredientChooser ingredientChooser = new IngredientChooser(parent);
+            IngredientChooser ingredientChooser = new IngredientChooser(parent,getLocation());
             Optional<Ingredient> ingredientOptional = ingredientChooser.getIngredient();
             ingredientOptional.ifPresent(addingIngredient -> {
 
@@ -180,6 +180,11 @@ public class MealCreator extends JDialog {
         setSize(new Dimension(677, 507));
         setPreferredSize(new Dimension(677, 507));
         setResizable(false);
+        setLocationRelativeTo(parent);
+    }
+
+    public MealCreator(JFrame parent, Point location){
+        this(parent);
         setLocation(location);
     }
 
@@ -223,10 +228,12 @@ public class MealCreator extends JDialog {
     }
 
     public void createMeal() {
+        setTitle("Create meal");
         setVisible(true);
     }
 
     public void editMeal(Meal meal) {
+        setTitle("Edit - " + meal.getName());
         isMealEditing = true;
         startingMeal = meal;
         mealNameField.setText(meal.getName());
