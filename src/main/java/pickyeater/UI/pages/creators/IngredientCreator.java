@@ -1,5 +1,7 @@
 package pickyeater.UI.pages.creators;
 
+import pickyeater.UI.pages.app.MainFrame;
+import pickyeater.UI.pages.leftbuttons.PanelButtons;
 import pickyeater.basics.food.*;
 import pickyeater.builders.IngredientBuilder;
 import pickyeater.builders.NutrientsBuilder;
@@ -138,6 +140,10 @@ public class IngredientCreator extends JDialog {
             if (isIngredientEditing)
                 executor.deleteIngredient(startingIngredient);
             executor.saveIngredient(ingredient);
+
+            new MainFrame();
+            MainFrame.changePage(PanelButtons.SETTINGS);
+            parent.dispose();
             this.dispose();
         });
         constraints.gridx = 0;
