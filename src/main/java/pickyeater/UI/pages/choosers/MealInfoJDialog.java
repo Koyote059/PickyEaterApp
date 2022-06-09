@@ -38,6 +38,8 @@ public class MealInfoJDialog extends JDialog {
         ingredientsTable = new JTable(tableModel);
         ingredientsTable.setName("Ingredients");
         ingredientsTable.removeEditor();
+        ingredientsTable.getTableHeader().setReorderingAllowed(false);
+
         JScrollPane scrollPane = new JScrollPane();
         scrollPane.setViewportView(ingredientsTable);
         scrollPane.setPreferredSize(new Dimension(250, 250));

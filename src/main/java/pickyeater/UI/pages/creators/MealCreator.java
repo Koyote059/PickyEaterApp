@@ -37,7 +37,7 @@ public class MealCreator extends JDialog {
     private boolean isMealEditing = false;
     private NutrientsPieChart nutrientsPieChart;
 
-    public MealCreator(JFrame parent) {
+    public MealCreator(JFrame parent,Point location) {
         super(parent, "Meal Creator", true);
         JPanel mainPanel = new JPanel(new BorderLayout());
         JPanel customMealPanel = new JPanel(new BorderLayout());
@@ -180,7 +180,7 @@ public class MealCreator extends JDialog {
         setSize(new Dimension(677, 507));
         setPreferredSize(new Dimension(677, 507));
         setResizable(false);
-        setLocationRelativeTo(parent);
+        setLocation(location);
     }
 
     private void draw() {
