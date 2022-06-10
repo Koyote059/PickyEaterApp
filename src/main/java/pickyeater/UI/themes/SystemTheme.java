@@ -35,8 +35,12 @@ public class SystemTheme {
         UIManager.put("Button.focusedBorderColor", Color.decode("#B1EA9D"));
         UIManager.put("List.selectionForeground", Color.decode("#000000"));
         UIManager.put("List.selectionBackground", Color.decode("#B1EA9D"));
+        UIManager.put("List.selectionInactiveForeground", Color.decode("#000000"));
+        UIManager.put("List.selectionInactiveBackground", Color.decode("#83D078"));
         UIManager.put("Table.selectionForeground", Color.decode("#000000"));
         UIManager.put("Table.selectionBackground", Color.decode("#B1EA9D"));
+        UIManager.put("Table.selectionInactiveForeground", Color.decode("#000000"));
+        UIManager.put("Table.selectionInactiveBackground", Color.decode("#83D078"));
         UIManager.put("ComboBox.selectionForeground", Color.decode("#000000"));
         UIManager.put("ComboBox.selectionBackground", Color.decode("#B1EA9D"));
         UIManager.put("ComboBox.border", Color.decode("#FFFFFF"));
@@ -68,8 +72,12 @@ public class SystemTheme {
         UIManager.put("Button.focusedBorderColor", Color.decode("#32AB5E"));
         UIManager.put("List.selectionForeground", Color.decode("#FFFFFF"));
         UIManager.put("List.selectionBackground", Color.decode("#32AB5E"));
+        UIManager.put("List.selectionInactiveForeground", Color.decode("#000000"));
+        UIManager.put("List.selectionInactiveBackground", Color.decode("#83D078"));
         UIManager.put("Table.selectionForeground", Color.decode("#FFFFFF"));
         UIManager.put("Table.selectionBackground", Color.decode("#32AB5E"));
+        UIManager.put("Table.selectionInactiveForeground", Color.decode("#000000"));
+        UIManager.put("Table.selectionInactiveBackground", Color.decode("#83D078"));
         UIManager.put("ComboBox.selectionForeground", Color.decode("#FFFFFF"));
         UIManager.put("ComboBox.selectionBackground", Color.decode("#32AB5E"));
         UIManager.put("ComboBox.border", Color.decode("#000000"));
