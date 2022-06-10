@@ -165,7 +165,7 @@ public class IngredientChooser extends JDialog {
                             if (choice != JOptionPane.YES_OPTION)
                                 return;
                         }
-                        IngredientCreator creator = new IngredientCreator(parent);
+                        IngredientCreator creator = new IngredientCreator(parent,getLocation());
                         setVisible(false);
                         creator.editIngredient(selectedIngredient);
                         setVisible(true);
@@ -202,6 +202,10 @@ public class IngredientChooser extends JDialog {
         setLocationRelativeTo(parent);
     }
 
+    public IngredientChooser(JFrame parent,Point location){
+        this(parent);
+        setLocation(location);
+    }
     private void populateIngredientsList() {
         ingredientsList.removeAll();
         Comparator<? super Ingredient> comparator = Comparator.comparing(Ingredient::getName);
@@ -239,6 +243,7 @@ public class IngredientChooser extends JDialog {
     }
 
     public void manageIngredients() {
+        setTitle(" Manage Ingredients ");
         cancelButton.setVisible(false);
         ingredientQuantityPanel.setVisible(false);
         isChoosing = false;
@@ -246,6 +251,7 @@ public class IngredientChooser extends JDialog {
     }
 
     public Optional<Ingredient> getIngredient() {
+        setTitle(" Choose Ingredient ");
         cancelButton.setVisible(true);
         ingredientQuantityPanel.setVisible(true);
         isChoosing = true;

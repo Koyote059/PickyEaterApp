@@ -10,6 +10,7 @@ import pickyeater.executors.creators.CreateIngredientExecutor;
 import pickyeater.utils.*;
 
 import javax.swing.*;
+import javax.xml.stream.Location;
 import java.awt.*;
 
 public class IngredientCreator extends JDialog {
@@ -49,7 +50,7 @@ public class IngredientCreator extends JDialog {
         quantityTypeBox = new JComboBox<>();
         quantityTypeBox.addItem("Grams");
         quantityTypeBox.addItem("Milliliters");
-        quantityTypeBox.addItem("Pieces");
+        quantityTypeBox.addItem("Piece");
         quantityTypeBox.addActionListener(l -> {
             String selectedItem = (String) quantityTypeBox.getSelectedItem();
             if (selectedItem == null)
@@ -61,7 +62,7 @@ public class IngredientCreator extends JDialog {
                     priceLabel.setText("Price per 100 g: ");
                     nutrientsLabel.setText("Nutrients per 100 g: ");
                 }
-                case "Pieces" -> {
+                case "Piece" -> {
                     gramsPerQuantityTextField.setVisible(true);
                     gramsQuantityLabel.setVisible(true);
                     gramsQuantityLabel.setText("Insert grams per piece: ");
@@ -193,7 +194,7 @@ public class IngredientCreator extends JDialog {
         switch (selectedItem) {
             case "Grams" -> quantityType = QuantityType.GRAMS;
             case "Milliliters" -> quantityType = QuantityType.MILLILITERS;
-            case "Pieces" -> {
+            case "Piece" -> {
                 quantityType = QuantityType.PIECES;
                 quantity = 1;
             }
@@ -270,11 +271,18 @@ public class IngredientCreator extends JDialog {
         return ingredientBuilder.build();
     }
 
+    public IngredientCreator(JFrame parent,Point point){
+        this(parent);
+        setLocation(point);
+    }
+
     public void createIngredient() {
+        setTitle("Create ingredient");
         setVisible(true);
     }
 
     public void editIngredient(Ingredient ingredient) {
+        setTitle("Editing - " + ingredient.getName());
         isIngredientEditing = true;
 
         Quantity quantity = ingredient.getQuantity();
@@ -286,7 +294,7 @@ public class IngredientCreator extends JDialog {
                 quantityTypeBox.setSelectedItem("Grams");
             }
             case PIECES ->{
-                quantityTypeBox.setSelectedItem("Pieces");
+                quantityTypeBox.setSelectedItem("Piece");
                 displayingGramsPerQuantity = ValuesConverter.convertFloat(quantity.getGramsPerQuantity());
                 IngredientQuantityConverter converter = new IngredientQuantityConverter();
                 startingIngredient = converter.convert(ingredient,1);

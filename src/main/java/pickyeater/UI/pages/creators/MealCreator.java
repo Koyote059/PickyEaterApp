@@ -50,7 +50,7 @@ public class MealCreator extends JDialog {
         customMealPanel.add(BorderLayout.PAGE_START, panelInsertName);
         JButton addIngredientButton = new JButton("Add ingredient");
         addIngredientButton.addActionListener(e -> {
-            IngredientChooser ingredientChooser = new IngredientChooser(parent);
+            IngredientChooser ingredientChooser = new IngredientChooser(parent,getLocation());
             Optional<Ingredient> ingredientOptional = ingredientChooser.getIngredient();
             ingredientOptional.ifPresent(addingIngredient -> {
 
@@ -183,6 +183,11 @@ public class MealCreator extends JDialog {
         setLocationRelativeTo(parent);
     }
 
+    public MealCreator(JFrame parent, Point location){
+        this(parent);
+        setLocation(location);
+    }
+
     private void draw() {
         populateTable();
         if (ingredientsTable.getRowCount() > 0)
@@ -223,10 +228,12 @@ public class MealCreator extends JDialog {
     }
 
     public void createMeal() {
+        setTitle("Create meal");
         setVisible(true);
     }
 
     public void editMeal(Meal meal) {
+        setTitle("Edit - " + meal.getName());
         isMealEditing = true;
         startingMeal = meal;
         mealNameField.setText(meal.getName());

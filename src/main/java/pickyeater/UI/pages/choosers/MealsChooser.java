@@ -162,7 +162,7 @@ public class MealsChooser extends JDialog {
                             if (choice != JOptionPane.YES_OPTION)
                                 return;
                         }
-                        MealCreator creator = new MealCreator(parent);
+                        MealCreator creator = new MealCreator(parent,getLocation());
                         setVisible(false);
                         creator.editMeal(selectedMeal);
                         setVisible(true);
@@ -197,8 +197,7 @@ public class MealsChooser extends JDialog {
         setResizable(false);
         setLocationRelativeTo(parent);
     }
-
-    private void populateMealList() {
+        private void populateMealList() {
         Comparator<? super Meal> comparator = Comparator.comparing(Meal::getName);
         searchedMeals.sort(comparator);
 
@@ -227,6 +226,7 @@ public class MealsChooser extends JDialog {
     }
 
     public void manageMeals() {
+        setTitle("Manage meals");
         cancelButton.setVisible(false);
         mealQuantityPanel.setVisible(false);
         isChoosing = false;
@@ -234,6 +234,7 @@ public class MealsChooser extends JDialog {
     }
 
     public Optional<Meal> getMeal() {
+        setTitle("Choose meal");
         cancelButton.setVisible(true);
         mealQuantityPanel.setVisible(true);
         isChoosing = true;
