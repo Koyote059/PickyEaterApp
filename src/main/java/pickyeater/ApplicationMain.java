@@ -16,8 +16,8 @@ import java.awt.*;
 public class ApplicationMain {
     public static void main(String[] args) {
         ThemeHandler.ReadTheme();
-        PickyEatersDatabase pickyEatersDB = new SQLPickyEaterDB("DatabasePickEater.sqlite");
-        //PickyEatersDatabase pickyEatersDB = new SQLPickyEaterDB("dbDiProva.sqlite");
+        //PickyEatersDatabase pickyEatersDB = new SQLPickyEaterDB("DatabasePickEater.sqlite");
+        PickyEatersDatabase pickyEatersDB = new SQLPickyEaterDB("DatabasePickEaterCopy.sqlite");
         EaterManager eaterManager = new PickyEaterManager(pickyEatersDB.getUserDatabase(), pickyEatersDB.getIngredientsDatabase(), pickyEatersDB.getMealsDatabase(), pickyEatersDB.getGroceriesDatabase());
         ExecutorProvider.setEaterManager(eaterManager);
         if (eaterManager.getUserManager().getUser().isEmpty()) {  // User Database is empty

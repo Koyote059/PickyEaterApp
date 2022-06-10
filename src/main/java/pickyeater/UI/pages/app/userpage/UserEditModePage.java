@@ -241,14 +241,16 @@ public class UserEditModePage extends PickyPage {
     }
 
     private void next(UserBuilder userBuilder) {
-        System.out.println(userBuilder.getBodyFat());
+        //System.out.println(userBuilder.getBodyFat());
         NutrientsBuilder newNutrientsBuilder = new PickyNutrientsBuilder();
         newNutrientsBuilder.setComplexCarbs(StringToNumber.convertPositiveFloat(tfCarbs.getText()));
         newNutrientsBuilder.setUnSaturatedFats(StringToNumber.convertPositiveFloat(tfFats.getText()));
         newNutrientsBuilder.setProteins(StringToNumber.convertPositiveFloat(tfProteins.getText()));
         userBuilder.setRequiredNutrients(newNutrientsBuilder.build());
+        /*
         JOptionPane.showMessageDialog(panelOne, "Selected:" + "\n" + "Name: " + userBuilder.getName() + "\n" + "Sex: " + userBuilder.getSex() + "\n" + "Height: " + userBuilder.getHeight() + "cm\n" + "Weight: " + userBuilder.getWeight() + "Kg\n" + "Birthday: " + userBuilder.getDateOfBirth() + "\n" + "Body fat: " + userBuilder.getBodyFat() + "%");
         JOptionPane.showMessageDialog(panelOne, "Nutrients:\n" + "Proteins: " + userBuilder.getRequiredNutrients().getProteins() + "\nCarbs: " + userBuilder.getRequiredNutrients().getCarbs() + "\nFats: " + userBuilder.getRequiredNutrients().getFats() + "\nCalories: " + userBuilder.getRequiredNutrients().getCalories());
+         */
         // Save user
         ExecutorProvider.getUserEditModeExecutor().saveUser(userBuilder.build());
         new MainFrame();

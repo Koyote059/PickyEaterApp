@@ -10,6 +10,7 @@ import pickyeater.UI.pages.leftbuttons.PanelButtons;
 import pickyeater.UI.pages.leftbuttons.PanelButtonsConverter;
 import pickyeater.UI.pages.registerpage.RegisterMainFrame;
 import pickyeater.UI.themes.ColorButtons;
+import pickyeater.UI.themes.SystemTheme;
 import pickyeater.UI.themes.filehandler.ThemeHandler;
 import pickyeater.UI.themes.filehandler.ThemesEnum;
 import pickyeater.executors.ExecutorProvider;
@@ -52,14 +53,19 @@ public class SettingsPage extends PickyPage {
         } else { //if (te == ThemesEnum.DARK_THEME)
             cbTheme.setSelectedIndex(1);
         }
-        txtDeletingZone.setForeground(Color.red);
-        btDeleteUser.setForeground(Color.red);
-        btResetMeals.setForeground(Color.red);
-        btResetIngredients.setForeground(Color.red);
-        txtImage.setText("");
+//        txtDeletingZone.setForeground(Color.red);
+//        btDeleteUser.setForeground(Color.red);
+//        btResetMeals.setForeground(Color.red);
+//        btResetIngredients.setForeground(Color.red);
         try {
-            BufferedImage binImage = ImageIO.read(new File("res/images/binIconR.png"));
+            BufferedImage binImage;
+            if (ThemeHandler.ReadTheme() == ThemesEnum.LIGHT_THEME) {
+                binImage = ImageIO.read(new File("res/images/binIcon.png"));
+            } else {
+                binImage = ImageIO.read(new File("res/images/binIconW.png"));
+            }
             txtImage.setIcon(new ImageIcon(binImage.getScaledInstance(30, 30, Image.SCALE_SMOOTH)));
+            txtImage.setText("");
         } catch (IOException | NullPointerException ignored) {
         }
         setLayout(new BorderLayout());
