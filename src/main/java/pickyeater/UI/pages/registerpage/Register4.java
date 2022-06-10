@@ -44,7 +44,9 @@ public class Register4 extends PickyPage {
         add(mainPanel, BorderLayout.CENTER);
         btBack.addActionListener(actionEvent -> RegisterMainFrame.changePage(3));
         btDone.addActionListener(actionEvent -> {
+            /*
             JOptionPane.showMessageDialog(mainPanel, "Selected:" + "\n" + "Calories: " + nutrientsBuilder.getCalories() + "\n" + "Proteins: " + nutrientsBuilder.getProteins() + "\n" + "Carbs: " + nutrientsBuilder.getCarbs() + "\n" + "Fats: " + nutrientsBuilder.getFats());
+            */
             userBuilder.setRequiredNutrients(nutrientsBuilder.build());
             registerExecutor.saveUser(userBuilder.build());
             new MainFrame();
