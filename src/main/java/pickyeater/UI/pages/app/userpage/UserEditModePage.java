@@ -241,7 +241,7 @@ public class UserEditModePage extends PickyPage {
     }
 
     private void next(UserBuilder userBuilder) {
-        System.out.println(userBuilder.getBodyFat());
+        //System.out.println(userBuilder.getBodyFat());
         NutrientsBuilder newNutrientsBuilder = new PickyNutrientsBuilder();
         newNutrientsBuilder.setComplexCarbs(StringToNumber.convertPositiveFloat(tfCarbs.getText()));
         newNutrientsBuilder.setUnSaturatedFats(StringToNumber.convertPositiveFloat(tfFats.getText()));
