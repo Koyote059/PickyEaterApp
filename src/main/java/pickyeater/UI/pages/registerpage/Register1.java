@@ -154,7 +154,9 @@ public class Register1 extends PickyPage {
                 BodyFatCalculator bodyFatCalculator = new DeurenbergCalculator();
                 userBuilder.setBodyFat(bodyFatCalculator.calculate(userBuilder.getHeight(), userBuilder.getWeight(), new AgeCalculator().age(userBuilder.getDateOfBirth()), userBuilder.getSex()));
             }
+            /*
             JOptionPane.showMessageDialog(panelZeroOne, "Selected:" + "\n" + "Name: " + userBuilder.getName() + "\n" + "Height: " + userBuilder.getHeight() + "cm\n" + "Weight: " + userBuilder.getWeight() + "Kg\n" + "Birthday: " + userBuilder.getDateOfBirth().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")) + "\n" + "Sex: " + userBuilder.getSex() + "\n" + "Body fat: " + userBuilder.getBodyFat() + "%");
+            */
             RegisterMainFrame.changePage(2);
         }
     }
