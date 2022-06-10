@@ -11,19 +11,17 @@ import java.awt.*;
 import static pickyeater.basics.food.QuantityType.*;
 
 public class IngredientInfoJDialog extends JDialog {
-    private JTextField nameTextField;
-    private JTextField quantityTypeField;
-    private JLabel gramsQuantityLabel;
-    private JTextField gramsPerQuantityTextField;
-    private JTextField proteinsTextField;
-    private JTextField priceTextField;
-    private JTextField carbsTextField;
-    private JTextField fatsTextField;
+    private JLabel labelName;
+    private JLabel labelQuantityType;
+    private JLabel labelGramsQuantity;
+    private JLabel labelGramsPerQuantity;
+    private JLabel labelProteins;
+    private JLabel labelPrice;
+    private JLabel labelCarbs;
+    private JLabel labelFats;
     private JLabel priceLabel;
 
     private JLabel nutrientsLabel;
-    private Ingredient startingIngredient = null;
-    private boolean isIngredientEditing = false;
 
     public IngredientInfoJDialog(JFrame parent, Ingredient ingredient, Point location) {
         super(parent, ingredient.getName() + " - Info", true);
@@ -60,37 +58,34 @@ public class IngredientInfoJDialog extends JDialog {
         constraints.gridx = 0;
         constraints.gridy = 0;
         infoPanel.add(nameLabel, constraints);
-        nameTextField = new JTextField(ingredient.getName());
-        nameTextField.setHorizontalAlignment(JTextField.LEFT);
-        nameTextField.setEditable(false);
+        labelName = new JLabel(ingredient.getName());
+        labelName.setHorizontalAlignment(JTextField.LEFT);
         constraints.gridx = 1;
         constraints.gridy = 0;
-        infoPanel.add(nameTextField, constraints);
-        JLabel quantityTypeLabel = new JLabel("Quantity type: ");
+        infoPanel.add(labelName, constraints);
+        JLabel quantityTypeLabel = new JLabel("Type: ");
         constraints.gridx = 0;
         constraints.gridy = 1;
         infoPanel.add(quantityTypeLabel, constraints);
-        gramsQuantityLabel = new JLabel("Grams per piece: ");
+        labelGramsQuantity = new JLabel("Grams: ");
         constraints.gridx = 0;
         constraints.gridy = 2;
-        infoPanel.add(gramsQuantityLabel, constraints);
-        gramsPerQuantityTextField = new JTextField();
+        infoPanel.add(labelGramsQuantity, constraints);
+        labelGramsPerQuantity = new JLabel();
 
-        gramsPerQuantityTextField.setEditable(false);
-        gramsPerQuantityTextField.setVisible(false);
-        gramsQuantityLabel.setVisible(false);
+        labelGramsPerQuantity.setVisible(false);
+        labelGramsQuantity.setVisible(false);
         constraints.gridx = 1;
         constraints.gridy = 2;
-        infoPanel.add(gramsPerQuantityTextField, constraints);
-        priceLabel = new JLabel("Price per 100 grams: ");
+        infoPanel.add(labelGramsPerQuantity, constraints);
+        priceLabel = new JLabel("Price: ");
         constraints.gridx = 0;
         constraints.gridy = 3;
         infoPanel.add(priceLabel, constraints);
-        priceTextField = new JTextField(ValuesConverter.convertFloat(ingredient.getPrice()));
-        priceTextField.setEditable(false);
+        labelPrice = new JLabel(ValuesConverter.convertFloat(ingredient.getPrice()) + " €");
         constraints.gridx = 1;
         constraints.gridy = 3;
-        infoPanel.add(priceTextField, constraints);
+        infoPanel.add(labelPrice, constraints);
         JSeparator separator = new JSeparator();
         constraints.gridx = 0;
         constraints.gridy = 4;
@@ -107,62 +102,58 @@ public class IngredientInfoJDialog extends JDialog {
         constraints.gridy = 6;
         infoPanel.add(proteinsLabel, constraints);
         Nutrients nutrients = ingredient.getNutrients();
-        proteinsTextField = new JTextField(ValuesConverter.convertFloat(nutrients.getProteins()));
-        proteinsTextField.setEditable(false);
+        labelProteins = new JLabel(ValuesConverter.convertFloat(nutrients.getProteins()));
         constraints.gridx = 1;
         constraints.gridy = 6;
-        infoPanel.add(proteinsTextField, constraints);
+        infoPanel.add(labelProteins, constraints);
         JLabel carbsLabel = new JLabel("Carbs: ");
         constraints.gridx = 0;
         constraints.gridy = 7;
         infoPanel.add(carbsLabel, constraints);
-        carbsTextField = new JTextField(ValuesConverter.convertFloat(nutrients.getCarbs()));
-        carbsTextField.setEditable(false);
+        labelCarbs = new JLabel(ValuesConverter.convertFloat(nutrients.getCarbs()));
         constraints.gridx = 1;
         constraints.gridy = 7;
-        infoPanel.add(carbsTextField, constraints);
+        infoPanel.add(labelCarbs, constraints);
         JLabel fatsLabel = new JLabel("Fats: ");
         constraints.gridx = 0;
         constraints.gridy = 8;
         infoPanel.add(fatsLabel, constraints);
-        fatsTextField = new JTextField(ValuesConverter.convertFloat(nutrients.getFats()));
-        fatsTextField.setEditable(false);
+        labelFats = new JLabel(ValuesConverter.convertFloat(nutrients.getFats()));
         constraints.gridx = 1;
         constraints.gridy = 8;
-        infoPanel.add(fatsTextField, constraints);
+        infoPanel.add(labelFats, constraints);
 
-        quantityTypeField = new JTextField();
-        quantityTypeField.setEditable(false);
+        labelQuantityType = new JLabel();
         switch (quantity.getQuantityType()) {
             case GRAMS -> {
-                gramsPerQuantityTextField.setVisible(false);
-                gramsQuantityLabel.setVisible(false);
-                quantityTypeField.setText("Grams");
-                priceLabel.setText("Price per 100 g: ");
+                labelGramsPerQuantity.setVisible(false);
+                labelGramsQuantity.setVisible(false);
+                labelQuantityType.setText("Grams");
+                priceLabel.setText("Price: ");
                 nutrientsLabel.setText("Nutrients per 100 g: ");
             }
             case PIECES -> {
-                gramsPerQuantityTextField.setVisible(true);
-                gramsPerQuantityTextField.setText(ValuesConverter.convertFloat(quantity.getGramsPerQuantity()));
-                gramsQuantityLabel.setVisible(true);
-                quantityTypeField.setText("Piece");
-                gramsQuantityLabel.setText("Grams per piece: ");
-                priceLabel.setText("Price per piece: ");
+                labelGramsPerQuantity.setVisible(true);
+                labelGramsPerQuantity.setText(ValuesConverter.convertFloat(quantity.getGramsPerQuantity()) + " g");
+                labelGramsQuantity.setVisible(true);
+                labelQuantityType.setText("Piece");
+                labelGramsQuantity.setText("Grams: ");
+                priceLabel.setText("Price: ");
                 nutrientsLabel.setText("Nutrients per piece: ");
             }
             case MILLILITERS -> {
-                gramsPerQuantityTextField.setVisible(true);
-                gramsQuantityLabel.setVisible(true);
-                quantityTypeField.setText("Milliliters");
-                gramsPerQuantityTextField.setText(ValuesConverter.convertFloat(quantity.getGramsPerQuantity()*100));
-                gramsQuantityLabel.setText("Grams per 100 ml: ");
-                priceLabel.setText("Price per 100ml: ");
+                labelGramsPerQuantity.setVisible(true);
+                labelGramsQuantity.setVisible(true);
+                labelQuantityType.setText("Milliliters");
+                labelGramsPerQuantity.setText(ValuesConverter.convertFloat(quantity.getGramsPerQuantity()*100) + " g");
+                labelGramsQuantity.setText("Grams: ");
+                priceLabel.setText("Price: ");
                 nutrientsLabel.setText("Nutrients per 100 ml: ");
             }
         }
         constraints.gridx = 1;
         constraints.gridy = 1;
-        infoPanel.add(quantityTypeField, constraints);
+        infoPanel.add(labelQuantityType, constraints);
         return infoPanel;
     }
 
