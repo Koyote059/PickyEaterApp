@@ -24,6 +24,10 @@ public class SystemTheme {
         UIManager.put("TextField.arc", 0);
         UIManager.put("Component.borderWidth", 0);
         UIManager.put("TextComponent.arc", 0);
+        UIManager.put("CheckBox.icon.borderWidth", 1);
+        UIManager.put("CheckBox.icon.borderColor", Color.decode("#B1EA9D"));
+        UIManager.put("CheckBox.icon.selectedBorderColor", Color.decode("#B1EA9D"));
+        UIManager.put("CheckBox.icon.checkmarkColor", Color.decode("#B1EA9D"));
         UIManager.put("Component.focusColor", Color.decode("#B1EA9D"));
         UIManager.put("ProgressBar.foreground", Color.decode("#B1EA9D"));
         UIManager.put("TextField.selectionBackground", Color.decode("#B1EA9D"));
@@ -53,6 +57,10 @@ public class SystemTheme {
         UIManager.put("TextField.arc", 0);
         UIManager.put("Component.borderWidth", 0);
         UIManager.put("TextComponent.arc", 0);
+        UIManager.put("CheckBox.icon.borderWidth", 1);
+        UIManager.put("CheckBox.icon.borderColor", null);
+        UIManager.put("CheckBox.icon.selectedBorderColor", null);
+        UIManager.put("CheckBox.icon.checkmarkColor", null);
         UIManager.put("Component.focusColor", Color.decode("#32AB5E"));
         UIManager.put("ProgressBar.foreground", Color.decode("#32AB5E"));
         UIManager.put("TextField.selectionBackground", Color.decode("#32AB5E"));
