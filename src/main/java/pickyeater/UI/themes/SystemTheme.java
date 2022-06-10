@@ -20,8 +20,15 @@ public class SystemTheme {
     }
 
     public static void theme1() {
-        //UIManager.put("Button.background", Color.decode("#FFFFFF"));
+        UIManager.put("Button.innerFocusWidth", 0);
+        UIManager.put("TextField.arc", 0);
+        UIManager.put("Component.borderWidth", 0);
+        UIManager.put("TextComponent.arc", 0);
+        UIManager.put("Component.focusColor", Color.decode("#B1EA9D"));
         UIManager.put("ProgressBar.foreground", Color.decode("#B1EA9D"));
+        UIManager.put("TextField.selectionBackground", Color.decode("#B1EA9D"));
+        UIManager.put("Button.hoverBorderColor", Color.decode("#B1EA9D"));
+        UIManager.put("Button.focusedBorderColor", Color.decode("#B1EA9D"));
         UIManager.put("List.selectionForeground", Color.decode("#000000"));
         UIManager.put("List.selectionBackground", Color.decode("#B1EA9D"));
         UIManager.put("Table.selectionForeground", Color.decode("#000000"));
@@ -29,7 +36,6 @@ public class SystemTheme {
         UIManager.put("ComboBox.selectionForeground", Color.decode("#000000"));
         UIManager.put("ComboBox.selectionBackground", Color.decode("#B1EA9D"));
         UIManager.put("ComboBox.border", Color.decode("#FFFFFF"));
-        UIManager.put("Button.hoverBorderColor", Color.decode("#B1EA9D"));
         try {
             UIManager.setLookAndFeel(new FlatLightLaf());
         } catch (Exception ex) {
