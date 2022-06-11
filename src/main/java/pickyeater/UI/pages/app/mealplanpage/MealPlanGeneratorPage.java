@@ -120,17 +120,19 @@ public class MealPlanGeneratorPage extends PickyPage {
             buttonsPanel.add(cancelButton);
             buttonsPanel.add(doneButton);
             mainPanel.add(BorderLayout.PAGE_END, buttonsPanel);
-            Component leftArrowComponent;
+            JComponent upArrowComponent;
             try {
-                BufferedImage binImage = ImageIO.read(new File("res/images/leftsmallarrow.png"));
-                JLabel leftArrow = new JLabel();
-                leftArrow.setIcon(new ImageIcon(binImage.getScaledInstance(30, 30, Image.SCALE_SMOOTH)));
-                leftArrow.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-                leftArrowComponent = leftArrow;
+                BufferedImage binImage = ImageIO.read(new File("res/images/upsmallarrow.png"));
+                JLabel upArrow = new JLabel();
+                upArrow.setIcon(new ImageIcon(binImage.getScaledInstance(30, 30, Image.SCALE_SMOOTH)));
+                upArrow.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+                upArrowComponent = upArrow;
             } catch (IOException | NullPointerException ignored) {
-                leftArrowComponent = new JButton("<");
+                upArrowComponent = new JButton("^");
             }
-            leftArrowComponent.addMouseListener(new MouseAdapter() {
+
+            upArrowComponent.setToolTipText("Move up");
+            upArrowComponent.addMouseListener(new MouseAdapter() {
                 @Override
                 public void mouseClicked(MouseEvent e) {
                     super.mouseClicked(e);
@@ -140,17 +142,19 @@ public class MealPlanGeneratorPage extends PickyPage {
                     draw();
                 }
             });
-            Component rightArrowComponent;
+            JComponent downArrowComponent;
             try {
-                BufferedImage binImage = ImageIO.read(new File("res/images/rightsmallarrow.png"));
-                JLabel rightArrow = new JLabel();
-                rightArrow.setIcon(new ImageIcon(binImage.getScaledInstance(30, 30, Image.SCALE_SMOOTH)));
-                rightArrow.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-                rightArrowComponent = rightArrow;
+                BufferedImage binImage = ImageIO.read(new File("res/images/downsmallarrow.png"));
+                JLabel downArrow = new JLabel();
+                downArrow.setIcon(new ImageIcon(binImage.getScaledInstance(30, 30, Image.SCALE_SMOOTH)));
+                downArrow.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+                downArrowComponent = downArrow;
             } catch (IOException | NullPointerException ignored) {
-                rightArrowComponent = new JButton("<");
+                downArrowComponent = new JButton("v");
             }
-            rightArrowComponent.addMouseListener(new MouseAdapter() {
+
+            downArrowComponent.setToolTipText("Move down");
+            downArrowComponent.addMouseListener(new MouseAdapter() {
                 @Override
                 public void mouseClicked(MouseEvent e) {
                     super.mouseClicked(e);
@@ -161,10 +165,11 @@ public class MealPlanGeneratorPage extends PickyPage {
                 }
             });
             JPanel dayNamePanel = new JPanel(new BorderLayout());
-            dayNamePanel.add(BorderLayout.LINE_START, leftArrowComponent);
+
+            if(i!=0) dayNamePanel.add(BorderLayout.LINE_START, upArrowComponent);
+            if(i!=(columns.size()-1)) dayNamePanel.add(BorderLayout.LINE_END, downArrowComponent);
             dayNamePanel.add(BorderLayout.CENTER, dayLabel);
             dayLabel.setToolTipText("Right click to remove");
-            dayNamePanel.add(BorderLayout.LINE_END, rightArrowComponent);
             dailyMealPlanColumnPanel.add(BorderLayout.PAGE_START, dayNamePanel);
             dailyMealPlanColumnPanel.add(BorderLayout.CENTER, component);
             dailyMealPlanColumnPanel.setMinimumSize(new Dimension(400,400));
