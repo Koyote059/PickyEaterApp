@@ -43,7 +43,7 @@ public class WelcomePage extends JFrame implements ActionListener {
             throw new RuntimeException(e);
         }
         logo = new ImageIcon(imgVA.getScaledInstance(100, -1, Image.SCALE_SMOOTH)).getImage();
-        timer = new Timer(1, this);
+        timer = new Timer(60, this);
         timer.start();
         coloredPanel.addMouseListener(new MouseAdapter() {
             @Override
