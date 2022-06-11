@@ -21,11 +21,6 @@ public class AddBurntCaloriesPage extends JDialog {
         btSave.addActionListener(e -> {
             int burntCal = (int) StringToNumber.convertPositiveFloat(tfBurntCalories.getText());
             if (burntCal != 0) {
-                if (!tfActivityName.getText().isEmpty()) {
-                    JOptionPane.showMessageDialog(mainPanel, "Activity name: " + tfActivityName.getText() + "\n" + "Burnt Calories: " + tfBurntCalories.getText());
-                } else {
-                    JOptionPane.showMessageDialog(mainPanel, "Burnt Calories: " + tfBurntCalories.getText());
-                }
                 ExecutorProvider.getAddBurntCaloriesExecutor().setBurntCalories(burntCal);
                 dispose();
             } else {
