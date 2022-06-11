@@ -36,7 +36,7 @@ public class WelcomePage extends JFrame implements ActionListener {
         coloredPanel.setBackground(Color.decode("#B1EA9D"));
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setVisible(true);
-        BufferedImage imgVA = null;
+        BufferedImage imgVA;
         try {
             imgVA = ImageIO.read(new File("res/images/PEL.png"));
         } catch (IOException e) {
@@ -49,7 +49,7 @@ public class WelcomePage extends JFrame implements ActionListener {
             @Override
             public void mouseReleased(MouseEvent e) {
                 super.mouseReleased(e);
-                EventQueue.invokeLater(() -> new RegisterMainFrame());
+                EventQueue.invokeLater(RegisterMainFrame::new);
                 setVisible(false);
             }
         });
