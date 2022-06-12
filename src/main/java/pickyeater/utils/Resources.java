@@ -63,6 +63,14 @@ public class Resources {
         }
     }
 
+    public static String getUpdatePic(){
+        if (ThemeHandler.ReadTheme() == ThemesEnum.LIGHT_THEME) {
+            return getDarkUpdatePic();
+        } else {
+            return getLightUpdatePic();
+        }
+    }
+
     private static String getDarkEditAccountPic() { return "res" + File.separator + "images" + File.separator +
             "accountEditB.png";}
     private static String getLightEditAccountPic() { return "res" + File.separator + "images" + File.separator +
@@ -84,4 +92,8 @@ public class Resources {
             "pencilIcon.png";}
     private static String getLightPencilPic() { return "res" + File.separator + "images" + File.separator +
             "pencilIconW.png";}
+    private static String getDarkUpdatePic() { return "res" + File.separator + "images" + File.separator +
+            "updateIcon.png";}
+    private static String getLightUpdatePic() { return "res" + File.separator + "images" + File.separator +
+            "updateIconW.png";}
 }

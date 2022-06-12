@@ -20,10 +20,7 @@ import pickyeater.builders.PickyUserBuilder;
 import pickyeater.builders.UserBuilder;
 import pickyeater.executors.ExecutorProvider;
 import pickyeater.executors.user.UserEditModeExecutor;
-import pickyeater.utils.AgeCalculator;
-import pickyeater.utils.JCalUtils;
-import pickyeater.utils.StringToNumber;
-import pickyeater.utils.StringsUtils;
+import pickyeater.utils.*;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -71,7 +68,7 @@ public class UserEditModePage extends PickyPage {
         UserBuilder newUserBuilder = new PickyUserBuilder();
         btUpdateNutrients.setToolTipText("It'll automatically calculate the nutrients using your stats");
         try {
-            BufferedImage binImage = ImageIO.read(new File("res/images/updateIcon.png"));
+            BufferedImage binImage = ImageIO.read(new File(Resources.getUpdatePic()));
             btUpdateNutrients.setIcon(new ImageIcon(binImage.getScaledInstance(16, 16, Image.SCALE_SMOOTH)));
         } catch (IOException | NullPointerException ignored) {
         }
