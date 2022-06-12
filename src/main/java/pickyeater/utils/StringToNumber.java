@@ -30,6 +30,16 @@ public class StringToNumber {
         return ret;
     }
 
+    public static int convertPositiveIntException(String s) throws NumberFormatException {
+        if (s.contains(",")) {
+            s = convertCommaToDot(s);
+        }
+        int ret =  Integer.parseInt(s);
+        if(ret<=0) throw new NumberFormatException();
+        return ret;
+    }
+
+
     private static String convertCommaToDot(String s) {
         StringBuilder stringBuilder = new StringBuilder(s);
         stringBuilder.setCharAt(stringBuilder.indexOf(","), '.');
