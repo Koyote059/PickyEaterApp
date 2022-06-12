@@ -6,6 +6,7 @@ import pickyeater.UI.themes.filehandler.ThemeHandler;
 import pickyeater.UI.themes.filehandler.ThemesEnum;
 import pickyeater.basics.user.LifeStyle;
 import pickyeater.executors.user.RegisterExecutor;
+import pickyeater.utils.Resources;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -16,6 +17,7 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.Objects;
+import java.util.ResourceBundle;
 
 public class Register2 extends PickyPage {
     private JButton btSedentary;
@@ -145,13 +147,13 @@ public class Register2 extends PickyPage {
         txtA.setText("");
         txtVA.setText("");
         try {
-            BufferedImage imgS = ImageIO.read(new File("res/images/lifestyle/S.png"));
+            BufferedImage imgS = ImageIO.read(new File(Resources.getSedentaryLSPic()));
             txtS.setIcon(new ImageIcon(imgS.getScaledInstance(-1, 95, Image.SCALE_SMOOTH)));
-            BufferedImage imgSA = ImageIO.read(new File("res/images/lifestyle/SA.png"));
+            BufferedImage imgSA = ImageIO.read(new File(Resources.getSlightlyActiveLSPic()));
             txtSA.setIcon(new ImageIcon(imgSA.getScaledInstance(-1, 95, Image.SCALE_SMOOTH)));
-            BufferedImage imgA = ImageIO.read(new File("res/images/lifestyle/A.png"));
+            BufferedImage imgA = ImageIO.read(new File(Resources.getActiveLSPic()));
             txtA.setIcon(new ImageIcon(imgA.getScaledInstance(-1, 95, Image.SCALE_SMOOTH)));
-            BufferedImage imgVA = ImageIO.read(new File("res/images/lifestyle/VA.png"));
+            BufferedImage imgVA = ImageIO.read(new File(Resources.getVeryActiveLSPic()));
             txtVA.setIcon(new ImageIcon(imgVA.getScaledInstance(-1, 95, Image.SCALE_SMOOTH)));
         } catch (IOException | NullPointerException ignored) {
             System.out.println("Couldn't process image");

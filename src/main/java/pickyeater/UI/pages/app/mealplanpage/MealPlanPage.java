@@ -2,6 +2,9 @@ package pickyeater.UI.pages.app.mealplanpage;
 
 import pickyeater.UI.pages.app.MainFrame;
 import pickyeater.UI.pages.app.PickyPage;
+import pickyeater.UI.themes.filehandler.ThemeHandler;
+import pickyeater.UI.themes.filehandler.ThemesEnum;
+import pickyeater.utils.Resources;
 import pickyeater.utils.pagesutils.MealRowPopupMenu;
 import pickyeater.UI.pages.choosers.MealInfoJDialog;
 import pickyeater.UI.pages.leftbuttons.PanelButtonsConverter;
@@ -57,7 +60,12 @@ public class MealPlanPage extends PickyPage {
         txtBin.setToolTipText("Click to delete the meal plan");
         txtBin.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
         try {
-            BufferedImage binImage = ImageIO.read(new File("res/images/binIcon.png"));
+            BufferedImage binImage;
+            if (ThemeHandler.ReadTheme() == ThemesEnum.LIGHT_THEME) {
+                binImage = ImageIO.read(new File(Resources.getLTBinIcon()));
+            } else {
+                binImage = ImageIO.read(new File(Resources.getDTBinIcon()));
+            }
             txtBin.setIcon(new ImageIcon(binImage.getScaledInstance(40, 40, Image.SCALE_SMOOTH)));
             txtBin.setText("");
         } catch (IOException | NullPointerException ignored) {
@@ -80,7 +88,7 @@ public class MealPlanPage extends PickyPage {
         txtEdit.setToolTipText("Click to edit the meal plan");
         txtEdit.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
         try {
-            BufferedImage binImage = ImageIO.read(new File("res/images/pencilIcon.png"));
+            BufferedImage binImage = ImageIO.read(new File(Resources.getPencilPic()));
             txtEdit.setIcon(new ImageIcon(binImage.getScaledInstance(30, 30, Image.SCALE_SMOOTH)));
             txtEdit.setText("");
         } catch (IOException | NullPointerException ignored) {

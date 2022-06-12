@@ -2,6 +2,7 @@ package pickyeater.UI.pages.app.mealplanpage;
 
 import pickyeater.UI.pages.app.MainFrame;
 import pickyeater.UI.pages.app.PickyPage;
+import pickyeater.utils.Resources;
 import pickyeater.utils.pagesutils.DailyMealPlanColumn;
 import pickyeater.UI.pages.leftbuttons.PanelButtons;
 import pickyeater.basics.food.Meal;
@@ -122,7 +123,7 @@ public class MealPlanGeneratorPage extends PickyPage {
             mainPanel.add(BorderLayout.PAGE_END, buttonsPanel);
             JComponent upArrowComponent;
             try {
-                BufferedImage binImage = ImageIO.read(new File("res/images/upsmallarrow.png"));
+                BufferedImage binImage = ImageIO.read(new File(Resources.getUpArrowPic()));
                 JLabel upArrow = new JLabel();
                 upArrow.setIcon(new ImageIcon(binImage.getScaledInstance(30, 30, Image.SCALE_SMOOTH)));
                 upArrow.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
@@ -144,7 +145,7 @@ public class MealPlanGeneratorPage extends PickyPage {
             });
             JComponent downArrowComponent;
             try {
-                BufferedImage binImage = ImageIO.read(new File("res/images/downsmallarrow.png"));
+                BufferedImage binImage = ImageIO.read(new File(Resources.getDownArrowPic()));
                 JLabel downArrow = new JLabel();
                 downArrow.setIcon(new ImageIcon(binImage.getScaledInstance(30, 30, Image.SCALE_SMOOTH)));
                 downArrow.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
@@ -177,7 +178,7 @@ public class MealPlanGeneratorPage extends PickyPage {
         }
         JButton addTableButton = new JButton();
         try {
-            BufferedImage plusImage = ImageIO.read(new File("res/images/plusicon.png"));
+            BufferedImage plusImage = ImageIO.read(new File(Resources.getPlusPic()));
             addTableButton.setIcon(new ImageIcon(plusImage.getScaledInstance(40, 40, Image.SCALE_SMOOTH)));
         } catch (IOException | NullPointerException ignored) {
             addTableButton.setText("+");

@@ -6,6 +6,7 @@ import pickyeater.UI.pages.leftbuttons.PanelButtonsConverter;
 import pickyeater.UI.themes.ColorButtons;
 import pickyeater.executors.ExecutorProvider;
 import pickyeater.executors.GroceriesExecutor;
+import pickyeater.utils.Resources;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -59,7 +60,7 @@ public class UnavailableGroceriesPage extends PickyPage {
     public void showPage() {
         txt404.setText("");
         try {
-            BufferedImage img404 = ImageIO.read(new File("res/images/404.png"));
+            BufferedImage img404 = ImageIO.read(new File(Resources.get404Pic()));
             txt404.setIcon(new ImageIcon(img404.getScaledInstance(-1, 350, Image.SCALE_SMOOTH)));
         } catch (IOException | NullPointerException ignored) {
             System.out.println("Couldn't process image");

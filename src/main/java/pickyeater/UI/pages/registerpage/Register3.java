@@ -6,6 +6,7 @@ import pickyeater.UI.themes.filehandler.ThemeHandler;
 import pickyeater.UI.themes.filehandler.ThemesEnum;
 import pickyeater.basics.user.WeightGoal;
 import pickyeater.executors.user.RegisterExecutor;
+import pickyeater.utils.Resources;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -115,11 +116,11 @@ public class Register3 extends PickyPage {
         txtMW.setText("");
         txtGW.setText("");
         try {
-            BufferedImage imgS = ImageIO.read(new File("res/images/goal/LW.png"));
+            BufferedImage imgS = ImageIO.read(new File(Resources.getLoseWeightPic()));
             txtLW.setIcon(new ImageIcon(imgS.getScaledInstance(-1, 195, Image.SCALE_SMOOTH)));
-            BufferedImage imgSA = ImageIO.read(new File("res/images/goal/MW.png"));
+            BufferedImage imgSA = ImageIO.read(new File(Resources.getMaintainWeightPic()));
             txtMW.setIcon(new ImageIcon(imgSA.getScaledInstance(-1, 195, Image.SCALE_SMOOTH)));
-            BufferedImage imgA = ImageIO.read(new File("res/images/goal/GW.png"));
+            BufferedImage imgA = ImageIO.read(new File(Resources.getGainWeightPic()));
             txtGW.setIcon(new ImageIcon(imgA.getScaledInstance(-1, 195, Image.SCALE_SMOOTH)));
         } catch (IOException | NullPointerException ignored) {
             System.out.println("Couldn't process image");
