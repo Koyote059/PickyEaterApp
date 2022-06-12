@@ -37,6 +37,7 @@ public class SystemTheme {
         UIManager.put("Button.default.focusedBorderColor", Color.decode("#B1EA9D"));
         UIManager.put("Button.default.focusColor", Color.decode("#B1EA9D"));
         UIManager.put("Button.default.borderColor", Color.decode("#B1EA9D"));
+        UIManager.put("Button.default.background", Color.decode("#B1EA9D"));
         UIManager.put("List.selectionForeground", Color.decode("#000000"));
         UIManager.put("List.selectionBackground", Color.decode("#B1EA9D"));
         UIManager.put("List.selectionInactiveForeground", Color.decode("#000000"));
@@ -79,6 +80,7 @@ public class SystemTheme {
         UIManager.put("Button.default.focusedBorderColor", Color.decode("#32AB5E"));
         UIManager.put("Button.default.focusColor", Color.decode("#32AB5E"));
         UIManager.put("Button.default.borderColor", Color.decode("#32AB5E"));
+        UIManager.put("Button.default.background", Color.decode("#32AB5E"));
         UIManager.put("List.selectionForeground", Color.decode("#FFFFFF"));
         UIManager.put("List.selectionBackground", Color.decode("#32AB5E"));
         UIManager.put("List.selectionInactiveForeground", Color.decode("#000000"));
