@@ -33,6 +33,10 @@ public class SystemTheme {
         UIManager.put("TextField.selectionBackground", Color.decode("#B1EA9D"));
         UIManager.put("Button.hoverBorderColor", Color.decode("#B1EA9D"));
         UIManager.put("Button.focusedBorderColor", Color.decode("#B1EA9D"));
+        UIManager.put("Button.default.hoverBorderColor", Color.decode("#B1EA9D"));
+        UIManager.put("Button.default.focusedBorderColor", Color.decode("#B1EA9D"));
+        UIManager.put("Button.default.focusColor", Color.decode("#B1EA9D"));
+        UIManager.put("Button.default.borderColor", Color.decode("#B1EA9D"));
         UIManager.put("List.selectionForeground", Color.decode("#000000"));
         UIManager.put("List.selectionBackground", Color.decode("#B1EA9D"));
         UIManager.put("List.selectionInactiveForeground", Color.decode("#000000"));
@@ -44,6 +48,7 @@ public class SystemTheme {
         UIManager.put("ComboBox.selectionForeground", Color.decode("#000000"));
         UIManager.put("ComboBox.selectionBackground", Color.decode("#B1EA9D"));
         UIManager.put("ComboBox.border", Color.decode("#FFFFFF"));
+        UIManager.put("MenuItem.selectionBackground", Color.decode("#B1EA9D"));
         try {
             UIManager.setLookAndFeel(new FlatLightLaf());
         } catch (Exception ex) {
@@ -70,6 +75,10 @@ public class SystemTheme {
         UIManager.put("TextField.selectionBackground", Color.decode("#32AB5E"));
         UIManager.put("Button.hoverBorderColor", Color.decode("#32AB5E"));
         UIManager.put("Button.focusedBorderColor", Color.decode("#32AB5E"));
+        UIManager.put("Button.default.hoverBorderColor", Color.decode("#32AB5E"));
+        UIManager.put("Button.default.focusedBorderColor", Color.decode("#32AB5E"));
+        UIManager.put("Button.default.focusColor", Color.decode("#32AB5E"));
+        UIManager.put("Button.default.borderColor", Color.decode("#32AB5E"));
         UIManager.put("List.selectionForeground", Color.decode("#FFFFFF"));
         UIManager.put("List.selectionBackground", Color.decode("#32AB5E"));
         UIManager.put("List.selectionInactiveForeground", Color.decode("#000000"));
@@ -81,6 +90,7 @@ public class SystemTheme {
         UIManager.put("ComboBox.selectionForeground", Color.decode("#FFFFFF"));
         UIManager.put("ComboBox.selectionBackground", Color.decode("#32AB5E"));
         UIManager.put("ComboBox.border", Color.decode("#000000"));
+        UIManager.put("MenuItem.selectionBackground", Color.decode("#32AB5E"));
 
         try {
             UIManager.setLookAndFeel(new MyDarkerLaf());

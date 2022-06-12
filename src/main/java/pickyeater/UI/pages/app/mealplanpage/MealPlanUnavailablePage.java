@@ -112,6 +112,7 @@ public class MealPlanUnavailablePage extends PickyPage {
         buttonsPanel = new JPanel(new GridLayout(1,2));
         btCreateMealPlan = new JButton("Create Meal Plan");
         btAutomaticGenerateMealPlan = new JButton("Generate Meal Plan");
+        btAutomaticGenerateMealPlan.setToolTipText("Right click for settings");
         buttonsPanel.add(btCreateMealPlan);
         buttonsPanel.add(btAutomaticGenerateMealPlan);
     }

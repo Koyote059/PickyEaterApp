@@ -1,9 +1,7 @@
 package pickyeater.UI.pages.app.mealplanpage;
 
-import pickyeater.executors.MealPlanCreatorExecutor;
 import pickyeater.utils.MealPlanGeneratorBundle;
 import pickyeater.utils.StringToNumber;
-import pickyeater.utils.ValuesConverter;
 
 import javax.swing.*;
 
