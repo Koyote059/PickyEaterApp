@@ -2,6 +2,9 @@ package pickyeater.UI.pages.app.groceriespage;
 
 import pickyeater.UI.pages.app.MainFrame;
 import pickyeater.UI.pages.app.PickyPage;
+import pickyeater.UI.themes.filehandler.ThemeHandler;
+import pickyeater.UI.themes.filehandler.ThemesEnum;
+import pickyeater.utils.Resources;
 import pickyeater.utils.pagesutils.WindowCloseListener;
 import pickyeater.UI.pages.leftbuttons.PanelButtonsConverter;
 import pickyeater.UI.themes.ColorButtons;
@@ -46,7 +49,12 @@ public class GroceriesPage extends PickyPage {
         this.groceriesExecutor = groceriesExecutor;
         binLabel.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
         try {
-            BufferedImage binImage = ImageIO.read(new File("res/images/binIcon.png"));
+            BufferedImage binImage;
+            if (ThemeHandler.ReadTheme() == ThemesEnum.LIGHT_THEME) {
+                binImage = ImageIO.read(new File(Resources.getLTBinIcon()));
+            } else {
+                binImage = ImageIO.read(new File(Resources.getDTBinIcon()));
+            }
             binLabel.setIcon(new ImageIcon(binImage.getScaledInstance(30, 30, Image.SCALE_SMOOTH)));
         } catch (IOException | NullPointerException ignored) {
             binLabel.setText("X");

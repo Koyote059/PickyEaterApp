@@ -7,6 +7,7 @@ import pickyeater.UI.themes.ColorButtons;
 import pickyeater.basics.user.User;
 import pickyeater.executors.ExecutorProvider;
 import pickyeater.executors.user.UserExecutor;
+import pickyeater.utils.Resources;
 import pickyeater.utils.StringsUtils;
 
 import javax.imageio.ImageIO;
@@ -51,7 +52,7 @@ public class UserPage extends PickyPage {
         add(mainPanel, BorderLayout.CENTER);
         txtEditMode.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
         try {
-            BufferedImage binImage = ImageIO.read(new File("res/images/accounteditB.png"));
+            BufferedImage binImage = ImageIO.read(new File(Resources.getEditAccountPic()));
             txtEditMode.setIcon(new ImageIcon(binImage.getScaledInstance(40, 40, Image.SCALE_SMOOTH)));
             txtEditMode.setText("");
         } catch (IOException | NullPointerException ignored) {

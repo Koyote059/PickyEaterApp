@@ -11,11 +11,16 @@ import pickyeater.basics.mealplan.MealPlan;
 import pickyeater.basics.user.User;
 import pickyeater.executors.ExecutorProvider;
 import pickyeater.executors.MealPlanCreatorExecutor;
+import pickyeater.utils.MealPlanGeneratorBundle;
+import pickyeater.utils.Resources;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
+import javax.swing.plaf.PopupMenuUI;
 import java.awt.*;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -33,10 +38,13 @@ public class MealPlanUnavailablePage extends PickyPage {
     private JPanel buttonsPanel;
     private final MealPlanCreatorExecutor mealPlanCreator;
 
+    private final MealPlanGeneratorBundle bundle;
+
     public MealPlanUnavailablePage(JFrame parent) {
         super(parent);
         showImage();
         this.mealPlanCreator = ExecutorProvider.getMealPlanExecutor();
+        bundle = mealPlanCreator.getBundle();
         ColorButtons.ColorLeftButtons(btDiet, btDailyProgress, btSettings, btGroceries, btUser);
         setLayout(new BorderLayout());
         add(mainPanel, BorderLayout.CENTER);
@@ -56,10 +64,27 @@ public class MealPlanUnavailablePage extends PickyPage {
             }
             MealPlanGenerator mealPlanGenerator = new GreedyMealPlanGenerator();
             User user = mealPlanCreator.getUser();
-            MealPlan mealPlan = mealPlanGenerator.generate(mealPlanCreator.getMeals(), user.getUserGoal().getRequiredNutrients(), 7, 4);
+            MealPlan mealPlan = mealPlanGenerator.generate(mealPlanCreator.getMeals(), user.getUserGoal().getRequiredNutrients(), bundle.getDays(), bundle.getMealsInADay());
             PickyPage mealPlanGeneratorPage = new MealPlanGeneratorPage(mealPlanCreator, mealPlan, parent);
             mealPlanGeneratorPage.showPage();
         });
+
+        btAutomaticGenerateMealPlan.setToolTipText("Right click to edit settings");
+        btAutomaticGenerateMealPlan.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                JPopupMenu menu = new JPopupMenu();
+                JMenuItem menuItem = new JMenuItem("Edit settings");
+                menu.add(menuItem);
+                menuItem.addActionListener( listener -> {
+                    MealPlanGeneratorEditor page = new MealPlanGeneratorEditor(parent,bundle,mealPlanCreator.getMeals().size());
+                    page.display();
+                    mealPlanCreator.saveBundle(bundle);
+                });
+                menu.show(e.getComponent(),e.getX(),e.getY());
+            }
+        });
+
     }
 
     private void setNavigationMenuListeners() {
@@ -76,7 +101,7 @@ public class MealPlanUnavailablePage extends PickyPage {
     private void showImage(){
         txt404.setText("");
         try {
-            BufferedImage img404 = ImageIO.read(new File("res/images/404.png"));
+            BufferedImage img404 = ImageIO.read(new File(Resources.get404Pic()));
             txt404.setIcon(new ImageIcon(img404.getScaledInstance(-1, 350, Image.SCALE_SMOOTH)));
         } catch (IOException | NullPointerException ignored) {
             System.out.println("Couldn't process image");

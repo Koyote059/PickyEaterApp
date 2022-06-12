@@ -14,6 +14,7 @@ import pickyeater.UI.themes.SystemTheme;
 import pickyeater.UI.themes.filehandler.ThemeHandler;
 import pickyeater.UI.themes.filehandler.ThemesEnum;
 import pickyeater.executors.ExecutorProvider;
+import pickyeater.utils.Resources;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -60,9 +61,9 @@ public class SettingsPage extends PickyPage {
         try {
             BufferedImage binImage;
             if (ThemeHandler.ReadTheme() == ThemesEnum.LIGHT_THEME) {
-                binImage = ImageIO.read(new File("res/images/binIcon.png"));
+                binImage = ImageIO.read(new File(Resources.getLTBinIcon()));
             } else {
-                binImage = ImageIO.read(new File("res/images/binIconW.png"));
+                binImage = ImageIO.read(new File(Resources.getDTBinIcon()));
             }
             txtImage.setIcon(new ImageIcon(binImage.getScaledInstance(30, 30, Image.SCALE_SMOOTH)));
             txtImage.setText("");
