@@ -1,5 +1,7 @@
 package pickyeater.UI.pages.registerpage;
 
+import pickyeater.utils.Resources;
+
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
@@ -38,7 +40,7 @@ public class WelcomePage extends JFrame implements ActionListener {
         setVisible(true);
         BufferedImage imgVA;
         try {
-            imgVA = ImageIO.read(new File("res/images/PEL.png"));
+            imgVA = ImageIO.read(new File(Resources.getPELPic()));
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

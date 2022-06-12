@@ -60,12 +60,7 @@ public class MealPlanPage extends PickyPage {
         txtBin.setToolTipText("Click to delete the meal plan");
         txtBin.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
         try {
-            BufferedImage binImage;
-            if (ThemeHandler.ReadTheme() == ThemesEnum.LIGHT_THEME) {
-                binImage = ImageIO.read(new File(Resources.getLTBinIcon()));
-            } else {
-                binImage = ImageIO.read(new File(Resources.getDTBinIcon()));
-            }
+            BufferedImage binImage = ImageIO.read(new File(Resources.getBinIcon()));
             txtBin.setIcon(new ImageIcon(binImage.getScaledInstance(40, 40, Image.SCALE_SMOOTH)));
             txtBin.setText("");
         } catch (IOException | NullPointerException ignored) {
