@@ -12,6 +12,7 @@ import pickyeater.basics.user.User;
 import pickyeater.executors.ExecutorProvider;
 import pickyeater.executors.MealPlanCreatorExecutor;
 import pickyeater.utils.MealPlanGeneratorBundle;
+import pickyeater.utils.Resources;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -100,7 +101,7 @@ public class MealPlanUnavailablePage extends PickyPage {
     private void showImage(){
         txt404.setText("");
         try {
-            BufferedImage img404 = ImageIO.read(new File("res/images/404.png"));
+            BufferedImage img404 = ImageIO.read(new File(Resources.get404Pic()));
             txt404.setIcon(new ImageIcon(img404.getScaledInstance(-1, 350, Image.SCALE_SMOOTH)));
         } catch (IOException | NullPointerException ignored) {
             System.out.println("Couldn't process image");

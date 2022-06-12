@@ -9,6 +9,7 @@ import pickyeater.managers.EaterManager;
 import pickyeater.managers.FoodManager;
 import pickyeater.managers.UserManager;
 import pickyeater.utils.MealPlanGeneratorBundle;
+import pickyeater.utils.Resources;
 
 import java.io.*;
 import java.nio.file.Files;
@@ -53,7 +54,7 @@ public class MealPlanCreatorExecutor {
     public MealPlanGeneratorBundle getBundle() {
         MealPlanGeneratorBundle bundle = new MealPlanGeneratorBundle();
         try {
-            BufferedReader reader = new BufferedReader(new FileReader("res/MPGeneratorSettings"));
+            BufferedReader reader = new BufferedReader(new FileReader(Resources.getMPGeneratorSettings()));
             String line = reader.readLine();
             if(line==null) throw new IOException();
             StringTokenizer tokenizer = new StringTokenizer(line," ");
