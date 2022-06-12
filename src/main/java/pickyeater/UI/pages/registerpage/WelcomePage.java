@@ -1,5 +1,7 @@
 package pickyeater.UI.pages.registerpage;
 
+import pickyeater.utils.Resources;
+
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
@@ -36,20 +38,20 @@ public class WelcomePage extends JFrame implements ActionListener {
         coloredPanel.setBackground(Color.decode("#B1EA9D"));
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setVisible(true);
-        BufferedImage imgVA = null;
+        BufferedImage imgVA;
         try {
-            imgVA = ImageIO.read(new File("res/images/PEL.png"));
+            imgVA = ImageIO.read(new File(Resources.getPELPic()));
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
         logo = new ImageIcon(imgVA.getScaledInstance(100, -1, Image.SCALE_SMOOTH)).getImage();
-        timer = new Timer(1, this);
+        timer = new Timer(60, this);
         timer.start();
         coloredPanel.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseReleased(MouseEvent e) {
                 super.mouseReleased(e);
-                EventQueue.invokeLater(() -> new RegisterMainFrame());
+                EventQueue.invokeLater(RegisterMainFrame::new);
                 setVisible(false);
             }
         });

@@ -49,12 +49,7 @@ public class GroceriesPage extends PickyPage {
         this.groceriesExecutor = groceriesExecutor;
         binLabel.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
         try {
-            BufferedImage binImage;
-            if (ThemeHandler.ReadTheme() == ThemesEnum.LIGHT_THEME) {
-                binImage = ImageIO.read(new File(Resources.getLTBinIcon()));
-            } else {
-                binImage = ImageIO.read(new File(Resources.getDTBinIcon()));
-            }
+            BufferedImage binImage = ImageIO.read(new File(Resources.getBinIcon()));
             binLabel.setIcon(new ImageIcon(binImage.getScaledInstance(30, 30, Image.SCALE_SMOOTH)));
         } catch (IOException | NullPointerException ignored) {
             binLabel.setText("X");
