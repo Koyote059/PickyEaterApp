@@ -3,7 +3,6 @@ package pickyeater.utils.pagesutils;
 import org.knowm.xchart.*;
 import org.knowm.xchart.style.CategoryStyler;
 import org.knowm.xchart.style.Styler;
-import pickyeater.UI.themes.ColorButtons;
 import pickyeater.UI.themes.SystemTheme;
 import pickyeater.basics.food.Nutrients;
 import pickyeater.executors.DailyProgressExecutor;
@@ -11,7 +10,6 @@ import pickyeater.executors.ExecutorProvider;
 
 import javax.swing.*;
 import java.awt.*;
-import java.text.DecimalFormat;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -36,17 +34,6 @@ public class NutrientsCategoryChart {
         styleCategoryChart(categoryChart.getStyler());
         chartPanel = new XChartPanel<>(categoryChart);
     }
-/*
-
-        dailyProgressExecutor.getEatenProteins();
-        dailyProgressExecutor.getProteinsToEat();
-
-        dailyProgressExecutor.getEatenCarbs();
-        dailyProgressExecutor.getCarbsToEat();
-
-        dailyProgressExecutor.getEatenFats();
-        dailyProgressExecutor.getFatsToEat();
- */
     public NutrientsCategoryChart() {
         DailyProgressExecutor dailyProgressExecutor = ExecutorProvider.getDailyProgressExecutor();
         List<Float> calories = new LinkedList<>(List.of( dailyProgressExecutor.getEatenCalories(),
@@ -62,9 +49,6 @@ public class NutrientsCategoryChart {
                 dailyProgressExecutor.getFatsToEat()));
 
         CategoryChart chart = new CategoryChartBuilder().width(410).height(330).build();
-        chart.getStyler().setLegendVisible(true);
-        chart.getStyler().setDefaultSeriesRenderStyle(CategorySeries.CategorySeriesRenderStyle.Bar);
-        chart.getStyler().setAvailableSpaceFill(.25);
 
         List<String> str = new LinkedList<>(List.of("Eaten", "To Eat"));
 
@@ -82,7 +66,6 @@ public class NutrientsCategoryChart {
 
     private void styleCategoryChart(CategoryStyler styler){
         styler.setToolTipType(Styler.ToolTipType.yLabels);
-        styler.setToolTipsEnabled(true);
         Color[] colors = {Color.decode("#32AB5E"), Color.decode("#83D078"), Color.decode("#B1EA9D"), Color.decode("#CAFFB8")};
         styler.setSeriesColors(colors);
         styler.setChartBackgroundColor(SystemTheme.getPanelColor());
@@ -92,18 +75,21 @@ public class NutrientsCategoryChart {
         styler.setPlotBorderColor(SystemTheme.getPanelColor());
         styler.setLabelsFontColor(SystemTheme.getLabelColor());
         styler.setLabelsFont(SystemTheme.getFont());
+        styler.setAxisTickLabelsColor(SystemTheme.getLabelColor());
+        styler.setAxisTickLabelsFont(SystemTheme.getFont());
         styler.setChartTitleFont(SystemTheme.getFont());
 
+        styler.setDefaultSeriesRenderStyle(CategorySeries.CategorySeriesRenderStyle.Bar);
+        styler.setAvailableSpaceFill(.75);
+        styler.setToolTipsEnabled(true);
+        styler.setLegendVisible(true);
         styler.setPlotBorderVisible(true);
         styler.setDefaultSeriesRenderStyle(CategorySeries.CategorySeriesRenderStyle.Bar);
         styler.setStacked(false);
         styler.setOverlapped(false);
-        styler.setLegendVisible(true);
         styler.setXAxisTicksVisible(true);
         styler.setYAxisTicksVisible(true);
         styler.setToolTipsEnabled(true);
-        styler.setLabelsFontColorAutomaticEnabled(true);
-        styler.setPlotGridLinesColor(ColorButtons.getWhite());
-        //styler.setLabelsFontColor(ColorButtons.getWhite());
+        styler.setPlotGridLinesColor(SystemTheme.getButtonColor());
     }
 }
