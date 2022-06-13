@@ -20,10 +20,14 @@ public class NutrientsCategoryChart {
 
     public NutrientsCategoryChart() {
         DailyProgressExecutor dailyProgressExecutor = ExecutorProvider.getDailyProgressExecutor();
-        List<Float> calories = new LinkedList<>(List.of(dailyProgressExecutor.getEatenCalories(), dailyProgressExecutor.getCaloriesToEat()));
-        List<Float> proteins = new LinkedList<>(List.of(dailyProgressExecutor.getEatenProteins(), dailyProgressExecutor.getProteinsToEat()));
-        List<Float> carbs = new LinkedList<>(List.of(dailyProgressExecutor.getEatenCarbs(), dailyProgressExecutor.getCarbsToEat()));
-        List<Float> fats = new LinkedList<>(List.of(dailyProgressExecutor.getEatenFats(), dailyProgressExecutor.getFatsToEat()));
+        List<Integer> calories = new LinkedList<>(List.of(Math.round(dailyProgressExecutor.getEatenCalories()),
+               Math.round(dailyProgressExecutor.getCaloriesToEat())));
+        List<Integer> proteins = new LinkedList<>(List.of(Math.round(dailyProgressExecutor.getEatenProteins()),
+                Math.round(dailyProgressExecutor.getProteinsToEat())));
+        List<Integer> carbs = new LinkedList<>(List.of(Math.round(dailyProgressExecutor.getEatenCarbs()),
+                Math.round(dailyProgressExecutor.getCarbsToEat())));
+        List<Integer> fats = new LinkedList<>(List.of(Math.round(dailyProgressExecutor.getEatenFats()),
+                Math.round(dailyProgressExecutor.getFatsToEat())));
         CategoryChart chart = new CategoryChartBuilder().width(410).height(330).build();
         List<String> str = new LinkedList<>(List.of("Eaten", "To Eat"));
         chart.addSeries("Calories", str, calories);
