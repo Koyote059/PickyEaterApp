@@ -93,6 +93,17 @@ public class DailyProgressPage extends PickyPage {
             }
         });
         setNavigationMenuListeners();
+        bar.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                super.mouseClicked(e);
+                if (e.getClickCount() == 2){
+                    EventQueue.invokeLater(() -> {
+                        new ProgressGraphPage(parent, parent.getLocation());
+                    });
+                }
+            }
+        });
     }
 
     private void draw() {

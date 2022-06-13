@@ -20,7 +20,6 @@ public class IngredientInfoJDialog extends JDialog {
     private JLabel labelCarbs;
     private JLabel labelFats;
     private JLabel priceLabel;
-
     private JLabel nutrientsLabel;
 
     public IngredientInfoJDialog(JFrame parent, Ingredient ingredient, Point location) {
@@ -156,6 +155,4 @@ public class IngredientInfoJDialog extends JDialog {
         infoPanel.add(labelQuantityType, constraints);
         return infoPanel;
     }
-
-
 }

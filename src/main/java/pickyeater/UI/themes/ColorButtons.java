@@ -33,4 +33,22 @@ public class ColorButtons {
             btSelected.setBackground(Color.decode("#505454"));
         }
     }
+
+    public static Color getWhite() {
+        ThemesEnum te = ThemeHandler.ReadTheme();
+        if (te == ThemesEnum.LIGHT_THEME) {
+            return (Color.decode("#FFFFFF"));
+        } else { // if (te == ThemesEnum.DARK_THEME)
+            return (Color.decode("#505454"));
+        }
+    }
+
+    public static Color getGreen() {
+        ThemesEnum te = ThemeHandler.ReadTheme();
+        if (te == ThemesEnum.LIGHT_THEME) {
+            return (Color.decode("#B1EA9D"));
+        } else { // if (te == ThemesEnum.DARK_THEME)
+            return (Color.decode("#32AB5E"));
+        }
+    }
 }
