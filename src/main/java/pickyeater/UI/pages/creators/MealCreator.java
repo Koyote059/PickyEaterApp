@@ -3,13 +3,13 @@ package pickyeater.UI.pages.creators;
 import pickyeater.UI.pages.app.MainFrame;
 import pickyeater.UI.pages.choosers.IngredientChooser;
 import pickyeater.UI.pages.leftbuttons.PanelButtons;
-import pickyeater.utils.pagesutils.NutrientsPieChart;
 import pickyeater.basics.food.*;
 import pickyeater.basics.groceries.PickyFinder;
 import pickyeater.builders.MealBuilder;
 import pickyeater.executors.ExecutorProvider;
 import pickyeater.executors.creators.CreateMealExecutor;
 import pickyeater.utils.StringsUtils;
+import pickyeater.utils.pagesutils.NutrientsPieChart;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -29,41 +29,43 @@ public class MealCreator extends JDialog {
     private final JPanel panelInsertName = new JPanel();
     private final JLabel mealQuantityTypeLabel = new JLabel(" g");
     private final JTextField mealQuantityTextField = new JTextField("100");
-    private JPanel mealPanel = null;
     private final List<Ingredient> ingredients = new ArrayList<>();
     private final CreateMealExecutor executor = ExecutorProvider.getCreateMealExecutor();
     private final MealBuilder mealBuilder = executor.getMealBuilder();
+    private final JPanel mealPanel = null;
     private Meal startingMeal = null;
     private boolean isMealEditing = false;
-    private NutrientsPieChart nutrientsPieChart;
+    private final NutrientsPieChart nutrientsPieChart;
+
+    public MealCreator(JFrame parent, Point location) {
+        this(parent);
+        setLocation(location);
+    }
 
     public MealCreator(JFrame parent) {
         super(parent, "Meal Creator", true);
         JPanel mainPanel = new JPanel(new BorderLayout());
         JPanel customMealPanel = new JPanel(new BorderLayout());
         mealNameField = new JTextField();
-        mealNameField.addActionListener( listener -> showPieChart());
+        mealNameField.addActionListener(listener -> showPieChart());
         panelInsertName.setLayout(new BorderLayout());
         panelInsertName.add(BorderLayout.WEST, txtInsertName);
         panelInsertName.add(BorderLayout.CENTER, mealNameField);
-
         customMealPanel.add(BorderLayout.PAGE_START, panelInsertName);
         JButton addIngredientButton = new JButton("Add ingredient");
         addIngredientButton.addActionListener(e -> {
-            IngredientChooser ingredientChooser = new IngredientChooser(parent,getLocation());
+            IngredientChooser ingredientChooser = new IngredientChooser(parent, getLocation());
             Optional<Ingredient> ingredientOptional = ingredientChooser.getIngredient();
             ingredientOptional.ifPresent(addingIngredient -> {
-
                 for (Iterator<Ingredient> iterator = ingredients.iterator(); iterator.hasNext(); ) {
                     Ingredient ingredient = iterator.next();
-                    if(ingredient.getName().equals(addingIngredient.getName())){
+                    if (ingredient.getName().equals(addingIngredient.getName())) {
                         mealBuilder.remove(ingredient);
-                        addingIngredient = new PickyFinder().sumIngredient(ingredient,addingIngredient);
+                        addingIngredient = new PickyFinder().sumIngredient(ingredient, addingIngredient);
                         iterator.remove();
                         break;
                     }
                 }
-
                 mealBuilder.addIngredients(addingIngredient);
                 ingredients.add(addingIngredient);
                 draw();
@@ -118,8 +120,7 @@ public class MealCreator extends JDialog {
                     popup.add(deleteItem);
                     popup.show(e.getComponent(), e.getX(), e.getY());
                     deleteItem.addActionListener(l -> {
-                        int choice = JOptionPane.showConfirmDialog(parent, "Are you sure you want to remove it?",
-                                "", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+                        int choice = JOptionPane.showConfirmDialog(parent, "Are you sure you want to remove it?", "", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
                         if (choice != JOptionPane.YES_OPTION)
                             return;
                         ingredients.remove(selectedIngredient);
@@ -157,12 +158,10 @@ public class MealCreator extends JDialog {
             }
             mealBuilder.setName(StringsUtils.capitalize(mealName));
             Meal meal = mealBuilder.build();
-
             if (isMealEditing) {
                 executor.deleteMeal(startingMeal);
             }
             executor.saveMeal(meal);
-
             new MainFrame();
             MainFrame.changePage(PanelButtons.SETTINGS);
             parent.dispose();
@@ -172,20 +171,21 @@ public class MealCreator extends JDialog {
         mainPanel.add(BorderLayout.PAGE_END, buttonPanel);
         setContentPane(mainPanel);
         pack();
-
         nutrientsPieChart = new NutrientsPieChart();
         add(BorderLayout.LINE_START, nutrientsPieChart.getPanel());
         draw();
-
         setSize(new Dimension(677, 507));
         setPreferredSize(new Dimension(677, 507));
         setResizable(false);
         setLocationRelativeTo(parent);
     }
 
-    public MealCreator(JFrame parent, Point location){
-        this(parent);
-        setLocation(location);
+    private void showPieChart() {
+        NutrientsAccumulator nutrientsAccumulator = new PickyNutrientsAccumulator();
+        ingredients.forEach(ingredient -> nutrientsAccumulator.sumNutrients(ingredient.getNutrients()));
+        nutrientsPieChart.setNutrients(nutrientsAccumulator.generateNutrients());
+        nutrientsPieChart.setName(mealNameField.getText());
+        revalidate();
     }
 
     private void draw() {
@@ -194,15 +194,6 @@ public class MealCreator extends JDialog {
             ingredientsTable.setRowSelectionInterval(0, 0);
         showPieChart();
         pack();
-        revalidate();
-    }
-
-    private void showPieChart() {
-
-        NutrientsAccumulator nutrientsAccumulator = new PickyNutrientsAccumulator();
-        ingredients.forEach( ingredient -> nutrientsAccumulator.sumNutrients(ingredient.getNutrients()));
-        nutrientsPieChart.setNutrients(nutrientsAccumulator.generateNutrients());
-        nutrientsPieChart.setName(mealNameField.getText());
         revalidate();
     }
 
@@ -242,5 +233,4 @@ public class MealCreator extends JDialog {
         draw();
         setVisible(true);
     }
-
 }

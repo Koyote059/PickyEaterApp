@@ -1,7 +1,6 @@
 package pickyeater.UI.pages.choosers;
 
 import pickyeater.UI.pages.creators.IngredientCreator;
-import pickyeater.utils.pagesutils.NutrientsPieChart;
 import pickyeater.basics.food.Ingredient;
 import pickyeater.basics.food.Nutrients;
 import pickyeater.basics.food.QuantityType;
@@ -11,6 +10,7 @@ import pickyeater.utils.IngredientQuantityConverter;
 import pickyeater.utils.StringToNumber;
 import pickyeater.utils.StringsUtils;
 import pickyeater.utils.ValuesConverter;
+import pickyeater.utils.pagesutils.NutrientsPieChart;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -29,23 +29,27 @@ public class IngredientChooser extends JDialog {
     private final JTextField searchBar;
     private final JList ingredientsList;
     private final NutrientsPieChart nutrientsPieChart;
-    private List<Ingredient> searchedIngredients;
     private final JButton cancelButton;
-    private JPanel mealPanel = new JPanel(new BorderLayout());
-    private Ingredient returningIngredient = null;
     private final JPanel ingredientQuantityPanel = new JPanel(new BorderLayout());
     private final JTextField ingredientQuantityTextField = new JTextField();
     private final JLabel ingredientQuantityTypeLabel = new JLabel(" g");
-    private final JPanel centerPanel = new JPanel(new GridLayout(1,2));
+    private final JPanel centerPanel = new JPanel(new GridLayout(1, 2));
+    private List<Ingredient> searchedIngredients;
+    private final JPanel mealPanel = new JPanel(new BorderLayout());
+    private Ingredient returningIngredient = null;
     private boolean isChoosing = false;
 
+    public IngredientChooser(JFrame parent, Point location) {
+        this(parent);
+        setLocation(location);
+    }
 
     public IngredientChooser(JFrame parent) {
         super(parent, "Ingredient Chooser", true);
         add(new JPanel());
         searchBar = new JTextField();
         ingredientsList = new JList();
-        if(!isChoosing){
+        if (!isChoosing) {
             ingredientsList.setToolTipText("Right click to delete/edit ingredient");
         }
         setLayout(new BorderLayout());
@@ -58,7 +62,7 @@ public class IngredientChooser extends JDialog {
         panelSearchBar.add(BorderLayout.WEST, txtSearchIngredient);
         panelSearchBar.add(BorderLayout.CENTER, searchBar);
         add(BorderLayout.NORTH, panelSearchBar);
-        add(BorderLayout.CENTER,centerPanel);
+        add(BorderLayout.CENTER, centerPanel);
         centerPanel.add(mealPanel);
         centerPanel.add(ingredientListPanel);
         ingredientQuantityTextField.setToolTipText("Left void it'll put automatically 100g/100ml/1pz");
@@ -66,8 +70,10 @@ public class IngredientChooser extends JDialog {
             @Override
             public void keyReleased(KeyEvent e) {
                 String text = searchBar.getText();
-                if(!StringsUtils.isAlpha(text)) searchedIngredients = new ArrayList<>();
-                else searchedIngredients = new ArrayList<>(ingredientsSearcherExecutor.getIngredientsThatStartWith(text));
+                if (!StringsUtils.isAlpha(text))
+                    searchedIngredients = new ArrayList<>();
+                else
+                    searchedIngredients = new ArrayList<>(ingredientsSearcherExecutor.getIngredientsThatStartWith(text));
                 populateIngredientsList();
             }
         });
@@ -82,19 +88,18 @@ public class IngredientChooser extends JDialog {
                 showPieChart();
             }
         });
-
         cancelButton = new JButton("Cancel");
         cancelButton.addActionListener(e -> dispose());
         JButton doneButton = new JButton("Done");
         doneButton.addActionListener(e -> {
-            if(!isChoosing) dispose();
+            if (!isChoosing)
+                dispose();
             int selectedItem = ingredientsList.getSelectedIndex();
-            if(selectedItem==-1) return;
+            if (selectedItem == -1)
+                return;
             Ingredient ingredient = searchedIngredients.get(selectedItem);
             IngredientQuantityConverter ingredientQuantityConverter = new IngredientQuantityConverter();
             float returningQuantity;
-
-
             if (ingredientQuantityTextField.getText().isEmpty()) {
                 if (ingredient.getQuantity().getQuantityType() == QuantityType.PIECES) {
                     returningQuantity = 1;
@@ -104,37 +109,32 @@ public class IngredientChooser extends JDialog {
             } else {
                 try {
                     returningQuantity = StringToNumber.convertPositiveFloatException(ingredientQuantityTextField.getText());
-                } catch (NumberFormatException ex){
-                    JOptionPane.showMessageDialog(parent,"Insert a valid quantity!");
+                } catch (NumberFormatException ex) {
+                    JOptionPane.showMessageDialog(parent, "Insert a valid quantity!");
                     return;
                 }
             }
             returningIngredient = ingredientQuantityConverter.convert(ingredient, returningQuantity);
             dispose();
         });
-
-
-
         ingredientsList.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
-                if(isChoosing) return;
-
+                if (isChoosing)
+                    return;
                 int selectedIndex = ingredientsList.locationToIndex(e.getPoint());
                 if (selectedIndex < 0)
                     return;
                 ingredientsList.setSelectedIndex(selectedIndex);
                 Ingredient selectedIngredient = searchedIngredients.get(selectedIndex);
-
-                if(e.getClickCount()==2){
-                    IngredientInfoJDialog ingredientInfoJDialog  = new IngredientInfoJDialog(parent,selectedIngredient,getLocation());
+                if (e.getClickCount() == 2) {
+                    IngredientInfoJDialog ingredientInfoJDialog = new IngredientInfoJDialog(parent, selectedIngredient, getLocation());
                     setVisible(false);
                     ingredientInfoJDialog.setVisible(true);
                     setVisible(true);
                     return;
                 }
-
                 if (e.isPopupTrigger() || SwingUtilities.isRightMouseButton(e)) {
                     JPopupMenu popup = new JPopupMenu();
                     // add menu items to popup
@@ -149,8 +149,7 @@ public class IngredientChooser extends JDialog {
                             JOptionPane.showMessageDialog(parent, "Cannot delete this meal as it's being used!");
                             return;
                         }
-                        int choice = JOptionPane.showConfirmDialog(parent, "Are you sure you want to delete it?", "",
-                                JOptionPane.YES_NO_OPTION);
+                        int choice = JOptionPane.showConfirmDialog(parent, "Are you sure you want to delete it?", "", JOptionPane.YES_NO_OPTION);
                         if (choice != JOptionPane.YES_OPTION)
                             return;
                         ingredientsSearcherExecutor.deleteIngredient(selectedIngredient);
@@ -159,13 +158,12 @@ public class IngredientChooser extends JDialog {
                         showPieChart();
                     });
                     editItem.addActionListener(l -> {
-                        if(ingredientsSearcherExecutor.isIngredientUsed(selectedIngredient)) {
-                            int choice = JOptionPane.showConfirmDialog(parent, "This ingredient is used somewhere. \nAre you sure you want to edit it?", "",
-                                    JOptionPane.YES_NO_OPTION);
+                        if (ingredientsSearcherExecutor.isIngredientUsed(selectedIngredient)) {
+                            int choice = JOptionPane.showConfirmDialog(parent, "This ingredient is used somewhere. \nAre you sure you want to edit it?", "", JOptionPane.YES_NO_OPTION);
                             if (choice != JOptionPane.YES_OPTION)
                                 return;
                         }
-                        IngredientCreator creator = new IngredientCreator(parent,getLocation());
+                        IngredientCreator creator = new IngredientCreator(parent, getLocation());
                         setVisible(false);
                         creator.editIngredient(selectedIngredient);
                         setVisible(true);
@@ -177,22 +175,19 @@ public class IngredientChooser extends JDialog {
                 }
             }
         });
-
         nutrientsPieChart = new NutrientsPieChart();
         mealPanel.add(BorderLayout.CENTER, nutrientsPieChart.getPanel());
-        ingredientQuantityPanel.add(BorderLayout.CENTER,ingredientQuantityTextField);
-        ingredientQuantityPanel.setBorder(new EmptyBorder(5,10,0,10));
-        ingredientQuantityTextField.setBorder(new EmptyBorder(0,5,0,0));
+        ingredientQuantityPanel.add(BorderLayout.CENTER, ingredientQuantityTextField);
+        ingredientQuantityPanel.setBorder(new EmptyBorder(5, 10, 0, 10));
+        ingredientQuantityTextField.setBorder(new EmptyBorder(0, 5, 0, 0));
         ingredientQuantityPanel.add(BorderLayout.LINE_END, ingredientQuantityTypeLabel);
         mealPanel.add(BorderLayout.PAGE_END, ingredientQuantityPanel);
         add(BorderLayout.LINE_START, mealPanel);
-
         if (!searchedIngredients.isEmpty()) {
             showPieChart();
         } else {
             JOptionPane.showMessageDialog(parent, "Error 404, Ingredients not found", "Error 404", JOptionPane.ERROR_MESSAGE);
         }
-
         JPanel buttonsPanel = new JPanel();
         buttonsPanel.add(cancelButton);
         buttonsPanel.add(doneButton);
@@ -202,15 +197,10 @@ public class IngredientChooser extends JDialog {
         setLocationRelativeTo(parent);
     }
 
-    public IngredientChooser(JFrame parent,Point location){
-        this(parent);
-        setLocation(location);
-    }
     private void populateIngredientsList() {
         ingredientsList.removeAll();
         Comparator<? super Ingredient> comparator = Comparator.comparing(Ingredient::getName);
         searchedIngredients.sort(comparator);
-
         Object[] listData = new Object[searchedIngredients.size()];
         for (int i = 0; i < searchedIngredients.size(); i++) {
             Ingredient ingredient = searchedIngredients.get(i);
@@ -225,14 +215,15 @@ public class IngredientChooser extends JDialog {
 
     private void showPieChart() {
         int selectedItem = ingredientsList.getSelectedIndex();
-        if(selectedItem==-1) return;
+        if (selectedItem == -1)
+            return;
         Ingredient selectedIngredient = searchedIngredients.get(selectedItem);
         QuantityType quantityType = selectedIngredient.getQuantity().getQuantityType();
         ingredientQuantityTypeLabel.setText(ValuesConverter.convertQuantityTypeValue(quantityType));
         Ingredient highLightedIngredient;
-        if(quantityType.equals(QuantityType.PIECES)){
+        if (quantityType.equals(QuantityType.PIECES)) {
             IngredientQuantityConverter converter = new IngredientQuantityConverter();
-            highLightedIngredient = converter.convert(selectedIngredient,1);
+            highLightedIngredient = converter.convert(selectedIngredient, 1);
         } else {
             highLightedIngredient = selectedIngredient;
         }

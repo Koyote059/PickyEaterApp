@@ -10,7 +10,6 @@ import pickyeater.UI.pages.leftbuttons.PanelButtons;
 import pickyeater.UI.pages.leftbuttons.PanelButtonsConverter;
 import pickyeater.UI.pages.registerpage.RegisterMainFrame;
 import pickyeater.UI.themes.ColorButtons;
-import pickyeater.UI.themes.SystemTheme;
 import pickyeater.UI.themes.filehandler.ThemeHandler;
 import pickyeater.UI.themes.filehandler.ThemesEnum;
 import pickyeater.executors.ExecutorProvider;
@@ -54,10 +53,10 @@ public class SettingsPage extends PickyPage {
         } else { //if (te == ThemesEnum.DARK_THEME)
             cbTheme.setSelectedIndex(1);
         }
-//        txtDeletingZone.setForeground(Color.red);
-//        btDeleteUser.setForeground(Color.red);
-//        btResetMeals.setForeground(Color.red);
-//        btResetIngredients.setForeground(Color.red);
+        //        txtDeletingZone.setForeground(Color.red);
+        //        btDeleteUser.setForeground(Color.red);
+        //        btResetMeals.setForeground(Color.red);
+        //        btResetIngredients.setForeground(Color.red);
         try {
             BufferedImage binImage = ImageIO.read(new File(Resources.getBinIcon()));
             txtImage.setIcon(new ImageIcon(binImage.getScaledInstance(30, 30, Image.SCALE_SMOOTH)));
@@ -103,7 +102,7 @@ public class SettingsPage extends PickyPage {
             MealsChooser chooser = new MealsChooser(parent);
             chooser.manageMeals();
         }));
-        btAddMeal.addActionListener(e -> EventQueue.invokeLater(() ->new MealCreator(parent).createMeal()));
+        btAddMeal.addActionListener(e -> EventQueue.invokeLater(() -> new MealCreator(parent).createMeal()));
         manageIngredientsButton.addActionListener(l -> EventQueue.invokeLater(() -> {
             IngredientChooser chooser = new IngredientChooser(parent);
             chooser.manageIngredients();
@@ -111,6 +110,16 @@ public class SettingsPage extends PickyPage {
         //btAddIngredient.addActionListener(e -> new IngredientCreator(parent).createIngredient());
         btAddIngredient.addActionListener(e -> EventQueue.invokeLater(() -> new IngredientCreator(parent).createIngredient()));
         setNavigationMenuListeners();
+    }
+
+    /**
+     * makes invisible ResetMeal and ResetIngredient
+     */
+    private void makeInvisible() {
+        btResetMeals.setVisible(false);
+        btResetIngredients.setVisible(false);
+        txtResetMeals.setVisible(false);
+        txtResetIngredients.setVisible(false);
     }
 
     private void setNavigationMenuListeners() {
@@ -123,15 +132,5 @@ public class SettingsPage extends PickyPage {
         btUser.addActionListener(listener);
         btGroceries.addActionListener(listener);
         btDiet.addActionListener(listener);
-    }
-
-    /**
-     * makes invisible ResetMeal and ResetIngredient
-     */
-    private void makeInvisible(){
-        btResetMeals.setVisible(false);
-        btResetIngredients.setVisible(false);
-        txtResetMeals.setVisible(false);
-        txtResetIngredients.setVisible(false);
     }
 }

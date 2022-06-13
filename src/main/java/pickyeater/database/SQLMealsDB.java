@@ -2,7 +2,6 @@ package pickyeater.database;
 
 import pickyeater.basics.food.Meal;
 import pickyeater.database.SQLutils.*;
-import pickyeater.utils.MealQuantityConverter;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;

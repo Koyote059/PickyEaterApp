@@ -11,14 +11,15 @@ import pickyeater.managers.UserManager;
 import pickyeater.utils.MealPlanGeneratorBundle;
 import pickyeater.utils.Resources;
 
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Optional;
 import java.util.Set;
 import java.util.StringTokenizer;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 public class MealPlanCreatorExecutor {
     private final EaterManager eaterManager;
@@ -56,11 +57,13 @@ public class MealPlanCreatorExecutor {
         try {
             BufferedReader reader = new BufferedReader(new FileReader(Resources.getMPGeneratorSettings()));
             String line = reader.readLine();
-            if(line==null) throw new IOException();
-            StringTokenizer tokenizer = new StringTokenizer(line," ");
+            if (line == null)
+                throw new IOException();
+            StringTokenizer tokenizer = new StringTokenizer(line, " ");
             int days = Integer.parseInt(tokenizer.nextToken());
             int mealsInADay = Integer.parseInt(tokenizer.nextToken());
-            if(days>20 || mealsInADay>20 || days<=0 || mealsInADay <=0) throw new IOException();
+            if (days > 20 || mealsInADay > 20 || days <= 0 || mealsInADay <= 0)
+                throw new IOException();
             bundle.setDays(days);
             bundle.setMealsInADay(mealsInADay);
         } catch (IOException | NumberFormatException e) {
@@ -73,12 +76,11 @@ public class MealPlanCreatorExecutor {
             bundle.setDays(7);
             bundle.setMealsInADay(4);
         }
-
         return bundle;
     }
 
     public void saveBundle(MealPlanGeneratorBundle bundle) {
-        try(FileWriter writer = new FileWriter("res/MPGeneratorSettings")) {
+        try (FileWriter writer = new FileWriter("res/MPGeneratorSettings")) {
             writer.write(bundle.getDays() + " " + bundle.getMealsInADay());
         } catch (IOException e) {
             throw new RuntimeException(e);

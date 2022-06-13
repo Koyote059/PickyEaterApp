@@ -14,6 +14,7 @@ import java.awt.*;
 import java.awt.event.ActionListener;
 
 public class CreateIngredientPage extends PickyPage {
+    private final IngredientSearcherExecutor ingredientSearcherExecutor;
     private JPanel mainPanel;
     private JButton btSettings;
     private JButton btDailyProgress;
@@ -34,7 +35,6 @@ public class CreateIngredientPage extends PickyPage {
     private JTextField tfCarbs;
     private JTextField tfFats;
     private QuantityType quantityType;
-    private final IngredientSearcherExecutor ingredientSearcherExecutor;
 
     public CreateIngredientPage(JFrame parent) {
         super(parent);

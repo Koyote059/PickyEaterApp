@@ -12,7 +12,8 @@ public class JCalUtils {
             return LocalDate.now();
         }
     }
-    public static boolean youngerThan(LocalDate date1, LocalDate date2){
+
+    public static boolean youngerThan(LocalDate date1, LocalDate date2) {
         return date1.isBefore(date2);
     }
 }

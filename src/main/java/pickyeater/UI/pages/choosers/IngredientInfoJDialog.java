@@ -1,14 +1,16 @@
 package pickyeater.UI.pages.choosers;
 
-import pickyeater.utils.pagesutils.NutrientsPieChart;
-import pickyeater.basics.food.*;
+import pickyeater.basics.food.Ingredient;
+import pickyeater.basics.food.Nutrients;
+import pickyeater.basics.food.Quantity;
 import pickyeater.utils.IngredientQuantityConverter;
 import pickyeater.utils.ValuesConverter;
+import pickyeater.utils.pagesutils.NutrientsPieChart;
 
 import javax.swing.*;
 import java.awt.*;
 
-import static pickyeater.basics.food.QuantityType.*;
+import static pickyeater.basics.food.QuantityType.PIECES;
 
 public class IngredientInfoJDialog extends JDialog {
     private JLabel labelName;
@@ -20,29 +22,27 @@ public class IngredientInfoJDialog extends JDialog {
     private JLabel labelCarbs;
     private JLabel labelFats;
     private JLabel priceLabel;
-
     private JLabel nutrientsLabel;
 
     public IngredientInfoJDialog(JFrame parent, Ingredient ingredient, Point location) {
         super(parent, ingredient.getName() + " - Info", true);
         Quantity quantity = ingredient.getQuantity();
-        if(quantity.getQuantityType().equals(PIECES)) {
+        if (quantity.getQuantityType().equals(PIECES)) {
             IngredientQuantityConverter converter = new IngredientQuantityConverter();
-            ingredient = converter.convert(ingredient,1);
+            ingredient = converter.convert(ingredient, 1);
         }
-
         JButton doneButton = new JButton("Done");
         doneButton.addActionListener(e -> this.dispose());
         JPanel mainPanel = new JPanel(new BorderLayout());
-        JPanel infoPanel = fillIngredientInfoPanel(ingredient,quantity);
+        JPanel infoPanel = fillIngredientInfoPanel(ingredient, quantity);
         NutrientsPieChart nutrientsPieChart = new NutrientsPieChart();
         nutrientsPieChart.setName(ingredient.getName());
         nutrientsPieChart.setNutrients(ingredient.getNutrients());
-        mainPanel.add(infoPanel,BorderLayout.CENTER);
+        mainPanel.add(infoPanel, BorderLayout.CENTER);
         JPanel chartPanel = nutrientsPieChart.getPanel();
-        chartPanel.setMaximumSize(new Dimension(100,100));
-        mainPanel.add(chartPanel,BorderLayout.LINE_START);
-        mainPanel.add(doneButton,BorderLayout.PAGE_END);
+        chartPanel.setMaximumSize(new Dimension(100, 100));
+        mainPanel.add(chartPanel, BorderLayout.LINE_START);
+        mainPanel.add(doneButton, BorderLayout.PAGE_END);
         setContentPane(mainPanel);
         pack();
         setSize(new Dimension(677, 507));
@@ -50,7 +50,7 @@ public class IngredientInfoJDialog extends JDialog {
         setLocation(location);
     }
 
-    private JPanel fillIngredientInfoPanel(Ingredient ingredient,Quantity quantity){
+    private JPanel fillIngredientInfoPanel(Ingredient ingredient, Quantity quantity) {
         JPanel infoPanel = new JPanel(new GridBagLayout());
         GridBagConstraints constraints = new GridBagConstraints();
         constraints.insets = new Insets(5, 1, 5, 3);
@@ -72,7 +72,6 @@ public class IngredientInfoJDialog extends JDialog {
         constraints.gridy = 2;
         infoPanel.add(labelGramsQuantity, constraints);
         labelGramsPerQuantity = new JLabel();
-
         labelGramsPerQuantity.setVisible(false);
         labelGramsQuantity.setVisible(false);
         constraints.gridx = 1;
@@ -122,7 +121,6 @@ public class IngredientInfoJDialog extends JDialog {
         constraints.gridx = 1;
         constraints.gridy = 8;
         infoPanel.add(labelFats, constraints);
-
         labelQuantityType = new JLabel();
         switch (quantity.getQuantityType()) {
             case GRAMS -> {
@@ -145,7 +143,7 @@ public class IngredientInfoJDialog extends JDialog {
                 labelGramsPerQuantity.setVisible(true);
                 labelGramsQuantity.setVisible(true);
                 labelQuantityType.setText("Milliliters");
-                labelGramsPerQuantity.setText(ValuesConverter.convertFloat(quantity.getGramsPerQuantity()*100) + " g");
+                labelGramsPerQuantity.setText(ValuesConverter.convertFloat(quantity.getGramsPerQuantity() * 100) + " g");
                 labelGramsQuantity.setText("Grams: ");
                 priceLabel.setText("Price: ");
                 nutrientsLabel.setText("Nutrients per 100 ml: ");
@@ -156,6 +154,4 @@ public class IngredientInfoJDialog extends JDialog {
         infoPanel.add(labelQuantityType, constraints);
         return infoPanel;
     }
-
-
 }

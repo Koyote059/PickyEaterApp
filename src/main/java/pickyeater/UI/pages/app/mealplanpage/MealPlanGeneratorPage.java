@@ -2,8 +2,6 @@ package pickyeater.UI.pages.app.mealplanpage;
 
 import pickyeater.UI.pages.app.MainFrame;
 import pickyeater.UI.pages.app.PickyPage;
-import pickyeater.utils.Resources;
-import pickyeater.utils.pagesutils.DailyMealPlanColumn;
 import pickyeater.UI.pages.leftbuttons.PanelButtons;
 import pickyeater.basics.food.Meal;
 import pickyeater.basics.mealplan.DailyMealPlan;
@@ -11,6 +9,8 @@ import pickyeater.basics.mealplan.MealPlan;
 import pickyeater.builders.MealPlanBuilder;
 import pickyeater.executors.ExecutorProvider;
 import pickyeater.executors.MealPlanCreatorExecutor;
+import pickyeater.utils.Resources;
+import pickyeater.utils.pagesutils.DailyMealPlanColumn;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -25,14 +25,18 @@ import java.util.Collections;
 import java.util.List;
 
 public class MealPlanGeneratorPage extends PickyPage {
-
-    private boolean isEditing = false;
+    private final JPanel topPanel;
+    private final MealPlanBuilder mealPlanBuilder;
     List<DailyMealPlanColumn> columns = new ArrayList<>();
+    private boolean isEditing = false;
     private JPanel mainPanel;
     private JButton doneButton;
     private JButton cancelButton;
-    private final JPanel topPanel;
-    private final MealPlanBuilder mealPlanBuilder;
+
+    public MealPlanGeneratorPage(MealPlan mealPlan, JFrame parent) {
+        this(ExecutorProvider.getMealPlanExecutor(), mealPlan, parent);
+        isEditing = true;
+    }
 
     public MealPlanGeneratorPage(MealPlanCreatorExecutor mealPlanCreator, MealPlan mealPlan, JFrame parent) {
         this(mealPlanCreator, parent);
@@ -47,7 +51,6 @@ public class MealPlanGeneratorPage extends PickyPage {
 
     public MealPlanGeneratorPage(MealPlanCreatorExecutor mealPlanCreator, JFrame parent) {
         super(parent);
-
         mainPanel.setLayout(new BorderLayout());
         topPanel = new JPanel(new ScrollPaneLayout());
         JScrollPane scrollPane = new JScrollPane(topPanel);
@@ -81,14 +84,9 @@ public class MealPlanGeneratorPage extends PickyPage {
         setSize(new Dimension(677, 507));
     }
 
-    public MealPlanGeneratorPage(MealPlan mealPlan, JFrame parent) {
-        this(ExecutorProvider.getMealPlanExecutor(),mealPlan,parent);
-        isEditing = true;
-    }
-
     public void draw() {
         topPanel.removeAll();
-        BoxLayout boxLayout = new BoxLayout(topPanel,BoxLayout.Y_AXIS);
+        BoxLayout boxLayout = new BoxLayout(topPanel, BoxLayout.Y_AXIS);
         topPanel.setLayout(boxLayout);
         //topPanel.setLayout(new GridLayout(1, columns.size() + 1));
         for (int i = 0; i < columns.size(); i++) {
@@ -131,7 +129,6 @@ public class MealPlanGeneratorPage extends PickyPage {
             } catch (IOException | NullPointerException ignored) {
                 upArrowComponent = new JButton("^");
             }
-
             upArrowComponent.setToolTipText("Move up");
             upArrowComponent.addMouseListener(new MouseAdapter() {
                 @Override
@@ -153,7 +150,6 @@ public class MealPlanGeneratorPage extends PickyPage {
             } catch (IOException | NullPointerException ignored) {
                 downArrowComponent = new JButton("v");
             }
-
             downArrowComponent.setToolTipText("Move down");
             downArrowComponent.addMouseListener(new MouseAdapter() {
                 @Override
@@ -166,14 +162,15 @@ public class MealPlanGeneratorPage extends PickyPage {
                 }
             });
             JPanel dayNamePanel = new JPanel(new BorderLayout());
-
-            if(i!=0) dayNamePanel.add(BorderLayout.LINE_START, upArrowComponent);
-            if(i!=(columns.size()-1)) dayNamePanel.add(BorderLayout.LINE_END, downArrowComponent);
+            if (i != 0)
+                dayNamePanel.add(BorderLayout.LINE_START, upArrowComponent);
+            if (i != (columns.size() - 1))
+                dayNamePanel.add(BorderLayout.LINE_END, downArrowComponent);
             dayNamePanel.add(BorderLayout.CENTER, dayLabel);
             dayLabel.setToolTipText("Right click to remove");
             dailyMealPlanColumnPanel.add(BorderLayout.PAGE_START, dayNamePanel);
             dailyMealPlanColumnPanel.add(BorderLayout.CENTER, component);
-            dailyMealPlanColumnPanel.setMinimumSize(new Dimension(400,400));
+            dailyMealPlanColumnPanel.setMinimumSize(new Dimension(400, 400));
             topPanel.add(dailyMealPlanColumnPanel);
         }
         JButton addTableButton = new JButton();
@@ -189,9 +186,9 @@ public class MealPlanGeneratorPage extends PickyPage {
             draw();
             revalidate();
         });
-        topPanel.add(Box.createRigidArea(new Dimension(5,5)));
+        topPanel.add(Box.createRigidArea(new Dimension(5, 5)));
         topPanel.add(addTableButton);
-        topPanel.add(Box.createRigidArea(new Dimension(5,5)));
+        topPanel.add(Box.createRigidArea(new Dimension(5, 5)));
         addTableButton.setAlignmentX(Component.CENTER_ALIGNMENT);
         revalidate();
     }

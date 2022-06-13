@@ -17,6 +17,7 @@ import java.text.DecimalFormat;
 import java.util.Optional;
 
 public class SearchIngredientPage extends PickyPage {
+    private final IngredientSearcherExecutor ingredientSearcherExecutor;
     private JButton btSettings;
     private JButton btDailyProgress;
     private JButton btUser;
@@ -32,7 +33,6 @@ public class SearchIngredientPage extends PickyPage {
     private JLabel txtProteins;
     private JLabel txtIngredientStats;
     private JPanel panelPieChart;
-    private final IngredientSearcherExecutor ingredientSearcherExecutor;
 
     public SearchIngredientPage(JFrame parent) {
         super(parent);

@@ -7,27 +7,33 @@ import pickyeater.builders.IngredientBuilder;
 import pickyeater.builders.NutrientsBuilder;
 import pickyeater.executors.ExecutorProvider;
 import pickyeater.executors.creators.CreateIngredientExecutor;
-import pickyeater.utils.*;
+import pickyeater.utils.IngredientQuantityConverter;
+import pickyeater.utils.StringToNumber;
+import pickyeater.utils.StringsUtils;
+import pickyeater.utils.ValuesConverter;
 
 import javax.swing.*;
-import javax.xml.stream.Location;
 import java.awt.*;
 
 public class IngredientCreator extends JDialog {
     private final JTextField nameTextField;
     private final JComboBox<String> quantityTypeBox;
-    private JLabel gramsQuantityLabel;
-    private JTextField gramsPerQuantityTextField;
     private final JTextField proteinsTextField;
     private final JTextField priceTextField;
     private final JTextField carbsTextField;
     private final JTextField fatsTextField;
-    private JLabel priceLabel;
-
-    private JLabel nutrientsLabel;
     private final CreateIngredientExecutor executor = ExecutorProvider.getCreateIngredientExecutor();
+    private JLabel gramsQuantityLabel;
+    private JTextField gramsPerQuantityTextField;
+    private JLabel priceLabel;
+    private JLabel nutrientsLabel;
     private Ingredient startingIngredient = null;
     private boolean isIngredientEditing = false;
+
+    public IngredientCreator(JFrame parent, Point point) {
+        this(parent);
+        setLocation(point);
+    }
 
     public IngredientCreator(JFrame parent) {
         super(parent, "IngredientCreator", true);
@@ -141,7 +147,6 @@ public class IngredientCreator extends JDialog {
             if (isIngredientEditing)
                 executor.deleteIngredient(startingIngredient);
             executor.saveIngredient(ingredient);
-
             new MainFrame();
             MainFrame.changePage(PanelButtons.SETTINGS);
             parent.dispose();
@@ -173,9 +178,6 @@ public class IngredientCreator extends JDialog {
         String selectedGramsPerQuantity = gramsPerQuantityTextField.getText();
         float price, proteins, carbs, fats;
         float gramsPerQuantity = 1;
-
-
-
         try {
             price = StringToNumber.convertPositiveFloatException(selectedPrice);
             proteins = StringToNumber.convertPositiveFloatException(selectedProteins);
@@ -203,8 +205,8 @@ public class IngredientCreator extends JDialog {
         if (!quantityType.equals(QuantityType.GRAMS)) {
             try {
                 gramsPerQuantity = StringToNumber.convertPositiveFloatException(selectedGramsPerQuantity);
-                if(quantityType.equals(QuantityType.MILLILITERS)){
-                    gramsPerQuantity/=100;
+                if (quantityType.equals(QuantityType.MILLILITERS)) {
+                    gramsPerQuantity /= 100;
                 }
             } catch (NumberFormatException e) {
                 JOptionPane.showMessageDialog(getParent(), "Incorrect parameters!");
@@ -243,8 +245,7 @@ public class IngredientCreator extends JDialog {
             JOptionPane.showMessageDialog(getParent(), "Fats cannot be negative!");
             return null;
         }
-
-        if (fats + proteins + carbs > gramsPerQuantity*quantity) {
+        if (fats + proteins + carbs > gramsPerQuantity * quantity) {
             JOptionPane.showMessageDialog(getParent(), "The nutrients' sum cannot exceed the ingredient weight!");
             return null;
         }
@@ -261,19 +262,11 @@ public class IngredientCreator extends JDialog {
         ingredientBuilder.setQuantity(new PickyQuantity(quantity, quantityType, gramsPerQuantity));
         ingredientBuilder.setPrice(price);
         NutrientsBuilder nutrientsBuilder = executor.getNutrientsBuilder();
-
         nutrientsBuilder.setComplexCarbs(carbs);
         nutrientsBuilder.setProteins(proteins);
         nutrientsBuilder.setUnSaturatedFats(fats);
-
-
         ingredientBuilder.setNutrients(nutrientsBuilder.build());
         return ingredientBuilder.build();
-    }
-
-    public IngredientCreator(JFrame parent,Point point){
-        this(parent);
-        setLocation(point);
     }
 
     public void createIngredient() {
@@ -284,7 +277,6 @@ public class IngredientCreator extends JDialog {
     public void editIngredient(Ingredient ingredient) {
         setTitle("Editing - " + ingredient.getName());
         isIngredientEditing = true;
-
         Quantity quantity = ingredient.getQuantity();
         startingIngredient = ingredient;
         String displayingGramsPerQuantity = "";
@@ -293,25 +285,23 @@ public class IngredientCreator extends JDialog {
                 displayingGramsPerQuantity = ValuesConverter.convertFloat(quantity.getGramsPerQuantity());
                 quantityTypeBox.setSelectedItem("Grams");
             }
-            case PIECES ->{
+            case PIECES -> {
                 quantityTypeBox.setSelectedItem("Piece");
                 displayingGramsPerQuantity = ValuesConverter.convertFloat(quantity.getGramsPerQuantity());
                 IngredientQuantityConverter converter = new IngredientQuantityConverter();
-                startingIngredient = converter.convert(ingredient,1);
+                startingIngredient = converter.convert(ingredient, 1);
             }
             case MILLILITERS -> {
-                displayingGramsPerQuantity = ValuesConverter.convertFloat(quantity.getGramsPerQuantity()*100);
+                displayingGramsPerQuantity = ValuesConverter.convertFloat(quantity.getGramsPerQuantity() * 100);
                 quantityTypeBox.setSelectedItem("Milliliters");
             }
         }
-
         nameTextField.setText(startingIngredient.getName());
         priceTextField.setText(ValuesConverter.convertFloat(startingIngredient.getPrice()));
         Nutrients nutrients = startingIngredient.getNutrients();
         proteinsTextField.setText(ValuesConverter.convertFloat(nutrients.getProteins()));
         carbsTextField.setText(ValuesConverter.convertFloat(nutrients.getCarbs()));
         fatsTextField.setText(ValuesConverter.convertFloat(nutrients.getFats()));
-
         gramsPerQuantityTextField.setText(displayingGramsPerQuantity);
         setVisible(true);
     }

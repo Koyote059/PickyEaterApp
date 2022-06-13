@@ -8,17 +8,6 @@ import java.awt.*;
 import java.util.Enumeration;
 
 public class SystemTheme {
-
-    public static void setUIFont(javax.swing.plaf.FontUIResource f) {
-        Enumeration<Object> keys = UIManager.getDefaults().keys();
-        while (keys.hasMoreElements()) {
-            Object key = keys.nextElement();
-            Object value = UIManager.get(key);
-            if (value instanceof javax.swing.plaf.FontUIResource)
-                UIManager.put(key, f);
-        }
-    }
-
     public static void theme1() {
         UIManager.put("Button.innerFocusWidth", 0);
         UIManager.put("TextField.arc", 0);
@@ -33,6 +22,11 @@ public class SystemTheme {
         UIManager.put("TextField.selectionBackground", Color.decode("#B1EA9D"));
         UIManager.put("Button.hoverBorderColor", Color.decode("#B1EA9D"));
         UIManager.put("Button.focusedBorderColor", Color.decode("#B1EA9D"));
+        UIManager.put("Button.default.hoverBorderColor", Color.decode("#B1EA9D"));
+        UIManager.put("Button.default.focusedBorderColor", Color.decode("#B1EA9D"));
+        UIManager.put("Button.default.focusColor", Color.decode("#B1EA9D"));
+        UIManager.put("Button.default.borderColor", Color.decode("#B1EA9D"));
+        UIManager.put("Button.default.background", Color.decode("#B1EA9D"));
         UIManager.put("List.selectionForeground", Color.decode("#000000"));
         UIManager.put("List.selectionBackground", Color.decode("#B1EA9D"));
         UIManager.put("List.selectionInactiveForeground", Color.decode("#000000"));
@@ -44,6 +38,7 @@ public class SystemTheme {
         UIManager.put("ComboBox.selectionForeground", Color.decode("#000000"));
         UIManager.put("ComboBox.selectionBackground", Color.decode("#B1EA9D"));
         UIManager.put("ComboBox.border", Color.decode("#FFFFFF"));
+        UIManager.put("MenuItem.selectionBackground", Color.decode("#B1EA9D"));
         try {
             UIManager.setLookAndFeel(new FlatLightLaf());
         } catch (Exception ex) {
@@ -54,6 +49,16 @@ public class SystemTheme {
 
     public static void setDefaultFont() {
         setUIFont(new javax.swing.plaf.FontUIResource("Helvetica", Font.BOLD, 16));
+    }
+
+    public static void setUIFont(javax.swing.plaf.FontUIResource f) {
+        Enumeration<Object> keys = UIManager.getDefaults().keys();
+        while (keys.hasMoreElements()) {
+            Object key = keys.nextElement();
+            Object value = UIManager.get(key);
+            if (value instanceof javax.swing.plaf.FontUIResource)
+                UIManager.put(key, f);
+        }
     }
 
     public static void theme2() {
@@ -70,6 +75,11 @@ public class SystemTheme {
         UIManager.put("TextField.selectionBackground", Color.decode("#32AB5E"));
         UIManager.put("Button.hoverBorderColor", Color.decode("#32AB5E"));
         UIManager.put("Button.focusedBorderColor", Color.decode("#32AB5E"));
+        UIManager.put("Button.default.hoverBorderColor", Color.decode("#32AB5E"));
+        UIManager.put("Button.default.focusedBorderColor", Color.decode("#32AB5E"));
+        UIManager.put("Button.default.focusColor", Color.decode("#32AB5E"));
+        UIManager.put("Button.default.borderColor", Color.decode("#32AB5E"));
+        UIManager.put("Button.default.background", Color.decode("#32AB5E"));
         UIManager.put("List.selectionForeground", Color.decode("#FFFFFF"));
         UIManager.put("List.selectionBackground", Color.decode("#32AB5E"));
         UIManager.put("List.selectionInactiveForeground", Color.decode("#000000"));
@@ -81,7 +91,7 @@ public class SystemTheme {
         UIManager.put("ComboBox.selectionForeground", Color.decode("#FFFFFF"));
         UIManager.put("ComboBox.selectionBackground", Color.decode("#32AB5E"));
         UIManager.put("ComboBox.border", Color.decode("#000000"));
-
+        UIManager.put("MenuItem.selectionBackground", Color.decode("#32AB5E"));
         try {
             UIManager.setLookAndFeel(new MyDarkerLaf());
         } catch (Exception ex) {
@@ -90,18 +100,19 @@ public class SystemTheme {
         setDefaultFont();
     }
 
-    public static Color getButtonColor(){
+    public static Color getButtonColor() {
         return UIManager.getColor("Button.background");
     }
 
-    public static Color getPanelColor(){
+    public static Color getPanelColor() {
         return UIManager.getColor("Panel.background");
     }
 
-    public static Color getLabelColor(){
+    public static Color getLabelColor() {
         return UIManager.getColor("Label.foreground");
     }
-    public static Font getFont(){
+
+    public static Font getFont() {
         return new javax.swing.plaf.FontUIResource("Helvetica", Font.BOLD, 16);
     }
 }

@@ -21,12 +21,19 @@ public class StringToNumber {
         return ris;
     }
 
+    private static String convertCommaToDot(String s) {
+        StringBuilder stringBuilder = new StringBuilder(s);
+        stringBuilder.setCharAt(stringBuilder.indexOf(","), '.');
+        return stringBuilder.toString();
+    }
+
     public static float convertPositiveFloatException(String s) throws NumberFormatException {
         if (s.contains(",")) {
             s = convertCommaToDot(s);
         }
-        float ret =  Float.parseFloat(s);
-        if(ret<0) throw new NumberFormatException();
+        float ret = Float.parseFloat(s);
+        if (ret < 0)
+            throw new NumberFormatException();
         return ret;
     }
 
@@ -34,16 +41,10 @@ public class StringToNumber {
         if (s.contains(",")) {
             s = convertCommaToDot(s);
         }
-        int ret =  Integer.parseInt(s);
-        if(ret<=0) throw new NumberFormatException();
+        int ret = Integer.parseInt(s);
+        if (ret <= 0)
+            throw new NumberFormatException();
         return ret;
-    }
-
-
-    private static String convertCommaToDot(String s) {
-        StringBuilder stringBuilder = new StringBuilder(s);
-        stringBuilder.setCharAt(stringBuilder.indexOf(","), '.');
-        return stringBuilder.toString();
     }
 
     public static double convertPositiveDouble(String s) {
