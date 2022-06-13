@@ -17,23 +17,24 @@ public class MealPlanGeneratorEditor extends JDialog {
         setModal(true);
         setTitle("Generator settings");
         getRootPane().setDefaultButton(cancelButton);
-        cancelButton.addActionListener( l -> dispose());
+        cancelButton.addActionListener(l -> dispose());
         daysTextField.setText(String.valueOf(bundle.getDays()));
         mealsInADayTextField.setText(String.valueOf(bundle.getMealsInADay()));
-        doneButton.addActionListener( l -> {
-            try{
+        doneButton.addActionListener(l -> {
+            try {
                 int days = (int) StringToNumber.convertPositiveFloatException(daysTextField.getText());
                 int mealsInADay = (int) StringToNumber.convertPositiveFloatException(mealsInADayTextField.getText());
-                if(days>20 || mealsInADay>20) throw new NumberFormatException();
-                if(mealsSize<mealsInADay){
-                    JOptionPane.showMessageDialog(parent,"Insufficient meals in database!\n");
+                if (days > 20 || mealsInADay > 20)
+                    throw new NumberFormatException();
+                if (mealsSize < mealsInADay) {
+                    JOptionPane.showMessageDialog(parent, "Insufficient meals in database!\n");
                     return;
                 }
                 bundle.setDays(days);
                 bundle.setMealsInADay(mealsInADay);
                 dispose();
-            } catch (NumberFormatException e){
-                JOptionPane.showMessageDialog(parent,"Invalid values!");
+            } catch (NumberFormatException e) {
+                JOptionPane.showMessageDialog(parent, "Invalid values!");
             }
         });
         pack();
@@ -41,7 +42,7 @@ public class MealPlanGeneratorEditor extends JDialog {
         setLocationRelativeTo(parent);
     }
 
-    public void display(){
+    public void display() {
         setVisible(true);
     }
 }

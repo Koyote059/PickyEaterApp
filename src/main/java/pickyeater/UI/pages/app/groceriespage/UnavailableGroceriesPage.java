@@ -17,6 +17,7 @@ import java.io.File;
 import java.io.IOException;
 
 public class UnavailableGroceriesPage extends PickyPage {
+    private final GroceriesExecutor groceriesExecutor = ExecutorProvider.getGroceriesExecutor();
     private JButton btSettings;
     private JButton btDailyProgress;
     private JButton btUser;
@@ -25,7 +26,6 @@ public class UnavailableGroceriesPage extends PickyPage {
     private JButton generateGroceriesButton;
     private JPanel mainPanel;
     private JLabel txt404;
-    private final GroceriesExecutor groceriesExecutor = ExecutorProvider.getGroceriesExecutor();
 
     public UnavailableGroceriesPage(JFrame parent) {
         super(parent);
@@ -68,6 +68,7 @@ public class UnavailableGroceriesPage extends PickyPage {
         if (groceriesExecutor.isGroceriesGenerated()) {
             PickyPage groceriesPage = new GroceriesPage(groceriesExecutor, parent);
             groceriesPage.showPage();
-        } else super.showPage();
+        } else
+            super.showPage();
     }
 }

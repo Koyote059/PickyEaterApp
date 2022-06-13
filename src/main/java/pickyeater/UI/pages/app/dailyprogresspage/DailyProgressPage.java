@@ -2,13 +2,13 @@ package pickyeater.UI.pages.app.dailyprogresspage;
 
 import pickyeater.UI.pages.app.MainFrame;
 import pickyeater.UI.pages.app.PickyPage;
-import pickyeater.utils.pagesutils.EatenMealsPopupMenu;
 import pickyeater.UI.pages.choosers.MealsChooser;
 import pickyeater.UI.pages.leftbuttons.PanelButtonsConverter;
 import pickyeater.UI.themes.ColorButtons;
 import pickyeater.basics.food.Meal;
 import pickyeater.executors.DailyProgressExecutor;
 import pickyeater.executors.ExecutorProvider;
+import pickyeater.utils.pagesutils.EatenMealsPopupMenu;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -22,8 +22,8 @@ import java.util.List;
 import java.util.Optional;
 
 public class DailyProgressPage extends PickyPage {
-    private List<Meal> meals = new ArrayList<>();
     private final DailyProgressExecutor dailyProgressExecutor;
+    private List<Meal> meals = new ArrayList<>();
     private JPanel mainPanel;
     private JButton btSettings;
     private JButton btDailyProgress;
@@ -81,8 +81,7 @@ public class DailyProgressPage extends PickyPage {
                     Meal selectedMeal = meals.get(selectedIndex);
                     EatenMealsPopupMenu popupMenu = new EatenMealsPopupMenu();
                     popupMenu.addRemoveListener(l -> {
-                        int choice = JOptionPane.showConfirmDialog(parent, "Are you sure you want to remove it?",
-                                "", JOptionPane.YES_NO_OPTION);
+                        int choice = JOptionPane.showConfirmDialog(parent, "Are you sure you want to remove it?", "", JOptionPane.YES_NO_OPTION);
                         if (choice != JOptionPane.YES_OPTION)
                             return;
                         dailyProgressExecutor.removeEatenMeal(selectedMeal);
@@ -97,7 +96,7 @@ public class DailyProgressPage extends PickyPage {
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
-                if (e.getClickCount() == 2){
+                if (e.getClickCount() == 2) {
                     EventQueue.invokeLater(() -> {
                         new ProgressGraphPage(parent, parent.getLocation());
                     });
@@ -108,7 +107,7 @@ public class DailyProgressPage extends PickyPage {
 
     private void draw() {
         DecimalFormat df = new DecimalFormat("0.00");
-        DefaultTableModel model = new DefaultTableModel(){
+        DefaultTableModel model = new DefaultTableModel() {
             @Override
             public boolean isCellEditable(int row, int column) {
                 return false;
@@ -125,7 +124,6 @@ public class DailyProgressPage extends PickyPage {
         }
         txtBurntCalories.setText(String.valueOf(dailyProgressExecutor.getBurntCalories()));
         tableEatenMeals.getTableHeader().setReorderingAllowed(false);
-
         tableEatenMeals.setModel(model);
         cbConsumed.removeAllItems();
         cbConsumed.insertItemAt("Calories: " + df.format(dailyProgressExecutor.getEatenCalories()) + "/" + df.format(dailyProgressExecutor.getCaloriesToEat()), 0);

@@ -20,10 +20,10 @@ import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 
 public class Register1 extends PickyPage {
     private final UserBuilder userBuilder;
+    private final LocalDate nineteen = LocalDate.of(1900, 01, 01);
     private JPanel mainPanel;
     private JPanel panelZeroOne;
     private JTextField tfName;
@@ -41,7 +41,6 @@ public class Register1 extends PickyPage {
     private JLabel txtBirthday;
     private JLabel txtSex;
     private JLabel txtBodyfat;
-    private final LocalDate nineteen = LocalDate.of(1900, 01, 01);
 
     public Register1(RegisterExecutor registerExecutor, JFrame parent) {
         super(parent);
@@ -107,7 +106,7 @@ public class Register1 extends PickyPage {
             // Birthday
             if (userBuilder.getDateOfBirth() == null) {
                 txtBirthday.setForeground(Color.red);
-    //JOptionPane.showMessageDialog(panelZeroOne, "Insert valid birthday", "Error", JOptionPane.ERROR_MESSAGE);
+                //JOptionPane.showMessageDialog(panelZeroOne, "Insert valid birthday", "Error", JOptionPane.ERROR_MESSAGE);
             }
             // Sex
             if (userBuilder.getSex() == null) {
@@ -163,7 +162,6 @@ public class Register1 extends PickyPage {
 
     private void draw() {
         new RegisterChangeTheme(txtChangeTheme);
-
         if (userBuilder.getSex() == Sex.MALE) {
             ColorButtons.ColorButtonGreen(btMale);
             ColorButtons.ColorButtonWhite(btFemale);
@@ -176,17 +174,7 @@ public class Register1 extends PickyPage {
         }
     }
 
-    private void createUIComponents() {
-        jBirthdayChooser = new JDateChooser();
-    }
-
-    @Override
-    public void showPage() {
-        draw();
-        super.showPage();
-    }
-
-    private void timer(){
+    private void timer() {
         Timer timer = new Timer(3000, e -> {
             txtName.setForeground(null);
             txtWeight.setForeground(null);
@@ -196,5 +184,15 @@ public class Register1 extends PickyPage {
             txtBodyfat.setForeground(null);
         });
         timer.start();
+    }
+
+    private void createUIComponents() {
+        jBirthdayChooser = new JDateChooser();
+    }
+
+    @Override
+    public void showPage() {
+        draw();
+        super.showPage();
     }
 }

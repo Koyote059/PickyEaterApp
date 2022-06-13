@@ -1,7 +1,6 @@
 package pickyeater.utils;
 
 public class MealPlanGeneratorBundle {
-
     private int mealsInADay;
     private int days;
 
@@ -9,12 +8,12 @@ public class MealPlanGeneratorBundle {
         return mealsInADay;
     }
 
-    public int getDays() {
-        return days;
-    }
-
     public void setMealsInADay(int mealsInADay) {
         this.mealsInADay = mealsInADay;
+    }
+
+    public int getDays() {
+        return days;
     }
 
     public void setDays(int days) {

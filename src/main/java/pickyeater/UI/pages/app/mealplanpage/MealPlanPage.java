@@ -2,10 +2,6 @@ package pickyeater.UI.pages.app.mealplanpage;
 
 import pickyeater.UI.pages.app.MainFrame;
 import pickyeater.UI.pages.app.PickyPage;
-import pickyeater.UI.themes.filehandler.ThemeHandler;
-import pickyeater.UI.themes.filehandler.ThemesEnum;
-import pickyeater.utils.Resources;
-import pickyeater.utils.pagesutils.MealRowPopupMenu;
 import pickyeater.UI.pages.choosers.MealInfoJDialog;
 import pickyeater.UI.pages.leftbuttons.PanelButtonsConverter;
 import pickyeater.UI.themes.ColorButtons;
@@ -16,6 +12,8 @@ import pickyeater.builders.MealPlanBuilder;
 import pickyeater.builders.PickyMealPlanBuilder;
 import pickyeater.executors.ExecutorProvider;
 import pickyeater.executors.MealPlanViewerExecutor;
+import pickyeater.utils.Resources;
+import pickyeater.utils.pagesutils.MealRowPopupMenu;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -56,7 +54,6 @@ public class MealPlanPage extends PickyPage {
         setLayout(new BorderLayout());
         add(mainPanel, BorderLayout.CENTER);
         executor = ExecutorProvider.getMealPlanViewerExecutor();
-
         txtBin.setToolTipText("Click to delete the meal plan");
         txtBin.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
         try {
@@ -66,7 +63,6 @@ public class MealPlanPage extends PickyPage {
         } catch (IOException | NullPointerException ignored) {
             txtBin.setText("X");
         }
-
         txtBin.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -79,7 +75,6 @@ public class MealPlanPage extends PickyPage {
                 }
             }
         });
-
         txtEdit.setToolTipText("Click to edit the meal plan");
         txtEdit.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
         try {
@@ -89,7 +84,6 @@ public class MealPlanPage extends PickyPage {
         } catch (IOException | NullPointerException ignored) {
             txtEdit.setText("E");
         }
-
         txtEdit.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -97,20 +91,17 @@ public class MealPlanPage extends PickyPage {
                 MealPlan actualMealPlan = executor.getMealPlan().get();
                 MealPlanBuilder mealPlanBuilder = new PickyMealPlanBuilder();
                 LocalDate date = LocalDate.now();
-                for(int i=0; i<actualMealPlan.getDailyMealPlans().size(); i++){
+                for (int i = 0; i < actualMealPlan.getDailyMealPlans().size(); i++) {
                     DailyMealPlan dailyMealPlan = executor.getDailyMealPlan(date).get();
                     mealPlanBuilder.addDailyMealPlan(dailyMealPlan);
                     date = date.plusDays(1);
                 }
-
                 PickyPage mealPlanGeneratorPage = new MealPlanGeneratorPage(mealPlanBuilder.build(), parent);
                 mealPlanGeneratorPage.showPage();
             }
         });
-
         actualDate = LocalDate.now();
         dailyMealsTable.getTableHeader().setReorderingAllowed(false);
-
         dailyMealsTable.setModel(new DefaultTableModel() {
             @Override
             public boolean isCellEditable(int row, int column) {

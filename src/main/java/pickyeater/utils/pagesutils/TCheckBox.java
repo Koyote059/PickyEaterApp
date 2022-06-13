@@ -26,7 +26,7 @@ public class TCheckBox extends JCheckBox implements Icon, ActionListener {
          * 1 mid-state selection
          * 2 fully selected
          */
-        super(text, sel > 1 ? true : false);
+        super(text, sel > 1);
         switch (sel) {
             case 2:
                 setSelected(true);

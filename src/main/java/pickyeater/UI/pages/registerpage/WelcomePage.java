@@ -16,11 +16,11 @@ import java.util.Random;
 import java.util.random.RandomGenerator;
 
 public class WelcomePage extends JFrame implements ActionListener {
+    private final RandomGenerator randomGenerator = new Random();
     Image logo;
     Timer timer;
     int xVelocity = 1;
     int yVelocity = 2;
-    private final RandomGenerator randomGenerator = new Random();
     int x = randomGenerator.nextInt(1, 400);
     int y = randomGenerator.nextInt(1, 400);
     private JPanel mainPanel;
@@ -78,8 +78,8 @@ public class WelcomePage extends JFrame implements ActionListener {
         repaint();
     }
 
-    private void changeColorOnImpact(){
-        if (clr){
+    private void changeColorOnImpact() {
+        if (clr) {
             txtWelcome.setForeground(Color.decode("#B1EA9D"));
             coloredPanel.setBackground(Color.decode("#32AB5E"));
             clr = false;

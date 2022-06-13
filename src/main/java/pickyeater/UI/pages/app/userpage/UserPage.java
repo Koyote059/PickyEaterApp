@@ -57,7 +57,6 @@ public class UserPage extends PickyPage {
             txtEditMode.setText("");
         } catch (IOException | NullPointerException ignored) {
         }
-
         // User:
         txtName.setText(user.getName());
         txtSex.setText(StringsUtils.toTitle(user.getUserStatus().getSex().toString()));

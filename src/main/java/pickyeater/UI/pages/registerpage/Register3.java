@@ -32,7 +32,6 @@ public class Register3 extends PickyPage {
 
     public Register3(RegisterExecutor registerExecutor, JFrame parent) {
         super(parent);
-
         setLayout(new BorderLayout());
         add(mainPanel, BorderLayout.CENTER);
         btLoseWeight.addActionListener(actionEvent -> {
@@ -125,7 +124,6 @@ public class Register3 extends PickyPage {
         } catch (IOException | NullPointerException ignored) {
             System.out.println("Couldn't process image");
         }
-
         ColorButtons.ColorButtonWhite(btGainWeight);
         ColorButtons.ColorButtonWhite(btMaintainWeight);
         ColorButtons.ColorButtonWhite(btLoseWeight);

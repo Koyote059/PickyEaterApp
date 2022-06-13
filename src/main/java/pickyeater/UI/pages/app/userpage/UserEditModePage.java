@@ -12,7 +12,6 @@ import pickyeater.algorithms.HarrisBenedictCalculator;
 import pickyeater.algorithms.NutrientsRequirementCalculator;
 import pickyeater.basics.food.Meal;
 import pickyeater.basics.food.Nutrients;
-import pickyeater.basics.mealplan.MealPlan;
 import pickyeater.basics.user.*;
 import pickyeater.builders.NutrientsBuilder;
 import pickyeater.builders.PickyNutrientsBuilder;
@@ -33,7 +32,6 @@ import java.text.DecimalFormat;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.Collection;
-import java.util.Collections;
 import java.util.Date;
 
 public class UserEditModePage extends PickyPage {
@@ -83,16 +81,13 @@ public class UserEditModePage extends PickyPage {
         tfHeight.setText(Integer.toString(user.getUserStatus().getHeight()));
         tfWeight.setText(df.format(user.getUserStatus().getWeight()));
         tfBodyfat.setText(df.format(user.getUserStatus().getBodyFat()));
-
-        if(user.getMealPlan().isPresent()){
+        if (user.getMealPlan().isPresent()) {
             newUserBuilder.setMealPlan(user.getMealPlan().get());
         }
-
         DailyProgresses dailyProgresses = user.getDailyProgresses();
         Collection<Meal> eatenMeals = dailyProgresses.getEatenMeals();
         int burntCalories = dailyProgresses.getBurnedCalories();
-        newUserBuilder.setDailyProgresses(eatenMeals,burntCalories);
-
+        newUserBuilder.setDailyProgresses(eatenMeals, burntCalories);
         if (user.getUserStatus().getSex() == Sex.MALE) {
             cbSex.setSelectedIndex(0);
             newUserBuilder.setSex(Sex.MALE);

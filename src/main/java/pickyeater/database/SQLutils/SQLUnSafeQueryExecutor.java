@@ -140,10 +140,7 @@ public class SQLUnSafeQueryExecutor {
             for (int mealNumber = 0; mealNumber < meals.size(); mealNumber++) {
                 Meal meal = meals.get(mealNumber);
                 try (Statement statement = connection.createStatement()) {
-                    ResultSet rs = statement.executeQuery("SELECT SUM(MC.quantity*I.gramsPerQuantity) AS mealWeight\n" +
-                            "FROM Meals M LEFT JOIN MealCompositions MC ON M.mealName = MC.mealName\n" +
-                            "LEFT JOIN Ingredients I ON I.ingredientName=MC.ingredientName\n" +
-                            "WHERE M.mealName = '" + meal.getName() + "'");
+                    ResultSet rs = statement.executeQuery("SELECT SUM(MC.quantity*I.gramsPerQuantity) AS mealWeight\n" + "FROM Meals M LEFT JOIN MealCompositions MC ON M.mealName = MC.mealName\n" + "LEFT JOIN Ingredients I ON I.ingredientName=MC.ingredientName\n" + "WHERE M.mealName = '" + meal.getName() + "'");
                     rs.next();
                     float mealWeight = rs.getFloat("mealWeight");
                     rs.close();
@@ -179,19 +176,12 @@ public class SQLUnSafeQueryExecutor {
         for (int i = 0; i < eatenMeals.size(); i++) {
             Meal eatenMeal = eatenMeals.get(i);
             try (Statement statement = connection.createStatement()) {
-                ResultSet rs = statement.executeQuery("SELECT SUM(MC.quantity*I.gramsPerQuantity) AS mealWeight\n" +
-                        "FROM Meals M LEFT JOIN MealCompositions MC ON M.mealName = MC.mealName\n" +
-                        "LEFT JOIN Ingredients I ON I.ingredientName=MC.ingredientName\n" +
-                        "WHERE M.mealName = '" + eatenMeal.getName() + "'");
+                ResultSet rs = statement.executeQuery("SELECT SUM(MC.quantity*I.gramsPerQuantity) AS mealWeight\n" + "FROM Meals M LEFT JOIN MealCompositions MC ON M.mealName = MC.mealName\n" + "LEFT JOIN Ingredients I ON I.ingredientName=MC.ingredientName\n" + "WHERE M.mealName = '" + eatenMeal.getName() + "'");
                 rs.next();
                 float mealWeight = rs.getFloat("mealWeight");
                 rs.close();
                 float ingredientsRatio = eatenMeal.getWeight() / mealWeight;
-                statement.execute(String.format("INSERT INTO EatenMeals (username, mealName, mealNumber, ingredientsRatio)" + " VALUES ('%s','%s',%d,%s)",
-                        userName,
-                        eatenMeal.getName(),
-                        i,
-                        String.format("%f", ingredientsRatio).replaceAll(",", ".")));
+                statement.execute(String.format("INSERT INTO EatenMeals (username, mealName, mealNumber, ingredientsRatio)" + " VALUES ('%s','%s',%d,%s)", userName, eatenMeal.getName(), i, String.format("%f", ingredientsRatio).replaceAll(",", ".")));
             }
         }
         connection.commit();

@@ -1,9 +1,9 @@
 package pickyeater.UI.pages.choosers;
 
-import pickyeater.utils.pagesutils.NutrientsPieChart;
 import pickyeater.basics.food.Ingredient;
 import pickyeater.basics.food.Meal;
 import pickyeater.basics.food.QuantityType;
+import pickyeater.utils.pagesutils.NutrientsPieChart;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -14,13 +14,18 @@ import java.util.Set;
 public class MealInfoJDialog extends JDialog {
     private final JTable ingredientsTable;
 
+    public MealInfoJDialog(JFrame parent, Meal meal, Point location) {
+        this(parent, meal);
+        setLocation(location);
+    }
+
     public MealInfoJDialog(JFrame parent, Meal meal) {
         super(parent, meal.getName(), true);
         setSize(parent.getSize());
         setPreferredSize(parent.getSize());
         setLocationRelativeTo(parent);
-        setName(meal.getName()+ " - Info");
-        NutrientsPieChart nutrientsPieChart = new NutrientsPieChart(meal.getNutrients(),meal.getName());
+        setName(meal.getName() + " - Info");
+        NutrientsPieChart nutrientsPieChart = new NutrientsPieChart(meal.getNutrients(), meal.getName());
         JPanel mainPanel = new JPanel(new BorderLayout());
         mainPanel.add(BorderLayout.LINE_START, nutrientsPieChart.getPanel());
         JButton okButton = new JButton("Ok");
@@ -39,7 +44,6 @@ public class MealInfoJDialog extends JDialog {
         ingredientsTable.setName("Ingredients");
         ingredientsTable.removeEditor();
         ingredientsTable.getTableHeader().setReorderingAllowed(false);
-
         JScrollPane scrollPane = new JScrollPane();
         scrollPane.setViewportView(ingredientsTable);
         scrollPane.setPreferredSize(new Dimension(250, 250));
@@ -51,11 +55,6 @@ public class MealInfoJDialog extends JDialog {
         populateTable(meal.getIngredients());
         setContentPane(mainPanel);
         pack();
-    }
-
-    public MealInfoJDialog(JFrame parent, Meal meal,Point location){
-        this(parent,meal);
-        setLocation(location);
     }
 
     private void populateTable(Set<Ingredient> ingredients) {

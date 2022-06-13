@@ -2,10 +2,6 @@ package pickyeater.UI.pages.app.groceriespage;
 
 import pickyeater.UI.pages.app.MainFrame;
 import pickyeater.UI.pages.app.PickyPage;
-import pickyeater.UI.themes.filehandler.ThemeHandler;
-import pickyeater.UI.themes.filehandler.ThemesEnum;
-import pickyeater.utils.Resources;
-import pickyeater.utils.pagesutils.WindowCloseListener;
 import pickyeater.UI.pages.leftbuttons.PanelButtonsConverter;
 import pickyeater.UI.themes.ColorButtons;
 import pickyeater.basics.food.Ingredient;
@@ -13,7 +9,9 @@ import pickyeater.basics.food.Quantity;
 import pickyeater.basics.groceries.Groceries;
 import pickyeater.basics.groceries.GroceriesCheckList;
 import pickyeater.executors.GroceriesExecutor;
+import pickyeater.utils.Resources;
 import pickyeater.utils.ValuesConverter;
+import pickyeater.utils.pagesutils.WindowCloseListener;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -32,6 +30,7 @@ import java.util.Optional;
 
 public class GroceriesPage extends PickyPage {
     private final List<Ingredient> ingredients = new ArrayList<>();
+    private final GroceriesExecutor groceriesExecutor;
     private JPanel mainPanel;
     private JButton btSettings;
     private JButton btDailyProgress;
@@ -41,7 +40,6 @@ public class GroceriesPage extends PickyPage {
     private JLabel binLabel;
     private JTable ingredientsTable;
     private JLabel priceLabel;
-    private final GroceriesExecutor groceriesExecutor;
     private GroceriesCheckList groceriesCheckList;
 
     public GroceriesPage(GroceriesExecutor groceriesExecutor, JFrame parent) {
@@ -57,7 +55,8 @@ public class GroceriesPage extends PickyPage {
         parent.addWindowListener(new WindowCloseListener() {
             @Override
             public void windowClosing(WindowEvent e) {
-                if(groceriesCheckList!=null) groceriesExecutor.saveGroceries(groceriesCheckList);
+                if (groceriesCheckList != null)
+                    groceriesExecutor.saveGroceries(groceriesCheckList);
             }
         });
         binLabel.addMouseListener(new MouseAdapter() {
@@ -67,7 +66,7 @@ public class GroceriesPage extends PickyPage {
                 int result = JOptionPane.showConfirmDialog(mainPanel, "Are you sure you want to delete it?", "Deleting  " + "groceries", JOptionPane.YES_NO_OPTION);
                 if (result == JOptionPane.YES_OPTION) {
                     groceriesExecutor.deleteGroceries();
-                    groceriesCheckList=null;
+                    groceriesCheckList = null;
                     PickyPage page = new UnavailableGroceriesPage(parent);
                     page.showPage();
                 }
@@ -94,7 +93,6 @@ public class GroceriesPage extends PickyPage {
                 return column == 0;
             }
         };
-
         ingredientsTable.getTableHeader().setReorderingAllowed(false);
         ingredientsTable.setModel(model);
         model.addTableModelListener(e -> {
