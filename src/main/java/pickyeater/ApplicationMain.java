@@ -20,9 +20,9 @@ public class ApplicationMain {
         PickyEatersDatabase pickyEatersDB = new SQLPickyEaterDB("DatabasePickEaterCopy.sqlite");
         EaterManager eaterManager = new PickyEaterManager(pickyEatersDB.getUserDatabase(), pickyEatersDB.getIngredientsDatabase(), pickyEatersDB.getMealsDatabase(), pickyEatersDB.getGroceriesDatabase());
         ExecutorProvider.setEaterManager(eaterManager);
-        if (eaterManager.getUserManager().getUser().isEmpty()) {  // User Database is empty
+        if (eaterManager.getUserManager().getUser().isEmpty()) {
             SwingUtilities.invokeLater(WelcomePage::new);
-        } else {  // Go to the app
+        } else {
             EventQueue.invokeLater(() -> {
                 new MainFrame();
                 MainFrame.changePage(PanelButtons.PROGRESS);
