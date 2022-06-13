@@ -2,10 +2,8 @@ import org.knowm.xchart.CategoryChart;
 import org.knowm.xchart.CategoryChartBuilder;
 import org.knowm.xchart.CategorySeries;
 import org.knowm.xchart.SwingWrapper;
-import pickyeater.utils.pagesutils.NutrientsBarChart;
 
 import javax.swing.*;
-import java.awt.*;
 
 public class CategoryChartTest extends JFrame {
 

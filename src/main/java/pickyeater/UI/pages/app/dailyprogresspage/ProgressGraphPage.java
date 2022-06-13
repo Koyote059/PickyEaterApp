@@ -1,6 +1,6 @@
 package pickyeater.UI.pages.app.dailyprogresspage;
 
-import pickyeater.utils.pagesutils.NutrientsBarChart;
+import pickyeater.utils.pagesutils.NutrientsCategoryChart;
 
 import javax.swing.*;
 import java.awt.*;
@@ -13,7 +13,7 @@ public class ProgressGraphPage extends JDialog {
         super(parent);
         setContentPane(mainPanel);
         mainPanel.add(BorderLayout.SOUTH, btContinue);
-        mainPanel.add(BorderLayout.CENTER, new NutrientsBarChart().getPanel());
+        mainPanel.add(BorderLayout.CENTER, new NutrientsCategoryChart().getPanel());
         setSize(new Dimension(677, 507));
         setResizable(false);
         setLocation(location);
