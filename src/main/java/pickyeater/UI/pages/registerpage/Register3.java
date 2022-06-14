@@ -115,11 +115,11 @@ public class Register3 extends PickyPage {
         txtMW.setText("");
         txtGW.setText("");
         try {
-            BufferedImage imgS = ImageIO.read(new File(Resources.getLoseWeightPic()));
+            BufferedImage imgS = ImageIO.read(ClassLoader.getSystemResourceAsStream(Resources.getLoseWeightPic()));
             txtLW.setIcon(new ImageIcon(imgS.getScaledInstance(-1, 195, Image.SCALE_SMOOTH)));
-            BufferedImage imgSA = ImageIO.read(new File(Resources.getMaintainWeightPic()));
+            BufferedImage imgSA = ImageIO.read(ClassLoader.getSystemResourceAsStream(Resources.getMaintainWeightPic()));
             txtMW.setIcon(new ImageIcon(imgSA.getScaledInstance(-1, 195, Image.SCALE_SMOOTH)));
-            BufferedImage imgA = ImageIO.read(new File(Resources.getGainWeightPic()));
+            BufferedImage imgA = ImageIO.read(ClassLoader.getSystemResourceAsStream(Resources.getGainWeightPic()));
             txtGW.setIcon(new ImageIcon(imgA.getScaledInstance(-1, 195, Image.SCALE_SMOOTH)));
         } catch (IOException | NullPointerException ignored) {
             System.out.println("Couldn't process image");

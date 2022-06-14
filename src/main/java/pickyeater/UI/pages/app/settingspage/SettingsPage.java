@@ -58,7 +58,7 @@ public class SettingsPage extends PickyPage {
         //        btResetMeals.setForeground(Color.red);
         //        btResetIngredients.setForeground(Color.red);
         try {
-            BufferedImage binImage = ImageIO.read(new File(Resources.getBinIcon()));
+            BufferedImage binImage = ImageIO.read(ClassLoader.getSystemResourceAsStream(Resources.getBinIcon()));
             txtImage.setIcon(new ImageIcon(binImage.getScaledInstance(30, 30, Image.SCALE_SMOOTH)));
             txtImage.setText("");
         } catch (IOException | NullPointerException ignored) {

@@ -85,7 +85,7 @@ public class MealPlanUnavailablePage extends PickyPage {
     private void showImage() {
         txt404.setText("");
         try {
-            BufferedImage img404 = ImageIO.read(new File(Resources.get404Pic()));
+            BufferedImage img404 = ImageIO.read(ClassLoader.getSystemResourceAsStream(Resources.get404Pic()));
             txt404.setIcon(new ImageIcon(img404.getScaledInstance(-1, 350, Image.SCALE_SMOOTH)));
         } catch (IOException | NullPointerException ignored) {
             System.out.println("Couldn't process image");

@@ -7,16 +7,14 @@ import java.text.DecimalFormat;
 public class ValuesConverter {
     public static String convertQuantityTypeValue(QuantityType quantityType) {
         switch (quantityType) {
-            case GRAMS -> {
+            case GRAMS:
                 return "g";
-            }
-            case MILLILITERS -> {
+            case MILLILITERS:
                 return "ml";
-            }
-            case PIECES -> {
+            case PIECES:
                 return "pz";
-            }
-            default -> throw new IllegalStateException("Unexpected value: " + quantityType);
+            default:
+                throw new IllegalStateException("Unexpected value: " + quantityType);
         }
     }
 

@@ -62,9 +62,15 @@ public class TCheckBox extends JCheckBox implements Icon, ActionListener {
 
     public void setSelectionState(int sel) {
         switch (sel) {
-            case 2 -> setSelected(true);
-            case 1, 0 -> setSelected(false);
-            default -> throw new IllegalArgumentException();
+            case 2:
+                setSelected(true);
+                break;
+            case 1:
+            case 0:
+                setSelected(false);
+                break;
+            default:
+                throw new IllegalArgumentException();
         }
         putClientProperty("SelectionState", sel);
     }

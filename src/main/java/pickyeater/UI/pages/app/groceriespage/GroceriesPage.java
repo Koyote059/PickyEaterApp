@@ -47,7 +47,7 @@ public class GroceriesPage extends PickyPage {
         this.groceriesExecutor = groceriesExecutor;
         binLabel.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
         try {
-            BufferedImage binImage = ImageIO.read(new File(Resources.getBinIcon()));
+            BufferedImage binImage = ImageIO.read(ClassLoader.getSystemResourceAsStream(Resources.getBinIcon()));
             binLabel.setIcon(new ImageIcon(binImage.getScaledInstance(30, 30, Image.SCALE_SMOOTH)));
         } catch (IOException | NullPointerException ignored) {
             binLabel.setText("X");

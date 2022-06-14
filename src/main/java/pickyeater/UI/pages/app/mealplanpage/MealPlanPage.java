@@ -57,7 +57,7 @@ public class MealPlanPage extends PickyPage {
         txtBin.setToolTipText("Click to delete the meal plan");
         txtBin.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
         try {
-            BufferedImage binImage = ImageIO.read(new File(Resources.getBinIcon()));
+            BufferedImage binImage = ImageIO.read(ClassLoader.getSystemResourceAsStream(Resources.getBinIcon()));
             txtBin.setIcon(new ImageIcon(binImage.getScaledInstance(40, 40, Image.SCALE_SMOOTH)));
             txtBin.setText("");
         } catch (IOException | NullPointerException ignored) {
@@ -78,7 +78,7 @@ public class MealPlanPage extends PickyPage {
         txtEdit.setToolTipText("Click to edit the meal plan");
         txtEdit.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
         try {
-            BufferedImage binImage = ImageIO.read(new File(Resources.getPencilPic()));
+            BufferedImage binImage = ImageIO.read(ClassLoader.getSystemResourceAsStream(Resources.getPencilPic()));
             txtEdit.setIcon(new ImageIcon(binImage.getScaledInstance(30, 30, Image.SCALE_SMOOTH)));
             txtEdit.setText("");
         } catch (IOException | NullPointerException ignored) {

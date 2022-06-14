@@ -62,26 +62,26 @@ public class IngredientCreator extends JDialog {
             if (selectedItem == null)
                 return;
             switch (selectedItem) {
-                case "Grams" -> {
+                case "Grams":
                     gramsPerQuantityTextField.setVisible(false);
                     gramsQuantityLabel.setVisible(false);
                     priceLabel.setText("Price per 100 g: ");
                     nutrientsLabel.setText("Nutrients per 100 g: ");
-                }
-                case "Piece" -> {
+                    break;
+                case "Piece":
                     gramsPerQuantityTextField.setVisible(true);
                     gramsQuantityLabel.setVisible(true);
                     gramsQuantityLabel.setText("Insert grams per piece: ");
                     priceLabel.setText("Price per piece: ");
                     nutrientsLabel.setText("Nutrients per 1 pz: ");
-                }
-                case "Milliliters" -> {
+                    break;
+                case "Milliliters":
                     gramsPerQuantityTextField.setVisible(true);
                     gramsQuantityLabel.setVisible(true);
                     gramsQuantityLabel.setText("Insert grams per 100 ml: ");
                     priceLabel.setText("Price per 100ml: ");
                     nutrientsLabel.setText("Nutrients per 100 ml: ");
-                }
+                    break;
             }
         });
         constraints.gridx = 1;
@@ -194,13 +194,18 @@ public class IngredientCreator extends JDialog {
         QuantityType quantityType;
         int quantity = 100;
         switch (selectedItem) {
-            case "Grams" -> quantityType = QuantityType.GRAMS;
-            case "Milliliters" -> quantityType = QuantityType.MILLILITERS;
-            case "Piece" -> {
+            case "Grams":
+                quantityType = QuantityType.GRAMS;
+                break;
+            case "Milliliters":
+                quantityType = QuantityType.MILLILITERS;
+                break;
+            case "Piece":
                 quantityType = QuantityType.PIECES;
                 quantity = 1;
-            }
-            default -> throw new IllegalStateException("Unexpected value: " + selectedItem);
+                break;
+            default:
+                throw new IllegalStateException("Unexpected value: " + selectedItem);
         }
         if (!quantityType.equals(QuantityType.GRAMS)) {
             try {
@@ -281,20 +286,20 @@ public class IngredientCreator extends JDialog {
         startingIngredient = ingredient;
         String displayingGramsPerQuantity = "";
         switch (quantity.getQuantityType()) {
-            case GRAMS -> {
+            case GRAMS:
                 displayingGramsPerQuantity = ValuesConverter.convertFloat(quantity.getGramsPerQuantity());
                 quantityTypeBox.setSelectedItem("Grams");
-            }
-            case PIECES -> {
+                break;
+            case PIECES:
                 quantityTypeBox.setSelectedItem("Piece");
                 displayingGramsPerQuantity = ValuesConverter.convertFloat(quantity.getGramsPerQuantity());
                 IngredientQuantityConverter converter = new IngredientQuantityConverter();
                 startingIngredient = converter.convert(ingredient, 1);
-            }
-            case MILLILITERS -> {
+                break;
+            case MILLILITERS:
                 displayingGramsPerQuantity = ValuesConverter.convertFloat(quantity.getGramsPerQuantity() * 100);
                 quantityTypeBox.setSelectedItem("Milliliters");
-            }
+                break;
         }
         nameTextField.setText(startingIngredient.getName());
         priceTextField.setText(ValuesConverter.convertFloat(startingIngredient.getPrice()));

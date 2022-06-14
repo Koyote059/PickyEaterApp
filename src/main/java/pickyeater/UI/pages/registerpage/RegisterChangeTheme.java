@@ -15,7 +15,7 @@ public class RegisterChangeTheme {
         txtChangeTheme.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
         if (ThemeHandler.ReadTheme() == ThemesEnum.DARK_THEME) {
             try {
-                BufferedImage binImage = ImageIO.read(new File("res/images/sun.png"));
+                BufferedImage binImage = ImageIO.read(ClassLoader.getSystemResourceAsStream("res/images/sun.png"));
                 txtChangeTheme.setIcon(new ImageIcon(binImage.getScaledInstance(30, 30, Image.SCALE_SMOOTH)));
                 txtChangeTheme.setText("");
             } catch (IOException | NullPointerException ignored) {
@@ -23,7 +23,7 @@ public class RegisterChangeTheme {
         } else {
             try {
                 ThemeHandler.ReadTheme();
-                BufferedImage binImage = ImageIO.read(new File("res/images/moon.png"));
+                BufferedImage binImage = ImageIO.read(ClassLoader.getSystemResourceAsStream("res/images/moon.png"));
                 txtChangeTheme.setIcon(new ImageIcon(binImage.getScaledInstance(30, 30, Image.SCALE_SMOOTH)));
                 txtChangeTheme.setText("");
             } catch (IOException | NullPointerException ignored) {

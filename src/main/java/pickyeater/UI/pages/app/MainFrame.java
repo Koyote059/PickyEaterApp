@@ -35,12 +35,24 @@ public class MainFrame extends JFrame {
 
     public static void changePage(PanelButtons panelButton) {
         switch (panelButton) {
-            case PROGRESS -> pages.get(DailyProgressPage.class.getName()).showPage();
-            case DIET -> pages.get(MealPlanPage.class.getName()).showPage();
-            case GROCERIES -> pages.get(UnavailableGroceriesPage.class.getName()).showPage();
-            case USER -> pages.get(UserPage.class.getName()).showPage();
-            case SETTINGS -> pages.get(SettingsPage.class.getName()).showPage();
-            default -> System.out.println("ERROR: " + panelButton);
+            case PROGRESS:
+                pages.get(DailyProgressPage.class.getName()).showPage();
+                break;
+            case DIET:
+                pages.get(MealPlanPage.class.getName()).showPage();
+                break;
+            case GROCERIES:
+                pages.get(UnavailableGroceriesPage.class.getName()).showPage();
+                break;
+            case USER:
+                pages.get(UserPage.class.getName()).showPage();
+                break;
+            case SETTINGS:
+                pages.get(SettingsPage.class.getName()).showPage();
+                break;
+            default:
+                System.out.println("ERROR: " + panelButton);
+                break;
         }
     }
 }

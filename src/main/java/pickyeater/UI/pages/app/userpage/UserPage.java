@@ -52,7 +52,7 @@ public class UserPage extends PickyPage {
         add(mainPanel, BorderLayout.CENTER);
         txtEditMode.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
         try {
-            BufferedImage binImage = ImageIO.read(new File(Resources.getEditAccountPic()));
+            BufferedImage binImage = ImageIO.read(ClassLoader.getSystemResourceAsStream(Resources.getEditAccountPic()));
             txtEditMode.setIcon(new ImageIcon(binImage.getScaledInstance(40, 40, Image.SCALE_SMOOTH)));
             txtEditMode.setText("");
         } catch (IOException | NullPointerException ignored) {

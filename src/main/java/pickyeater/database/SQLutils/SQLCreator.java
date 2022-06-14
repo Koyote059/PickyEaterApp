@@ -247,10 +247,17 @@ public class SQLCreator {
             Ingredient ingredient = getIngredient(resultSet);
             String status = resultSet.getString("status");
             switch (status) {
-                case "MISSING" -> missingIngredients.add(ingredient);
-                case "NEEDED" -> neededIngredients.add(ingredient);
-                case "TAKEN" -> takenIngredients.add(ingredient);
-                default -> throw new SQLException("Illegal argument in GroceriesItems.status: " + status);
+                case "MISSING":
+                    missingIngredients.add(ingredient);
+                    break;
+                case "NEEDED":
+                    neededIngredients.add(ingredient);
+                    break;
+                case "TAKEN":
+                    takenIngredients.add(ingredient);
+                    break;
+                default:
+                    throw new SQLException("Illegal argument in GroceriesItems.status: " + status);
             }
         }
         return new PickyGroceries(neededIngredients, missingIngredients, takenIngredients);

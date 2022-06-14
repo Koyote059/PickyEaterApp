@@ -65,10 +65,18 @@ public class MealInfoJDialog extends JDialog {
             QuantityType quantityType = ingredient.getQuantity().getQuantityType();
             String suffix;
             switch (quantityType) {
-                case GRAMS -> suffix = "gr";
-                case MILLILITERS -> suffix = "ml";
-                case PIECES -> suffix = "pz";
-                default -> suffix = "";
+                case GRAMS:
+                    suffix = "gr";
+                    break;
+                case MILLILITERS:
+                    suffix = "ml";
+                    break;
+                case PIECES:
+                    suffix = "pz";
+                    break;
+                default:
+                    suffix = "";
+                    break;
             }
             DecimalFormat formatter = new DecimalFormat();
             formatter.setMaximumFractionDigits(2);

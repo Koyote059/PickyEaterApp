@@ -66,7 +66,7 @@ public class UserEditModePage extends PickyPage {
         UserBuilder newUserBuilder = new PickyUserBuilder();
         btUpdateNutrients.setToolTipText("It'll automatically calculate the nutrients using your stats");
         try {
-            BufferedImage binImage = ImageIO.read(new File(Resources.getUpdatePic()));
+            BufferedImage binImage = ImageIO.read(ClassLoader.getSystemResourceAsStream(Resources.getUpdatePic()));
             btUpdateNutrients.setIcon(new ImageIcon(binImage.getScaledInstance(16, 16, Image.SCALE_SMOOTH)));
         } catch (IOException | NullPointerException ignored) {
         }
@@ -152,27 +152,49 @@ public class UserEditModePage extends PickyPage {
             JComboBox cb = (JComboBox) e.getSource();
             String item = cb.getSelectedItem().toString();
             switch (item) {
-                case "Sedentary" -> newUserBuilder.setLifeStyle(LifeStyle.SEDENTARY);
-                case "Slightly Active" -> newUserBuilder.setLifeStyle(LifeStyle.LIGHTLY_ACTIVE);
-                case "Active" -> newUserBuilder.setLifeStyle(LifeStyle.ACTIVE);
-                case "Very Active" -> newUserBuilder.setLifeStyle(LifeStyle.VERY_ACTIVE);
-                default -> System.out.println("Error in UserEditModePage - 1");
+                case "Sedentary":
+                    newUserBuilder.setLifeStyle(LifeStyle.SEDENTARY);
+                    break;
+                case "Slightly Active":
+                    newUserBuilder.setLifeStyle(LifeStyle.LIGHTLY_ACTIVE);
+                    break;
+                case "Active":
+                    newUserBuilder.setLifeStyle(LifeStyle.ACTIVE);
+                    break;
+                case "Very Active":
+                    newUserBuilder.setLifeStyle(LifeStyle.VERY_ACTIVE);
+                    break;
+                default:
+                    System.out.println("Error in UserEditModePage - 1");
+                    break;
             }
         });
         cbWeightGoal.addActionListener(e -> {
             JComboBox cb = (JComboBox) e.getSource();
             String item = cb.getSelectedItem().toString();
             switch (item) {
-                case "Decrease Weight" -> newUserBuilder.setWeightVariationGoal(WeightGoal.LOSE_WEIGHT);
-                case "Maintain Weight" -> newUserBuilder.setWeightVariationGoal(WeightGoal.MAINTAIN_WEIGHT);
-                case "Increase Weight" -> newUserBuilder.setWeightVariationGoal(WeightGoal.INCREASE_WEIGHT);
-                default -> System.out.println("Error in UserEditModePage - 2");
+                case "Decrease Weight":
+                    newUserBuilder.setWeightVariationGoal(WeightGoal.LOSE_WEIGHT);
+                    break;
+                case "Maintain Weight":
+                    newUserBuilder.setWeightVariationGoal(WeightGoal.MAINTAIN_WEIGHT);
+                    break;
+                case "Increase Weight":
+                    newUserBuilder.setWeightVariationGoal(WeightGoal.INCREASE_WEIGHT);
+                    break;
+                default:
+                    System.out.println("Error in UserEditModePage - 2");
+                    break;
             }
         });
         cbSex.addActionListener(e -> {
             switch (cbSex.getSelectedIndex()) {
-                case 0 -> newUserBuilder.setSex(Sex.MALE);
-                case 1 -> newUserBuilder.setSex(Sex.FEMALE);
+                case 0:
+                    newUserBuilder.setSex(Sex.MALE);
+                    break;
+                case 1:
+                    newUserBuilder.setSex(Sex.FEMALE);
+                    break;
             }
         });
         btUpdateNutrients.addActionListener(e -> {

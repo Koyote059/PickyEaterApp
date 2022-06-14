@@ -31,11 +31,21 @@ public class RegisterMainFrame extends JFrame {
 
     public static void changePage(int index) {
         switch (index) {
-            case 1 -> pages.get(Register1.class.getName()).showPage();
-            case 2 -> pages.get(Register2.class.getName()).showPage();
-            case 3 -> pages.get(Register3.class.getName()).showPage();
-            case 4 -> pages.get(Register4.class.getName()).showPage();
-            default -> System.out.println("ERROR: " + index);
+            case 1:
+                pages.get(Register1.class.getName()).showPage();
+                break;
+            case 2:
+                pages.get(Register2.class.getName()).showPage();
+                break;
+            case 3:
+                pages.get(Register3.class.getName()).showPage();
+                break;
+            case 4:
+                pages.get(Register4.class.getName()).showPage();
+                break;
+            default:
+                System.out.println("ERROR: " + index);
+                break;
         }
     }
 }

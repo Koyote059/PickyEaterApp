@@ -9,7 +9,7 @@ import java.util.Scanner;
 public class FileHandler {
     public static void createFile() {
         try {
-            File myObj = new File("res/themes.txt");
+            File myObj = new File("res" + File.separator + "themes.txt");
             if (!myObj.createNewFile()) {
                 System.out.println("File already exists.");
             }

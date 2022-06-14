@@ -123,14 +123,14 @@ public class IngredientInfoJDialog extends JDialog {
         infoPanel.add(labelFats, constraints);
         labelQuantityType = new JLabel();
         switch (quantity.getQuantityType()) {
-            case GRAMS -> {
+            case GRAMS:
                 labelGramsPerQuantity.setVisible(false);
                 labelGramsQuantity.setVisible(false);
                 labelQuantityType.setText("Grams");
                 priceLabel.setText("Price: ");
                 nutrientsLabel.setText("Nutrients per 100 g: ");
-            }
-            case PIECES -> {
+                break;
+            case PIECES:
                 labelGramsPerQuantity.setVisible(true);
                 labelGramsPerQuantity.setText(ValuesConverter.convertFloat(quantity.getGramsPerQuantity()) + " g");
                 labelGramsQuantity.setVisible(true);
@@ -138,8 +138,8 @@ public class IngredientInfoJDialog extends JDialog {
                 labelGramsQuantity.setText("Grams: ");
                 priceLabel.setText("Price: ");
                 nutrientsLabel.setText("Nutrients per piece: ");
-            }
-            case MILLILITERS -> {
+                break;
+            case MILLILITERS:
                 labelGramsPerQuantity.setVisible(true);
                 labelGramsQuantity.setVisible(true);
                 labelQuantityType.setText("Milliliters");
@@ -147,7 +147,7 @@ public class IngredientInfoJDialog extends JDialog {
                 labelGramsQuantity.setText("Grams: ");
                 priceLabel.setText("Price: ");
                 nutrientsLabel.setText("Nutrients per 100 ml: ");
-            }
+                break;
         }
         constraints.gridx = 1;
         constraints.gridy = 1;

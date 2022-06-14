@@ -121,7 +121,7 @@ public class MealPlanGeneratorPage extends PickyPage {
             mainPanel.add(BorderLayout.PAGE_END, buttonsPanel);
             JComponent upArrowComponent;
             try {
-                BufferedImage binImage = ImageIO.read(new File(Resources.getUpArrowPic()));
+                BufferedImage binImage = ImageIO.read(ClassLoader.getSystemResourceAsStream(Resources.getUpArrowPic()));
                 JLabel upArrow = new JLabel();
                 upArrow.setIcon(new ImageIcon(binImage.getScaledInstance(30, 30, Image.SCALE_SMOOTH)));
                 upArrow.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
@@ -142,7 +142,7 @@ public class MealPlanGeneratorPage extends PickyPage {
             });
             JComponent downArrowComponent;
             try {
-                BufferedImage binImage = ImageIO.read(new File(Resources.getDownArrowPic()));
+                BufferedImage binImage = ImageIO.read(ClassLoader.getSystemResourceAsStream(Resources.getDownArrowPic()));
                 JLabel downArrow = new JLabel();
                 downArrow.setIcon(new ImageIcon(binImage.getScaledInstance(30, 30, Image.SCALE_SMOOTH)));
                 downArrow.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
@@ -175,7 +175,7 @@ public class MealPlanGeneratorPage extends PickyPage {
         }
         JButton addTableButton = new JButton();
         try {
-            BufferedImage plusImage = ImageIO.read(new File(Resources.getPlusPic()));
+            BufferedImage plusImage = ImageIO.read(ClassLoader.getSystemResourceAsStream(Resources.getPlusPic()));
             addTableButton.setIcon(new ImageIcon(plusImage.getScaledInstance(40, 40, Image.SCALE_SMOOTH)));
         } catch (IOException | NullPointerException ignored) {
             addTableButton.setText("+");

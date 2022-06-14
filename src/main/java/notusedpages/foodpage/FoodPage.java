@@ -39,13 +39,13 @@ public class FoodPage extends PickyPage {
         btUser.setBackground(Color.decode("#FFFFFF"));
         btSettings.setBackground(Color.decode("#FFFFFF"));
         try {
-            BufferedImage binImage = ImageIO.read(new File("res/images/search1B.png"));
+            BufferedImage binImage = ImageIO.read(ClassLoader.getSystemResourceAsStream("res/images/search1B.png"));
             btSearchMeal.setIcon(new ImageIcon(binImage.getScaledInstance(30, 30, Image.SCALE_SMOOTH)));
             btSearchIngredient.setIcon(new ImageIcon(binImage.getScaledInstance(30, 30, Image.SCALE_SMOOTH)));
         } catch (IOException | NullPointerException ignored) {
         }
         try {
-            BufferedImage binImage = ImageIO.read(new File("res/images/addB.png"));
+            BufferedImage binImage = ImageIO.read(ClassLoader.getSystemResourceAsStream("res/images/addB.png"));
             btAddMeal.setIcon(new ImageIcon(binImage.getScaledInstance(30, 30, Image.SCALE_SMOOTH)));
             btAddIngredient.setIcon(new ImageIcon(binImage.getScaledInstance(30, 30, Image.SCALE_SMOOTH)));
         } catch (IOException | NullPointerException ignored) {

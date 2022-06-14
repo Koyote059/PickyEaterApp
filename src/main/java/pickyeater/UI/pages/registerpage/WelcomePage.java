@@ -13,16 +13,15 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.Random;
-import java.util.random.RandomGenerator;
 
 public class WelcomePage extends JFrame implements ActionListener {
-    private final RandomGenerator randomGenerator = new Random();
+    private final Random randomGenerator = new Random();
     Image logo;
     Timer timer;
     int xVelocity = 1;
     int yVelocity = 2;
-    int x = randomGenerator.nextInt(1, 400);
-    int y = randomGenerator.nextInt(1, 400);
+    int x = Math.abs(randomGenerator.nextInt(400)) + 1 ;
+    int y = Math.abs(randomGenerator.nextInt(400)) + 1;
     private JPanel mainPanel;
     private JPanel coloredPanel;
     private JLabel txtWelcome;
@@ -40,7 +39,7 @@ public class WelcomePage extends JFrame implements ActionListener {
         setVisible(true);
         BufferedImage imgVA;
         try {
-            imgVA = ImageIO.read(new File(Resources.getPELPic()));
+            imgVA = ImageIO.read(ClassLoader.getSystemResourceAsStream(Resources.getPELPic()));
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

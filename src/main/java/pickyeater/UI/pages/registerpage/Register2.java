@@ -146,13 +146,14 @@ public class Register2 extends PickyPage {
         txtA.setText("");
         txtVA.setText("");
         try {
-            BufferedImage imgS = ImageIO.read(new File(Resources.getSedentaryLSPic()));
+            
+            BufferedImage imgS = ImageIO.read(ClassLoader.getSystemResourceAsStream(Resources.getSedentaryLSPic()));
             txtS.setIcon(new ImageIcon(imgS.getScaledInstance(-1, 95, Image.SCALE_SMOOTH)));
-            BufferedImage imgSA = ImageIO.read(new File(Resources.getSlightlyActiveLSPic()));
+            BufferedImage imgSA = ImageIO.read(ClassLoader.getSystemResourceAsStream(Resources.getSlightlyActiveLSPic()));
             txtSA.setIcon(new ImageIcon(imgSA.getScaledInstance(-1, 95, Image.SCALE_SMOOTH)));
-            BufferedImage imgA = ImageIO.read(new File(Resources.getActiveLSPic()));
+            BufferedImage imgA = ImageIO.read(ClassLoader.getSystemResourceAsStream(Resources.getActiveLSPic()));
             txtA.setIcon(new ImageIcon(imgA.getScaledInstance(-1, 95, Image.SCALE_SMOOTH)));
-            BufferedImage imgVA = ImageIO.read(new File(Resources.getVeryActiveLSPic()));
+            BufferedImage imgVA = ImageIO.read(ClassLoader.getSystemResourceAsStream(Resources.getVeryActiveLSPic()));
             txtVA.setIcon(new ImageIcon(imgVA.getScaledInstance(-1, 95, Image.SCALE_SMOOTH)));
         } catch (IOException | NullPointerException ignored) {
             System.out.println("Couldn't process image");

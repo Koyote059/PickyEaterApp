@@ -12,37 +12,50 @@ public class HarrisBenedictCalculator implements NutrientsRequirementCalculator 
     public Nutrients calculate(int height, float weight, int age, Sex sex, LifeStyle lifeStyle, WeightGoal weightGoal) {
         int basalMetabolicRate;
         switch (sex) {
-            case MALE -> basalMetabolicRate = (int) (655.095 + (9.563 * weight) + (1.8496 * height) - (age * 4.6756));
-            case FEMALE -> basalMetabolicRate = (int) (66.473 + (13.7516 * weight) + (5.0033 * height) - (age * 6.755));
-            default -> throw new IllegalArgumentException("Illegal argument: sex -> " + sex);
+            case MALE:
+                basalMetabolicRate = (int) (655.095 + (9.563 * weight) + (1.8496 * height) - (age * 4.6756));
+                break;
+            case FEMALE:
+                basalMetabolicRate = (int) (66.473 + (13.7516 * weight) + (5.0033 * height) - (age * 6.755));
+                break;
+            default:
+                throw new IllegalArgumentException("Illegal argument: sex -> " + sex);
         }
         int offset;
         switch (weightGoal) {
-            case LOSE_WEIGHT -> offset = -400;
-            case MAINTAIN_WEIGHT -> offset = 0;
-            case INCREASE_WEIGHT -> offset = 400;
-            default -> throw new IllegalArgumentException("Illegal argument: weightGoal -> " + weightGoal);
+            case LOSE_WEIGHT:
+                offset = -400;
+                break;
+            case MAINTAIN_WEIGHT:
+                offset = 0;
+                break;
+            case INCREASE_WEIGHT:
+                offset = 400;
+                break;
+            default:
+                throw new IllegalArgumentException("Illegal argument: weightGoal -> " + weightGoal);
         }
         float cof;
         float proteinsPercentage;
         switch (lifeStyle) {
-            case SEDENTARY -> {
+            case SEDENTARY:
                 cof = 1.2f;
                 proteinsPercentage = 0.15f;
-            }
-            case LIGHTLY_ACTIVE -> {
+                break;
+            case LIGHTLY_ACTIVE:
                 cof = 1.35f;
                 proteinsPercentage = 0.18f;
-            }
-            case ACTIVE -> {
+                break;
+            case ACTIVE:
                 cof = 1.5f;
                 proteinsPercentage = 0.21f;
-            }
-            case VERY_ACTIVE -> {
+                break;
+            case VERY_ACTIVE:
                 cof = 1.7f;
                 proteinsPercentage = 0.23f;
-            }
-            default -> throw new IllegalArgumentException("Illegal argument: lifeStyle -> " + lifeStyle);
+                break;
+            default:
+                throw new IllegalArgumentException("Illegal argument: lifeStyle -> " + lifeStyle);
         }
         int caloriesRequirement = (int) (basalMetabolicRate * cof) + offset;
         NutrientsBuilder nutrientsBuilder = new PickyNutrientsBuilder();
